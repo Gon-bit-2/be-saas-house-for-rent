@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
+import { Module } from '@nestjs/common'
 
-import { DatabaseModule } from './modules/database/prisma.module';
+import { DatabaseModule } from './modules/database/prisma.module'
 
 @Module({
   imports: [DatabaseModule],

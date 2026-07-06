@@ -5,53 +5,11 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-}
-
-/// Trạng thái hoạt động của tài khoản người dùng
-enum UserStatus {
-  /// Đang hoạt động bình thường
-  ACTIVE
-  /// Tạm khóa hoặc chưa kích hoạt
-  INACTIVE
-  /// Bị cấm khỏi hệ thống do vi phạm
-  BANNED
-}
-
-/// Trạng thái xác minh của hồ sơ/tổ chức (Tenant hoặc Renter Profile)
-enum VerificationStatus {
-  /// Chưa xác minh thông tin
-  UNVERIFIED
-  /// Đang chờ duyệt xác minh từ hệ thống
-  PENDING
-  /// Đã xác minh thành công
-  VERIFIED
-  /// Yêu cầu xác minh bị từ chối
-  REJECTED
-}
-
-/// Trạng thái hoạt động của Tenant (chủ trọ/tổ chức kinh doanh)
-enum TenantStatus {
-  /// Đang hoạt động bình thường
-  ACTIVE
-  /// Tạm ngưng hoạt động do quá hạn thanh toán gói SaaS hoặc vi phạm
-  SUSPENDED
-  /// Đã đóng cửa hoặc xóa tài khoản tenant
-  CLOSED
-}
-
-/// Trạng thái thành viên trong Tenant
-enum TenantMemberStatus {
-  /// Đang làm việc tích cực
-  ACTIVE
-  /// Đã gửi lời mời tham gia nhưng chưa xác nhận
-  INVITED
-  /// Đã bị vô hiệu hóa quyền truy cập vào tenant
-  DISABLED
 }
 
 /// Bảng lưu thông tin tài khoản người dùng đăng nhập toàn hệ thống
@@ -66,8 +24,12 @@ model User {
   phone           String?    @unique @db.VarChar(50)
   /// Mật khẩu đăng nhập đã mã hóa bcrypt
   passwordHash    String     @map("password_hash") @db.Text
+  /// Quyền hệ thống toàn cục (ví dụ: SUPER_ADMIN). Nếu null thì chỉ là user bình thường hoặc user thuộc Tenant
+  systemRole      String?    @map("system_role") @db.VarChar(50)
   /// Đường dẫn đến ảnh đại diện người dùng
   avatarUrl       String?    @map("avatar_url") @db.Text
+  /// Mã OTP dùng để xác thực 2 yếu tố
+  totpSecret String?
   /// Trạng thái tài khoản người dùng
   status          UserStatus @default(ACTIVE)
   /// Thời điểm xác minh địa chỉ email
@@ -85,66 +47,120 @@ model User {
 
   // Các quan hệ (Relations)
   /// Các tổ chức/chủ trọ do người dùng này sở hữu chính
-  ownedTenants          Tenant[]                     @relation("TenantOwner")
+  ownedTenants         Tenant[]                 @relation("TenantOwner")
   /// Danh sách các tổ chức mà người dùng này làm thành viên hoặc nhân viên
-  tenantMembers         TenantMember[]
+  tenantMembers        TenantMember[]
   /// Hồ sơ chi tiết của người thuê (nếu tài khoản là khách thuê)
-  renterProfile         RenterProfile?
+  renterProfile        RenterProfile?
   /// Lịch sử thuê phòng của người dùng này
-  rentalHistories       RentalHistory[]
+  rentalHistories      RentalHistory[]
   /// Lịch sử xem phòng trên Marketplace của người dùng này
-  roomViewLogs          RoomViewLog[]
+  roomViewLogs         RoomViewLog[]
   /// Danh sách các phòng trọ yêu thích của khách thuê
-  favoriteRooms         FavoriteRoom[]
+  favoriteRooms        FavoriteRoom[]
   /// Danh sách lịch hẹn xem phòng với tư cách khách thuê
-  viewingAppointments   RoomViewingAppointment[]     @relation("RenterAppointments")
+  viewingAppointments  RoomViewingAppointment[] @relation("RenterAppointments")
   /// Danh sách lịch hẹn xem phòng được phân công hỗ trợ (với tư cách nhân viên)
-  assignedAppointments  RoomViewingAppointment[]     @relation("StaffAppointments")
+  assignedAppointments RoomViewingAppointment[] @relation("StaffAppointments")
   /// Danh sách các yêu cầu thuê phòng đã gửi
-  rentalRequests        RentalRequest[]
+  rentalRequests       RentalRequest[]
   /// Các hợp đồng thuê phòng mà người dùng này là người ký chính
-  contracts             Contract[]
+  contracts            Contract[]
   /// Các hợp đồng thuê phòng mà người dùng này tham gia ở cùng (với tư cách thành viên)
-  contractMembers       ContractMember[]
-  /// Các yêu cầu thanh lý hợp đồng do người dùng này tạo
-  terminationRequests   ContractTerminationRequest[]
-  /// Danh sách các chỉ số điện nước do người dùng này ghi nhận
-  recordedMeterReadings MeterReading[]               @relation("RecordedReadings")
+  contractMembers      ContractMember[]
   /// Danh sách các tác vụ AI OCR do người dùng này tải lên
-  uploadedOcrJobs       OcrJob[]                     @relation("UploadedJobs")
-  /// Danh sách các đợt hóa đơn hàng loạt do người dùng này tạo
-  createdInvoiceBatches InvoiceBatch[]               @relation("CreatedBatches")
+  uploadedOcrJobs      OcrJob[]                 @relation("UploadedJobs")
   /// Danh sách các hóa đơn của khách thuê này
-  invoices              Invoice[]                    @relation("RenterInvoices")
+  invoices             Invoice[]                @relation("RenterInvoices")
   /// Danh sách các thanh toán do khách thuê này thực hiện
-  payments              Payment[]                    @relation("PayerPayments")
-  /// Danh sách các sự cố/ticket do người dùng này tạo
-  createdTickets        Ticket[]                     @relation("TicketCreator")
+  payments             Payment[]                @relation("PayerPayments")
   /// Danh sách các sự cố/ticket được phân công cho người dùng này xử lý
-  assignedTickets       Ticket[]                     @relation("TicketAssignee")
+  assignedTickets      Ticket[]                 @relation("TicketAssignee")
   /// Danh sách các file đính kèm ticket do người dùng này tải lên
-  ticketAttachments     TicketAttachment[]
+  ticketAttachments    TicketAttachment[]
   /// Danh sách các bình luận sự cố do người dùng này viết
-  ticketComments        TicketComment[]
+  ticketComments       TicketComment[]
   /// Danh sách các phòng chat người dùng này tham gia
-  conversationMembers   ConversationMember[]
+  conversationMembers  ConversationMember[]
   /// Danh sách tin nhắn người dùng này gửi
-  sentMessages          Message[]                    @relation("MessageSender")
+  sentMessages         Message[]                @relation("MessageSender")
   /// Danh sách các đánh giá do người dùng này thực hiện
-  reviews               Review[]                     @relation("Reviewer")
+  reviews              Review[]                 @relation("Reviewer")
   /// Danh sách các báo cáo vi phạm do người dùng này gửi
-  reportedItems         Report[]                     @relation("Reporter")
+  reportedItems        Report[]                 @relation("Reporter")
   /// Danh sách các báo cáo vi phạm do người dùng này xử lý (với tư cách admin/staff)
-  handledReports        Report[]                     @relation("ReportHandler")
+  handledReports       Report[]                 @relation("ReportHandler")
   /// Danh sách các thông báo của người dùng này
-  notifications         Notification[]
+  notifications        Notification[]
   /// Danh sách các mã token thiết bị của người dùng này
-  deviceTokens          DeviceToken[]
+  deviceTokens         DeviceToken[]
   /// Lịch sử các tác vụ AI gợi ý liên quan đến người dùng này
-  aiRecommendationLogs  AiRecommendationLog[]
+  aiRecommendationLogs AiRecommendationLog[]
   /// Danh sách các audit log do người dùng này thực hiện
-  auditLogs             AuditLog[]
-  chatbotSessions       ChatbotSession[]
+  auditLogs            AuditLog[]
+  chatbotSessions      ChatbotSession[]
+
+  // --- Audit Relations ---
+  createdTenants                     Tenant[]                     @relation("TenantCreator")
+  updatedTenants                     Tenant[]                     @relation("TenantUpdater")
+  deletedTenants                     Tenant[]                     @relation("TenantDeleter")
+  createdPropertys                   Property[]                   @relation("PropertyCreator")
+  updatedPropertys                   Property[]                   @relation("PropertyUpdater")
+  deletedPropertys                   Property[]                   @relation("PropertyDeleter")
+  createdRooms                       Room[]                       @relation("RoomCreator")
+  updatedRooms                       Room[]                       @relation("RoomUpdater")
+  deletedRooms                       Room[]                       @relation("RoomDeleter")
+  createdContracts                   Contract[]                   @relation("ContractCreator")
+  updatedContracts                   Contract[]                   @relation("ContractUpdater")
+  deletedContracts                   Contract[]                   @relation("ContractDeleter")
+  createdInvoices                    Invoice[]                    @relation("InvoiceCreator")
+  updatedInvoices                    Invoice[]                    @relation("InvoiceUpdater")
+  deletedInvoices                    Invoice[]                    @relation("InvoiceDeleter")
+  createdPayments                    Payment[]                    @relation("PaymentCreator")
+  updatedPayments                    Payment[]                    @relation("PaymentUpdater")
+  deletedPayments                    Payment[]                    @relation("PaymentDeleter")
+  createdTickets                     Ticket[]                     @relation("TicketCreator")
+  updatedTickets                     Ticket[]                     @relation("TicketUpdater")
+  deletedTickets                     Ticket[]                     @relation("TicketDeleter")
+  createdRoomAssets                  RoomAsset[]                  @relation("RoomAssetCreator")
+  updatedRoomAssets                  RoomAsset[]                  @relation("RoomAssetUpdater")
+  deletedRoomAssets                  RoomAsset[]                  @relation("RoomAssetDeleter")
+  createdHandoverRecords             HandoverRecord[]             @relation("HandoverRecordCreator")
+  updatedHandoverRecords             HandoverRecord[]             @relation("HandoverRecordUpdater")
+  deletedHandoverRecords             HandoverRecord[]             @relation("HandoverRecordDeleter")
+  createdMeterReadings               MeterReading[]               @relation("MeterReadingCreator")
+  updatedMeterReadings               MeterReading[]               @relation("MeterReadingUpdater")
+  deletedMeterReadings               MeterReading[]               @relation("MeterReadingDeleter")
+  createdContractTemplates           ContractTemplate[]           @relation("ContractTemplateCreator")
+  updatedContractTemplates           ContractTemplate[]           @relation("ContractTemplateUpdater")
+  deletedContractTemplates           ContractTemplate[]           @relation("ContractTemplateDeleter")
+  createdRoomViewingAppointments     RoomViewingAppointment[]     @relation("RoomViewingAppointmentCreator")
+  updatedRoomViewingAppointments     RoomViewingAppointment[]     @relation("RoomViewingAppointmentUpdater")
+  deletedRoomViewingAppointments     RoomViewingAppointment[]     @relation("RoomViewingAppointmentDeleter")
+  createdRentalRequests              RentalRequest[]              @relation("RentalRequestCreator")
+  updatedRentalRequests              RentalRequest[]              @relation("RentalRequestUpdater")
+  deletedRentalRequests              RentalRequest[]              @relation("RentalRequestDeleter")
+  createdInvoiceBatchs               InvoiceBatch[]               @relation("InvoiceBatchCreator")
+  updatedInvoiceBatchs               InvoiceBatch[]               @relation("InvoiceBatchUpdater")
+  deletedInvoiceBatchs               InvoiceBatch[]               @relation("InvoiceBatchDeleter")
+  createdContractTerminationRequests ContractTerminationRequest[] @relation("ContractTerminationRequestCreator")
+  updatedContractTerminationRequests ContractTerminationRequest[] @relation("ContractTerminationRequestUpdater")
+  deletedContractTerminationRequests ContractTerminationRequest[] @relation("ContractTerminationRequestDeleter")
+  createdRoles                       Role[]                       @relation("RoleCreator")
+  updatedRoles                       Role[]                       @relation("RoleUpdater")
+  deletedRoles                       Role[]                       @relation("RoleDeleter")
+  createdPermissions                 Permission[]                 @relation("PermissionCreator")
+  updatedPermissions                 Permission[]                 @relation("PermissionUpdater")
+  deletedPermissions                 Permission[]                 @relation("PermissionDeleter")
+  createdPlans                       Plan[]                       @relation("PlanCreator")
+  updatedPlans                       Plan[]                       @relation("PlanUpdater")
+  deletedPlans                       Plan[]                       @relation("PlanDeleter")
+  createdAmenitys                    Amenity[]                    @relation("AmenityCreator")
+  updatedAmenitys                    Amenity[]                    @relation("AmenityUpdater")
+  deletedAmenitys                    Amenity[]                    @relation("AmenityDeleter")
+  createdAssetCategorys              AssetCategory[]              @relation("AssetCategoryCreator")
+  updatedAssetCategorys              AssetCategory[]              @relation("AssetCategoryUpdater")
+  deletedAssetCategorys              AssetCategory[]              @relation("AssetCategoryDeleter")
 
   @@index([email])
   @@index([status])
@@ -153,10 +169,8 @@ model User {
 
 /// Bảng danh sách các vai trò (roles) trong hệ thống
 model Role {
-  /// ID định danh vai trò (UUID)
-  id          String  @id @default(uuid()) @db.Uuid
-  /// Mã vai trò duy nhất (ví dụ: SUPER_ADMIN, LANDLORD, STAFF, RENTER)
-  code        String  @unique @db.VarChar(50)
+  /// ID định danh vai trò chính là mã vai trò (ví dụ: ADMIN, LANDLORD, STAFF, RENTER)
+  id          String  @id @db.VarChar(50)
   /// Tên hiển thị của vai trò (ví dụ: Chủ trọ, Nhân viên)
   name        String  @db.VarChar(100)
   /// Mô tả chi tiết về chức năng của vai trò
@@ -167,6 +181,17 @@ model Role {
   permissions   RolePermission[]
   /// Các thành viên tenant được gán vai trò này
   tenantMembers TenantMember[]
+
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("RoleCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("RoleUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("RoleDeleter", fields: [deletedById], references: [id])
 
   @@map("roles")
 }
@@ -188,13 +213,24 @@ model Permission {
   /// Các vai trò sở hữu quyền hạn này
   roles RolePermission[]
 
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("PermissionCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("PermissionUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("PermissionDeleter", fields: [deletedById], references: [id])
+
   @@map("permissions")
 }
 
 /// Bảng trung gian gán quyền cho vai trò (Role - Permission)
 model RolePermission {
   /// ID của vai trò liên kết
-  roleId       String @map("role_id") @db.Uuid
+  roleId       String @map("role_id") @db.VarChar(50)
   /// ID của quyền hạn liên kết
   permissionId String @map("permission_id") @db.Uuid
 
@@ -304,6 +340,16 @@ model Tenant {
   backgroundJobs       BackgroundJob[]
   /// Danh sách audit log thao tác của tenant này
   auditLogs            AuditLog[]
+  /// ID người dùng tạo bản ghi
+  createdById          String?                      @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById          String?                      @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById          String?                      @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("TenantCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("TenantUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("TenantDeleter", fields: [deletedById], references: [id])
 
   @@index([slug])
   @@index([status])
@@ -319,7 +365,7 @@ model TenantMember {
   /// ID của người dùng liên kết
   userId    String             @map("user_id") @db.Uuid
   /// ID của vai trò được giao trong Tenant này
-  roleId    String             @map("role_id") @db.Uuid
+  roleId    String             @map("role_id") @db.VarChar(50)
   /// Trạng thái làm việc của thành viên trong tenant
   status    TenantMemberStatus @default(INVITED)
   /// Thời điểm chính thức tham gia vào Tenant (khi xác nhận lời mời)
@@ -337,90 +383,6 @@ model TenantMember {
 
   @@unique([tenantId, userId])
   @@map("tenant_members")
-}
-
-/// Trạng thái gói đăng ký dịch vụ SaaS
-enum SubscriptionStatus {
-  /// Đang dùng thử
-  TRIALING
-  /// Đang hoạt động bình thường
-  ACTIVE
-  /// Quá hạn thanh toán nhưng chưa khóa
-  PAST_DUE
-  /// Đã hủy đăng ký
-  CANCELED
-  /// Đã hết hạn sử dụng
-  EXPIRED
-}
-
-/// Chu kỳ thanh toán của gói cước
-enum BillingCycle {
-  /// Thanh toán theo từng tháng
-  MONTHLY
-  /// Thanh toán theo từng năm
-  YEARLY
-}
-
-/// Trạng thái giao dịch thanh toán gói SaaS
-enum SubscriptionPaymentStatus {
-  /// Đang chờ xử lý giao dịch
-  PENDING
-  /// Đã thanh toán thành công
-  PAID
-  /// Giao dịch thất bại
-  FAILED
-  /// Giao dịch đã được hoàn tiền
-  REFUNDED
-}
-
-/// Loại bất động sản/nhà trọ
-enum PropertyType {
-  /// Nhà nguyên căn
-  HOUSE
-  /// Chung cư mini
-  MINI_APARTMENT
-  /// Ký túc xá / Phòng trọ homestay ghép giường
-  DORM
-  /// Căn hộ chung cư
-  APARTMENT
-}
-
-/// Trạng thái hoạt động của tòa nhà/nhà trọ
-enum PropertyStatus {
-  /// Đang hoạt động bình thường
-  ACTIVE
-  /// Tạm ngưng hoạt động
-  INACTIVE
-  /// Đang trong quá trình bảo trì, sửa chữa lớn
-  MAINTENANCE
-}
-
-/// Trạng thái thuê của phòng trọ
-enum RoomStatus {
-  /// Phòng trống có sẵn để thuê
-  AVAILABLE
-  /// Phòng đã có người ở
-  OCCUPIED
-  /// Phòng đã được đặt cọc giữ chỗ
-  RESERVED
-  /// Phòng đang bảo trì, sửa chữa không thể cho thuê
-  MAINTENANCE
-  /// Phòng tạm dừng hoạt động
-  INACTIVE
-}
-
-/// Trạng thái tin đăng của phòng trên Marketplace
-enum MarketplaceStatus {
-  /// Tin nháp, chưa công khai
-  DRAFT
-  /// Đang chờ Super Admin phê duyệt tin đăng
-  PENDING_REVIEW
-  /// Đã phê duyệt và đăng công khai trên Marketplace
-  PUBLISHED
-  /// Tin đăng bị từ chối phê duyệt do vi phạm quy định
-  REJECTED
-  /// Tin đăng bị ẩn tạm thời bởi chủ trọ
-  HIDDEN
 }
 
 /// Bảng lưu trữ các gói dịch vụ SaaS hệ thống cung cấp cho chủ trọ
@@ -457,6 +419,17 @@ model Plan {
   // Các quan hệ (Relations)
   /// Danh sách các đăng ký của các tenant sử dụng gói dịch vụ này
   subscriptions Subscription[]
+
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("PlanCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("PlanUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("PlanDeleter", fields: [deletedById], references: [id])
 
   @@map("plans")
 }
@@ -560,11 +533,21 @@ model Property {
 
   // Các quan hệ (Relations)
   /// Tenant sở hữu tòa nhà (khi xóa tenant thì tự động xóa toàn bộ tòa nhà của họ)
-  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant      Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Danh sách các tầng trong tòa nhà trọ này
-  floors Floor[]
+  floors      Floor[]
   /// Danh sách các phòng trọ nằm trong tòa nhà này
-  rooms  Room[]
+  rooms       Room[]
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("PropertyCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("PropertyUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("PropertyDeleter", fields: [deletedById], references: [id])
 
   @@index([province, district, ward])
   @@index([tenantId])
@@ -683,6 +666,16 @@ model Room {
   reputationScores     ReputationScore[]
   /// Danh sách AI gợi ý giá thuê của phòng trọ này
   roomPriceSuggestions RoomPriceSuggestion[]
+  /// ID người dùng tạo bản ghi
+  createdById          String?                  @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById          String?                  @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById          String?                  @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("RoomCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("RoomUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("RoomDeleter", fields: [deletedById], references: [id])
 
   @@unique([propertyId, roomCode]) // Đảm bảo trong cùng 1 tòa nhà không thể có 2 phòng trùng mã phòng
   @@index([propertyId])
@@ -733,6 +726,17 @@ model Amenity {
   /// Danh sách các phòng trọ sở hữu tiện ích này
   rooms RoomAmenity[]
 
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("AmenityCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("AmenityUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("AmenityDeleter", fields: [deletedById], references: [id])
+
   @@map("amenities")
 }
 
@@ -751,106 +755,6 @@ model RoomAmenity {
 
   @@id([roomId, amenityId])
   @@map("room_amenities")
-}
-
-/// Giới tính của người thuê
-enum Gender {
-  /// Nam
-  MALE
-  /// Nữ
-  FEMALE
-  /// Khác
-  OTHER
-}
-
-/// Trạng thái lịch sử thuê phòng
-enum RentalHistoryStatus {
-  /// Đang thuê tích cực
-  ACTIVE
-  /// Đã kết thúc hợp đồng bình thường
-  ENDED
-  /// Bị chấm dứt hợp đồng trước thời hạn (do vi phạm hoặc thỏa thuận)
-  TERMINATED
-}
-
-/// Trạng thái lịch hẹn xem phòng
-enum AppointmentStatus {
-  /// Đang chờ chủ trọ/nhân viên xác nhận lịch hẹn
-  PENDING
-  /// Lịch hẹn đã được xác nhận thành công
-  CONFIRMED
-  /// Yêu cầu hẹn xem bị từ chối
-  REJECTED
-  /// Lịch hẹn được đổi sang khung giờ khác
-  RESCHEDULED
-  /// Khách thuê hoặc chủ trọ hủy lịch hẹn
-  CANCELED
-  /// Đã hoàn thành buổi xem phòng trọ thực tế
-  COMPLETED
-}
-
-/// Trạng thái của yêu cầu thuê phòng
-enum RentalRequestStatus {
-  /// Đang chờ chủ trọ xem xét
-  PENDING
-  /// Yêu cầu thuê được phê duyệt
-  APPROVED
-  /// Yêu cầu thuê bị từ chối
-  REJECTED
-  /// Chủ trọ yêu cầu bổ sung thêm thông tin hồ sơ
-  NEED_MORE_INFO
-  /// Khách thuê hủy yêu cầu thuê phòng
-  CANCELED
-  /// Đã ký hợp đồng chính thức từ yêu cầu thuê này
-  CONVERTED_TO_CONTRACT
-}
-
-/// Chu kỳ thanh toán của hợp đồng thuê phòng
-enum ContractBillingCycle {
-  /// Đóng tiền phòng hằng tháng
-  MONTHLY
-  /// Đóng tiền phòng hằng quý (3 tháng/lần)
-  QUARTERLY
-}
-
-/// Trạng thái pháp lý của hợp đồng thuê phòng
-enum ContractStatus {
-  /// Bản nháp hợp đồng, chưa gửi
-  DRAFT
-  /// Chờ chủ trọ ký tên
-  WAITING_LANDLORD_SIGN
-  /// Chờ khách thuê ký tên xác nhận online
-  WAITING_RENTER_SIGN
-  /// Hợp đồng đang có hiệu lực thuê
-  ACTIVE
-  /// Hợp đồng đã hết hạn thuê
-  EXPIRED
-  /// Hợp đồng bị thanh lý trước hạn
-  TERMINATED
-  /// Hợp đồng đã bị hủy bỏ
-  CANCELED
-}
-
-/// Vai trò của thành viên trong hợp đồng thuê phòng
-enum ContractMemberRole {
-  /// Người ký hợp đồng chính (chịu trách nhiệm pháp lý và thanh toán)
-  MAIN_RENTER
-  /// Người ở cùng phòng (được khai báo thông tin tạm trú)
-  CO_RENTER
-}
-
-/// Trạng thái yêu cầu chấm dứt/thanh lý hợp đồng
-enum TerminationRequestStatus {
-  /// Đang chờ chủ trọ duyệt yêu cầu trả phòng
-  PENDING
-  /// Yêu cầu được chấp thuận
-  APPROVED
-  /// Yêu cầu bị từ chối
-  REJECTED
-  /// Đã hoàn tất thủ tục bàn giao và thanh lý hợp đồng
-  COMPLETED
-  /// Khách thuê hủy yêu cầu trả phòng
-  CANCELED
 }
 
 /// Hồ sơ thông tin chi tiết người thuê trên Mobile App
@@ -1005,6 +909,17 @@ model RoomViewingAppointment {
   /// Các yêu cầu thuê được tạo ra sau cuộc hẹn này
   rentalRequests RentalRequest[]
 
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("RoomViewingAppointmentCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("RoomViewingAppointmentUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("RoomViewingAppointmentDeleter", fields: [deletedById], references: [id])
+
   @@map("room_viewing_appointments")
 }
 
@@ -1043,6 +958,17 @@ model RentalRequest {
   /// Các hợp đồng được khởi tạo từ yêu cầu thuê được phê duyệt này
   contracts   Contract[]
 
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("RentalRequestCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("RentalRequestUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("RentalRequestDeleter", fields: [deletedById], references: [id])
+
   @@map("rental_requests")
 }
 
@@ -1070,6 +996,17 @@ model ContractTemplate {
   tenant    Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Các hợp đồng thực tế được tạo ra từ mẫu này
   contracts Contract[]
+
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("ContractTemplateCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("ContractTemplateUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("ContractTemplateDeleter", fields: [deletedById], references: [id])
 
   @@map("contract_templates")
 }
@@ -1148,6 +1085,16 @@ model Contract {
   conversations       Conversation[]
   /// Danh sách các đánh giá của khách thuê liên quan đến hợp đồng này
   reviews             Review[]
+  /// ID người dùng tạo bản ghi
+  createdById         String?                      @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById         String?                      @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById         String?                      @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("ContractCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("ContractUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("ContractDeleter", fields: [deletedById], references: [id])
 
   @@index([tenantId])
   @@index([contractCode])
@@ -1207,8 +1154,7 @@ model ContractTerminationRequest {
   tenantId            String                   @map("tenant_id") @db.Uuid
   /// ID hợp đồng muốn chấm dứt
   contractId          String                   @map("contract_id") @db.Uuid
-  /// ID tài khoản người gửi yêu cầu (thường là User khách thuê chính hoặc nhân viên quản lý)
-  requestedBy         String                   @map("requested_by") @db.Uuid
+  // (removed old requestedBy)
   /// Lý do xin trả phòng/chấm dứt hợp đồng trọ
   reason              String                   @db.Text
   /// Ngày dự kiến khách dọn đồ ra khỏi phòng trọ
@@ -1222,199 +1168,24 @@ model ContractTerminationRequest {
 
   // Các quan hệ (Relations)
   /// Tenant quản lý
-  tenant        Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant   Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Hợp đồng thuê liên quan (xóa hợp đồng thì xóa yêu cầu trả phòng)
-  contract      Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
-  /// Người gửi yêu cầu
-  requestedUser User     @relation(fields: [requestedBy], references: [id], onDelete: Cascade)
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  // (removed old requestedUser)
+  // (removed old requestedUser)
+
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("ContractTerminationRequestCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("ContractTerminationRequestUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("ContractTerminationRequestDeleter", fields: [deletedById], references: [id])
 
   @@map("contract_termination_requests")
-}
-
-/// Trạng thái của tài sản (Mới, Tốt, Bình thường, Hỏng, Mất)
-enum AssetCondition {
-  /// Tài sản mới hoàn toàn
-  NEW
-  /// Tài sản còn tốt
-  GOOD
-  /// Tài sản ở trạng thái bình thường, có khấu hao nhẹ
-  NORMAL
-  /// Tài sản bị hỏng hóc cần sửa chữa hoặc thay thế
-  DAMAGED
-  /// Tài sản bị mất
-  LOST
-}
-
-/// Loại biên bản bàn giao (Bàn giao khi nhận phòng / Trả phòng)
-enum HandoverType {
-  /// Biên bản bàn giao khi nhận phòng (Check-in)
-  CHECKIN
-  /// Biên bản bàn giao khi trả phòng (Check-out)
-  CHECKOUT
-}
-
-/// Trạng thái của biên bản bàn giao
-enum HandoverStatus {
-  /// Bản nháp biên bản
-  DRAFT
-  /// Đã được cả hai bên xác nhận
-  CONFIRMED
-  /// Đang có tranh chấp về tài sản bàn giao
-  DISPUTED
-}
-
-/// Loại đồng hồ tiện ích
-enum MeterType {
-  /// Đồng hồ điện
-  ELECTRICITY
-  /// Đồng hồ nước
-  WATER
-}
-
-/// Trạng thái hoạt động của đồng hồ
-enum MeterStatus {
-  /// Đang hoạt động bình thường
-  ACTIVE
-  /// Tạm ngưng hoạt động
-  INACTIVE
-  /// Đồng hồ bị hỏng, cần sửa chữa/thay thế
-  BROKEN
-}
-
-/// Nguồn nhập chỉ số điện nước
-enum ReadingSource {
-  /// Nhập tay thủ công
-  MANUAL
-  /// Tự động nhận diện từ ảnh bằng công nghệ AI OCR
-  OCR
-  /// Nhập hàng loạt từ file Excel/CSV
-  IMPORT
-}
-
-/// Trạng thái của bản ghi chỉ số điện nước hằng tháng
-enum ReadingStatus {
-  /// Bản nháp chỉ số
-  DRAFT
-  /// Đã xác nhận chỉ số chính xác
-  CONFIRMED
-  /// Chỉ số có sự bất thường cần kiểm tra lại (ví dụ tiêu thụ tăng đột biến)
-  ABNORMAL
-  /// Bản ghi bị từ chối phê duyệt do sai lệch
-  REJECTED
-}
-
-/// Trạng thái của tác vụ AI OCR
-enum OcrJobStatus {
-  /// Đang chờ xử lý
-  PENDING
-  /// Đang trong quá trình nhận diện hình ảnh
-  PROCESSING
-  /// Nhận diện thành công
-  SUCCESS
-  /// Nhận diện thất bại do lỗi kỹ thuật hoặc ảnh mờ
-  FAILED
-  /// Cần người dùng xem xét lại do độ tin cậy nhận diện thấp
-  NEED_REVIEW
-}
-
-/// Trạng thái xử lý của đợt hóa đơn hàng loạt
-enum InvoiceBatchStatus {
-  /// Bản nháp đợt hóa đơn
-  DRAFT
-  /// Đang chạy ngầm sinh hóa đơn cho các phòng
-  PROCESSING
-  /// Đã hoàn thành sinh toàn bộ hóa đơn
-  COMPLETED
-  /// Quá trình sinh hóa đơn hàng loạt gặp lỗi
-  FAILED
-}
-
-/// Trạng thái thanh toán của hóa đơn
-enum InvoiceStatus {
-  /// Bản nháp hóa đơn, chưa gửi khách thuê
-  DRAFT
-  /// Chưa thanh toán
-  UNPAID
-  /// Đã thanh toán một phần
-  PARTIALLY_PAID
-  /// Đã thanh toán toàn bộ hóa đơn
-  PAID
-  /// Đã quá hạn thanh toán
-  OVERDUE
-  /// Hóa đơn bị hủy bỏ
-  CANCELED
-}
-
-/// Phân loại danh mục khoản thu trong hóa đơn
-enum InvoiceItemType {
-  /// Tiền thuê phòng cơ bản
-  RENT
-  /// Tiền điện tiêu thụ
-  ELECTRICITY
-  /// Tiền nước tiêu thụ
-  WATER
-  /// Phí dịch vụ (vệ sinh, thang máy, an ninh...)
-  SERVICE
-  /// Phí gửi xe
-  PARKING
-  /// Phí internet/wifi
-  INTERNET
-  /// Phí phạt (nộp muộn, vi phạm quy định hợp đồng...)
-  PENALTY
-  /// Khoản chiết khấu, giảm giá phòng
-  DISCOUNT
-  /// Khoản thu khác
-  OTHER
-}
-
-/// Phương thức thanh toán của người thuê
-enum PaymentMethod {
-  /// Thanh toán bằng tiền mặt
-  CASH
-  /// Chuyển khoản ngân hàng trực tiếp
-  BANK_TRANSFER
-  /// Quét mã VietQR động
-  QR
-  /// Thanh toán qua ví điện tử
-  WALLET
-}
-
-/// Trạng thái giao dịch thanh toán hóa đơn
-enum PaymentStatus {
-  /// Giao dịch đang chờ xử lý
-  PENDING
-  /// Giao dịch thanh toán thành công
-  SUCCESS
-  /// Giao dịch thất bại
-  FAILED
-  /// Khách thuê hủy bỏ giao dịch
-  CANCELED
-  /// Giao dịch đã được hoàn trả lại tiền
-  REFUNDED
-}
-
-/// Trạng thái hoạt động của mã QR động thanh toán
-enum QrCodeStatus {
-  /// Mã QR đang hoạt động và chờ quét
-  ACTIVE
-  /// Mã QR đã hết hạn thanh toán
-  EXPIRED
-  /// Đã thanh toán thành công thông qua mã QR này
-  PAID
-  /// Mã QR bị hủy bỏ
-  CANCELED
-}
-
-/// Trạng thái xử lý log webhook từ cổng thanh toán
-enum WebhookLogStatus {
-  /// Đã nhận webhook payload
-  RECEIVED
-  /// Đã xử lý cập nhật trạng thái hóa đơn thành công
-  PROCESSED
-  /// Xử lý webhook thất bại do lỗi
-  FAILED
-  /// Webhook bị bỏ qua (ví dụ: giao dịch trùng lặp hoặc không liên quan)
-  IGNORED
 }
 
 /// Bảng danh mục loại tài sản (Ví dụ: Giường, Tủ, Điều hòa, Chìa khóa...)
@@ -1429,6 +1200,17 @@ model AssetCategory {
   // Các quan hệ (Relations)
   /// Danh sách các tài sản thực tế trong các phòng thuộc danh mục này
   roomAssets RoomAsset[]
+
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("AssetCategoryCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("AssetCategoryUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("AssetCategoryDeleter", fields: [deletedById], references: [id])
 
   @@map("asset_categories")
 }
@@ -1470,6 +1252,17 @@ model RoomAsset {
   /// Lịch sử bàn giao tài sản này trong các biên bản
   handoverItems HandoverAssetItem[]
 
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("RoomAssetCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("RoomAssetUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("RoomAssetDeleter", fields: [deletedById], references: [id])
+
   @@map("room_assets")
 }
 
@@ -1505,6 +1298,17 @@ model HandoverRecord {
   room       Room                @relation(fields: [roomId], references: [id], onDelete: Cascade)
   /// Chi tiết tình trạng các tài sản được ghi nhận trong biên bản này
   assetItems HandoverAssetItem[]
+
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("HandoverRecordCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("HandoverRecordUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("HandoverRecordDeleter", fields: [deletedById], references: [id])
 
   @@map("handover_records")
 }
@@ -1598,24 +1402,33 @@ model MeterReading {
   source        ReadingSource @default(MANUAL)
   /// Trạng thái kiểm duyệt chỉ số
   status        ReadingStatus @default(DRAFT)
-  /// ID tài khoản nhân viên hoặc chủ trọ thực hiện ghi nhận chỉ số
-  recordedBy    String        @map("recorded_by") @db.Uuid
+  // (removed old recordedBy)
   /// Thời điểm thực hiện hành động ghi nhận chỉ số
   recordedAt    DateTime      @default(now()) @map("recorded_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Tenant quản lý
-  tenant         Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant       Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Phòng trọ liên quan
-  room           Room          @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  room         Room          @relation(fields: [roomId], references: [id], onDelete: Cascade)
   /// Đồng hồ đo tương ứng (xóa đồng hồ thì cascade xóa lịch sử chỉ số của nó)
-  meter          UtilityMeter  @relation(fields: [meterId], references: [id], onDelete: Cascade)
+  meter        UtilityMeter  @relation(fields: [meterId], references: [id], onDelete: Cascade)
   /// Hợp đồng thuê phòng liên quan (gỡ liên kết nếu hợp đồng bị xóa)
-  contract       Contract?     @relation(fields: [contractId], references: [id], onDelete: SetNull)
-  /// Tài khoản người thực hiện ghi nhận chỉ số (chặn xóa người dùng này)
-  recordedByUser User          @relation("RecordedReadings", fields: [recordedBy], references: [id], onDelete: Restrict)
+  contract     Contract?     @relation(fields: [contractId], references: [id], onDelete: SetNull)
+  // (removed old recordedByUser)
   /// Chi tiết hóa đơn liên quan đã sử dụng chỉ số tiêu thụ này để tính tiền
-  invoiceItems   InvoiceItem[]
+  invoiceItems InvoiceItem[]
+
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("MeterReadingCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("MeterReadingUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("MeterReadingDeleter", fields: [deletedById], references: [id])
 
   @@unique([meterId, billingMonth]) // Tránh ghi chỉ số trùng lặp nhiều lần cho cùng 1 đồng hồ trong cùng 1 tháng
   @@index([tenantId, billingMonth])
@@ -1673,8 +1486,7 @@ model InvoiceBatch {
   tenantId      String             @map("tenant_id") @db.Uuid
   /// Tháng/năm lập hóa đơn thanh toán cho đợt này (ngày 1 của tháng tính toán)
   billingMonth  DateTime           @map("billing_month") @db.Date
-  /// ID tài khoản quản lý/chủ trọ kích hoạt tạo đợt hóa đơn này
-  createdBy     String             @map("created_by") @db.Uuid
+  // (removed old createdBy)
   /// Trạng thái xử lý tạo hóa đơn hàng loạt
   status        InvoiceBatchStatus @default(DRAFT)
   /// Tổng số lượng hóa đơn được sinh ra trong đợt này
@@ -1684,11 +1496,21 @@ model InvoiceBatch {
 
   // Các quan hệ (Relations)
   /// Tenant phát hành
-  tenant        Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  /// Người dùng tạo đợt hóa đơn (chặn xóa người dùng này)
-  createdByUser User      @relation("CreatedBatches", fields: [createdBy], references: [id], onDelete: Restrict)
+  tenant   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  // (removed old createdByUser)
   /// Danh sách các hóa đơn chi tiết được sinh ra trực thuộc đợt này
-  invoices      Invoice[]
+  invoices Invoice[]
+
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("InvoiceBatchCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("InvoiceBatchUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("InvoiceBatchDeleter", fields: [deletedById], references: [id])
 
   @@unique([tenantId, billingMonth]) // Đảm bảo mỗi tenant chỉ tạo tối đa 1 đợt hóa đơn hàng loạt trong 1 tháng
   @@map("invoice_batches")
@@ -1759,6 +1581,17 @@ model Invoice {
   /// Danh sách log webhook lịch sử nhận thanh toán liên quan đến hóa đơn này
   webhookLogs PaymentWebhookLog[]
 
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("InvoiceCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("InvoiceUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("InvoiceDeleter", fields: [deletedById], references: [id])
+
   @@index([tenantId, billingMonth])
   @@index([invoiceCode])
   @@index([status])
@@ -1827,6 +1660,17 @@ model Payment {
   invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   /// Tài khoản người thanh toán (chặn xóa người dùng này nếu đã phát sinh thanh toán)
   payer   User    @relation("PayerPayments", fields: [payerId], references: [id], onDelete: Restrict)
+
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("PaymentCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("PaymentUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("PaymentDeleter", fields: [deletedById], references: [id])
 
   @@index([tenantId])
   @@index([transactionCode])
@@ -1898,180 +1742,6 @@ model PaymentWebhookLog {
   @@map("payment_webhook_logs")
 }
 
-/// Phân loại danh mục sự cố báo cáo trong ticket
-enum TicketCategory {
-  /// Sự cố về hệ thống điện
-  ELECTRICITY
-  /// Sự cố về hệ thống nước, đường ống
-  WATER
-  /// Sự cố về đường truyền mạng, internet
-  INTERNET
-  /// Sự cố liên quan đến đồ nội thất bàn giao (giường, tủ, bàn ghế...)
-  FURNITURE
-  /// Vấn đề về an ninh, bảo vệ, trộm cắp
-  SECURITY
-  /// Sự cố về vệ sinh phòng, hành lang, khu vực chung
-  CLEANING
-  /// Sự cố khác không thuộc các danh mục trên
-  OTHER
-}
-
-/// Mức độ ưu tiên của ticket sự cố
-enum TicketPriority {
-  /// Ưu tiên thấp, có thể xử lý muộn
-  LOW
-  /// Mức độ xử lý trung bình
-  MEDIUM
-  /// Mức độ ưu tiên cao, cần xử lý trong ngày
-  HIGH
-  /// Sự cố khẩn cấp, đe dọa an toàn hoặc gián đoạn dịch vụ nghiêm trọng
-  URGENT
-}
-
-/// Trạng thái xử lý sự cố báo cáo
-enum TicketStatus {
-  /// Mới tiếp nhận sự cố, chưa xử lý
-  OPEN
-  /// Đang trong quá trình sửa chữa/xử lý
-  IN_PROGRESS
-  /// Tạm dừng xử lý do chờ khách thuê phản hồi hoặc phối hợp
-  WAITING_RENTER
-  /// Đã khắc phục xong sự cố
-  RESOLVED
-  /// Đã đóng ticket sau khi khách thuê xác nhận hài lòng
-  CLOSED
-  /// Hủy bỏ yêu cầu báo cáo sự cố
-  CANCELED
-}
-
-/// Phân loại phòng chat trong hệ thống
-enum ConversationType {
-  /// Phòng chat liên quan trực tiếp đến phòng trọ
-  ROOM_CHAT
-  /// Phòng chat giải quyết các điều khoản hợp đồng thuê phòng
-  CONTRACT_CHAT
-  /// Phòng chat phục vụ trao đổi sửa chữa sự cố của ticket
-  TICKET_CHAT
-  /// Phòng chat hỗ trợ chung giữa khách thuê và Super Admin / Chủ trọ
-  SUPPORT_CHAT
-}
-
-/// Phân loại loại tin nhắn
-enum MessageType {
-  /// Tin nhắn văn bản thuần túy
-  TEXT
-  /// Tin nhắn kèm hình ảnh chụp
-  IMAGE
-  /// Tin nhắn đính kèm file tài liệu
-  FILE
-  /// Tin nhắn hệ thống (ví dụ: Thông báo bắt đầu cuộc trò chuyện)
-  SYSTEM
-}
-
-/// Trạng thái kiểm duyệt đánh giá phòng trọ
-enum ReviewStatus {
-  /// Đang chờ chủ trọ hoặc quản trị viên duyệt hiển thị
-  PENDING
-  /// Đã duyệt hiển thị công khai trên Marketplace
-  APPROVED
-  /// Từ chối hiển thị đánh giá do vi phạm quy định
-  REJECTED
-  /// Đã bị ẩn đi bởi chủ trọ/admin
-  HIDDEN
-}
-
-/// Loại đối tượng tính điểm uy tín
-enum ReputationTargetType {
-  /// Điểm uy tín của chủ trọ/tổ chức (Tenant)
-  TENANT
-  /// Điểm uy tín của phòng trọ cụ thể
-  ROOM
-}
-
-/// Phân loại đối tượng bị báo cáo vi phạm
-enum ReportTargetType {
-  /// Báo cáo vi phạm tin đăng phòng trọ
-  ROOM
-  /// Báo cáo vi phạm hành vi của chủ trọ
-  TENANT
-  /// Báo cáo vi phạm nội dung đánh giá sai sự thật
-  REVIEW
-  /// Báo cáo vi phạm hành vi của người dùng khác
-  USER
-}
-
-/// Trạng thái xử lý báo cáo vi phạm
-enum ReportStatus {
-  /// Báo cáo mới nhận, đang chờ xử lý
-  PENDING
-  /// Đang được Admin/Super Admin kiểm tra xác minh
-  REVIEWING
-  /// Báo cáo đã xử lý xong (đã ẩn đối tượng vi phạm hoặc cảnh cáo)
-  RESOLVED
-  /// Báo cáo bị từ chối do không vi phạm hoặc thiếu bằng chứng
-  REJECTED
-}
-
-/// Phân loại danh mục thông báo hệ thống gửi
-enum NotificationType {
-  /// Thông báo liên quan đến phát hành hóa đơn mới
-  INVOICE
-  /// Thông báo liên quan đến thanh toán tiền phòng thành công hoặc thất bại
-  PAYMENT
-  /// Thông báo liên quan đến ký hợp đồng, trả phòng
-  CONTRACT
-  /// Thông báo cập nhật tiến độ xử lý ticket sự cố
-  TICKET
-  /// Thông báo nhắc lịch hẹn xem phòng trọ
-  APPOINTMENT
-  /// Thông báo chung hoặc cập nhật từ hệ thống SaaS
-  SYSTEM
-}
-
-/// Nền tảng thiết bị di động/web nhận thông báo đẩy
-enum DevicePlatform {
-  /// Điện thoại hệ điều hành iOS
-  IOS
-  /// Điện thoại hệ điều hành Android
-  ANDROID
-  /// Trình duyệt web
-  WEB
-}
-
-/// Loại tác vụ AI ghi nhận trong log
-enum AiLogType {
-  /// AI gợi ý danh sách phòng phù hợp cho khách thuê
-  ROOM_RECOMMENDATION
-  /// AI phân tích và đề xuất mức giá thuê tối ưu cho chủ trọ
-  PRICE_SUGGESTION
-}
-
-/// Kênh giao tiếp với AI Chatbot
-enum ChatbotChannel {
-  /// Giao tiếp qua ứng dụng web
-  WEB
-  /// Giao tiếp qua ứng dụng mobile
-  MOBILE
-}
-
-/// Trạng thái phiên chat hỗ trợ của chatbot
-enum ChatbotSessionStatus {
-  /// Phiên chat đang mở và tiếp tục hội thoại
-  ACTIVE
-  /// Phiên chat đã kết thúc
-  CLOSED
-}
-
-/// Vai trò của người gửi tin nhắn trong chatbot
-enum ChatbotSenderType {
-  /// Khách thuê/Người dùng gửi tin nhắn
-  USER
-  /// AI Bot tự động trả lời
-  BOT
-  /// Nhân viên hỗ trợ (chủ trọ/staff) nhảy vào tiếp quản phiên chat
-  STAFF
-}
-
 /// Bảng quản lý các yêu cầu báo cáo sự cố, yêu cầu sửa chữa cơ sở vật chất (Ticket)
 model Ticket {
   /// ID ticket (UUID)
@@ -2082,8 +1752,7 @@ model Ticket {
   roomId      String         @map("room_id") @db.Uuid
   /// ID hợp đồng thuê phòng liên quan tại thời điểm xảy ra sự cố (nullable nếu phòng trống)
   contractId  String?        @map("contract_id") @db.Uuid
-  /// ID người dùng tạo báo cáo sự cố (thường là khách thuê chính)
-  createdBy   String         @map("created_by") @db.Uuid
+  // (removed old createdBy)
   /// ID nhân viên được phân công xử lý sự cố (nullable nếu chưa phân công)
   assignedTo  String?        @map("assigned_to") @db.Uuid
   /// Tiêu đề báo cáo ngắn gọn (ví dụ: Hỏng vòi nước nhà vệ sinh)
@@ -2110,8 +1779,7 @@ model Ticket {
   room           Room               @relation(fields: [roomId], references: [id], onDelete: Cascade)
   /// Hợp đồng thuê phòng liên quan (gỡ liên kết nếu hợp đồng bị xóa)
   contract       Contract?          @relation(fields: [contractId], references: [id], onDelete: SetNull)
-  /// Người dùng tạo ticket (chặn xóa người dùng này)
-  createdByUser  User               @relation("TicketCreator", fields: [createdBy], references: [id], onDelete: Restrict)
+  // (removed old createdByUser)
   /// Nhân viên được phân công xử lý (gỡ liên kết nếu tài khoản nhân viên bị xóa)
   assignedToUser User?              @relation("TicketAssignee", fields: [assignedTo], references: [id], onDelete: SetNull)
   /// Danh sách hình ảnh, video hiện trạng sự cố đính kèm
@@ -2120,6 +1788,17 @@ model Ticket {
   comments       TicketComment[]
   /// Phòng chat trực tiếp để bàn luận về ticket này
   conversations  Conversation[]
+
+  /// ID người dùng tạo bản ghi
+  createdById String? @map("created_by_id") @db.Uuid
+  /// ID người dùng cập nhật bản ghi gần nhất
+  updatedById String? @map("updated_by_id") @db.Uuid
+  /// ID người dùng thực hiện xóa mềm bản ghi
+  deletedById String? @map("deleted_by_id") @db.Uuid
+
+  createdBy User? @relation("TicketCreator", fields: [createdById], references: [id])
+  updatedBy User? @relation("TicketUpdater", fields: [updatedById], references: [id])
+  deletedBy User? @relation("TicketDeleter", fields: [deletedById], references: [id])
 
   @@map("tickets")
 }
@@ -2146,6 +1825,22 @@ model TicketAttachment {
   uploadedByUser User   @relation(fields: [uploadedBy], references: [id], onDelete: Cascade)
 
   @@map("ticket_attachments")
+}
+
+/// Bảng lưu trữ cấu hình tùy biến toàn hệ thống động (System Settings) dạng Key-Value
+model SystemSetting {
+  /// ID cấu hình (UUID)
+  id          String   @id @default(uuid()) @db.Uuid
+  /// Mã định danh tham chiếu duy nhất của cấu hình (ví dụ: min_deposit_months)
+  key         String   @unique @db.VarChar(100)
+  /// Giá trị thiết lập lưu dạng JSON (linh hoạt cho cả String, Number, Array, Object)
+  value       Json     @db.JsonB
+  /// Mô tả chức năng và ý nghĩa của khóa cấu hình này
+  description String?  @db.Text
+  /// Thời điểm cập nhật giá trị cấu hình gần nhất
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("system_settings")
 }
 
 /// Bảng lưu trữ trao đổi, thảo luận chi tiết giữa khách thuê và chủ trọ về việc xử lý sự cố
@@ -2534,20 +2229,6 @@ model ChatbotMessage {
   @@map("chatbot_messages")
 }
 
-/// Trạng thái của tác vụ chạy ngầm
-enum BackgroundJobStatus {
-  /// Đang chờ đến lượt xử lý
-  WAITING
-  /// Tác vụ đang được thực thi
-  ACTIVE
-  /// Tác vụ đã hoàn thành thành công
-  COMPLETED
-  /// Tác vụ thất bại sau các lượt thử
-  FAILED
-  /// Tác vụ lỗi và đang chờ chạy lại
-  RETRYING
-}
-
 /// Bảng lưu trạng thái và thông tin của các tác vụ chạy ngầm (Background Jobs)
 model BackgroundJob {
   /// ID tác vụ (UUID)
@@ -2619,18 +2300,602 @@ model AuditLog {
   @@map("audit_logs")
 }
 
-/// Bảng lưu trữ cấu hình tùy biến toàn hệ thống động (System Settings) dạng Key-Value
-model SystemSetting {
-  /// ID cấu hình (UUID)
-  id          String   @id @default(uuid()) @db.Uuid
-  /// Mã định danh tham chiếu duy nhất của cấu hình (ví dụ: min_deposit_months)
-  key         String   @unique @db.VarChar(100)
-  /// Giá trị thiết lập lưu dạng JSON (linh hoạt cho cả String, Number, Array, Object)
-  value       Json     @db.JsonB
-  /// Mô tả chức năng và ý nghĩa của khóa cấu hình này
-  description String?  @db.Text
-  /// Thời điểm cập nhật giá trị cấu hình gần nhất
-  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz
+/// Trạng thái gói đăng ký dịch vụ SaaS
+enum SubscriptionStatus {
+  /// Đang dùng thử
+  TRIALING
+  /// Đang hoạt động bình thường
+  ACTIVE
+  /// Quá hạn thanh toán nhưng chưa khóa
+  PAST_DUE
+  /// Đã hủy đăng ký
+  CANCELED
+  /// Đã hết hạn sử dụng
+  EXPIRED
+}
 
-  @@map("system_settings")
+/// Chu kỳ thanh toán của gói cước
+enum BillingCycle {
+  /// Thanh toán theo từng tháng
+  MONTHLY
+  /// Thanh toán theo từng năm
+  YEARLY
+}
+
+/// Trạng thái giao dịch thanh toán gói SaaS
+enum SubscriptionPaymentStatus {
+  /// Đang chờ xử lý giao dịch
+  PENDING
+  /// Đã thanh toán thành công
+  PAID
+  /// Giao dịch thất bại
+  FAILED
+  /// Giao dịch đã được hoàn tiền
+  REFUNDED
+}
+
+/// Loại bất động sản/nhà trọ
+enum PropertyType {
+  /// Nhà nguyên căn
+  HOUSE
+  /// Chung cư mini
+  MINI_APARTMENT
+  /// Ký túc xá / Phòng trọ homestay ghép giường
+  DORM
+  /// Căn hộ chung cư
+  APARTMENT
+}
+
+/// Trạng thái hoạt động của tòa nhà/nhà trọ
+enum PropertyStatus {
+  /// Đang hoạt động bình thường
+  ACTIVE
+  /// Tạm ngưng hoạt động
+  INACTIVE
+  /// Đang trong quá trình bảo trì, sửa chữa lớn
+  MAINTENANCE
+}
+
+/// Trạng thái thuê của phòng trọ
+enum RoomStatus {
+  /// Phòng trống có sẵn để thuê
+  AVAILABLE
+  /// Phòng đã có người ở
+  OCCUPIED
+  /// Phòng đã được đặt cọc giữ chỗ
+  RESERVED
+  /// Phòng đang bảo trì, sửa chữa không thể cho thuê
+  MAINTENANCE
+  /// Phòng tạm dừng hoạt động
+  INACTIVE
+}
+
+/// Trạng thái tin đăng của phòng trên Marketplace
+enum MarketplaceStatus {
+  /// Tin nháp, chưa công khai
+  DRAFT
+  /// Đang chờ Super Admin phê duyệt tin đăng
+  PENDING_REVIEW
+  /// Đã phê duyệt và đăng công khai trên Marketplace
+  PUBLISHED
+  /// Tin đăng bị từ chối phê duyệt do vi phạm quy định
+  REJECTED
+  /// Tin đăng bị ẩn tạm thời bởi chủ trọ
+  HIDDEN
+}
+
+/// Trạng thái hoạt động của tài khoản người dùng
+enum UserStatus {
+  /// Đang hoạt động bình thường
+  ACTIVE
+  /// Tạm khóa hoặc chưa kích hoạt
+  INACTIVE
+  /// Bị cấm khỏi hệ thống do vi phạm
+  BANNED
+}
+
+/// Trạng thái xác minh của hồ sơ/tổ chức (Tenant hoặc Renter Profile)
+enum VerificationStatus {
+  /// Chưa xác minh thông tin
+  UNVERIFIED
+  /// Đang chờ duyệt xác minh từ hệ thống
+  PENDING
+  /// Đã xác minh thành công
+  VERIFIED
+  /// Yêu cầu xác minh bị từ chối
+  REJECTED
+}
+
+/// Trạng thái hoạt động của Tenant (chủ trọ/tổ chức kinh doanh)
+enum TenantStatus {
+  /// Đang hoạt động bình thường
+  ACTIVE
+  /// Tạm ngưng hoạt động do quá hạn thanh toán gói SaaS hoặc vi phạm
+  SUSPENDED
+  /// Đã đóng cửa hoặc xóa tài khoản tenant
+  CLOSED
+}
+
+/// Trạng thái thành viên trong Tenant
+enum TenantMemberStatus {
+  /// Đang làm việc tích cực
+  ACTIVE
+  /// Đã gửi lời mời tham gia nhưng chưa xác nhận
+  INVITED
+  /// Đã bị vô hiệu hóa quyền truy cập vào tenant
+  DISABLED
+}
+
+/// Trạng thái của tài sản (Mới, Tốt, Bình thường, Hỏng, Mất)
+enum AssetCondition {
+  /// Tài sản mới hoàn toàn
+  NEW
+  /// Tài sản còn tốt
+  GOOD
+  /// Tài sản ở trạng thái bình thường, có khấu hao nhẹ
+  NORMAL
+  /// Tài sản bị hỏng hóc cần sửa chữa hoặc thay thế
+  DAMAGED
+  /// Tài sản bị mất
+  LOST
+}
+
+/// Loại biên bản bàn giao (Bàn giao khi nhận phòng / Trả phòng)
+enum HandoverType {
+  /// Biên bản bàn giao khi nhận phòng (Check-in)
+  CHECKIN
+  /// Biên bản bàn giao khi trả phòng (Check-out)
+  CHECKOUT
+}
+
+/// Trạng thái của biên bản bàn giao
+enum HandoverStatus {
+  /// Bản nháp biên bản
+  DRAFT
+  /// Đã được cả hai bên xác nhận
+  CONFIRMED
+  /// Đang có tranh chấp về tài sản bàn giao
+  DISPUTED
+}
+
+/// Loại đồng hồ tiện ích
+enum MeterType {
+  /// Đồng hồ điện
+  ELECTRICITY
+  /// Đồng hồ nước
+  WATER
+}
+
+/// Trạng thái hoạt động của đồng hồ
+enum MeterStatus {
+  /// Đang hoạt động bình thường
+  ACTIVE
+  /// Tạm ngưng hoạt động
+  INACTIVE
+  /// Đồng hồ bị hỏng, cần sửa chữa/thay thế
+  BROKEN
+}
+
+/// Nguồn nhập chỉ số điện nước
+enum ReadingSource {
+  /// Nhập tay thủ công
+  MANUAL
+  /// Tự động nhận diện từ ảnh bằng công nghệ AI OCR
+  OCR
+  /// Nhập hàng loạt từ file Excel/CSV
+  IMPORT
+}
+
+/// Trạng thái của bản ghi chỉ số điện nước hằng tháng
+enum ReadingStatus {
+  /// Bản nháp chỉ số
+  DRAFT
+  /// Đã xác nhận chỉ số chính xác
+  CONFIRMED
+  /// Chỉ số có sự bất thường cần kiểm tra lại (ví dụ tiêu thụ tăng đột biến)
+  ABNORMAL
+  /// Bản ghi bị từ chối phê duyệt do sai lệch
+  REJECTED
+}
+
+/// Trạng thái của tác vụ AI OCR
+enum OcrJobStatus {
+  /// Đang chờ xử lý
+  PENDING
+  /// Đang trong quá trình nhận diện hình ảnh
+  PROCESSING
+  /// Nhận diện thành công
+  SUCCESS
+  /// Nhận diện thất bại do lỗi kỹ thuật hoặc ảnh mờ
+  FAILED
+  /// Cần người dùng xem xét lại do độ tin cậy nhận diện thấp
+  NEED_REVIEW
+}
+
+/// Trạng thái xử lý của đợt hóa đơn hàng loạt
+enum InvoiceBatchStatus {
+  /// Bản nháp đợt hóa đơn
+  DRAFT
+  /// Đang chạy ngầm sinh hóa đơn cho các phòng
+  PROCESSING
+  /// Đã hoàn thành sinh toàn bộ hóa đơn
+  COMPLETED
+  /// Quá trình sinh hóa đơn hàng loạt gặp lỗi
+  FAILED
+}
+
+/// Trạng thái thanh toán của hóa đơn
+enum InvoiceStatus {
+  /// Bản nháp hóa đơn, chưa gửi khách thuê
+  DRAFT
+  /// Chưa thanh toán
+  UNPAID
+  /// Đã thanh toán một phần
+  PARTIALLY_PAID
+  /// Đã thanh toán toàn bộ hóa đơn
+  PAID
+  /// Đã quá hạn thanh toán
+  OVERDUE
+  /// Hóa đơn bị hủy bỏ
+  CANCELED
+}
+
+/// Phân loại danh mục khoản thu trong hóa đơn
+enum InvoiceItemType {
+  /// Tiền thuê phòng cơ bản
+  RENT
+  /// Tiền điện tiêu thụ
+  ELECTRICITY
+  /// Tiền nước tiêu thụ
+  WATER
+  /// Phí dịch vụ (vệ sinh, thang máy, an ninh...)
+  SERVICE
+  /// Phí gửi xe
+  PARKING
+  /// Phí internet/wifi
+  INTERNET
+  /// Phí phạt (nộp muộn, vi phạm quy định hợp đồng...)
+  PENALTY
+  /// Khoản chiết khấu, giảm giá phòng
+  DISCOUNT
+  /// Khoản thu khác
+  OTHER
+}
+
+/// Phương thức thanh toán của người thuê
+enum PaymentMethod {
+  /// Thanh toán bằng tiền mặt
+  CASH
+  /// Chuyển khoản ngân hàng trực tiếp
+  BANK_TRANSFER
+  /// Quét mã VietQR động
+  QR
+  /// Thanh toán qua ví điện tử
+  WALLET
+}
+
+/// Trạng thái giao dịch thanh toán hóa đơn
+enum PaymentStatus {
+  /// Giao dịch đang chờ xử lý
+  PENDING
+  /// Giao dịch thanh toán thành công
+  SUCCESS
+  /// Giao dịch thất bại
+  FAILED
+  /// Khách thuê hủy bỏ giao dịch
+  CANCELED
+  /// Giao dịch đã được hoàn trả lại tiền
+  REFUNDED
+}
+
+/// Trạng thái hoạt động của mã QR động thanh toán
+enum QrCodeStatus {
+  /// Mã QR đang hoạt động và chờ quét
+  ACTIVE
+  /// Mã QR đã hết hạn thanh toán
+  EXPIRED
+  /// Đã thanh toán thành công thông qua mã QR này
+  PAID
+  /// Mã QR bị hủy bỏ
+  CANCELED
+}
+
+/// Trạng thái xử lý log webhook từ cổng thanh toán
+enum WebhookLogStatus {
+  /// Đã nhận webhook payload
+  RECEIVED
+  /// Đã xử lý cập nhật trạng thái hóa đơn thành công
+  PROCESSED
+  /// Xử lý webhook thất bại do lỗi
+  FAILED
+  /// Webhook bị bỏ qua (ví dụ: giao dịch trùng lặp hoặc không liên quan)
+  IGNORED
+}
+
+/// Giới tính của người thuê
+enum Gender {
+  /// Nam
+  MALE
+  /// Nữ
+  FEMALE
+  /// Khác
+  OTHER
+}
+
+/// Trạng thái lịch sử thuê phòng
+enum RentalHistoryStatus {
+  /// Đang thuê tích cực
+  ACTIVE
+  /// Đã kết thúc hợp đồng bình thường
+  ENDED
+  /// Bị chấm dứt hợp đồng trước thời hạn (do vi phạm hoặc thỏa thuận)
+  TERMINATED
+}
+
+/// Trạng thái lịch hẹn xem phòng
+enum AppointmentStatus {
+  /// Đang chờ chủ trọ/nhân viên xác nhận lịch hẹn
+  PENDING
+  /// Lịch hẹn đã được xác nhận thành công
+  CONFIRMED
+  /// Yêu cầu hẹn xem bị từ chối
+  REJECTED
+  /// Lịch hẹn được đổi sang khung giờ khác
+  RESCHEDULED
+  /// Khách thuê hoặc chủ trọ hủy lịch hẹn
+  CANCELED
+  /// Đã hoàn thành buổi xem phòng trọ thực tế
+  COMPLETED
+}
+
+/// Trạng thái của yêu cầu thuê phòng
+enum RentalRequestStatus {
+  /// Đang chờ chủ trọ xem xét
+  PENDING
+  /// Yêu cầu thuê được phê duyệt
+  APPROVED
+  /// Yêu cầu thuê bị từ chối
+  REJECTED
+  /// Chủ trọ yêu cầu bổ sung thêm thông tin hồ sơ
+  NEED_MORE_INFO
+  /// Khách thuê hủy yêu cầu thuê phòng
+  CANCELED
+  /// Đã ký hợp đồng chính thức từ yêu cầu thuê này
+  CONVERTED_TO_CONTRACT
+}
+
+/// Chu kỳ thanh toán của hợp đồng thuê phòng
+enum ContractBillingCycle {
+  /// Đóng tiền phòng hằng tháng
+  MONTHLY
+  /// Đóng tiền phòng hằng quý (3 tháng/lần)
+  QUARTERLY
+}
+
+/// Trạng thái pháp lý của hợp đồng thuê phòng
+enum ContractStatus {
+  /// Bản nháp hợp đồng, chưa gửi
+  DRAFT
+  /// Chờ chủ trọ ký tên
+  WAITING_LANDLORD_SIGN
+  /// Chờ khách thuê ký tên xác nhận online
+  WAITING_RENTER_SIGN
+  /// Hợp đồng đang có hiệu lực thuê
+  ACTIVE
+  /// Hợp đồng đã hết hạn thuê
+  EXPIRED
+  /// Hợp đồng bị thanh lý trước hạn
+  TERMINATED
+  /// Hợp đồng đã bị hủy bỏ
+  CANCELED
+}
+
+/// Vai trò của thành viên trong hợp đồng thuê phòng
+enum ContractMemberRole {
+  /// Người ký hợp đồng chính (chịu trách nhiệm pháp lý và thanh toán)
+  MAIN_RENTER
+  /// Người ở cùng phòng (được khai báo thông tin tạm trú)
+  CO_RENTER
+}
+
+/// Trạng thái yêu cầu chấm dứt/thanh lý hợp đồng
+enum TerminationRequestStatus {
+  /// Đang chờ chủ trọ duyệt yêu cầu trả phòng
+  PENDING
+  /// Yêu cầu được chấp thuận
+  APPROVED
+  /// Yêu cầu bị từ chối
+  REJECTED
+  /// Đã hoàn tất thủ tục bàn giao và thanh lý hợp đồng
+  COMPLETED
+  /// Khách thuê hủy yêu cầu trả phòng
+  CANCELED
+}
+
+/// Phân loại danh mục sự cố báo cáo trong ticket
+enum TicketCategory {
+  /// Sự cố về hệ thống điện
+  ELECTRICITY
+  /// Sự cố về hệ thống nước, đường ống
+  WATER
+  /// Sự cố về đường truyền mạng, internet
+  INTERNET
+  /// Sự cố liên quan đến đồ nội thất bàn giao (giường, tủ, bàn ghế...)
+  FURNITURE
+  /// Vấn đề về an ninh, bảo vệ, trộm cắp
+  SECURITY
+  /// Sự cố về vệ sinh phòng, hành lang, khu vực chung
+  CLEANING
+  /// Sự cố khác không thuộc các danh mục trên
+  OTHER
+}
+
+/// Mức độ ưu tiên của ticket sự cố
+enum TicketPriority {
+  /// Ưu tiên thấp, có thể xử lý muộn
+  LOW
+  /// Mức độ xử lý trung bình
+  MEDIUM
+  /// Mức độ ưu tiên cao, cần xử lý trong ngày
+  HIGH
+  /// Sự cố khẩn cấp, đe dọa an toàn hoặc gián đoạn dịch vụ nghiêm trọng
+  URGENT
+}
+
+/// Trạng thái xử lý sự cố báo cáo
+enum TicketStatus {
+  /// Mới tiếp nhận sự cố, chưa xử lý
+  OPEN
+  /// Đang trong quá trình sửa chữa/xử lý
+  IN_PROGRESS
+  /// Tạm dừng xử lý do chờ khách thuê phản hồi hoặc phối hợp
+  WAITING_RENTER
+  /// Đã khắc phục xong sự cố
+  RESOLVED
+  /// Đã đóng ticket sau khi khách thuê xác nhận hài lòng
+  CLOSED
+  /// Hủy bỏ yêu cầu báo cáo sự cố
+  CANCELED
+}
+
+/// Phân loại phòng chat trong hệ thống
+enum ConversationType {
+  /// Phòng chat liên quan trực tiếp đến phòng trọ
+  ROOM_CHAT
+  /// Phòng chat giải quyết các điều khoản hợp đồng thuê phòng
+  CONTRACT_CHAT
+  /// Phòng chat phục vụ trao đổi sửa chữa sự cố của ticket
+  TICKET_CHAT
+  /// Phòng chat hỗ trợ chung giữa khách thuê và Super Admin / Chủ trọ
+  SUPPORT_CHAT
+}
+
+/// Phân loại loại tin nhắn
+enum MessageType {
+  /// Tin nhắn văn bản thuần túy
+  TEXT
+  /// Tin nhắn kèm hình ảnh chụp
+  IMAGE
+  /// Tin nhắn đính kèm file tài liệu
+  FILE
+  /// Tin nhắn hệ thống (ví dụ: Thông báo bắt đầu cuộc trò chuyện)
+  SYSTEM
+}
+
+/// Trạng thái kiểm duyệt đánh giá phòng trọ
+enum ReviewStatus {
+  /// Đang chờ chủ trọ hoặc quản trị viên duyệt hiển thị
+  PENDING
+  /// Đã duyệt hiển thị công khai trên Marketplace
+  APPROVED
+  /// Từ chối hiển thị đánh giá do vi phạm quy định
+  REJECTED
+  /// Đã bị ẩn đi bởi chủ trọ/admin
+  HIDDEN
+}
+
+/// Loại đối tượng tính điểm uy tín
+enum ReputationTargetType {
+  /// Điểm uy tín của chủ trọ/tổ chức (Tenant)
+  TENANT
+  /// Điểm uy tín của phòng trọ cụ thể
+  ROOM
+}
+
+/// Phân loại đối tượng bị báo cáo vi phạm
+enum ReportTargetType {
+  /// Báo cáo vi phạm tin đăng phòng trọ
+  ROOM
+  /// Báo cáo vi phạm hành vi của chủ trọ
+  TENANT
+  /// Báo cáo vi phạm nội dung đánh giá sai sự thật
+  REVIEW
+  /// Báo cáo vi phạm hành vi của người dùng khác
+  USER
+}
+
+/// Trạng thái xử lý báo cáo vi phạm
+enum ReportStatus {
+  /// Báo cáo mới nhận, đang chờ xử lý
+  PENDING
+  /// Đang được Admin/Super Admin kiểm tra xác minh
+  REVIEWING
+  /// Báo cáo đã xử lý xong (đã ẩn đối tượng vi phạm hoặc cảnh cáo)
+  RESOLVED
+  /// Báo cáo bị từ chối do không vi phạm hoặc thiếu bằng chứng
+  REJECTED
+}
+
+/// Phân loại danh mục thông báo hệ thống gửi
+enum NotificationType {
+  /// Thông báo liên quan đến phát hành hóa đơn mới
+  INVOICE
+  /// Thông báo liên quan đến thanh toán tiền phòng thành công hoặc thất bại
+  PAYMENT
+  /// Thông báo liên quan đến ký hợp đồng, trả phòng
+  CONTRACT
+  /// Thông báo cập nhật tiến độ xử lý ticket sự cố
+  TICKET
+  /// Thông báo nhắc lịch hẹn xem phòng trọ
+  APPOINTMENT
+  /// Thông báo chung hoặc cập nhật từ hệ thống SaaS
+  SYSTEM
+}
+
+/// Nền tảng thiết bị di động/web nhận thông báo đẩy
+enum DevicePlatform {
+  /// Điện thoại hệ điều hành iOS
+  IOS
+  /// Điện thoại hệ điều hành Android
+  ANDROID
+  /// Trình duyệt web
+  WEB
+}
+
+/// Loại tác vụ AI ghi nhận trong log
+enum AiLogType {
+  /// AI gợi ý danh sách phòng phù hợp cho khách thuê
+  ROOM_RECOMMENDATION
+  /// AI phân tích và đề xuất mức giá thuê tối ưu cho chủ trọ
+  PRICE_SUGGESTION
+}
+
+/// Kênh giao tiếp với AI Chatbot
+enum ChatbotChannel {
+  /// Giao tiếp qua ứng dụng web
+  WEB
+  /// Giao tiếp qua ứng dụng mobile
+  MOBILE
+}
+
+/// Trạng thái phiên chat hỗ trợ của chatbot
+enum ChatbotSessionStatus {
+  /// Phiên chat đang mở và tiếp tục hội thoại
+  ACTIVE
+  /// Phiên chat đã kết thúc
+  CLOSED
+}
+
+/// Vai trò của người gửi tin nhắn trong chatbot
+enum ChatbotSenderType {
+  /// Khách thuê/Người dùng gửi tin nhắn
+  USER
+  /// AI Bot tự động trả lời
+  BOT
+  /// Nhân viên hỗ trợ (chủ trọ/staff) nhảy vào tiếp quản phiên chat
+  STAFF
+}
+
+/// Trạng thái của tác vụ chạy ngầm
+enum BackgroundJobStatus {
+  /// Đang chờ đến lượt xử lý
+  WAITING
+  /// Tác vụ đang được thực thi
+  ACTIVE
+  /// Tác vụ đã hoàn thành thành công
+  COMPLETED
+  /// Tác vụ thất bại sau các lượt thử
+  FAILED
+  /// Tác vụ lỗi và đang chờ chạy lại
+  RETRYING
 }
