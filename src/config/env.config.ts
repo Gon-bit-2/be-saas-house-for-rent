@@ -1,8 +1,8 @@
-import z from 'zod';
-import 'dotenv/config';
-import { Logger } from '@nestjs/common';
+import z from 'zod'
+import 'dotenv/config'
+import { Logger } from '@nestjs/common'
 
-const logger = new Logger('Config');
+const logger = new Logger('Config')
 const ConfigSchema = z.object({
   DATABASE_URL: z.string(),
   DB_POOL_IDLE_TIMEOUT_MS: z.coerce.number().int().positive().default(30_000),
@@ -18,11 +18,18 @@ const ConfigSchema = z.object({
   ADMIN_EMAIL: z.string(),
   ADMIN_PHONE_NUMBER: z.string(),
   OTP_EXPIRES_IN: z.string(),
+  OTP_MAX_ATTEMPTS: z.coerce.number().int().positive().default(5),
   RESEND_API_KEY: z.string(),
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
   GOOGLE_REDIRECT_URI: z.string(),
   GOOGLE_CLIENT_REDIRECT_URI: z.string(),
+  GOOGLE_OAUTH_SCOPES: z
+    .string()
+    .default('https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'),
+  GOOGLE_SESSION_EXPIRES_IN: z.string().default('5m'),
+  GOOGLE_STATE_EXPIRES_IN: z.string().default('5m'),
+  GOOGLE_USERINFO_URL: z.string().url().default('https://openidconnect.googleapis.com/v1/userinfo'),
   REDIS_USERNAME: z.string(),
   REDIS_PASSWORD: z.string(),
   REDIS_HOST: z.string(),
@@ -45,13 +52,13 @@ const ConfigSchema = z.object({
     .transform((value) => value === '1'),
   SLOW_REQUEST_MS: z.coerce.number().nonnegative().default(1_000),
   TRACKING_ACCESS_CACHE_TTL_MS: z.coerce.number().nonnegative().default(15_000),
-});
+})
 
-const configServer = ConfigSchema.safeParse(process.env);
+const configServer = ConfigSchema.safeParse(process.env)
 if (!configServer.success) {
-  logger.error('Các giá trị env không hợp lệ');
-  logger.error(configServer.error.message);
-  process.exit(1);
+  logger.error('Các giá trị env không hợp lệ')
+  logger.error(configServer.error.message)
+  process.exit(1)
 }
-const envConfig = configServer.data;
-export default envConfig;
+const envConfig = configServer.data
+export default envConfig
