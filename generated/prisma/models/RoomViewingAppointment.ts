@@ -20,42 +20,66 @@ export type RoomViewingAppointmentModel = runtime.Types.Result.DefaultSelection<
 
 export type AggregateRoomViewingAppointment = {
   _count: RoomViewingAppointmentCountAggregateOutputType | null
+  _avg: RoomViewingAppointmentAvgAggregateOutputType | null
+  _sum: RoomViewingAppointmentSumAggregateOutputType | null
   _min: RoomViewingAppointmentMinAggregateOutputType | null
   _max: RoomViewingAppointmentMaxAggregateOutputType | null
 }
 
+export type RoomViewingAppointmentAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  renterId: number | null
+  assignedStaffId: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
+export type RoomViewingAppointmentSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  renterId: number | null
+  assignedStaffId: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
 export type RoomViewingAppointmentMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  renterId: string | null
-  assignedStaffId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  renterId: number | null
+  assignedStaffId: number | null
   scheduledAt: Date | null
   note: string | null
   landlordNote: string | null
   status: $Enums.AppointmentStatus | null
   createdAt: Date | null
   updatedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoomViewingAppointmentMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  renterId: string | null
-  assignedStaffId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  renterId: number | null
+  assignedStaffId: number | null
   scheduledAt: Date | null
   note: string | null
   landlordNote: string | null
   status: $Enums.AppointmentStatus | null
   createdAt: Date | null
   updatedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoomViewingAppointmentCountAggregateOutputType = {
@@ -76,6 +100,28 @@ export type RoomViewingAppointmentCountAggregateOutputType = {
   _all: number
 }
 
+
+export type RoomViewingAppointmentAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  renterId?: true
+  assignedStaffId?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
+
+export type RoomViewingAppointmentSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  renterId?: true
+  assignedStaffId?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
 
 export type RoomViewingAppointmentMinAggregateInputType = {
   id?: true
@@ -167,6 +213,18 @@ export type RoomViewingAppointmentAggregateArgs<ExtArgs extends runtime.Types.Ex
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: RoomViewingAppointmentAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: RoomViewingAppointmentSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: RoomViewingAppointmentMinAggregateInputType
@@ -197,26 +255,30 @@ export type RoomViewingAppointmentGroupByArgs<ExtArgs extends runtime.Types.Exte
   take?: number
   skip?: number
   _count?: RoomViewingAppointmentCountAggregateInputType | true
+  _avg?: RoomViewingAppointmentAvgAggregateInputType
+  _sum?: RoomViewingAppointmentSumAggregateInputType
   _min?: RoomViewingAppointmentMinAggregateInputType
   _max?: RoomViewingAppointmentMaxAggregateInputType
 }
 
 export type RoomViewingAppointmentGroupByOutputType = {
-  id: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  assignedStaffId: string | null
+  id: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  assignedStaffId: number | null
   scheduledAt: Date
   note: string | null
   landlordNote: string | null
   status: $Enums.AppointmentStatus
   createdAt: Date
   updatedAt: Date
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: RoomViewingAppointmentCountAggregateOutputType | null
+  _avg: RoomViewingAppointmentAvgAggregateOutputType | null
+  _sum: RoomViewingAppointmentSumAggregateOutputType | null
   _min: RoomViewingAppointmentMinAggregateOutputType | null
   _max: RoomViewingAppointmentMaxAggregateOutputType | null
 }
@@ -240,20 +302,20 @@ export type RoomViewingAppointmentWhereInput = {
   AND?: Prisma.RoomViewingAppointmentWhereInput | Prisma.RoomViewingAppointmentWhereInput[]
   OR?: Prisma.RoomViewingAppointmentWhereInput[]
   NOT?: Prisma.RoomViewingAppointmentWhereInput | Prisma.RoomViewingAppointmentWhereInput[]
-  id?: Prisma.UuidFilter<"RoomViewingAppointment"> | string
-  tenantId?: Prisma.UuidFilter<"RoomViewingAppointment"> | string
-  roomId?: Prisma.UuidFilter<"RoomViewingAppointment"> | string
-  renterId?: Prisma.UuidFilter<"RoomViewingAppointment"> | string
-  assignedStaffId?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
+  id?: Prisma.IntFilter<"RoomViewingAppointment"> | number
+  tenantId?: Prisma.IntFilter<"RoomViewingAppointment"> | number
+  roomId?: Prisma.IntFilter<"RoomViewingAppointment"> | number
+  renterId?: Prisma.IntFilter<"RoomViewingAppointment"> | number
+  assignedStaffId?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
   scheduledAt?: Prisma.DateTimeFilter<"RoomViewingAppointment"> | Date | string
   note?: Prisma.StringNullableFilter<"RoomViewingAppointment"> | string | null
   landlordNote?: Prisma.StringNullableFilter<"RoomViewingAppointment"> | string | null
   status?: Prisma.EnumAppointmentStatusFilter<"RoomViewingAppointment"> | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFilter<"RoomViewingAppointment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomViewingAppointment"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
+  createdById?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   renter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -290,23 +352,23 @@ export type RoomViewingAppointmentOrderByWithRelationInput = {
 }
 
 export type RoomViewingAppointmentWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.RoomViewingAppointmentWhereInput | Prisma.RoomViewingAppointmentWhereInput[]
   OR?: Prisma.RoomViewingAppointmentWhereInput[]
   NOT?: Prisma.RoomViewingAppointmentWhereInput | Prisma.RoomViewingAppointmentWhereInput[]
-  tenantId?: Prisma.UuidFilter<"RoomViewingAppointment"> | string
-  roomId?: Prisma.UuidFilter<"RoomViewingAppointment"> | string
-  renterId?: Prisma.UuidFilter<"RoomViewingAppointment"> | string
-  assignedStaffId?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
+  tenantId?: Prisma.IntFilter<"RoomViewingAppointment"> | number
+  roomId?: Prisma.IntFilter<"RoomViewingAppointment"> | number
+  renterId?: Prisma.IntFilter<"RoomViewingAppointment"> | number
+  assignedStaffId?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
   scheduledAt?: Prisma.DateTimeFilter<"RoomViewingAppointment"> | Date | string
   note?: Prisma.StringNullableFilter<"RoomViewingAppointment"> | string | null
   landlordNote?: Prisma.StringNullableFilter<"RoomViewingAppointment"> | string | null
   status?: Prisma.EnumAppointmentStatusFilter<"RoomViewingAppointment"> | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFilter<"RoomViewingAppointment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomViewingAppointment"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
+  createdById?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   renter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -333,32 +395,33 @@ export type RoomViewingAppointmentOrderByWithAggregationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.RoomViewingAppointmentCountOrderByAggregateInput
+  _avg?: Prisma.RoomViewingAppointmentAvgOrderByAggregateInput
   _max?: Prisma.RoomViewingAppointmentMaxOrderByAggregateInput
   _min?: Prisma.RoomViewingAppointmentMinOrderByAggregateInput
+  _sum?: Prisma.RoomViewingAppointmentSumOrderByAggregateInput
 }
 
 export type RoomViewingAppointmentScalarWhereWithAggregatesInput = {
   AND?: Prisma.RoomViewingAppointmentScalarWhereWithAggregatesInput | Prisma.RoomViewingAppointmentScalarWhereWithAggregatesInput[]
   OR?: Prisma.RoomViewingAppointmentScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RoomViewingAppointmentScalarWhereWithAggregatesInput | Prisma.RoomViewingAppointmentScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"RoomViewingAppointment"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"RoomViewingAppointment"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"RoomViewingAppointment"> | string
-  renterId?: Prisma.UuidWithAggregatesFilter<"RoomViewingAppointment"> | string
-  assignedStaffId?: Prisma.UuidNullableWithAggregatesFilter<"RoomViewingAppointment"> | string | null
+  id?: Prisma.IntWithAggregatesFilter<"RoomViewingAppointment"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"RoomViewingAppointment"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"RoomViewingAppointment"> | number
+  renterId?: Prisma.IntWithAggregatesFilter<"RoomViewingAppointment"> | number
+  assignedStaffId?: Prisma.IntNullableWithAggregatesFilter<"RoomViewingAppointment"> | number | null
   scheduledAt?: Prisma.DateTimeWithAggregatesFilter<"RoomViewingAppointment"> | Date | string
   note?: Prisma.StringNullableWithAggregatesFilter<"RoomViewingAppointment"> | string | null
   landlordNote?: Prisma.StringNullableWithAggregatesFilter<"RoomViewingAppointment"> | string | null
   status?: Prisma.EnumAppointmentStatusWithAggregatesFilter<"RoomViewingAppointment"> | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RoomViewingAppointment"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"RoomViewingAppointment"> | Date | string
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"RoomViewingAppointment"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"RoomViewingAppointment"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"RoomViewingAppointment"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"RoomViewingAppointment"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"RoomViewingAppointment"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"RoomViewingAppointment"> | number | null
 }
 
 export type RoomViewingAppointmentCreateInput = {
-  id?: string
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
@@ -376,25 +439,24 @@ export type RoomViewingAppointmentCreateInput = {
 }
 
 export type RoomViewingAppointmentUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutAppointmentInput
 }
 
 export type RoomViewingAppointmentUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -412,42 +474,41 @@ export type RoomViewingAppointmentUpdateInput = {
 }
 
 export type RoomViewingAppointmentUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutAppointmentNestedInput
 }
 
 export type RoomViewingAppointmentCreateManyInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomViewingAppointmentUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -457,20 +518,20 @@ export type RoomViewingAppointmentUpdateManyMutationInput = {
 }
 
 export type RoomViewingAppointmentUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomViewingAppointmentListRelationFilter = {
@@ -495,6 +556,17 @@ export type RoomViewingAppointmentCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
+export type RoomViewingAppointmentAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  renterId?: Prisma.SortOrder
+  assignedStaffId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -529,6 +601,17 @@ export type RoomViewingAppointmentMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
+export type RoomViewingAppointmentSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  renterId?: Prisma.SortOrder
+  assignedStaffId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -854,7 +937,6 @@ export type RoomViewingAppointmentUpdateOneWithoutRentalRequestsNestedInput = {
 }
 
 export type RoomViewingAppointmentCreateWithoutRenterInput = {
-  id?: string
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
@@ -871,19 +953,19 @@ export type RoomViewingAppointmentCreateWithoutRenterInput = {
 }
 
 export type RoomViewingAppointmentUncheckedCreateWithoutRenterInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutAppointmentInput
 }
 
@@ -898,7 +980,6 @@ export type RoomViewingAppointmentCreateManyRenterInputEnvelope = {
 }
 
 export type RoomViewingAppointmentCreateWithoutAssignedStaffInput = {
-  id?: string
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
@@ -915,19 +996,19 @@ export type RoomViewingAppointmentCreateWithoutAssignedStaffInput = {
 }
 
 export type RoomViewingAppointmentUncheckedCreateWithoutAssignedStaffInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutAppointmentInput
 }
 
@@ -942,7 +1023,6 @@ export type RoomViewingAppointmentCreateManyAssignedStaffInputEnvelope = {
 }
 
 export type RoomViewingAppointmentCreateWithoutCreatedByInput = {
-  id?: string
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
@@ -959,19 +1039,19 @@ export type RoomViewingAppointmentCreateWithoutCreatedByInput = {
 }
 
 export type RoomViewingAppointmentUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutAppointmentInput
 }
 
@@ -986,7 +1066,6 @@ export type RoomViewingAppointmentCreateManyCreatedByInputEnvelope = {
 }
 
 export type RoomViewingAppointmentCreateWithoutUpdatedByInput = {
-  id?: string
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
@@ -1003,19 +1082,19 @@ export type RoomViewingAppointmentCreateWithoutUpdatedByInput = {
 }
 
 export type RoomViewingAppointmentUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutAppointmentInput
 }
 
@@ -1030,7 +1109,6 @@ export type RoomViewingAppointmentCreateManyUpdatedByInputEnvelope = {
 }
 
 export type RoomViewingAppointmentCreateWithoutDeletedByInput = {
-  id?: string
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
@@ -1047,19 +1125,19 @@ export type RoomViewingAppointmentCreateWithoutDeletedByInput = {
 }
 
 export type RoomViewingAppointmentUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutAppointmentInput
 }
 
@@ -1093,20 +1171,20 @@ export type RoomViewingAppointmentScalarWhereInput = {
   AND?: Prisma.RoomViewingAppointmentScalarWhereInput | Prisma.RoomViewingAppointmentScalarWhereInput[]
   OR?: Prisma.RoomViewingAppointmentScalarWhereInput[]
   NOT?: Prisma.RoomViewingAppointmentScalarWhereInput | Prisma.RoomViewingAppointmentScalarWhereInput[]
-  id?: Prisma.UuidFilter<"RoomViewingAppointment"> | string
-  tenantId?: Prisma.UuidFilter<"RoomViewingAppointment"> | string
-  roomId?: Prisma.UuidFilter<"RoomViewingAppointment"> | string
-  renterId?: Prisma.UuidFilter<"RoomViewingAppointment"> | string
-  assignedStaffId?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
+  id?: Prisma.IntFilter<"RoomViewingAppointment"> | number
+  tenantId?: Prisma.IntFilter<"RoomViewingAppointment"> | number
+  roomId?: Prisma.IntFilter<"RoomViewingAppointment"> | number
+  renterId?: Prisma.IntFilter<"RoomViewingAppointment"> | number
+  assignedStaffId?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
   scheduledAt?: Prisma.DateTimeFilter<"RoomViewingAppointment"> | Date | string
   note?: Prisma.StringNullableFilter<"RoomViewingAppointment"> | string | null
   landlordNote?: Prisma.StringNullableFilter<"RoomViewingAppointment"> | string | null
   status?: Prisma.EnumAppointmentStatusFilter<"RoomViewingAppointment"> | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFilter<"RoomViewingAppointment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomViewingAppointment"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"RoomViewingAppointment"> | string | null
+  createdById?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"RoomViewingAppointment"> | number | null
 }
 
 export type RoomViewingAppointmentUpsertWithWhereUniqueWithoutAssignedStaffInput = {
@@ -1174,7 +1252,6 @@ export type RoomViewingAppointmentUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type RoomViewingAppointmentCreateWithoutTenantInput = {
-  id?: string
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
@@ -1191,19 +1268,19 @@ export type RoomViewingAppointmentCreateWithoutTenantInput = {
 }
 
 export type RoomViewingAppointmentUncheckedCreateWithoutTenantInput = {
-  id?: string
-  roomId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  roomId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutAppointmentInput
 }
 
@@ -1234,7 +1311,6 @@ export type RoomViewingAppointmentUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type RoomViewingAppointmentCreateWithoutRoomInput = {
-  id?: string
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
@@ -1251,19 +1327,19 @@ export type RoomViewingAppointmentCreateWithoutRoomInput = {
 }
 
 export type RoomViewingAppointmentUncheckedCreateWithoutRoomInput = {
-  id?: string
-  tenantId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutAppointmentInput
 }
 
@@ -1294,7 +1370,6 @@ export type RoomViewingAppointmentUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type RoomViewingAppointmentCreateWithoutRentalRequestsInput = {
-  id?: string
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
@@ -1311,20 +1386,20 @@ export type RoomViewingAppointmentCreateWithoutRentalRequestsInput = {
 }
 
 export type RoomViewingAppointmentUncheckedCreateWithoutRentalRequestsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomViewingAppointmentCreateOrConnectWithoutRentalRequestsInput = {
@@ -1344,7 +1419,6 @@ export type RoomViewingAppointmentUpdateToOneWithWhereWithoutRentalRequestsInput
 }
 
 export type RoomViewingAppointmentUpdateWithoutRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1361,104 +1435,103 @@ export type RoomViewingAppointmentUpdateWithoutRentalRequestsInput = {
 }
 
 export type RoomViewingAppointmentUncheckedUpdateWithoutRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomViewingAppointmentCreateManyRenterInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomViewingAppointmentCreateManyAssignedStaffInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomViewingAppointmentCreateManyCreatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomViewingAppointmentCreateManyUpdatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomViewingAppointmentCreateManyDeletedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type RoomViewingAppointmentUpdateWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1475,40 +1548,39 @@ export type RoomViewingAppointmentUpdateWithoutRenterInput = {
 }
 
 export type RoomViewingAppointmentUncheckedUpdateWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutAppointmentNestedInput
 }
 
 export type RoomViewingAppointmentUncheckedUpdateManyWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomViewingAppointmentUpdateWithoutAssignedStaffInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1525,40 +1597,39 @@ export type RoomViewingAppointmentUpdateWithoutAssignedStaffInput = {
 }
 
 export type RoomViewingAppointmentUncheckedUpdateWithoutAssignedStaffInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutAppointmentNestedInput
 }
 
 export type RoomViewingAppointmentUncheckedUpdateManyWithoutAssignedStaffInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomViewingAppointmentUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1575,40 +1646,39 @@ export type RoomViewingAppointmentUpdateWithoutCreatedByInput = {
 }
 
 export type RoomViewingAppointmentUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutAppointmentNestedInput
 }
 
 export type RoomViewingAppointmentUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomViewingAppointmentUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1625,40 +1695,39 @@ export type RoomViewingAppointmentUpdateWithoutUpdatedByInput = {
 }
 
 export type RoomViewingAppointmentUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutAppointmentNestedInput
 }
 
 export type RoomViewingAppointmentUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomViewingAppointmentUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1675,56 +1744,55 @@ export type RoomViewingAppointmentUpdateWithoutDeletedByInput = {
 }
 
 export type RoomViewingAppointmentUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutAppointmentNestedInput
 }
 
 export type RoomViewingAppointmentUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomViewingAppointmentCreateManyTenantInput = {
-  id?: string
-  roomId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  roomId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomViewingAppointmentUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1741,56 +1809,55 @@ export type RoomViewingAppointmentUpdateWithoutTenantInput = {
 }
 
 export type RoomViewingAppointmentUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutAppointmentNestedInput
 }
 
 export type RoomViewingAppointmentUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomViewingAppointmentCreateManyRoomInput = {
-  id?: string
-  tenantId: string
-  renterId: string
-  assignedStaffId?: string | null
+  id?: number
+  tenantId: number
+  renterId: number
+  assignedStaffId?: number | null
   scheduledAt: Date | string
   note?: string | null
   landlordNote?: string | null
   status?: $Enums.AppointmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomViewingAppointmentUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1807,36 +1874,36 @@ export type RoomViewingAppointmentUpdateWithoutRoomInput = {
 }
 
 export type RoomViewingAppointmentUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutAppointmentNestedInput
 }
 
 export type RoomViewingAppointmentUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedStaffId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedStaffId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   scheduledAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -2023,23 +2090,23 @@ export type $RoomViewingAppointmentPayload<ExtArgs extends runtime.Types.Extensi
     /**
      * ID cuộc hẹn (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant quản lý nhà trọ
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID phòng trọ muốn xem
      */
-    roomId: string
+    roomId: number
     /**
      * ID tài khoản khách thuê hẹn xem phòng
      */
-    renterId: string
+    renterId: number
     /**
      * ID tài khoản nhân viên được phân công dẫn khách đi xem (null nếu chưa phân công)
      */
-    assignedStaffId: string | null
+    assignedStaffId: number | null
     /**
      * Thời điểm hẹn xem phòng trọ
      */
@@ -2067,15 +2134,15 @@ export type $RoomViewingAppointmentPayload<ExtArgs extends runtime.Types.Extensi
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["roomViewingAppointment"]>
   composites: {}
 }
@@ -2507,20 +2574,20 @@ export interface Prisma__RoomViewingAppointmentClient<T, Null = never, ExtArgs e
  * Fields of the RoomViewingAppointment model
  */
 export interface RoomViewingAppointmentFieldRefs {
-  readonly id: Prisma.FieldRef<"RoomViewingAppointment", 'String'>
-  readonly tenantId: Prisma.FieldRef<"RoomViewingAppointment", 'String'>
-  readonly roomId: Prisma.FieldRef<"RoomViewingAppointment", 'String'>
-  readonly renterId: Prisma.FieldRef<"RoomViewingAppointment", 'String'>
-  readonly assignedStaffId: Prisma.FieldRef<"RoomViewingAppointment", 'String'>
+  readonly id: Prisma.FieldRef<"RoomViewingAppointment", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"RoomViewingAppointment", 'Int'>
+  readonly roomId: Prisma.FieldRef<"RoomViewingAppointment", 'Int'>
+  readonly renterId: Prisma.FieldRef<"RoomViewingAppointment", 'Int'>
+  readonly assignedStaffId: Prisma.FieldRef<"RoomViewingAppointment", 'Int'>
   readonly scheduledAt: Prisma.FieldRef<"RoomViewingAppointment", 'DateTime'>
   readonly note: Prisma.FieldRef<"RoomViewingAppointment", 'String'>
   readonly landlordNote: Prisma.FieldRef<"RoomViewingAppointment", 'String'>
   readonly status: Prisma.FieldRef<"RoomViewingAppointment", 'AppointmentStatus'>
   readonly createdAt: Prisma.FieldRef<"RoomViewingAppointment", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"RoomViewingAppointment", 'DateTime'>
-  readonly createdById: Prisma.FieldRef<"RoomViewingAppointment", 'String'>
-  readonly updatedById: Prisma.FieldRef<"RoomViewingAppointment", 'String'>
-  readonly deletedById: Prisma.FieldRef<"RoomViewingAppointment", 'String'>
+  readonly createdById: Prisma.FieldRef<"RoomViewingAppointment", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"RoomViewingAppointment", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"RoomViewingAppointment", 'Int'>
 }
     
 

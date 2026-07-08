@@ -27,6 +27,11 @@ export type AggregateReview = {
 }
 
 export type ReviewAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  reviewerId: number | null
   rating: number | null
   cleanlinessScore: number | null
   locationScore: number | null
@@ -35,6 +40,11 @@ export type ReviewAvgAggregateOutputType = {
 }
 
 export type ReviewSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  reviewerId: number | null
   rating: number | null
   cleanlinessScore: number | null
   locationScore: number | null
@@ -43,11 +53,11 @@ export type ReviewSumAggregateOutputType = {
 }
 
 export type ReviewMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  contractId: string | null
-  reviewerId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  reviewerId: number | null
   rating: number | null
   content: string | null
   cleanlinessScore: number | null
@@ -60,11 +70,11 @@ export type ReviewMinAggregateOutputType = {
 }
 
 export type ReviewMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  contractId: string | null
-  reviewerId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  reviewerId: number | null
   rating: number | null
   content: string | null
   cleanlinessScore: number | null
@@ -96,6 +106,11 @@ export type ReviewCountAggregateOutputType = {
 
 
 export type ReviewAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  contractId?: true
+  reviewerId?: true
   rating?: true
   cleanlinessScore?: true
   locationScore?: true
@@ -104,6 +119,11 @@ export type ReviewAvgAggregateInputType = {
 }
 
 export type ReviewSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  contractId?: true
+  reviewerId?: true
   rating?: true
   cleanlinessScore?: true
   locationScore?: true
@@ -250,11 +270,11 @@ export type ReviewGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 export type ReviewGroupByOutputType = {
-  id: string
-  tenantId: string
-  roomId: string
-  contractId: string | null
-  reviewerId: string
+  id: number
+  tenantId: number
+  roomId: number
+  contractId: number | null
+  reviewerId: number
   rating: number
   content: string
   cleanlinessScore: number
@@ -290,11 +310,11 @@ export type ReviewWhereInput = {
   AND?: Prisma.ReviewWhereInput | Prisma.ReviewWhereInput[]
   OR?: Prisma.ReviewWhereInput[]
   NOT?: Prisma.ReviewWhereInput | Prisma.ReviewWhereInput[]
-  id?: Prisma.UuidFilter<"Review"> | string
-  tenantId?: Prisma.UuidFilter<"Review"> | string
-  roomId?: Prisma.UuidFilter<"Review"> | string
-  contractId?: Prisma.UuidNullableFilter<"Review"> | string | null
-  reviewerId?: Prisma.UuidFilter<"Review"> | string
+  id?: Prisma.IntFilter<"Review"> | number
+  tenantId?: Prisma.IntFilter<"Review"> | number
+  roomId?: Prisma.IntFilter<"Review"> | number
+  contractId?: Prisma.IntNullableFilter<"Review"> | number | null
+  reviewerId?: Prisma.IntFilter<"Review"> | number
   rating?: Prisma.IntFilter<"Review"> | number
   content?: Prisma.StringFilter<"Review"> | string
   cleanlinessScore?: Prisma.IntFilter<"Review"> | number
@@ -332,14 +352,14 @@ export type ReviewOrderByWithRelationInput = {
 }
 
 export type ReviewWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.ReviewWhereInput | Prisma.ReviewWhereInput[]
   OR?: Prisma.ReviewWhereInput[]
   NOT?: Prisma.ReviewWhereInput | Prisma.ReviewWhereInput[]
-  tenantId?: Prisma.UuidFilter<"Review"> | string
-  roomId?: Prisma.UuidFilter<"Review"> | string
-  contractId?: Prisma.UuidNullableFilter<"Review"> | string | null
-  reviewerId?: Prisma.UuidFilter<"Review"> | string
+  tenantId?: Prisma.IntFilter<"Review"> | number
+  roomId?: Prisma.IntFilter<"Review"> | number
+  contractId?: Prisma.IntNullableFilter<"Review"> | number | null
+  reviewerId?: Prisma.IntFilter<"Review"> | number
   rating?: Prisma.IntFilter<"Review"> | number
   content?: Prisma.StringFilter<"Review"> | string
   cleanlinessScore?: Prisma.IntFilter<"Review"> | number
@@ -381,11 +401,11 @@ export type ReviewScalarWhereWithAggregatesInput = {
   AND?: Prisma.ReviewScalarWhereWithAggregatesInput | Prisma.ReviewScalarWhereWithAggregatesInput[]
   OR?: Prisma.ReviewScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ReviewScalarWhereWithAggregatesInput | Prisma.ReviewScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Review"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"Review"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"Review"> | string
-  contractId?: Prisma.UuidNullableWithAggregatesFilter<"Review"> | string | null
-  reviewerId?: Prisma.UuidWithAggregatesFilter<"Review"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Review"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"Review"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"Review"> | number
+  contractId?: Prisma.IntNullableWithAggregatesFilter<"Review"> | number | null
+  reviewerId?: Prisma.IntWithAggregatesFilter<"Review"> | number
   rating?: Prisma.IntWithAggregatesFilter<"Review"> | number
   content?: Prisma.StringWithAggregatesFilter<"Review"> | string
   cleanlinessScore?: Prisma.IntWithAggregatesFilter<"Review"> | number
@@ -398,7 +418,6 @@ export type ReviewScalarWhereWithAggregatesInput = {
 }
 
 export type ReviewCreateInput = {
-  id?: string
   rating: number
   content: string
   cleanlinessScore: number
@@ -415,11 +434,11 @@ export type ReviewCreateInput = {
 }
 
 export type ReviewUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  reviewerId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  reviewerId: number
   rating: number
   content: string
   cleanlinessScore: number
@@ -432,7 +451,6 @@ export type ReviewUncheckedCreateInput = {
 }
 
 export type ReviewUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -449,11 +467,11 @@ export type ReviewUpdateInput = {
 }
 
 export type ReviewUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -466,11 +484,11 @@ export type ReviewUncheckedUpdateInput = {
 }
 
 export type ReviewCreateManyInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  reviewerId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  reviewerId: number
   rating: number
   content: string
   cleanlinessScore: number
@@ -483,7 +501,6 @@ export type ReviewCreateManyInput = {
 }
 
 export type ReviewUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -496,11 +513,11 @@ export type ReviewUpdateManyMutationInput = {
 }
 
 export type ReviewUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -540,6 +557,11 @@ export type ReviewCountOrderByAggregateInput = {
 }
 
 export type ReviewAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
+  reviewerId?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   cleanlinessScore?: Prisma.SortOrder
   locationScore?: Prisma.SortOrder
@@ -582,6 +604,11 @@ export type ReviewMinOrderByAggregateInput = {
 }
 
 export type ReviewSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
+  reviewerId?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   cleanlinessScore?: Prisma.SortOrder
   locationScore?: Prisma.SortOrder
@@ -762,7 +789,6 @@ export type EnumReviewStatusFieldUpdateOperationsInput = {
 }
 
 export type ReviewCreateWithoutReviewerInput = {
-  id?: string
   rating: number
   content: string
   cleanlinessScore: number
@@ -778,10 +804,10 @@ export type ReviewCreateWithoutReviewerInput = {
 }
 
 export type ReviewUncheckedCreateWithoutReviewerInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
   rating: number
   content: string
   cleanlinessScore: number
@@ -823,11 +849,11 @@ export type ReviewScalarWhereInput = {
   AND?: Prisma.ReviewScalarWhereInput | Prisma.ReviewScalarWhereInput[]
   OR?: Prisma.ReviewScalarWhereInput[]
   NOT?: Prisma.ReviewScalarWhereInput | Prisma.ReviewScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Review"> | string
-  tenantId?: Prisma.UuidFilter<"Review"> | string
-  roomId?: Prisma.UuidFilter<"Review"> | string
-  contractId?: Prisma.UuidNullableFilter<"Review"> | string | null
-  reviewerId?: Prisma.UuidFilter<"Review"> | string
+  id?: Prisma.IntFilter<"Review"> | number
+  tenantId?: Prisma.IntFilter<"Review"> | number
+  roomId?: Prisma.IntFilter<"Review"> | number
+  contractId?: Prisma.IntNullableFilter<"Review"> | number | null
+  reviewerId?: Prisma.IntFilter<"Review"> | number
   rating?: Prisma.IntFilter<"Review"> | number
   content?: Prisma.StringFilter<"Review"> | string
   cleanlinessScore?: Prisma.IntFilter<"Review"> | number
@@ -840,7 +866,6 @@ export type ReviewScalarWhereInput = {
 }
 
 export type ReviewCreateWithoutTenantInput = {
-  id?: string
   rating: number
   content: string
   cleanlinessScore: number
@@ -856,10 +881,10 @@ export type ReviewCreateWithoutTenantInput = {
 }
 
 export type ReviewUncheckedCreateWithoutTenantInput = {
-  id?: string
-  roomId: string
-  contractId?: string | null
-  reviewerId: string
+  id?: number
+  roomId: number
+  contractId?: number | null
+  reviewerId: number
   rating: number
   content: string
   cleanlinessScore: number
@@ -898,7 +923,6 @@ export type ReviewUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type ReviewCreateWithoutRoomInput = {
-  id?: string
   rating: number
   content: string
   cleanlinessScore: number
@@ -914,10 +938,10 @@ export type ReviewCreateWithoutRoomInput = {
 }
 
 export type ReviewUncheckedCreateWithoutRoomInput = {
-  id?: string
-  tenantId: string
-  contractId?: string | null
-  reviewerId: string
+  id?: number
+  tenantId: number
+  contractId?: number | null
+  reviewerId: number
   rating: number
   content: string
   cleanlinessScore: number
@@ -956,7 +980,6 @@ export type ReviewUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type ReviewCreateWithoutContractInput = {
-  id?: string
   rating: number
   content: string
   cleanlinessScore: number
@@ -972,10 +995,10 @@ export type ReviewCreateWithoutContractInput = {
 }
 
 export type ReviewUncheckedCreateWithoutContractInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  reviewerId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  reviewerId: number
   rating: number
   content: string
   cleanlinessScore: number
@@ -1014,10 +1037,10 @@ export type ReviewUpdateManyWithWhereWithoutContractInput = {
 }
 
 export type ReviewCreateManyReviewerInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
   rating: number
   content: string
   cleanlinessScore: number
@@ -1030,7 +1053,6 @@ export type ReviewCreateManyReviewerInput = {
 }
 
 export type ReviewUpdateWithoutReviewerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1046,10 +1068,10 @@ export type ReviewUpdateWithoutReviewerInput = {
 }
 
 export type ReviewUncheckedUpdateWithoutReviewerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1062,10 +1084,10 @@ export type ReviewUncheckedUpdateWithoutReviewerInput = {
 }
 
 export type ReviewUncheckedUpdateManyWithoutReviewerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1078,10 +1100,10 @@ export type ReviewUncheckedUpdateManyWithoutReviewerInput = {
 }
 
 export type ReviewCreateManyTenantInput = {
-  id?: string
-  roomId: string
-  contractId?: string | null
-  reviewerId: string
+  id?: number
+  roomId: number
+  contractId?: number | null
+  reviewerId: number
   rating: number
   content: string
   cleanlinessScore: number
@@ -1094,7 +1116,6 @@ export type ReviewCreateManyTenantInput = {
 }
 
 export type ReviewUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1110,10 +1131,10 @@ export type ReviewUpdateWithoutTenantInput = {
 }
 
 export type ReviewUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1126,10 +1147,10 @@ export type ReviewUncheckedUpdateWithoutTenantInput = {
 }
 
 export type ReviewUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1142,10 +1163,10 @@ export type ReviewUncheckedUpdateManyWithoutTenantInput = {
 }
 
 export type ReviewCreateManyRoomInput = {
-  id?: string
-  tenantId: string
-  contractId?: string | null
-  reviewerId: string
+  id?: number
+  tenantId: number
+  contractId?: number | null
+  reviewerId: number
   rating: number
   content: string
   cleanlinessScore: number
@@ -1158,7 +1179,6 @@ export type ReviewCreateManyRoomInput = {
 }
 
 export type ReviewUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1174,10 +1194,10 @@ export type ReviewUpdateWithoutRoomInput = {
 }
 
 export type ReviewUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1190,10 +1210,10 @@ export type ReviewUncheckedUpdateWithoutRoomInput = {
 }
 
 export type ReviewUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1206,10 +1226,10 @@ export type ReviewUncheckedUpdateManyWithoutRoomInput = {
 }
 
 export type ReviewCreateManyContractInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  reviewerId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  reviewerId: number
   rating: number
   content: string
   cleanlinessScore: number
@@ -1222,7 +1242,6 @@ export type ReviewCreateManyContractInput = {
 }
 
 export type ReviewUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1238,10 +1257,10 @@ export type ReviewUpdateWithoutContractInput = {
 }
 
 export type ReviewUncheckedUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1254,10 +1273,10 @@ export type ReviewUncheckedUpdateWithoutContractInput = {
 }
 
 export type ReviewUncheckedUpdateManyWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  reviewerId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1395,23 +1414,23 @@ export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     /**
      * ID đánh giá (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant sở hữu phòng được đánh giá
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID phòng trọ nhận đánh giá
      */
-    roomId: string
+    roomId: number
     /**
      * ID hợp đồng thuê liên quan làm căn cứ xác thực khách trọ (nullable)
      */
-    contractId: string | null
+    contractId: number | null
     /**
      * ID tài khoản khách thuê gửi đánh giá phản hồi
      */
-    reviewerId: string
+    reviewerId: number
     /**
      * Điểm đánh giá chung tổng hợp (giá trị từ 1 đến 5 sao)
      */
@@ -1875,11 +1894,11 @@ export interface Prisma__ReviewClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the Review model
  */
 export interface ReviewFieldRefs {
-  readonly id: Prisma.FieldRef<"Review", 'String'>
-  readonly tenantId: Prisma.FieldRef<"Review", 'String'>
-  readonly roomId: Prisma.FieldRef<"Review", 'String'>
-  readonly contractId: Prisma.FieldRef<"Review", 'String'>
-  readonly reviewerId: Prisma.FieldRef<"Review", 'String'>
+  readonly id: Prisma.FieldRef<"Review", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"Review", 'Int'>
+  readonly roomId: Prisma.FieldRef<"Review", 'Int'>
+  readonly contractId: Prisma.FieldRef<"Review", 'Int'>
+  readonly reviewerId: Prisma.FieldRef<"Review", 'Int'>
   readonly rating: Prisma.FieldRef<"Review", 'Int'>
   readonly content: Prisma.FieldRef<"Review", 'String'>
   readonly cleanlinessScore: Prisma.FieldRef<"Review", 'Int'>

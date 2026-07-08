@@ -4,8 +4,9 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
 }
 
 datasource db {
@@ -14,8 +15,8 @@ datasource db {
 
 /// Bảng lưu thông tin tài khoản người dùng đăng nhập toàn hệ thống
 model User {
-  /// ID định danh duy nhất (UUID)
-  id              String     @id @default(uuid()) @db.Uuid
+  /// ID định danh duy nhất
+  id              Int        @id @default(autoincrement())
   /// Họ và tên đầy đủ
   fullName        String     @map("full_name") @db.VarChar(255)
   /// Địa chỉ email đăng nhập (duy nhất)
@@ -29,7 +30,7 @@ model User {
   /// Đường dẫn đến ảnh đại diện người dùng
   avatarUrl       String?    @map("avatar_url") @db.Text
   /// Mã OTP dùng để xác thực 2 yếu tố
-  totpSecret String?
+  totpSecret      String?
   /// Trạng thái tài khoản người dùng
   status          UserStatus @default(ACTIVE)
   /// Thời điểm xác minh địa chỉ email
@@ -94,11 +95,12 @@ model User {
   notifications        Notification[]
   /// Danh sách các mã token thiết bị của người dùng này
   deviceTokens         DeviceToken[]
-  /// Lịch sử các tác vụ AI gợi ý liên quan đến người dùng này
-  aiRecommendationLogs AiRecommendationLog[]
+  /// Danh sach refresh token dang hoac da duoc cap cho nguoi dung nay
+  refreshTokens        RefreshToken[]
+  /// Danh sach cac thiet bi dang nhap cua nguoi dung nay
+  devices              Device[]
   /// Danh sách các audit log do người dùng này thực hiện
   auditLogs            AuditLog[]
-  chatbotSessions      ChatbotSession[]
 
   // --- Audit Relations ---
   createdTenants                     Tenant[]                     @relation("TenantCreator")
@@ -167,6 +169,99 @@ model User {
   @@map("users")
 }
 
+/// Bang luu refresh token theo thiet bi/phien dang nhap. Token chi luu dang hash.
+model RefreshToken {
+  /// ID dinh danh refresh token
+  id            Int       @id @default(autoincrement())
+  /// ID nguoi dung so huu refresh token
+  userId        Int       @map("user_id")
+  /// ID thiet bi tao refresh token (nullable de tuong thich voi token cu chua co device)
+  deviceId      Int?      @map("device_id")
+  /// Hash cua refresh token, khong luu plaintext token
+  tokenHash     String    @unique @map("token_hash") @db.Text
+  /// User-Agent cua thiet bi hoac trinh duyet dang nhap
+  userAgent     String?   @map("user_agent") @db.Text
+  /// IP tao phien dang nhap
+  ip            String?   @db.VarChar(64)
+  /// Thoi diem token het han
+  expiresAt     DateTime  @map("expires_at") @db.Timestamptz
+  /// Thoi diem token bi thu hoi, null neu van con hieu luc
+  revokedAt     DateTime? @map("revoked_at") @db.Timestamptz
+  /// Ly do thu hoi token neu co
+  revokedReason String?   @map("revoked_reason") @db.VarChar(255)
+  /// Thoi diem tao token
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  /// Thoi diem cap nhat token gan nhat
+  updatedAt     DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  /// Nguoi dung so huu token
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /// Thiet bi tao token (xoa thiet bi thi thu hoi token tuong ung)
+  device Device? @relation(fields: [deviceId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([deviceId])
+  @@index([expiresAt])
+  @@index([revokedAt])
+  @@map("refresh_tokens")
+}
+
+/// Bang luu thong tin thiet bi dang nhap cua nguoi dung. Moi thiet bi dai dien cho mot trinh duyet/app tren mot may cu the.
+model Device {
+  /// ID dinh danh thiet bi
+  id           Int      @id @default(autoincrement())
+  /// ID nguoi dung so huu thiet bi
+  userId       Int      @map("user_id")
+  /// Chuoi User-Agent nhan dien trinh duyet/ung dung
+  userAgent    String   @map("user_agent") @db.Text
+  /// Dia chi IP khi dang nhap tu thiet bi nay
+  ip           String   @db.VarChar(64)
+  /// Thoi diem hoat dong gan nhat tren thiet bi
+  lastActiveAt DateTime @updatedAt @map("last_active_at") @db.Timestamptz
+  /// Thoi diem dang ky thiet bi (lan dang nhap dau tien tu thiet bi nay)
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+  /// Trang thai thiet bi: true = dang dang nhap, false = da dang xuat
+  isActive     Boolean  @default(true) @map("is_active")
+
+  // Cac quan he (Relations)
+  /// Nguoi dung so huu thiet bi (xoa nguoi dung thi cascade xoa thiet bi)
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /// Danh sach refresh token duoc cap cho thiet bi nay
+  refreshTokens RefreshToken[]
+
+  @@index([userId])
+  @@index([isActive])
+  @@map("devices")
+}
+
+/// Bang luu ma xac thuc OTP theo email. Code chi luu dang hash.
+model VerificationCode {
+  /// ID dinh danh verification code
+  id            Int                  @id @default(autoincrement())
+  /// Email nhan ma xac thuc
+  email         String               @db.VarChar(255)
+  /// Hash cua OTP, khong luu plaintext code
+  codeHash      String               @map("code_hash") @db.Text
+  /// Ngu canh su dung ma xac thuc
+  type          VerificationCodeType
+  /// So lan xac thuc sai
+  attempts      Int                  @default(0)
+  /// Thoi diem ma het han
+  expiresAt     DateTime             @map("expires_at") @db.Timestamptz
+  /// Thoi diem ma da duoc dung thanh cong
+  consumedAt    DateTime?            @map("consumed_at") @db.Timestamptz
+  /// Thoi diem ma bi vo hieu hoa do cap ma moi hoac het hieu luc thu cong
+  invalidatedAt DateTime?            @map("invalidated_at") @db.Timestamptz
+  /// Thoi diem tao ma
+  createdAt     DateTime             @default(now()) @map("created_at") @db.Timestamptz
+
+  @@index([email, type])
+  @@index([expiresAt])
+  @@index([consumedAt])
+  @@index([invalidatedAt])
+  @@map("verification_codes")
+}
+
 /// Bảng danh sách các vai trò (roles) trong hệ thống
 model Role {
   /// ID định danh vai trò chính là mã vai trò (ví dụ: ADMIN, LANDLORD, STAFF, RENTER)
@@ -183,11 +278,11 @@ model Role {
   tenantMembers TenantMember[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("RoleCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("RoleUpdater", fields: [updatedById], references: [id])
@@ -198,8 +293,8 @@ model Role {
 
 /// Bảng danh sách các quyền chi tiết trong hệ thống
 model Permission {
-  /// ID định danh quyền (UUID)
-  id          String  @id @default(uuid()) @db.Uuid
+  /// ID định danh quyền
+  id          Int     @id @default(autoincrement())
   /// Mã quyền duy nhất (ví dụ: ROOM_CREATE, INVOICE_VIEW)
   code        String  @unique @db.VarChar(100)
   /// Tên hiển thị quyền (ví dụ: Tạo phòng, Xem hóa đơn)
@@ -214,11 +309,11 @@ model Permission {
   roles RolePermission[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("PermissionCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("PermissionUpdater", fields: [updatedById], references: [id])
@@ -232,7 +327,7 @@ model RolePermission {
   /// ID của vai trò liên kết
   roleId       String @map("role_id") @db.VarChar(50)
   /// ID của quyền hạn liên kết
-  permissionId String @map("permission_id") @db.Uuid
+  permissionId Int    @map("permission_id")
 
   // Các quan hệ (Relations)
   /// Bản ghi vai trò tương ứng (xóa vai trò tự động xóa liên kết)
@@ -246,10 +341,10 @@ model RolePermission {
 
 /// Bảng đại diện cho từng chủ trọ / tổ chức kinh doanh phòng trọ (Tenant)
 model Tenant {
-  /// ID định danh tổ chức (UUID)
-  id                 String             @id @default(uuid()) @db.Uuid
+  /// ID định danh tổ chức
+  id                 Int                @id @default(autoincrement())
   /// ID của người dùng làm chủ sở hữu chính của Tenant
-  ownerUserId        String             @map("owner_user_id") @db.Uuid
+  ownerUserId        Int                @map("owner_user_id")
   /// Tên thương hiệu hoặc tên chủ trọ
   name               String             @db.VarChar(255)
   /// Chuỗi định danh URL (slug duy nhất) dùng để tạo URL riêng cho tenant
@@ -330,22 +425,16 @@ model Tenant {
   reputationScores     ReputationScore[]
   /// Danh sách thông báo liên quan đến tenant này
   notifications        Notification[]
-  /// Lịch sử các tác vụ AI gợi ý của tenant này
-  aiRecommendationLogs AiRecommendationLog[]
-  /// Lịch sử AI gợi ý giá thuê của tenant này
-  roomPriceSuggestions RoomPriceSuggestion[]
-  /// Các phiên chat hỗ trợ chatbot của tenant này
-  chatbotSessions      ChatbotSession[]
   /// Danh sách tác vụ nền của tenant này
   backgroundJobs       BackgroundJob[]
   /// Danh sách audit log thao tác của tenant này
   auditLogs            AuditLog[]
   /// ID người dùng tạo bản ghi
-  createdById          String?                      @map("created_by_id") @db.Uuid
+  createdById          Int?                         @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById          String?                      @map("updated_by_id") @db.Uuid
+  updatedById          Int?                         @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById          String?                      @map("deleted_by_id") @db.Uuid
+  deletedById          Int?                         @map("deleted_by_id")
 
   createdBy User? @relation("TenantCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("TenantUpdater", fields: [updatedById], references: [id])
@@ -358,12 +447,12 @@ model Tenant {
 
 /// Bảng quản lý nhân sự và phân quyền thành viên của từng Tenant
 model TenantMember {
-  /// ID định danh duy nhất (UUID)
-  id        String             @id @default(uuid()) @db.Uuid
+  /// ID định danh duy nhất
+  id        Int                @id @default(autoincrement())
   /// ID của Tenant liên kết
-  tenantId  String             @map("tenant_id") @db.Uuid
+  tenantId  Int                @map("tenant_id")
   /// ID của người dùng liên kết
-  userId    String             @map("user_id") @db.Uuid
+  userId    Int                @map("user_id")
   /// ID của vai trò được giao trong Tenant này
   roleId    String             @map("role_id") @db.VarChar(50)
   /// Trạng thái làm việc của thành viên trong tenant
@@ -387,8 +476,8 @@ model TenantMember {
 
 /// Bảng lưu trữ các gói dịch vụ SaaS hệ thống cung cấp cho chủ trọ
 model Plan {
-  /// ID gói dịch vụ (UUID)
-  id                  String   @id @default(uuid()) @db.Uuid
+  /// ID gói dịch vụ
+  id                  Int      @id @default(autoincrement())
   /// Mã gói cước duy nhất (ví dụ: FREE, PRO, BUSINESS)
   code                String   @unique @db.VarChar(50)
   /// Tên gói dịch vụ
@@ -405,10 +494,6 @@ model Plan {
   maxStaff            Int      @map("max_staff")
   /// Cho phép sử dụng tính năng nhận diện chỉ số điện nước qua AI OCR
   allowAiOcr          Boolean  @default(false) @map("allow_ai_ocr")
-  /// Cho phép AI gợi ý giá thuê phòng dựa trên thị trường
-  allowAiPricing      Boolean  @default(false) @map("allow_ai_pricing")
-  /// Cho phép sử dụng AI Chatbot hỗ trợ khách thuê tự động
-  allowChatbot        Boolean  @default(false) @map("allow_chatbot")
   /// Cho phép cấu hình Webhook tự động ghi nhận thanh toán ngân hàng
   allowWebhookPayment Boolean  @default(false) @map("allow_webhook_payment")
   /// Trạng thái gói cước có đang mở bán hay không
@@ -421,11 +506,11 @@ model Plan {
   subscriptions Subscription[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("PlanCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("PlanUpdater", fields: [updatedById], references: [id])
@@ -436,12 +521,12 @@ model Plan {
 
 /// Bảng lưu thông tin các gói đăng ký dịch vụ hiện tại và lịch sử của từng Tenant
 model Subscription {
-  /// ID bản ghi đăng ký (UUID)
-  id           String             @id @default(uuid()) @db.Uuid
+  /// ID bản ghi đăng ký
+  id           Int                @id @default(autoincrement())
   /// ID của Tenant đăng ký
-  tenantId     String             @map("tenant_id") @db.Uuid
+  tenantId     Int                @map("tenant_id")
   /// ID của gói dịch vụ sử dụng
-  planId       String             @map("plan_id") @db.Uuid
+  planId       Int                @map("plan_id")
   /// Trạng thái hiện tại của gói đăng ký
   status       SubscriptionStatus @default(ACTIVE)
   /// Thời điểm bắt đầu chu kỳ đăng ký
@@ -470,12 +555,12 @@ model Subscription {
 
 /// Bảng lưu trữ lịch sử thanh toán hóa đơn gói SaaS của chủ trọ
 model SubscriptionPayment {
-  /// ID giao dịch thanh toán (UUID)
-  id              String                    @id @default(uuid()) @db.Uuid
+  /// ID giao dịch thanh toán
+  id              Int                       @id @default(autoincrement())
   /// ID của bản ghi đăng ký dịch vụ tương ứng
-  subscriptionId  String                    @map("subscription_id") @db.Uuid
+  subscriptionId  Int                       @map("subscription_id")
   /// ID của Tenant thực hiện thanh toán
-  tenantId        String                    @map("tenant_id") @db.Uuid
+  tenantId        Int                       @map("tenant_id")
   /// Số tiền thanh toán thực tế
   amount          Decimal                   @db.Decimal(12, 2)
   /// Phương thức thanh toán (ví dụ: BANK_TRANSFER, VNPAY, MOMO, CREDIT_CARD)
@@ -500,10 +585,10 @@ model SubscriptionPayment {
 
 /// Bảng đại diện cho một nhà trọ, tòa nhà, chung cư mini hoặc cụm phòng thuộc sở hữu của chủ trọ
 model Property {
-  /// ID định danh bất động sản (UUID)
-  id            String         @id @default(uuid()) @db.Uuid
+  /// ID định danh bất động sản
+  id            Int            @id @default(autoincrement())
   /// ID của Tenant sở hữu bất động sản này
-  tenantId      String         @map("tenant_id") @db.Uuid
+  tenantId      Int            @map("tenant_id")
   /// Tên nhà / tòa nhà trọ (ví dụ: Chung cư mini Hoa Hồng)
   name          String         @db.VarChar(255)
   /// Phân loại loại hình nhà trọ
@@ -539,11 +624,11 @@ model Property {
   /// Danh sách các phòng trọ nằm trong tòa nhà này
   rooms       Room[]
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int?    @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int?    @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int?    @map("deleted_by_id")
 
   createdBy User? @relation("PropertyCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("PropertyUpdater", fields: [updatedById], references: [id])
@@ -556,12 +641,12 @@ model Property {
 
 /// Bảng quản lý danh sách các tầng trong từng tòa nhà trọ
 model Floor {
-  /// ID định danh tầng (UUID)
-  id          String   @id @default(uuid()) @db.Uuid
+  /// ID định danh tầng
+  id          Int      @id @default(autoincrement())
   /// ID của Tenant quản lý
-  tenantId    String   @map("tenant_id") @db.Uuid
+  tenantId    Int      @map("tenant_id")
   /// ID của tòa nhà chứa tầng này
-  propertyId  String   @map("property_id") @db.Uuid
+  propertyId  Int      @map("property_id")
   /// Tên hiển thị của tầng (ví dụ: Tầng 1, Tầng trệt, Tầng lửng)
   name        String   @db.VarChar(100)
   /// Số tầng thực tế phục vụ sắp xếp (ví dụ: 1, 2, 3)
@@ -582,14 +667,14 @@ model Floor {
 
 /// Bảng lưu trữ thông tin chi tiết từng phòng trọ / chung cư mini
 model Room {
-  /// ID định danh phòng trọ (UUID)
-  id                String            @id @default(uuid()) @db.Uuid
+  /// ID định danh phòng trọ
+  id                Int               @id @default(autoincrement())
   /// ID của Tenant quản lý
-  tenantId          String            @map("tenant_id") @db.Uuid
+  tenantId          Int               @map("tenant_id")
   /// ID của tòa nhà chứa phòng trọ này
-  propertyId        String            @map("property_id") @db.Uuid
+  propertyId        Int               @map("property_id")
   /// ID của tầng chứa phòng trọ này (có thể null nếu nhà trọ không chia tầng rõ ràng)
-  floorId           String?           @map("floor_id") @db.Uuid
+  floorId           Int?              @map("floor_id")
   /// Mã định danh phòng (ví dụ: P101, P.A1)
   roomCode          String            @map("room_code") @db.VarChar(50)
   /// Tiêu đề hiển thị khi đăng tin cho thuê phòng (ví dụ: Phòng trọ khép kín, ban công thoáng mát)
@@ -664,14 +749,12 @@ model Room {
   reviews              Review[]
   /// Bảng điểm uy tín của phòng trọ này
   reputationScores     ReputationScore[]
-  /// Danh sách AI gợi ý giá thuê của phòng trọ này
-  roomPriceSuggestions RoomPriceSuggestion[]
   /// ID người dùng tạo bản ghi
-  createdById          String?                  @map("created_by_id") @db.Uuid
+  createdById          Int?                     @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById          String?                  @map("updated_by_id") @db.Uuid
+  updatedById          Int?                     @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById          String?                  @map("deleted_by_id") @db.Uuid
+  deletedById          Int?                     @map("deleted_by_id")
 
   createdBy User? @relation("RoomCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("RoomUpdater", fields: [updatedById], references: [id])
@@ -688,9 +771,9 @@ model Room {
 /// Bảng lưu trữ hình ảnh chi tiết của phòng trọ
 model RoomImage {
   /// ID hình ảnh (UUID)
-  id          String   @id @default(uuid()) @db.Uuid
+  id          Int      @id @default(autoincrement())
   /// ID của phòng chứa hình ảnh này
-  roomId      String   @map("room_id") @db.Uuid
+  roomId      Int      @map("room_id")
   /// Đường dẫn lưu trữ hình ảnh (ví dụ: trên S3 hoặc Cloudinary)
   url         String   @db.Text
   /// Ghi chú mô tả bức ảnh (ví dụ: Nhà vệ sinh, Góc bếp)
@@ -712,7 +795,7 @@ model RoomImage {
 /// Bảng lưu trữ danh mục các tiện ích dùng chung toàn hệ thống (ví dụ: Wifi, Điều hòa...)
 model Amenity {
   /// ID tiện ích (UUID)
-  id       String  @id @default(uuid()) @db.Uuid
+  id       Int     @id @default(autoincrement())
   /// Tên tiện ích (ví dụ: Máy giặt, Điều hòa, Bãi giữ xe, Thang máy...)
   name     String  @db.VarChar(100)
   /// Mã icon hiển thị (ví dụ: fa-wifi, air-conditioner)
@@ -727,11 +810,11 @@ model Amenity {
   rooms RoomAmenity[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("AmenityCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("AmenityUpdater", fields: [updatedById], references: [id])
@@ -743,9 +826,9 @@ model Amenity {
 /// Bảng trung gian biểu diễn mối quan hệ nhiều-nhiều giữa Phòng và Tiện ích
 model RoomAmenity {
   /// ID phòng trọ
-  roomId    String @map("room_id") @db.Uuid
+  roomId    Int @map("room_id")
   /// ID tiện ích
-  amenityId String @map("amenity_id") @db.Uuid
+  amenityId Int @map("amenity_id")
 
   // Các quan hệ (Relations)
   /// Bản ghi phòng trọ tương ứng (xóa phòng thì tự động xóa liên kết tiện ích của nó)
@@ -760,9 +843,9 @@ model RoomAmenity {
 /// Hồ sơ thông tin chi tiết người thuê trên Mobile App
 model RenterProfile {
   /// ID hồ sơ (UUID)
-  id                    String             @id @default(uuid()) @db.Uuid
+  id                    Int                @id @default(autoincrement())
   /// ID tài khoản người dùng liên kết (quan hệ 1-1)
-  userId                String             @unique @map("user_id") @db.Uuid
+  userId                Int                @unique @map("user_id")
   /// Ngày tháng năm sinh
   dateOfBirth           DateTime?          @map("date_of_birth") @db.Date
   /// Giới tính
@@ -798,15 +881,15 @@ model RenterProfile {
 /// Bảng ghi nhận lịch sử thuê phòng của khách trọ
 model RentalHistory {
   /// ID bản ghi lịch sử (UUID)
-  id         String              @id @default(uuid()) @db.Uuid
+  id         Int                 @id @default(autoincrement())
   /// ID người thuê (tài khoản User)
-  renterId   String              @map("renter_id") @db.Uuid
+  renterId   Int                 @map("renter_id")
   /// ID Tenant (chủ trọ quản lý)
-  tenantId   String              @map("tenant_id") @db.Uuid
+  tenantId   Int                 @map("tenant_id")
   /// ID phòng thuê
-  roomId     String              @map("room_id") @db.Uuid
+  roomId     Int                 @map("room_id")
   /// ID hợp đồng thuê liên quan
-  contractId String              @map("contract_id") @db.Uuid
+  contractId Int                 @map("contract_id")
   /// Ngày bắt đầu thuê thực tế
   startedAt  DateTime            @map("started_at") @db.Date
   /// Ngày trả phòng/kết thúc thực tế
@@ -832,11 +915,11 @@ model RentalHistory {
 /// Bảng ghi nhận nhật ký xem phòng trọ trên sàn Marketplace phục vụ gợi ý AI
 model RoomViewLog {
   /// ID bản ghi log (UUID)
-  id        String   @id @default(uuid()) @db.Uuid
+  id        Int      @id @default(autoincrement())
   /// ID người dùng xem phòng (null nếu là khách vãng lai chưa đăng nhập)
-  userId    String?  @map("user_id") @db.Uuid
+  userId    Int?     @map("user_id")
   /// ID phòng trọ được xem
-  roomId    String   @map("room_id") @db.Uuid
+  roomId    Int      @map("room_id")
   /// Địa chỉ IP của người truy cập
   ipAddress String?  @map("ip_address") @db.VarChar(45)
   /// Chuỗi thông tin trình duyệt và thiết bị (User Agent)
@@ -856,9 +939,9 @@ model RoomViewLog {
 /// Bảng trung gian lưu danh sách phòng yêu thích của người dùng
 model FavoriteRoom {
   /// ID tài khoản người dùng thích phòng
-  userId    String   @map("user_id") @db.Uuid
+  userId    Int      @map("user_id")
   /// ID phòng trọ được thích
-  roomId    String   @map("room_id") @db.Uuid
+  roomId    Int      @map("room_id")
   /// Thời điểm thêm phòng vào danh sách yêu thích
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
 
@@ -875,15 +958,15 @@ model FavoriteRoom {
 /// Bảng quản lý lịch hẹn xem phòng trọ trực tiếp
 model RoomViewingAppointment {
   /// ID cuộc hẹn (UUID)
-  id              String            @id @default(uuid()) @db.Uuid
+  id              Int               @id @default(autoincrement())
   /// ID Tenant quản lý nhà trọ
-  tenantId        String            @map("tenant_id") @db.Uuid
+  tenantId        Int               @map("tenant_id")
   /// ID phòng trọ muốn xem
-  roomId          String            @map("room_id") @db.Uuid
+  roomId          Int               @map("room_id")
   /// ID tài khoản khách thuê hẹn xem phòng
-  renterId        String            @map("renter_id") @db.Uuid
+  renterId        Int               @map("renter_id")
   /// ID tài khoản nhân viên được phân công dẫn khách đi xem (null nếu chưa phân công)
-  assignedStaffId String?           @map("assigned_staff_id") @db.Uuid
+  assignedStaffId Int?              @map("assigned_staff_id")
   /// Thời điểm hẹn xem phòng trọ
   scheduledAt     DateTime          @map("scheduled_at") @db.Timestamptz
   /// Ghi chú, lời nhắn của khách thuê gửi chủ trọ
@@ -910,11 +993,11 @@ model RoomViewingAppointment {
   rentalRequests RentalRequest[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("RoomViewingAppointmentCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("RoomViewingAppointmentUpdater", fields: [updatedById], references: [id])
@@ -926,15 +1009,15 @@ model RoomViewingAppointment {
 /// Bảng quản lý các yêu cầu thuê phòng từ khách trọ gửi đến
 model RentalRequest {
   /// ID yêu cầu thuê (UUID)
-  id                String              @id @default(uuid()) @db.Uuid
+  id                Int                 @id @default(autoincrement())
   /// ID Tenant quản lý phòng trọ
-  tenantId          String              @map("tenant_id") @db.Uuid
+  tenantId          Int                 @map("tenant_id")
   /// ID phòng trọ xin thuê
-  roomId            String              @map("room_id") @db.Uuid
+  roomId            Int                 @map("room_id")
   /// ID tài khoản người gửi yêu cầu thuê
-  renterId          String              @map("renter_id") @db.Uuid
+  renterId          Int                 @map("renter_id")
   /// ID lịch hẹn xem phòng trước đó (nếu có, hỗ trợ truy vết hành trình khách hàng)
-  appointmentId     String?             @map("appointment_id") @db.Uuid
+  appointmentId     Int?                @map("appointment_id")
   /// Lời nhắn kèm theo của khách thuê gửi chủ trọ
   message           String?             @db.Text
   /// Ngày dự kiến muốn dọn vào ở
@@ -959,11 +1042,11 @@ model RentalRequest {
   contracts   Contract[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("RentalRequestCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("RentalRequestUpdater", fields: [updatedById], references: [id])
@@ -975,9 +1058,9 @@ model RentalRequest {
 /// Bảng mẫu văn bản hợp đồng thuê trọ của từng chủ trọ
 model ContractTemplate {
   /// ID mẫu hợp đồng (UUID)
-  id              String   @id @default(uuid()) @db.Uuid
+  id              Int      @id @default(autoincrement())
   /// ID Tenant tạo mẫu hợp đồng này
-  tenantId        String   @map("tenant_id") @db.Uuid
+  tenantId        Int      @map("tenant_id")
   /// Tên gợi nhớ mẫu hợp đồng (ví dụ: Mẫu hợp đồng phòng đơn, mẫu căn hộ)
   name            String   @db.VarChar(255)
   /// Nội dung chi tiết của mẫu chứa định dạng Markdown hoặc HTML
@@ -998,11 +1081,11 @@ model ContractTemplate {
   contracts Contract[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("ContractTemplateCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("ContractTemplateUpdater", fields: [updatedById], references: [id])
@@ -1014,17 +1097,17 @@ model ContractTemplate {
 /// Bảng lưu trữ thông tin hợp đồng thuê phòng chính thức
 model Contract {
   /// ID hợp đồng (UUID)
-  id                 String               @id @default(uuid()) @db.Uuid
+  id                 Int                  @id @default(autoincrement())
   /// ID Tenant quản lý phòng trọ
-  tenantId           String               @map("tenant_id") @db.Uuid
+  tenantId           Int                  @map("tenant_id")
   /// ID phòng cho thuê
-  roomId             String               @map("room_id") @db.Uuid
+  roomId             Int                  @map("room_id")
   /// ID tài khoản khách thuê chính (người đứng tên ký hợp đồng)
-  renterId           String               @map("renter_id") @db.Uuid
+  renterId           Int                  @map("renter_id")
   /// ID yêu cầu thuê gốc (null nếu tạo hợp đồng trực tiếp không qua yêu cầu trên sàn)
-  rentalRequestId    String?              @map("rental_request_id") @db.Uuid
+  rentalRequestId    Int?                 @map("rental_request_id")
   /// ID mẫu hợp đồng sử dụng để khởi tạo văn bản hợp đồng (null nếu tự soạn thảo)
-  templateId         String?              @map("template_id") @db.Uuid
+  templateId         Int?                 @map("template_id")
   /// Mã số hợp đồng duy nhất (phục vụ quản lý và đối soát)
   contractCode       String               @unique @map("contract_code") @db.VarChar(100)
   /// Ngày hợp đồng bắt đầu có hiệu lực
@@ -1086,11 +1169,11 @@ model Contract {
   /// Danh sách các đánh giá của khách thuê liên quan đến hợp đồng này
   reviews             Review[]
   /// ID người dùng tạo bản ghi
-  createdById         String?                      @map("created_by_id") @db.Uuid
+  createdById         Int?                         @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById         String?                      @map("updated_by_id") @db.Uuid
+  updatedById         Int?                         @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById         String?                      @map("deleted_by_id") @db.Uuid
+  deletedById         Int?                         @map("deleted_by_id")
 
   createdBy User? @relation("ContractCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("ContractUpdater", fields: [updatedById], references: [id])
@@ -1105,11 +1188,11 @@ model Contract {
 /// Bảng lưu danh sách người ở cùng phòng trọ theo hợp đồng
 model ContractMember {
   /// ID bản ghi thành viên (UUID)
-  id         String             @id @default(uuid()) @db.Uuid
+  id         Int                @id @default(autoincrement())
   /// ID hợp đồng liên quan
-  contractId String             @map("contract_id") @db.Uuid
+  contractId Int                @map("contract_id")
   /// ID tài khoản người dùng của thành viên ở cùng
-  userId     String             @map("user_id") @db.Uuid
+  userId     Int                @map("user_id")
   /// Vai trò của thành viên trong hợp đồng (Ví dụ: MAIN_RENTER hoặc CO_RENTER)
   role       ContractMemberRole @default(CO_RENTER)
   /// Thời điểm thêm thành viên vào hợp đồng
@@ -1127,9 +1210,9 @@ model ContractMember {
 /// Bảng lưu trữ file văn bản hợp đồng đã xuất ra dạng PDF hoặc DOCX
 model ContractFile {
   /// ID file (UUID)
-  id         String   @id @default(uuid()) @db.Uuid
+  id         Int      @id @default(autoincrement())
   /// ID hợp đồng liên quan
-  contractId String   @map("contract_id") @db.Uuid
+  contractId Int      @map("contract_id")
   /// Đường dẫn lưu trữ file trên máy chủ hoặc cloud storage
   fileUrl    String   @map("file_url") @db.Text
   /// Định dạng file (ví dụ: PDF, DOCX)
@@ -1149,11 +1232,11 @@ model ContractFile {
 /// Bảng quản lý các yêu cầu chấm dứt hoặc thanh lý hợp đồng thuê phòng
 model ContractTerminationRequest {
   /// ID yêu cầu thanh lý (UUID)
-  id                  String                   @id @default(uuid()) @db.Uuid
+  id                  Int                      @id @default(autoincrement())
   /// ID Tenant quản lý phòng
-  tenantId            String                   @map("tenant_id") @db.Uuid
+  tenantId            Int                      @map("tenant_id")
   /// ID hợp đồng muốn chấm dứt
-  contractId          String                   @map("contract_id") @db.Uuid
+  contractId          Int                      @map("contract_id")
   // (removed old requestedBy)
   /// Lý do xin trả phòng/chấm dứt hợp đồng trọ
   reason              String                   @db.Text
@@ -1175,11 +1258,11 @@ model ContractTerminationRequest {
   // (removed old requestedUser)
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("ContractTerminationRequestCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("ContractTerminationRequestUpdater", fields: [updatedById], references: [id])
@@ -1191,7 +1274,7 @@ model ContractTerminationRequest {
 /// Bảng danh mục loại tài sản (Ví dụ: Giường, Tủ, Điều hòa, Chìa khóa...)
 model AssetCategory {
   /// ID danh mục tài sản (UUID)
-  id          String  @id @default(uuid()) @db.Uuid
+  id          Int     @id @default(autoincrement())
   /// Tên loại tài sản
   name        String  @db.VarChar(100)
   /// Mô tả chi tiết loại tài sản
@@ -1202,11 +1285,11 @@ model AssetCategory {
   roomAssets RoomAsset[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("AssetCategoryCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("AssetCategoryUpdater", fields: [updatedById], references: [id])
@@ -1218,13 +1301,13 @@ model AssetCategory {
 /// Bảng quản lý thông tin các tài sản được trang bị trong từng phòng trọ
 model RoomAsset {
   /// ID tài sản phòng (UUID)
-  id          String         @id @default(uuid()) @db.Uuid
+  id          Int            @id @default(autoincrement())
   /// ID Tenant quản lý
-  tenantId    String         @map("tenant_id") @db.Uuid
+  tenantId    Int            @map("tenant_id")
   /// ID phòng trọ chứa tài sản này
-  roomId      String         @map("room_id") @db.Uuid
+  roomId      Int            @map("room_id")
   /// ID danh mục loại tài sản
-  categoryId  String         @map("category_id") @db.Uuid
+  categoryId  Int            @map("category_id")
   /// Tên cụ thể của tài sản (ví dụ: Máy lạnh Daikin Inverter 1.5HP)
   name        String         @db.VarChar(255)
   /// Số lượng trang bị trong phòng
@@ -1253,11 +1336,11 @@ model RoomAsset {
   handoverItems HandoverAssetItem[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("RoomAssetCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("RoomAssetUpdater", fields: [updatedById], references: [id])
@@ -1269,13 +1352,13 @@ model RoomAsset {
 /// Bảng quản lý biên bản bàn giao tài sản khi khách thuê nhận hoặc trả phòng trọ
 model HandoverRecord {
   /// ID biên bản bàn giao (UUID)
-  id                 String         @id @default(uuid()) @db.Uuid
+  id                 Int            @id @default(autoincrement())
   /// ID Tenant quản lý
-  tenantId           String         @map("tenant_id") @db.Uuid
+  tenantId           Int            @map("tenant_id")
   /// ID hợp đồng thuê liên quan trực tiếp
-  contractId         String         @map("contract_id") @db.Uuid
+  contractId         Int            @map("contract_id")
   /// ID phòng trọ được bàn giao
-  roomId             String         @map("room_id") @db.Uuid
+  roomId             Int            @map("room_id")
   /// Phân loại là bàn giao khi nhận phòng (Check-in) hay trả phòng (Check-out)
   type               HandoverType
   /// Ghi chú tổng quan về tình trạng bàn giao phòng
@@ -1300,11 +1383,11 @@ model HandoverRecord {
   assetItems HandoverAssetItem[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("HandoverRecordCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("HandoverRecordUpdater", fields: [updatedById], references: [id])
@@ -1316,11 +1399,11 @@ model HandoverRecord {
 /// Bảng chi tiết trạng thái từng tài sản tại thời điểm lập biên bản bàn giao
 model HandoverAssetItem {
   /// ID chi tiết bàn giao tài sản (UUID)
-  id               String         @id @default(uuid()) @db.Uuid
+  id               Int            @id @default(autoincrement())
   /// ID biên bản bàn giao tương ứng
-  handoverRecordId String         @map("handover_record_id") @db.Uuid
+  handoverRecordId Int            @map("handover_record_id")
   /// ID tài sản phòng được bàn giao
-  roomAssetId      String         @map("room_asset_id") @db.Uuid
+  roomAssetId      Int            @map("room_asset_id")
   /// Số lượng thực tế bàn giao
   quantity         Int            @default(1)
   /// Trạng thái chất lượng tài sản được ghi nhận lúc bàn giao
@@ -1342,11 +1425,11 @@ model HandoverAssetItem {
 /// Bảng quản lý thông tin các đầu đồng hồ đo điện, đo nước lắp đặt tại phòng
 model UtilityMeter {
   /// ID đồng hồ (UUID)
-  id        String      @id @default(uuid()) @db.Uuid
+  id        Int         @id @default(autoincrement())
   /// ID Tenant quản lý
-  tenantId  String      @map("tenant_id") @db.Uuid
+  tenantId  Int         @map("tenant_id")
   /// ID phòng lắp đặt đồng hồ
-  roomId    String      @map("room_id") @db.Uuid
+  roomId    Int         @map("room_id")
   /// Phân loại đồng hồ đo điện hay đo nước
   type      MeterType
   /// Mã số ký hiệu của đồng hồ vật lý phục vụ đối soát
@@ -1375,15 +1458,15 @@ model UtilityMeter {
 /// Bảng ghi nhận chỉ số tiêu thụ điện nước hằng tháng phục vụ tính hóa đơn tiền phòng
 model MeterReading {
   /// ID bản ghi ghi nhận chỉ số (UUID)
-  id            String        @id @default(uuid()) @db.Uuid
+  id            Int           @id @default(autoincrement())
   /// ID Tenant quản lý
-  tenantId      String        @map("tenant_id") @db.Uuid
+  tenantId      Int           @map("tenant_id")
   /// ID phòng ghi nhận chỉ số
-  roomId        String        @map("room_id") @db.Uuid
+  roomId        Int           @map("room_id")
   /// ID đồng hồ đo tương ứng
-  meterId       String        @map("meter_id") @db.Uuid
+  meterId       Int           @map("meter_id")
   /// ID hợp đồng thuê phòng hiệu lực tại thời điểm ghi nhận (nullable nếu phòng trống)
-  contractId    String?       @map("contract_id") @db.Uuid
+  contractId    Int?          @map("contract_id")
   /// Tháng/năm ghi nhận chỉ số tính toán (định dạng ngày 1 của tháng ghi nhận)
   billingMonth  DateTime      @map("billing_month") @db.Date
   /// Chỉ số đồng hồ cũ đầu kỳ
@@ -1420,11 +1503,11 @@ model MeterReading {
   invoiceItems InvoiceItem[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("MeterReadingCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("MeterReadingUpdater", fields: [updatedById], references: [id])
@@ -1439,15 +1522,15 @@ model MeterReading {
 /// Bảng quản lý lịch sử các tác vụ xử lý nhận diện chỉ số đồng hồ bằng AI OCR từ ảnh chụp
 model OcrJob {
   /// ID tác vụ OCR (UUID)
-  id              String       @id @default(uuid()) @db.Uuid
+  id              Int          @id @default(autoincrement())
   /// ID Tenant quản lý
-  tenantId        String       @map("tenant_id") @db.Uuid
+  tenantId        Int          @map("tenant_id")
   /// ID phòng được quét ảnh
-  roomId          String       @map("room_id") @db.Uuid
+  roomId          Int          @map("room_id")
   /// ID đồng hồ được quét ảnh
-  meterId         String       @map("meter_id") @db.Uuid
+  meterId         Int          @map("meter_id")
   /// ID tài khoản người dùng tải ảnh lên xử lý
-  uploadedBy      String       @map("uploaded_by") @db.Uuid
+  uploadedBy      Int          @map("uploaded_by")
   /// Đường dẫn hình ảnh đầu vào tải lên để OCR nhận diện
   imageUrl        String       @map("image_url") @db.Text
   /// Giá trị số chỉ số đồng hồ mà AI nhận diện được (null nếu xử lý thất bại)
@@ -1481,9 +1564,9 @@ model OcrJob {
 /// Bảng quản lý các đợt phát hành hóa đơn tiền phòng hàng loạt hằng tháng của chủ trọ
 model InvoiceBatch {
   /// ID đợt hóa đơn (UUID)
-  id            String             @id @default(uuid()) @db.Uuid
+  id            Int                @id @default(autoincrement())
   /// ID Tenant phát hành
-  tenantId      String             @map("tenant_id") @db.Uuid
+  tenantId      Int                @map("tenant_id")
   /// Tháng/năm lập hóa đơn thanh toán cho đợt này (ngày 1 của tháng tính toán)
   billingMonth  DateTime           @map("billing_month") @db.Date
   // (removed old createdBy)
@@ -1502,11 +1585,11 @@ model InvoiceBatch {
   invoices Invoice[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("InvoiceBatchCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("InvoiceBatchUpdater", fields: [updatedById], references: [id])
@@ -1519,17 +1602,17 @@ model InvoiceBatch {
 /// Bảng lưu trữ thông tin hóa đơn thu tiền phòng, điện nước và dịch vụ hằng tháng
 model Invoice {
   /// ID hóa đơn (UUID)
-  id             String        @id @default(uuid()) @db.Uuid
+  id             Int           @id @default(autoincrement())
   /// ID Tenant quản lý
-  tenantId       String        @map("tenant_id") @db.Uuid
+  tenantId       Int           @map("tenant_id")
   /// ID đợt hóa đơn hàng loạt (nếu được tạo hàng loạt, null nếu tạo đơn lẻ)
-  batchId        String?       @map("batch_id") @db.Uuid
+  batchId        Int?          @map("batch_id")
   /// ID hợp đồng thuê phòng hiệu lực tại thời điểm xuất hóa đơn
-  contractId     String        @map("contract_id") @db.Uuid
+  contractId     Int           @map("contract_id")
   /// ID phòng tính tiền
-  roomId         String        @map("room_id") @db.Uuid
+  roomId         Int           @map("room_id")
   /// ID tài khoản khách thuê chính chịu trách nhiệm thanh toán hóa đơn
-  renterId       String        @map("renter_id") @db.Uuid
+  renterId       Int           @map("renter_id")
   /// Mã số hóa đơn duy nhất phục vụ đối chiếu thanh toán và tìm kiếm
   invoiceCode    String        @unique @map("invoice_code") @db.VarChar(100)
   /// Tháng tính toán tiền phòng (ngày 1 của tháng tính toán)
@@ -1582,11 +1665,11 @@ model Invoice {
   webhookLogs PaymentWebhookLog[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("InvoiceCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("InvoiceUpdater", fields: [updatedById], references: [id])
@@ -1601,9 +1684,9 @@ model Invoice {
 /// Bảng chi tiết các khoản phí cấu thành trong một hóa đơn hằng tháng (ví dụ: tiền điện, tiền phòng...)
 model InvoiceItem {
   /// ID dòng chi tiết hóa đơn (UUID)
-  id             String          @id @default(uuid()) @db.Uuid
+  id             Int             @id @default(autoincrement())
   /// ID hóa đơn chứa chi tiết này
-  invoiceId      String          @map("invoice_id") @db.Uuid
+  invoiceId      Int             @map("invoice_id")
   /// Phân loại danh mục khoản thu phí
   itemType       InvoiceItemType
   /// Ghi chú mô tả chi tiết khoản thu (ví dụ: Tiền điện chỉ số 1200 - 1350)
@@ -1615,7 +1698,7 @@ model InvoiceItem {
   /// Tổng tiền của dòng chi tiết này (Số lượng * Đơn giá)
   amount         Decimal         @db.Decimal(12, 2)
   /// ID chỉ số điện nước liên quan (nullable nếu khoản thu không phải điện nước tiêu thụ)
-  meterReadingId String?         @map("meter_reading_id") @db.Uuid
+  meterReadingId Int?            @map("meter_reading_id")
   /// Thời điểm tạo chi tiết hóa đơn
   createdAt      DateTime        @default(now()) @map("created_at") @db.Timestamptz
 
@@ -1631,13 +1714,13 @@ model InvoiceItem {
 /// Bảng ghi nhận các giao dịch thanh toán thực tế của khách thuê cho từng hóa đơn
 model Payment {
   /// ID giao dịch thanh toán (UUID)
-  id              String        @id @default(uuid()) @db.Uuid
+  id              Int           @id @default(autoincrement())
   /// ID Tenant quản lý nhận tiền
-  tenantId        String        @map("tenant_id") @db.Uuid
+  tenantId        Int           @map("tenant_id")
   /// ID hóa đơn được thanh toán
-  invoiceId       String        @map("invoice_id") @db.Uuid
+  invoiceId       Int           @map("invoice_id")
   /// ID tài khoản người dùng thực hiện giao dịch thanh toán tiền
-  payerId         String        @map("payer_id") @db.Uuid
+  payerId         Int           @map("payer_id")
   /// Số tiền thực tế khách thực hiện thanh toán trong giao dịch này
   amount          Decimal       @db.Decimal(12, 2)
   /// Phương thức thanh toán (Tiền mặt, Chuyển khoản, Quét QR...)
@@ -1662,11 +1745,11 @@ model Payment {
   payer   User    @relation("PayerPayments", fields: [payerId], references: [id], onDelete: Restrict)
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("PaymentCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("PaymentUpdater", fields: [updatedById], references: [id])
@@ -1681,11 +1764,11 @@ model Payment {
 /// Bảng lưu trữ thông tin mã VietQR động được tạo phục vụ khách quét thanh toán hóa đơn tiện lợi
 model PaymentQrCode {
   /// ID mã QR (UUID)
-  id         String       @id @default(uuid()) @db.Uuid
+  id         Int          @id @default(autoincrement())
   /// ID Tenant quản lý
-  tenantId   String       @map("tenant_id") @db.Uuid
+  tenantId   Int          @map("tenant_id")
   /// ID hóa đơn liên quan tạo mã QR
-  invoiceId  String       @map("invoice_id") @db.Uuid
+  invoiceId  Int          @map("invoice_id")
   /// Tên nhà cung cấp dịch vụ QR (ví dụ: VietQR, PayOS, MoMo)
   provider   String       @db.VarChar(100)
   /// Nội dung chuỗi text thô mã hóa trong mã QR phục vụ quét
@@ -1713,13 +1796,13 @@ model PaymentQrCode {
 /// Bảng ghi nhận lịch sử các gói tin Webhook gọi từ cổng thanh toán tự động đến hệ thống
 model PaymentWebhookLog {
   /// ID log webhook (UUID)
-  id              String           @id @default(uuid()) @db.Uuid
+  id              Int              @id @default(autoincrement())
   /// Tên cổng thanh toán gửi webhook (ví dụ: PayOS, VNPay, MoMo)
   provider        String           @db.VarChar(100)
   /// ID Tenant liên quan (mới nhận có thể null, sau đó phân tích payload để ánh xạ)
-  tenantId        String?          @map("tenant_id") @db.Uuid
+  tenantId        Int?             @map("tenant_id")
   /// ID hóa đơn liên quan (mới nhận có thể null, sau đó phân tích payload để ánh xạ)
-  invoiceId       String?          @map("invoice_id") @db.Uuid
+  invoiceId       Int?             @map("invoice_id")
   /// Mã giao dịch tham chiếu của cổng thanh toán gửi trong webhook
   transactionCode String?          @map("transaction_code") @db.VarChar(100)
   /// Dữ liệu thô dạng JSON nhận được từ cổng thanh toán để lưu vết đối soát
@@ -1745,16 +1828,16 @@ model PaymentWebhookLog {
 /// Bảng quản lý các yêu cầu báo cáo sự cố, yêu cầu sửa chữa cơ sở vật chất (Ticket)
 model Ticket {
   /// ID ticket (UUID)
-  id          String         @id @default(uuid()) @db.Uuid
+  id          Int            @id @default(autoincrement())
   /// ID Tenant quản lý phòng trọ
-  tenantId    String         @map("tenant_id") @db.Uuid
+  tenantId    Int            @map("tenant_id")
   /// ID phòng trọ xảy ra sự cố cần sửa chữa
-  roomId      String         @map("room_id") @db.Uuid
+  roomId      Int            @map("room_id")
   /// ID hợp đồng thuê phòng liên quan tại thời điểm xảy ra sự cố (nullable nếu phòng trống)
-  contractId  String?        @map("contract_id") @db.Uuid
+  contractId  Int?           @map("contract_id")
   // (removed old createdBy)
   /// ID nhân viên được phân công xử lý sự cố (nullable nếu chưa phân công)
-  assignedTo  String?        @map("assigned_to") @db.Uuid
+  assignedTo  Int?           @map("assigned_to")
   /// Tiêu đề báo cáo ngắn gọn (ví dụ: Hỏng vòi nước nhà vệ sinh)
   title       String         @db.VarChar(255)
   /// Mô tả chi tiết về hiện trạng sự cố xảy ra
@@ -1790,11 +1873,11 @@ model Ticket {
   conversations  Conversation[]
 
   /// ID người dùng tạo bản ghi
-  createdById String? @map("created_by_id") @db.Uuid
+  createdById Int? @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById String? @map("updated_by_id") @db.Uuid
+  updatedById Int? @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById String? @map("deleted_by_id") @db.Uuid
+  deletedById Int? @map("deleted_by_id")
 
   createdBy User? @relation("TicketCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("TicketUpdater", fields: [updatedById], references: [id])
@@ -1806,15 +1889,15 @@ model Ticket {
 /// Bảng lưu các file hình ảnh/video hiện trạng đính kèm khi báo cáo sự cố
 model TicketAttachment {
   /// ID file đính kèm (UUID)
-  id         String   @id @default(uuid()) @db.Uuid
+  id         Int      @id @default(autoincrement())
   /// ID ticket liên quan
-  ticketId   String   @map("ticket_id") @db.Uuid
+  ticketId   Int      @map("ticket_id")
   /// Đường dẫn lưu trữ hình ảnh/video sự cố
   fileUrl    String   @map("file_url") @db.Text
   /// Loại file (ví dụ: image, video, document)
   fileType   String   @map("file_type") @db.VarChar(50)
   /// ID tài khoản người dùng tải file lên làm bằng chứng
-  uploadedBy String   @map("uploaded_by") @db.Uuid
+  uploadedBy Int      @map("uploaded_by")
   /// Thời điểm tải file lên
   createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
 
@@ -1830,7 +1913,7 @@ model TicketAttachment {
 /// Bảng lưu trữ cấu hình tùy biến toàn hệ thống động (System Settings) dạng Key-Value
 model SystemSetting {
   /// ID cấu hình (UUID)
-  id          String   @id @default(uuid()) @db.Uuid
+  id          Int      @id @default(autoincrement())
   /// Mã định danh tham chiếu duy nhất của cấu hình (ví dụ: min_deposit_months)
   key         String   @unique @db.VarChar(100)
   /// Giá trị thiết lập lưu dạng JSON (linh hoạt cho cả String, Number, Array, Object)
@@ -1846,11 +1929,11 @@ model SystemSetting {
 /// Bảng lưu trữ trao đổi, thảo luận chi tiết giữa khách thuê và chủ trọ về việc xử lý sự cố
 model TicketComment {
   /// ID bình luận (UUID)
-  id         String   @id @default(uuid()) @db.Uuid
+  id         Int      @id @default(autoincrement())
   /// ID ticket sự cố liên quan
-  ticketId   String   @map("ticket_id") @db.Uuid
+  ticketId   Int      @map("ticket_id")
   /// ID tài khoản người gửi bình luận (khách thuê hoặc chủ trọ/nhân viên)
-  userId     String   @map("user_id") @db.Uuid
+  userId     Int      @map("user_id")
   /// Nội dung tin nhắn trao đổi trong ticket
   message    String   @db.Text
   /// Đánh dấu bình luận nội bộ chỉ nhân viên và chủ trọ thấy (ẩn với khách thuê)
@@ -1870,15 +1953,15 @@ model TicketComment {
 /// Bảng lưu thông tin các phòng chat giao tiếp trong hệ thống
 model Conversation {
   /// ID phòng chat (UUID)
-  id         String           @id @default(uuid()) @db.Uuid
+  id         Int              @id @default(autoincrement())
   /// ID Tenant quản lý phòng chat này
-  tenantId   String           @map("tenant_id") @db.Uuid
+  tenantId   Int              @map("tenant_id")
   /// ID phòng trọ liên quan (nullable nếu chat hỗ trợ chung)
-  roomId     String?          @map("room_id") @db.Uuid
+  roomId     Int?             @map("room_id")
   /// ID hợp đồng thuê phòng liên quan (nullable)
-  contractId String?          @map("contract_id") @db.Uuid
+  contractId Int?             @map("contract_id")
   /// ID ticket sự cố liên quan (nullable)
-  ticketId   String?          @map("ticket_id") @db.Uuid
+  ticketId   Int?             @map("ticket_id")
   /// Phân loại mục đích phòng chat
   type       ConversationType
   /// Thời điểm khởi tạo cuộc trò chuyện chat
@@ -1904,9 +1987,9 @@ model Conversation {
 /// Bảng trung gian quản lý thành viên tham gia trong phòng chat
 model ConversationMember {
   /// ID phòng chat
-  conversationId String   @map("conversation_id") @db.Uuid
+  conversationId Int      @map("conversation_id")
   /// ID tài khoản người dùng tham gia chat
-  userId         String   @map("user_id") @db.Uuid
+  userId         Int      @map("user_id")
   /// Thời điểm tham gia vào phòng chat
   joinedAt       DateTime @default(now()) @map("joined_at") @db.Timestamptz
 
@@ -1923,11 +2006,11 @@ model ConversationMember {
 /// Bảng ghi nhận các tin nhắn chi tiết trong các cuộc hội thoại chat
 model Message {
   /// ID tin nhắn (UUID)
-  id             String      @id @default(uuid()) @db.Uuid
+  id             Int         @id @default(autoincrement())
   /// ID phòng chat chứa tin nhắn này
-  conversationId String      @map("conversation_id") @db.Uuid
+  conversationId Int         @map("conversation_id")
   /// ID tài khoản người gửi tin nhắn
-  senderId       String      @map("sender_id") @db.Uuid
+  senderId       Int         @map("sender_id")
   /// Nội dung tin nhắn chat (văn bản thô)
   content        String      @db.Text
   /// Loại tin nhắn (text, ảnh, file đính kèm hoặc thông báo hệ thống)
@@ -1953,15 +2036,15 @@ model Message {
 /// Bảng lưu trữ đánh giá phản hồi của khách thuê về chất lượng phòng và chủ trọ
 model Review {
   /// ID đánh giá (UUID)
-  id               String       @id @default(uuid()) @db.Uuid
+  id               Int          @id @default(autoincrement())
   /// ID Tenant sở hữu phòng được đánh giá
-  tenantId         String       @map("tenant_id") @db.Uuid
+  tenantId         Int          @map("tenant_id")
   /// ID phòng trọ nhận đánh giá
-  roomId           String       @map("room_id") @db.Uuid
+  roomId           Int          @map("room_id")
   /// ID hợp đồng thuê liên quan làm căn cứ xác thực khách trọ (nullable)
-  contractId       String?      @map("contract_id") @db.Uuid
+  contractId       Int?         @map("contract_id")
   /// ID tài khoản khách thuê gửi đánh giá phản hồi
-  reviewerId       String       @map("reviewer_id") @db.Uuid
+  reviewerId       Int          @map("reviewer_id")
   /// Điểm đánh giá chung tổng hợp (giá trị từ 1 đến 5 sao)
   rating           Int
   /// Nội dung nhận xét, đánh giá chi tiết
@@ -1997,13 +2080,13 @@ model Review {
 /// Bảng tổng hợp điểm uy tín của chủ trọ (Tenant) hoặc phòng trọ cụ thể dựa trên đánh giá, hỗ trợ sự cố
 model ReputationScore {
   /// ID bản ghi điểm uy tín (UUID)
-  id                  String               @id @default(uuid()) @db.Uuid
+  id                  Int                  @id @default(autoincrement())
   /// Phân loại đối tượng tính điểm là chủ trọ (Tenant) hay phòng cụ thể (Room)
   targetType          ReputationTargetType @map("target_type")
   /// ID Tenant liên quan
-  tenantId            String               @map("tenant_id") @db.Uuid
+  tenantId            Int                  @map("tenant_id")
   /// ID phòng trọ liên quan (nullable nếu là điểm chung của Tenant)
-  roomId              String?              @map("room_id") @db.Uuid
+  roomId              Int?                 @map("room_id")
   /// Điểm trung bình đánh giá từ khách thuê (0.00 đến 5.00)
   averageRating       Decimal              @map("average_rating") @db.Decimal(3, 2)
   /// Tổng số lượng đánh giá nhận được để tính trung bình
@@ -2031,13 +2114,13 @@ model ReputationScore {
 /// Bảng báo cáo hành vi vi phạm hoặc thông tin sai lệch gửi lên Super Admin kiểm duyệt
 model Report {
   /// ID báo cáo vi phạm (UUID)
-  id          String           @id @default(uuid()) @db.Uuid
+  id          Int              @id @default(autoincrement())
   /// ID tài khoản người dùng gửi báo cáo vi phạm
-  reporterId  String           @map("reporter_id") @db.Uuid
+  reporterId  Int              @map("reporter_id")
   /// Loại đối tượng bị báo cáo vi phạm (Phòng, Chủ trọ, Đánh giá, Người dùng)
   targetType  ReportTargetType @map("target_type")
-  /// ID của đối tượng bị báo cáo (Lưu UUID dạng chuỗi)
-  targetId    String           @map("target_id") @db.Uuid
+  /// ID của đối tượng bị báo cáo (Lưu String dạng mã định danh)
+  targetId    String           @map("target_id") @db.VarChar(50)
   /// Lý do báo cáo vi phạm (tiêu đề lý do)
   reason      String           @db.VarChar(255)
   /// Mô tả chi tiết hành vi vi phạm hoặc sai thông tin
@@ -2045,7 +2128,7 @@ model Report {
   /// Trạng thái xử lý báo cáo vi phạm của Ban quản trị
   status      ReportStatus     @default(PENDING)
   /// ID tài khoản Super Admin thực hiện xử lý báo cáo (nullable nếu chưa xử lý)
-  handledBy   String?          @map("handled_by") @db.Uuid
+  handledBy   Int?             @map("handled_by")
   /// Thời điểm gửi báo cáo vi phạm
   createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz
   /// Thời điểm Ban quản trị xử lý xong báo cáo
@@ -2063,11 +2146,11 @@ model Report {
 /// Bảng lưu thông báo nội bộ hệ thống gửi cho người dùng
 model Notification {
   /// ID thông báo (UUID)
-  id        String           @id @default(uuid()) @db.Uuid
+  id        Int              @id @default(autoincrement())
   /// ID tài khoản nhận thông báo
-  userId    String           @map("user_id") @db.Uuid
+  userId    Int              @map("user_id")
   /// ID Tenant liên quan gửi thông báo (nullable nếu là thông báo hệ thống toàn sàn)
-  tenantId  String?          @map("tenant_id") @db.Uuid
+  tenantId  Int?             @map("tenant_id")
   /// Tiêu đề thông báo ngắn gọn
   title     String           @db.VarChar(255)
   /// Nội dung chi tiết thông báo
@@ -2095,9 +2178,9 @@ model Notification {
 /// Bảng lưu các mã token thiết bị di động/web phục vụ đẩy thông báo qua Firebase Cloud Messaging (FCM)
 model DeviceToken {
   /// ID token (UUID)
-  id         String         @id @default(uuid()) @db.Uuid
+  id         Int            @id @default(autoincrement())
   /// ID tài khoản người dùng sở hữu thiết bị này
-  userId     String         @map("user_id") @db.Uuid
+  userId     Int            @map("user_id")
   /// Chuỗi token FCM duy nhất phục vụ push notification
   token      String         @db.Text
   /// Hệ điều hành của thiết bị nhận thông báo (iOS, Android hoặc Web)
@@ -2119,122 +2202,12 @@ model DeviceToken {
   @@map("device_tokens")
 }
 
-/// Bảng lưu nhật ký các lượt gợi ý phòng trọ (cho khách thuê) và gợi ý giá (cho chủ trọ) từ hệ thống AI
-model AiRecommendationLog {
-  /// ID bản ghi log (UUID)
-  id         String    @id @default(uuid()) @db.Uuid
-  /// ID người dùng nhận gợi ý (null nếu khách vãng lai chưa đăng nhập)
-  userId     String?   @map("user_id") @db.Uuid
-  /// ID Tenant nhận gợi ý giá thị trường (nullable)
-  tenantId   String?   @map("tenant_id") @db.Uuid
-  /// Phân loại tác vụ AI thực hiện phân tích gợi ý
-  type       AiLogType
-  /// Dữ liệu đầu vào cung cấp cho mô hình AI phân tích dạng JSON
-  inputData  Json      @map("input_data") @db.JsonB
-  /// Kết quả tính toán gợi ý trả về từ mô hình AI dạng JSON
-  outputData Json      @map("output_data") @db.JsonB
-  /// Tên mô hình AI được sử dụng (ví dụ: gemini-1.5-flash)
-  modelName  String    @map("model_name") @db.VarChar(100)
-  /// Thời điểm thực hiện tác vụ AI phân tích
-  createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz
-
-  // Các quan hệ (Relations)
-  /// Người dùng nhận gợi ý (gỡ liên kết nếu người dùng bị xóa)
-  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
-  /// Tenant nhận gợi ý (gỡ liên kết nếu tenant bị xóa)
-  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: SetNull)
-
-  @@map("ai_recommendation_logs")
-}
-
-/// Bảng lưu các đề xuất gợi ý giá thuê phòng trọ do AI tự động phân tích thị trường
-model RoomPriceSuggestion {
-  /// ID bản ghi đề xuất giá (UUID)
-  id             String   @id @default(uuid()) @db.Uuid
-  /// ID Tenant quản lý phòng trọ
-  tenantId       String   @map("tenant_id") @db.Uuid
-  /// ID phòng trọ cần phân tích giá đề xuất
-  roomId         String   @map("room_id") @db.Uuid
-  /// Mức giá thuê đề xuất trung bình từ AI
-  suggestedPrice Decimal  @map("suggested_price") @db.Decimal(12, 2)
-  /// Mức giá thuê đề xuất sàn thấp nhất
-  minPrice       Decimal  @map("min_price") @db.Decimal(12, 2)
-  /// Mức giá thuê đề xuất trần cao nhất
-  maxPrice       Decimal  @map("max_price") @db.Decimal(12, 2)
-  /// Độ tin cậy tính toán của mô hình AI (0.00 đến 1.00)
-  confidence     Decimal  @db.Decimal(5, 4)
-  /// Đoạn văn bản lý giải chi tiết cơ sở đề xuất giá (ví dụ: do khu vực có nhu cầu cao...)
-  reason         String?  @db.Text
-  /// Ảnh chụp các thông số đầu vào tại thời điểm AI chạy phân tích đề xuất giá
-  inputSnapshot  Json     @map("input_snapshot") @db.JsonB
-  /// Thời điểm tạo bản ghi gợi ý giá
-  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz
-
-  // Các quan hệ (Relations)
-  /// Tenant quản lý
-  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  /// Phòng trọ được gợi ý (xóa phòng thì cascade xóa các gợi ý giá liên quan)
-  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
-
-  @@map("room_price_suggestions")
-}
-
-/// Bảng quản lý các phiên trò chuyện của người dùng với trợ lý AI Chatbot hoặc nhân viên hỗ trợ tiếp quản
-model ChatbotSession {
-  /// ID phiên chat (UUID)
-  id        String               @id @default(uuid()) @db.Uuid
-  /// ID tài khoản người dùng trò chuyện (null nếu khách vãng lai chưa đăng nhập)
-  userId    String?              @map("user_id") @db.Uuid
-  /// ID Tenant liên quan (nếu chat tại trang tin của một chủ trọ cụ thể, nullable)
-  tenantId  String?              @map("tenant_id") @db.Uuid
-  /// Kênh giao tiếp hội thoại (Web hoặc Mobile app)
-  channel   ChatbotChannel
-  /// Trạng thái hoạt động của phiên chat
-  status    ChatbotSessionStatus @default(ACTIVE)
-  /// Thời điểm mở phiên chat hỗ trợ
-  createdAt DateTime             @default(now()) @map("created_at") @db.Timestamptz
-  /// Thời điểm phiên chat kết thúc
-  endedAt   DateTime?            @map("ended_at") @db.Timestamptz
-
-  // Các quan hệ (Relations)
-  /// Tài khoản người dùng (gỡ liên kết nếu tài khoản người dùng bị xóa)
-  user     User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
-  /// Tenant liên quan (gỡ liên kết nếu tenant bị xóa)
-  tenant   Tenant?          @relation(fields: [tenantId], references: [id], onDelete: SetNull)
-  /// Danh sách các tin nhắn trao đổi trong phiên chat này
-  messages ChatbotMessage[]
-
-  @@map("chatbot_sessions")
-}
-
-/// Bảng lưu trữ chi tiết các tin nhắn trong các phiên chat hỗ trợ của chatbot
-model ChatbotMessage {
-  /// ID tin nhắn (UUID)
-  id         String            @id @default(uuid()) @db.Uuid
-  /// ID phiên chat chứa tin nhắn này
-  sessionId  String            @map("session_id") @db.Uuid
-  /// Vai trò của người gửi tin nhắn (Khách thuê, Bot tự động, hoặc Nhân viên hỗ trợ)
-  senderType ChatbotSenderType @map("sender_type")
-  /// Nội dung tin nhắn chat (văn bản thô)
-  message    String            @db.Text
-  /// Dữ liệu bổ sung tùy biến (ví dụ: danh sách link phòng gợi ý kèm theo)
-  metadata   Json?             @db.JsonB
-  /// Thời điểm gửi tin nhắn chatbot
-  createdAt  DateTime          @default(now()) @map("created_at") @db.Timestamptz
-
-  // Các quan hệ (Relations)
-  /// Phiên chatbot chứa tin nhắn (xóa phiên chatbot thì cascade xóa toàn bộ tin nhắn)
-  session ChatbotSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-
-  @@map("chatbot_messages")
-}
-
 /// Bảng lưu trạng thái và thông tin của các tác vụ chạy ngầm (Background Jobs)
 model BackgroundJob {
   /// ID tác vụ (UUID)
-  id           String              @id @default(uuid()) @db.Uuid
+  id           Int                 @id @default(autoincrement())
   /// ID Tenant liên quan (nullable nếu là tác vụ hệ thống)
-  tenantId     String?             @map("tenant_id") @db.Uuid
+  tenantId     Int?                @map("tenant_id")
   /// Tên hàng đợi (ví dụ: default, email, invoices)
   queueName    String              @map("queue_name") @db.VarChar(100)
   /// Phân loại loại tác vụ cần thực hiện (ví dụ: SEND_EMAIL_INVOICE)
@@ -2266,17 +2239,17 @@ model BackgroundJob {
 /// Bảng ghi nhận nhật ký kiểm toán (Audit Logs) để giám sát và lưu vết các thao tác dữ liệu nhạy cảm
 model AuditLog {
   /// ID bản ghi log (UUID)
-  id         String   @id @default(uuid()) @db.Uuid
+  id         Int      @id @default(autoincrement())
   /// ID Tenant xảy ra thao tác dữ liệu (nullable nếu là thao tác hệ thống)
-  tenantId   String?  @map("tenant_id") @db.Uuid
+  tenantId   Int?     @map("tenant_id")
   /// ID tài khoản người dùng thực hiện thao tác (nullable nếu do hệ thống chạy tự động)
-  actorId    String?  @map("actor_id") @db.Uuid
+  actorId    Int?     @map("actor_id")
   /// Hành động thực hiện (ví dụ: CREATE_INVOICE, UPDATE_ROOM_PRICE)
   action     String   @db.VarChar(100)
   /// Phân loại loại thực thể bị tác động (ví dụ: ROOM, CONTRACT, INVOICE)
   entityType String   @map("entity_type") @db.VarChar(100)
   /// ID của thực thể bị tác động
-  entityId   String   @map("entity_id") @db.Uuid
+  entityId   String   @map("entity_id") @db.VarChar(50)
   /// Giá trị dữ liệu cũ trước khi thao tác dạng JSON
   oldValues  Json?    @map("old_values") @db.JsonB
   /// Giá trị dữ liệu mới sau khi thao tác dạng JSON
@@ -2382,6 +2355,15 @@ enum MarketplaceStatus {
   REJECTED
   /// Tin đăng bị ẩn tạm thời bởi chủ trọ
   HIDDEN
+}
+
+enum VerificationCodeType {
+  /// Dang ky tai khoan moi
+  REGISTER
+  /// Quen mat khau
+  FORGOT_PASSWORD
+  /// Dang nhap can OTP
+  LOGIN
 }
 
 /// Trạng thái hoạt động của tài khoản người dùng
@@ -2850,40 +2832,6 @@ enum DevicePlatform {
   ANDROID
   /// Trình duyệt web
   WEB
-}
-
-/// Loại tác vụ AI ghi nhận trong log
-enum AiLogType {
-  /// AI gợi ý danh sách phòng phù hợp cho khách thuê
-  ROOM_RECOMMENDATION
-  /// AI phân tích và đề xuất mức giá thuê tối ưu cho chủ trọ
-  PRICE_SUGGESTION
-}
-
-/// Kênh giao tiếp với AI Chatbot
-enum ChatbotChannel {
-  /// Giao tiếp qua ứng dụng web
-  WEB
-  /// Giao tiếp qua ứng dụng mobile
-  MOBILE
-}
-
-/// Trạng thái phiên chat hỗ trợ của chatbot
-enum ChatbotSessionStatus {
-  /// Phiên chat đang mở và tiếp tục hội thoại
-  ACTIVE
-  /// Phiên chat đã kết thúc
-  CLOSED
-}
-
-/// Vai trò của người gửi tin nhắn trong chatbot
-enum ChatbotSenderType {
-  /// Khách thuê/Người dùng gửi tin nhắn
-  USER
-  /// AI Bot tự động trả lời
-  BOT
-  /// Nhân viên hỗ trợ (chủ trọ/staff) nhảy vào tiếp quản phiên chat
-  STAFF
 }
 
 /// Trạng thái của tác vụ chạy ngầm

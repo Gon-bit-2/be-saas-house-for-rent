@@ -20,23 +20,37 @@ export type RoomViewLogModel = runtime.Types.Result.DefaultSelection<Prisma.$Roo
 
 export type AggregateRoomViewLog = {
   _count: RoomViewLogCountAggregateOutputType | null
+  _avg: RoomViewLogAvgAggregateOutputType | null
+  _sum: RoomViewLogSumAggregateOutputType | null
   _min: RoomViewLogMinAggregateOutputType | null
   _max: RoomViewLogMaxAggregateOutputType | null
 }
 
+export type RoomViewLogAvgAggregateOutputType = {
+  id: number | null
+  userId: number | null
+  roomId: number | null
+}
+
+export type RoomViewLogSumAggregateOutputType = {
+  id: number | null
+  userId: number | null
+  roomId: number | null
+}
+
 export type RoomViewLogMinAggregateOutputType = {
-  id: string | null
-  userId: string | null
-  roomId: string | null
+  id: number | null
+  userId: number | null
+  roomId: number | null
   ipAddress: string | null
   userAgent: string | null
   viewedAt: Date | null
 }
 
 export type RoomViewLogMaxAggregateOutputType = {
-  id: string | null
-  userId: string | null
-  roomId: string | null
+  id: number | null
+  userId: number | null
+  roomId: number | null
   ipAddress: string | null
   userAgent: string | null
   viewedAt: Date | null
@@ -52,6 +66,18 @@ export type RoomViewLogCountAggregateOutputType = {
   _all: number
 }
 
+
+export type RoomViewLogAvgAggregateInputType = {
+  id?: true
+  userId?: true
+  roomId?: true
+}
+
+export type RoomViewLogSumAggregateInputType = {
+  id?: true
+  userId?: true
+  roomId?: true
+}
 
 export type RoomViewLogMinAggregateInputType = {
   id?: true
@@ -119,6 +145,18 @@ export type RoomViewLogAggregateArgs<ExtArgs extends runtime.Types.Extensions.In
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: RoomViewLogAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: RoomViewLogSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: RoomViewLogMinAggregateInputType
@@ -149,18 +187,22 @@ export type RoomViewLogGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   _count?: RoomViewLogCountAggregateInputType | true
+  _avg?: RoomViewLogAvgAggregateInputType
+  _sum?: RoomViewLogSumAggregateInputType
   _min?: RoomViewLogMinAggregateInputType
   _max?: RoomViewLogMaxAggregateInputType
 }
 
 export type RoomViewLogGroupByOutputType = {
-  id: string
-  userId: string | null
-  roomId: string
+  id: number
+  userId: number | null
+  roomId: number
   ipAddress: string | null
   userAgent: string | null
   viewedAt: Date
   _count: RoomViewLogCountAggregateOutputType | null
+  _avg: RoomViewLogAvgAggregateOutputType | null
+  _sum: RoomViewLogSumAggregateOutputType | null
   _min: RoomViewLogMinAggregateOutputType | null
   _max: RoomViewLogMaxAggregateOutputType | null
 }
@@ -184,9 +226,9 @@ export type RoomViewLogWhereInput = {
   AND?: Prisma.RoomViewLogWhereInput | Prisma.RoomViewLogWhereInput[]
   OR?: Prisma.RoomViewLogWhereInput[]
   NOT?: Prisma.RoomViewLogWhereInput | Prisma.RoomViewLogWhereInput[]
-  id?: Prisma.UuidFilter<"RoomViewLog"> | string
-  userId?: Prisma.UuidNullableFilter<"RoomViewLog"> | string | null
-  roomId?: Prisma.UuidFilter<"RoomViewLog"> | string
+  id?: Prisma.IntFilter<"RoomViewLog"> | number
+  userId?: Prisma.IntNullableFilter<"RoomViewLog"> | number | null
+  roomId?: Prisma.IntFilter<"RoomViewLog"> | number
   ipAddress?: Prisma.StringNullableFilter<"RoomViewLog"> | string | null
   userAgent?: Prisma.StringNullableFilter<"RoomViewLog"> | string | null
   viewedAt?: Prisma.DateTimeFilter<"RoomViewLog"> | Date | string
@@ -206,12 +248,12 @@ export type RoomViewLogOrderByWithRelationInput = {
 }
 
 export type RoomViewLogWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.RoomViewLogWhereInput | Prisma.RoomViewLogWhereInput[]
   OR?: Prisma.RoomViewLogWhereInput[]
   NOT?: Prisma.RoomViewLogWhereInput | Prisma.RoomViewLogWhereInput[]
-  userId?: Prisma.UuidNullableFilter<"RoomViewLog"> | string | null
-  roomId?: Prisma.UuidFilter<"RoomViewLog"> | string
+  userId?: Prisma.IntNullableFilter<"RoomViewLog"> | number | null
+  roomId?: Prisma.IntFilter<"RoomViewLog"> | number
   ipAddress?: Prisma.StringNullableFilter<"RoomViewLog"> | string | null
   userAgent?: Prisma.StringNullableFilter<"RoomViewLog"> | string | null
   viewedAt?: Prisma.DateTimeFilter<"RoomViewLog"> | Date | string
@@ -227,24 +269,25 @@ export type RoomViewLogOrderByWithAggregationInput = {
   userAgent?: Prisma.SortOrderInput | Prisma.SortOrder
   viewedAt?: Prisma.SortOrder
   _count?: Prisma.RoomViewLogCountOrderByAggregateInput
+  _avg?: Prisma.RoomViewLogAvgOrderByAggregateInput
   _max?: Prisma.RoomViewLogMaxOrderByAggregateInput
   _min?: Prisma.RoomViewLogMinOrderByAggregateInput
+  _sum?: Prisma.RoomViewLogSumOrderByAggregateInput
 }
 
 export type RoomViewLogScalarWhereWithAggregatesInput = {
   AND?: Prisma.RoomViewLogScalarWhereWithAggregatesInput | Prisma.RoomViewLogScalarWhereWithAggregatesInput[]
   OR?: Prisma.RoomViewLogScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RoomViewLogScalarWhereWithAggregatesInput | Prisma.RoomViewLogScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"RoomViewLog"> | string
-  userId?: Prisma.UuidNullableWithAggregatesFilter<"RoomViewLog"> | string | null
-  roomId?: Prisma.UuidWithAggregatesFilter<"RoomViewLog"> | string
+  id?: Prisma.IntWithAggregatesFilter<"RoomViewLog"> | number
+  userId?: Prisma.IntNullableWithAggregatesFilter<"RoomViewLog"> | number | null
+  roomId?: Prisma.IntWithAggregatesFilter<"RoomViewLog"> | number
   ipAddress?: Prisma.StringNullableWithAggregatesFilter<"RoomViewLog"> | string | null
   userAgent?: Prisma.StringNullableWithAggregatesFilter<"RoomViewLog"> | string | null
   viewedAt?: Prisma.DateTimeWithAggregatesFilter<"RoomViewLog"> | Date | string
 }
 
 export type RoomViewLogCreateInput = {
-  id?: string
   ipAddress?: string | null
   userAgent?: string | null
   viewedAt?: Date | string
@@ -253,16 +296,15 @@ export type RoomViewLogCreateInput = {
 }
 
 export type RoomViewLogUncheckedCreateInput = {
-  id?: string
-  userId?: string | null
-  roomId: string
+  id?: number
+  userId?: number | null
+  roomId: number
   ipAddress?: string | null
   userAgent?: string | null
   viewedAt?: Date | string
 }
 
 export type RoomViewLogUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   viewedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -271,34 +313,33 @@ export type RoomViewLogUpdateInput = {
 }
 
 export type RoomViewLogUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   viewedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoomViewLogCreateManyInput = {
-  id?: string
-  userId?: string | null
-  roomId: string
+  id?: number
+  userId?: number | null
+  roomId: number
   ipAddress?: string | null
   userAgent?: string | null
   viewedAt?: Date | string
 }
 
 export type RoomViewLogUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   viewedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoomViewLogUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   viewedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -323,6 +364,12 @@ export type RoomViewLogCountOrderByAggregateInput = {
   viewedAt?: Prisma.SortOrder
 }
 
+export type RoomViewLogAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+}
+
 export type RoomViewLogMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -339,6 +386,12 @@ export type RoomViewLogMinOrderByAggregateInput = {
   ipAddress?: Prisma.SortOrder
   userAgent?: Prisma.SortOrder
   viewedAt?: Prisma.SortOrder
+}
+
+export type RoomViewLogSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
 }
 
 export type RoomViewLogCreateNestedManyWithoutUserInput = {
@@ -426,7 +479,6 @@ export type RoomViewLogUncheckedUpdateManyWithoutRoomNestedInput = {
 }
 
 export type RoomViewLogCreateWithoutUserInput = {
-  id?: string
   ipAddress?: string | null
   userAgent?: string | null
   viewedAt?: Date | string
@@ -434,8 +486,8 @@ export type RoomViewLogCreateWithoutUserInput = {
 }
 
 export type RoomViewLogUncheckedCreateWithoutUserInput = {
-  id?: string
-  roomId: string
+  id?: number
+  roomId: number
   ipAddress?: string | null
   userAgent?: string | null
   viewedAt?: Date | string
@@ -471,16 +523,15 @@ export type RoomViewLogScalarWhereInput = {
   AND?: Prisma.RoomViewLogScalarWhereInput | Prisma.RoomViewLogScalarWhereInput[]
   OR?: Prisma.RoomViewLogScalarWhereInput[]
   NOT?: Prisma.RoomViewLogScalarWhereInput | Prisma.RoomViewLogScalarWhereInput[]
-  id?: Prisma.UuidFilter<"RoomViewLog"> | string
-  userId?: Prisma.UuidNullableFilter<"RoomViewLog"> | string | null
-  roomId?: Prisma.UuidFilter<"RoomViewLog"> | string
+  id?: Prisma.IntFilter<"RoomViewLog"> | number
+  userId?: Prisma.IntNullableFilter<"RoomViewLog"> | number | null
+  roomId?: Prisma.IntFilter<"RoomViewLog"> | number
   ipAddress?: Prisma.StringNullableFilter<"RoomViewLog"> | string | null
   userAgent?: Prisma.StringNullableFilter<"RoomViewLog"> | string | null
   viewedAt?: Prisma.DateTimeFilter<"RoomViewLog"> | Date | string
 }
 
 export type RoomViewLogCreateWithoutRoomInput = {
-  id?: string
   ipAddress?: string | null
   userAgent?: string | null
   viewedAt?: Date | string
@@ -488,8 +539,8 @@ export type RoomViewLogCreateWithoutRoomInput = {
 }
 
 export type RoomViewLogUncheckedCreateWithoutRoomInput = {
-  id?: string
-  userId?: string | null
+  id?: number
+  userId?: number | null
   ipAddress?: string | null
   userAgent?: string | null
   viewedAt?: Date | string
@@ -522,15 +573,14 @@ export type RoomViewLogUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type RoomViewLogCreateManyUserInput = {
-  id?: string
-  roomId: string
+  id?: number
+  roomId: number
   ipAddress?: string | null
   userAgent?: string | null
   viewedAt?: Date | string
 }
 
 export type RoomViewLogUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   viewedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -538,31 +588,30 @@ export type RoomViewLogUpdateWithoutUserInput = {
 }
 
 export type RoomViewLogUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   viewedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoomViewLogUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   viewedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoomViewLogCreateManyRoomInput = {
-  id?: string
-  userId?: string | null
+  id?: number
+  userId?: number | null
   ipAddress?: string | null
   userAgent?: string | null
   viewedAt?: Date | string
 }
 
 export type RoomViewLogUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   viewedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -570,16 +619,16 @@ export type RoomViewLogUpdateWithoutRoomInput = {
 }
 
 export type RoomViewLogUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   viewedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoomViewLogUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   viewedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -659,15 +708,15 @@ export type $RoomViewLogPayload<ExtArgs extends runtime.Types.Extensions.Interna
     /**
      * ID bản ghi log (UUID)
      */
-    id: string
+    id: number
     /**
      * ID người dùng xem phòng (null nếu là khách vãng lai chưa đăng nhập)
      */
-    userId: string | null
+    userId: number | null
     /**
      * ID phòng trọ được xem
      */
-    roomId: string
+    roomId: number
     /**
      * Địa chỉ IP của người truy cập
      */
@@ -1105,9 +1154,9 @@ export interface Prisma__RoomViewLogClient<T, Null = never, ExtArgs extends runt
  * Fields of the RoomViewLog model
  */
 export interface RoomViewLogFieldRefs {
-  readonly id: Prisma.FieldRef<"RoomViewLog", 'String'>
-  readonly userId: Prisma.FieldRef<"RoomViewLog", 'String'>
-  readonly roomId: Prisma.FieldRef<"RoomViewLog", 'String'>
+  readonly id: Prisma.FieldRef<"RoomViewLog", 'Int'>
+  readonly userId: Prisma.FieldRef<"RoomViewLog", 'Int'>
+  readonly roomId: Prisma.FieldRef<"RoomViewLog", 'Int'>
   readonly ipAddress: Prisma.FieldRef<"RoomViewLog", 'String'>
   readonly userAgent: Prisma.FieldRef<"RoomViewLog", 'String'>
   readonly viewedAt: Prisma.FieldRef<"RoomViewLog", 'DateTime'>

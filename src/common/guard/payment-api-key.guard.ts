@@ -1,6 +1,6 @@
 import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common'
 import { Request } from 'express'
-import envConfig from 'src/config/config'
+import envConfig from '@src/config/env.config'
 
 /**
  * Guard that validates payment-specific API keys.

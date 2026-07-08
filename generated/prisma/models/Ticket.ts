@@ -20,16 +20,40 @@ export type TicketModel = runtime.Types.Result.DefaultSelection<Prisma.$TicketPa
 
 export type AggregateTicket = {
   _count: TicketCountAggregateOutputType | null
+  _avg: TicketAvgAggregateOutputType | null
+  _sum: TicketSumAggregateOutputType | null
   _min: TicketMinAggregateOutputType | null
   _max: TicketMaxAggregateOutputType | null
 }
 
+export type TicketAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  assignedTo: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
+export type TicketSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  assignedTo: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
 export type TicketMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  contractId: string | null
-  assignedTo: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  assignedTo: number | null
   title: string | null
   description: string | null
   category: $Enums.TicketCategory | null
@@ -38,17 +62,17 @@ export type TicketMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   resolvedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type TicketMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  contractId: string | null
-  assignedTo: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  assignedTo: number | null
   title: string | null
   description: string | null
   category: $Enums.TicketCategory | null
@@ -57,9 +81,9 @@ export type TicketMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   resolvedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type TicketCountAggregateOutputType = {
@@ -82,6 +106,28 @@ export type TicketCountAggregateOutputType = {
   _all: number
 }
 
+
+export type TicketAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  contractId?: true
+  assignedTo?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
+
+export type TicketSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  contractId?: true
+  assignedTo?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
 
 export type TicketMinAggregateInputType = {
   id?: true
@@ -179,6 +225,18 @@ export type TicketAggregateArgs<ExtArgs extends runtime.Types.Extensions.Interna
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: TicketAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: TicketSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: TicketMinAggregateInputType
@@ -209,16 +267,18 @@ export type TicketGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   _count?: TicketCountAggregateInputType | true
+  _avg?: TicketAvgAggregateInputType
+  _sum?: TicketSumAggregateInputType
   _min?: TicketMinAggregateInputType
   _max?: TicketMaxAggregateInputType
 }
 
 export type TicketGroupByOutputType = {
-  id: string
-  tenantId: string
-  roomId: string
-  contractId: string | null
-  assignedTo: string | null
+  id: number
+  tenantId: number
+  roomId: number
+  contractId: number | null
+  assignedTo: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -227,10 +287,12 @@ export type TicketGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   resolvedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: TicketCountAggregateOutputType | null
+  _avg: TicketAvgAggregateOutputType | null
+  _sum: TicketSumAggregateOutputType | null
   _min: TicketMinAggregateOutputType | null
   _max: TicketMaxAggregateOutputType | null
 }
@@ -254,11 +316,11 @@ export type TicketWhereInput = {
   AND?: Prisma.TicketWhereInput | Prisma.TicketWhereInput[]
   OR?: Prisma.TicketWhereInput[]
   NOT?: Prisma.TicketWhereInput | Prisma.TicketWhereInput[]
-  id?: Prisma.UuidFilter<"Ticket"> | string
-  tenantId?: Prisma.UuidFilter<"Ticket"> | string
-  roomId?: Prisma.UuidFilter<"Ticket"> | string
-  contractId?: Prisma.UuidNullableFilter<"Ticket"> | string | null
-  assignedTo?: Prisma.UuidNullableFilter<"Ticket"> | string | null
+  id?: Prisma.IntFilter<"Ticket"> | number
+  tenantId?: Prisma.IntFilter<"Ticket"> | number
+  roomId?: Prisma.IntFilter<"Ticket"> | number
+  contractId?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  assignedTo?: Prisma.IntNullableFilter<"Ticket"> | number | null
   title?: Prisma.StringFilter<"Ticket"> | string
   description?: Prisma.StringFilter<"Ticket"> | string
   category?: Prisma.EnumTicketCategoryFilter<"Ticket"> | $Enums.TicketCategory
@@ -267,9 +329,9 @@ export type TicketWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Ticket"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ticket"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableFilter<"Ticket"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Ticket"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Ticket"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Ticket"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Ticket"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   contract?: Prisma.XOR<Prisma.ContractNullableScalarRelationFilter, Prisma.ContractWhereInput> | null
@@ -312,14 +374,14 @@ export type TicketOrderByWithRelationInput = {
 }
 
 export type TicketWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.TicketWhereInput | Prisma.TicketWhereInput[]
   OR?: Prisma.TicketWhereInput[]
   NOT?: Prisma.TicketWhereInput | Prisma.TicketWhereInput[]
-  tenantId?: Prisma.UuidFilter<"Ticket"> | string
-  roomId?: Prisma.UuidFilter<"Ticket"> | string
-  contractId?: Prisma.UuidNullableFilter<"Ticket"> | string | null
-  assignedTo?: Prisma.UuidNullableFilter<"Ticket"> | string | null
+  tenantId?: Prisma.IntFilter<"Ticket"> | number
+  roomId?: Prisma.IntFilter<"Ticket"> | number
+  contractId?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  assignedTo?: Prisma.IntNullableFilter<"Ticket"> | number | null
   title?: Prisma.StringFilter<"Ticket"> | string
   description?: Prisma.StringFilter<"Ticket"> | string
   category?: Prisma.EnumTicketCategoryFilter<"Ticket"> | $Enums.TicketCategory
@@ -328,9 +390,9 @@ export type TicketWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Ticket"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ticket"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableFilter<"Ticket"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Ticket"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Ticket"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Ticket"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Ticket"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   contract?: Prisma.XOR<Prisma.ContractNullableScalarRelationFilter, Prisma.ContractWhereInput> | null
@@ -361,19 +423,21 @@ export type TicketOrderByWithAggregationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TicketCountOrderByAggregateInput
+  _avg?: Prisma.TicketAvgOrderByAggregateInput
   _max?: Prisma.TicketMaxOrderByAggregateInput
   _min?: Prisma.TicketMinOrderByAggregateInput
+  _sum?: Prisma.TicketSumOrderByAggregateInput
 }
 
 export type TicketScalarWhereWithAggregatesInput = {
   AND?: Prisma.TicketScalarWhereWithAggregatesInput | Prisma.TicketScalarWhereWithAggregatesInput[]
   OR?: Prisma.TicketScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TicketScalarWhereWithAggregatesInput | Prisma.TicketScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Ticket"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"Ticket"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"Ticket"> | string
-  contractId?: Prisma.UuidNullableWithAggregatesFilter<"Ticket"> | string | null
-  assignedTo?: Prisma.UuidNullableWithAggregatesFilter<"Ticket"> | string | null
+  id?: Prisma.IntWithAggregatesFilter<"Ticket"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"Ticket"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"Ticket"> | number
+  contractId?: Prisma.IntNullableWithAggregatesFilter<"Ticket"> | number | null
+  assignedTo?: Prisma.IntNullableWithAggregatesFilter<"Ticket"> | number | null
   title?: Prisma.StringWithAggregatesFilter<"Ticket"> | string
   description?: Prisma.StringWithAggregatesFilter<"Ticket"> | string
   category?: Prisma.EnumTicketCategoryWithAggregatesFilter<"Ticket"> | $Enums.TicketCategory
@@ -382,13 +446,12 @@ export type TicketScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Ticket"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Ticket"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Ticket"> | Date | string | null
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"Ticket"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"Ticket"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"Ticket"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"Ticket"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"Ticket"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"Ticket"> | number | null
 }
 
 export type TicketCreateInput = {
-  id?: string
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -410,11 +473,11 @@ export type TicketCreateInput = {
 }
 
 export type TicketUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -423,16 +486,15 @@ export type TicketUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   attachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
   comments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutTicketInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTicketInput
 }
 
 export type TicketUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -454,11 +516,11 @@ export type TicketUpdateInput = {
 }
 
 export type TicketUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -467,20 +529,20 @@ export type TicketUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
   comments?: Prisma.TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketCreateManyInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -489,13 +551,12 @@ export type TicketCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type TicketUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -507,11 +568,11 @@ export type TicketUpdateManyMutationInput = {
 }
 
 export type TicketUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -520,9 +581,9 @@ export type TicketUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TicketListRelationFilter = {
@@ -549,6 +610,17 @@ export type TicketCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
+export type TicketAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
+  assignedTo?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -587,6 +659,17 @@ export type TicketMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
+export type TicketSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
+  assignedTo?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -953,7 +1036,6 @@ export type TicketUpdateOneWithoutConversationsNestedInput = {
 }
 
 export type TicketCreateWithoutAssignedToUserInput = {
-  id?: string
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -974,10 +1056,10 @@ export type TicketCreateWithoutAssignedToUserInput = {
 }
 
 export type TicketUncheckedCreateWithoutAssignedToUserInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -986,9 +1068,9 @@ export type TicketUncheckedCreateWithoutAssignedToUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   attachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
   comments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutTicketInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTicketInput
@@ -1005,7 +1087,6 @@ export type TicketCreateManyAssignedToUserInputEnvelope = {
 }
 
 export type TicketCreateWithoutCreatedByInput = {
-  id?: string
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1026,11 +1107,11 @@ export type TicketCreateWithoutCreatedByInput = {
 }
 
 export type TicketUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1039,8 +1120,8 @@ export type TicketUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   attachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
   comments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutTicketInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTicketInput
@@ -1057,7 +1138,6 @@ export type TicketCreateManyCreatedByInputEnvelope = {
 }
 
 export type TicketCreateWithoutUpdatedByInput = {
-  id?: string
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1078,11 +1158,11 @@ export type TicketCreateWithoutUpdatedByInput = {
 }
 
 export type TicketUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1091,8 +1171,8 @@ export type TicketUncheckedCreateWithoutUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   attachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
   comments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutTicketInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTicketInput
@@ -1109,7 +1189,6 @@ export type TicketCreateManyUpdatedByInputEnvelope = {
 }
 
 export type TicketCreateWithoutDeletedByInput = {
-  id?: string
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1130,11 +1209,11 @@ export type TicketCreateWithoutDeletedByInput = {
 }
 
 export type TicketUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1143,8 +1222,8 @@ export type TicketUncheckedCreateWithoutDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   attachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
   comments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutTicketInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTicketInput
@@ -1180,11 +1259,11 @@ export type TicketScalarWhereInput = {
   AND?: Prisma.TicketScalarWhereInput | Prisma.TicketScalarWhereInput[]
   OR?: Prisma.TicketScalarWhereInput[]
   NOT?: Prisma.TicketScalarWhereInput | Prisma.TicketScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Ticket"> | string
-  tenantId?: Prisma.UuidFilter<"Ticket"> | string
-  roomId?: Prisma.UuidFilter<"Ticket"> | string
-  contractId?: Prisma.UuidNullableFilter<"Ticket"> | string | null
-  assignedTo?: Prisma.UuidNullableFilter<"Ticket"> | string | null
+  id?: Prisma.IntFilter<"Ticket"> | number
+  tenantId?: Prisma.IntFilter<"Ticket"> | number
+  roomId?: Prisma.IntFilter<"Ticket"> | number
+  contractId?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  assignedTo?: Prisma.IntNullableFilter<"Ticket"> | number | null
   title?: Prisma.StringFilter<"Ticket"> | string
   description?: Prisma.StringFilter<"Ticket"> | string
   category?: Prisma.EnumTicketCategoryFilter<"Ticket"> | $Enums.TicketCategory
@@ -1193,9 +1272,9 @@ export type TicketScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Ticket"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ticket"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableFilter<"Ticket"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Ticket"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Ticket"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Ticket"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Ticket"> | number | null
 }
 
 export type TicketUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1247,7 +1326,6 @@ export type TicketUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type TicketCreateWithoutTenantInput = {
-  id?: string
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1268,10 +1346,10 @@ export type TicketCreateWithoutTenantInput = {
 }
 
 export type TicketUncheckedCreateWithoutTenantInput = {
-  id?: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1280,9 +1358,9 @@ export type TicketUncheckedCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   attachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
   comments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutTicketInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTicketInput
@@ -1315,7 +1393,6 @@ export type TicketUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type TicketCreateWithoutRoomInput = {
-  id?: string
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1336,10 +1413,10 @@ export type TicketCreateWithoutRoomInput = {
 }
 
 export type TicketUncheckedCreateWithoutRoomInput = {
-  id?: string
-  tenantId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1348,9 +1425,9 @@ export type TicketUncheckedCreateWithoutRoomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   attachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
   comments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutTicketInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTicketInput
@@ -1383,7 +1460,6 @@ export type TicketUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type TicketCreateWithoutContractInput = {
-  id?: string
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1404,10 +1480,10 @@ export type TicketCreateWithoutContractInput = {
 }
 
 export type TicketUncheckedCreateWithoutContractInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1416,9 +1492,9 @@ export type TicketUncheckedCreateWithoutContractInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   attachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
   comments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutTicketInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTicketInput
@@ -1451,7 +1527,6 @@ export type TicketUpdateManyWithWhereWithoutContractInput = {
 }
 
 export type TicketCreateWithoutAttachmentsInput = {
-  id?: string
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1472,11 +1547,11 @@ export type TicketCreateWithoutAttachmentsInput = {
 }
 
 export type TicketUncheckedCreateWithoutAttachmentsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1485,9 +1560,9 @@ export type TicketUncheckedCreateWithoutAttachmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   comments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutTicketInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTicketInput
 }
@@ -1509,7 +1584,6 @@ export type TicketUpdateToOneWithWhereWithoutAttachmentsInput = {
 }
 
 export type TicketUpdateWithoutAttachmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1530,11 +1604,11 @@ export type TicketUpdateWithoutAttachmentsInput = {
 }
 
 export type TicketUncheckedUpdateWithoutAttachmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1543,15 +1617,14 @@ export type TicketUncheckedUpdateWithoutAttachmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   comments?: Prisma.TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketCreateWithoutCommentsInput = {
-  id?: string
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1572,11 +1645,11 @@ export type TicketCreateWithoutCommentsInput = {
 }
 
 export type TicketUncheckedCreateWithoutCommentsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1585,9 +1658,9 @@ export type TicketUncheckedCreateWithoutCommentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   attachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTicketInput
 }
@@ -1609,7 +1682,6 @@ export type TicketUpdateToOneWithWhereWithoutCommentsInput = {
 }
 
 export type TicketUpdateWithoutCommentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1630,11 +1702,11 @@ export type TicketUpdateWithoutCommentsInput = {
 }
 
 export type TicketUncheckedUpdateWithoutCommentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1643,15 +1715,14 @@ export type TicketUncheckedUpdateWithoutCommentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketCreateWithoutConversationsInput = {
-  id?: string
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1672,11 +1743,11 @@ export type TicketCreateWithoutConversationsInput = {
 }
 
 export type TicketUncheckedCreateWithoutConversationsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1685,9 +1756,9 @@ export type TicketUncheckedCreateWithoutConversationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   attachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutTicketInput
   comments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutTicketInput
 }
@@ -1709,7 +1780,6 @@ export type TicketUpdateToOneWithWhereWithoutConversationsInput = {
 }
 
 export type TicketUpdateWithoutConversationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1730,11 +1800,11 @@ export type TicketUpdateWithoutConversationsInput = {
 }
 
 export type TicketUncheckedUpdateWithoutConversationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1743,18 +1813,18 @@ export type TicketUncheckedUpdateWithoutConversationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
   comments?: Prisma.TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketCreateManyAssignedToUserInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1763,17 +1833,17 @@ export type TicketCreateManyAssignedToUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type TicketCreateManyCreatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1782,16 +1852,16 @@ export type TicketCreateManyCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type TicketCreateManyUpdatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1800,16 +1870,16 @@ export type TicketCreateManyUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type TicketCreateManyDeletedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1818,12 +1888,11 @@ export type TicketCreateManyDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type TicketUpdateWithoutAssignedToUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1844,10 +1913,10 @@ export type TicketUpdateWithoutAssignedToUserInput = {
 }
 
 export type TicketUncheckedUpdateWithoutAssignedToUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1856,19 +1925,19 @@ export type TicketUncheckedUpdateWithoutAssignedToUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
   comments?: Prisma.TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateManyWithoutAssignedToUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1877,13 +1946,12 @@ export type TicketUncheckedUpdateManyWithoutAssignedToUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TicketUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1904,11 +1972,11 @@ export type TicketUpdateWithoutCreatedByInput = {
 }
 
 export type TicketUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1917,19 +1985,19 @@ export type TicketUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
   comments?: Prisma.TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1938,12 +2006,11 @@ export type TicketUncheckedUpdateManyWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TicketUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1964,11 +2031,11 @@ export type TicketUpdateWithoutUpdatedByInput = {
 }
 
 export type TicketUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1977,19 +2044,19 @@ export type TicketUncheckedUpdateWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
   comments?: Prisma.TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1998,12 +2065,11 @@ export type TicketUncheckedUpdateManyWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TicketUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2024,11 +2090,11 @@ export type TicketUpdateWithoutDeletedByInput = {
 }
 
 export type TicketUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2037,19 +2103,19 @@ export type TicketUncheckedUpdateWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
   comments?: Prisma.TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2058,15 +2124,15 @@ export type TicketUncheckedUpdateManyWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TicketCreateManyTenantInput = {
-  id?: string
-  roomId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  roomId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -2075,13 +2141,12 @@ export type TicketCreateManyTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type TicketUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2102,10 +2167,10 @@ export type TicketUpdateWithoutTenantInput = {
 }
 
 export type TicketUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2114,19 +2179,19 @@ export type TicketUncheckedUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
   comments?: Prisma.TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2135,16 +2200,16 @@ export type TicketUncheckedUpdateManyWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TicketCreateManyRoomInput = {
-  id?: string
-  tenantId: string
-  contractId?: string | null
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  contractId?: number | null
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -2153,13 +2218,12 @@ export type TicketCreateManyRoomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type TicketUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2180,10 +2244,10 @@ export type TicketUpdateWithoutRoomInput = {
 }
 
 export type TicketUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2192,19 +2256,19 @@ export type TicketUncheckedUpdateWithoutRoomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
   comments?: Prisma.TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2213,16 +2277,16 @@ export type TicketUncheckedUpdateManyWithoutRoomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TicketCreateManyContractInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  assignedTo?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  assignedTo?: number | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -2231,13 +2295,12 @@ export type TicketCreateManyContractInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   resolvedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type TicketUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2258,10 +2321,10 @@ export type TicketUpdateWithoutContractInput = {
 }
 
 export type TicketUncheckedUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2270,19 +2333,19 @@ export type TicketUncheckedUpdateWithoutContractInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput
   comments?: Prisma.TicketCommentUncheckedUpdateManyWithoutTicketNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateManyWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  assignedTo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2291,9 +2354,9 @@ export type TicketUncheckedUpdateManyWithoutContractInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -2518,23 +2581,23 @@ export type $TicketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     /**
      * ID ticket (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant quản lý phòng trọ
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID phòng trọ xảy ra sự cố cần sửa chữa
      */
-    roomId: string
+    roomId: number
     /**
      * ID hợp đồng thuê phòng liên quan tại thời điểm xảy ra sự cố (nullable nếu phòng trống)
      */
-    contractId: string | null
+    contractId: number | null
     /**
      * ID nhân viên được phân công xử lý sự cố (nullable nếu chưa phân công)
      */
-    assignedTo: string | null
+    assignedTo: number | null
     /**
      * Tiêu đề báo cáo ngắn gọn (ví dụ: Hỏng vòi nước nhà vệ sinh)
      */
@@ -2570,15 +2633,15 @@ export type $TicketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["ticket"]>
   composites: {}
 }
@@ -3012,11 +3075,11 @@ export interface Prisma__TicketClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the Ticket model
  */
 export interface TicketFieldRefs {
-  readonly id: Prisma.FieldRef<"Ticket", 'String'>
-  readonly tenantId: Prisma.FieldRef<"Ticket", 'String'>
-  readonly roomId: Prisma.FieldRef<"Ticket", 'String'>
-  readonly contractId: Prisma.FieldRef<"Ticket", 'String'>
-  readonly assignedTo: Prisma.FieldRef<"Ticket", 'String'>
+  readonly id: Prisma.FieldRef<"Ticket", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"Ticket", 'Int'>
+  readonly roomId: Prisma.FieldRef<"Ticket", 'Int'>
+  readonly contractId: Prisma.FieldRef<"Ticket", 'Int'>
+  readonly assignedTo: Prisma.FieldRef<"Ticket", 'Int'>
   readonly title: Prisma.FieldRef<"Ticket", 'String'>
   readonly description: Prisma.FieldRef<"Ticket", 'String'>
   readonly category: Prisma.FieldRef<"Ticket", 'TicketCategory'>
@@ -3025,9 +3088,9 @@ export interface TicketFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Ticket", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Ticket", 'DateTime'>
   readonly resolvedAt: Prisma.FieldRef<"Ticket", 'DateTime'>
-  readonly createdById: Prisma.FieldRef<"Ticket", 'String'>
-  readonly updatedById: Prisma.FieldRef<"Ticket", 'String'>
-  readonly deletedById: Prisma.FieldRef<"Ticket", 'String'>
+  readonly createdById: Prisma.FieldRef<"Ticket", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"Ticket", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"Ticket", 'Int'>
 }
     
 

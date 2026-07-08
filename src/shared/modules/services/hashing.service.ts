@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { compare, hash } from 'bcrypt'
+import { createHash } from 'crypto'
 const saltRound = 10
 /**
  * Service that provides secure string hashing and comparison using bcrypt.
@@ -19,7 +20,7 @@ export class HashingService {
    * @returns {Promise<string>} The generated secure hash string.
    * @returns {Promise<string>} Chuỗi băm bảo mật đã tạo.
    */
-  hash(value: string) {
+  hash(value: string): Promise<string> {
     return hash(value, saltRound)
   }
 
@@ -34,7 +35,23 @@ export class HashingService {
    * @returns {Promise<boolean>} True if they match, false otherwise.
    * @returns {Promise<boolean>} True nếu khớp, ngược lại là false.
    */
-  compare(value: string, hash: string) {
-    return compare(value, hash)
+  compare(value: string, hashStr: string): Promise<boolean> {
+    return compare(value, hashStr)
+  }
+
+  /**
+   * Hashes a string using SHA-256 (deterministic, synchronous).
+   * Băm chuỗi sử dụng SHA-256 (xác định, đồng bộ).
+   *
+   * Dùng cho refresh token: cùng token → cùng hash → tìm được trong DB.
+   * Không dùng bcrypt vì bcrypt không deterministic (mỗi lần hash ra kết quả khác).
+   *
+   * @param {string} value - The plain text value to hash.
+   * @param {string} value - Giá trị văn bản thường cần băm.
+   * @returns {string} The SHA-256 hash string in hex format.
+   * @returns {string} Chuỗi băm SHA-256 dạng hex.
+   */
+  hashSHA256(value: string): string {
+    return createHash('sha256').update(value).digest('hex')
   }
 }

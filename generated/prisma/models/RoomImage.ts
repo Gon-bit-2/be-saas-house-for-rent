@@ -27,16 +27,20 @@ export type AggregateRoomImage = {
 }
 
 export type RoomImageAvgAggregateOutputType = {
+  id: number | null
+  roomId: number | null
   sortOrder: number | null
 }
 
 export type RoomImageSumAggregateOutputType = {
+  id: number | null
+  roomId: number | null
   sortOrder: number | null
 }
 
 export type RoomImageMinAggregateOutputType = {
-  id: string | null
-  roomId: string | null
+  id: number | null
+  roomId: number | null
   url: string | null
   caption: string | null
   sortOrder: number | null
@@ -45,8 +49,8 @@ export type RoomImageMinAggregateOutputType = {
 }
 
 export type RoomImageMaxAggregateOutputType = {
-  id: string | null
-  roomId: string | null
+  id: number | null
+  roomId: number | null
   url: string | null
   caption: string | null
   sortOrder: number | null
@@ -67,10 +71,14 @@ export type RoomImageCountAggregateOutputType = {
 
 
 export type RoomImageAvgAggregateInputType = {
+  id?: true
+  roomId?: true
   sortOrder?: true
 }
 
 export type RoomImageSumAggregateInputType = {
+  id?: true
+  roomId?: true
   sortOrder?: true
 }
 
@@ -192,8 +200,8 @@ export type RoomImageGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 export type RoomImageGroupByOutputType = {
-  id: string
-  roomId: string
+  id: number
+  roomId: number
   url: string
   caption: string | null
   sortOrder: number
@@ -225,8 +233,8 @@ export type RoomImageWhereInput = {
   AND?: Prisma.RoomImageWhereInput | Prisma.RoomImageWhereInput[]
   OR?: Prisma.RoomImageWhereInput[]
   NOT?: Prisma.RoomImageWhereInput | Prisma.RoomImageWhereInput[]
-  id?: Prisma.UuidFilter<"RoomImage"> | string
-  roomId?: Prisma.UuidFilter<"RoomImage"> | string
+  id?: Prisma.IntFilter<"RoomImage"> | number
+  roomId?: Prisma.IntFilter<"RoomImage"> | number
   url?: Prisma.StringFilter<"RoomImage"> | string
   caption?: Prisma.StringNullableFilter<"RoomImage"> | string | null
   sortOrder?: Prisma.IntFilter<"RoomImage"> | number
@@ -247,11 +255,11 @@ export type RoomImageOrderByWithRelationInput = {
 }
 
 export type RoomImageWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.RoomImageWhereInput | Prisma.RoomImageWhereInput[]
   OR?: Prisma.RoomImageWhereInput[]
   NOT?: Prisma.RoomImageWhereInput | Prisma.RoomImageWhereInput[]
-  roomId?: Prisma.UuidFilter<"RoomImage"> | string
+  roomId?: Prisma.IntFilter<"RoomImage"> | number
   url?: Prisma.StringFilter<"RoomImage"> | string
   caption?: Prisma.StringNullableFilter<"RoomImage"> | string | null
   sortOrder?: Prisma.IntFilter<"RoomImage"> | number
@@ -279,8 +287,8 @@ export type RoomImageScalarWhereWithAggregatesInput = {
   AND?: Prisma.RoomImageScalarWhereWithAggregatesInput | Prisma.RoomImageScalarWhereWithAggregatesInput[]
   OR?: Prisma.RoomImageScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RoomImageScalarWhereWithAggregatesInput | Prisma.RoomImageScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"RoomImage"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"RoomImage"> | string
+  id?: Prisma.IntWithAggregatesFilter<"RoomImage"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"RoomImage"> | number
   url?: Prisma.StringWithAggregatesFilter<"RoomImage"> | string
   caption?: Prisma.StringNullableWithAggregatesFilter<"RoomImage"> | string | null
   sortOrder?: Prisma.IntWithAggregatesFilter<"RoomImage"> | number
@@ -289,7 +297,6 @@ export type RoomImageScalarWhereWithAggregatesInput = {
 }
 
 export type RoomImageCreateInput = {
-  id?: string
   url: string
   caption?: string | null
   sortOrder?: number
@@ -299,8 +306,8 @@ export type RoomImageCreateInput = {
 }
 
 export type RoomImageUncheckedCreateInput = {
-  id?: string
-  roomId: string
+  id?: number
+  roomId: number
   url: string
   caption?: string | null
   sortOrder?: number
@@ -309,7 +316,6 @@ export type RoomImageUncheckedCreateInput = {
 }
 
 export type RoomImageUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -319,8 +325,8 @@ export type RoomImageUpdateInput = {
 }
 
 export type RoomImageUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -329,8 +335,8 @@ export type RoomImageUncheckedUpdateInput = {
 }
 
 export type RoomImageCreateManyInput = {
-  id?: string
-  roomId: string
+  id?: number
+  roomId: number
   url: string
   caption?: string | null
   sortOrder?: number
@@ -339,7 +345,6 @@ export type RoomImageCreateManyInput = {
 }
 
 export type RoomImageUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -348,8 +353,8 @@ export type RoomImageUpdateManyMutationInput = {
 }
 
 export type RoomImageUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -378,6 +383,8 @@ export type RoomImageCountOrderByAggregateInput = {
 }
 
 export type RoomImageAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
 }
 
@@ -402,6 +409,8 @@ export type RoomImageMinOrderByAggregateInput = {
 }
 
 export type RoomImageSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
 }
 
@@ -448,7 +457,6 @@ export type RoomImageUncheckedUpdateManyWithoutRoomNestedInput = {
 }
 
 export type RoomImageCreateWithoutRoomInput = {
-  id?: string
   url: string
   caption?: string | null
   sortOrder?: number
@@ -457,7 +465,7 @@ export type RoomImageCreateWithoutRoomInput = {
 }
 
 export type RoomImageUncheckedCreateWithoutRoomInput = {
-  id?: string
+  id?: number
   url: string
   caption?: string | null
   sortOrder?: number
@@ -495,8 +503,8 @@ export type RoomImageScalarWhereInput = {
   AND?: Prisma.RoomImageScalarWhereInput | Prisma.RoomImageScalarWhereInput[]
   OR?: Prisma.RoomImageScalarWhereInput[]
   NOT?: Prisma.RoomImageScalarWhereInput | Prisma.RoomImageScalarWhereInput[]
-  id?: Prisma.UuidFilter<"RoomImage"> | string
-  roomId?: Prisma.UuidFilter<"RoomImage"> | string
+  id?: Prisma.IntFilter<"RoomImage"> | number
+  roomId?: Prisma.IntFilter<"RoomImage"> | number
   url?: Prisma.StringFilter<"RoomImage"> | string
   caption?: Prisma.StringNullableFilter<"RoomImage"> | string | null
   sortOrder?: Prisma.IntFilter<"RoomImage"> | number
@@ -505,7 +513,7 @@ export type RoomImageScalarWhereInput = {
 }
 
 export type RoomImageCreateManyRoomInput = {
-  id?: string
+  id?: number
   url: string
   caption?: string | null
   sortOrder?: number
@@ -514,7 +522,6 @@ export type RoomImageCreateManyRoomInput = {
 }
 
 export type RoomImageUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -523,7 +530,7 @@ export type RoomImageUpdateWithoutRoomInput = {
 }
 
 export type RoomImageUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -532,7 +539,7 @@ export type RoomImageUncheckedUpdateWithoutRoomInput = {
 }
 
 export type RoomImageUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -608,11 +615,11 @@ export type $RoomImagePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     /**
      * ID hình ảnh (UUID)
      */
-    id: string
+    id: number
     /**
      * ID của phòng chứa hình ảnh này
      */
-    roomId: string
+    roomId: number
     /**
      * Đường dẫn lưu trữ hình ảnh (ví dụ: trên S3 hoặc Cloudinary)
      */
@@ -1057,8 +1064,8 @@ export interface Prisma__RoomImageClient<T, Null = never, ExtArgs extends runtim
  * Fields of the RoomImage model
  */
 export interface RoomImageFieldRefs {
-  readonly id: Prisma.FieldRef<"RoomImage", 'String'>
-  readonly roomId: Prisma.FieldRef<"RoomImage", 'String'>
+  readonly id: Prisma.FieldRef<"RoomImage", 'Int'>
+  readonly roomId: Prisma.FieldRef<"RoomImage", 'Int'>
   readonly url: Prisma.FieldRef<"RoomImage", 'String'>
   readonly caption: Prisma.FieldRef<"RoomImage", 'String'>
   readonly sortOrder: Prisma.FieldRef<"RoomImage", 'Int'>

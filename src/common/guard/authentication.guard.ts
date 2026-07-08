@@ -2,9 +2,9 @@ import { CanActivate, ExecutionContext, HttpException, Injectable, UnauthorizedE
 import { Reflector } from '@nestjs/core'
 import { ApiKeyGuard } from './api-key.guard'
 import { PaymentApiKeyGuard } from './payment-api-key.guard'
-import { AccessTokenGuard } from 'src/common/guards/access-token.guard'
+import { AccessTokenGuard } from './access-token.guard'
 import { AuthType, AuthTypeType, ConditionGuard } from 'src/common/constants/auth.constant'
-import { AUTH_TYPE_KEY, AuthTypeDecoratorPayload } from 'src/common/decorators/auth.decorator'
+import { AUTH_TYPE_KEY, AuthTypeDecoratorPayload } from '../decorators/decorators/auth.decorator'
 
 /**
  * Master authentication guard that orchestrates multiple authentication guards.

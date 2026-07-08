@@ -27,18 +27,32 @@ export type AggregateRoomAsset = {
 }
 
 export type RoomAssetAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  categoryId: number | null
   quantity: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoomAssetSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  categoryId: number | null
   quantity: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoomAssetMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  categoryId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  categoryId: number | null
   name: string | null
   quantity: number | null
   condition: $Enums.AssetCondition | null
@@ -47,16 +61,16 @@ export type RoomAssetMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoomAssetMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  categoryId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  categoryId: number | null
   name: string | null
   quantity: number | null
   condition: $Enums.AssetCondition | null
@@ -65,9 +79,9 @@ export type RoomAssetMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoomAssetCountAggregateOutputType = {
@@ -91,11 +105,25 @@ export type RoomAssetCountAggregateOutputType = {
 
 
 export type RoomAssetAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  categoryId?: true
   quantity?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type RoomAssetSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  categoryId?: true
   quantity?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type RoomAssetMinAggregateInputType = {
@@ -240,10 +268,10 @@ export type RoomAssetGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 export type RoomAssetGroupByOutputType = {
-  id: string
-  tenantId: string
-  roomId: string
-  categoryId: string
+  id: number
+  tenantId: number
+  roomId: number
+  categoryId: number
   name: string
   quantity: number
   condition: $Enums.AssetCondition
@@ -252,9 +280,9 @@ export type RoomAssetGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: RoomAssetCountAggregateOutputType | null
   _avg: RoomAssetAvgAggregateOutputType | null
   _sum: RoomAssetSumAggregateOutputType | null
@@ -281,10 +309,10 @@ export type RoomAssetWhereInput = {
   AND?: Prisma.RoomAssetWhereInput | Prisma.RoomAssetWhereInput[]
   OR?: Prisma.RoomAssetWhereInput[]
   NOT?: Prisma.RoomAssetWhereInput | Prisma.RoomAssetWhereInput[]
-  id?: Prisma.UuidFilter<"RoomAsset"> | string
-  tenantId?: Prisma.UuidFilter<"RoomAsset"> | string
-  roomId?: Prisma.UuidFilter<"RoomAsset"> | string
-  categoryId?: Prisma.UuidFilter<"RoomAsset"> | string
+  id?: Prisma.IntFilter<"RoomAsset"> | number
+  tenantId?: Prisma.IntFilter<"RoomAsset"> | number
+  roomId?: Prisma.IntFilter<"RoomAsset"> | number
+  categoryId?: Prisma.IntFilter<"RoomAsset"> | number
   name?: Prisma.StringFilter<"RoomAsset"> | string
   quantity?: Prisma.IntFilter<"RoomAsset"> | number
   condition?: Prisma.EnumAssetConditionFilter<"RoomAsset"> | $Enums.AssetCondition
@@ -293,9 +321,9 @@ export type RoomAssetWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"RoomAsset"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomAsset"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"RoomAsset"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"RoomAsset"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"RoomAsset"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"RoomAsset"> | string | null
+  createdById?: Prisma.IntNullableFilter<"RoomAsset"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"RoomAsset"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"RoomAsset"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   category?: Prisma.XOR<Prisma.AssetCategoryScalarRelationFilter, Prisma.AssetCategoryWhereInput>
@@ -331,13 +359,13 @@ export type RoomAssetOrderByWithRelationInput = {
 }
 
 export type RoomAssetWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.RoomAssetWhereInput | Prisma.RoomAssetWhereInput[]
   OR?: Prisma.RoomAssetWhereInput[]
   NOT?: Prisma.RoomAssetWhereInput | Prisma.RoomAssetWhereInput[]
-  tenantId?: Prisma.UuidFilter<"RoomAsset"> | string
-  roomId?: Prisma.UuidFilter<"RoomAsset"> | string
-  categoryId?: Prisma.UuidFilter<"RoomAsset"> | string
+  tenantId?: Prisma.IntFilter<"RoomAsset"> | number
+  roomId?: Prisma.IntFilter<"RoomAsset"> | number
+  categoryId?: Prisma.IntFilter<"RoomAsset"> | number
   name?: Prisma.StringFilter<"RoomAsset"> | string
   quantity?: Prisma.IntFilter<"RoomAsset"> | number
   condition?: Prisma.EnumAssetConditionFilter<"RoomAsset"> | $Enums.AssetCondition
@@ -346,9 +374,9 @@ export type RoomAssetWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"RoomAsset"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomAsset"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"RoomAsset"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"RoomAsset"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"RoomAsset"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"RoomAsset"> | string | null
+  createdById?: Prisma.IntNullableFilter<"RoomAsset"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"RoomAsset"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"RoomAsset"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   category?: Prisma.XOR<Prisma.AssetCategoryScalarRelationFilter, Prisma.AssetCategoryWhereInput>
@@ -385,10 +413,10 @@ export type RoomAssetScalarWhereWithAggregatesInput = {
   AND?: Prisma.RoomAssetScalarWhereWithAggregatesInput | Prisma.RoomAssetScalarWhereWithAggregatesInput[]
   OR?: Prisma.RoomAssetScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RoomAssetScalarWhereWithAggregatesInput | Prisma.RoomAssetScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"RoomAsset"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"RoomAsset"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"RoomAsset"> | string
-  categoryId?: Prisma.UuidWithAggregatesFilter<"RoomAsset"> | string
+  id?: Prisma.IntWithAggregatesFilter<"RoomAsset"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"RoomAsset"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"RoomAsset"> | number
+  categoryId?: Prisma.IntWithAggregatesFilter<"RoomAsset"> | number
   name?: Prisma.StringWithAggregatesFilter<"RoomAsset"> | string
   quantity?: Prisma.IntWithAggregatesFilter<"RoomAsset"> | number
   condition?: Prisma.EnumAssetConditionWithAggregatesFilter<"RoomAsset"> | $Enums.AssetCondition
@@ -397,13 +425,12 @@ export type RoomAssetScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RoomAsset"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"RoomAsset"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"RoomAsset"> | Date | string | null
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"RoomAsset"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"RoomAsset"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"RoomAsset"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"RoomAsset"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"RoomAsset"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"RoomAsset"> | number | null
 }
 
 export type RoomAssetCreateInput = {
-  id?: string
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -422,10 +449,10 @@ export type RoomAssetCreateInput = {
 }
 
 export type RoomAssetUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  categoryId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -434,14 +461,13 @@ export type RoomAssetUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutRoomAssetInput
 }
 
 export type RoomAssetUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -460,10 +486,10 @@ export type RoomAssetUpdateInput = {
 }
 
 export type RoomAssetUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -472,17 +498,17 @@ export type RoomAssetUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutRoomAssetNestedInput
 }
 
 export type RoomAssetCreateManyInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  categoryId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -491,13 +517,12 @@ export type RoomAssetCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomAssetUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -509,10 +534,10 @@ export type RoomAssetUpdateManyMutationInput = {
 }
 
 export type RoomAssetUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -521,9 +546,9 @@ export type RoomAssetUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomAssetListRelationFilter = {
@@ -555,7 +580,14 @@ export type RoomAssetCountOrderByAggregateInput = {
 }
 
 export type RoomAssetAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type RoomAssetMaxOrderByAggregateInput = {
@@ -595,7 +627,14 @@ export type RoomAssetMinOrderByAggregateInput = {
 }
 
 export type RoomAssetSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type RoomAssetScalarRelationFilter = {
@@ -874,7 +913,6 @@ export type RoomAssetUpdateOneRequiredWithoutHandoverItemsNestedInput = {
 }
 
 export type RoomAssetCreateWithoutCreatedByInput = {
-  id?: string
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -892,10 +930,10 @@ export type RoomAssetCreateWithoutCreatedByInput = {
 }
 
 export type RoomAssetUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  categoryId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -904,8 +942,8 @@ export type RoomAssetUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutRoomAssetInput
 }
 
@@ -920,7 +958,6 @@ export type RoomAssetCreateManyCreatedByInputEnvelope = {
 }
 
 export type RoomAssetCreateWithoutUpdatedByInput = {
-  id?: string
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -938,10 +975,10 @@ export type RoomAssetCreateWithoutUpdatedByInput = {
 }
 
 export type RoomAssetUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  categoryId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -950,8 +987,8 @@ export type RoomAssetUncheckedCreateWithoutUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutRoomAssetInput
 }
 
@@ -966,7 +1003,6 @@ export type RoomAssetCreateManyUpdatedByInputEnvelope = {
 }
 
 export type RoomAssetCreateWithoutDeletedByInput = {
-  id?: string
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -984,10 +1020,10 @@ export type RoomAssetCreateWithoutDeletedByInput = {
 }
 
 export type RoomAssetUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  categoryId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -996,8 +1032,8 @@ export type RoomAssetUncheckedCreateWithoutDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutRoomAssetInput
 }
 
@@ -1031,10 +1067,10 @@ export type RoomAssetScalarWhereInput = {
   AND?: Prisma.RoomAssetScalarWhereInput | Prisma.RoomAssetScalarWhereInput[]
   OR?: Prisma.RoomAssetScalarWhereInput[]
   NOT?: Prisma.RoomAssetScalarWhereInput | Prisma.RoomAssetScalarWhereInput[]
-  id?: Prisma.UuidFilter<"RoomAsset"> | string
-  tenantId?: Prisma.UuidFilter<"RoomAsset"> | string
-  roomId?: Prisma.UuidFilter<"RoomAsset"> | string
-  categoryId?: Prisma.UuidFilter<"RoomAsset"> | string
+  id?: Prisma.IntFilter<"RoomAsset"> | number
+  tenantId?: Prisma.IntFilter<"RoomAsset"> | number
+  roomId?: Prisma.IntFilter<"RoomAsset"> | number
+  categoryId?: Prisma.IntFilter<"RoomAsset"> | number
   name?: Prisma.StringFilter<"RoomAsset"> | string
   quantity?: Prisma.IntFilter<"RoomAsset"> | number
   condition?: Prisma.EnumAssetConditionFilter<"RoomAsset"> | $Enums.AssetCondition
@@ -1043,9 +1079,9 @@ export type RoomAssetScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"RoomAsset"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomAsset"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"RoomAsset"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"RoomAsset"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"RoomAsset"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"RoomAsset"> | string | null
+  createdById?: Prisma.IntNullableFilter<"RoomAsset"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"RoomAsset"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"RoomAsset"> | number | null
 }
 
 export type RoomAssetUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -1081,7 +1117,6 @@ export type RoomAssetUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type RoomAssetCreateWithoutTenantInput = {
-  id?: string
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1099,9 +1134,9 @@ export type RoomAssetCreateWithoutTenantInput = {
 }
 
 export type RoomAssetUncheckedCreateWithoutTenantInput = {
-  id?: string
-  roomId: string
-  categoryId: string
+  id?: number
+  roomId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1110,9 +1145,9 @@ export type RoomAssetUncheckedCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutRoomAssetInput
 }
 
@@ -1143,7 +1178,6 @@ export type RoomAssetUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type RoomAssetCreateWithoutRoomInput = {
-  id?: string
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1161,9 +1195,9 @@ export type RoomAssetCreateWithoutRoomInput = {
 }
 
 export type RoomAssetUncheckedCreateWithoutRoomInput = {
-  id?: string
-  tenantId: string
-  categoryId: string
+  id?: number
+  tenantId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1172,9 +1206,9 @@ export type RoomAssetUncheckedCreateWithoutRoomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutRoomAssetInput
 }
 
@@ -1205,7 +1239,6 @@ export type RoomAssetUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type RoomAssetCreateWithoutCategoryInput = {
-  id?: string
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1223,9 +1256,9 @@ export type RoomAssetCreateWithoutCategoryInput = {
 }
 
 export type RoomAssetUncheckedCreateWithoutCategoryInput = {
-  id?: string
-  tenantId: string
-  roomId: string
+  id?: number
+  tenantId: number
+  roomId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1234,9 +1267,9 @@ export type RoomAssetUncheckedCreateWithoutCategoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutRoomAssetInput
 }
 
@@ -1267,7 +1300,6 @@ export type RoomAssetUpdateManyWithWhereWithoutCategoryInput = {
 }
 
 export type RoomAssetCreateWithoutHandoverItemsInput = {
-  id?: string
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1285,10 +1317,10 @@ export type RoomAssetCreateWithoutHandoverItemsInput = {
 }
 
 export type RoomAssetUncheckedCreateWithoutHandoverItemsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  categoryId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1297,9 +1329,9 @@ export type RoomAssetUncheckedCreateWithoutHandoverItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomAssetCreateOrConnectWithoutHandoverItemsInput = {
@@ -1319,7 +1351,6 @@ export type RoomAssetUpdateToOneWithWhereWithoutHandoverItemsInput = {
 }
 
 export type RoomAssetUpdateWithoutHandoverItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1337,10 +1368,10 @@ export type RoomAssetUpdateWithoutHandoverItemsInput = {
 }
 
 export type RoomAssetUncheckedUpdateWithoutHandoverItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1349,16 +1380,16 @@ export type RoomAssetUncheckedUpdateWithoutHandoverItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomAssetCreateManyCreatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  categoryId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1367,15 +1398,15 @@ export type RoomAssetCreateManyCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomAssetCreateManyUpdatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  categoryId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1384,15 +1415,15 @@ export type RoomAssetCreateManyUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomAssetCreateManyDeletedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  categoryId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1401,12 +1432,11 @@ export type RoomAssetCreateManyDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type RoomAssetUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1424,10 +1454,10 @@ export type RoomAssetUpdateWithoutCreatedByInput = {
 }
 
 export type RoomAssetUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1436,16 +1466,16 @@ export type RoomAssetUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutRoomAssetNestedInput
 }
 
 export type RoomAssetUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1454,12 +1484,11 @@ export type RoomAssetUncheckedUpdateManyWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomAssetUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1477,10 +1506,10 @@ export type RoomAssetUpdateWithoutUpdatedByInput = {
 }
 
 export type RoomAssetUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1489,16 +1518,16 @@ export type RoomAssetUncheckedUpdateWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutRoomAssetNestedInput
 }
 
 export type RoomAssetUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1507,12 +1536,11 @@ export type RoomAssetUncheckedUpdateManyWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomAssetUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1530,10 +1558,10 @@ export type RoomAssetUpdateWithoutDeletedByInput = {
 }
 
 export type RoomAssetUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1542,16 +1570,16 @@ export type RoomAssetUncheckedUpdateWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutRoomAssetNestedInput
 }
 
 export type RoomAssetUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1560,14 +1588,14 @@ export type RoomAssetUncheckedUpdateManyWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomAssetCreateManyTenantInput = {
-  id?: string
-  roomId: string
-  categoryId: string
+  id?: number
+  roomId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1576,13 +1604,12 @@ export type RoomAssetCreateManyTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomAssetUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1600,9 +1627,9 @@ export type RoomAssetUpdateWithoutTenantInput = {
 }
 
 export type RoomAssetUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1611,16 +1638,16 @@ export type RoomAssetUncheckedUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutRoomAssetNestedInput
 }
 
 export type RoomAssetUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1629,15 +1656,15 @@ export type RoomAssetUncheckedUpdateManyWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomAssetCreateManyRoomInput = {
-  id?: string
-  tenantId: string
-  categoryId: string
+  id?: number
+  tenantId: number
+  categoryId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1646,13 +1673,12 @@ export type RoomAssetCreateManyRoomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomAssetUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1670,9 +1696,9 @@ export type RoomAssetUpdateWithoutRoomInput = {
 }
 
 export type RoomAssetUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1681,16 +1707,16 @@ export type RoomAssetUncheckedUpdateWithoutRoomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutRoomAssetNestedInput
 }
 
 export type RoomAssetUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  categoryId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1699,15 +1725,15 @@ export type RoomAssetUncheckedUpdateManyWithoutRoomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomAssetCreateManyCategoryInput = {
-  id?: string
-  tenantId: string
-  roomId: string
+  id?: number
+  tenantId: number
+  roomId: number
   name: string
   quantity?: number
   condition?: $Enums.AssetCondition
@@ -1716,13 +1742,12 @@ export type RoomAssetCreateManyCategoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomAssetUpdateWithoutCategoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1740,9 +1765,9 @@ export type RoomAssetUpdateWithoutCategoryInput = {
 }
 
 export type RoomAssetUncheckedUpdateWithoutCategoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1751,16 +1776,16 @@ export type RoomAssetUncheckedUpdateWithoutCategoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   handoverItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutRoomAssetNestedInput
 }
 
 export type RoomAssetUncheckedUpdateManyWithoutCategoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
@@ -1769,9 +1794,9 @@ export type RoomAssetUncheckedUpdateManyWithoutCategoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -1952,19 +1977,19 @@ export type $RoomAssetPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     /**
      * ID tài sản phòng (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant quản lý
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID phòng trọ chứa tài sản này
      */
-    roomId: string
+    roomId: number
     /**
      * ID danh mục loại tài sản
      */
-    categoryId: string
+    categoryId: number
     /**
      * Tên cụ thể của tài sản (ví dụ: Máy lạnh Daikin Inverter 1.5HP)
      */
@@ -2000,15 +2025,15 @@ export type $RoomAssetPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["roomAsset"]>
   composites: {}
 }
@@ -2439,10 +2464,10 @@ export interface Prisma__RoomAssetClient<T, Null = never, ExtArgs extends runtim
  * Fields of the RoomAsset model
  */
 export interface RoomAssetFieldRefs {
-  readonly id: Prisma.FieldRef<"RoomAsset", 'String'>
-  readonly tenantId: Prisma.FieldRef<"RoomAsset", 'String'>
-  readonly roomId: Prisma.FieldRef<"RoomAsset", 'String'>
-  readonly categoryId: Prisma.FieldRef<"RoomAsset", 'String'>
+  readonly id: Prisma.FieldRef<"RoomAsset", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"RoomAsset", 'Int'>
+  readonly roomId: Prisma.FieldRef<"RoomAsset", 'Int'>
+  readonly categoryId: Prisma.FieldRef<"RoomAsset", 'Int'>
   readonly name: Prisma.FieldRef<"RoomAsset", 'String'>
   readonly quantity: Prisma.FieldRef<"RoomAsset", 'Int'>
   readonly condition: Prisma.FieldRef<"RoomAsset", 'AssetCondition'>
@@ -2451,9 +2476,9 @@ export interface RoomAssetFieldRefs {
   readonly createdAt: Prisma.FieldRef<"RoomAsset", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"RoomAsset", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"RoomAsset", 'DateTime'>
-  readonly createdById: Prisma.FieldRef<"RoomAsset", 'String'>
-  readonly updatedById: Prisma.FieldRef<"RoomAsset", 'String'>
-  readonly deletedById: Prisma.FieldRef<"RoomAsset", 'String'>
+  readonly createdById: Prisma.FieldRef<"RoomAsset", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"RoomAsset", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"RoomAsset", 'Int'>
 }
     
 

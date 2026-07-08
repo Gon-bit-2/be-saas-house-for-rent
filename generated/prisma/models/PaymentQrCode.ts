@@ -27,17 +27,23 @@ export type AggregatePaymentQrCode = {
 }
 
 export type PaymentQrCodeAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  invoiceId: number | null
   amount: runtime.Decimal | null
 }
 
 export type PaymentQrCodeSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  invoiceId: number | null
   amount: runtime.Decimal | null
 }
 
 export type PaymentQrCodeMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  invoiceId: string | null
+  id: number | null
+  tenantId: number | null
+  invoiceId: number | null
   provider: string | null
   qrContent: string | null
   qrImageUrl: string | null
@@ -48,9 +54,9 @@ export type PaymentQrCodeMinAggregateOutputType = {
 }
 
 export type PaymentQrCodeMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  invoiceId: string | null
+  id: number | null
+  tenantId: number | null
+  invoiceId: number | null
   provider: string | null
   qrContent: string | null
   qrImageUrl: string | null
@@ -76,10 +82,16 @@ export type PaymentQrCodeCountAggregateOutputType = {
 
 
 export type PaymentQrCodeAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  invoiceId?: true
   amount?: true
 }
 
 export type PaymentQrCodeSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  invoiceId?: true
   amount?: true
 }
 
@@ -210,9 +222,9 @@ export type PaymentQrCodeGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 export type PaymentQrCodeGroupByOutputType = {
-  id: string
-  tenantId: string
-  invoiceId: string
+  id: number
+  tenantId: number
+  invoiceId: number
   provider: string
   qrContent: string
   qrImageUrl: string | null
@@ -246,9 +258,9 @@ export type PaymentQrCodeWhereInput = {
   AND?: Prisma.PaymentQrCodeWhereInput | Prisma.PaymentQrCodeWhereInput[]
   OR?: Prisma.PaymentQrCodeWhereInput[]
   NOT?: Prisma.PaymentQrCodeWhereInput | Prisma.PaymentQrCodeWhereInput[]
-  id?: Prisma.UuidFilter<"PaymentQrCode"> | string
-  tenantId?: Prisma.UuidFilter<"PaymentQrCode"> | string
-  invoiceId?: Prisma.UuidFilter<"PaymentQrCode"> | string
+  id?: Prisma.IntFilter<"PaymentQrCode"> | number
+  tenantId?: Prisma.IntFilter<"PaymentQrCode"> | number
+  invoiceId?: Prisma.IntFilter<"PaymentQrCode"> | number
   provider?: Prisma.StringFilter<"PaymentQrCode"> | string
   qrContent?: Prisma.StringFilter<"PaymentQrCode"> | string
   qrImageUrl?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
@@ -276,12 +288,12 @@ export type PaymentQrCodeOrderByWithRelationInput = {
 }
 
 export type PaymentQrCodeWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.PaymentQrCodeWhereInput | Prisma.PaymentQrCodeWhereInput[]
   OR?: Prisma.PaymentQrCodeWhereInput[]
   NOT?: Prisma.PaymentQrCodeWhereInput | Prisma.PaymentQrCodeWhereInput[]
-  tenantId?: Prisma.UuidFilter<"PaymentQrCode"> | string
-  invoiceId?: Prisma.UuidFilter<"PaymentQrCode"> | string
+  tenantId?: Prisma.IntFilter<"PaymentQrCode"> | number
+  invoiceId?: Prisma.IntFilter<"PaymentQrCode"> | number
   provider?: Prisma.StringFilter<"PaymentQrCode"> | string
   qrContent?: Prisma.StringFilter<"PaymentQrCode"> | string
   qrImageUrl?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
@@ -315,9 +327,9 @@ export type PaymentQrCodeScalarWhereWithAggregatesInput = {
   AND?: Prisma.PaymentQrCodeScalarWhereWithAggregatesInput | Prisma.PaymentQrCodeScalarWhereWithAggregatesInput[]
   OR?: Prisma.PaymentQrCodeScalarWhereWithAggregatesInput[]
   NOT?: Prisma.PaymentQrCodeScalarWhereWithAggregatesInput | Prisma.PaymentQrCodeScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"PaymentQrCode"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"PaymentQrCode"> | string
-  invoiceId?: Prisma.UuidWithAggregatesFilter<"PaymentQrCode"> | string
+  id?: Prisma.IntWithAggregatesFilter<"PaymentQrCode"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"PaymentQrCode"> | number
+  invoiceId?: Prisma.IntWithAggregatesFilter<"PaymentQrCode"> | number
   provider?: Prisma.StringWithAggregatesFilter<"PaymentQrCode"> | string
   qrContent?: Prisma.StringWithAggregatesFilter<"PaymentQrCode"> | string
   qrImageUrl?: Prisma.StringNullableWithAggregatesFilter<"PaymentQrCode"> | string | null
@@ -328,7 +340,6 @@ export type PaymentQrCodeScalarWhereWithAggregatesInput = {
 }
 
 export type PaymentQrCodeCreateInput = {
-  id?: string
   provider: string
   qrContent: string
   qrImageUrl?: string | null
@@ -341,9 +352,9 @@ export type PaymentQrCodeCreateInput = {
 }
 
 export type PaymentQrCodeUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  invoiceId: string
+  id?: number
+  tenantId: number
+  invoiceId: number
   provider: string
   qrContent: string
   qrImageUrl?: string | null
@@ -354,7 +365,6 @@ export type PaymentQrCodeUncheckedCreateInput = {
 }
 
 export type PaymentQrCodeUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   qrContent?: Prisma.StringFieldUpdateOperationsInput | string
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -367,9 +377,9 @@ export type PaymentQrCodeUpdateInput = {
 }
 
 export type PaymentQrCodeUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  invoiceId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   qrContent?: Prisma.StringFieldUpdateOperationsInput | string
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -380,9 +390,9 @@ export type PaymentQrCodeUncheckedUpdateInput = {
 }
 
 export type PaymentQrCodeCreateManyInput = {
-  id?: string
-  tenantId: string
-  invoiceId: string
+  id?: number
+  tenantId: number
+  invoiceId: number
   provider: string
   qrContent: string
   qrImageUrl?: string | null
@@ -393,7 +403,6 @@ export type PaymentQrCodeCreateManyInput = {
 }
 
 export type PaymentQrCodeUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   qrContent?: Prisma.StringFieldUpdateOperationsInput | string
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -404,9 +413,9 @@ export type PaymentQrCodeUpdateManyMutationInput = {
 }
 
 export type PaymentQrCodeUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  invoiceId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   qrContent?: Prisma.StringFieldUpdateOperationsInput | string
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -440,6 +449,9 @@ export type PaymentQrCodeCountOrderByAggregateInput = {
 }
 
 export type PaymentQrCodeAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  invoiceId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
@@ -470,6 +482,9 @@ export type PaymentQrCodeMinOrderByAggregateInput = {
 }
 
 export type PaymentQrCodeSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  invoiceId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
@@ -562,7 +577,6 @@ export type EnumQrCodeStatusFieldUpdateOperationsInput = {
 }
 
 export type PaymentQrCodeCreateWithoutTenantInput = {
-  id?: string
   provider: string
   qrContent: string
   qrImageUrl?: string | null
@@ -574,8 +588,8 @@ export type PaymentQrCodeCreateWithoutTenantInput = {
 }
 
 export type PaymentQrCodeUncheckedCreateWithoutTenantInput = {
-  id?: string
-  invoiceId: string
+  id?: number
+  invoiceId: number
   provider: string
   qrContent: string
   qrImageUrl?: string | null
@@ -615,9 +629,9 @@ export type PaymentQrCodeScalarWhereInput = {
   AND?: Prisma.PaymentQrCodeScalarWhereInput | Prisma.PaymentQrCodeScalarWhereInput[]
   OR?: Prisma.PaymentQrCodeScalarWhereInput[]
   NOT?: Prisma.PaymentQrCodeScalarWhereInput | Prisma.PaymentQrCodeScalarWhereInput[]
-  id?: Prisma.UuidFilter<"PaymentQrCode"> | string
-  tenantId?: Prisma.UuidFilter<"PaymentQrCode"> | string
-  invoiceId?: Prisma.UuidFilter<"PaymentQrCode"> | string
+  id?: Prisma.IntFilter<"PaymentQrCode"> | number
+  tenantId?: Prisma.IntFilter<"PaymentQrCode"> | number
+  invoiceId?: Prisma.IntFilter<"PaymentQrCode"> | number
   provider?: Prisma.StringFilter<"PaymentQrCode"> | string
   qrContent?: Prisma.StringFilter<"PaymentQrCode"> | string
   qrImageUrl?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
@@ -628,7 +642,6 @@ export type PaymentQrCodeScalarWhereInput = {
 }
 
 export type PaymentQrCodeCreateWithoutInvoiceInput = {
-  id?: string
   provider: string
   qrContent: string
   qrImageUrl?: string | null
@@ -640,8 +653,8 @@ export type PaymentQrCodeCreateWithoutInvoiceInput = {
 }
 
 export type PaymentQrCodeUncheckedCreateWithoutInvoiceInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   provider: string
   qrContent: string
   qrImageUrl?: string | null
@@ -678,8 +691,8 @@ export type PaymentQrCodeUpdateManyWithWhereWithoutInvoiceInput = {
 }
 
 export type PaymentQrCodeCreateManyTenantInput = {
-  id?: string
-  invoiceId: string
+  id?: number
+  invoiceId: number
   provider: string
   qrContent: string
   qrImageUrl?: string | null
@@ -690,7 +703,6 @@ export type PaymentQrCodeCreateManyTenantInput = {
 }
 
 export type PaymentQrCodeUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   qrContent?: Prisma.StringFieldUpdateOperationsInput | string
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -702,8 +714,8 @@ export type PaymentQrCodeUpdateWithoutTenantInput = {
 }
 
 export type PaymentQrCodeUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  invoiceId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   qrContent?: Prisma.StringFieldUpdateOperationsInput | string
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -714,8 +726,8 @@ export type PaymentQrCodeUncheckedUpdateWithoutTenantInput = {
 }
 
 export type PaymentQrCodeUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  invoiceId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   qrContent?: Prisma.StringFieldUpdateOperationsInput | string
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -726,8 +738,8 @@ export type PaymentQrCodeUncheckedUpdateManyWithoutTenantInput = {
 }
 
 export type PaymentQrCodeCreateManyInvoiceInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   provider: string
   qrContent: string
   qrImageUrl?: string | null
@@ -738,7 +750,6 @@ export type PaymentQrCodeCreateManyInvoiceInput = {
 }
 
 export type PaymentQrCodeUpdateWithoutInvoiceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   qrContent?: Prisma.StringFieldUpdateOperationsInput | string
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -750,8 +761,8 @@ export type PaymentQrCodeUpdateWithoutInvoiceInput = {
 }
 
 export type PaymentQrCodeUncheckedUpdateWithoutInvoiceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   qrContent?: Prisma.StringFieldUpdateOperationsInput | string
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -762,8 +773,8 @@ export type PaymentQrCodeUncheckedUpdateWithoutInvoiceInput = {
 }
 
 export type PaymentQrCodeUncheckedUpdateManyWithoutInvoiceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   qrContent?: Prisma.StringFieldUpdateOperationsInput | string
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -863,15 +874,15 @@ export type $PaymentQrCodePayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * ID mã QR (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant quản lý
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID hóa đơn liên quan tạo mã QR
      */
-    invoiceId: string
+    invoiceId: number
     /**
      * Tên nhà cung cấp dịch vụ QR (ví dụ: VietQR, PayOS, MoMo)
      */
@@ -1325,9 +1336,9 @@ export interface Prisma__PaymentQrCodeClient<T, Null = never, ExtArgs extends ru
  * Fields of the PaymentQrCode model
  */
 export interface PaymentQrCodeFieldRefs {
-  readonly id: Prisma.FieldRef<"PaymentQrCode", 'String'>
-  readonly tenantId: Prisma.FieldRef<"PaymentQrCode", 'String'>
-  readonly invoiceId: Prisma.FieldRef<"PaymentQrCode", 'String'>
+  readonly id: Prisma.FieldRef<"PaymentQrCode", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"PaymentQrCode", 'Int'>
+  readonly invoiceId: Prisma.FieldRef<"PaymentQrCode", 'Int'>
   readonly provider: Prisma.FieldRef<"PaymentQrCode", 'String'>
   readonly qrContent: Prisma.FieldRef<"PaymentQrCode", 'String'>
   readonly qrImageUrl: Prisma.FieldRef<"PaymentQrCode", 'String'>

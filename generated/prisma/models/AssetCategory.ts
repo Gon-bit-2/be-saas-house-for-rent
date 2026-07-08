@@ -20,26 +20,42 @@ export type AssetCategoryModel = runtime.Types.Result.DefaultSelection<Prisma.$A
 
 export type AggregateAssetCategory = {
   _count: AssetCategoryCountAggregateOutputType | null
+  _avg: AssetCategoryAvgAggregateOutputType | null
+  _sum: AssetCategorySumAggregateOutputType | null
   _min: AssetCategoryMinAggregateOutputType | null
   _max: AssetCategoryMaxAggregateOutputType | null
 }
 
+export type AssetCategoryAvgAggregateOutputType = {
+  id: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
+export type AssetCategorySumAggregateOutputType = {
+  id: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
 export type AssetCategoryMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   name: string | null
   description: string | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type AssetCategoryMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   name: string | null
   description: string | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type AssetCategoryCountAggregateOutputType = {
@@ -52,6 +68,20 @@ export type AssetCategoryCountAggregateOutputType = {
   _all: number
 }
 
+
+export type AssetCategoryAvgAggregateInputType = {
+  id?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
+
+export type AssetCategorySumAggregateInputType = {
+  id?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
 
 export type AssetCategoryMinAggregateInputType = {
   id?: true
@@ -119,6 +149,18 @@ export type AssetCategoryAggregateArgs<ExtArgs extends runtime.Types.Extensions.
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: AssetCategoryAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: AssetCategorySumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: AssetCategoryMinAggregateInputType
@@ -149,18 +191,22 @@ export type AssetCategoryGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   _count?: AssetCategoryCountAggregateInputType | true
+  _avg?: AssetCategoryAvgAggregateInputType
+  _sum?: AssetCategorySumAggregateInputType
   _min?: AssetCategoryMinAggregateInputType
   _max?: AssetCategoryMaxAggregateInputType
 }
 
 export type AssetCategoryGroupByOutputType = {
-  id: string
+  id: number
   name: string
   description: string | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: AssetCategoryCountAggregateOutputType | null
+  _avg: AssetCategoryAvgAggregateOutputType | null
+  _sum: AssetCategorySumAggregateOutputType | null
   _min: AssetCategoryMinAggregateOutputType | null
   _max: AssetCategoryMaxAggregateOutputType | null
 }
@@ -184,12 +230,12 @@ export type AssetCategoryWhereInput = {
   AND?: Prisma.AssetCategoryWhereInput | Prisma.AssetCategoryWhereInput[]
   OR?: Prisma.AssetCategoryWhereInput[]
   NOT?: Prisma.AssetCategoryWhereInput | Prisma.AssetCategoryWhereInput[]
-  id?: Prisma.UuidFilter<"AssetCategory"> | string
+  id?: Prisma.IntFilter<"AssetCategory"> | number
   name?: Prisma.StringFilter<"AssetCategory"> | string
   description?: Prisma.StringNullableFilter<"AssetCategory"> | string | null
-  createdById?: Prisma.UuidNullableFilter<"AssetCategory"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"AssetCategory"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"AssetCategory"> | string | null
+  createdById?: Prisma.IntNullableFilter<"AssetCategory"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"AssetCategory"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"AssetCategory"> | number | null
   roomAssets?: Prisma.RoomAssetListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -210,15 +256,15 @@ export type AssetCategoryOrderByWithRelationInput = {
 }
 
 export type AssetCategoryWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.AssetCategoryWhereInput | Prisma.AssetCategoryWhereInput[]
   OR?: Prisma.AssetCategoryWhereInput[]
   NOT?: Prisma.AssetCategoryWhereInput | Prisma.AssetCategoryWhereInput[]
   name?: Prisma.StringFilter<"AssetCategory"> | string
   description?: Prisma.StringNullableFilter<"AssetCategory"> | string | null
-  createdById?: Prisma.UuidNullableFilter<"AssetCategory"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"AssetCategory"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"AssetCategory"> | string | null
+  createdById?: Prisma.IntNullableFilter<"AssetCategory"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"AssetCategory"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"AssetCategory"> | number | null
   roomAssets?: Prisma.RoomAssetListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -233,24 +279,25 @@ export type AssetCategoryOrderByWithAggregationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.AssetCategoryCountOrderByAggregateInput
+  _avg?: Prisma.AssetCategoryAvgOrderByAggregateInput
   _max?: Prisma.AssetCategoryMaxOrderByAggregateInput
   _min?: Prisma.AssetCategoryMinOrderByAggregateInput
+  _sum?: Prisma.AssetCategorySumOrderByAggregateInput
 }
 
 export type AssetCategoryScalarWhereWithAggregatesInput = {
   AND?: Prisma.AssetCategoryScalarWhereWithAggregatesInput | Prisma.AssetCategoryScalarWhereWithAggregatesInput[]
   OR?: Prisma.AssetCategoryScalarWhereWithAggregatesInput[]
   NOT?: Prisma.AssetCategoryScalarWhereWithAggregatesInput | Prisma.AssetCategoryScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"AssetCategory"> | string
+  id?: Prisma.IntWithAggregatesFilter<"AssetCategory"> | number
   name?: Prisma.StringWithAggregatesFilter<"AssetCategory"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"AssetCategory"> | string | null
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"AssetCategory"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"AssetCategory"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"AssetCategory"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"AssetCategory"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"AssetCategory"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"AssetCategory"> | number | null
 }
 
 export type AssetCategoryCreateInput = {
-  id?: string
   name: string
   description?: string | null
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCategoryInput
@@ -260,17 +307,16 @@ export type AssetCategoryCreateInput = {
 }
 
 export type AssetCategoryUncheckedCreateInput = {
-  id?: string
+  id?: number
   name: string
   description?: string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCategoryInput
 }
 
 export type AssetCategoryUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutCategoryNestedInput
@@ -280,37 +326,36 @@ export type AssetCategoryUpdateInput = {
 }
 
 export type AssetCategoryUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type AssetCategoryCreateManyInput = {
-  id?: string
+  id?: number
   name: string
   description?: string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type AssetCategoryUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type AssetCategoryUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AssetCategoryListRelationFilter = {
@@ -332,6 +377,13 @@ export type AssetCategoryCountOrderByAggregateInput = {
   deletedById?: Prisma.SortOrder
 }
 
+export type AssetCategoryAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
 export type AssetCategoryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -345,6 +397,13 @@ export type AssetCategoryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
+export type AssetCategorySumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -496,7 +555,6 @@ export type AssetCategoryUpdateOneRequiredWithoutRoomAssetsNestedInput = {
 }
 
 export type AssetCategoryCreateWithoutCreatedByInput = {
-  id?: string
   name: string
   description?: string | null
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCategoryInput
@@ -505,11 +563,11 @@ export type AssetCategoryCreateWithoutCreatedByInput = {
 }
 
 export type AssetCategoryUncheckedCreateWithoutCreatedByInput = {
-  id?: string
+  id?: number
   name: string
   description?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCategoryInput
 }
 
@@ -524,7 +582,6 @@ export type AssetCategoryCreateManyCreatedByInputEnvelope = {
 }
 
 export type AssetCategoryCreateWithoutUpdatedByInput = {
-  id?: string
   name: string
   description?: string | null
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCategoryInput
@@ -533,11 +590,11 @@ export type AssetCategoryCreateWithoutUpdatedByInput = {
 }
 
 export type AssetCategoryUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
+  id?: number
   name: string
   description?: string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCategoryInput
 }
 
@@ -552,7 +609,6 @@ export type AssetCategoryCreateManyUpdatedByInputEnvelope = {
 }
 
 export type AssetCategoryCreateWithoutDeletedByInput = {
-  id?: string
   name: string
   description?: string | null
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCategoryInput
@@ -561,11 +617,11 @@ export type AssetCategoryCreateWithoutDeletedByInput = {
 }
 
 export type AssetCategoryUncheckedCreateWithoutDeletedByInput = {
-  id?: string
+  id?: number
   name: string
   description?: string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCategoryInput
 }
 
@@ -599,12 +655,12 @@ export type AssetCategoryScalarWhereInput = {
   AND?: Prisma.AssetCategoryScalarWhereInput | Prisma.AssetCategoryScalarWhereInput[]
   OR?: Prisma.AssetCategoryScalarWhereInput[]
   NOT?: Prisma.AssetCategoryScalarWhereInput | Prisma.AssetCategoryScalarWhereInput[]
-  id?: Prisma.UuidFilter<"AssetCategory"> | string
+  id?: Prisma.IntFilter<"AssetCategory"> | number
   name?: Prisma.StringFilter<"AssetCategory"> | string
   description?: Prisma.StringNullableFilter<"AssetCategory"> | string | null
-  createdById?: Prisma.UuidNullableFilter<"AssetCategory"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"AssetCategory"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"AssetCategory"> | string | null
+  createdById?: Prisma.IntNullableFilter<"AssetCategory"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"AssetCategory"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"AssetCategory"> | number | null
 }
 
 export type AssetCategoryUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -640,7 +696,6 @@ export type AssetCategoryUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type AssetCategoryCreateWithoutRoomAssetsInput = {
-  id?: string
   name: string
   description?: string | null
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedAssetCategorysInput
@@ -649,12 +704,12 @@ export type AssetCategoryCreateWithoutRoomAssetsInput = {
 }
 
 export type AssetCategoryUncheckedCreateWithoutRoomAssetsInput = {
-  id?: string
+  id?: number
   name: string
   description?: string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type AssetCategoryCreateOrConnectWithoutRoomAssetsInput = {
@@ -674,7 +729,6 @@ export type AssetCategoryUpdateToOneWithWhereWithoutRoomAssetsInput = {
 }
 
 export type AssetCategoryUpdateWithoutRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdBy?: Prisma.UserUpdateOneWithoutCreatedAssetCategorysNestedInput
@@ -683,40 +737,39 @@ export type AssetCategoryUpdateWithoutRoomAssetsInput = {
 }
 
 export type AssetCategoryUncheckedUpdateWithoutRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AssetCategoryCreateManyCreatedByInput = {
-  id?: string
+  id?: number
   name: string
   description?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type AssetCategoryCreateManyUpdatedByInput = {
-  id?: string
+  id?: number
   name: string
   description?: string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type AssetCategoryCreateManyDeletedByInput = {
-  id?: string
+  id?: number
   name: string
   description?: string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type AssetCategoryUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutCategoryNestedInput
@@ -725,24 +778,23 @@ export type AssetCategoryUpdateWithoutCreatedByInput = {
 }
 
 export type AssetCategoryUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type AssetCategoryUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AssetCategoryUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutCategoryNestedInput
@@ -751,24 +803,23 @@ export type AssetCategoryUpdateWithoutUpdatedByInput = {
 }
 
 export type AssetCategoryUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type AssetCategoryUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AssetCategoryUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutCategoryNestedInput
@@ -777,20 +828,20 @@ export type AssetCategoryUpdateWithoutDeletedByInput = {
 }
 
 export type AssetCategoryUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCategoryNestedInput
 }
 
 export type AssetCategoryUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -905,7 +956,7 @@ export type $AssetCategoryPayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * ID danh mục tài sản (UUID)
      */
-    id: string
+    id: number
     /**
      * Tên loại tài sản
      */
@@ -917,15 +968,15 @@ export type $AssetCategoryPayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["assetCategory"]>
   composites: {}
 }
@@ -1353,12 +1404,12 @@ export interface Prisma__AssetCategoryClient<T, Null = never, ExtArgs extends ru
  * Fields of the AssetCategory model
  */
 export interface AssetCategoryFieldRefs {
-  readonly id: Prisma.FieldRef<"AssetCategory", 'String'>
+  readonly id: Prisma.FieldRef<"AssetCategory", 'Int'>
   readonly name: Prisma.FieldRef<"AssetCategory", 'String'>
   readonly description: Prisma.FieldRef<"AssetCategory", 'String'>
-  readonly createdById: Prisma.FieldRef<"AssetCategory", 'String'>
-  readonly updatedById: Prisma.FieldRef<"AssetCategory", 'String'>
-  readonly deletedById: Prisma.FieldRef<"AssetCategory", 'String'>
+  readonly createdById: Prisma.FieldRef<"AssetCategory", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"AssetCategory", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"AssetCategory", 'Int'>
 }
     
 

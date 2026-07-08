@@ -20,14 +20,28 @@ export type TenantMemberModel = runtime.Types.Result.DefaultSelection<Prisma.$Te
 
 export type AggregateTenantMember = {
   _count: TenantMemberCountAggregateOutputType | null
+  _avg: TenantMemberAvgAggregateOutputType | null
+  _sum: TenantMemberSumAggregateOutputType | null
   _min: TenantMemberMinAggregateOutputType | null
   _max: TenantMemberMaxAggregateOutputType | null
 }
 
+export type TenantMemberAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  userId: number | null
+}
+
+export type TenantMemberSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  userId: number | null
+}
+
 export type TenantMemberMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  userId: string | null
+  id: number | null
+  tenantId: number | null
+  userId: number | null
   roleId: string | null
   status: $Enums.TenantMemberStatus | null
   joinedAt: Date | null
@@ -35,9 +49,9 @@ export type TenantMemberMinAggregateOutputType = {
 }
 
 export type TenantMemberMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  userId: string | null
+  id: number | null
+  tenantId: number | null
+  userId: number | null
   roleId: string | null
   status: $Enums.TenantMemberStatus | null
   joinedAt: Date | null
@@ -55,6 +69,18 @@ export type TenantMemberCountAggregateOutputType = {
   _all: number
 }
 
+
+export type TenantMemberAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  userId?: true
+}
+
+export type TenantMemberSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  userId?: true
+}
 
 export type TenantMemberMinAggregateInputType = {
   id?: true
@@ -125,6 +151,18 @@ export type TenantMemberAggregateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: TenantMemberAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: TenantMemberSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: TenantMemberMinAggregateInputType
@@ -155,19 +193,23 @@ export type TenantMemberGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   _count?: TenantMemberCountAggregateInputType | true
+  _avg?: TenantMemberAvgAggregateInputType
+  _sum?: TenantMemberSumAggregateInputType
   _min?: TenantMemberMinAggregateInputType
   _max?: TenantMemberMaxAggregateInputType
 }
 
 export type TenantMemberGroupByOutputType = {
-  id: string
-  tenantId: string
-  userId: string
+  id: number
+  tenantId: number
+  userId: number
   roleId: string
   status: $Enums.TenantMemberStatus
   joinedAt: Date | null
   createdAt: Date
   _count: TenantMemberCountAggregateOutputType | null
+  _avg: TenantMemberAvgAggregateOutputType | null
+  _sum: TenantMemberSumAggregateOutputType | null
   _min: TenantMemberMinAggregateOutputType | null
   _max: TenantMemberMaxAggregateOutputType | null
 }
@@ -191,9 +233,9 @@ export type TenantMemberWhereInput = {
   AND?: Prisma.TenantMemberWhereInput | Prisma.TenantMemberWhereInput[]
   OR?: Prisma.TenantMemberWhereInput[]
   NOT?: Prisma.TenantMemberWhereInput | Prisma.TenantMemberWhereInput[]
-  id?: Prisma.UuidFilter<"TenantMember"> | string
-  tenantId?: Prisma.UuidFilter<"TenantMember"> | string
-  userId?: Prisma.UuidFilter<"TenantMember"> | string
+  id?: Prisma.IntFilter<"TenantMember"> | number
+  tenantId?: Prisma.IntFilter<"TenantMember"> | number
+  userId?: Prisma.IntFilter<"TenantMember"> | number
   roleId?: Prisma.StringFilter<"TenantMember"> | string
   status?: Prisma.EnumTenantMemberStatusFilter<"TenantMember"> | $Enums.TenantMemberStatus
   joinedAt?: Prisma.DateTimeNullableFilter<"TenantMember"> | Date | string | null
@@ -217,13 +259,13 @@ export type TenantMemberOrderByWithRelationInput = {
 }
 
 export type TenantMemberWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   tenantId_userId?: Prisma.TenantMemberTenantIdUserIdCompoundUniqueInput
   AND?: Prisma.TenantMemberWhereInput | Prisma.TenantMemberWhereInput[]
   OR?: Prisma.TenantMemberWhereInput[]
   NOT?: Prisma.TenantMemberWhereInput | Prisma.TenantMemberWhereInput[]
-  tenantId?: Prisma.UuidFilter<"TenantMember"> | string
-  userId?: Prisma.UuidFilter<"TenantMember"> | string
+  tenantId?: Prisma.IntFilter<"TenantMember"> | number
+  userId?: Prisma.IntFilter<"TenantMember"> | number
   roleId?: Prisma.StringFilter<"TenantMember"> | string
   status?: Prisma.EnumTenantMemberStatusFilter<"TenantMember"> | $Enums.TenantMemberStatus
   joinedAt?: Prisma.DateTimeNullableFilter<"TenantMember"> | Date | string | null
@@ -242,17 +284,19 @@ export type TenantMemberOrderByWithAggregationInput = {
   joinedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.TenantMemberCountOrderByAggregateInput
+  _avg?: Prisma.TenantMemberAvgOrderByAggregateInput
   _max?: Prisma.TenantMemberMaxOrderByAggregateInput
   _min?: Prisma.TenantMemberMinOrderByAggregateInput
+  _sum?: Prisma.TenantMemberSumOrderByAggregateInput
 }
 
 export type TenantMemberScalarWhereWithAggregatesInput = {
   AND?: Prisma.TenantMemberScalarWhereWithAggregatesInput | Prisma.TenantMemberScalarWhereWithAggregatesInput[]
   OR?: Prisma.TenantMemberScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TenantMemberScalarWhereWithAggregatesInput | Prisma.TenantMemberScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"TenantMember"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"TenantMember"> | string
-  userId?: Prisma.UuidWithAggregatesFilter<"TenantMember"> | string
+  id?: Prisma.IntWithAggregatesFilter<"TenantMember"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"TenantMember"> | number
+  userId?: Prisma.IntWithAggregatesFilter<"TenantMember"> | number
   roleId?: Prisma.StringWithAggregatesFilter<"TenantMember"> | string
   status?: Prisma.EnumTenantMemberStatusWithAggregatesFilter<"TenantMember"> | $Enums.TenantMemberStatus
   joinedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"TenantMember"> | Date | string | null
@@ -260,7 +304,6 @@ export type TenantMemberScalarWhereWithAggregatesInput = {
 }
 
 export type TenantMemberCreateInput = {
-  id?: string
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -270,9 +313,9 @@ export type TenantMemberCreateInput = {
 }
 
 export type TenantMemberUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  userId: string
+  id?: number
+  tenantId: number
+  userId: number
   roleId: string
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
@@ -280,7 +323,6 @@ export type TenantMemberUncheckedCreateInput = {
 }
 
 export type TenantMemberUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -290,9 +332,9 @@ export type TenantMemberUpdateInput = {
 }
 
 export type TenantMemberUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -300,9 +342,9 @@ export type TenantMemberUncheckedUpdateInput = {
 }
 
 export type TenantMemberCreateManyInput = {
-  id?: string
-  tenantId: string
-  userId: string
+  id?: number
+  tenantId: number
+  userId: number
   roleId: string
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
@@ -310,16 +352,15 @@ export type TenantMemberCreateManyInput = {
 }
 
 export type TenantMemberUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TenantMemberUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -337,8 +378,8 @@ export type TenantMemberOrderByRelationAggregateInput = {
 }
 
 export type TenantMemberTenantIdUserIdCompoundUniqueInput = {
-  tenantId: string
-  userId: string
+  tenantId: number
+  userId: number
 }
 
 export type TenantMemberCountOrderByAggregateInput = {
@@ -349,6 +390,12 @@ export type TenantMemberCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type TenantMemberAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type TenantMemberMaxOrderByAggregateInput = {
@@ -369,6 +416,12 @@ export type TenantMemberMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type TenantMemberSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type TenantMemberCreateNestedManyWithoutUserInput = {
@@ -502,7 +555,6 @@ export type EnumTenantMemberStatusFieldUpdateOperationsInput = {
 }
 
 export type TenantMemberCreateWithoutUserInput = {
-  id?: string
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -511,8 +563,8 @@ export type TenantMemberCreateWithoutUserInput = {
 }
 
 export type TenantMemberUncheckedCreateWithoutUserInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   roleId: string
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
@@ -549,9 +601,9 @@ export type TenantMemberScalarWhereInput = {
   AND?: Prisma.TenantMemberScalarWhereInput | Prisma.TenantMemberScalarWhereInput[]
   OR?: Prisma.TenantMemberScalarWhereInput[]
   NOT?: Prisma.TenantMemberScalarWhereInput | Prisma.TenantMemberScalarWhereInput[]
-  id?: Prisma.UuidFilter<"TenantMember"> | string
-  tenantId?: Prisma.UuidFilter<"TenantMember"> | string
-  userId?: Prisma.UuidFilter<"TenantMember"> | string
+  id?: Prisma.IntFilter<"TenantMember"> | number
+  tenantId?: Prisma.IntFilter<"TenantMember"> | number
+  userId?: Prisma.IntFilter<"TenantMember"> | number
   roleId?: Prisma.StringFilter<"TenantMember"> | string
   status?: Prisma.EnumTenantMemberStatusFilter<"TenantMember"> | $Enums.TenantMemberStatus
   joinedAt?: Prisma.DateTimeNullableFilter<"TenantMember"> | Date | string | null
@@ -559,7 +611,6 @@ export type TenantMemberScalarWhereInput = {
 }
 
 export type TenantMemberCreateWithoutRoleInput = {
-  id?: string
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -568,9 +619,9 @@ export type TenantMemberCreateWithoutRoleInput = {
 }
 
 export type TenantMemberUncheckedCreateWithoutRoleInput = {
-  id?: string
-  tenantId: string
-  userId: string
+  id?: number
+  tenantId: number
+  userId: number
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -603,7 +654,6 @@ export type TenantMemberUpdateManyWithWhereWithoutRoleInput = {
 }
 
 export type TenantMemberCreateWithoutTenantInput = {
-  id?: string
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -612,8 +662,8 @@ export type TenantMemberCreateWithoutTenantInput = {
 }
 
 export type TenantMemberUncheckedCreateWithoutTenantInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   roleId: string
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
@@ -647,8 +697,8 @@ export type TenantMemberUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type TenantMemberCreateManyUserInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   roleId: string
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
@@ -656,7 +706,6 @@ export type TenantMemberCreateManyUserInput = {
 }
 
 export type TenantMemberUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -665,8 +714,8 @@ export type TenantMemberUpdateWithoutUserInput = {
 }
 
 export type TenantMemberUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -674,8 +723,8 @@ export type TenantMemberUncheckedUpdateWithoutUserInput = {
 }
 
 export type TenantMemberUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -683,16 +732,15 @@ export type TenantMemberUncheckedUpdateManyWithoutUserInput = {
 }
 
 export type TenantMemberCreateManyRoleInput = {
-  id?: string
-  tenantId: string
-  userId: string
+  id?: number
+  tenantId: number
+  userId: number
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
 }
 
 export type TenantMemberUpdateWithoutRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -701,26 +749,26 @@ export type TenantMemberUpdateWithoutRoleInput = {
 }
 
 export type TenantMemberUncheckedUpdateWithoutRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TenantMemberUncheckedUpdateManyWithoutRoleInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TenantMemberCreateManyTenantInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   roleId: string
   status?: $Enums.TenantMemberStatus
   joinedAt?: Date | string | null
@@ -728,7 +776,6 @@ export type TenantMemberCreateManyTenantInput = {
 }
 
 export type TenantMemberUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -737,8 +784,8 @@ export type TenantMemberUpdateWithoutTenantInput = {
 }
 
 export type TenantMemberUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -746,8 +793,8 @@ export type TenantMemberUncheckedUpdateWithoutTenantInput = {
 }
 
 export type TenantMemberUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumTenantMemberStatusFieldUpdateOperationsInput | $Enums.TenantMemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -840,17 +887,17 @@ export type $TenantMemberPayload<ExtArgs extends runtime.Types.Extensions.Intern
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
-     * ID định danh duy nhất (UUID)
+     * ID định danh duy nhất
      */
-    id: string
+    id: number
     /**
      * ID của Tenant liên kết
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID của người dùng liên kết
      */
-    userId: string
+    userId: number
     /**
      * ID của vai trò được giao trong Tenant này
      */
@@ -1293,9 +1340,9 @@ export interface Prisma__TenantMemberClient<T, Null = never, ExtArgs extends run
  * Fields of the TenantMember model
  */
 export interface TenantMemberFieldRefs {
-  readonly id: Prisma.FieldRef<"TenantMember", 'String'>
-  readonly tenantId: Prisma.FieldRef<"TenantMember", 'String'>
-  readonly userId: Prisma.FieldRef<"TenantMember", 'String'>
+  readonly id: Prisma.FieldRef<"TenantMember", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"TenantMember", 'Int'>
+  readonly userId: Prisma.FieldRef<"TenantMember", 'Int'>
   readonly roleId: Prisma.FieldRef<"TenantMember", 'String'>
   readonly status: Prisma.FieldRef<"TenantMember", 'TenantMemberStatus'>
   readonly joinedAt: Prisma.FieldRef<"TenantMember", 'DateTime'>

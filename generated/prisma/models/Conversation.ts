@@ -20,26 +20,44 @@ export type ConversationModel = runtime.Types.Result.DefaultSelection<Prisma.$Co
 
 export type AggregateConversation = {
   _count: ConversationCountAggregateOutputType | null
+  _avg: ConversationAvgAggregateOutputType | null
+  _sum: ConversationSumAggregateOutputType | null
   _min: ConversationMinAggregateOutputType | null
   _max: ConversationMaxAggregateOutputType | null
 }
 
+export type ConversationAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  ticketId: number | null
+}
+
+export type ConversationSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  ticketId: number | null
+}
+
 export type ConversationMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  contractId: string | null
-  ticketId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  ticketId: number | null
   type: $Enums.ConversationType | null
   createdAt: Date | null
 }
 
 export type ConversationMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  contractId: string | null
-  ticketId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+  ticketId: number | null
   type: $Enums.ConversationType | null
   createdAt: Date | null
 }
@@ -55,6 +73,22 @@ export type ConversationCountAggregateOutputType = {
   _all: number
 }
 
+
+export type ConversationAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  contractId?: true
+  ticketId?: true
+}
+
+export type ConversationSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  contractId?: true
+  ticketId?: true
+}
 
 export type ConversationMinAggregateInputType = {
   id?: true
@@ -125,6 +159,18 @@ export type ConversationAggregateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: ConversationAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: ConversationSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: ConversationMinAggregateInputType
@@ -155,19 +201,23 @@ export type ConversationGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   _count?: ConversationCountAggregateInputType | true
+  _avg?: ConversationAvgAggregateInputType
+  _sum?: ConversationSumAggregateInputType
   _min?: ConversationMinAggregateInputType
   _max?: ConversationMaxAggregateInputType
 }
 
 export type ConversationGroupByOutputType = {
-  id: string
-  tenantId: string
-  roomId: string | null
-  contractId: string | null
-  ticketId: string | null
+  id: number
+  tenantId: number
+  roomId: number | null
+  contractId: number | null
+  ticketId: number | null
   type: $Enums.ConversationType
   createdAt: Date
   _count: ConversationCountAggregateOutputType | null
+  _avg: ConversationAvgAggregateOutputType | null
+  _sum: ConversationSumAggregateOutputType | null
   _min: ConversationMinAggregateOutputType | null
   _max: ConversationMaxAggregateOutputType | null
 }
@@ -191,11 +241,11 @@ export type ConversationWhereInput = {
   AND?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
   OR?: Prisma.ConversationWhereInput[]
   NOT?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
-  id?: Prisma.UuidFilter<"Conversation"> | string
-  tenantId?: Prisma.UuidFilter<"Conversation"> | string
-  roomId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
-  contractId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
-  ticketId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
+  id?: Prisma.IntFilter<"Conversation"> | number
+  tenantId?: Prisma.IntFilter<"Conversation"> | number
+  roomId?: Prisma.IntNullableFilter<"Conversation"> | number | null
+  contractId?: Prisma.IntNullableFilter<"Conversation"> | number | null
+  ticketId?: Prisma.IntNullableFilter<"Conversation"> | number | null
   type?: Prisma.EnumConversationTypeFilter<"Conversation"> | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
@@ -223,14 +273,14 @@ export type ConversationOrderByWithRelationInput = {
 }
 
 export type ConversationWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
   OR?: Prisma.ConversationWhereInput[]
   NOT?: Prisma.ConversationWhereInput | Prisma.ConversationWhereInput[]
-  tenantId?: Prisma.UuidFilter<"Conversation"> | string
-  roomId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
-  contractId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
-  ticketId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
+  tenantId?: Prisma.IntFilter<"Conversation"> | number
+  roomId?: Prisma.IntNullableFilter<"Conversation"> | number | null
+  contractId?: Prisma.IntNullableFilter<"Conversation"> | number | null
+  ticketId?: Prisma.IntNullableFilter<"Conversation"> | number | null
   type?: Prisma.EnumConversationTypeFilter<"Conversation"> | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
@@ -250,25 +300,26 @@ export type ConversationOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ConversationCountOrderByAggregateInput
+  _avg?: Prisma.ConversationAvgOrderByAggregateInput
   _max?: Prisma.ConversationMaxOrderByAggregateInput
   _min?: Prisma.ConversationMinOrderByAggregateInput
+  _sum?: Prisma.ConversationSumOrderByAggregateInput
 }
 
 export type ConversationScalarWhereWithAggregatesInput = {
   AND?: Prisma.ConversationScalarWhereWithAggregatesInput | Prisma.ConversationScalarWhereWithAggregatesInput[]
   OR?: Prisma.ConversationScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ConversationScalarWhereWithAggregatesInput | Prisma.ConversationScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Conversation"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"Conversation"> | string
-  roomId?: Prisma.UuidNullableWithAggregatesFilter<"Conversation"> | string | null
-  contractId?: Prisma.UuidNullableWithAggregatesFilter<"Conversation"> | string | null
-  ticketId?: Prisma.UuidNullableWithAggregatesFilter<"Conversation"> | string | null
+  id?: Prisma.IntWithAggregatesFilter<"Conversation"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"Conversation"> | number
+  roomId?: Prisma.IntNullableWithAggregatesFilter<"Conversation"> | number | null
+  contractId?: Prisma.IntNullableWithAggregatesFilter<"Conversation"> | number | null
+  ticketId?: Prisma.IntNullableWithAggregatesFilter<"Conversation"> | number | null
   type?: Prisma.EnumConversationTypeWithAggregatesFilter<"Conversation"> | $Enums.ConversationType
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Conversation"> | Date | string
 }
 
 export type ConversationCreateInput = {
-  id?: string
   type: $Enums.ConversationType
   createdAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutConversationsInput
@@ -280,11 +331,11 @@ export type ConversationCreateInput = {
 }
 
 export type ConversationUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  roomId?: string | null
-  contractId?: string | null
-  ticketId?: string | null
+  id?: number
+  tenantId: number
+  roomId?: number | null
+  contractId?: number | null
+  ticketId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
   members?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutConversationInput
@@ -292,7 +343,6 @@ export type ConversationUncheckedCreateInput = {
 }
 
 export type ConversationUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutConversationsNestedInput
@@ -304,11 +354,11 @@ export type ConversationUpdateInput = {
 }
 
 export type ConversationUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ticketId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ConversationMemberUncheckedUpdateManyWithoutConversationNestedInput
@@ -316,27 +366,26 @@ export type ConversationUncheckedUpdateInput = {
 }
 
 export type ConversationCreateManyInput = {
-  id?: string
-  tenantId: string
-  roomId?: string | null
-  contractId?: string | null
-  ticketId?: string | null
+  id?: number
+  tenantId: number
+  roomId?: number | null
+  contractId?: number | null
+  ticketId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
 }
 
 export type ConversationUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConversationUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ticketId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -361,6 +410,14 @@ export type ConversationCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
+export type ConversationAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
+  ticketId?: Prisma.SortOrder
+}
+
 export type ConversationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -379,6 +436,14 @@ export type ConversationMinOrderByAggregateInput = {
   ticketId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type ConversationSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
+  ticketId?: Prisma.SortOrder
 }
 
 export type ConversationScalarRelationFilter = {
@@ -587,7 +652,6 @@ export type ConversationUpdateOneRequiredWithoutMessagesNestedInput = {
 }
 
 export type ConversationCreateWithoutTenantInput = {
-  id?: string
   type: $Enums.ConversationType
   createdAt?: Date | string
   room?: Prisma.RoomCreateNestedOneWithoutConversationsInput
@@ -598,10 +662,10 @@ export type ConversationCreateWithoutTenantInput = {
 }
 
 export type ConversationUncheckedCreateWithoutTenantInput = {
-  id?: string
-  roomId?: string | null
-  contractId?: string | null
-  ticketId?: string | null
+  id?: number
+  roomId?: number | null
+  contractId?: number | null
+  ticketId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
   members?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutConversationInput
@@ -638,17 +702,16 @@ export type ConversationScalarWhereInput = {
   AND?: Prisma.ConversationScalarWhereInput | Prisma.ConversationScalarWhereInput[]
   OR?: Prisma.ConversationScalarWhereInput[]
   NOT?: Prisma.ConversationScalarWhereInput | Prisma.ConversationScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Conversation"> | string
-  tenantId?: Prisma.UuidFilter<"Conversation"> | string
-  roomId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
-  contractId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
-  ticketId?: Prisma.UuidNullableFilter<"Conversation"> | string | null
+  id?: Prisma.IntFilter<"Conversation"> | number
+  tenantId?: Prisma.IntFilter<"Conversation"> | number
+  roomId?: Prisma.IntNullableFilter<"Conversation"> | number | null
+  contractId?: Prisma.IntNullableFilter<"Conversation"> | number | null
+  ticketId?: Prisma.IntNullableFilter<"Conversation"> | number | null
   type?: Prisma.EnumConversationTypeFilter<"Conversation"> | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFilter<"Conversation"> | Date | string
 }
 
 export type ConversationCreateWithoutRoomInput = {
-  id?: string
   type: $Enums.ConversationType
   createdAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutConversationsInput
@@ -659,10 +722,10 @@ export type ConversationCreateWithoutRoomInput = {
 }
 
 export type ConversationUncheckedCreateWithoutRoomInput = {
-  id?: string
-  tenantId: string
-  contractId?: string | null
-  ticketId?: string | null
+  id?: number
+  tenantId: number
+  contractId?: number | null
+  ticketId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
   members?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutConversationInput
@@ -696,7 +759,6 @@ export type ConversationUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type ConversationCreateWithoutContractInput = {
-  id?: string
   type: $Enums.ConversationType
   createdAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutConversationsInput
@@ -707,10 +769,10 @@ export type ConversationCreateWithoutContractInput = {
 }
 
 export type ConversationUncheckedCreateWithoutContractInput = {
-  id?: string
-  tenantId: string
-  roomId?: string | null
-  ticketId?: string | null
+  id?: number
+  tenantId: number
+  roomId?: number | null
+  ticketId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
   members?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutConversationInput
@@ -744,7 +806,6 @@ export type ConversationUpdateManyWithWhereWithoutContractInput = {
 }
 
 export type ConversationCreateWithoutTicketInput = {
-  id?: string
   type: $Enums.ConversationType
   createdAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutConversationsInput
@@ -755,10 +816,10 @@ export type ConversationCreateWithoutTicketInput = {
 }
 
 export type ConversationUncheckedCreateWithoutTicketInput = {
-  id?: string
-  tenantId: string
-  roomId?: string | null
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId?: number | null
+  contractId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
   members?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutConversationInput
@@ -792,7 +853,6 @@ export type ConversationUpdateManyWithWhereWithoutTicketInput = {
 }
 
 export type ConversationCreateWithoutMembersInput = {
-  id?: string
   type: $Enums.ConversationType
   createdAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutConversationsInput
@@ -803,11 +863,11 @@ export type ConversationCreateWithoutMembersInput = {
 }
 
 export type ConversationUncheckedCreateWithoutMembersInput = {
-  id?: string
-  tenantId: string
-  roomId?: string | null
-  contractId?: string | null
-  ticketId?: string | null
+  id?: number
+  tenantId: number
+  roomId?: number | null
+  contractId?: number | null
+  ticketId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConversationInput
@@ -830,7 +890,6 @@ export type ConversationUpdateToOneWithWhereWithoutMembersInput = {
 }
 
 export type ConversationUpdateWithoutMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutConversationsNestedInput
@@ -841,18 +900,17 @@ export type ConversationUpdateWithoutMembersInput = {
 }
 
 export type ConversationUncheckedUpdateWithoutMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ticketId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   messages?: Prisma.MessageUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateWithoutMessagesInput = {
-  id?: string
   type: $Enums.ConversationType
   createdAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutConversationsInput
@@ -863,11 +921,11 @@ export type ConversationCreateWithoutMessagesInput = {
 }
 
 export type ConversationUncheckedCreateWithoutMessagesInput = {
-  id?: string
-  tenantId: string
-  roomId?: string | null
-  contractId?: string | null
-  ticketId?: string | null
+  id?: number
+  tenantId: number
+  roomId?: number | null
+  contractId?: number | null
+  ticketId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
   members?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutConversationInput
@@ -890,7 +948,6 @@ export type ConversationUpdateToOneWithWhereWithoutMessagesInput = {
 }
 
 export type ConversationUpdateWithoutMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutConversationsNestedInput
@@ -901,27 +958,26 @@ export type ConversationUpdateWithoutMessagesInput = {
 }
 
 export type ConversationUncheckedUpdateWithoutMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ticketId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ConversationMemberUncheckedUpdateManyWithoutConversationNestedInput
 }
 
 export type ConversationCreateManyTenantInput = {
-  id?: string
-  roomId?: string | null
-  contractId?: string | null
-  ticketId?: string | null
+  id?: number
+  roomId?: number | null
+  contractId?: number | null
+  ticketId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
 }
 
 export type ConversationUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   room?: Prisma.RoomUpdateOneWithoutConversationsNestedInput
@@ -932,10 +988,10 @@ export type ConversationUpdateWithoutTenantInput = {
 }
 
 export type ConversationUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ticketId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ConversationMemberUncheckedUpdateManyWithoutConversationNestedInput
@@ -943,25 +999,24 @@ export type ConversationUncheckedUpdateWithoutTenantInput = {
 }
 
 export type ConversationUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ticketId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConversationCreateManyRoomInput = {
-  id?: string
-  tenantId: string
-  contractId?: string | null
-  ticketId?: string | null
+  id?: number
+  tenantId: number
+  contractId?: number | null
+  ticketId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
 }
 
 export type ConversationUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutConversationsNestedInput
@@ -972,10 +1027,10 @@ export type ConversationUpdateWithoutRoomInput = {
 }
 
 export type ConversationUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ticketId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ConversationMemberUncheckedUpdateManyWithoutConversationNestedInput
@@ -983,25 +1038,24 @@ export type ConversationUncheckedUpdateWithoutRoomInput = {
 }
 
 export type ConversationUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ticketId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConversationCreateManyContractInput = {
-  id?: string
-  tenantId: string
-  roomId?: string | null
-  ticketId?: string | null
+  id?: number
+  tenantId: number
+  roomId?: number | null
+  ticketId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
 }
 
 export type ConversationUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutConversationsNestedInput
@@ -1012,10 +1066,10 @@ export type ConversationUpdateWithoutContractInput = {
 }
 
 export type ConversationUncheckedUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ticketId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ConversationMemberUncheckedUpdateManyWithoutConversationNestedInput
@@ -1023,25 +1077,24 @@ export type ConversationUncheckedUpdateWithoutContractInput = {
 }
 
 export type ConversationUncheckedUpdateManyWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ticketId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConversationCreateManyTicketInput = {
-  id?: string
-  tenantId: string
-  roomId?: string | null
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId?: number | null
+  contractId?: number | null
   type: $Enums.ConversationType
   createdAt?: Date | string
 }
 
 export type ConversationUpdateWithoutTicketInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutConversationsNestedInput
@@ -1052,10 +1105,10 @@ export type ConversationUpdateWithoutTicketInput = {
 }
 
 export type ConversationUncheckedUpdateWithoutTicketInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.ConversationMemberUncheckedUpdateManyWithoutConversationNestedInput
@@ -1063,10 +1116,10 @@ export type ConversationUncheckedUpdateWithoutTicketInput = {
 }
 
 export type ConversationUncheckedUpdateManyWithoutTicketInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   type?: Prisma.EnumConversationTypeFieldUpdateOperationsInput | $Enums.ConversationType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1221,23 +1274,23 @@ export type $ConversationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     /**
      * ID phòng chat (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant quản lý phòng chat này
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID phòng trọ liên quan (nullable nếu chat hỗ trợ chung)
      */
-    roomId: string | null
+    roomId: number | null
     /**
      * ID hợp đồng thuê phòng liên quan (nullable)
      */
-    contractId: string | null
+    contractId: number | null
     /**
      * ID ticket sự cố liên quan (nullable)
      */
-    ticketId: string | null
+    ticketId: number | null
     /**
      * Phân loại mục đích phòng chat
      */
@@ -1675,11 +1728,11 @@ export interface Prisma__ConversationClient<T, Null = never, ExtArgs extends run
  * Fields of the Conversation model
  */
 export interface ConversationFieldRefs {
-  readonly id: Prisma.FieldRef<"Conversation", 'String'>
-  readonly tenantId: Prisma.FieldRef<"Conversation", 'String'>
-  readonly roomId: Prisma.FieldRef<"Conversation", 'String'>
-  readonly contractId: Prisma.FieldRef<"Conversation", 'String'>
-  readonly ticketId: Prisma.FieldRef<"Conversation", 'String'>
+  readonly id: Prisma.FieldRef<"Conversation", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"Conversation", 'Int'>
+  readonly roomId: Prisma.FieldRef<"Conversation", 'Int'>
+  readonly contractId: Prisma.FieldRef<"Conversation", 'Int'>
+  readonly ticketId: Prisma.FieldRef<"Conversation", 'Int'>
   readonly type: Prisma.FieldRef<"Conversation", 'ConversationType'>
   readonly createdAt: Prisma.FieldRef<"Conversation", 'DateTime'>
 }

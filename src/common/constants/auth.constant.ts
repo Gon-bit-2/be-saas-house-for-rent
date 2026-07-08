@@ -15,7 +15,7 @@ export type ConditionGuardType = (typeof ConditionGuard)[keyof typeof ConditionG
 export const UserStatus = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
-  BLOCKED: 'BLOCKED',
+  BANNED: 'BANNED',
 } as const
 
 export const TypeOfVerificationCode = {

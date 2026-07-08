@@ -27,16 +27,20 @@ export type AggregateContractFile = {
 }
 
 export type ContractFileAvgAggregateOutputType = {
+  id: number | null
+  contractId: number | null
   version: number | null
 }
 
 export type ContractFileSumAggregateOutputType = {
+  id: number | null
+  contractId: number | null
   version: number | null
 }
 
 export type ContractFileMinAggregateOutputType = {
-  id: string | null
-  contractId: string | null
+  id: number | null
+  contractId: number | null
   fileUrl: string | null
   fileType: string | null
   version: number | null
@@ -44,8 +48,8 @@ export type ContractFileMinAggregateOutputType = {
 }
 
 export type ContractFileMaxAggregateOutputType = {
-  id: string | null
-  contractId: string | null
+  id: number | null
+  contractId: number | null
   fileUrl: string | null
   fileType: string | null
   version: number | null
@@ -64,10 +68,14 @@ export type ContractFileCountAggregateOutputType = {
 
 
 export type ContractFileAvgAggregateInputType = {
+  id?: true
+  contractId?: true
   version?: true
 }
 
 export type ContractFileSumAggregateInputType = {
+  id?: true
+  contractId?: true
   version?: true
 }
 
@@ -186,8 +194,8 @@ export type ContractFileGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 export type ContractFileGroupByOutputType = {
-  id: string
-  contractId: string
+  id: number
+  contractId: number
   fileUrl: string
   fileType: string
   version: number
@@ -218,8 +226,8 @@ export type ContractFileWhereInput = {
   AND?: Prisma.ContractFileWhereInput | Prisma.ContractFileWhereInput[]
   OR?: Prisma.ContractFileWhereInput[]
   NOT?: Prisma.ContractFileWhereInput | Prisma.ContractFileWhereInput[]
-  id?: Prisma.UuidFilter<"ContractFile"> | string
-  contractId?: Prisma.UuidFilter<"ContractFile"> | string
+  id?: Prisma.IntFilter<"ContractFile"> | number
+  contractId?: Prisma.IntFilter<"ContractFile"> | number
   fileUrl?: Prisma.StringFilter<"ContractFile"> | string
   fileType?: Prisma.StringFilter<"ContractFile"> | string
   version?: Prisma.IntFilter<"ContractFile"> | number
@@ -238,11 +246,11 @@ export type ContractFileOrderByWithRelationInput = {
 }
 
 export type ContractFileWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.ContractFileWhereInput | Prisma.ContractFileWhereInput[]
   OR?: Prisma.ContractFileWhereInput[]
   NOT?: Prisma.ContractFileWhereInput | Prisma.ContractFileWhereInput[]
-  contractId?: Prisma.UuidFilter<"ContractFile"> | string
+  contractId?: Prisma.IntFilter<"ContractFile"> | number
   fileUrl?: Prisma.StringFilter<"ContractFile"> | string
   fileType?: Prisma.StringFilter<"ContractFile"> | string
   version?: Prisma.IntFilter<"ContractFile"> | number
@@ -268,8 +276,8 @@ export type ContractFileScalarWhereWithAggregatesInput = {
   AND?: Prisma.ContractFileScalarWhereWithAggregatesInput | Prisma.ContractFileScalarWhereWithAggregatesInput[]
   OR?: Prisma.ContractFileScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ContractFileScalarWhereWithAggregatesInput | Prisma.ContractFileScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"ContractFile"> | string
-  contractId?: Prisma.UuidWithAggregatesFilter<"ContractFile"> | string
+  id?: Prisma.IntWithAggregatesFilter<"ContractFile"> | number
+  contractId?: Prisma.IntWithAggregatesFilter<"ContractFile"> | number
   fileUrl?: Prisma.StringWithAggregatesFilter<"ContractFile"> | string
   fileType?: Prisma.StringWithAggregatesFilter<"ContractFile"> | string
   version?: Prisma.IntWithAggregatesFilter<"ContractFile"> | number
@@ -277,7 +285,6 @@ export type ContractFileScalarWhereWithAggregatesInput = {
 }
 
 export type ContractFileCreateInput = {
-  id?: string
   fileUrl: string
   fileType: string
   version?: number
@@ -286,8 +293,8 @@ export type ContractFileCreateInput = {
 }
 
 export type ContractFileUncheckedCreateInput = {
-  id?: string
-  contractId: string
+  id?: number
+  contractId: number
   fileUrl: string
   fileType: string
   version?: number
@@ -295,7 +302,6 @@ export type ContractFileUncheckedCreateInput = {
 }
 
 export type ContractFileUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
@@ -304,8 +310,8 @@ export type ContractFileUpdateInput = {
 }
 
 export type ContractFileUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
@@ -313,8 +319,8 @@ export type ContractFileUncheckedUpdateInput = {
 }
 
 export type ContractFileCreateManyInput = {
-  id?: string
-  contractId: string
+  id?: number
+  contractId: number
   fileUrl: string
   fileType: string
   version?: number
@@ -322,7 +328,6 @@ export type ContractFileCreateManyInput = {
 }
 
 export type ContractFileUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
@@ -330,8 +335,8 @@ export type ContractFileUpdateManyMutationInput = {
 }
 
 export type ContractFileUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
@@ -358,6 +363,8 @@ export type ContractFileCountOrderByAggregateInput = {
 }
 
 export type ContractFileAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
   version?: Prisma.SortOrder
 }
 
@@ -380,6 +387,8 @@ export type ContractFileMinOrderByAggregateInput = {
 }
 
 export type ContractFileSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
   version?: Prisma.SortOrder
 }
 
@@ -426,7 +435,6 @@ export type ContractFileUncheckedUpdateManyWithoutContractNestedInput = {
 }
 
 export type ContractFileCreateWithoutContractInput = {
-  id?: string
   fileUrl: string
   fileType: string
   version?: number
@@ -434,7 +442,7 @@ export type ContractFileCreateWithoutContractInput = {
 }
 
 export type ContractFileUncheckedCreateWithoutContractInput = {
-  id?: string
+  id?: number
   fileUrl: string
   fileType: string
   version?: number
@@ -471,8 +479,8 @@ export type ContractFileScalarWhereInput = {
   AND?: Prisma.ContractFileScalarWhereInput | Prisma.ContractFileScalarWhereInput[]
   OR?: Prisma.ContractFileScalarWhereInput[]
   NOT?: Prisma.ContractFileScalarWhereInput | Prisma.ContractFileScalarWhereInput[]
-  id?: Prisma.UuidFilter<"ContractFile"> | string
-  contractId?: Prisma.UuidFilter<"ContractFile"> | string
+  id?: Prisma.IntFilter<"ContractFile"> | number
+  contractId?: Prisma.IntFilter<"ContractFile"> | number
   fileUrl?: Prisma.StringFilter<"ContractFile"> | string
   fileType?: Prisma.StringFilter<"ContractFile"> | string
   version?: Prisma.IntFilter<"ContractFile"> | number
@@ -480,7 +488,7 @@ export type ContractFileScalarWhereInput = {
 }
 
 export type ContractFileCreateManyContractInput = {
-  id?: string
+  id?: number
   fileUrl: string
   fileType: string
   version?: number
@@ -488,7 +496,6 @@ export type ContractFileCreateManyContractInput = {
 }
 
 export type ContractFileUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
@@ -496,7 +503,7 @@ export type ContractFileUpdateWithoutContractInput = {
 }
 
 export type ContractFileUncheckedUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
@@ -504,7 +511,7 @@ export type ContractFileUncheckedUpdateWithoutContractInput = {
 }
 
 export type ContractFileUncheckedUpdateManyWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
@@ -575,11 +582,11 @@ export type $ContractFilePayload<ExtArgs extends runtime.Types.Extensions.Intern
     /**
      * ID file (UUID)
      */
-    id: string
+    id: number
     /**
      * ID hợp đồng liên quan
      */
-    contractId: string
+    contractId: number
     /**
      * Đường dẫn lưu trữ file trên máy chủ hoặc cloud storage
      */
@@ -1020,8 +1027,8 @@ export interface Prisma__ContractFileClient<T, Null = never, ExtArgs extends run
  * Fields of the ContractFile model
  */
 export interface ContractFileFieldRefs {
-  readonly id: Prisma.FieldRef<"ContractFile", 'String'>
-  readonly contractId: Prisma.FieldRef<"ContractFile", 'String'>
+  readonly id: Prisma.FieldRef<"ContractFile", 'Int'>
+  readonly contractId: Prisma.FieldRef<"ContractFile", 'Int'>
   readonly fileUrl: Prisma.FieldRef<"ContractFile", 'String'>
   readonly fileType: Prisma.FieldRef<"ContractFile", 'String'>
   readonly version: Prisma.FieldRef<"ContractFile", 'Int'>

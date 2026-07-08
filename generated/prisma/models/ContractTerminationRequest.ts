@@ -20,36 +20,56 @@ export type ContractTerminationRequestModel = runtime.Types.Result.DefaultSelect
 
 export type AggregateContractTerminationRequest = {
   _count: ContractTerminationRequestCountAggregateOutputType | null
+  _avg: ContractTerminationRequestAvgAggregateOutputType | null
+  _sum: ContractTerminationRequestSumAggregateOutputType | null
   _min: ContractTerminationRequestMinAggregateOutputType | null
   _max: ContractTerminationRequestMaxAggregateOutputType | null
 }
 
+export type ContractTerminationRequestAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  contractId: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
+export type ContractTerminationRequestSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  contractId: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
 export type ContractTerminationRequestMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  contractId: string | null
+  id: number | null
+  tenantId: number | null
+  contractId: number | null
   reason: string | null
   expectedMoveOutDate: Date | null
   status: $Enums.TerminationRequestStatus | null
   createdAt: Date | null
   updatedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type ContractTerminationRequestMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  contractId: string | null
+  id: number | null
+  tenantId: number | null
+  contractId: number | null
   reason: string | null
   expectedMoveOutDate: Date | null
   status: $Enums.TerminationRequestStatus | null
   createdAt: Date | null
   updatedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type ContractTerminationRequestCountAggregateOutputType = {
@@ -67,6 +87,24 @@ export type ContractTerminationRequestCountAggregateOutputType = {
   _all: number
 }
 
+
+export type ContractTerminationRequestAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  contractId?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
+
+export type ContractTerminationRequestSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  contractId?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
 
 export type ContractTerminationRequestMinAggregateInputType = {
   id?: true
@@ -149,6 +187,18 @@ export type ContractTerminationRequestAggregateArgs<ExtArgs extends runtime.Type
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: ContractTerminationRequestAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: ContractTerminationRequestSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: ContractTerminationRequestMinAggregateInputType
@@ -179,23 +229,27 @@ export type ContractTerminationRequestGroupByArgs<ExtArgs extends runtime.Types.
   take?: number
   skip?: number
   _count?: ContractTerminationRequestCountAggregateInputType | true
+  _avg?: ContractTerminationRequestAvgAggregateInputType
+  _sum?: ContractTerminationRequestSumAggregateInputType
   _min?: ContractTerminationRequestMinAggregateInputType
   _max?: ContractTerminationRequestMaxAggregateInputType
 }
 
 export type ContractTerminationRequestGroupByOutputType = {
-  id: string
-  tenantId: string
-  contractId: string
+  id: number
+  tenantId: number
+  contractId: number
   reason: string
   expectedMoveOutDate: Date
   status: $Enums.TerminationRequestStatus
   createdAt: Date
   updatedAt: Date
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: ContractTerminationRequestCountAggregateOutputType | null
+  _avg: ContractTerminationRequestAvgAggregateOutputType | null
+  _sum: ContractTerminationRequestSumAggregateOutputType | null
   _min: ContractTerminationRequestMinAggregateOutputType | null
   _max: ContractTerminationRequestMaxAggregateOutputType | null
 }
@@ -219,17 +273,17 @@ export type ContractTerminationRequestWhereInput = {
   AND?: Prisma.ContractTerminationRequestWhereInput | Prisma.ContractTerminationRequestWhereInput[]
   OR?: Prisma.ContractTerminationRequestWhereInput[]
   NOT?: Prisma.ContractTerminationRequestWhereInput | Prisma.ContractTerminationRequestWhereInput[]
-  id?: Prisma.UuidFilter<"ContractTerminationRequest"> | string
-  tenantId?: Prisma.UuidFilter<"ContractTerminationRequest"> | string
-  contractId?: Prisma.UuidFilter<"ContractTerminationRequest"> | string
+  id?: Prisma.IntFilter<"ContractTerminationRequest"> | number
+  tenantId?: Prisma.IntFilter<"ContractTerminationRequest"> | number
+  contractId?: Prisma.IntFilter<"ContractTerminationRequest"> | number
   reason?: Prisma.StringFilter<"ContractTerminationRequest"> | string
   expectedMoveOutDate?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   status?: Prisma.EnumTerminationRequestStatusFilter<"ContractTerminationRequest"> | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"ContractTerminationRequest"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"ContractTerminationRequest"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"ContractTerminationRequest"> | string | null
+  createdById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -257,20 +311,20 @@ export type ContractTerminationRequestOrderByWithRelationInput = {
 }
 
 export type ContractTerminationRequestWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.ContractTerminationRequestWhereInput | Prisma.ContractTerminationRequestWhereInput[]
   OR?: Prisma.ContractTerminationRequestWhereInput[]
   NOT?: Prisma.ContractTerminationRequestWhereInput | Prisma.ContractTerminationRequestWhereInput[]
-  tenantId?: Prisma.UuidFilter<"ContractTerminationRequest"> | string
-  contractId?: Prisma.UuidFilter<"ContractTerminationRequest"> | string
+  tenantId?: Prisma.IntFilter<"ContractTerminationRequest"> | number
+  contractId?: Prisma.IntFilter<"ContractTerminationRequest"> | number
   reason?: Prisma.StringFilter<"ContractTerminationRequest"> | string
   expectedMoveOutDate?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   status?: Prisma.EnumTerminationRequestStatusFilter<"ContractTerminationRequest"> | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"ContractTerminationRequest"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"ContractTerminationRequest"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"ContractTerminationRequest"> | string | null
+  createdById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -291,29 +345,30 @@ export type ContractTerminationRequestOrderByWithAggregationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ContractTerminationRequestCountOrderByAggregateInput
+  _avg?: Prisma.ContractTerminationRequestAvgOrderByAggregateInput
   _max?: Prisma.ContractTerminationRequestMaxOrderByAggregateInput
   _min?: Prisma.ContractTerminationRequestMinOrderByAggregateInput
+  _sum?: Prisma.ContractTerminationRequestSumOrderByAggregateInput
 }
 
 export type ContractTerminationRequestScalarWhereWithAggregatesInput = {
   AND?: Prisma.ContractTerminationRequestScalarWhereWithAggregatesInput | Prisma.ContractTerminationRequestScalarWhereWithAggregatesInput[]
   OR?: Prisma.ContractTerminationRequestScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ContractTerminationRequestScalarWhereWithAggregatesInput | Prisma.ContractTerminationRequestScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"ContractTerminationRequest"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"ContractTerminationRequest"> | string
-  contractId?: Prisma.UuidWithAggregatesFilter<"ContractTerminationRequest"> | string
+  id?: Prisma.IntWithAggregatesFilter<"ContractTerminationRequest"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"ContractTerminationRequest"> | number
+  contractId?: Prisma.IntWithAggregatesFilter<"ContractTerminationRequest"> | number
   reason?: Prisma.StringWithAggregatesFilter<"ContractTerminationRequest"> | string
   expectedMoveOutDate?: Prisma.DateTimeWithAggregatesFilter<"ContractTerminationRequest"> | Date | string
   status?: Prisma.EnumTerminationRequestStatusWithAggregatesFilter<"ContractTerminationRequest"> | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ContractTerminationRequest"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ContractTerminationRequest"> | Date | string
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"ContractTerminationRequest"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"ContractTerminationRequest"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"ContractTerminationRequest"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"ContractTerminationRequest"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"ContractTerminationRequest"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"ContractTerminationRequest"> | number | null
 }
 
 export type ContractTerminationRequestCreateInput = {
-  id?: string
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
@@ -327,21 +382,20 @@ export type ContractTerminationRequestCreateInput = {
 }
 
 export type ContractTerminationRequestUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  contractId: string
+  id?: number
+  tenantId: number
+  contractId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractTerminationRequestUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
@@ -355,35 +409,34 @@ export type ContractTerminationRequestUpdateInput = {
 }
 
 export type ContractTerminationRequestUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestCreateManyInput = {
-  id?: string
-  tenantId: string
-  contractId: string
+  id?: number
+  tenantId: number
+  contractId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractTerminationRequestUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
@@ -392,17 +445,17 @@ export type ContractTerminationRequestUpdateManyMutationInput = {
 }
 
 export type ContractTerminationRequestUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestListRelationFilter = {
@@ -424,6 +477,15 @@ export type ContractTerminationRequestCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
+export type ContractTerminationRequestAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -452,6 +514,15 @@ export type ContractTerminationRequestMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
+export type ContractTerminationRequestSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -672,7 +743,6 @@ export type EnumTerminationRequestStatusFieldUpdateOperationsInput = {
 }
 
 export type ContractTerminationRequestCreateWithoutCreatedByInput = {
-  id?: string
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
@@ -685,16 +755,16 @@ export type ContractTerminationRequestCreateWithoutCreatedByInput = {
 }
 
 export type ContractTerminationRequestUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  tenantId: string
-  contractId: string
+  id?: number
+  tenantId: number
+  contractId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractTerminationRequestCreateOrConnectWithoutCreatedByInput = {
@@ -708,7 +778,6 @@ export type ContractTerminationRequestCreateManyCreatedByInputEnvelope = {
 }
 
 export type ContractTerminationRequestCreateWithoutUpdatedByInput = {
-  id?: string
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
@@ -721,16 +790,16 @@ export type ContractTerminationRequestCreateWithoutUpdatedByInput = {
 }
 
 export type ContractTerminationRequestUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  tenantId: string
-  contractId: string
+  id?: number
+  tenantId: number
+  contractId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractTerminationRequestCreateOrConnectWithoutUpdatedByInput = {
@@ -744,7 +813,6 @@ export type ContractTerminationRequestCreateManyUpdatedByInputEnvelope = {
 }
 
 export type ContractTerminationRequestCreateWithoutDeletedByInput = {
-  id?: string
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
@@ -757,16 +825,16 @@ export type ContractTerminationRequestCreateWithoutDeletedByInput = {
 }
 
 export type ContractTerminationRequestUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  tenantId: string
-  contractId: string
+  id?: number
+  tenantId: number
+  contractId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type ContractTerminationRequestCreateOrConnectWithoutDeletedByInput = {
@@ -799,17 +867,17 @@ export type ContractTerminationRequestScalarWhereInput = {
   AND?: Prisma.ContractTerminationRequestScalarWhereInput | Prisma.ContractTerminationRequestScalarWhereInput[]
   OR?: Prisma.ContractTerminationRequestScalarWhereInput[]
   NOT?: Prisma.ContractTerminationRequestScalarWhereInput | Prisma.ContractTerminationRequestScalarWhereInput[]
-  id?: Prisma.UuidFilter<"ContractTerminationRequest"> | string
-  tenantId?: Prisma.UuidFilter<"ContractTerminationRequest"> | string
-  contractId?: Prisma.UuidFilter<"ContractTerminationRequest"> | string
+  id?: Prisma.IntFilter<"ContractTerminationRequest"> | number
+  tenantId?: Prisma.IntFilter<"ContractTerminationRequest"> | number
+  contractId?: Prisma.IntFilter<"ContractTerminationRequest"> | number
   reason?: Prisma.StringFilter<"ContractTerminationRequest"> | string
   expectedMoveOutDate?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   status?: Prisma.EnumTerminationRequestStatusFilter<"ContractTerminationRequest"> | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"ContractTerminationRequest"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"ContractTerminationRequest"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"ContractTerminationRequest"> | string | null
+  createdById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
 }
 
 export type ContractTerminationRequestUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -845,7 +913,6 @@ export type ContractTerminationRequestUpdateManyWithWhereWithoutDeletedByInput =
 }
 
 export type ContractTerminationRequestCreateWithoutTenantInput = {
-  id?: string
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
@@ -858,16 +925,16 @@ export type ContractTerminationRequestCreateWithoutTenantInput = {
 }
 
 export type ContractTerminationRequestUncheckedCreateWithoutTenantInput = {
-  id?: string
-  contractId: string
+  id?: number
+  contractId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractTerminationRequestCreateOrConnectWithoutTenantInput = {
@@ -897,7 +964,6 @@ export type ContractTerminationRequestUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type ContractTerminationRequestCreateWithoutContractInput = {
-  id?: string
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
@@ -910,16 +976,16 @@ export type ContractTerminationRequestCreateWithoutContractInput = {
 }
 
 export type ContractTerminationRequestUncheckedCreateWithoutContractInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractTerminationRequestCreateOrConnectWithoutContractInput = {
@@ -949,46 +1015,45 @@ export type ContractTerminationRequestUpdateManyWithWhereWithoutContractInput = 
 }
 
 export type ContractTerminationRequestCreateManyCreatedByInput = {
-  id?: string
-  tenantId: string
-  contractId: string
+  id?: number
+  tenantId: number
+  contractId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractTerminationRequestCreateManyUpdatedByInput = {
-  id?: string
-  tenantId: string
-  contractId: string
+  id?: number
+  tenantId: number
+  contractId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractTerminationRequestCreateManyDeletedByInput = {
-  id?: string
-  tenantId: string
-  contractId: string
+  id?: number
+  tenantId: number
+  contractId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type ContractTerminationRequestUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
@@ -1001,33 +1066,32 @@ export type ContractTerminationRequestUpdateWithoutCreatedByInput = {
 }
 
 export type ContractTerminationRequestUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
@@ -1040,33 +1104,32 @@ export type ContractTerminationRequestUpdateWithoutUpdatedByInput = {
 }
 
 export type ContractTerminationRequestUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
@@ -1079,46 +1142,45 @@ export type ContractTerminationRequestUpdateWithoutDeletedByInput = {
 }
 
 export type ContractTerminationRequestUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestCreateManyTenantInput = {
-  id?: string
-  contractId: string
+  id?: number
+  contractId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractTerminationRequestUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
@@ -1131,46 +1193,45 @@ export type ContractTerminationRequestUpdateWithoutTenantInput = {
 }
 
 export type ContractTerminationRequestUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestCreateManyContractInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
   createdAt?: Date | string
   updatedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractTerminationRequestUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
@@ -1183,29 +1244,29 @@ export type ContractTerminationRequestUpdateWithoutContractInput = {
 }
 
 export type ContractTerminationRequestUncheckedUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestUncheckedUpdateManyWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -1323,15 +1384,15 @@ export type $ContractTerminationRequestPayload<ExtArgs extends runtime.Types.Ext
     /**
      * ID yêu cầu thanh lý (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant quản lý phòng
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID hợp đồng muốn chấm dứt
      */
-    contractId: string
+    contractId: number
     /**
      * Lý do xin trả phòng/chấm dứt hợp đồng trọ
      */
@@ -1355,15 +1416,15 @@ export type $ContractTerminationRequestPayload<ExtArgs extends runtime.Types.Ext
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["contractTerminationRequest"]>
   composites: {}
 }
@@ -1792,17 +1853,17 @@ export interface Prisma__ContractTerminationRequestClient<T, Null = never, ExtAr
  * Fields of the ContractTerminationRequest model
  */
 export interface ContractTerminationRequestFieldRefs {
-  readonly id: Prisma.FieldRef<"ContractTerminationRequest", 'String'>
-  readonly tenantId: Prisma.FieldRef<"ContractTerminationRequest", 'String'>
-  readonly contractId: Prisma.FieldRef<"ContractTerminationRequest", 'String'>
+  readonly id: Prisma.FieldRef<"ContractTerminationRequest", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"ContractTerminationRequest", 'Int'>
+  readonly contractId: Prisma.FieldRef<"ContractTerminationRequest", 'Int'>
   readonly reason: Prisma.FieldRef<"ContractTerminationRequest", 'String'>
   readonly expectedMoveOutDate: Prisma.FieldRef<"ContractTerminationRequest", 'DateTime'>
   readonly status: Prisma.FieldRef<"ContractTerminationRequest", 'TerminationRequestStatus'>
   readonly createdAt: Prisma.FieldRef<"ContractTerminationRequest", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ContractTerminationRequest", 'DateTime'>
-  readonly createdById: Prisma.FieldRef<"ContractTerminationRequest", 'String'>
-  readonly updatedById: Prisma.FieldRef<"ContractTerminationRequest", 'String'>
-  readonly deletedById: Prisma.FieldRef<"ContractTerminationRequest", 'String'>
+  readonly createdById: Prisma.FieldRef<"ContractTerminationRequest", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"ContractTerminationRequest", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"ContractTerminationRequest", 'Int'>
 }
     
 

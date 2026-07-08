@@ -27,27 +27,43 @@ export type AggregateMeterReading = {
 }
 
 export type MeterReadingAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  meterId: number | null
+  contractId: number | null
   previousValue: runtime.Decimal | null
   currentValue: runtime.Decimal | null
   consumption: runtime.Decimal | null
   unitPrice: runtime.Decimal | null
   amount: runtime.Decimal | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type MeterReadingSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  meterId: number | null
+  contractId: number | null
   previousValue: runtime.Decimal | null
   currentValue: runtime.Decimal | null
   consumption: runtime.Decimal | null
   unitPrice: runtime.Decimal | null
   amount: runtime.Decimal | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type MeterReadingMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  meterId: string | null
-  contractId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  meterId: number | null
+  contractId: number | null
   billingMonth: Date | null
   previousValue: runtime.Decimal | null
   currentValue: runtime.Decimal | null
@@ -58,17 +74,17 @@ export type MeterReadingMinAggregateOutputType = {
   source: $Enums.ReadingSource | null
   status: $Enums.ReadingStatus | null
   recordedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type MeterReadingMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  meterId: string | null
-  contractId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  meterId: number | null
+  contractId: number | null
   billingMonth: Date | null
   previousValue: runtime.Decimal | null
   currentValue: runtime.Decimal | null
@@ -79,9 +95,9 @@ export type MeterReadingMaxAggregateOutputType = {
   source: $Enums.ReadingSource | null
   status: $Enums.ReadingStatus | null
   recordedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type MeterReadingCountAggregateOutputType = {
@@ -108,19 +124,35 @@ export type MeterReadingCountAggregateOutputType = {
 
 
 export type MeterReadingAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  meterId?: true
+  contractId?: true
   previousValue?: true
   currentValue?: true
   consumption?: true
   unitPrice?: true
   amount?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type MeterReadingSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  meterId?: true
+  contractId?: true
   previousValue?: true
   currentValue?: true
   consumption?: true
   unitPrice?: true
   amount?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type MeterReadingMinAggregateInputType = {
@@ -274,11 +306,11 @@ export type MeterReadingGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 export type MeterReadingGroupByOutputType = {
-  id: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  contractId: string | null
+  id: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  contractId: number | null
   billingMonth: Date
   previousValue: runtime.Decimal
   currentValue: runtime.Decimal
@@ -289,9 +321,9 @@ export type MeterReadingGroupByOutputType = {
   source: $Enums.ReadingSource
   status: $Enums.ReadingStatus
   recordedAt: Date
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: MeterReadingCountAggregateOutputType | null
   _avg: MeterReadingAvgAggregateOutputType | null
   _sum: MeterReadingSumAggregateOutputType | null
@@ -318,11 +350,11 @@ export type MeterReadingWhereInput = {
   AND?: Prisma.MeterReadingWhereInput | Prisma.MeterReadingWhereInput[]
   OR?: Prisma.MeterReadingWhereInput[]
   NOT?: Prisma.MeterReadingWhereInput | Prisma.MeterReadingWhereInput[]
-  id?: Prisma.UuidFilter<"MeterReading"> | string
-  tenantId?: Prisma.UuidFilter<"MeterReading"> | string
-  roomId?: Prisma.UuidFilter<"MeterReading"> | string
-  meterId?: Prisma.UuidFilter<"MeterReading"> | string
-  contractId?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
+  id?: Prisma.IntFilter<"MeterReading"> | number
+  tenantId?: Prisma.IntFilter<"MeterReading"> | number
+  roomId?: Prisma.IntFilter<"MeterReading"> | number
+  meterId?: Prisma.IntFilter<"MeterReading"> | number
+  contractId?: Prisma.IntNullableFilter<"MeterReading"> | number | null
   billingMonth?: Prisma.DateTimeFilter<"MeterReading"> | Date | string
   previousValue?: Prisma.DecimalFilter<"MeterReading"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFilter<"MeterReading"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -333,9 +365,9 @@ export type MeterReadingWhereInput = {
   source?: Prisma.EnumReadingSourceFilter<"MeterReading"> | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFilter<"MeterReading"> | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFilter<"MeterReading"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
+  createdById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   meter?: Prisma.XOR<Prisma.UtilityMeterScalarRelationFilter, Prisma.UtilityMeterWhereInput>
@@ -376,15 +408,15 @@ export type MeterReadingOrderByWithRelationInput = {
 }
 
 export type MeterReadingWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   meterId_billingMonth?: Prisma.MeterReadingMeterIdBillingMonthCompoundUniqueInput
   AND?: Prisma.MeterReadingWhereInput | Prisma.MeterReadingWhereInput[]
   OR?: Prisma.MeterReadingWhereInput[]
   NOT?: Prisma.MeterReadingWhereInput | Prisma.MeterReadingWhereInput[]
-  tenantId?: Prisma.UuidFilter<"MeterReading"> | string
-  roomId?: Prisma.UuidFilter<"MeterReading"> | string
-  meterId?: Prisma.UuidFilter<"MeterReading"> | string
-  contractId?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
+  tenantId?: Prisma.IntFilter<"MeterReading"> | number
+  roomId?: Prisma.IntFilter<"MeterReading"> | number
+  meterId?: Prisma.IntFilter<"MeterReading"> | number
+  contractId?: Prisma.IntNullableFilter<"MeterReading"> | number | null
   billingMonth?: Prisma.DateTimeFilter<"MeterReading"> | Date | string
   previousValue?: Prisma.DecimalFilter<"MeterReading"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFilter<"MeterReading"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -395,9 +427,9 @@ export type MeterReadingWhereUniqueInput = Prisma.AtLeast<{
   source?: Prisma.EnumReadingSourceFilter<"MeterReading"> | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFilter<"MeterReading"> | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFilter<"MeterReading"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
+  createdById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   meter?: Prisma.XOR<Prisma.UtilityMeterScalarRelationFilter, Prisma.UtilityMeterWhereInput>
@@ -438,11 +470,11 @@ export type MeterReadingScalarWhereWithAggregatesInput = {
   AND?: Prisma.MeterReadingScalarWhereWithAggregatesInput | Prisma.MeterReadingScalarWhereWithAggregatesInput[]
   OR?: Prisma.MeterReadingScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MeterReadingScalarWhereWithAggregatesInput | Prisma.MeterReadingScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"MeterReading"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"MeterReading"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"MeterReading"> | string
-  meterId?: Prisma.UuidWithAggregatesFilter<"MeterReading"> | string
-  contractId?: Prisma.UuidNullableWithAggregatesFilter<"MeterReading"> | string | null
+  id?: Prisma.IntWithAggregatesFilter<"MeterReading"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"MeterReading"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"MeterReading"> | number
+  meterId?: Prisma.IntWithAggregatesFilter<"MeterReading"> | number
+  contractId?: Prisma.IntNullableWithAggregatesFilter<"MeterReading"> | number | null
   billingMonth?: Prisma.DateTimeWithAggregatesFilter<"MeterReading"> | Date | string
   previousValue?: Prisma.DecimalWithAggregatesFilter<"MeterReading"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalWithAggregatesFilter<"MeterReading"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -453,13 +485,12 @@ export type MeterReadingScalarWhereWithAggregatesInput = {
   source?: Prisma.EnumReadingSourceWithAggregatesFilter<"MeterReading"> | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusWithAggregatesFilter<"MeterReading"> | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeWithAggregatesFilter<"MeterReading"> | Date | string
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"MeterReading"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"MeterReading"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"MeterReading"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"MeterReading"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"MeterReading"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"MeterReading"> | number | null
 }
 
 export type MeterReadingCreateInput = {
-  id?: string
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -481,11 +512,11 @@ export type MeterReadingCreateInput = {
 }
 
 export type MeterReadingUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -496,14 +527,13 @@ export type MeterReadingUncheckedCreateInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
 }
 
 export type MeterReadingUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -525,11 +555,11 @@ export type MeterReadingUpdateInput = {
 }
 
 export type MeterReadingUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -540,18 +570,18 @@ export type MeterReadingUncheckedUpdateInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
 }
 
 export type MeterReadingCreateManyInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -562,13 +592,12 @@ export type MeterReadingCreateManyInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type MeterReadingUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -582,11 +611,11 @@ export type MeterReadingUpdateManyMutationInput = {
 }
 
 export type MeterReadingUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -597,9 +626,9 @@ export type MeterReadingUncheckedUpdateManyInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MeterReadingListRelationFilter = {
@@ -613,7 +642,7 @@ export type MeterReadingOrderByRelationAggregateInput = {
 }
 
 export type MeterReadingMeterIdBillingMonthCompoundUniqueInput = {
-  meterId: string
+  meterId: number
   billingMonth: Date | string
 }
 
@@ -639,11 +668,19 @@ export type MeterReadingCountOrderByAggregateInput = {
 }
 
 export type MeterReadingAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  meterId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
   previousValue?: Prisma.SortOrder
   currentValue?: Prisma.SortOrder
   consumption?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type MeterReadingMaxOrderByAggregateInput = {
@@ -689,11 +726,19 @@ export type MeterReadingMinOrderByAggregateInput = {
 }
 
 export type MeterReadingSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  meterId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
   previousValue?: Prisma.SortOrder
   currentValue?: Prisma.SortOrder
   consumption?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type MeterReadingNullableScalarRelationFilter = {
@@ -1020,7 +1065,6 @@ export type MeterReadingUpdateOneWithoutInvoiceItemsNestedInput = {
 }
 
 export type MeterReadingCreateWithoutCreatedByInput = {
-  id?: string
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1041,11 +1085,11 @@ export type MeterReadingCreateWithoutCreatedByInput = {
 }
 
 export type MeterReadingUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1056,8 +1100,8 @@ export type MeterReadingUncheckedCreateWithoutCreatedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
 }
 
@@ -1072,7 +1116,6 @@ export type MeterReadingCreateManyCreatedByInputEnvelope = {
 }
 
 export type MeterReadingCreateWithoutUpdatedByInput = {
-  id?: string
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1093,11 +1136,11 @@ export type MeterReadingCreateWithoutUpdatedByInput = {
 }
 
 export type MeterReadingUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1108,8 +1151,8 @@ export type MeterReadingUncheckedCreateWithoutUpdatedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
 }
 
@@ -1124,7 +1167,6 @@ export type MeterReadingCreateManyUpdatedByInputEnvelope = {
 }
 
 export type MeterReadingCreateWithoutDeletedByInput = {
-  id?: string
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1145,11 +1187,11 @@ export type MeterReadingCreateWithoutDeletedByInput = {
 }
 
 export type MeterReadingUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1160,8 +1202,8 @@ export type MeterReadingUncheckedCreateWithoutDeletedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
 }
 
@@ -1195,11 +1237,11 @@ export type MeterReadingScalarWhereInput = {
   AND?: Prisma.MeterReadingScalarWhereInput | Prisma.MeterReadingScalarWhereInput[]
   OR?: Prisma.MeterReadingScalarWhereInput[]
   NOT?: Prisma.MeterReadingScalarWhereInput | Prisma.MeterReadingScalarWhereInput[]
-  id?: Prisma.UuidFilter<"MeterReading"> | string
-  tenantId?: Prisma.UuidFilter<"MeterReading"> | string
-  roomId?: Prisma.UuidFilter<"MeterReading"> | string
-  meterId?: Prisma.UuidFilter<"MeterReading"> | string
-  contractId?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
+  id?: Prisma.IntFilter<"MeterReading"> | number
+  tenantId?: Prisma.IntFilter<"MeterReading"> | number
+  roomId?: Prisma.IntFilter<"MeterReading"> | number
+  meterId?: Prisma.IntFilter<"MeterReading"> | number
+  contractId?: Prisma.IntNullableFilter<"MeterReading"> | number | null
   billingMonth?: Prisma.DateTimeFilter<"MeterReading"> | Date | string
   previousValue?: Prisma.DecimalFilter<"MeterReading"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFilter<"MeterReading"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1210,9 +1252,9 @@ export type MeterReadingScalarWhereInput = {
   source?: Prisma.EnumReadingSourceFilter<"MeterReading"> | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFilter<"MeterReading"> | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFilter<"MeterReading"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"MeterReading"> | string | null
+  createdById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
 }
 
 export type MeterReadingUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -1248,7 +1290,6 @@ export type MeterReadingUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type MeterReadingCreateWithoutTenantInput = {
-  id?: string
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1269,10 +1310,10 @@ export type MeterReadingCreateWithoutTenantInput = {
 }
 
 export type MeterReadingUncheckedCreateWithoutTenantInput = {
-  id?: string
-  roomId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1283,9 +1324,9 @@ export type MeterReadingUncheckedCreateWithoutTenantInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
 }
 
@@ -1316,7 +1357,6 @@ export type MeterReadingUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type MeterReadingCreateWithoutRoomInput = {
-  id?: string
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1337,10 +1377,10 @@ export type MeterReadingCreateWithoutRoomInput = {
 }
 
 export type MeterReadingUncheckedCreateWithoutRoomInput = {
-  id?: string
-  tenantId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1351,9 +1391,9 @@ export type MeterReadingUncheckedCreateWithoutRoomInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
 }
 
@@ -1384,7 +1424,6 @@ export type MeterReadingUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type MeterReadingCreateWithoutContractInput = {
-  id?: string
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1405,10 +1444,10 @@ export type MeterReadingCreateWithoutContractInput = {
 }
 
 export type MeterReadingUncheckedCreateWithoutContractInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1419,9 +1458,9 @@ export type MeterReadingUncheckedCreateWithoutContractInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
 }
 
@@ -1452,7 +1491,6 @@ export type MeterReadingUpdateManyWithWhereWithoutContractInput = {
 }
 
 export type MeterReadingCreateWithoutMeterInput = {
-  id?: string
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1473,10 +1511,10 @@ export type MeterReadingCreateWithoutMeterInput = {
 }
 
 export type MeterReadingUncheckedCreateWithoutMeterInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1487,9 +1525,9 @@ export type MeterReadingUncheckedCreateWithoutMeterInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
 }
 
@@ -1520,7 +1558,6 @@ export type MeterReadingUpdateManyWithWhereWithoutMeterInput = {
 }
 
 export type MeterReadingCreateWithoutInvoiceItemsInput = {
-  id?: string
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1541,11 +1578,11 @@ export type MeterReadingCreateWithoutInvoiceItemsInput = {
 }
 
 export type MeterReadingUncheckedCreateWithoutInvoiceItemsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1556,9 +1593,9 @@ export type MeterReadingUncheckedCreateWithoutInvoiceItemsInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type MeterReadingCreateOrConnectWithoutInvoiceItemsInput = {
@@ -1578,7 +1615,6 @@ export type MeterReadingUpdateToOneWithWhereWithoutInvoiceItemsInput = {
 }
 
 export type MeterReadingUpdateWithoutInvoiceItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1599,11 +1635,11 @@ export type MeterReadingUpdateWithoutInvoiceItemsInput = {
 }
 
 export type MeterReadingUncheckedUpdateWithoutInvoiceItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1614,17 +1650,17 @@ export type MeterReadingUncheckedUpdateWithoutInvoiceItemsInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MeterReadingCreateManyCreatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1635,16 +1671,16 @@ export type MeterReadingCreateManyCreatedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type MeterReadingCreateManyUpdatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1655,16 +1691,16 @@ export type MeterReadingCreateManyUpdatedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type MeterReadingCreateManyDeletedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1675,12 +1711,11 @@ export type MeterReadingCreateManyDeletedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type MeterReadingUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1701,11 +1736,11 @@ export type MeterReadingUpdateWithoutCreatedByInput = {
 }
 
 export type MeterReadingUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1716,17 +1751,17 @@ export type MeterReadingUncheckedUpdateWithoutCreatedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
 }
 
 export type MeterReadingUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1737,12 +1772,11 @@ export type MeterReadingUncheckedUpdateManyWithoutCreatedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MeterReadingUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1763,11 +1797,11 @@ export type MeterReadingUpdateWithoutUpdatedByInput = {
 }
 
 export type MeterReadingUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1778,17 +1812,17 @@ export type MeterReadingUncheckedUpdateWithoutUpdatedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
 }
 
 export type MeterReadingUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1799,12 +1833,11 @@ export type MeterReadingUncheckedUpdateManyWithoutUpdatedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MeterReadingUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1825,11 +1858,11 @@ export type MeterReadingUpdateWithoutDeletedByInput = {
 }
 
 export type MeterReadingUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1840,17 +1873,17 @@ export type MeterReadingUncheckedUpdateWithoutDeletedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
 }
 
 export type MeterReadingUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1861,15 +1894,15 @@ export type MeterReadingUncheckedUpdateManyWithoutDeletedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MeterReadingCreateManyTenantInput = {
-  id?: string
-  roomId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1880,13 +1913,12 @@ export type MeterReadingCreateManyTenantInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type MeterReadingUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1907,10 +1939,10 @@ export type MeterReadingUpdateWithoutTenantInput = {
 }
 
 export type MeterReadingUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1921,17 +1953,17 @@ export type MeterReadingUncheckedUpdateWithoutTenantInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
 }
 
 export type MeterReadingUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1942,16 +1974,16 @@ export type MeterReadingUncheckedUpdateManyWithoutTenantInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MeterReadingCreateManyRoomInput = {
-  id?: string
-  tenantId: string
-  meterId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  meterId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1962,13 +1994,12 @@ export type MeterReadingCreateManyRoomInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type MeterReadingUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1989,10 +2020,10 @@ export type MeterReadingUpdateWithoutRoomInput = {
 }
 
 export type MeterReadingUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2003,17 +2034,17 @@ export type MeterReadingUncheckedUpdateWithoutRoomInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
 }
 
 export type MeterReadingUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2024,16 +2055,16 @@ export type MeterReadingUncheckedUpdateManyWithoutRoomInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MeterReadingCreateManyContractInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2044,13 +2075,12 @@ export type MeterReadingCreateManyContractInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type MeterReadingUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2071,10 +2101,10 @@ export type MeterReadingUpdateWithoutContractInput = {
 }
 
 export type MeterReadingUncheckedUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2085,17 +2115,17 @@ export type MeterReadingUncheckedUpdateWithoutContractInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
 }
 
 export type MeterReadingUncheckedUpdateManyWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2106,16 +2136,16 @@ export type MeterReadingUncheckedUpdateManyWithoutContractInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type MeterReadingCreateManyMeterInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId?: number | null
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2126,13 +2156,12 @@ export type MeterReadingCreateManyMeterInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type MeterReadingUpdateWithoutMeterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2153,10 +2182,10 @@ export type MeterReadingUpdateWithoutMeterInput = {
 }
 
 export type MeterReadingUncheckedUpdateWithoutMeterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2167,17 +2196,17 @@ export type MeterReadingUncheckedUpdateWithoutMeterInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
 }
 
 export type MeterReadingUncheckedUpdateManyWithoutMeterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2188,9 +2217,9 @@ export type MeterReadingUncheckedUpdateManyWithoutMeterInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -2393,23 +2422,23 @@ export type $MeterReadingPayload<ExtArgs extends runtime.Types.Extensions.Intern
     /**
      * ID bản ghi ghi nhận chỉ số (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant quản lý
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID phòng ghi nhận chỉ số
      */
-    roomId: string
+    roomId: number
     /**
      * ID đồng hồ đo tương ứng
      */
-    meterId: string
+    meterId: number
     /**
      * ID hợp đồng thuê phòng hiệu lực tại thời điểm ghi nhận (nullable nếu phòng trống)
      */
-    contractId: string | null
+    contractId: number | null
     /**
      * Tháng/năm ghi nhận chỉ số tính toán (định dạng ngày 1 của tháng ghi nhận)
      */
@@ -2453,15 +2482,15 @@ export type $MeterReadingPayload<ExtArgs extends runtime.Types.Extensions.Intern
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["meterReading"]>
   composites: {}
 }
@@ -2893,11 +2922,11 @@ export interface Prisma__MeterReadingClient<T, Null = never, ExtArgs extends run
  * Fields of the MeterReading model
  */
 export interface MeterReadingFieldRefs {
-  readonly id: Prisma.FieldRef<"MeterReading", 'String'>
-  readonly tenantId: Prisma.FieldRef<"MeterReading", 'String'>
-  readonly roomId: Prisma.FieldRef<"MeterReading", 'String'>
-  readonly meterId: Prisma.FieldRef<"MeterReading", 'String'>
-  readonly contractId: Prisma.FieldRef<"MeterReading", 'String'>
+  readonly id: Prisma.FieldRef<"MeterReading", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"MeterReading", 'Int'>
+  readonly roomId: Prisma.FieldRef<"MeterReading", 'Int'>
+  readonly meterId: Prisma.FieldRef<"MeterReading", 'Int'>
+  readonly contractId: Prisma.FieldRef<"MeterReading", 'Int'>
   readonly billingMonth: Prisma.FieldRef<"MeterReading", 'DateTime'>
   readonly previousValue: Prisma.FieldRef<"MeterReading", 'Decimal'>
   readonly currentValue: Prisma.FieldRef<"MeterReading", 'Decimal'>
@@ -2908,9 +2937,9 @@ export interface MeterReadingFieldRefs {
   readonly source: Prisma.FieldRef<"MeterReading", 'ReadingSource'>
   readonly status: Prisma.FieldRef<"MeterReading", 'ReadingStatus'>
   readonly recordedAt: Prisma.FieldRef<"MeterReading", 'DateTime'>
-  readonly createdById: Prisma.FieldRef<"MeterReading", 'String'>
-  readonly updatedById: Prisma.FieldRef<"MeterReading", 'String'>
-  readonly deletedById: Prisma.FieldRef<"MeterReading", 'String'>
+  readonly createdById: Prisma.FieldRef<"MeterReading", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"MeterReading", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"MeterReading", 'Int'>
 }
     
 

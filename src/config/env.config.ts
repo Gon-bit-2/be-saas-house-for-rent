@@ -18,11 +18,18 @@ const ConfigSchema = z.object({
   ADMIN_EMAIL: z.string(),
   ADMIN_PHONE_NUMBER: z.string(),
   OTP_EXPIRES_IN: z.string(),
+  OTP_MAX_ATTEMPTS: z.coerce.number().int().positive().default(5),
   RESEND_API_KEY: z.string(),
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
   GOOGLE_REDIRECT_URI: z.string(),
   GOOGLE_CLIENT_REDIRECT_URI: z.string(),
+  GOOGLE_OAUTH_SCOPES: z
+    .string()
+    .default('https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'),
+  GOOGLE_SESSION_EXPIRES_IN: z.string().default('5m'),
+  GOOGLE_STATE_EXPIRES_IN: z.string().default('5m'),
+  GOOGLE_USERINFO_URL: z.string().url().default('https://openidconnect.googleapis.com/v1/userinfo'),
   REDIS_USERNAME: z.string(),
   REDIS_PASSWORD: z.string(),
   REDIS_HOST: z.string(),

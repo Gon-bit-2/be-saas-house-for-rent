@@ -27,26 +27,32 @@ export type AggregateFloor = {
 }
 
 export type FloorAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  propertyId: number | null
   floorNumber: number | null
 }
 
 export type FloorSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  propertyId: number | null
   floorNumber: number | null
 }
 
 export type FloorMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  propertyId: string | null
+  id: number | null
+  tenantId: number | null
+  propertyId: number | null
   name: string | null
   floorNumber: number | null
   createdAt: Date | null
 }
 
 export type FloorMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  propertyId: string | null
+  id: number | null
+  tenantId: number | null
+  propertyId: number | null
   name: string | null
   floorNumber: number | null
   createdAt: Date | null
@@ -64,10 +70,16 @@ export type FloorCountAggregateOutputType = {
 
 
 export type FloorAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  propertyId?: true
   floorNumber?: true
 }
 
 export type FloorSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  propertyId?: true
   floorNumber?: true
 }
 
@@ -186,9 +198,9 @@ export type FloorGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 export type FloorGroupByOutputType = {
-  id: string
-  tenantId: string
-  propertyId: string
+  id: number
+  tenantId: number
+  propertyId: number
   name: string
   floorNumber: number
   createdAt: Date
@@ -218,9 +230,9 @@ export type FloorWhereInput = {
   AND?: Prisma.FloorWhereInput | Prisma.FloorWhereInput[]
   OR?: Prisma.FloorWhereInput[]
   NOT?: Prisma.FloorWhereInput | Prisma.FloorWhereInput[]
-  id?: Prisma.UuidFilter<"Floor"> | string
-  tenantId?: Prisma.UuidFilter<"Floor"> | string
-  propertyId?: Prisma.UuidFilter<"Floor"> | string
+  id?: Prisma.IntFilter<"Floor"> | number
+  tenantId?: Prisma.IntFilter<"Floor"> | number
+  propertyId?: Prisma.IntFilter<"Floor"> | number
   name?: Prisma.StringFilter<"Floor"> | string
   floorNumber?: Prisma.IntFilter<"Floor"> | number
   createdAt?: Prisma.DateTimeFilter<"Floor"> | Date | string
@@ -242,12 +254,12 @@ export type FloorOrderByWithRelationInput = {
 }
 
 export type FloorWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.FloorWhereInput | Prisma.FloorWhereInput[]
   OR?: Prisma.FloorWhereInput[]
   NOT?: Prisma.FloorWhereInput | Prisma.FloorWhereInput[]
-  tenantId?: Prisma.UuidFilter<"Floor"> | string
-  propertyId?: Prisma.UuidFilter<"Floor"> | string
+  tenantId?: Prisma.IntFilter<"Floor"> | number
+  propertyId?: Prisma.IntFilter<"Floor"> | number
   name?: Prisma.StringFilter<"Floor"> | string
   floorNumber?: Prisma.IntFilter<"Floor"> | number
   createdAt?: Prisma.DateTimeFilter<"Floor"> | Date | string
@@ -274,16 +286,15 @@ export type FloorScalarWhereWithAggregatesInput = {
   AND?: Prisma.FloorScalarWhereWithAggregatesInput | Prisma.FloorScalarWhereWithAggregatesInput[]
   OR?: Prisma.FloorScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FloorScalarWhereWithAggregatesInput | Prisma.FloorScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Floor"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"Floor"> | string
-  propertyId?: Prisma.UuidWithAggregatesFilter<"Floor"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Floor"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"Floor"> | number
+  propertyId?: Prisma.IntWithAggregatesFilter<"Floor"> | number
   name?: Prisma.StringWithAggregatesFilter<"Floor"> | string
   floorNumber?: Prisma.IntWithAggregatesFilter<"Floor"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Floor"> | Date | string
 }
 
 export type FloorCreateInput = {
-  id?: string
   name: string
   floorNumber: number
   createdAt?: Date | string
@@ -293,9 +304,9 @@ export type FloorCreateInput = {
 }
 
 export type FloorUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
+  id?: number
+  tenantId: number
+  propertyId: number
   name: string
   floorNumber: number
   createdAt?: Date | string
@@ -303,7 +314,6 @@ export type FloorUncheckedCreateInput = {
 }
 
 export type FloorUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -313,9 +323,9 @@ export type FloorUpdateInput = {
 }
 
 export type FloorUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -323,25 +333,24 @@ export type FloorUncheckedUpdateInput = {
 }
 
 export type FloorCreateManyInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
+  id?: number
+  tenantId: number
+  propertyId: number
   name: string
   floorNumber: number
   createdAt?: Date | string
 }
 
 export type FloorUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FloorUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -367,6 +376,9 @@ export type FloorCountOrderByAggregateInput = {
 }
 
 export type FloorAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
   floorNumber?: Prisma.SortOrder
 }
 
@@ -389,6 +401,9 @@ export type FloorMinOrderByAggregateInput = {
 }
 
 export type FloorSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
   floorNumber?: Prisma.SortOrder
 }
 
@@ -498,7 +513,6 @@ export type FloorUpdateOneWithoutRoomsNestedInput = {
 }
 
 export type FloorCreateWithoutTenantInput = {
-  id?: string
   name: string
   floorNumber: number
   createdAt?: Date | string
@@ -507,8 +521,8 @@ export type FloorCreateWithoutTenantInput = {
 }
 
 export type FloorUncheckedCreateWithoutTenantInput = {
-  id?: string
-  propertyId: string
+  id?: number
+  propertyId: number
   name: string
   floorNumber: number
   createdAt?: Date | string
@@ -545,16 +559,15 @@ export type FloorScalarWhereInput = {
   AND?: Prisma.FloorScalarWhereInput | Prisma.FloorScalarWhereInput[]
   OR?: Prisma.FloorScalarWhereInput[]
   NOT?: Prisma.FloorScalarWhereInput | Prisma.FloorScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Floor"> | string
-  tenantId?: Prisma.UuidFilter<"Floor"> | string
-  propertyId?: Prisma.UuidFilter<"Floor"> | string
+  id?: Prisma.IntFilter<"Floor"> | number
+  tenantId?: Prisma.IntFilter<"Floor"> | number
+  propertyId?: Prisma.IntFilter<"Floor"> | number
   name?: Prisma.StringFilter<"Floor"> | string
   floorNumber?: Prisma.IntFilter<"Floor"> | number
   createdAt?: Prisma.DateTimeFilter<"Floor"> | Date | string
 }
 
 export type FloorCreateWithoutPropertyInput = {
-  id?: string
   name: string
   floorNumber: number
   createdAt?: Date | string
@@ -563,8 +576,8 @@ export type FloorCreateWithoutPropertyInput = {
 }
 
 export type FloorUncheckedCreateWithoutPropertyInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   name: string
   floorNumber: number
   createdAt?: Date | string
@@ -598,7 +611,6 @@ export type FloorUpdateManyWithWhereWithoutPropertyInput = {
 }
 
 export type FloorCreateWithoutRoomsInput = {
-  id?: string
   name: string
   floorNumber: number
   createdAt?: Date | string
@@ -607,9 +619,9 @@ export type FloorCreateWithoutRoomsInput = {
 }
 
 export type FloorUncheckedCreateWithoutRoomsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
+  id?: number
+  tenantId: number
+  propertyId: number
   name: string
   floorNumber: number
   createdAt?: Date | string
@@ -632,7 +644,6 @@ export type FloorUpdateToOneWithWhereWithoutRoomsInput = {
 }
 
 export type FloorUpdateWithoutRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -641,24 +652,23 @@ export type FloorUpdateWithoutRoomsInput = {
 }
 
 export type FloorUncheckedUpdateWithoutRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FloorCreateManyTenantInput = {
-  id?: string
-  propertyId: string
+  id?: number
+  propertyId: number
   name: string
   floorNumber: number
   createdAt?: Date | string
 }
 
 export type FloorUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -667,8 +677,8 @@ export type FloorUpdateWithoutTenantInput = {
 }
 
 export type FloorUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -676,23 +686,22 @@ export type FloorUncheckedUpdateWithoutTenantInput = {
 }
 
 export type FloorUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FloorCreateManyPropertyInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   name: string
   floorNumber: number
   createdAt?: Date | string
 }
 
 export type FloorUpdateWithoutPropertyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -701,8 +710,8 @@ export type FloorUpdateWithoutPropertyInput = {
 }
 
 export type FloorUncheckedUpdateWithoutPropertyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -710,8 +719,8 @@ export type FloorUncheckedUpdateWithoutPropertyInput = {
 }
 
 export type FloorUncheckedUpdateManyWithoutPropertyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -826,17 +835,17 @@ export type $FloorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
-     * ID định danh tầng (UUID)
+     * ID định danh tầng
      */
-    id: string
+    id: number
     /**
      * ID của Tenant quản lý
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID của tòa nhà chứa tầng này
      */
-    propertyId: string
+    propertyId: number
     /**
      * Tên hiển thị của tầng (ví dụ: Tầng 1, Tầng trệt, Tầng lửng)
      */
@@ -1275,9 +1284,9 @@ export interface Prisma__FloorClient<T, Null = never, ExtArgs extends runtime.Ty
  * Fields of the Floor model
  */
 export interface FloorFieldRefs {
-  readonly id: Prisma.FieldRef<"Floor", 'String'>
-  readonly tenantId: Prisma.FieldRef<"Floor", 'String'>
-  readonly propertyId: Prisma.FieldRef<"Floor", 'String'>
+  readonly id: Prisma.FieldRef<"Floor", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"Floor", 'Int'>
+  readonly propertyId: Prisma.FieldRef<"Floor", 'Int'>
   readonly name: Prisma.FieldRef<"Floor", 'String'>
   readonly floorNumber: Prisma.FieldRef<"Floor", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Floor", 'DateTime'>

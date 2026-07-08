@@ -23,6 +23,21 @@ export * from './enums.js';
  */
 export type User = Prisma.UserModel
 /**
+ * Model RefreshToken
+ * Bang luu refresh token theo thiet bi/phien dang nhap. Token chi luu dang hash.
+ */
+export type RefreshToken = Prisma.RefreshTokenModel
+/**
+ * Model Device
+ * Bang luu thong tin thiet bi dang nhap cua nguoi dung. Moi thiet bi dai dien cho mot trinh duyet/app tren mot may cu the.
+ */
+export type Device = Prisma.DeviceModel
+/**
+ * Model VerificationCode
+ * Bang luu ma xac thuc OTP theo email. Code chi luu dang hash.
+ */
+export type VerificationCode = Prisma.VerificationCodeModel
+/**
  * Model Role
  * Bảng danh sách các vai trò (roles) trong hệ thống
  */
@@ -272,26 +287,6 @@ export type Notification = Prisma.NotificationModel
  * Bảng lưu các mã token thiết bị di động/web phục vụ đẩy thông báo qua Firebase Cloud Messaging (FCM)
  */
 export type DeviceToken = Prisma.DeviceTokenModel
-/**
- * Model AiRecommendationLog
- * Bảng lưu nhật ký các lượt gợi ý phòng trọ (cho khách thuê) và gợi ý giá (cho chủ trọ) từ hệ thống AI
- */
-export type AiRecommendationLog = Prisma.AiRecommendationLogModel
-/**
- * Model RoomPriceSuggestion
- * Bảng lưu các đề xuất gợi ý giá thuê phòng trọ do AI tự động phân tích thị trường
- */
-export type RoomPriceSuggestion = Prisma.RoomPriceSuggestionModel
-/**
- * Model ChatbotSession
- * Bảng quản lý các phiên trò chuyện của người dùng với trợ lý AI Chatbot hoặc nhân viên hỗ trợ tiếp quản
- */
-export type ChatbotSession = Prisma.ChatbotSessionModel
-/**
- * Model ChatbotMessage
- * Bảng lưu trữ chi tiết các tin nhắn trong các phiên chat hỗ trợ của chatbot
- */
-export type ChatbotMessage = Prisma.ChatbotMessageModel
 /**
  * Model BackgroundJob
  * Bảng lưu trạng thái và thông tin của các tác vụ chạy ngầm (Background Jobs)

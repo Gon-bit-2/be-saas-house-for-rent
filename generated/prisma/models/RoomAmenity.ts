@@ -20,18 +20,30 @@ export type RoomAmenityModel = runtime.Types.Result.DefaultSelection<Prisma.$Roo
 
 export type AggregateRoomAmenity = {
   _count: RoomAmenityCountAggregateOutputType | null
+  _avg: RoomAmenityAvgAggregateOutputType | null
+  _sum: RoomAmenitySumAggregateOutputType | null
   _min: RoomAmenityMinAggregateOutputType | null
   _max: RoomAmenityMaxAggregateOutputType | null
 }
 
+export type RoomAmenityAvgAggregateOutputType = {
+  roomId: number | null
+  amenityId: number | null
+}
+
+export type RoomAmenitySumAggregateOutputType = {
+  roomId: number | null
+  amenityId: number | null
+}
+
 export type RoomAmenityMinAggregateOutputType = {
-  roomId: string | null
-  amenityId: string | null
+  roomId: number | null
+  amenityId: number | null
 }
 
 export type RoomAmenityMaxAggregateOutputType = {
-  roomId: string | null
-  amenityId: string | null
+  roomId: number | null
+  amenityId: number | null
 }
 
 export type RoomAmenityCountAggregateOutputType = {
@@ -40,6 +52,16 @@ export type RoomAmenityCountAggregateOutputType = {
   _all: number
 }
 
+
+export type RoomAmenityAvgAggregateInputType = {
+  roomId?: true
+  amenityId?: true
+}
+
+export type RoomAmenitySumAggregateInputType = {
+  roomId?: true
+  amenityId?: true
+}
 
 export type RoomAmenityMinAggregateInputType = {
   roomId?: true
@@ -95,6 +117,18 @@ export type RoomAmenityAggregateArgs<ExtArgs extends runtime.Types.Extensions.In
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: RoomAmenityAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: RoomAmenitySumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: RoomAmenityMinAggregateInputType
@@ -125,14 +159,18 @@ export type RoomAmenityGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   _count?: RoomAmenityCountAggregateInputType | true
+  _avg?: RoomAmenityAvgAggregateInputType
+  _sum?: RoomAmenitySumAggregateInputType
   _min?: RoomAmenityMinAggregateInputType
   _max?: RoomAmenityMaxAggregateInputType
 }
 
 export type RoomAmenityGroupByOutputType = {
-  roomId: string
-  amenityId: string
+  roomId: number
+  amenityId: number
   _count: RoomAmenityCountAggregateOutputType | null
+  _avg: RoomAmenityAvgAggregateOutputType | null
+  _sum: RoomAmenitySumAggregateOutputType | null
   _min: RoomAmenityMinAggregateOutputType | null
   _max: RoomAmenityMaxAggregateOutputType | null
 }
@@ -156,8 +194,8 @@ export type RoomAmenityWhereInput = {
   AND?: Prisma.RoomAmenityWhereInput | Prisma.RoomAmenityWhereInput[]
   OR?: Prisma.RoomAmenityWhereInput[]
   NOT?: Prisma.RoomAmenityWhereInput | Prisma.RoomAmenityWhereInput[]
-  roomId?: Prisma.UuidFilter<"RoomAmenity"> | string
-  amenityId?: Prisma.UuidFilter<"RoomAmenity"> | string
+  roomId?: Prisma.IntFilter<"RoomAmenity"> | number
+  amenityId?: Prisma.IntFilter<"RoomAmenity"> | number
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   amenity?: Prisma.XOR<Prisma.AmenityScalarRelationFilter, Prisma.AmenityWhereInput>
 }
@@ -174,8 +212,8 @@ export type RoomAmenityWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.RoomAmenityWhereInput | Prisma.RoomAmenityWhereInput[]
   OR?: Prisma.RoomAmenityWhereInput[]
   NOT?: Prisma.RoomAmenityWhereInput | Prisma.RoomAmenityWhereInput[]
-  roomId?: Prisma.UuidFilter<"RoomAmenity"> | string
-  amenityId?: Prisma.UuidFilter<"RoomAmenity"> | string
+  roomId?: Prisma.IntFilter<"RoomAmenity"> | number
+  amenityId?: Prisma.IntFilter<"RoomAmenity"> | number
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   amenity?: Prisma.XOR<Prisma.AmenityScalarRelationFilter, Prisma.AmenityWhereInput>
 }, "roomId_amenityId">
@@ -184,16 +222,18 @@ export type RoomAmenityOrderByWithAggregationInput = {
   roomId?: Prisma.SortOrder
   amenityId?: Prisma.SortOrder
   _count?: Prisma.RoomAmenityCountOrderByAggregateInput
+  _avg?: Prisma.RoomAmenityAvgOrderByAggregateInput
   _max?: Prisma.RoomAmenityMaxOrderByAggregateInput
   _min?: Prisma.RoomAmenityMinOrderByAggregateInput
+  _sum?: Prisma.RoomAmenitySumOrderByAggregateInput
 }
 
 export type RoomAmenityScalarWhereWithAggregatesInput = {
   AND?: Prisma.RoomAmenityScalarWhereWithAggregatesInput | Prisma.RoomAmenityScalarWhereWithAggregatesInput[]
   OR?: Prisma.RoomAmenityScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RoomAmenityScalarWhereWithAggregatesInput | Prisma.RoomAmenityScalarWhereWithAggregatesInput[]
-  roomId?: Prisma.UuidWithAggregatesFilter<"RoomAmenity"> | string
-  amenityId?: Prisma.UuidWithAggregatesFilter<"RoomAmenity"> | string
+  roomId?: Prisma.IntWithAggregatesFilter<"RoomAmenity"> | number
+  amenityId?: Prisma.IntWithAggregatesFilter<"RoomAmenity"> | number
 }
 
 export type RoomAmenityCreateInput = {
@@ -202,8 +242,8 @@ export type RoomAmenityCreateInput = {
 }
 
 export type RoomAmenityUncheckedCreateInput = {
-  roomId: string
-  amenityId: string
+  roomId: number
+  amenityId: number
 }
 
 export type RoomAmenityUpdateInput = {
@@ -212,13 +252,13 @@ export type RoomAmenityUpdateInput = {
 }
 
 export type RoomAmenityUncheckedUpdateInput = {
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  amenityId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  amenityId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type RoomAmenityCreateManyInput = {
-  roomId: string
-  amenityId: string
+  roomId: number
+  amenityId: number
 }
 
 export type RoomAmenityUpdateManyMutationInput = {
@@ -226,8 +266,8 @@ export type RoomAmenityUpdateManyMutationInput = {
 }
 
 export type RoomAmenityUncheckedUpdateManyInput = {
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  amenityId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  amenityId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type RoomAmenityListRelationFilter = {
@@ -241,11 +281,16 @@ export type RoomAmenityOrderByRelationAggregateInput = {
 }
 
 export type RoomAmenityRoomIdAmenityIdCompoundUniqueInput = {
-  roomId: string
-  amenityId: string
+  roomId: number
+  amenityId: number
 }
 
 export type RoomAmenityCountOrderByAggregateInput = {
+  roomId?: Prisma.SortOrder
+  amenityId?: Prisma.SortOrder
+}
+
+export type RoomAmenityAvgOrderByAggregateInput = {
   roomId?: Prisma.SortOrder
   amenityId?: Prisma.SortOrder
 }
@@ -256,6 +301,11 @@ export type RoomAmenityMaxOrderByAggregateInput = {
 }
 
 export type RoomAmenityMinOrderByAggregateInput = {
+  roomId?: Prisma.SortOrder
+  amenityId?: Prisma.SortOrder
+}
+
+export type RoomAmenitySumOrderByAggregateInput = {
   roomId?: Prisma.SortOrder
   amenityId?: Prisma.SortOrder
 }
@@ -349,7 +399,7 @@ export type RoomAmenityCreateWithoutRoomInput = {
 }
 
 export type RoomAmenityUncheckedCreateWithoutRoomInput = {
-  amenityId: string
+  amenityId: number
 }
 
 export type RoomAmenityCreateOrConnectWithoutRoomInput = {
@@ -382,8 +432,8 @@ export type RoomAmenityScalarWhereInput = {
   AND?: Prisma.RoomAmenityScalarWhereInput | Prisma.RoomAmenityScalarWhereInput[]
   OR?: Prisma.RoomAmenityScalarWhereInput[]
   NOT?: Prisma.RoomAmenityScalarWhereInput | Prisma.RoomAmenityScalarWhereInput[]
-  roomId?: Prisma.UuidFilter<"RoomAmenity"> | string
-  amenityId?: Prisma.UuidFilter<"RoomAmenity"> | string
+  roomId?: Prisma.IntFilter<"RoomAmenity"> | number
+  amenityId?: Prisma.IntFilter<"RoomAmenity"> | number
 }
 
 export type RoomAmenityCreateWithoutAmenityInput = {
@@ -391,7 +441,7 @@ export type RoomAmenityCreateWithoutAmenityInput = {
 }
 
 export type RoomAmenityUncheckedCreateWithoutAmenityInput = {
-  roomId: string
+  roomId: number
 }
 
 export type RoomAmenityCreateOrConnectWithoutAmenityInput = {
@@ -421,7 +471,7 @@ export type RoomAmenityUpdateManyWithWhereWithoutAmenityInput = {
 }
 
 export type RoomAmenityCreateManyRoomInput = {
-  amenityId: string
+  amenityId: number
 }
 
 export type RoomAmenityUpdateWithoutRoomInput = {
@@ -429,15 +479,15 @@ export type RoomAmenityUpdateWithoutRoomInput = {
 }
 
 export type RoomAmenityUncheckedUpdateWithoutRoomInput = {
-  amenityId?: Prisma.StringFieldUpdateOperationsInput | string
+  amenityId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type RoomAmenityUncheckedUpdateManyWithoutRoomInput = {
-  amenityId?: Prisma.StringFieldUpdateOperationsInput | string
+  amenityId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type RoomAmenityCreateManyAmenityInput = {
-  roomId: string
+  roomId: number
 }
 
 export type RoomAmenityUpdateWithoutAmenityInput = {
@@ -445,11 +495,11 @@ export type RoomAmenityUpdateWithoutAmenityInput = {
 }
 
 export type RoomAmenityUncheckedUpdateWithoutAmenityInput = {
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type RoomAmenityUncheckedUpdateManyWithoutAmenityInput = {
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -510,11 +560,11 @@ export type $RoomAmenityPayload<ExtArgs extends runtime.Types.Extensions.Interna
     /**
      * ID phòng trọ
      */
-    roomId: string
+    roomId: number
     /**
      * ID tiện ích
      */
-    amenityId: string
+    amenityId: number
   }, ExtArgs["result"]["roomAmenity"]>
   composites: {}
 }
@@ -940,8 +990,8 @@ export interface Prisma__RoomAmenityClient<T, Null = never, ExtArgs extends runt
  * Fields of the RoomAmenity model
  */
 export interface RoomAmenityFieldRefs {
-  readonly roomId: Prisma.FieldRef<"RoomAmenity", 'String'>
-  readonly amenityId: Prisma.FieldRef<"RoomAmenity", 'String'>
+  readonly roomId: Prisma.FieldRef<"RoomAmenity", 'Int'>
+  readonly amenityId: Prisma.FieldRef<"RoomAmenity", 'Int'>
 }
     
 

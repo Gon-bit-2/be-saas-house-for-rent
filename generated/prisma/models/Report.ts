@@ -20,32 +20,46 @@ export type ReportModel = runtime.Types.Result.DefaultSelection<Prisma.$ReportPa
 
 export type AggregateReport = {
   _count: ReportCountAggregateOutputType | null
+  _avg: ReportAvgAggregateOutputType | null
+  _sum: ReportSumAggregateOutputType | null
   _min: ReportMinAggregateOutputType | null
   _max: ReportMaxAggregateOutputType | null
 }
 
+export type ReportAvgAggregateOutputType = {
+  id: number | null
+  reporterId: number | null
+  handledBy: number | null
+}
+
+export type ReportSumAggregateOutputType = {
+  id: number | null
+  reporterId: number | null
+  handledBy: number | null
+}
+
 export type ReportMinAggregateOutputType = {
-  id: string | null
-  reporterId: string | null
+  id: number | null
+  reporterId: number | null
   targetType: $Enums.ReportTargetType | null
   targetId: string | null
   reason: string | null
   description: string | null
   status: $Enums.ReportStatus | null
-  handledBy: string | null
+  handledBy: number | null
   createdAt: Date | null
   resolvedAt: Date | null
 }
 
 export type ReportMaxAggregateOutputType = {
-  id: string | null
-  reporterId: string | null
+  id: number | null
+  reporterId: number | null
   targetType: $Enums.ReportTargetType | null
   targetId: string | null
   reason: string | null
   description: string | null
   status: $Enums.ReportStatus | null
-  handledBy: string | null
+  handledBy: number | null
   createdAt: Date | null
   resolvedAt: Date | null
 }
@@ -64,6 +78,18 @@ export type ReportCountAggregateOutputType = {
   _all: number
 }
 
+
+export type ReportAvgAggregateInputType = {
+  id?: true
+  reporterId?: true
+  handledBy?: true
+}
+
+export type ReportSumAggregateInputType = {
+  id?: true
+  reporterId?: true
+  handledBy?: true
+}
 
 export type ReportMinAggregateInputType = {
   id?: true
@@ -143,6 +169,18 @@ export type ReportAggregateArgs<ExtArgs extends runtime.Types.Extensions.Interna
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: ReportAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: ReportSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: ReportMinAggregateInputType
@@ -173,22 +211,26 @@ export type ReportGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   _count?: ReportCountAggregateInputType | true
+  _avg?: ReportAvgAggregateInputType
+  _sum?: ReportSumAggregateInputType
   _min?: ReportMinAggregateInputType
   _max?: ReportMaxAggregateInputType
 }
 
 export type ReportGroupByOutputType = {
-  id: string
-  reporterId: string
+  id: number
+  reporterId: number
   targetType: $Enums.ReportTargetType
   targetId: string
   reason: string
   description: string | null
   status: $Enums.ReportStatus
-  handledBy: string | null
+  handledBy: number | null
   createdAt: Date
   resolvedAt: Date | null
   _count: ReportCountAggregateOutputType | null
+  _avg: ReportAvgAggregateOutputType | null
+  _sum: ReportSumAggregateOutputType | null
   _min: ReportMinAggregateOutputType | null
   _max: ReportMaxAggregateOutputType | null
 }
@@ -212,14 +254,14 @@ export type ReportWhereInput = {
   AND?: Prisma.ReportWhereInput | Prisma.ReportWhereInput[]
   OR?: Prisma.ReportWhereInput[]
   NOT?: Prisma.ReportWhereInput | Prisma.ReportWhereInput[]
-  id?: Prisma.UuidFilter<"Report"> | string
-  reporterId?: Prisma.UuidFilter<"Report"> | string
+  id?: Prisma.IntFilter<"Report"> | number
+  reporterId?: Prisma.IntFilter<"Report"> | number
   targetType?: Prisma.EnumReportTargetTypeFilter<"Report"> | $Enums.ReportTargetType
-  targetId?: Prisma.UuidFilter<"Report"> | string
+  targetId?: Prisma.StringFilter<"Report"> | string
   reason?: Prisma.StringFilter<"Report"> | string
   description?: Prisma.StringNullableFilter<"Report"> | string | null
   status?: Prisma.EnumReportStatusFilter<"Report"> | $Enums.ReportStatus
-  handledBy?: Prisma.UuidNullableFilter<"Report"> | string | null
+  handledBy?: Prisma.IntNullableFilter<"Report"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Report"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableFilter<"Report"> | Date | string | null
   reporter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -242,17 +284,17 @@ export type ReportOrderByWithRelationInput = {
 }
 
 export type ReportWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.ReportWhereInput | Prisma.ReportWhereInput[]
   OR?: Prisma.ReportWhereInput[]
   NOT?: Prisma.ReportWhereInput | Prisma.ReportWhereInput[]
-  reporterId?: Prisma.UuidFilter<"Report"> | string
+  reporterId?: Prisma.IntFilter<"Report"> | number
   targetType?: Prisma.EnumReportTargetTypeFilter<"Report"> | $Enums.ReportTargetType
-  targetId?: Prisma.UuidFilter<"Report"> | string
+  targetId?: Prisma.StringFilter<"Report"> | string
   reason?: Prisma.StringFilter<"Report"> | string
   description?: Prisma.StringNullableFilter<"Report"> | string | null
   status?: Prisma.EnumReportStatusFilter<"Report"> | $Enums.ReportStatus
-  handledBy?: Prisma.UuidNullableFilter<"Report"> | string | null
+  handledBy?: Prisma.IntNullableFilter<"Report"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Report"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableFilter<"Report"> | Date | string | null
   reporter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -271,28 +313,29 @@ export type ReportOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ReportCountOrderByAggregateInput
+  _avg?: Prisma.ReportAvgOrderByAggregateInput
   _max?: Prisma.ReportMaxOrderByAggregateInput
   _min?: Prisma.ReportMinOrderByAggregateInput
+  _sum?: Prisma.ReportSumOrderByAggregateInput
 }
 
 export type ReportScalarWhereWithAggregatesInput = {
   AND?: Prisma.ReportScalarWhereWithAggregatesInput | Prisma.ReportScalarWhereWithAggregatesInput[]
   OR?: Prisma.ReportScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ReportScalarWhereWithAggregatesInput | Prisma.ReportScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Report"> | string
-  reporterId?: Prisma.UuidWithAggregatesFilter<"Report"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Report"> | number
+  reporterId?: Prisma.IntWithAggregatesFilter<"Report"> | number
   targetType?: Prisma.EnumReportTargetTypeWithAggregatesFilter<"Report"> | $Enums.ReportTargetType
-  targetId?: Prisma.UuidWithAggregatesFilter<"Report"> | string
+  targetId?: Prisma.StringWithAggregatesFilter<"Report"> | string
   reason?: Prisma.StringWithAggregatesFilter<"Report"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Report"> | string | null
   status?: Prisma.EnumReportStatusWithAggregatesFilter<"Report"> | $Enums.ReportStatus
-  handledBy?: Prisma.UuidNullableWithAggregatesFilter<"Report"> | string | null
+  handledBy?: Prisma.IntNullableWithAggregatesFilter<"Report"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Report"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Report"> | Date | string | null
 }
 
 export type ReportCreateInput = {
-  id?: string
   targetType: $Enums.ReportTargetType
   targetId: string
   reason: string
@@ -305,20 +348,19 @@ export type ReportCreateInput = {
 }
 
 export type ReportUncheckedCreateInput = {
-  id?: string
-  reporterId: string
+  id?: number
+  reporterId: number
   targetType: $Enums.ReportTargetType
   targetId: string
   reason: string
   description?: string | null
   status?: $Enums.ReportStatus
-  handledBy?: string | null
+  handledBy?: number | null
   createdAt?: Date | string
   resolvedAt?: Date | string | null
 }
 
 export type ReportUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   targetType?: Prisma.EnumReportTargetTypeFieldUpdateOperationsInput | $Enums.ReportTargetType
   targetId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
@@ -331,33 +373,32 @@ export type ReportUpdateInput = {
 }
 
 export type ReportUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  reporterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  reporterId?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReportTargetTypeFieldUpdateOperationsInput | $Enums.ReportTargetType
   targetId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus
-  handledBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  handledBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ReportCreateManyInput = {
-  id?: string
-  reporterId: string
+  id?: number
+  reporterId: number
   targetType: $Enums.ReportTargetType
   targetId: string
   reason: string
   description?: string | null
   status?: $Enums.ReportStatus
-  handledBy?: string | null
+  handledBy?: number | null
   createdAt?: Date | string
   resolvedAt?: Date | string | null
 }
 
 export type ReportUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   targetType?: Prisma.EnumReportTargetTypeFieldUpdateOperationsInput | $Enums.ReportTargetType
   targetId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
@@ -368,14 +409,14 @@ export type ReportUpdateManyMutationInput = {
 }
 
 export type ReportUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  reporterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  reporterId?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReportTargetTypeFieldUpdateOperationsInput | $Enums.ReportTargetType
   targetId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus
-  handledBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  handledBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -403,6 +444,12 @@ export type ReportCountOrderByAggregateInput = {
   resolvedAt?: Prisma.SortOrder
 }
 
+export type ReportAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  reporterId?: Prisma.SortOrder
+  handledBy?: Prisma.SortOrder
+}
+
 export type ReportMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   reporterId?: Prisma.SortOrder
@@ -427,6 +474,12 @@ export type ReportMinOrderByAggregateInput = {
   handledBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   resolvedAt?: Prisma.SortOrder
+}
+
+export type ReportSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  reporterId?: Prisma.SortOrder
+  handledBy?: Prisma.SortOrder
 }
 
 export type ReportCreateNestedManyWithoutReporterInput = {
@@ -522,7 +575,6 @@ export type EnumReportStatusFieldUpdateOperationsInput = {
 }
 
 export type ReportCreateWithoutReporterInput = {
-  id?: string
   targetType: $Enums.ReportTargetType
   targetId: string
   reason: string
@@ -534,13 +586,13 @@ export type ReportCreateWithoutReporterInput = {
 }
 
 export type ReportUncheckedCreateWithoutReporterInput = {
-  id?: string
+  id?: number
   targetType: $Enums.ReportTargetType
   targetId: string
   reason: string
   description?: string | null
   status?: $Enums.ReportStatus
-  handledBy?: string | null
+  handledBy?: number | null
   createdAt?: Date | string
   resolvedAt?: Date | string | null
 }
@@ -556,7 +608,6 @@ export type ReportCreateManyReporterInputEnvelope = {
 }
 
 export type ReportCreateWithoutHandledByUserInput = {
-  id?: string
   targetType: $Enums.ReportTargetType
   targetId: string
   reason: string
@@ -568,8 +619,8 @@ export type ReportCreateWithoutHandledByUserInput = {
 }
 
 export type ReportUncheckedCreateWithoutHandledByUserInput = {
-  id?: string
-  reporterId: string
+  id?: number
+  reporterId: number
   targetType: $Enums.ReportTargetType
   targetId: string
   reason: string
@@ -609,14 +660,14 @@ export type ReportScalarWhereInput = {
   AND?: Prisma.ReportScalarWhereInput | Prisma.ReportScalarWhereInput[]
   OR?: Prisma.ReportScalarWhereInput[]
   NOT?: Prisma.ReportScalarWhereInput | Prisma.ReportScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Report"> | string
-  reporterId?: Prisma.UuidFilter<"Report"> | string
+  id?: Prisma.IntFilter<"Report"> | number
+  reporterId?: Prisma.IntFilter<"Report"> | number
   targetType?: Prisma.EnumReportTargetTypeFilter<"Report"> | $Enums.ReportTargetType
-  targetId?: Prisma.UuidFilter<"Report"> | string
+  targetId?: Prisma.StringFilter<"Report"> | string
   reason?: Prisma.StringFilter<"Report"> | string
   description?: Prisma.StringNullableFilter<"Report"> | string | null
   status?: Prisma.EnumReportStatusFilter<"Report"> | $Enums.ReportStatus
-  handledBy?: Prisma.UuidNullableFilter<"Report"> | string | null
+  handledBy?: Prisma.IntNullableFilter<"Report"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Report"> | Date | string
   resolvedAt?: Prisma.DateTimeNullableFilter<"Report"> | Date | string | null
 }
@@ -638,20 +689,20 @@ export type ReportUpdateManyWithWhereWithoutHandledByUserInput = {
 }
 
 export type ReportCreateManyReporterInput = {
-  id?: string
+  id?: number
   targetType: $Enums.ReportTargetType
   targetId: string
   reason: string
   description?: string | null
   status?: $Enums.ReportStatus
-  handledBy?: string | null
+  handledBy?: number | null
   createdAt?: Date | string
   resolvedAt?: Date | string | null
 }
 
 export type ReportCreateManyHandledByUserInput = {
-  id?: string
-  reporterId: string
+  id?: number
+  reporterId: number
   targetType: $Enums.ReportTargetType
   targetId: string
   reason: string
@@ -662,7 +713,6 @@ export type ReportCreateManyHandledByUserInput = {
 }
 
 export type ReportUpdateWithoutReporterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   targetType?: Prisma.EnumReportTargetTypeFieldUpdateOperationsInput | $Enums.ReportTargetType
   targetId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
@@ -674,31 +724,30 @@ export type ReportUpdateWithoutReporterInput = {
 }
 
 export type ReportUncheckedUpdateWithoutReporterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReportTargetTypeFieldUpdateOperationsInput | $Enums.ReportTargetType
   targetId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus
-  handledBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  handledBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ReportUncheckedUpdateManyWithoutReporterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReportTargetTypeFieldUpdateOperationsInput | $Enums.ReportTargetType
   targetId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus
-  handledBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  handledBy?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ReportUpdateWithoutHandledByUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   targetType?: Prisma.EnumReportTargetTypeFieldUpdateOperationsInput | $Enums.ReportTargetType
   targetId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
@@ -710,8 +759,8 @@ export type ReportUpdateWithoutHandledByUserInput = {
 }
 
 export type ReportUncheckedUpdateWithoutHandledByUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  reporterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  reporterId?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReportTargetTypeFieldUpdateOperationsInput | $Enums.ReportTargetType
   targetId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
@@ -722,8 +771,8 @@ export type ReportUncheckedUpdateWithoutHandledByUserInput = {
 }
 
 export type ReportUncheckedUpdateManyWithoutHandledByUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  reporterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  reporterId?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReportTargetTypeFieldUpdateOperationsInput | $Enums.ReportTargetType
   targetId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
@@ -823,17 +872,17 @@ export type $ReportPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     /**
      * ID báo cáo vi phạm (UUID)
      */
-    id: string
+    id: number
     /**
      * ID tài khoản người dùng gửi báo cáo vi phạm
      */
-    reporterId: string
+    reporterId: number
     /**
      * Loại đối tượng bị báo cáo vi phạm (Phòng, Chủ trọ, Đánh giá, Người dùng)
      */
     targetType: $Enums.ReportTargetType
     /**
-     * ID của đối tượng bị báo cáo (Lưu UUID dạng chuỗi)
+     * ID của đối tượng bị báo cáo (Lưu String dạng mã định danh)
      */
     targetId: string
     /**
@@ -851,7 +900,7 @@ export type $ReportPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     /**
      * ID tài khoản Super Admin thực hiện xử lý báo cáo (nullable nếu chưa xử lý)
      */
-    handledBy: string | null
+    handledBy: number | null
     /**
      * Thời điểm gửi báo cáo vi phạm
      */
@@ -1285,14 +1334,14 @@ export interface Prisma__ReportClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the Report model
  */
 export interface ReportFieldRefs {
-  readonly id: Prisma.FieldRef<"Report", 'String'>
-  readonly reporterId: Prisma.FieldRef<"Report", 'String'>
+  readonly id: Prisma.FieldRef<"Report", 'Int'>
+  readonly reporterId: Prisma.FieldRef<"Report", 'Int'>
   readonly targetType: Prisma.FieldRef<"Report", 'ReportTargetType'>
   readonly targetId: Prisma.FieldRef<"Report", 'String'>
   readonly reason: Prisma.FieldRef<"Report", 'String'>
   readonly description: Prisma.FieldRef<"Report", 'String'>
   readonly status: Prisma.FieldRef<"Report", 'ReportStatus'>
-  readonly handledBy: Prisma.FieldRef<"Report", 'String'>
+  readonly handledBy: Prisma.FieldRef<"Report", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Report", 'DateTime'>
   readonly resolvedAt: Prisma.FieldRef<"Report", 'DateTime'>
 }

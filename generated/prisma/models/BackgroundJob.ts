@@ -27,16 +27,20 @@ export type AggregateBackgroundJob = {
 }
 
 export type BackgroundJobAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
   attempts: number | null
 }
 
 export type BackgroundJobSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
   attempts: number | null
 }
 
 export type BackgroundJobMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
+  id: number | null
+  tenantId: number | null
   queueName: string | null
   jobType: string | null
   status: $Enums.BackgroundJobStatus | null
@@ -48,8 +52,8 @@ export type BackgroundJobMinAggregateOutputType = {
 }
 
 export type BackgroundJobMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
+  id: number | null
+  tenantId: number | null
   queueName: string | null
   jobType: string | null
   status: $Enums.BackgroundJobStatus | null
@@ -77,10 +81,14 @@ export type BackgroundJobCountAggregateOutputType = {
 
 
 export type BackgroundJobAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
   attempts?: true
 }
 
 export type BackgroundJobSumAggregateInputType = {
+  id?: true
+  tenantId?: true
   attempts?: true
 }
 
@@ -212,8 +220,8 @@ export type BackgroundJobGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 export type BackgroundJobGroupByOutputType = {
-  id: string
-  tenantId: string | null
+  id: number
+  tenantId: number | null
   queueName: string
   jobType: string
   payload: runtime.JsonValue
@@ -249,8 +257,8 @@ export type BackgroundJobWhereInput = {
   AND?: Prisma.BackgroundJobWhereInput | Prisma.BackgroundJobWhereInput[]
   OR?: Prisma.BackgroundJobWhereInput[]
   NOT?: Prisma.BackgroundJobWhereInput | Prisma.BackgroundJobWhereInput[]
-  id?: Prisma.UuidFilter<"BackgroundJob"> | string
-  tenantId?: Prisma.UuidNullableFilter<"BackgroundJob"> | string | null
+  id?: Prisma.IntFilter<"BackgroundJob"> | number
+  tenantId?: Prisma.IntNullableFilter<"BackgroundJob"> | number | null
   queueName?: Prisma.StringFilter<"BackgroundJob"> | string
   jobType?: Prisma.StringFilter<"BackgroundJob"> | string
   payload?: Prisma.JsonFilter<"BackgroundJob">
@@ -279,11 +287,11 @@ export type BackgroundJobOrderByWithRelationInput = {
 }
 
 export type BackgroundJobWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.BackgroundJobWhereInput | Prisma.BackgroundJobWhereInput[]
   OR?: Prisma.BackgroundJobWhereInput[]
   NOT?: Prisma.BackgroundJobWhereInput | Prisma.BackgroundJobWhereInput[]
-  tenantId?: Prisma.UuidNullableFilter<"BackgroundJob"> | string | null
+  tenantId?: Prisma.IntNullableFilter<"BackgroundJob"> | number | null
   queueName?: Prisma.StringFilter<"BackgroundJob"> | string
   jobType?: Prisma.StringFilter<"BackgroundJob"> | string
   payload?: Prisma.JsonFilter<"BackgroundJob">
@@ -319,8 +327,8 @@ export type BackgroundJobScalarWhereWithAggregatesInput = {
   AND?: Prisma.BackgroundJobScalarWhereWithAggregatesInput | Prisma.BackgroundJobScalarWhereWithAggregatesInput[]
   OR?: Prisma.BackgroundJobScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BackgroundJobScalarWhereWithAggregatesInput | Prisma.BackgroundJobScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"BackgroundJob"> | string
-  tenantId?: Prisma.UuidNullableWithAggregatesFilter<"BackgroundJob"> | string | null
+  id?: Prisma.IntWithAggregatesFilter<"BackgroundJob"> | number
+  tenantId?: Prisma.IntNullableWithAggregatesFilter<"BackgroundJob"> | number | null
   queueName?: Prisma.StringWithAggregatesFilter<"BackgroundJob"> | string
   jobType?: Prisma.StringWithAggregatesFilter<"BackgroundJob"> | string
   payload?: Prisma.JsonWithAggregatesFilter<"BackgroundJob">
@@ -333,7 +341,6 @@ export type BackgroundJobScalarWhereWithAggregatesInput = {
 }
 
 export type BackgroundJobCreateInput = {
-  id?: string
   queueName: string
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -347,8 +354,8 @@ export type BackgroundJobCreateInput = {
 }
 
 export type BackgroundJobUncheckedCreateInput = {
-  id?: string
-  tenantId?: string | null
+  id?: number
+  tenantId?: number | null
   queueName: string
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -361,7 +368,6 @@ export type BackgroundJobUncheckedCreateInput = {
 }
 
 export type BackgroundJobUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -375,8 +381,8 @@ export type BackgroundJobUpdateInput = {
 }
 
 export type BackgroundJobUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -389,8 +395,8 @@ export type BackgroundJobUncheckedUpdateInput = {
 }
 
 export type BackgroundJobCreateManyInput = {
-  id?: string
-  tenantId?: string | null
+  id?: number
+  tenantId?: number | null
   queueName: string
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -403,7 +409,6 @@ export type BackgroundJobCreateManyInput = {
 }
 
 export type BackgroundJobUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -416,8 +421,8 @@ export type BackgroundJobUpdateManyMutationInput = {
 }
 
 export type BackgroundJobUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -454,6 +459,8 @@ export type BackgroundJobCountOrderByAggregateInput = {
 }
 
 export type BackgroundJobAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
 }
 
@@ -484,6 +491,8 @@ export type BackgroundJobMinOrderByAggregateInput = {
 }
 
 export type BackgroundJobSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
 }
 
@@ -534,7 +543,6 @@ export type EnumBackgroundJobStatusFieldUpdateOperationsInput = {
 }
 
 export type BackgroundJobCreateWithoutTenantInput = {
-  id?: string
   queueName: string
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -547,7 +555,7 @@ export type BackgroundJobCreateWithoutTenantInput = {
 }
 
 export type BackgroundJobUncheckedCreateWithoutTenantInput = {
-  id?: string
+  id?: number
   queueName: string
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -589,8 +597,8 @@ export type BackgroundJobScalarWhereInput = {
   AND?: Prisma.BackgroundJobScalarWhereInput | Prisma.BackgroundJobScalarWhereInput[]
   OR?: Prisma.BackgroundJobScalarWhereInput[]
   NOT?: Prisma.BackgroundJobScalarWhereInput | Prisma.BackgroundJobScalarWhereInput[]
-  id?: Prisma.UuidFilter<"BackgroundJob"> | string
-  tenantId?: Prisma.UuidNullableFilter<"BackgroundJob"> | string | null
+  id?: Prisma.IntFilter<"BackgroundJob"> | number
+  tenantId?: Prisma.IntNullableFilter<"BackgroundJob"> | number | null
   queueName?: Prisma.StringFilter<"BackgroundJob"> | string
   jobType?: Prisma.StringFilter<"BackgroundJob"> | string
   payload?: Prisma.JsonFilter<"BackgroundJob">
@@ -603,7 +611,7 @@ export type BackgroundJobScalarWhereInput = {
 }
 
 export type BackgroundJobCreateManyTenantInput = {
-  id?: string
+  id?: number
   queueName: string
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -616,7 +624,6 @@ export type BackgroundJobCreateManyTenantInput = {
 }
 
 export type BackgroundJobUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -629,7 +636,7 @@ export type BackgroundJobUpdateWithoutTenantInput = {
 }
 
 export type BackgroundJobUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -642,7 +649,7 @@ export type BackgroundJobUncheckedUpdateWithoutTenantInput = {
 }
 
 export type BackgroundJobUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -738,11 +745,11 @@ export type $BackgroundJobPayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * ID tác vụ (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant liên quan (nullable nếu là tác vụ hệ thống)
      */
-    tenantId: string | null
+    tenantId: number | null
     /**
      * Tên hàng đợi (ví dụ: default, email, invoices)
      */
@@ -1203,8 +1210,8 @@ export interface Prisma__BackgroundJobClient<T, Null = never, ExtArgs extends ru
  * Fields of the BackgroundJob model
  */
 export interface BackgroundJobFieldRefs {
-  readonly id: Prisma.FieldRef<"BackgroundJob", 'String'>
-  readonly tenantId: Prisma.FieldRef<"BackgroundJob", 'String'>
+  readonly id: Prisma.FieldRef<"BackgroundJob", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"BackgroundJob", 'Int'>
   readonly queueName: Prisma.FieldRef<"BackgroundJob", 'String'>
   readonly jobType: Prisma.FieldRef<"BackgroundJob", 'String'>
   readonly payload: Prisma.FieldRef<"BackgroundJob", 'Json'>

@@ -20,26 +20,40 @@ export type RoleModel = runtime.Types.Result.DefaultSelection<Prisma.$RolePayloa
 
 export type AggregateRole = {
   _count: RoleCountAggregateOutputType | null
+  _avg: RoleAvgAggregateOutputType | null
+  _sum: RoleSumAggregateOutputType | null
   _min: RoleMinAggregateOutputType | null
   _max: RoleMaxAggregateOutputType | null
+}
+
+export type RoleAvgAggregateOutputType = {
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
+export type RoleSumAggregateOutputType = {
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoleMinAggregateOutputType = {
   id: string | null
   name: string | null
   description: string | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoleMaxAggregateOutputType = {
   id: string | null
   name: string | null
   description: string | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoleCountAggregateOutputType = {
@@ -52,6 +66,18 @@ export type RoleCountAggregateOutputType = {
   _all: number
 }
 
+
+export type RoleAvgAggregateInputType = {
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
+
+export type RoleSumAggregateInputType = {
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
 
 export type RoleMinAggregateInputType = {
   id?: true
@@ -119,6 +145,18 @@ export type RoleAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: RoleAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: RoleSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: RoleMinAggregateInputType
@@ -149,6 +187,8 @@ export type RoleGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: RoleCountAggregateInputType | true
+  _avg?: RoleAvgAggregateInputType
+  _sum?: RoleSumAggregateInputType
   _min?: RoleMinAggregateInputType
   _max?: RoleMaxAggregateInputType
 }
@@ -157,10 +197,12 @@ export type RoleGroupByOutputType = {
   id: string
   name: string
   description: string | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: RoleCountAggregateOutputType | null
+  _avg: RoleAvgAggregateOutputType | null
+  _sum: RoleSumAggregateOutputType | null
   _min: RoleMinAggregateOutputType | null
   _max: RoleMaxAggregateOutputType | null
 }
@@ -187,9 +229,9 @@ export type RoleWhereInput = {
   id?: Prisma.StringFilter<"Role"> | string
   name?: Prisma.StringFilter<"Role"> | string
   description?: Prisma.StringNullableFilter<"Role"> | string | null
-  createdById?: Prisma.UuidNullableFilter<"Role"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Role"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Role"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Role"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Role"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Role"> | number | null
   permissions?: Prisma.RolePermissionListRelationFilter
   tenantMembers?: Prisma.TenantMemberListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -218,9 +260,9 @@ export type RoleWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.RoleWhereInput | Prisma.RoleWhereInput[]
   name?: Prisma.StringFilter<"Role"> | string
   description?: Prisma.StringNullableFilter<"Role"> | string | null
-  createdById?: Prisma.UuidNullableFilter<"Role"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Role"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Role"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Role"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Role"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Role"> | number | null
   permissions?: Prisma.RolePermissionListRelationFilter
   tenantMembers?: Prisma.TenantMemberListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -236,8 +278,10 @@ export type RoleOrderByWithAggregationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.RoleCountOrderByAggregateInput
+  _avg?: Prisma.RoleAvgOrderByAggregateInput
   _max?: Prisma.RoleMaxOrderByAggregateInput
   _min?: Prisma.RoleMinOrderByAggregateInput
+  _sum?: Prisma.RoleSumOrderByAggregateInput
 }
 
 export type RoleScalarWhereWithAggregatesInput = {
@@ -247,9 +291,9 @@ export type RoleScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Role"> | string
   name?: Prisma.StringWithAggregatesFilter<"Role"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Role"> | string | null
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"Role"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"Role"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"Role"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"Role"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"Role"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"Role"> | number | null
 }
 
 export type RoleCreateInput = {
@@ -267,9 +311,9 @@ export type RoleUncheckedCreateInput = {
   id: string
   name: string
   description?: string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutRoleInput
 }
@@ -289,9 +333,9 @@ export type RoleUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutRoleNestedInput
 }
@@ -300,9 +344,9 @@ export type RoleCreateManyInput = {
   id: string
   name: string
   description?: string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoleUpdateManyMutationInput = {
@@ -315,9 +359,9 @@ export type RoleUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoleListRelationFilter = {
@@ -339,6 +383,12 @@ export type RoleCountOrderByAggregateInput = {
   deletedById?: Prisma.SortOrder
 }
 
+export type RoleAvgOrderByAggregateInput = {
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
 export type RoleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -352,6 +402,12 @@ export type RoleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
+export type RoleSumOrderByAggregateInput = {
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -530,8 +586,8 @@ export type RoleUncheckedCreateWithoutCreatedByInput = {
   id: string
   name: string
   description?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutRoleInput
 }
@@ -560,8 +616,8 @@ export type RoleUncheckedCreateWithoutUpdatedByInput = {
   id: string
   name: string
   description?: string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutRoleInput
 }
@@ -590,8 +646,8 @@ export type RoleUncheckedCreateWithoutDeletedByInput = {
   id: string
   name: string
   description?: string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutRoleInput
 }
@@ -629,9 +685,9 @@ export type RoleScalarWhereInput = {
   id?: Prisma.StringFilter<"Role"> | string
   name?: Prisma.StringFilter<"Role"> | string
   description?: Prisma.StringNullableFilter<"Role"> | string | null
-  createdById?: Prisma.UuidNullableFilter<"Role"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Role"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Role"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Role"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Role"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Role"> | number | null
 }
 
 export type RoleUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -680,9 +736,9 @@ export type RoleUncheckedCreateWithoutPermissionsInput = {
   id: string
   name: string
   description?: string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutRoleInput
 }
 
@@ -716,9 +772,9 @@ export type RoleUncheckedUpdateWithoutPermissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutRoleNestedInput
 }
 
@@ -736,9 +792,9 @@ export type RoleUncheckedCreateWithoutTenantMembersInput = {
   id: string
   name: string
   description?: string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
 }
 
@@ -772,9 +828,9 @@ export type RoleUncheckedUpdateWithoutTenantMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
 }
 
@@ -782,24 +838,24 @@ export type RoleCreateManyCreatedByInput = {
   id: string
   name: string
   description?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoleCreateManyUpdatedByInput = {
   id: string
   name: string
   description?: string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type RoleCreateManyDeletedByInput = {
   id: string
   name: string
   description?: string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type RoleUpdateWithoutCreatedByInput = {
@@ -816,8 +872,8 @@ export type RoleUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutRoleNestedInput
 }
@@ -826,8 +882,8 @@ export type RoleUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoleUpdateWithoutUpdatedByInput = {
@@ -844,8 +900,8 @@ export type RoleUncheckedUpdateWithoutUpdatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutRoleNestedInput
 }
@@ -854,8 +910,8 @@ export type RoleUncheckedUpdateManyWithoutUpdatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoleUpdateWithoutDeletedByInput = {
@@ -872,8 +928,8 @@ export type RoleUncheckedUpdateWithoutDeletedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutRoleNestedInput
 }
@@ -882,8 +938,8 @@ export type RoleUncheckedUpdateManyWithoutDeletedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -1025,15 +1081,15 @@ export type $RolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["role"]>
   composites: {}
 }
@@ -1465,9 +1521,9 @@ export interface RoleFieldRefs {
   readonly id: Prisma.FieldRef<"Role", 'String'>
   readonly name: Prisma.FieldRef<"Role", 'String'>
   readonly description: Prisma.FieldRef<"Role", 'String'>
-  readonly createdById: Prisma.FieldRef<"Role", 'String'>
-  readonly updatedById: Prisma.FieldRef<"Role", 'String'>
-  readonly deletedById: Prisma.FieldRef<"Role", 'String'>
+  readonly createdById: Prisma.FieldRef<"Role", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"Role", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"Role", 'Int'>
 }
     
 

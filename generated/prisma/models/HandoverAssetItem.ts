@@ -27,17 +27,23 @@ export type AggregateHandoverAssetItem = {
 }
 
 export type HandoverAssetItemAvgAggregateOutputType = {
+  id: number | null
+  handoverRecordId: number | null
+  roomAssetId: number | null
   quantity: number | null
 }
 
 export type HandoverAssetItemSumAggregateOutputType = {
+  id: number | null
+  handoverRecordId: number | null
+  roomAssetId: number | null
   quantity: number | null
 }
 
 export type HandoverAssetItemMinAggregateOutputType = {
-  id: string | null
-  handoverRecordId: string | null
-  roomAssetId: string | null
+  id: number | null
+  handoverRecordId: number | null
+  roomAssetId: number | null
   quantity: number | null
   condition: $Enums.AssetCondition | null
   note: string | null
@@ -45,9 +51,9 @@ export type HandoverAssetItemMinAggregateOutputType = {
 }
 
 export type HandoverAssetItemMaxAggregateOutputType = {
-  id: string | null
-  handoverRecordId: string | null
-  roomAssetId: string | null
+  id: number | null
+  handoverRecordId: number | null
+  roomAssetId: number | null
   quantity: number | null
   condition: $Enums.AssetCondition | null
   note: string | null
@@ -67,10 +73,16 @@ export type HandoverAssetItemCountAggregateOutputType = {
 
 
 export type HandoverAssetItemAvgAggregateInputType = {
+  id?: true
+  handoverRecordId?: true
+  roomAssetId?: true
   quantity?: true
 }
 
 export type HandoverAssetItemSumAggregateInputType = {
+  id?: true
+  handoverRecordId?: true
+  roomAssetId?: true
   quantity?: true
 }
 
@@ -192,9 +204,9 @@ export type HandoverAssetItemGroupByArgs<ExtArgs extends runtime.Types.Extension
 }
 
 export type HandoverAssetItemGroupByOutputType = {
-  id: string
-  handoverRecordId: string
-  roomAssetId: string
+  id: number
+  handoverRecordId: number
+  roomAssetId: number
   quantity: number
   condition: $Enums.AssetCondition
   note: string | null
@@ -225,9 +237,9 @@ export type HandoverAssetItemWhereInput = {
   AND?: Prisma.HandoverAssetItemWhereInput | Prisma.HandoverAssetItemWhereInput[]
   OR?: Prisma.HandoverAssetItemWhereInput[]
   NOT?: Prisma.HandoverAssetItemWhereInput | Prisma.HandoverAssetItemWhereInput[]
-  id?: Prisma.UuidFilter<"HandoverAssetItem"> | string
-  handoverRecordId?: Prisma.UuidFilter<"HandoverAssetItem"> | string
-  roomAssetId?: Prisma.UuidFilter<"HandoverAssetItem"> | string
+  id?: Prisma.IntFilter<"HandoverAssetItem"> | number
+  handoverRecordId?: Prisma.IntFilter<"HandoverAssetItem"> | number
+  roomAssetId?: Prisma.IntFilter<"HandoverAssetItem"> | number
   quantity?: Prisma.IntFilter<"HandoverAssetItem"> | number
   condition?: Prisma.EnumAssetConditionFilter<"HandoverAssetItem"> | $Enums.AssetCondition
   note?: Prisma.StringNullableFilter<"HandoverAssetItem"> | string | null
@@ -249,12 +261,12 @@ export type HandoverAssetItemOrderByWithRelationInput = {
 }
 
 export type HandoverAssetItemWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.HandoverAssetItemWhereInput | Prisma.HandoverAssetItemWhereInput[]
   OR?: Prisma.HandoverAssetItemWhereInput[]
   NOT?: Prisma.HandoverAssetItemWhereInput | Prisma.HandoverAssetItemWhereInput[]
-  handoverRecordId?: Prisma.UuidFilter<"HandoverAssetItem"> | string
-  roomAssetId?: Prisma.UuidFilter<"HandoverAssetItem"> | string
+  handoverRecordId?: Prisma.IntFilter<"HandoverAssetItem"> | number
+  roomAssetId?: Prisma.IntFilter<"HandoverAssetItem"> | number
   quantity?: Prisma.IntFilter<"HandoverAssetItem"> | number
   condition?: Prisma.EnumAssetConditionFilter<"HandoverAssetItem"> | $Enums.AssetCondition
   note?: Prisma.StringNullableFilter<"HandoverAssetItem"> | string | null
@@ -282,9 +294,9 @@ export type HandoverAssetItemScalarWhereWithAggregatesInput = {
   AND?: Prisma.HandoverAssetItemScalarWhereWithAggregatesInput | Prisma.HandoverAssetItemScalarWhereWithAggregatesInput[]
   OR?: Prisma.HandoverAssetItemScalarWhereWithAggregatesInput[]
   NOT?: Prisma.HandoverAssetItemScalarWhereWithAggregatesInput | Prisma.HandoverAssetItemScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"HandoverAssetItem"> | string
-  handoverRecordId?: Prisma.UuidWithAggregatesFilter<"HandoverAssetItem"> | string
-  roomAssetId?: Prisma.UuidWithAggregatesFilter<"HandoverAssetItem"> | string
+  id?: Prisma.IntWithAggregatesFilter<"HandoverAssetItem"> | number
+  handoverRecordId?: Prisma.IntWithAggregatesFilter<"HandoverAssetItem"> | number
+  roomAssetId?: Prisma.IntWithAggregatesFilter<"HandoverAssetItem"> | number
   quantity?: Prisma.IntWithAggregatesFilter<"HandoverAssetItem"> | number
   condition?: Prisma.EnumAssetConditionWithAggregatesFilter<"HandoverAssetItem"> | $Enums.AssetCondition
   note?: Prisma.StringNullableWithAggregatesFilter<"HandoverAssetItem"> | string | null
@@ -292,7 +304,6 @@ export type HandoverAssetItemScalarWhereWithAggregatesInput = {
 }
 
 export type HandoverAssetItemCreateInput = {
-  id?: string
   quantity?: number
   condition?: $Enums.AssetCondition
   note?: string | null
@@ -302,9 +313,9 @@ export type HandoverAssetItemCreateInput = {
 }
 
 export type HandoverAssetItemUncheckedCreateInput = {
-  id?: string
-  handoverRecordId: string
-  roomAssetId: string
+  id?: number
+  handoverRecordId: number
+  roomAssetId: number
   quantity?: number
   condition?: $Enums.AssetCondition
   note?: string | null
@@ -312,7 +323,6 @@ export type HandoverAssetItemUncheckedCreateInput = {
 }
 
 export type HandoverAssetItemUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -322,9 +332,9 @@ export type HandoverAssetItemUpdateInput = {
 }
 
 export type HandoverAssetItemUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  handoverRecordId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomAssetId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  handoverRecordId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomAssetId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -332,9 +342,9 @@ export type HandoverAssetItemUncheckedUpdateInput = {
 }
 
 export type HandoverAssetItemCreateManyInput = {
-  id?: string
-  handoverRecordId: string
-  roomAssetId: string
+  id?: number
+  handoverRecordId: number
+  roomAssetId: number
   quantity?: number
   condition?: $Enums.AssetCondition
   note?: string | null
@@ -342,7 +352,6 @@ export type HandoverAssetItemCreateManyInput = {
 }
 
 export type HandoverAssetItemUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -350,9 +359,9 @@ export type HandoverAssetItemUpdateManyMutationInput = {
 }
 
 export type HandoverAssetItemUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  handoverRecordId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomAssetId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  handoverRecordId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomAssetId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -380,6 +389,9 @@ export type HandoverAssetItemCountOrderByAggregateInput = {
 }
 
 export type HandoverAssetItemAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  handoverRecordId?: Prisma.SortOrder
+  roomAssetId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
 }
 
@@ -404,6 +416,9 @@ export type HandoverAssetItemMinOrderByAggregateInput = {
 }
 
 export type HandoverAssetItemSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  handoverRecordId?: Prisma.SortOrder
+  roomAssetId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
 }
 
@@ -492,7 +507,6 @@ export type HandoverAssetItemUncheckedUpdateManyWithoutHandoverRecordNestedInput
 }
 
 export type HandoverAssetItemCreateWithoutRoomAssetInput = {
-  id?: string
   quantity?: number
   condition?: $Enums.AssetCondition
   note?: string | null
@@ -501,8 +515,8 @@ export type HandoverAssetItemCreateWithoutRoomAssetInput = {
 }
 
 export type HandoverAssetItemUncheckedCreateWithoutRoomAssetInput = {
-  id?: string
-  handoverRecordId: string
+  id?: number
+  handoverRecordId: number
   quantity?: number
   condition?: $Enums.AssetCondition
   note?: string | null
@@ -539,9 +553,9 @@ export type HandoverAssetItemScalarWhereInput = {
   AND?: Prisma.HandoverAssetItemScalarWhereInput | Prisma.HandoverAssetItemScalarWhereInput[]
   OR?: Prisma.HandoverAssetItemScalarWhereInput[]
   NOT?: Prisma.HandoverAssetItemScalarWhereInput | Prisma.HandoverAssetItemScalarWhereInput[]
-  id?: Prisma.UuidFilter<"HandoverAssetItem"> | string
-  handoverRecordId?: Prisma.UuidFilter<"HandoverAssetItem"> | string
-  roomAssetId?: Prisma.UuidFilter<"HandoverAssetItem"> | string
+  id?: Prisma.IntFilter<"HandoverAssetItem"> | number
+  handoverRecordId?: Prisma.IntFilter<"HandoverAssetItem"> | number
+  roomAssetId?: Prisma.IntFilter<"HandoverAssetItem"> | number
   quantity?: Prisma.IntFilter<"HandoverAssetItem"> | number
   condition?: Prisma.EnumAssetConditionFilter<"HandoverAssetItem"> | $Enums.AssetCondition
   note?: Prisma.StringNullableFilter<"HandoverAssetItem"> | string | null
@@ -549,7 +563,6 @@ export type HandoverAssetItemScalarWhereInput = {
 }
 
 export type HandoverAssetItemCreateWithoutHandoverRecordInput = {
-  id?: string
   quantity?: number
   condition?: $Enums.AssetCondition
   note?: string | null
@@ -558,8 +571,8 @@ export type HandoverAssetItemCreateWithoutHandoverRecordInput = {
 }
 
 export type HandoverAssetItemUncheckedCreateWithoutHandoverRecordInput = {
-  id?: string
-  roomAssetId: string
+  id?: number
+  roomAssetId: number
   quantity?: number
   condition?: $Enums.AssetCondition
   note?: string | null
@@ -593,8 +606,8 @@ export type HandoverAssetItemUpdateManyWithWhereWithoutHandoverRecordInput = {
 }
 
 export type HandoverAssetItemCreateManyRoomAssetInput = {
-  id?: string
-  handoverRecordId: string
+  id?: number
+  handoverRecordId: number
   quantity?: number
   condition?: $Enums.AssetCondition
   note?: string | null
@@ -602,7 +615,6 @@ export type HandoverAssetItemCreateManyRoomAssetInput = {
 }
 
 export type HandoverAssetItemUpdateWithoutRoomAssetInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -611,8 +623,8 @@ export type HandoverAssetItemUpdateWithoutRoomAssetInput = {
 }
 
 export type HandoverAssetItemUncheckedUpdateWithoutRoomAssetInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  handoverRecordId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  handoverRecordId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -620,8 +632,8 @@ export type HandoverAssetItemUncheckedUpdateWithoutRoomAssetInput = {
 }
 
 export type HandoverAssetItemUncheckedUpdateManyWithoutRoomAssetInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  handoverRecordId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  handoverRecordId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -629,8 +641,8 @@ export type HandoverAssetItemUncheckedUpdateManyWithoutRoomAssetInput = {
 }
 
 export type HandoverAssetItemCreateManyHandoverRecordInput = {
-  id?: string
-  roomAssetId: string
+  id?: number
+  roomAssetId: number
   quantity?: number
   condition?: $Enums.AssetCondition
   note?: string | null
@@ -638,7 +650,6 @@ export type HandoverAssetItemCreateManyHandoverRecordInput = {
 }
 
 export type HandoverAssetItemUpdateWithoutHandoverRecordInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -647,8 +658,8 @@ export type HandoverAssetItemUpdateWithoutHandoverRecordInput = {
 }
 
 export type HandoverAssetItemUncheckedUpdateWithoutHandoverRecordInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomAssetId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomAssetId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -656,8 +667,8 @@ export type HandoverAssetItemUncheckedUpdateWithoutHandoverRecordInput = {
 }
 
 export type HandoverAssetItemUncheckedUpdateManyWithoutHandoverRecordInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomAssetId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomAssetId?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   condition?: Prisma.EnumAssetConditionFieldUpdateOperationsInput | $Enums.AssetCondition
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -742,15 +753,15 @@ export type $HandoverAssetItemPayload<ExtArgs extends runtime.Types.Extensions.I
     /**
      * ID chi tiết bàn giao tài sản (UUID)
      */
-    id: string
+    id: number
     /**
      * ID biên bản bàn giao tương ứng
      */
-    handoverRecordId: string
+    handoverRecordId: number
     /**
      * ID tài sản phòng được bàn giao
      */
-    roomAssetId: string
+    roomAssetId: number
     /**
      * Số lượng thực tế bàn giao
      */
@@ -1192,9 +1203,9 @@ export interface Prisma__HandoverAssetItemClient<T, Null = never, ExtArgs extend
  * Fields of the HandoverAssetItem model
  */
 export interface HandoverAssetItemFieldRefs {
-  readonly id: Prisma.FieldRef<"HandoverAssetItem", 'String'>
-  readonly handoverRecordId: Prisma.FieldRef<"HandoverAssetItem", 'String'>
-  readonly roomAssetId: Prisma.FieldRef<"HandoverAssetItem", 'String'>
+  readonly id: Prisma.FieldRef<"HandoverAssetItem", 'Int'>
+  readonly handoverRecordId: Prisma.FieldRef<"HandoverAssetItem", 'Int'>
+  readonly roomAssetId: Prisma.FieldRef<"HandoverAssetItem", 'Int'>
   readonly quantity: Prisma.FieldRef<"HandoverAssetItem", 'Int'>
   readonly condition: Prisma.FieldRef<"HandoverAssetItem", 'AssetCondition'>
   readonly note: Prisma.FieldRef<"HandoverAssetItem", 'String'>

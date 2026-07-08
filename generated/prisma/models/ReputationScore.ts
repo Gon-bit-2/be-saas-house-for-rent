@@ -27,6 +27,9 @@ export type AggregateReputationScore = {
 }
 
 export type ReputationScoreAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
   averageRating: runtime.Decimal | null
   totalReviews: number | null
   ticketResponseScore: runtime.Decimal | null
@@ -36,6 +39,9 @@ export type ReputationScoreAvgAggregateOutputType = {
 }
 
 export type ReputationScoreSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
   averageRating: runtime.Decimal | null
   totalReviews: number | null
   ticketResponseScore: runtime.Decimal | null
@@ -45,10 +51,10 @@ export type ReputationScoreSumAggregateOutputType = {
 }
 
 export type ReputationScoreMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   targetType: $Enums.ReputationTargetType | null
-  tenantId: string | null
-  roomId: string | null
+  tenantId: number | null
+  roomId: number | null
   averageRating: runtime.Decimal | null
   totalReviews: number | null
   ticketResponseScore: runtime.Decimal | null
@@ -59,10 +65,10 @@ export type ReputationScoreMinAggregateOutputType = {
 }
 
 export type ReputationScoreMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   targetType: $Enums.ReputationTargetType | null
-  tenantId: string | null
-  roomId: string | null
+  tenantId: number | null
+  roomId: number | null
   averageRating: runtime.Decimal | null
   totalReviews: number | null
   ticketResponseScore: runtime.Decimal | null
@@ -89,6 +95,9 @@ export type ReputationScoreCountAggregateOutputType = {
 
 
 export type ReputationScoreAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
   averageRating?: true
   totalReviews?: true
   ticketResponseScore?: true
@@ -98,6 +107,9 @@ export type ReputationScoreAvgAggregateInputType = {
 }
 
 export type ReputationScoreSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
   averageRating?: true
   totalReviews?: true
   ticketResponseScore?: true
@@ -236,10 +248,10 @@ export type ReputationScoreGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 export type ReputationScoreGroupByOutputType = {
-  id: string
+  id: number
   targetType: $Enums.ReputationTargetType
-  tenantId: string
-  roomId: string | null
+  tenantId: number
+  roomId: number | null
   averageRating: runtime.Decimal
   totalReviews: number
   ticketResponseScore: runtime.Decimal
@@ -273,10 +285,10 @@ export type ReputationScoreWhereInput = {
   AND?: Prisma.ReputationScoreWhereInput | Prisma.ReputationScoreWhereInput[]
   OR?: Prisma.ReputationScoreWhereInput[]
   NOT?: Prisma.ReputationScoreWhereInput | Prisma.ReputationScoreWhereInput[]
-  id?: Prisma.UuidFilter<"ReputationScore"> | string
+  id?: Prisma.IntFilter<"ReputationScore"> | number
   targetType?: Prisma.EnumReputationTargetTypeFilter<"ReputationScore"> | $Enums.ReputationTargetType
-  tenantId?: Prisma.UuidFilter<"ReputationScore"> | string
-  roomId?: Prisma.UuidNullableFilter<"ReputationScore"> | string | null
+  tenantId?: Prisma.IntFilter<"ReputationScore"> | number
+  roomId?: Prisma.IntNullableFilter<"ReputationScore"> | number | null
   averageRating?: Prisma.DecimalFilter<"ReputationScore"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFilter<"ReputationScore"> | number
   ticketResponseScore?: Prisma.DecimalFilter<"ReputationScore"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -305,13 +317,13 @@ export type ReputationScoreOrderByWithRelationInput = {
 }
 
 export type ReputationScoreWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.ReputationScoreWhereInput | Prisma.ReputationScoreWhereInput[]
   OR?: Prisma.ReputationScoreWhereInput[]
   NOT?: Prisma.ReputationScoreWhereInput | Prisma.ReputationScoreWhereInput[]
   targetType?: Prisma.EnumReputationTargetTypeFilter<"ReputationScore"> | $Enums.ReputationTargetType
-  tenantId?: Prisma.UuidFilter<"ReputationScore"> | string
-  roomId?: Prisma.UuidNullableFilter<"ReputationScore"> | string | null
+  tenantId?: Prisma.IntFilter<"ReputationScore"> | number
+  roomId?: Prisma.IntNullableFilter<"ReputationScore"> | number | null
   averageRating?: Prisma.DecimalFilter<"ReputationScore"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFilter<"ReputationScore"> | number
   ticketResponseScore?: Prisma.DecimalFilter<"ReputationScore"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -346,10 +358,10 @@ export type ReputationScoreScalarWhereWithAggregatesInput = {
   AND?: Prisma.ReputationScoreScalarWhereWithAggregatesInput | Prisma.ReputationScoreScalarWhereWithAggregatesInput[]
   OR?: Prisma.ReputationScoreScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ReputationScoreScalarWhereWithAggregatesInput | Prisma.ReputationScoreScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"ReputationScore"> | string
+  id?: Prisma.IntWithAggregatesFilter<"ReputationScore"> | number
   targetType?: Prisma.EnumReputationTargetTypeWithAggregatesFilter<"ReputationScore"> | $Enums.ReputationTargetType
-  tenantId?: Prisma.UuidWithAggregatesFilter<"ReputationScore"> | string
-  roomId?: Prisma.UuidNullableWithAggregatesFilter<"ReputationScore"> | string | null
+  tenantId?: Prisma.IntWithAggregatesFilter<"ReputationScore"> | number
+  roomId?: Prisma.IntNullableWithAggregatesFilter<"ReputationScore"> | number | null
   averageRating?: Prisma.DecimalWithAggregatesFilter<"ReputationScore"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntWithAggregatesFilter<"ReputationScore"> | number
   ticketResponseScore?: Prisma.DecimalWithAggregatesFilter<"ReputationScore"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -360,7 +372,6 @@ export type ReputationScoreScalarWhereWithAggregatesInput = {
 }
 
 export type ReputationScoreCreateInput = {
-  id?: string
   targetType: $Enums.ReputationTargetType
   averageRating: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -374,10 +385,10 @@ export type ReputationScoreCreateInput = {
 }
 
 export type ReputationScoreUncheckedCreateInput = {
-  id?: string
+  id?: number
   targetType: $Enums.ReputationTargetType
-  tenantId: string
-  roomId?: string | null
+  tenantId: number
+  roomId?: number | null
   averageRating: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
   ticketResponseScore: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -388,7 +399,6 @@ export type ReputationScoreUncheckedCreateInput = {
 }
 
 export type ReputationScoreUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   targetType?: Prisma.EnumReputationTargetTypeFieldUpdateOperationsInput | $Enums.ReputationTargetType
   averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -402,10 +412,10 @@ export type ReputationScoreUpdateInput = {
 }
 
 export type ReputationScoreUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReputationTargetTypeFieldUpdateOperationsInput | $Enums.ReputationTargetType
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
   ticketResponseScore?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -416,10 +426,10 @@ export type ReputationScoreUncheckedUpdateInput = {
 }
 
 export type ReputationScoreCreateManyInput = {
-  id?: string
+  id?: number
   targetType: $Enums.ReputationTargetType
-  tenantId: string
-  roomId?: string | null
+  tenantId: number
+  roomId?: number | null
   averageRating: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
   ticketResponseScore: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -430,7 +440,6 @@ export type ReputationScoreCreateManyInput = {
 }
 
 export type ReputationScoreUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   targetType?: Prisma.EnumReputationTargetTypeFieldUpdateOperationsInput | $Enums.ReputationTargetType
   averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -442,10 +451,10 @@ export type ReputationScoreUpdateManyMutationInput = {
 }
 
 export type ReputationScoreUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReputationTargetTypeFieldUpdateOperationsInput | $Enums.ReputationTargetType
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
   ticketResponseScore?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -480,6 +489,9 @@ export type ReputationScoreCountOrderByAggregateInput = {
 }
 
 export type ReputationScoreAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   averageRating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
   ticketResponseScore?: Prisma.SortOrder
@@ -517,6 +529,9 @@ export type ReputationScoreMinOrderByAggregateInput = {
 }
 
 export type ReputationScoreSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
   averageRating?: Prisma.SortOrder
   totalReviews?: Prisma.SortOrder
   ticketResponseScore?: Prisma.SortOrder
@@ -614,7 +629,6 @@ export type EnumReputationTargetTypeFieldUpdateOperationsInput = {
 }
 
 export type ReputationScoreCreateWithoutTenantInput = {
-  id?: string
   targetType: $Enums.ReputationTargetType
   averageRating: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -627,9 +641,9 @@ export type ReputationScoreCreateWithoutTenantInput = {
 }
 
 export type ReputationScoreUncheckedCreateWithoutTenantInput = {
-  id?: string
+  id?: number
   targetType: $Enums.ReputationTargetType
-  roomId?: string | null
+  roomId?: number | null
   averageRating: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
   ticketResponseScore: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -669,10 +683,10 @@ export type ReputationScoreScalarWhereInput = {
   AND?: Prisma.ReputationScoreScalarWhereInput | Prisma.ReputationScoreScalarWhereInput[]
   OR?: Prisma.ReputationScoreScalarWhereInput[]
   NOT?: Prisma.ReputationScoreScalarWhereInput | Prisma.ReputationScoreScalarWhereInput[]
-  id?: Prisma.UuidFilter<"ReputationScore"> | string
+  id?: Prisma.IntFilter<"ReputationScore"> | number
   targetType?: Prisma.EnumReputationTargetTypeFilter<"ReputationScore"> | $Enums.ReputationTargetType
-  tenantId?: Prisma.UuidFilter<"ReputationScore"> | string
-  roomId?: Prisma.UuidNullableFilter<"ReputationScore"> | string | null
+  tenantId?: Prisma.IntFilter<"ReputationScore"> | number
+  roomId?: Prisma.IntNullableFilter<"ReputationScore"> | number | null
   averageRating?: Prisma.DecimalFilter<"ReputationScore"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFilter<"ReputationScore"> | number
   ticketResponseScore?: Prisma.DecimalFilter<"ReputationScore"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -683,7 +697,6 @@ export type ReputationScoreScalarWhereInput = {
 }
 
 export type ReputationScoreCreateWithoutRoomInput = {
-  id?: string
   targetType: $Enums.ReputationTargetType
   averageRating: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
@@ -696,9 +709,9 @@ export type ReputationScoreCreateWithoutRoomInput = {
 }
 
 export type ReputationScoreUncheckedCreateWithoutRoomInput = {
-  id?: string
+  id?: number
   targetType: $Enums.ReputationTargetType
-  tenantId: string
+  tenantId: number
   averageRating: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
   ticketResponseScore: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -735,9 +748,9 @@ export type ReputationScoreUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type ReputationScoreCreateManyTenantInput = {
-  id?: string
+  id?: number
   targetType: $Enums.ReputationTargetType
-  roomId?: string | null
+  roomId?: number | null
   averageRating: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
   ticketResponseScore: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -748,7 +761,6 @@ export type ReputationScoreCreateManyTenantInput = {
 }
 
 export type ReputationScoreUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   targetType?: Prisma.EnumReputationTargetTypeFieldUpdateOperationsInput | $Enums.ReputationTargetType
   averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -761,9 +773,9 @@ export type ReputationScoreUpdateWithoutTenantInput = {
 }
 
 export type ReputationScoreUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReputationTargetTypeFieldUpdateOperationsInput | $Enums.ReputationTargetType
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
   ticketResponseScore?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -774,9 +786,9 @@ export type ReputationScoreUncheckedUpdateWithoutTenantInput = {
 }
 
 export type ReputationScoreUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReputationTargetTypeFieldUpdateOperationsInput | $Enums.ReputationTargetType
-  roomId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roomId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
   ticketResponseScore?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -787,9 +799,9 @@ export type ReputationScoreUncheckedUpdateManyWithoutTenantInput = {
 }
 
 export type ReputationScoreCreateManyRoomInput = {
-  id?: string
+  id?: number
   targetType: $Enums.ReputationTargetType
-  tenantId: string
+  tenantId: number
   averageRating: runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: number
   ticketResponseScore: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -800,7 +812,6 @@ export type ReputationScoreCreateManyRoomInput = {
 }
 
 export type ReputationScoreUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   targetType?: Prisma.EnumReputationTargetTypeFieldUpdateOperationsInput | $Enums.ReputationTargetType
   averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
@@ -813,9 +824,9 @@ export type ReputationScoreUpdateWithoutRoomInput = {
 }
 
 export type ReputationScoreUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReputationTargetTypeFieldUpdateOperationsInput | $Enums.ReputationTargetType
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
   ticketResponseScore?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -826,9 +837,9 @@ export type ReputationScoreUncheckedUpdateWithoutRoomInput = {
 }
 
 export type ReputationScoreUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   targetType?: Prisma.EnumReputationTargetTypeFieldUpdateOperationsInput | $Enums.ReputationTargetType
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
   ticketResponseScore?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -932,7 +943,7 @@ export type $ReputationScorePayload<ExtArgs extends runtime.Types.Extensions.Int
     /**
      * ID bản ghi điểm uy tín (UUID)
      */
-    id: string
+    id: number
     /**
      * Phân loại đối tượng tính điểm là chủ trọ (Tenant) hay phòng cụ thể (Room)
      */
@@ -940,11 +951,11 @@ export type $ReputationScorePayload<ExtArgs extends runtime.Types.Extensions.Int
     /**
      * ID Tenant liên quan
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID phòng trọ liên quan (nullable nếu là điểm chung của Tenant)
      */
-    roomId: string | null
+    roomId: number | null
     /**
      * Điểm trung bình đánh giá từ khách thuê (0.00 đến 5.00)
      */
@@ -1398,10 +1409,10 @@ export interface Prisma__ReputationScoreClient<T, Null = never, ExtArgs extends 
  * Fields of the ReputationScore model
  */
 export interface ReputationScoreFieldRefs {
-  readonly id: Prisma.FieldRef<"ReputationScore", 'String'>
+  readonly id: Prisma.FieldRef<"ReputationScore", 'Int'>
   readonly targetType: Prisma.FieldRef<"ReputationScore", 'ReputationTargetType'>
-  readonly tenantId: Prisma.FieldRef<"ReputationScore", 'String'>
-  readonly roomId: Prisma.FieldRef<"ReputationScore", 'String'>
+  readonly tenantId: Prisma.FieldRef<"ReputationScore", 'Int'>
+  readonly roomId: Prisma.FieldRef<"ReputationScore", 'Int'>
   readonly averageRating: Prisma.FieldRef<"ReputationScore", 'Decimal'>
   readonly totalReviews: Prisma.FieldRef<"ReputationScore", 'Int'>
   readonly ticketResponseScore: Prisma.FieldRef<"ReputationScore", 'Decimal'>

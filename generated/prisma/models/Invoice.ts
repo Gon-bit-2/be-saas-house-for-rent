@@ -27,30 +27,48 @@ export type AggregateInvoice = {
 }
 
 export type InvoiceAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  batchId: number | null
+  contractId: number | null
+  roomId: number | null
+  renterId: number | null
   subtotal: runtime.Decimal | null
   discountAmount: runtime.Decimal | null
   penaltyAmount: runtime.Decimal | null
   totalAmount: runtime.Decimal | null
   paidAmount: runtime.Decimal | null
   debtAmount: runtime.Decimal | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type InvoiceSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  batchId: number | null
+  contractId: number | null
+  roomId: number | null
+  renterId: number | null
   subtotal: runtime.Decimal | null
   discountAmount: runtime.Decimal | null
   penaltyAmount: runtime.Decimal | null
   totalAmount: runtime.Decimal | null
   paidAmount: runtime.Decimal | null
   debtAmount: runtime.Decimal | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type InvoiceMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  batchId: string | null
-  contractId: string | null
-  roomId: string | null
-  renterId: string | null
+  id: number | null
+  tenantId: number | null
+  batchId: number | null
+  contractId: number | null
+  roomId: number | null
+  renterId: number | null
   invoiceCode: string | null
   billingMonth: Date | null
   issueDate: Date | null
@@ -66,18 +84,18 @@ export type InvoiceMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type InvoiceMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  batchId: string | null
-  contractId: string | null
-  roomId: string | null
-  renterId: string | null
+  id: number | null
+  tenantId: number | null
+  batchId: number | null
+  contractId: number | null
+  roomId: number | null
+  renterId: number | null
   invoiceCode: string | null
   billingMonth: Date | null
   issueDate: Date | null
@@ -93,9 +111,9 @@ export type InvoiceMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type InvoiceCountAggregateOutputType = {
@@ -128,21 +146,39 @@ export type InvoiceCountAggregateOutputType = {
 
 
 export type InvoiceAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  batchId?: true
+  contractId?: true
+  roomId?: true
+  renterId?: true
   subtotal?: true
   discountAmount?: true
   penaltyAmount?: true
   totalAmount?: true
   paidAmount?: true
   debtAmount?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type InvoiceSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  batchId?: true
+  contractId?: true
+  roomId?: true
+  renterId?: true
   subtotal?: true
   discountAmount?: true
   penaltyAmount?: true
   totalAmount?: true
   paidAmount?: true
   debtAmount?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type InvoiceMinAggregateInputType = {
@@ -314,12 +350,12 @@ export type InvoiceGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 export type InvoiceGroupByOutputType = {
-  id: string
-  tenantId: string
-  batchId: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id: number
+  tenantId: number
+  batchId: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date
   issueDate: Date
@@ -335,9 +371,9 @@ export type InvoiceGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: InvoiceCountAggregateOutputType | null
   _avg: InvoiceAvgAggregateOutputType | null
   _sum: InvoiceSumAggregateOutputType | null
@@ -364,12 +400,12 @@ export type InvoiceWhereInput = {
   AND?: Prisma.InvoiceWhereInput | Prisma.InvoiceWhereInput[]
   OR?: Prisma.InvoiceWhereInput[]
   NOT?: Prisma.InvoiceWhereInput | Prisma.InvoiceWhereInput[]
-  id?: Prisma.UuidFilter<"Invoice"> | string
-  tenantId?: Prisma.UuidFilter<"Invoice"> | string
-  batchId?: Prisma.UuidNullableFilter<"Invoice"> | string | null
-  contractId?: Prisma.UuidFilter<"Invoice"> | string
-  roomId?: Prisma.UuidFilter<"Invoice"> | string
-  renterId?: Prisma.UuidFilter<"Invoice"> | string
+  id?: Prisma.IntFilter<"Invoice"> | number
+  tenantId?: Prisma.IntFilter<"Invoice"> | number
+  batchId?: Prisma.IntNullableFilter<"Invoice"> | number | null
+  contractId?: Prisma.IntFilter<"Invoice"> | number
+  roomId?: Prisma.IntFilter<"Invoice"> | number
+  renterId?: Prisma.IntFilter<"Invoice"> | number
   invoiceCode?: Prisma.StringFilter<"Invoice"> | string
   billingMonth?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   issueDate?: Prisma.DateTimeFilter<"Invoice"> | Date | string
@@ -385,9 +421,9 @@ export type InvoiceWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Invoice"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Invoice"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Invoice"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Invoice"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Invoice"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Invoice"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Invoice"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   batch?: Prisma.XOR<Prisma.InvoiceBatchNullableScalarRelationFilter, Prisma.InvoiceBatchWhereInput> | null
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
@@ -442,16 +478,16 @@ export type InvoiceOrderByWithRelationInput = {
 }
 
 export type InvoiceWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   invoiceCode?: string
   AND?: Prisma.InvoiceWhereInput | Prisma.InvoiceWhereInput[]
   OR?: Prisma.InvoiceWhereInput[]
   NOT?: Prisma.InvoiceWhereInput | Prisma.InvoiceWhereInput[]
-  tenantId?: Prisma.UuidFilter<"Invoice"> | string
-  batchId?: Prisma.UuidNullableFilter<"Invoice"> | string | null
-  contractId?: Prisma.UuidFilter<"Invoice"> | string
-  roomId?: Prisma.UuidFilter<"Invoice"> | string
-  renterId?: Prisma.UuidFilter<"Invoice"> | string
+  tenantId?: Prisma.IntFilter<"Invoice"> | number
+  batchId?: Prisma.IntNullableFilter<"Invoice"> | number | null
+  contractId?: Prisma.IntFilter<"Invoice"> | number
+  roomId?: Prisma.IntFilter<"Invoice"> | number
+  renterId?: Prisma.IntFilter<"Invoice"> | number
   billingMonth?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   issueDate?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   dueDate?: Prisma.DateTimeFilter<"Invoice"> | Date | string
@@ -466,9 +502,9 @@ export type InvoiceWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Invoice"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Invoice"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Invoice"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Invoice"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Invoice"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Invoice"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Invoice"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   batch?: Prisma.XOR<Prisma.InvoiceBatchNullableScalarRelationFilter, Prisma.InvoiceBatchWhereInput> | null
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
@@ -519,12 +555,12 @@ export type InvoiceScalarWhereWithAggregatesInput = {
   AND?: Prisma.InvoiceScalarWhereWithAggregatesInput | Prisma.InvoiceScalarWhereWithAggregatesInput[]
   OR?: Prisma.InvoiceScalarWhereWithAggregatesInput[]
   NOT?: Prisma.InvoiceScalarWhereWithAggregatesInput | Prisma.InvoiceScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Invoice"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"Invoice"> | string
-  batchId?: Prisma.UuidNullableWithAggregatesFilter<"Invoice"> | string | null
-  contractId?: Prisma.UuidWithAggregatesFilter<"Invoice"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"Invoice"> | string
-  renterId?: Prisma.UuidWithAggregatesFilter<"Invoice"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Invoice"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"Invoice"> | number
+  batchId?: Prisma.IntNullableWithAggregatesFilter<"Invoice"> | number | null
+  contractId?: Prisma.IntWithAggregatesFilter<"Invoice"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"Invoice"> | number
+  renterId?: Prisma.IntWithAggregatesFilter<"Invoice"> | number
   invoiceCode?: Prisma.StringWithAggregatesFilter<"Invoice"> | string
   billingMonth?: Prisma.DateTimeWithAggregatesFilter<"Invoice"> | Date | string
   issueDate?: Prisma.DateTimeWithAggregatesFilter<"Invoice"> | Date | string
@@ -540,13 +576,12 @@ export type InvoiceScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Invoice"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Invoice"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Invoice"> | Date | string | null
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"Invoice"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"Invoice"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"Invoice"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"Invoice"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"Invoice"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"Invoice"> | number | null
 }
 
 export type InvoiceCreateInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -577,12 +612,12 @@ export type InvoiceCreateInput = {
 }
 
 export type InvoiceUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -598,9 +633,9 @@ export type InvoiceUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
@@ -608,7 +643,6 @@ export type InvoiceUncheckedCreateInput = {
 }
 
 export type InvoiceUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -639,12 +673,12 @@ export type InvoiceUpdateInput = {
 }
 
 export type InvoiceUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -660,9 +694,9 @@ export type InvoiceUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -670,12 +704,12 @@ export type InvoiceUncheckedUpdateInput = {
 }
 
 export type InvoiceCreateManyInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -691,13 +725,12 @@ export type InvoiceCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -716,12 +749,12 @@ export type InvoiceUpdateManyMutationInput = {
 }
 
 export type InvoiceUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -737,9 +770,9 @@ export type InvoiceUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceListRelationFilter = {
@@ -780,12 +813,21 @@ export type InvoiceCountOrderByAggregateInput = {
 }
 
 export type InvoiceAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  batchId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  renterId?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   discountAmount?: Prisma.SortOrder
   penaltyAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   paidAmount?: Prisma.SortOrder
   debtAmount?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type InvoiceMaxOrderByAggregateInput = {
@@ -843,12 +885,21 @@ export type InvoiceMinOrderByAggregateInput = {
 }
 
 export type InvoiceSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  batchId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  renterId?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   discountAmount?: Prisma.SortOrder
   penaltyAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   paidAmount?: Prisma.SortOrder
   debtAmount?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type InvoiceScalarRelationFilter = {
@@ -1260,7 +1311,6 @@ export type InvoiceUpdateOneWithoutWebhookLogsNestedInput = {
 }
 
 export type InvoiceCreateWithoutRenterInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1290,11 +1340,11 @@ export type InvoiceCreateWithoutRenterInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutRenterInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1310,9 +1360,9 @@ export type InvoiceUncheckedCreateWithoutRenterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
@@ -1330,7 +1380,6 @@ export type InvoiceCreateManyRenterInputEnvelope = {
 }
 
 export type InvoiceCreateWithoutCreatedByInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1360,12 +1409,12 @@ export type InvoiceCreateWithoutCreatedByInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1381,8 +1430,8 @@ export type InvoiceUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
@@ -1400,7 +1449,6 @@ export type InvoiceCreateManyCreatedByInputEnvelope = {
 }
 
 export type InvoiceCreateWithoutUpdatedByInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1430,12 +1478,12 @@ export type InvoiceCreateWithoutUpdatedByInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1451,8 +1499,8 @@ export type InvoiceUncheckedCreateWithoutUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
@@ -1470,7 +1518,6 @@ export type InvoiceCreateManyUpdatedByInputEnvelope = {
 }
 
 export type InvoiceCreateWithoutDeletedByInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1500,12 +1547,12 @@ export type InvoiceCreateWithoutDeletedByInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1521,8 +1568,8 @@ export type InvoiceUncheckedCreateWithoutDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
@@ -1559,12 +1606,12 @@ export type InvoiceScalarWhereInput = {
   AND?: Prisma.InvoiceScalarWhereInput | Prisma.InvoiceScalarWhereInput[]
   OR?: Prisma.InvoiceScalarWhereInput[]
   NOT?: Prisma.InvoiceScalarWhereInput | Prisma.InvoiceScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Invoice"> | string
-  tenantId?: Prisma.UuidFilter<"Invoice"> | string
-  batchId?: Prisma.UuidNullableFilter<"Invoice"> | string | null
-  contractId?: Prisma.UuidFilter<"Invoice"> | string
-  roomId?: Prisma.UuidFilter<"Invoice"> | string
-  renterId?: Prisma.UuidFilter<"Invoice"> | string
+  id?: Prisma.IntFilter<"Invoice"> | number
+  tenantId?: Prisma.IntFilter<"Invoice"> | number
+  batchId?: Prisma.IntNullableFilter<"Invoice"> | number | null
+  contractId?: Prisma.IntFilter<"Invoice"> | number
+  roomId?: Prisma.IntFilter<"Invoice"> | number
+  renterId?: Prisma.IntFilter<"Invoice"> | number
   invoiceCode?: Prisma.StringFilter<"Invoice"> | string
   billingMonth?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   issueDate?: Prisma.DateTimeFilter<"Invoice"> | Date | string
@@ -1580,9 +1627,9 @@ export type InvoiceScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Invoice"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Invoice"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Invoice"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Invoice"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Invoice"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Invoice"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Invoice"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Invoice"> | number | null
 }
 
 export type InvoiceUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1634,7 +1681,6 @@ export type InvoiceUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type InvoiceCreateWithoutTenantInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1664,11 +1710,11 @@ export type InvoiceCreateWithoutTenantInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutTenantInput = {
-  id?: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1684,9 +1730,9 @@ export type InvoiceUncheckedCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
@@ -1720,7 +1766,6 @@ export type InvoiceUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type InvoiceCreateWithoutRoomInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1750,11 +1795,11 @@ export type InvoiceCreateWithoutRoomInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutRoomInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1770,9 +1815,9 @@ export type InvoiceUncheckedCreateWithoutRoomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
@@ -1806,7 +1851,6 @@ export type InvoiceUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type InvoiceCreateWithoutContractInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1836,11 +1880,11 @@ export type InvoiceCreateWithoutContractInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutContractInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1856,9 +1900,9 @@ export type InvoiceUncheckedCreateWithoutContractInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
@@ -1892,7 +1936,6 @@ export type InvoiceUpdateManyWithWhereWithoutContractInput = {
 }
 
 export type InvoiceCreateWithoutBatchInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1922,11 +1965,11 @@ export type InvoiceCreateWithoutBatchInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutBatchInput = {
-  id?: string
-  tenantId: string
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -1942,9 +1985,9 @@ export type InvoiceUncheckedCreateWithoutBatchInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
@@ -1978,7 +2021,6 @@ export type InvoiceUpdateManyWithWhereWithoutBatchInput = {
 }
 
 export type InvoiceCreateWithoutItemsInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2008,12 +2050,12 @@ export type InvoiceCreateWithoutItemsInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutItemsInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2029,9 +2071,9 @@ export type InvoiceUncheckedCreateWithoutItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
@@ -2054,7 +2096,6 @@ export type InvoiceUpdateToOneWithWhereWithoutItemsInput = {
 }
 
 export type InvoiceUpdateWithoutItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2084,12 +2125,12 @@ export type InvoiceUpdateWithoutItemsInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2105,16 +2146,15 @@ export type InvoiceUncheckedUpdateWithoutItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type InvoiceCreateWithoutPaymentsInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2144,12 +2184,12 @@ export type InvoiceCreateWithoutPaymentsInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutPaymentsInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2165,9 +2205,9 @@ export type InvoiceUncheckedCreateWithoutPaymentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
@@ -2190,7 +2230,6 @@ export type InvoiceUpdateToOneWithWhereWithoutPaymentsInput = {
 }
 
 export type InvoiceUpdateWithoutPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2220,12 +2259,12 @@ export type InvoiceUpdateWithoutPaymentsInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2241,16 +2280,15 @@ export type InvoiceUncheckedUpdateWithoutPaymentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type InvoiceCreateWithoutQrCodesInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2280,12 +2318,12 @@ export type InvoiceCreateWithoutQrCodesInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutQrCodesInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2301,9 +2339,9 @@ export type InvoiceUncheckedCreateWithoutQrCodesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
@@ -2326,7 +2364,6 @@ export type InvoiceUpdateToOneWithWhereWithoutQrCodesInput = {
 }
 
 export type InvoiceUpdateWithoutQrCodesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2356,12 +2393,12 @@ export type InvoiceUpdateWithoutQrCodesInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutQrCodesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2377,16 +2414,15 @@ export type InvoiceUncheckedUpdateWithoutQrCodesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type InvoiceCreateWithoutWebhookLogsInput = {
-  id?: string
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2416,12 +2452,12 @@ export type InvoiceCreateWithoutWebhookLogsInput = {
 }
 
 export type InvoiceUncheckedCreateWithoutWebhookLogsInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2437,9 +2473,9 @@ export type InvoiceUncheckedCreateWithoutWebhookLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
@@ -2462,7 +2498,6 @@ export type InvoiceUpdateToOneWithWhereWithoutWebhookLogsInput = {
 }
 
 export type InvoiceUpdateWithoutWebhookLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2492,12 +2527,12 @@ export type InvoiceUpdateWithoutWebhookLogsInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutWebhookLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2513,20 +2548,20 @@ export type InvoiceUncheckedUpdateWithoutWebhookLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type InvoiceCreateManyRenterInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2542,18 +2577,18 @@ export type InvoiceCreateManyRenterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceCreateManyCreatedByInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2569,17 +2604,17 @@ export type InvoiceCreateManyCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceCreateManyUpdatedByInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2595,17 +2630,17 @@ export type InvoiceCreateManyUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceCreateManyDeletedByInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2621,12 +2656,11 @@ export type InvoiceCreateManyDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type InvoiceUpdateWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2656,11 +2690,11 @@ export type InvoiceUpdateWithoutRenterInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2676,9 +2710,9 @@ export type InvoiceUncheckedUpdateWithoutRenterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -2686,11 +2720,11 @@ export type InvoiceUncheckedUpdateWithoutRenterInput = {
 }
 
 export type InvoiceUncheckedUpdateManyWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2706,13 +2740,12 @@ export type InvoiceUncheckedUpdateManyWithoutRenterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2742,12 +2775,12 @@ export type InvoiceUpdateWithoutCreatedByInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2763,8 +2796,8 @@ export type InvoiceUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -2772,12 +2805,12 @@ export type InvoiceUncheckedUpdateWithoutCreatedByInput = {
 }
 
 export type InvoiceUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2793,12 +2826,11 @@ export type InvoiceUncheckedUpdateManyWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2828,12 +2860,12 @@ export type InvoiceUpdateWithoutUpdatedByInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2849,8 +2881,8 @@ export type InvoiceUncheckedUpdateWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -2858,12 +2890,12 @@ export type InvoiceUncheckedUpdateWithoutUpdatedByInput = {
 }
 
 export type InvoiceUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2879,12 +2911,11 @@ export type InvoiceUncheckedUpdateManyWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2914,12 +2945,12 @@ export type InvoiceUpdateWithoutDeletedByInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2935,8 +2966,8 @@ export type InvoiceUncheckedUpdateWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -2944,12 +2975,12 @@ export type InvoiceUncheckedUpdateWithoutDeletedByInput = {
 }
 
 export type InvoiceUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2965,16 +2996,16 @@ export type InvoiceUncheckedUpdateManyWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceCreateManyTenantInput = {
-  id?: string
-  batchId?: string | null
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -2990,13 +3021,12 @@ export type InvoiceCreateManyTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3026,11 +3056,11 @@ export type InvoiceUpdateWithoutTenantInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3046,9 +3076,9 @@ export type InvoiceUncheckedUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -3056,11 +3086,11 @@ export type InvoiceUncheckedUpdateWithoutTenantInput = {
 }
 
 export type InvoiceUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3076,17 +3106,17 @@ export type InvoiceUncheckedUpdateManyWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceCreateManyRoomInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  contractId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -3102,13 +3132,12 @@ export type InvoiceCreateManyRoomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3138,11 +3167,11 @@ export type InvoiceUpdateWithoutRoomInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3158,9 +3187,9 @@ export type InvoiceUncheckedUpdateWithoutRoomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -3168,11 +3197,11 @@ export type InvoiceUncheckedUpdateWithoutRoomInput = {
 }
 
 export type InvoiceUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3188,17 +3217,17 @@ export type InvoiceUncheckedUpdateManyWithoutRoomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceCreateManyContractInput = {
-  id?: string
-  tenantId: string
-  batchId?: string | null
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -3214,13 +3243,12 @@ export type InvoiceCreateManyContractInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3250,11 +3278,11 @@ export type InvoiceUpdateWithoutContractInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3270,9 +3298,9 @@ export type InvoiceUncheckedUpdateWithoutContractInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -3280,11 +3308,11 @@ export type InvoiceUncheckedUpdateWithoutContractInput = {
 }
 
 export type InvoiceUncheckedUpdateManyWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  batchId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3300,17 +3328,17 @@ export type InvoiceUncheckedUpdateManyWithoutContractInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceCreateManyBatchInput = {
-  id?: string
-  tenantId: string
-  contractId: string
-  roomId: string
-  renterId: string
+  id?: number
+  tenantId: number
+  contractId: number
+  roomId: number
+  renterId: number
   invoiceCode: string
   billingMonth: Date | string
   issueDate: Date | string
@@ -3326,13 +3354,12 @@ export type InvoiceCreateManyBatchInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceUpdateWithoutBatchInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3362,11 +3389,11 @@ export type InvoiceUpdateWithoutBatchInput = {
 }
 
 export type InvoiceUncheckedUpdateWithoutBatchInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3382,9 +3409,9 @@ export type InvoiceUncheckedUpdateWithoutBatchInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -3392,11 +3419,11 @@ export type InvoiceUncheckedUpdateWithoutBatchInput = {
 }
 
 export type InvoiceUncheckedUpdateManyWithoutBatchInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3412,9 +3439,9 @@ export type InvoiceUncheckedUpdateManyWithoutBatchInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -3696,27 +3723,27 @@ export type $InvoicePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     /**
      * ID hóa đơn (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant quản lý
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID đợt hóa đơn hàng loạt (nếu được tạo hàng loạt, null nếu tạo đơn lẻ)
      */
-    batchId: string | null
+    batchId: number | null
     /**
      * ID hợp đồng thuê phòng hiệu lực tại thời điểm xuất hóa đơn
      */
-    contractId: string
+    contractId: number
     /**
      * ID phòng tính tiền
      */
-    roomId: string
+    roomId: number
     /**
      * ID tài khoản khách thuê chính chịu trách nhiệm thanh toán hóa đơn
      */
-    renterId: string
+    renterId: number
     /**
      * Mã số hóa đơn duy nhất phục vụ đối chiếu thanh toán và tìm kiếm
      */
@@ -3780,15 +3807,15 @@ export type $InvoicePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["invoice"]>
   composites: {}
 }
@@ -4224,12 +4251,12 @@ export interface Prisma__InvoiceClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Invoice model
  */
 export interface InvoiceFieldRefs {
-  readonly id: Prisma.FieldRef<"Invoice", 'String'>
-  readonly tenantId: Prisma.FieldRef<"Invoice", 'String'>
-  readonly batchId: Prisma.FieldRef<"Invoice", 'String'>
-  readonly contractId: Prisma.FieldRef<"Invoice", 'String'>
-  readonly roomId: Prisma.FieldRef<"Invoice", 'String'>
-  readonly renterId: Prisma.FieldRef<"Invoice", 'String'>
+  readonly id: Prisma.FieldRef<"Invoice", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"Invoice", 'Int'>
+  readonly batchId: Prisma.FieldRef<"Invoice", 'Int'>
+  readonly contractId: Prisma.FieldRef<"Invoice", 'Int'>
+  readonly roomId: Prisma.FieldRef<"Invoice", 'Int'>
+  readonly renterId: Prisma.FieldRef<"Invoice", 'Int'>
   readonly invoiceCode: Prisma.FieldRef<"Invoice", 'String'>
   readonly billingMonth: Prisma.FieldRef<"Invoice", 'DateTime'>
   readonly issueDate: Prisma.FieldRef<"Invoice", 'DateTime'>
@@ -4245,9 +4272,9 @@ export interface InvoiceFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Invoice", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Invoice", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Invoice", 'DateTime'>
-  readonly createdById: Prisma.FieldRef<"Invoice", 'String'>
-  readonly updatedById: Prisma.FieldRef<"Invoice", 'String'>
-  readonly deletedById: Prisma.FieldRef<"Invoice", 'String'>
+  readonly createdById: Prisma.FieldRef<"Invoice", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"Invoice", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"Invoice", 'Int'>
 }
     
 

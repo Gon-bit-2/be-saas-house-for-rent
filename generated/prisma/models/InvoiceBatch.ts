@@ -27,35 +27,45 @@ export type AggregateInvoiceBatch = {
 }
 
 export type InvoiceBatchAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
   totalInvoices: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type InvoiceBatchSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
   totalInvoices: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type InvoiceBatchMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
+  id: number | null
+  tenantId: number | null
   billingMonth: Date | null
   status: $Enums.InvoiceBatchStatus | null
   totalInvoices: number | null
   createdAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type InvoiceBatchMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
+  id: number | null
+  tenantId: number | null
   billingMonth: Date | null
   status: $Enums.InvoiceBatchStatus | null
   totalInvoices: number | null
   createdAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type InvoiceBatchCountAggregateOutputType = {
@@ -73,11 +83,21 @@ export type InvoiceBatchCountAggregateOutputType = {
 
 
 export type InvoiceBatchAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
   totalInvoices?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type InvoiceBatchSumAggregateInputType = {
+  id?: true
+  tenantId?: true
   totalInvoices?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type InvoiceBatchMinAggregateInputType = {
@@ -204,15 +224,15 @@ export type InvoiceBatchGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 export type InvoiceBatchGroupByOutputType = {
-  id: string
-  tenantId: string
+  id: number
+  tenantId: number
   billingMonth: Date
   status: $Enums.InvoiceBatchStatus
   totalInvoices: number
   createdAt: Date
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: InvoiceBatchCountAggregateOutputType | null
   _avg: InvoiceBatchAvgAggregateOutputType | null
   _sum: InvoiceBatchSumAggregateOutputType | null
@@ -239,15 +259,15 @@ export type InvoiceBatchWhereInput = {
   AND?: Prisma.InvoiceBatchWhereInput | Prisma.InvoiceBatchWhereInput[]
   OR?: Prisma.InvoiceBatchWhereInput[]
   NOT?: Prisma.InvoiceBatchWhereInput | Prisma.InvoiceBatchWhereInput[]
-  id?: Prisma.UuidFilter<"InvoiceBatch"> | string
-  tenantId?: Prisma.UuidFilter<"InvoiceBatch"> | string
+  id?: Prisma.IntFilter<"InvoiceBatch"> | number
+  tenantId?: Prisma.IntFilter<"InvoiceBatch"> | number
   billingMonth?: Prisma.DateTimeFilter<"InvoiceBatch"> | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFilter<"InvoiceBatch"> | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFilter<"InvoiceBatch"> | number
   createdAt?: Prisma.DateTimeFilter<"InvoiceBatch"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"InvoiceBatch"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"InvoiceBatch"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"InvoiceBatch"> | string | null
+  createdById?: Prisma.IntNullableFilter<"InvoiceBatch"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"InvoiceBatch"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"InvoiceBatch"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   invoices?: Prisma.InvoiceListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -273,19 +293,19 @@ export type InvoiceBatchOrderByWithRelationInput = {
 }
 
 export type InvoiceBatchWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   tenantId_billingMonth?: Prisma.InvoiceBatchTenantIdBillingMonthCompoundUniqueInput
   AND?: Prisma.InvoiceBatchWhereInput | Prisma.InvoiceBatchWhereInput[]
   OR?: Prisma.InvoiceBatchWhereInput[]
   NOT?: Prisma.InvoiceBatchWhereInput | Prisma.InvoiceBatchWhereInput[]
-  tenantId?: Prisma.UuidFilter<"InvoiceBatch"> | string
+  tenantId?: Prisma.IntFilter<"InvoiceBatch"> | number
   billingMonth?: Prisma.DateTimeFilter<"InvoiceBatch"> | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFilter<"InvoiceBatch"> | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFilter<"InvoiceBatch"> | number
   createdAt?: Prisma.DateTimeFilter<"InvoiceBatch"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"InvoiceBatch"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"InvoiceBatch"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"InvoiceBatch"> | string | null
+  createdById?: Prisma.IntNullableFilter<"InvoiceBatch"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"InvoiceBatch"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"InvoiceBatch"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   invoices?: Prisma.InvoiceListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -314,19 +334,18 @@ export type InvoiceBatchScalarWhereWithAggregatesInput = {
   AND?: Prisma.InvoiceBatchScalarWhereWithAggregatesInput | Prisma.InvoiceBatchScalarWhereWithAggregatesInput[]
   OR?: Prisma.InvoiceBatchScalarWhereWithAggregatesInput[]
   NOT?: Prisma.InvoiceBatchScalarWhereWithAggregatesInput | Prisma.InvoiceBatchScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"InvoiceBatch"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"InvoiceBatch"> | string
+  id?: Prisma.IntWithAggregatesFilter<"InvoiceBatch"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"InvoiceBatch"> | number
   billingMonth?: Prisma.DateTimeWithAggregatesFilter<"InvoiceBatch"> | Date | string
   status?: Prisma.EnumInvoiceBatchStatusWithAggregatesFilter<"InvoiceBatch"> | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntWithAggregatesFilter<"InvoiceBatch"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"InvoiceBatch"> | Date | string
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"InvoiceBatch"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"InvoiceBatch"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"InvoiceBatch"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"InvoiceBatch"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"InvoiceBatch"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"InvoiceBatch"> | number | null
 }
 
 export type InvoiceBatchCreateInput = {
-  id?: string
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
@@ -339,20 +358,19 @@ export type InvoiceBatchCreateInput = {
 }
 
 export type InvoiceBatchUncheckedCreateInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
   createdAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutBatchInput
 }
 
 export type InvoiceBatchUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
@@ -365,32 +383,31 @@ export type InvoiceBatchUpdateInput = {
 }
 
 export type InvoiceBatchUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutBatchNestedInput
 }
 
 export type InvoiceBatchCreateManyInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
   createdAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceBatchUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
@@ -398,15 +415,15 @@ export type InvoiceBatchUpdateManyMutationInput = {
 }
 
 export type InvoiceBatchUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceBatchListRelationFilter = {
@@ -420,7 +437,7 @@ export type InvoiceBatchOrderByRelationAggregateInput = {
 }
 
 export type InvoiceBatchTenantIdBillingMonthCompoundUniqueInput = {
-  tenantId: string
+  tenantId: number
   billingMonth: Date | string
 }
 
@@ -437,7 +454,12 @@ export type InvoiceBatchCountOrderByAggregateInput = {
 }
 
 export type InvoiceBatchAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   totalInvoices?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type InvoiceBatchMaxOrderByAggregateInput = {
@@ -465,7 +487,12 @@ export type InvoiceBatchMinOrderByAggregateInput = {
 }
 
 export type InvoiceBatchSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   totalInvoices?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type InvoiceBatchNullableScalarRelationFilter = {
@@ -662,7 +689,6 @@ export type InvoiceBatchUpdateOneWithoutInvoicesNestedInput = {
 }
 
 export type InvoiceBatchCreateWithoutCreatedByInput = {
-  id?: string
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
@@ -674,14 +700,14 @@ export type InvoiceBatchCreateWithoutCreatedByInput = {
 }
 
 export type InvoiceBatchUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
   createdAt?: Date | string
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutBatchInput
 }
 
@@ -696,7 +722,6 @@ export type InvoiceBatchCreateManyCreatedByInputEnvelope = {
 }
 
 export type InvoiceBatchCreateWithoutUpdatedByInput = {
-  id?: string
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
@@ -708,14 +733,14 @@ export type InvoiceBatchCreateWithoutUpdatedByInput = {
 }
 
 export type InvoiceBatchUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
   createdAt?: Date | string
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutBatchInput
 }
 
@@ -730,7 +755,6 @@ export type InvoiceBatchCreateManyUpdatedByInputEnvelope = {
 }
 
 export type InvoiceBatchCreateWithoutDeletedByInput = {
-  id?: string
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
@@ -742,14 +766,14 @@ export type InvoiceBatchCreateWithoutDeletedByInput = {
 }
 
 export type InvoiceBatchUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
   createdAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutBatchInput
 }
 
@@ -783,15 +807,15 @@ export type InvoiceBatchScalarWhereInput = {
   AND?: Prisma.InvoiceBatchScalarWhereInput | Prisma.InvoiceBatchScalarWhereInput[]
   OR?: Prisma.InvoiceBatchScalarWhereInput[]
   NOT?: Prisma.InvoiceBatchScalarWhereInput | Prisma.InvoiceBatchScalarWhereInput[]
-  id?: Prisma.UuidFilter<"InvoiceBatch"> | string
-  tenantId?: Prisma.UuidFilter<"InvoiceBatch"> | string
+  id?: Prisma.IntFilter<"InvoiceBatch"> | number
+  tenantId?: Prisma.IntFilter<"InvoiceBatch"> | number
   billingMonth?: Prisma.DateTimeFilter<"InvoiceBatch"> | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFilter<"InvoiceBatch"> | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFilter<"InvoiceBatch"> | number
   createdAt?: Prisma.DateTimeFilter<"InvoiceBatch"> | Date | string
-  createdById?: Prisma.UuidNullableFilter<"InvoiceBatch"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"InvoiceBatch"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"InvoiceBatch"> | string | null
+  createdById?: Prisma.IntNullableFilter<"InvoiceBatch"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"InvoiceBatch"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"InvoiceBatch"> | number | null
 }
 
 export type InvoiceBatchUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -827,7 +851,6 @@ export type InvoiceBatchUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type InvoiceBatchCreateWithoutTenantInput = {
-  id?: string
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
@@ -839,14 +862,14 @@ export type InvoiceBatchCreateWithoutTenantInput = {
 }
 
 export type InvoiceBatchUncheckedCreateWithoutTenantInput = {
-  id?: string
+  id?: number
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
   createdAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutBatchInput
 }
 
@@ -877,7 +900,6 @@ export type InvoiceBatchUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type InvoiceBatchCreateWithoutInvoicesInput = {
-  id?: string
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
@@ -889,15 +911,15 @@ export type InvoiceBatchCreateWithoutInvoicesInput = {
 }
 
 export type InvoiceBatchUncheckedCreateWithoutInvoicesInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
   createdAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceBatchCreateOrConnectWithoutInvoicesInput = {
@@ -917,7 +939,6 @@ export type InvoiceBatchUpdateToOneWithWhereWithoutInvoicesInput = {
 }
 
 export type InvoiceBatchUpdateWithoutInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
@@ -929,52 +950,51 @@ export type InvoiceBatchUpdateWithoutInvoicesInput = {
 }
 
 export type InvoiceBatchUncheckedUpdateWithoutInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceBatchCreateManyCreatedByInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
   createdAt?: Date | string
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceBatchCreateManyUpdatedByInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
   createdAt?: Date | string
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceBatchCreateManyDeletedByInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
   createdAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type InvoiceBatchUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
@@ -986,30 +1006,29 @@ export type InvoiceBatchUpdateWithoutCreatedByInput = {
 }
 
 export type InvoiceBatchUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutBatchNestedInput
 }
 
 export type InvoiceBatchUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceBatchUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1021,30 +1040,29 @@ export type InvoiceBatchUpdateWithoutUpdatedByInput = {
 }
 
 export type InvoiceBatchUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutBatchNestedInput
 }
 
 export type InvoiceBatchUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceBatchUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1056,41 +1074,40 @@ export type InvoiceBatchUpdateWithoutDeletedByInput = {
 }
 
 export type InvoiceBatchUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutBatchNestedInput
 }
 
 export type InvoiceBatchUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type InvoiceBatchCreateManyTenantInput = {
-  id?: string
+  id?: number
   billingMonth: Date | string
   status?: $Enums.InvoiceBatchStatus
   totalInvoices?: number
   createdAt?: Date | string
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type InvoiceBatchUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1102,26 +1119,26 @@ export type InvoiceBatchUpdateWithoutTenantInput = {
 }
 
 export type InvoiceBatchUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutBatchNestedInput
 }
 
 export type InvoiceBatchUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumInvoiceBatchStatusFieldUpdateOperationsInput | $Enums.InvoiceBatchStatus
   totalInvoices?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -1258,11 +1275,11 @@ export type $InvoiceBatchPayload<ExtArgs extends runtime.Types.Extensions.Intern
     /**
      * ID đợt hóa đơn (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant phát hành
      */
-    tenantId: string
+    tenantId: number
     /**
      * Tháng/năm lập hóa đơn thanh toán cho đợt này (ngày 1 của tháng tính toán)
      */
@@ -1282,15 +1299,15 @@ export type $InvoiceBatchPayload<ExtArgs extends runtime.Types.Extensions.Intern
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["invoiceBatch"]>
   composites: {}
 }
@@ -1719,15 +1736,15 @@ export interface Prisma__InvoiceBatchClient<T, Null = never, ExtArgs extends run
  * Fields of the InvoiceBatch model
  */
 export interface InvoiceBatchFieldRefs {
-  readonly id: Prisma.FieldRef<"InvoiceBatch", 'String'>
-  readonly tenantId: Prisma.FieldRef<"InvoiceBatch", 'String'>
+  readonly id: Prisma.FieldRef<"InvoiceBatch", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"InvoiceBatch", 'Int'>
   readonly billingMonth: Prisma.FieldRef<"InvoiceBatch", 'DateTime'>
   readonly status: Prisma.FieldRef<"InvoiceBatch", 'InvoiceBatchStatus'>
   readonly totalInvoices: Prisma.FieldRef<"InvoiceBatch", 'Int'>
   readonly createdAt: Prisma.FieldRef<"InvoiceBatch", 'DateTime'>
-  readonly createdById: Prisma.FieldRef<"InvoiceBatch", 'String'>
-  readonly updatedById: Prisma.FieldRef<"InvoiceBatch", 'String'>
-  readonly deletedById: Prisma.FieldRef<"InvoiceBatch", 'String'>
+  readonly createdById: Prisma.FieldRef<"InvoiceBatch", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"InvoiceBatch", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"InvoiceBatch", 'Int'>
 }
     
 

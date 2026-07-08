@@ -27,28 +27,42 @@ export type AggregateRoom = {
 }
 
 export type RoomAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  propertyId: number | null
+  floorId: number | null
   area: runtime.Decimal | null
   maxOccupants: number | null
   basePrice: runtime.Decimal | null
   depositAmount: runtime.Decimal | null
   electricityPrice: runtime.Decimal | null
   waterPrice: runtime.Decimal | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoomSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  propertyId: number | null
+  floorId: number | null
   area: runtime.Decimal | null
   maxOccupants: number | null
   basePrice: runtime.Decimal | null
   depositAmount: runtime.Decimal | null
   electricityPrice: runtime.Decimal | null
   waterPrice: runtime.Decimal | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoomMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  propertyId: string | null
-  floorId: string | null
+  id: number | null
+  tenantId: number | null
+  propertyId: number | null
+  floorId: number | null
   roomCode: string | null
   title: string | null
   area: runtime.Decimal | null
@@ -64,16 +78,16 @@ export type RoomMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoomMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  propertyId: string | null
-  floorId: string | null
+  id: number | null
+  tenantId: number | null
+  propertyId: number | null
+  floorId: number | null
   roomCode: string | null
   title: string | null
   area: runtime.Decimal | null
@@ -89,9 +103,9 @@ export type RoomMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type RoomCountAggregateOutputType = {
@@ -122,21 +136,35 @@ export type RoomCountAggregateOutputType = {
 
 
 export type RoomAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  propertyId?: true
+  floorId?: true
   area?: true
   maxOccupants?: true
   basePrice?: true
   depositAmount?: true
   electricityPrice?: true
   waterPrice?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type RoomSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  propertyId?: true
+  floorId?: true
   area?: true
   maxOccupants?: true
   basePrice?: true
   depositAmount?: true
   electricityPrice?: true
   waterPrice?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type RoomMinAggregateInputType = {
@@ -302,10 +330,10 @@ export type RoomGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 }
 
 export type RoomGroupByOutputType = {
-  id: string
-  tenantId: string
-  propertyId: string
-  floorId: string | null
+  id: number
+  tenantId: number
+  propertyId: number
+  floorId: number | null
   roomCode: string
   title: string
   area: runtime.Decimal
@@ -321,9 +349,9 @@ export type RoomGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: RoomCountAggregateOutputType | null
   _avg: RoomAvgAggregateOutputType | null
   _sum: RoomSumAggregateOutputType | null
@@ -350,10 +378,10 @@ export type RoomWhereInput = {
   AND?: Prisma.RoomWhereInput | Prisma.RoomWhereInput[]
   OR?: Prisma.RoomWhereInput[]
   NOT?: Prisma.RoomWhereInput | Prisma.RoomWhereInput[]
-  id?: Prisma.UuidFilter<"Room"> | string
-  tenantId?: Prisma.UuidFilter<"Room"> | string
-  propertyId?: Prisma.UuidFilter<"Room"> | string
-  floorId?: Prisma.UuidNullableFilter<"Room"> | string | null
+  id?: Prisma.IntFilter<"Room"> | number
+  tenantId?: Prisma.IntFilter<"Room"> | number
+  propertyId?: Prisma.IntFilter<"Room"> | number
+  floorId?: Prisma.IntNullableFilter<"Room"> | number | null
   roomCode?: Prisma.StringFilter<"Room"> | string
   title?: Prisma.StringFilter<"Room"> | string
   area?: Prisma.DecimalFilter<"Room"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -369,9 +397,9 @@ export type RoomWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Room"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Room"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Room"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Room"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Room"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Room"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Room"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   floor?: Prisma.XOR<Prisma.FloorNullableScalarRelationFilter, Prisma.FloorWhereInput> | null
@@ -393,7 +421,6 @@ export type RoomWhereInput = {
   conversations?: Prisma.ConversationListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   reputationScores?: Prisma.ReputationScoreListRelationFilter
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -443,21 +470,20 @@ export type RoomOrderByWithRelationInput = {
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   reputationScores?: Prisma.ReputationScoreOrderByRelationAggregateInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionOrderByRelationAggregateInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
   deletedBy?: Prisma.UserOrderByWithRelationInput
 }
 
 export type RoomWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   propertyId_roomCode?: Prisma.RoomPropertyIdRoomCodeCompoundUniqueInput
   AND?: Prisma.RoomWhereInput | Prisma.RoomWhereInput[]
   OR?: Prisma.RoomWhereInput[]
   NOT?: Prisma.RoomWhereInput | Prisma.RoomWhereInput[]
-  tenantId?: Prisma.UuidFilter<"Room"> | string
-  propertyId?: Prisma.UuidFilter<"Room"> | string
-  floorId?: Prisma.UuidNullableFilter<"Room"> | string | null
+  tenantId?: Prisma.IntFilter<"Room"> | number
+  propertyId?: Prisma.IntFilter<"Room"> | number
+  floorId?: Prisma.IntNullableFilter<"Room"> | number | null
   roomCode?: Prisma.StringFilter<"Room"> | string
   title?: Prisma.StringFilter<"Room"> | string
   area?: Prisma.DecimalFilter<"Room"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -473,9 +499,9 @@ export type RoomWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Room"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Room"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Room"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Room"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Room"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Room"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Room"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
   floor?: Prisma.XOR<Prisma.FloorNullableScalarRelationFilter, Prisma.FloorWhereInput> | null
@@ -497,7 +523,6 @@ export type RoomWhereUniqueInput = Prisma.AtLeast<{
   conversations?: Prisma.ConversationListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   reputationScores?: Prisma.ReputationScoreListRelationFilter
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -537,10 +562,10 @@ export type RoomScalarWhereWithAggregatesInput = {
   AND?: Prisma.RoomScalarWhereWithAggregatesInput | Prisma.RoomScalarWhereWithAggregatesInput[]
   OR?: Prisma.RoomScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RoomScalarWhereWithAggregatesInput | Prisma.RoomScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Room"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"Room"> | string
-  propertyId?: Prisma.UuidWithAggregatesFilter<"Room"> | string
-  floorId?: Prisma.UuidNullableWithAggregatesFilter<"Room"> | string | null
+  id?: Prisma.IntWithAggregatesFilter<"Room"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"Room"> | number
+  propertyId?: Prisma.IntWithAggregatesFilter<"Room"> | number
+  floorId?: Prisma.IntNullableWithAggregatesFilter<"Room"> | number | null
   roomCode?: Prisma.StringWithAggregatesFilter<"Room"> | string
   title?: Prisma.StringWithAggregatesFilter<"Room"> | string
   area?: Prisma.DecimalWithAggregatesFilter<"Room"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -556,13 +581,12 @@ export type RoomScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Room"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Room"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Room"> | Date | string | null
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"Room"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"Room"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"Room"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"Room"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"Room"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"Room"> | number | null
 }
 
 export type RoomCreateInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -599,17 +623,16 @@ export type RoomCreateInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -625,9 +648,9 @@ export type RoomUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -646,11 +669,9 @@ export type RoomUncheckedCreateInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -687,17 +708,16 @@ export type RoomUpdateInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -713,9 +733,9 @@ export type RoomUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -734,14 +754,13 @@ export type RoomUncheckedUpdateInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateManyInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -757,13 +776,12 @@ export type RoomCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -782,10 +800,10 @@ export type RoomUpdateManyMutationInput = {
 }
 
 export type RoomUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -801,9 +819,9 @@ export type RoomUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomListRelationFilter = {
@@ -817,7 +835,7 @@ export type RoomOrderByRelationAggregateInput = {
 }
 
 export type RoomPropertyIdRoomCodeCompoundUniqueInput = {
-  propertyId: string
+  propertyId: number
   roomCode: string
 }
 
@@ -847,12 +865,19 @@ export type RoomCountOrderByAggregateInput = {
 }
 
 export type RoomAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
+  floorId?: Prisma.SortOrder
   area?: Prisma.SortOrder
   maxOccupants?: Prisma.SortOrder
   basePrice?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
   electricityPrice?: Prisma.SortOrder
   waterPrice?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type RoomMaxOrderByAggregateInput = {
@@ -906,12 +931,19 @@ export type RoomMinOrderByAggregateInput = {
 }
 
 export type RoomSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrder
+  floorId?: Prisma.SortOrder
   area?: Prisma.SortOrder
   maxOccupants?: Prisma.SortOrder
   basePrice?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
   electricityPrice?: Prisma.SortOrder
   waterPrice?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type RoomScalarRelationFilter = {
@@ -1440,22 +1472,7 @@ export type RoomUpdateOneWithoutReputationScoresNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutReputationScoresInput, Prisma.RoomUpdateWithoutReputationScoresInput>, Prisma.RoomUncheckedUpdateWithoutReputationScoresInput>
 }
 
-export type RoomCreateNestedOneWithoutRoomPriceSuggestionsInput = {
-  create?: Prisma.XOR<Prisma.RoomCreateWithoutRoomPriceSuggestionsInput, Prisma.RoomUncheckedCreateWithoutRoomPriceSuggestionsInput>
-  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutRoomPriceSuggestionsInput
-  connect?: Prisma.RoomWhereUniqueInput
-}
-
-export type RoomUpdateOneRequiredWithoutRoomPriceSuggestionsNestedInput = {
-  create?: Prisma.XOR<Prisma.RoomCreateWithoutRoomPriceSuggestionsInput, Prisma.RoomUncheckedCreateWithoutRoomPriceSuggestionsInput>
-  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutRoomPriceSuggestionsInput
-  upsert?: Prisma.RoomUpsertWithoutRoomPriceSuggestionsInput
-  connect?: Prisma.RoomWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutRoomPriceSuggestionsInput, Prisma.RoomUpdateWithoutRoomPriceSuggestionsInput>, Prisma.RoomUncheckedUpdateWithoutRoomPriceSuggestionsInput>
-}
-
 export type RoomCreateWithoutCreatedByInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1492,16 +1509,15 @@ export type RoomCreateWithoutCreatedByInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1517,8 +1533,8 @@ export type RoomUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -1537,7 +1553,6 @@ export type RoomUncheckedCreateWithoutCreatedByInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutCreatedByInput = {
@@ -1551,7 +1566,6 @@ export type RoomCreateManyCreatedByInputEnvelope = {
 }
 
 export type RoomCreateWithoutUpdatedByInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1588,16 +1602,15 @@ export type RoomCreateWithoutUpdatedByInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1613,8 +1626,8 @@ export type RoomUncheckedCreateWithoutUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -1633,7 +1646,6 @@ export type RoomUncheckedCreateWithoutUpdatedByInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutUpdatedByInput = {
@@ -1647,7 +1659,6 @@ export type RoomCreateManyUpdatedByInputEnvelope = {
 }
 
 export type RoomCreateWithoutDeletedByInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1684,16 +1695,15 @@ export type RoomCreateWithoutDeletedByInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1709,8 +1719,8 @@ export type RoomUncheckedCreateWithoutDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -1729,7 +1739,6 @@ export type RoomUncheckedCreateWithoutDeletedByInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutDeletedByInput = {
@@ -1762,10 +1771,10 @@ export type RoomScalarWhereInput = {
   AND?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
   OR?: Prisma.RoomScalarWhereInput[]
   NOT?: Prisma.RoomScalarWhereInput | Prisma.RoomScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Room"> | string
-  tenantId?: Prisma.UuidFilter<"Room"> | string
-  propertyId?: Prisma.UuidFilter<"Room"> | string
-  floorId?: Prisma.UuidNullableFilter<"Room"> | string | null
+  id?: Prisma.IntFilter<"Room"> | number
+  tenantId?: Prisma.IntFilter<"Room"> | number
+  propertyId?: Prisma.IntFilter<"Room"> | number
+  floorId?: Prisma.IntNullableFilter<"Room"> | number | null
   roomCode?: Prisma.StringFilter<"Room"> | string
   title?: Prisma.StringFilter<"Room"> | string
   area?: Prisma.DecimalFilter<"Room"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1781,9 +1790,9 @@ export type RoomScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Room"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Room"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Room"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Room"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Room"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Room"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Room"> | number | null
 }
 
 export type RoomUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -1819,7 +1828,6 @@ export type RoomUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type RoomCreateWithoutTenantInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1855,16 +1863,15 @@ export type RoomCreateWithoutTenantInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutTenantInput = {
-  id?: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1880,9 +1887,9 @@ export type RoomUncheckedCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -1901,7 +1908,6 @@ export type RoomUncheckedCreateWithoutTenantInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutTenantInput = {
@@ -1931,7 +1937,6 @@ export type RoomUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type RoomCreateWithoutPropertyInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1967,16 +1972,15 @@ export type RoomCreateWithoutPropertyInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutPropertyInput = {
-  id?: string
-  tenantId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1992,9 +1996,9 @@ export type RoomUncheckedCreateWithoutPropertyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -2013,7 +2017,6 @@ export type RoomUncheckedCreateWithoutPropertyInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutPropertyInput = {
@@ -2043,7 +2046,6 @@ export type RoomUpdateManyWithWhereWithoutPropertyInput = {
 }
 
 export type RoomCreateWithoutFloorInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2079,16 +2081,15 @@ export type RoomCreateWithoutFloorInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutFloorInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
+  id?: number
+  tenantId: number
+  propertyId: number
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2104,9 +2105,9 @@ export type RoomUncheckedCreateWithoutFloorInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -2125,7 +2126,6 @@ export type RoomUncheckedCreateWithoutFloorInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutFloorInput = {
@@ -2155,7 +2155,6 @@ export type RoomUpdateManyWithWhereWithoutFloorInput = {
 }
 
 export type RoomCreateWithoutImagesInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2191,17 +2190,16 @@ export type RoomCreateWithoutImagesInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutImagesInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2217,9 +2215,9 @@ export type RoomUncheckedCreateWithoutImagesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
   viewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutRoomInput
@@ -2237,7 +2235,6 @@ export type RoomUncheckedCreateWithoutImagesInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutImagesInput = {
@@ -2257,7 +2254,6 @@ export type RoomUpdateToOneWithWhereWithoutImagesInput = {
 }
 
 export type RoomUpdateWithoutImagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2293,17 +2289,16 @@ export type RoomUpdateWithoutImagesInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutImagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2319,9 +2314,9 @@ export type RoomUncheckedUpdateWithoutImagesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
   viewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutRoomNestedInput
@@ -2339,11 +2334,9 @@ export type RoomUncheckedUpdateWithoutImagesInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutAmenitiesInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2379,17 +2372,16 @@ export type RoomCreateWithoutAmenitiesInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutAmenitiesInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2405,9 +2397,9 @@ export type RoomUncheckedCreateWithoutAmenitiesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
   viewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutRoomInput
@@ -2425,7 +2417,6 @@ export type RoomUncheckedCreateWithoutAmenitiesInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutAmenitiesInput = {
@@ -2445,7 +2436,6 @@ export type RoomUpdateToOneWithWhereWithoutAmenitiesInput = {
 }
 
 export type RoomUpdateWithoutAmenitiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2481,17 +2471,16 @@ export type RoomUpdateWithoutAmenitiesInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutAmenitiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2507,9 +2496,9 @@ export type RoomUncheckedUpdateWithoutAmenitiesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
   viewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutRoomNestedInput
@@ -2527,11 +2516,9 @@ export type RoomUncheckedUpdateWithoutAmenitiesInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutRentalHistoriesInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2567,17 +2554,16 @@ export type RoomCreateWithoutRentalHistoriesInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutRentalHistoriesInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2593,9 +2579,9 @@ export type RoomUncheckedCreateWithoutRentalHistoriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   viewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutRoomInput
@@ -2613,7 +2599,6 @@ export type RoomUncheckedCreateWithoutRentalHistoriesInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutRentalHistoriesInput = {
@@ -2633,7 +2618,6 @@ export type RoomUpdateToOneWithWhereWithoutRentalHistoriesInput = {
 }
 
 export type RoomUpdateWithoutRentalHistoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2669,17 +2653,16 @@ export type RoomUpdateWithoutRentalHistoriesInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutRentalHistoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2695,9 +2678,9 @@ export type RoomUncheckedUpdateWithoutRentalHistoriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   viewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutRoomNestedInput
@@ -2715,11 +2698,9 @@ export type RoomUncheckedUpdateWithoutRentalHistoriesInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutViewLogsInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2755,17 +2736,16 @@ export type RoomCreateWithoutViewLogsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutViewLogsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2781,9 +2761,9 @@ export type RoomUncheckedCreateWithoutViewLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -2801,7 +2781,6 @@ export type RoomUncheckedCreateWithoutViewLogsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutViewLogsInput = {
@@ -2821,7 +2800,6 @@ export type RoomUpdateToOneWithWhereWithoutViewLogsInput = {
 }
 
 export type RoomUpdateWithoutViewLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2857,17 +2835,16 @@ export type RoomUpdateWithoutViewLogsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutViewLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2883,9 +2860,9 @@ export type RoomUncheckedUpdateWithoutViewLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -2903,11 +2880,9 @@ export type RoomUncheckedUpdateWithoutViewLogsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutFavoritesInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2943,17 +2918,16 @@ export type RoomCreateWithoutFavoritesInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutFavoritesInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2969,9 +2943,9 @@ export type RoomUncheckedCreateWithoutFavoritesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -2989,7 +2963,6 @@ export type RoomUncheckedCreateWithoutFavoritesInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutFavoritesInput = {
@@ -3009,7 +2982,6 @@ export type RoomUpdateToOneWithWhereWithoutFavoritesInput = {
 }
 
 export type RoomUpdateWithoutFavoritesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3045,17 +3017,16 @@ export type RoomUpdateWithoutFavoritesInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutFavoritesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3071,9 +3042,9 @@ export type RoomUncheckedUpdateWithoutFavoritesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -3091,11 +3062,9 @@ export type RoomUncheckedUpdateWithoutFavoritesInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutViewingAppointmentsInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3131,17 +3100,16 @@ export type RoomCreateWithoutViewingAppointmentsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutViewingAppointmentsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3157,9 +3125,9 @@ export type RoomUncheckedCreateWithoutViewingAppointmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -3177,7 +3145,6 @@ export type RoomUncheckedCreateWithoutViewingAppointmentsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutViewingAppointmentsInput = {
@@ -3197,7 +3164,6 @@ export type RoomUpdateToOneWithWhereWithoutViewingAppointmentsInput = {
 }
 
 export type RoomUpdateWithoutViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3233,17 +3199,16 @@ export type RoomUpdateWithoutViewingAppointmentsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3259,9 +3224,9 @@ export type RoomUncheckedUpdateWithoutViewingAppointmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -3279,11 +3244,9 @@ export type RoomUncheckedUpdateWithoutViewingAppointmentsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutRentalRequestsInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3319,17 +3282,16 @@ export type RoomCreateWithoutRentalRequestsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutRentalRequestsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3345,9 +3307,9 @@ export type RoomUncheckedCreateWithoutRentalRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -3365,7 +3327,6 @@ export type RoomUncheckedCreateWithoutRentalRequestsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutRentalRequestsInput = {
@@ -3385,7 +3346,6 @@ export type RoomUpdateToOneWithWhereWithoutRentalRequestsInput = {
 }
 
 export type RoomUpdateWithoutRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3421,17 +3381,16 @@ export type RoomUpdateWithoutRentalRequestsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3447,9 +3406,9 @@ export type RoomUncheckedUpdateWithoutRentalRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -3467,11 +3426,9 @@ export type RoomUncheckedUpdateWithoutRentalRequestsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutContractsInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3507,17 +3464,16 @@ export type RoomCreateWithoutContractsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutContractsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3533,9 +3489,9 @@ export type RoomUncheckedCreateWithoutContractsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -3553,7 +3509,6 @@ export type RoomUncheckedCreateWithoutContractsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutContractsInput = {
@@ -3573,7 +3528,6 @@ export type RoomUpdateToOneWithWhereWithoutContractsInput = {
 }
 
 export type RoomUpdateWithoutContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3609,17 +3563,16 @@ export type RoomUpdateWithoutContractsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3635,9 +3588,9 @@ export type RoomUncheckedUpdateWithoutContractsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -3655,11 +3608,9 @@ export type RoomUncheckedUpdateWithoutContractsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutRoomAssetsInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3695,17 +3646,16 @@ export type RoomCreateWithoutRoomAssetsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutRoomAssetsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3721,9 +3671,9 @@ export type RoomUncheckedCreateWithoutRoomAssetsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -3741,7 +3691,6 @@ export type RoomUncheckedCreateWithoutRoomAssetsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutRoomAssetsInput = {
@@ -3761,7 +3710,6 @@ export type RoomUpdateToOneWithWhereWithoutRoomAssetsInput = {
 }
 
 export type RoomUpdateWithoutRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3797,17 +3745,16 @@ export type RoomUpdateWithoutRoomAssetsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3823,9 +3770,9 @@ export type RoomUncheckedUpdateWithoutRoomAssetsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -3843,11 +3790,9 @@ export type RoomUncheckedUpdateWithoutRoomAssetsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutHandoverRecordsInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3883,17 +3828,16 @@ export type RoomCreateWithoutHandoverRecordsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutHandoverRecordsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3909,9 +3853,9 @@ export type RoomUncheckedCreateWithoutHandoverRecordsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -3929,7 +3873,6 @@ export type RoomUncheckedCreateWithoutHandoverRecordsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutHandoverRecordsInput = {
@@ -3949,7 +3892,6 @@ export type RoomUpdateToOneWithWhereWithoutHandoverRecordsInput = {
 }
 
 export type RoomUpdateWithoutHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -3985,17 +3927,16 @@ export type RoomUpdateWithoutHandoverRecordsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4011,9 +3952,9 @@ export type RoomUncheckedUpdateWithoutHandoverRecordsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -4031,11 +3972,9 @@ export type RoomUncheckedUpdateWithoutHandoverRecordsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutUtilityMetersInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4071,17 +4010,16 @@ export type RoomCreateWithoutUtilityMetersInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutUtilityMetersInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4097,9 +4035,9 @@ export type RoomUncheckedCreateWithoutUtilityMetersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -4117,7 +4055,6 @@ export type RoomUncheckedCreateWithoutUtilityMetersInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutUtilityMetersInput = {
@@ -4137,7 +4074,6 @@ export type RoomUpdateToOneWithWhereWithoutUtilityMetersInput = {
 }
 
 export type RoomUpdateWithoutUtilityMetersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4173,17 +4109,16 @@ export type RoomUpdateWithoutUtilityMetersInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutUtilityMetersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4199,9 +4134,9 @@ export type RoomUncheckedUpdateWithoutUtilityMetersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -4219,11 +4154,9 @@ export type RoomUncheckedUpdateWithoutUtilityMetersInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutMeterReadingsInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4259,17 +4192,16 @@ export type RoomCreateWithoutMeterReadingsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutMeterReadingsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4285,9 +4217,9 @@ export type RoomUncheckedCreateWithoutMeterReadingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -4305,7 +4237,6 @@ export type RoomUncheckedCreateWithoutMeterReadingsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutMeterReadingsInput = {
@@ -4325,7 +4256,6 @@ export type RoomUpdateToOneWithWhereWithoutMeterReadingsInput = {
 }
 
 export type RoomUpdateWithoutMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4361,17 +4291,16 @@ export type RoomUpdateWithoutMeterReadingsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4387,9 +4316,9 @@ export type RoomUncheckedUpdateWithoutMeterReadingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -4407,11 +4336,9 @@ export type RoomUncheckedUpdateWithoutMeterReadingsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutOcrJobsInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4447,17 +4374,16 @@ export type RoomCreateWithoutOcrJobsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutOcrJobsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4473,9 +4399,9 @@ export type RoomUncheckedCreateWithoutOcrJobsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -4493,7 +4419,6 @@ export type RoomUncheckedCreateWithoutOcrJobsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutOcrJobsInput = {
@@ -4513,7 +4438,6 @@ export type RoomUpdateToOneWithWhereWithoutOcrJobsInput = {
 }
 
 export type RoomUpdateWithoutOcrJobsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4549,17 +4473,16 @@ export type RoomUpdateWithoutOcrJobsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutOcrJobsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4575,9 +4498,9 @@ export type RoomUncheckedUpdateWithoutOcrJobsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -4595,11 +4518,9 @@ export type RoomUncheckedUpdateWithoutOcrJobsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutInvoicesInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4635,17 +4556,16 @@ export type RoomCreateWithoutInvoicesInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutInvoicesInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4661,9 +4581,9 @@ export type RoomUncheckedCreateWithoutInvoicesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -4681,7 +4601,6 @@ export type RoomUncheckedCreateWithoutInvoicesInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutInvoicesInput = {
@@ -4701,7 +4620,6 @@ export type RoomUpdateToOneWithWhereWithoutInvoicesInput = {
 }
 
 export type RoomUpdateWithoutInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4737,17 +4655,16 @@ export type RoomUpdateWithoutInvoicesInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4763,9 +4680,9 @@ export type RoomUncheckedUpdateWithoutInvoicesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -4783,11 +4700,9 @@ export type RoomUncheckedUpdateWithoutInvoicesInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutTicketsInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4823,17 +4738,16 @@ export type RoomCreateWithoutTicketsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutTicketsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4849,9 +4763,9 @@ export type RoomUncheckedCreateWithoutTicketsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -4869,7 +4783,6 @@ export type RoomUncheckedCreateWithoutTicketsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutTicketsInput = {
@@ -4889,7 +4802,6 @@ export type RoomUpdateToOneWithWhereWithoutTicketsInput = {
 }
 
 export type RoomUpdateWithoutTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4925,17 +4837,16 @@ export type RoomUpdateWithoutTicketsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -4951,9 +4862,9 @@ export type RoomUncheckedUpdateWithoutTicketsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -4971,11 +4882,9 @@ export type RoomUncheckedUpdateWithoutTicketsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutConversationsInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5011,17 +4920,16 @@ export type RoomCreateWithoutConversationsInput = {
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutConversationsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5037,9 +4945,9 @@ export type RoomUncheckedCreateWithoutConversationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -5057,7 +4965,6 @@ export type RoomUncheckedCreateWithoutConversationsInput = {
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutConversationsInput = {
@@ -5077,7 +4984,6 @@ export type RoomUpdateToOneWithWhereWithoutConversationsInput = {
 }
 
 export type RoomUpdateWithoutConversationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5113,17 +5019,16 @@ export type RoomUpdateWithoutConversationsInput = {
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutConversationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5139,9 +5044,9 @@ export type RoomUncheckedUpdateWithoutConversationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -5159,11 +5064,9 @@ export type RoomUncheckedUpdateWithoutConversationsInput = {
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutReviewsInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5199,17 +5102,16 @@ export type RoomCreateWithoutReviewsInput = {
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutReviewsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5225,9 +5127,9 @@ export type RoomUncheckedCreateWithoutReviewsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -5245,7 +5147,6 @@ export type RoomUncheckedCreateWithoutReviewsInput = {
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutReviewsInput = {
@@ -5265,7 +5166,6 @@ export type RoomUpdateToOneWithWhereWithoutReviewsInput = {
 }
 
 export type RoomUpdateWithoutReviewsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5301,17 +5201,16 @@ export type RoomUpdateWithoutReviewsInput = {
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutReviewsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5327,9 +5226,9 @@ export type RoomUncheckedUpdateWithoutReviewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -5347,11 +5246,9 @@ export type RoomUncheckedUpdateWithoutReviewsInput = {
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutReputationScoresInput = {
-  id?: string
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5387,17 +5284,16 @@ export type RoomCreateWithoutReputationScoresInput = {
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
 
 export type RoomUncheckedCreateWithoutReputationScoresInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5413,9 +5309,9 @@ export type RoomUncheckedCreateWithoutReputationScoresInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
   amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
@@ -5433,7 +5329,6 @@ export type RoomUncheckedCreateWithoutReputationScoresInput = {
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutReputationScoresInput = {
@@ -5453,7 +5348,6 @@ export type RoomUpdateToOneWithWhereWithoutReputationScoresInput = {
 }
 
 export type RoomUpdateWithoutReputationScoresInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5489,17 +5383,16 @@ export type RoomUpdateWithoutReputationScoresInput = {
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutReputationScoresInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5515,9 +5408,9 @@ export type RoomUncheckedUpdateWithoutReputationScoresInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -5535,202 +5428,13 @@ export type RoomUncheckedUpdateWithoutReputationScoresInput = {
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
-}
-
-export type RoomCreateWithoutRoomPriceSuggestionsInput = {
-  id?: string
-  roomCode: string
-  title: string
-  area: runtime.Decimal | runtime.DecimalJsLike | number | string
-  maxOccupants: number
-  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  electricityPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  waterPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  description?: string | null
-  status?: $Enums.RoomStatus
-  marketplaceStatus?: $Enums.MarketplaceStatus
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  tenant: Prisma.TenantCreateNestedOneWithoutRoomsInput
-  property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
-  floor?: Prisma.FloorCreateNestedOneWithoutRoomsInput
-  images?: Prisma.RoomImageCreateNestedManyWithoutRoomInput
-  amenities?: Prisma.RoomAmenityCreateNestedManyWithoutRoomInput
-  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRoomInput
-  viewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutRoomInput
-  favorites?: Prisma.FavoriteRoomCreateNestedManyWithoutRoomInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
-  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
-  contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
-  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
-  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
-  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
-  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
-  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
-  invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
-  tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
-  conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
-  reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
-  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
-}
-
-export type RoomUncheckedCreateWithoutRoomPriceSuggestionsInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
-  roomCode: string
-  title: string
-  area: runtime.Decimal | runtime.DecimalJsLike | number | string
-  maxOccupants: number
-  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  electricityPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  waterPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  description?: string | null
-  status?: $Enums.RoomStatus
-  marketplaceStatus?: $Enums.MarketplaceStatus
-  publishedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
-  images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
-  amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
-  viewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutRoomInput
-  favorites?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutRoomInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
-  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
-  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
-  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
-  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
-  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
-  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
-  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
-  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
-  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
-  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
-  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
-  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
-}
-
-export type RoomCreateOrConnectWithoutRoomPriceSuggestionsInput = {
-  where: Prisma.RoomWhereUniqueInput
-  create: Prisma.XOR<Prisma.RoomCreateWithoutRoomPriceSuggestionsInput, Prisma.RoomUncheckedCreateWithoutRoomPriceSuggestionsInput>
-}
-
-export type RoomUpsertWithoutRoomPriceSuggestionsInput = {
-  update: Prisma.XOR<Prisma.RoomUpdateWithoutRoomPriceSuggestionsInput, Prisma.RoomUncheckedUpdateWithoutRoomPriceSuggestionsInput>
-  create: Prisma.XOR<Prisma.RoomCreateWithoutRoomPriceSuggestionsInput, Prisma.RoomUncheckedCreateWithoutRoomPriceSuggestionsInput>
-  where?: Prisma.RoomWhereInput
-}
-
-export type RoomUpdateToOneWithWhereWithoutRoomPriceSuggestionsInput = {
-  where?: Prisma.RoomWhereInput
-  data: Prisma.XOR<Prisma.RoomUpdateWithoutRoomPriceSuggestionsInput, Prisma.RoomUncheckedUpdateWithoutRoomPriceSuggestionsInput>
-}
-
-export type RoomUpdateWithoutRoomPriceSuggestionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomCode?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maxOccupants?: Prisma.IntFieldUpdateOperationsInput | number
-  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  electricityPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  waterPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
-  marketplaceStatus?: Prisma.EnumMarketplaceStatusFieldUpdateOperationsInput | $Enums.MarketplaceStatus
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  tenant?: Prisma.TenantUpdateOneRequiredWithoutRoomsNestedInput
-  property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
-  floor?: Prisma.FloorUpdateOneWithoutRoomsNestedInput
-  images?: Prisma.RoomImageUpdateManyWithoutRoomNestedInput
-  amenities?: Prisma.RoomAmenityUpdateManyWithoutRoomNestedInput
-  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRoomNestedInput
-  viewLogs?: Prisma.RoomViewLogUpdateManyWithoutRoomNestedInput
-  favorites?: Prisma.FavoriteRoomUpdateManyWithoutRoomNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
-  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
-  contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
-  roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
-  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
-  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
-  meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
-  ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
-  invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
-  tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
-  conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
-  reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
-  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
-}
-
-export type RoomUncheckedUpdateWithoutRoomPriceSuggestionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roomCode?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  maxOccupants?: Prisma.IntFieldUpdateOperationsInput | number
-  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  electricityPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  waterPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
-  marketplaceStatus?: Prisma.EnumMarketplaceStatusFieldUpdateOperationsInput | $Enums.MarketplaceStatus
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
-  amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
-  viewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutRoomNestedInput
-  favorites?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutRoomNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
-  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
-  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
-  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
-  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
-  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
-  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
-  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
-  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
-  tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
-  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
-  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
-  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateManyCreatedByInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5746,15 +5450,15 @@ export type RoomCreateManyCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomCreateManyUpdatedByInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5770,15 +5474,15 @@ export type RoomCreateManyUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomCreateManyDeletedByInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5794,12 +5498,11 @@ export type RoomCreateManyDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type RoomUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5836,16 +5539,15 @@ export type RoomUpdateWithoutCreatedByInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5861,8 +5563,8 @@ export type RoomUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -5881,14 +5583,13 @@ export type RoomUncheckedUpdateWithoutCreatedByInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5904,12 +5605,11 @@ export type RoomUncheckedUpdateManyWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5946,16 +5646,15 @@ export type RoomUpdateWithoutUpdatedByInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -5971,8 +5670,8 @@ export type RoomUncheckedUpdateWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -5991,14 +5690,13 @@ export type RoomUncheckedUpdateWithoutUpdatedByInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6014,12 +5712,11 @@ export type RoomUncheckedUpdateManyWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6056,16 +5753,15 @@ export type RoomUpdateWithoutDeletedByInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6081,8 +5777,8 @@ export type RoomUncheckedUpdateWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -6101,14 +5797,13 @@ export type RoomUncheckedUpdateWithoutDeletedByInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6124,14 +5819,14 @@ export type RoomUncheckedUpdateManyWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomCreateManyTenantInput = {
-  id?: string
-  propertyId: string
-  floorId?: string | null
+  id?: number
+  propertyId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6147,13 +5842,12 @@ export type RoomCreateManyTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6189,16 +5883,15 @@ export type RoomUpdateWithoutTenantInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6214,9 +5907,9 @@ export type RoomUncheckedUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -6235,13 +5928,12 @@ export type RoomUncheckedUpdateWithoutTenantInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6257,15 +5949,15 @@ export type RoomUncheckedUpdateManyWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomCreateManyPropertyInput = {
-  id?: string
-  tenantId: string
-  floorId?: string | null
+  id?: number
+  tenantId: number
+  floorId?: number | null
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6281,13 +5973,12 @@ export type RoomCreateManyPropertyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomUpdateWithoutPropertyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6323,16 +6014,15 @@ export type RoomUpdateWithoutPropertyInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutPropertyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6348,9 +6038,9 @@ export type RoomUncheckedUpdateWithoutPropertyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -6369,13 +6059,12 @@ export type RoomUncheckedUpdateWithoutPropertyInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutPropertyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  floorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6391,15 +6080,15 @@ export type RoomUncheckedUpdateManyWithoutPropertyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type RoomCreateManyFloorInput = {
-  id?: string
-  tenantId: string
-  propertyId: string
+  id?: number
+  tenantId: number
+  propertyId: number
   roomCode: string
   title: string
   area: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6415,13 +6104,12 @@ export type RoomCreateManyFloorInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type RoomUpdateWithoutFloorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6457,16 +6145,15 @@ export type RoomUpdateWithoutFloorInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
 
 export type RoomUncheckedUpdateWithoutFloorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6482,9 +6169,9 @@ export type RoomUncheckedUpdateWithoutFloorInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
   amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
@@ -6503,13 +6190,12 @@ export type RoomUncheckedUpdateWithoutFloorInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutFloorInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
   roomCode?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -6525,9 +6211,9 @@ export type RoomUncheckedUpdateManyWithoutFloorInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -6554,7 +6240,6 @@ export type RoomCountOutputType = {
   conversations: number
   reviews: number
   reputationScores: number
-  roomPriceSuggestions: number
 }
 
 export type RoomCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6576,7 +6261,6 @@ export type RoomCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   conversations?: boolean | RoomCountOutputTypeCountConversationsArgs
   reviews?: boolean | RoomCountOutputTypeCountReviewsArgs
   reputationScores?: boolean | RoomCountOutputTypeCountReputationScoresArgs
-  roomPriceSuggestions?: boolean | RoomCountOutputTypeCountRoomPriceSuggestionsArgs
 }
 
 /**
@@ -6715,13 +6399,6 @@ export type RoomCountOutputTypeCountReputationScoresArgs<ExtArgs extends runtime
   where?: Prisma.ReputationScoreWhereInput
 }
 
-/**
- * RoomCountOutputType without action
- */
-export type RoomCountOutputTypeCountRoomPriceSuggestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RoomPriceSuggestionWhereInput
-}
-
 
 export type RoomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -6767,7 +6444,6 @@ export type RoomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   conversations?: boolean | Prisma.Room$conversationsArgs<ExtArgs>
   reviews?: boolean | Prisma.Room$reviewsArgs<ExtArgs>
   reputationScores?: boolean | Prisma.Room$reputationScoresArgs<ExtArgs>
-  roomPriceSuggestions?: boolean | Prisma.Room$roomPriceSuggestionsArgs<ExtArgs>
   createdBy?: boolean | Prisma.Room$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Room$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Room$deletedByArgs<ExtArgs>
@@ -6884,7 +6560,6 @@ export type RoomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   conversations?: boolean | Prisma.Room$conversationsArgs<ExtArgs>
   reviews?: boolean | Prisma.Room$reviewsArgs<ExtArgs>
   reputationScores?: boolean | Prisma.Room$reputationScoresArgs<ExtArgs>
-  roomPriceSuggestions?: boolean | Prisma.Room$roomPriceSuggestionsArgs<ExtArgs>
   createdBy?: boolean | Prisma.Room$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Room$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Room$deletedByArgs<ExtArgs>
@@ -6994,31 +6669,27 @@ export type $RoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
      * Bảng điểm uy tín của phòng trọ này
      */
     reputationScores: Prisma.$ReputationScorePayload<ExtArgs>[]
-    /**
-     * Danh sách AI gợi ý giá thuê của phòng trọ này
-     */
-    roomPriceSuggestions: Prisma.$RoomPriceSuggestionPayload<ExtArgs>[]
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     deletedBy: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
-     * ID định danh phòng trọ (UUID)
+     * ID định danh phòng trọ
      */
-    id: string
+    id: number
     /**
      * ID của Tenant quản lý
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID của tòa nhà chứa phòng trọ này
      */
-    propertyId: string
+    propertyId: number
     /**
      * ID của tầng chứa phòng trọ này (có thể null nếu nhà trọ không chia tầng rõ ràng)
      */
-    floorId: string | null
+    floorId: number | null
     /**
      * Mã định danh phòng (ví dụ: P101, P.A1)
      */
@@ -7082,15 +6753,15 @@ export type $RoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["room"]>
   composites: {}
 }
@@ -7506,7 +7177,6 @@ export interface Prisma__RoomClient<T, Null = never, ExtArgs extends runtime.Typ
   conversations<T extends Prisma.Room$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.Room$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reputationScores<T extends Prisma.Room$reputationScoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$reputationScoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReputationScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  roomPriceSuggestions<T extends Prisma.Room$roomPriceSuggestionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$roomPriceSuggestionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomPriceSuggestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.Room$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.Room$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.Room$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -7539,10 +7209,10 @@ export interface Prisma__RoomClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the Room model
  */
 export interface RoomFieldRefs {
-  readonly id: Prisma.FieldRef<"Room", 'String'>
-  readonly tenantId: Prisma.FieldRef<"Room", 'String'>
-  readonly propertyId: Prisma.FieldRef<"Room", 'String'>
-  readonly floorId: Prisma.FieldRef<"Room", 'String'>
+  readonly id: Prisma.FieldRef<"Room", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"Room", 'Int'>
+  readonly propertyId: Prisma.FieldRef<"Room", 'Int'>
+  readonly floorId: Prisma.FieldRef<"Room", 'Int'>
   readonly roomCode: Prisma.FieldRef<"Room", 'String'>
   readonly title: Prisma.FieldRef<"Room", 'String'>
   readonly area: Prisma.FieldRef<"Room", 'Decimal'>
@@ -7558,9 +7228,9 @@ export interface RoomFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Room", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Room", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Room", 'DateTime'>
-  readonly createdById: Prisma.FieldRef<"Room", 'String'>
-  readonly updatedById: Prisma.FieldRef<"Room", 'String'>
-  readonly deletedById: Prisma.FieldRef<"Room", 'String'>
+  readonly createdById: Prisma.FieldRef<"Room", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"Room", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"Room", 'Int'>
 }
     
 
@@ -8410,30 +8080,6 @@ export type Room$reputationScoresArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.ReputationScoreScalarFieldEnum | Prisma.ReputationScoreScalarFieldEnum[]
-}
-
-/**
- * Room.roomPriceSuggestions
- */
-export type Room$roomPriceSuggestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the RoomPriceSuggestion
-   */
-  select?: Prisma.RoomPriceSuggestionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the RoomPriceSuggestion
-   */
-  omit?: Prisma.RoomPriceSuggestionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RoomPriceSuggestionInclude<ExtArgs> | null
-  where?: Prisma.RoomPriceSuggestionWhereInput
-  orderBy?: Prisma.RoomPriceSuggestionOrderByWithRelationInput | Prisma.RoomPriceSuggestionOrderByWithRelationInput[]
-  cursor?: Prisma.RoomPriceSuggestionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.RoomPriceSuggestionScalarFieldEnum | Prisma.RoomPriceSuggestionScalarFieldEnum[]
 }
 
 /**

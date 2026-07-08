@@ -11,23 +11,29 @@ import { Request } from 'express'
 import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager'
 import { HTTPMethod } from '@src/common/constants/role.constant'
 import { REQUEST_ROLE_PERMISSIONS, REQUEST_USER_KEY } from '@src/common/constants/auth.constant'
-import { RolePermissionType } from '@src/modules/role/model/role.model'
 import { keyBy } from 'lodash'
-import { TokenService } from '@src/common/services/token.service'
-import { PrismaService } from '@src/database/prisma.service'
 import { AccessTokenPayload } from '@src/common/types/jwt.type'
+import { TokenService } from '@src/shared/modules/services/token.service'
+import { PrismaService } from '@src/shared/modules/database/prisma.service'
+import type { Prisma } from 'generated/prisma/client'
 
-type permission = RolePermissionType['permissions'][number]
-type CachedRole = RolePermissionType & {
-  permissions: {
-    [key: string]: permission
+type RolePermissionType = Prisma.RoleGetPayload<{
+  include: {
+    permissions: {
+      include: {
+        permission: true
+      }
+    }
   }
+}>
+type PermissionEntry = RolePermissionType['permissions'][number]
+type CachedRole = Omit<RolePermissionType, 'permissions'> & {
+  permissions: Record<string, PermissionEntry>
 }
 type AuthenticatedRequest = Request & {
   [REQUEST_USER_KEY]?: AccessTokenPayload
   [REQUEST_ROLE_PERMISSIONS]?: RolePermissionType
 }
-
 /**
  * Normalizes a route segment by ensuring it starts with a slash and stripping root/wildcard slashes.
  * Chuẩn hóa một phân đoạn route bằng cách đảm bảo nó bắt đầu bằng dấu gạch chéo và loại bỏ dấu gạch chéo gốc/kí tự đại diện.
@@ -180,13 +186,11 @@ export class AccessTokenGuard implements CanActivate {
         .findUniqueOrThrow({
           where: {
             id: roleId,
-            isActive: true,
-            deletedAt: null,
           },
           include: {
             permissions: {
-              where: {
-                deletedAt: null,
+              include: {
+                permission: true,
               },
             },
           },
@@ -196,7 +200,7 @@ export class AccessTokenGuard implements CanActivate {
         })
       const permissionObject = keyBy(
         role.permissions,
-        (permission) => `${permission.path}_${permission.method}`,
+        (rolePermission) => rolePermission.permission.code,
       ) as CachedRole['permissions']
 
       cachedRole = {

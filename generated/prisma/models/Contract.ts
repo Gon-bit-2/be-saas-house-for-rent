@@ -27,24 +27,42 @@ export type AggregateContract = {
 }
 
 export type ContractAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  renterId: number | null
+  rentalRequestId: number | null
+  templateId: number | null
   monthlyPrice: runtime.Decimal | null
   depositAmount: runtime.Decimal | null
   paymentDueDay: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type ContractSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  renterId: number | null
+  rentalRequestId: number | null
+  templateId: number | null
   monthlyPrice: runtime.Decimal | null
   depositAmount: runtime.Decimal | null
   paymentDueDay: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type ContractMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  renterId: string | null
-  rentalRequestId: string | null
-  templateId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  renterId: number | null
+  rentalRequestId: number | null
+  templateId: number | null
   contractCode: string | null
   startDate: Date | null
   endDate: Date | null
@@ -59,18 +77,18 @@ export type ContractMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type ContractMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  renterId: string | null
-  rentalRequestId: string | null
-  templateId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  renterId: number | null
+  rentalRequestId: number | null
+  templateId: number | null
   contractCode: string | null
   startDate: Date | null
   endDate: Date | null
@@ -85,9 +103,9 @@ export type ContractMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type ContractCountAggregateOutputType = {
@@ -119,15 +137,33 @@ export type ContractCountAggregateOutputType = {
 
 
 export type ContractAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  renterId?: true
+  rentalRequestId?: true
+  templateId?: true
   monthlyPrice?: true
   depositAmount?: true
   paymentDueDay?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type ContractSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  renterId?: true
+  rentalRequestId?: true
+  templateId?: true
   monthlyPrice?: true
   depositAmount?: true
   paymentDueDay?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
 }
 
 export type ContractMinAggregateInputType = {
@@ -296,12 +332,12 @@ export type ContractGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 export type ContractGroupByOutputType = {
-  id: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId: string | null
-  templateId: string | null
+  id: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId: number | null
+  templateId: number | null
   contractCode: string
   startDate: Date
   endDate: Date
@@ -316,9 +352,9 @@ export type ContractGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: ContractCountAggregateOutputType | null
   _avg: ContractAvgAggregateOutputType | null
   _sum: ContractSumAggregateOutputType | null
@@ -345,12 +381,12 @@ export type ContractWhereInput = {
   AND?: Prisma.ContractWhereInput | Prisma.ContractWhereInput[]
   OR?: Prisma.ContractWhereInput[]
   NOT?: Prisma.ContractWhereInput | Prisma.ContractWhereInput[]
-  id?: Prisma.UuidFilter<"Contract"> | string
-  tenantId?: Prisma.UuidFilter<"Contract"> | string
-  roomId?: Prisma.UuidFilter<"Contract"> | string
-  renterId?: Prisma.UuidFilter<"Contract"> | string
-  rentalRequestId?: Prisma.UuidNullableFilter<"Contract"> | string | null
-  templateId?: Prisma.UuidNullableFilter<"Contract"> | string | null
+  id?: Prisma.IntFilter<"Contract"> | number
+  tenantId?: Prisma.IntFilter<"Contract"> | number
+  roomId?: Prisma.IntFilter<"Contract"> | number
+  renterId?: Prisma.IntFilter<"Contract"> | number
+  rentalRequestId?: Prisma.IntNullableFilter<"Contract"> | number | null
+  templateId?: Prisma.IntNullableFilter<"Contract"> | number | null
   contractCode?: Prisma.StringFilter<"Contract"> | string
   startDate?: Prisma.DateTimeFilter<"Contract"> | Date | string
   endDate?: Prisma.DateTimeFilter<"Contract"> | Date | string
@@ -365,9 +401,9 @@ export type ContractWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Contract"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contract"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Contract"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Contract"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Contract"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Contract"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Contract"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Contract"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Contract"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   renter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -433,16 +469,16 @@ export type ContractOrderByWithRelationInput = {
 }
 
 export type ContractWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   contractCode?: string
   AND?: Prisma.ContractWhereInput | Prisma.ContractWhereInput[]
   OR?: Prisma.ContractWhereInput[]
   NOT?: Prisma.ContractWhereInput | Prisma.ContractWhereInput[]
-  tenantId?: Prisma.UuidFilter<"Contract"> | string
-  roomId?: Prisma.UuidFilter<"Contract"> | string
-  renterId?: Prisma.UuidFilter<"Contract"> | string
-  rentalRequestId?: Prisma.UuidNullableFilter<"Contract"> | string | null
-  templateId?: Prisma.UuidNullableFilter<"Contract"> | string | null
+  tenantId?: Prisma.IntFilter<"Contract"> | number
+  roomId?: Prisma.IntFilter<"Contract"> | number
+  renterId?: Prisma.IntFilter<"Contract"> | number
+  rentalRequestId?: Prisma.IntNullableFilter<"Contract"> | number | null
+  templateId?: Prisma.IntNullableFilter<"Contract"> | number | null
   startDate?: Prisma.DateTimeFilter<"Contract"> | Date | string
   endDate?: Prisma.DateTimeFilter<"Contract"> | Date | string
   monthlyPrice?: Prisma.DecimalFilter<"Contract"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -456,9 +492,9 @@ export type ContractWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Contract"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contract"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Contract"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Contract"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Contract"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Contract"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Contract"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Contract"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Contract"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   renter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -514,12 +550,12 @@ export type ContractScalarWhereWithAggregatesInput = {
   AND?: Prisma.ContractScalarWhereWithAggregatesInput | Prisma.ContractScalarWhereWithAggregatesInput[]
   OR?: Prisma.ContractScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ContractScalarWhereWithAggregatesInput | Prisma.ContractScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Contract"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"Contract"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"Contract"> | string
-  renterId?: Prisma.UuidWithAggregatesFilter<"Contract"> | string
-  rentalRequestId?: Prisma.UuidNullableWithAggregatesFilter<"Contract"> | string | null
-  templateId?: Prisma.UuidNullableWithAggregatesFilter<"Contract"> | string | null
+  id?: Prisma.IntWithAggregatesFilter<"Contract"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"Contract"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"Contract"> | number
+  renterId?: Prisma.IntWithAggregatesFilter<"Contract"> | number
+  rentalRequestId?: Prisma.IntNullableWithAggregatesFilter<"Contract"> | number | null
+  templateId?: Prisma.IntNullableWithAggregatesFilter<"Contract"> | number | null
   contractCode?: Prisma.StringWithAggregatesFilter<"Contract"> | string
   startDate?: Prisma.DateTimeWithAggregatesFilter<"Contract"> | Date | string
   endDate?: Prisma.DateTimeWithAggregatesFilter<"Contract"> | Date | string
@@ -534,13 +570,12 @@ export type ContractScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Contract"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Contract"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Contract"> | Date | string | null
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"Contract"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"Contract"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"Contract"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"Contract"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"Contract"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"Contract"> | number | null
 }
 
 export type ContractCreateInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -576,12 +611,12 @@ export type ContractCreateInput = {
 }
 
 export type ContractUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -596,9 +631,9 @@ export type ContractUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -612,7 +647,6 @@ export type ContractUncheckedCreateInput = {
 }
 
 export type ContractUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -648,12 +682,12 @@ export type ContractUpdateInput = {
 }
 
 export type ContractUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -668,9 +702,9 @@ export type ContractUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -684,12 +718,12 @@ export type ContractUncheckedUpdateInput = {
 }
 
 export type ContractCreateManyInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -704,13 +738,12 @@ export type ContractCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -728,12 +761,12 @@ export type ContractUpdateManyMutationInput = {
 }
 
 export type ContractUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -748,9 +781,9 @@ export type ContractUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractListRelationFilter = {
@@ -795,9 +828,18 @@ export type ContractCountOrderByAggregateInput = {
 }
 
 export type ContractAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  renterId?: Prisma.SortOrder
+  rentalRequestId?: Prisma.SortOrder
+  templateId?: Prisma.SortOrder
   monthlyPrice?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
   paymentDueDay?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type ContractMaxOrderByAggregateInput = {
@@ -853,9 +895,18 @@ export type ContractMinOrderByAggregateInput = {
 }
 
 export type ContractSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  renterId?: Prisma.SortOrder
+  rentalRequestId?: Prisma.SortOrder
+  templateId?: Prisma.SortOrder
   monthlyPrice?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
   paymentDueDay?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
 }
 
 export type ContractNullableScalarRelationFilter = {
@@ -1356,7 +1407,6 @@ export type ContractUpdateOneWithoutReviewsNestedInput = {
 }
 
 export type ContractCreateWithoutRenterInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1391,11 +1441,11 @@ export type ContractCreateWithoutRenterInput = {
 }
 
 export type ContractUncheckedCreateWithoutRenterInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1410,9 +1460,9 @@ export type ContractUncheckedCreateWithoutRenterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -1436,7 +1486,6 @@ export type ContractCreateManyRenterInputEnvelope = {
 }
 
 export type ContractCreateWithoutCreatedByInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1471,12 +1520,12 @@ export type ContractCreateWithoutCreatedByInput = {
 }
 
 export type ContractUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1491,8 +1540,8 @@ export type ContractUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -1516,7 +1565,6 @@ export type ContractCreateManyCreatedByInputEnvelope = {
 }
 
 export type ContractCreateWithoutUpdatedByInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1551,12 +1599,12 @@ export type ContractCreateWithoutUpdatedByInput = {
 }
 
 export type ContractUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1571,8 +1619,8 @@ export type ContractUncheckedCreateWithoutUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -1596,7 +1644,6 @@ export type ContractCreateManyUpdatedByInputEnvelope = {
 }
 
 export type ContractCreateWithoutDeletedByInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1631,12 +1678,12 @@ export type ContractCreateWithoutDeletedByInput = {
 }
 
 export type ContractUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1651,8 +1698,8 @@ export type ContractUncheckedCreateWithoutDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -1695,12 +1742,12 @@ export type ContractScalarWhereInput = {
   AND?: Prisma.ContractScalarWhereInput | Prisma.ContractScalarWhereInput[]
   OR?: Prisma.ContractScalarWhereInput[]
   NOT?: Prisma.ContractScalarWhereInput | Prisma.ContractScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Contract"> | string
-  tenantId?: Prisma.UuidFilter<"Contract"> | string
-  roomId?: Prisma.UuidFilter<"Contract"> | string
-  renterId?: Prisma.UuidFilter<"Contract"> | string
-  rentalRequestId?: Prisma.UuidNullableFilter<"Contract"> | string | null
-  templateId?: Prisma.UuidNullableFilter<"Contract"> | string | null
+  id?: Prisma.IntFilter<"Contract"> | number
+  tenantId?: Prisma.IntFilter<"Contract"> | number
+  roomId?: Prisma.IntFilter<"Contract"> | number
+  renterId?: Prisma.IntFilter<"Contract"> | number
+  rentalRequestId?: Prisma.IntNullableFilter<"Contract"> | number | null
+  templateId?: Prisma.IntNullableFilter<"Contract"> | number | null
   contractCode?: Prisma.StringFilter<"Contract"> | string
   startDate?: Prisma.DateTimeFilter<"Contract"> | Date | string
   endDate?: Prisma.DateTimeFilter<"Contract"> | Date | string
@@ -1715,9 +1762,9 @@ export type ContractScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Contract"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contract"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Contract"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Contract"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Contract"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Contract"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Contract"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Contract"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Contract"> | number | null
 }
 
 export type ContractUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1769,7 +1816,6 @@ export type ContractUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type ContractCreateWithoutTenantInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1804,11 +1850,11 @@ export type ContractCreateWithoutTenantInput = {
 }
 
 export type ContractUncheckedCreateWithoutTenantInput = {
-  id?: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1823,9 +1869,9 @@ export type ContractUncheckedCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -1865,7 +1911,6 @@ export type ContractUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type ContractCreateWithoutRoomInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1900,11 +1945,11 @@ export type ContractCreateWithoutRoomInput = {
 }
 
 export type ContractUncheckedCreateWithoutRoomInput = {
-  id?: string
-  tenantId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1919,9 +1964,9 @@ export type ContractUncheckedCreateWithoutRoomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -1961,7 +2006,6 @@ export type ContractUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type ContractCreateWithoutRentalHistoriesInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -1996,12 +2040,12 @@ export type ContractCreateWithoutRentalHistoriesInput = {
 }
 
 export type ContractUncheckedCreateWithoutRentalHistoriesInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2016,9 +2060,9 @@ export type ContractUncheckedCreateWithoutRentalHistoriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -2047,7 +2091,6 @@ export type ContractUpdateToOneWithWhereWithoutRentalHistoriesInput = {
 }
 
 export type ContractUpdateWithoutRentalHistoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2082,12 +2125,12 @@ export type ContractUpdateWithoutRentalHistoriesInput = {
 }
 
 export type ContractUncheckedUpdateWithoutRentalHistoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2102,9 +2145,9 @@ export type ContractUncheckedUpdateWithoutRentalHistoriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -2117,7 +2160,6 @@ export type ContractUncheckedUpdateWithoutRentalHistoriesInput = {
 }
 
 export type ContractCreateWithoutRentalRequestInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2152,11 +2194,11 @@ export type ContractCreateWithoutRentalRequestInput = {
 }
 
 export type ContractUncheckedCreateWithoutRentalRequestInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2171,9 +2213,9 @@ export type ContractUncheckedCreateWithoutRentalRequestInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -2213,7 +2255,6 @@ export type ContractUpdateManyWithWhereWithoutRentalRequestInput = {
 }
 
 export type ContractCreateWithoutTemplateInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2248,11 +2289,11 @@ export type ContractCreateWithoutTemplateInput = {
 }
 
 export type ContractUncheckedCreateWithoutTemplateInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2267,9 +2308,9 @@ export type ContractUncheckedCreateWithoutTemplateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -2309,7 +2350,6 @@ export type ContractUpdateManyWithWhereWithoutTemplateInput = {
 }
 
 export type ContractCreateWithoutMembersInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2344,12 +2384,12 @@ export type ContractCreateWithoutMembersInput = {
 }
 
 export type ContractUncheckedCreateWithoutMembersInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2364,9 +2404,9 @@ export type ContractUncheckedCreateWithoutMembersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -2395,7 +2435,6 @@ export type ContractUpdateToOneWithWhereWithoutMembersInput = {
 }
 
 export type ContractUpdateWithoutMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2430,12 +2469,12 @@ export type ContractUpdateWithoutMembersInput = {
 }
 
 export type ContractUncheckedUpdateWithoutMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2450,9 +2489,9 @@ export type ContractUncheckedUpdateWithoutMembersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -2465,7 +2504,6 @@ export type ContractUncheckedUpdateWithoutMembersInput = {
 }
 
 export type ContractCreateWithoutFilesInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2500,12 +2538,12 @@ export type ContractCreateWithoutFilesInput = {
 }
 
 export type ContractUncheckedCreateWithoutFilesInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2520,9 +2558,9 @@ export type ContractUncheckedCreateWithoutFilesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -2551,7 +2589,6 @@ export type ContractUpdateToOneWithWhereWithoutFilesInput = {
 }
 
 export type ContractUpdateWithoutFilesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2586,12 +2623,12 @@ export type ContractUpdateWithoutFilesInput = {
 }
 
 export type ContractUncheckedUpdateWithoutFilesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2606,9 +2643,9 @@ export type ContractUncheckedUpdateWithoutFilesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -2621,7 +2658,6 @@ export type ContractUncheckedUpdateWithoutFilesInput = {
 }
 
 export type ContractCreateWithoutTerminationRequestsInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2656,12 +2692,12 @@ export type ContractCreateWithoutTerminationRequestsInput = {
 }
 
 export type ContractUncheckedCreateWithoutTerminationRequestsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2676,9 +2712,9 @@ export type ContractUncheckedCreateWithoutTerminationRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -2707,7 +2743,6 @@ export type ContractUpdateToOneWithWhereWithoutTerminationRequestsInput = {
 }
 
 export type ContractUpdateWithoutTerminationRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2742,12 +2777,12 @@ export type ContractUpdateWithoutTerminationRequestsInput = {
 }
 
 export type ContractUncheckedUpdateWithoutTerminationRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2762,9 +2797,9 @@ export type ContractUncheckedUpdateWithoutTerminationRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -2777,7 +2812,6 @@ export type ContractUncheckedUpdateWithoutTerminationRequestsInput = {
 }
 
 export type ContractCreateWithoutHandoverRecordsInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2812,12 +2846,12 @@ export type ContractCreateWithoutHandoverRecordsInput = {
 }
 
 export type ContractUncheckedCreateWithoutHandoverRecordsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2832,9 +2866,9 @@ export type ContractUncheckedCreateWithoutHandoverRecordsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -2863,7 +2897,6 @@ export type ContractUpdateToOneWithWhereWithoutHandoverRecordsInput = {
 }
 
 export type ContractUpdateWithoutHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2898,12 +2931,12 @@ export type ContractUpdateWithoutHandoverRecordsInput = {
 }
 
 export type ContractUncheckedUpdateWithoutHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2918,9 +2951,9 @@ export type ContractUncheckedUpdateWithoutHandoverRecordsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -2933,7 +2966,6 @@ export type ContractUncheckedUpdateWithoutHandoverRecordsInput = {
 }
 
 export type ContractCreateWithoutMeterReadingsInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2968,12 +3000,12 @@ export type ContractCreateWithoutMeterReadingsInput = {
 }
 
 export type ContractUncheckedCreateWithoutMeterReadingsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -2988,9 +3020,9 @@ export type ContractUncheckedCreateWithoutMeterReadingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -3019,7 +3051,6 @@ export type ContractUpdateToOneWithWhereWithoutMeterReadingsInput = {
 }
 
 export type ContractUpdateWithoutMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3054,12 +3085,12 @@ export type ContractUpdateWithoutMeterReadingsInput = {
 }
 
 export type ContractUncheckedUpdateWithoutMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3074,9 +3105,9 @@ export type ContractUncheckedUpdateWithoutMeterReadingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -3089,7 +3120,6 @@ export type ContractUncheckedUpdateWithoutMeterReadingsInput = {
 }
 
 export type ContractCreateWithoutInvoicesInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3124,12 +3154,12 @@ export type ContractCreateWithoutInvoicesInput = {
 }
 
 export type ContractUncheckedCreateWithoutInvoicesInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3144,9 +3174,9 @@ export type ContractUncheckedCreateWithoutInvoicesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -3175,7 +3205,6 @@ export type ContractUpdateToOneWithWhereWithoutInvoicesInput = {
 }
 
 export type ContractUpdateWithoutInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3210,12 +3239,12 @@ export type ContractUpdateWithoutInvoicesInput = {
 }
 
 export type ContractUncheckedUpdateWithoutInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3230,9 +3259,9 @@ export type ContractUncheckedUpdateWithoutInvoicesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -3245,7 +3274,6 @@ export type ContractUncheckedUpdateWithoutInvoicesInput = {
 }
 
 export type ContractCreateWithoutTicketsInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3280,12 +3308,12 @@ export type ContractCreateWithoutTicketsInput = {
 }
 
 export type ContractUncheckedCreateWithoutTicketsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3300,9 +3328,9 @@ export type ContractUncheckedCreateWithoutTicketsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -3331,7 +3359,6 @@ export type ContractUpdateToOneWithWhereWithoutTicketsInput = {
 }
 
 export type ContractUpdateWithoutTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3366,12 +3393,12 @@ export type ContractUpdateWithoutTicketsInput = {
 }
 
 export type ContractUncheckedUpdateWithoutTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3386,9 +3413,9 @@ export type ContractUncheckedUpdateWithoutTicketsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -3401,7 +3428,6 @@ export type ContractUncheckedUpdateWithoutTicketsInput = {
 }
 
 export type ContractCreateWithoutConversationsInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3436,12 +3462,12 @@ export type ContractCreateWithoutConversationsInput = {
 }
 
 export type ContractUncheckedCreateWithoutConversationsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3456,9 +3482,9 @@ export type ContractUncheckedCreateWithoutConversationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -3487,7 +3513,6 @@ export type ContractUpdateToOneWithWhereWithoutConversationsInput = {
 }
 
 export type ContractUpdateWithoutConversationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3522,12 +3547,12 @@ export type ContractUpdateWithoutConversationsInput = {
 }
 
 export type ContractUncheckedUpdateWithoutConversationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3542,9 +3567,9 @@ export type ContractUncheckedUpdateWithoutConversationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -3557,7 +3582,6 @@ export type ContractUncheckedUpdateWithoutConversationsInput = {
 }
 
 export type ContractCreateWithoutReviewsInput = {
-  id?: string
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3592,12 +3616,12 @@ export type ContractCreateWithoutReviewsInput = {
 }
 
 export type ContractUncheckedCreateWithoutReviewsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3612,9 +3636,9 @@ export type ContractUncheckedCreateWithoutReviewsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
@@ -3643,7 +3667,6 @@ export type ContractUpdateToOneWithWhereWithoutReviewsInput = {
 }
 
 export type ContractUpdateWithoutReviewsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3678,12 +3701,12 @@ export type ContractUpdateWithoutReviewsInput = {
 }
 
 export type ContractUncheckedUpdateWithoutReviewsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3698,9 +3721,9 @@ export type ContractUncheckedUpdateWithoutReviewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -3713,11 +3736,11 @@ export type ContractUncheckedUpdateWithoutReviewsInput = {
 }
 
 export type ContractCreateManyRenterInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3732,18 +3755,18 @@ export type ContractCreateManyRenterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractCreateManyCreatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3758,17 +3781,17 @@ export type ContractCreateManyCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractCreateManyUpdatedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3783,17 +3806,17 @@ export type ContractCreateManyUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractCreateManyDeletedByInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -3808,12 +3831,11 @@ export type ContractCreateManyDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type ContractUpdateWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3848,11 +3870,11 @@ export type ContractUpdateWithoutRenterInput = {
 }
 
 export type ContractUncheckedUpdateWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3867,9 +3889,9 @@ export type ContractUncheckedUpdateWithoutRenterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -3883,11 +3905,11 @@ export type ContractUncheckedUpdateWithoutRenterInput = {
 }
 
 export type ContractUncheckedUpdateManyWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3902,13 +3924,12 @@ export type ContractUncheckedUpdateManyWithoutRenterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3943,12 +3964,12 @@ export type ContractUpdateWithoutCreatedByInput = {
 }
 
 export type ContractUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3963,8 +3984,8 @@ export type ContractUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -3978,12 +3999,12 @@ export type ContractUncheckedUpdateWithoutCreatedByInput = {
 }
 
 export type ContractUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3998,12 +4019,11 @@ export type ContractUncheckedUpdateManyWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4038,12 +4058,12 @@ export type ContractUpdateWithoutUpdatedByInput = {
 }
 
 export type ContractUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4058,8 +4078,8 @@ export type ContractUncheckedUpdateWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -4073,12 +4093,12 @@ export type ContractUncheckedUpdateWithoutUpdatedByInput = {
 }
 
 export type ContractUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4093,12 +4113,11 @@ export type ContractUncheckedUpdateManyWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4133,12 +4152,12 @@ export type ContractUpdateWithoutDeletedByInput = {
 }
 
 export type ContractUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4153,8 +4172,8 @@ export type ContractUncheckedUpdateWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -4168,12 +4187,12 @@ export type ContractUncheckedUpdateWithoutDeletedByInput = {
 }
 
 export type ContractUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4188,16 +4207,16 @@ export type ContractUncheckedUpdateManyWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractCreateManyTenantInput = {
-  id?: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -4212,13 +4231,12 @@ export type ContractCreateManyTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4253,11 +4271,11 @@ export type ContractUpdateWithoutTenantInput = {
 }
 
 export type ContractUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4272,9 +4290,9 @@ export type ContractUncheckedUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -4288,11 +4306,11 @@ export type ContractUncheckedUpdateWithoutTenantInput = {
 }
 
 export type ContractUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4307,17 +4325,17 @@ export type ContractUncheckedUpdateManyWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractCreateManyRoomInput = {
-  id?: string
-  tenantId: string
-  renterId: string
-  rentalRequestId?: string | null
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -4332,13 +4350,12 @@ export type ContractCreateManyRoomInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4373,11 +4390,11 @@ export type ContractUpdateWithoutRoomInput = {
 }
 
 export type ContractUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4392,9 +4409,9 @@ export type ContractUncheckedUpdateWithoutRoomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -4408,11 +4425,11 @@ export type ContractUncheckedUpdateWithoutRoomInput = {
 }
 
 export type ContractUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4427,17 +4444,17 @@ export type ContractUncheckedUpdateManyWithoutRoomInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractCreateManyRentalRequestInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  templateId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  templateId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -4452,13 +4469,12 @@ export type ContractCreateManyRentalRequestInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractUpdateWithoutRentalRequestInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4493,11 +4509,11 @@ export type ContractUpdateWithoutRentalRequestInput = {
 }
 
 export type ContractUncheckedUpdateWithoutRentalRequestInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4512,9 +4528,9 @@ export type ContractUncheckedUpdateWithoutRentalRequestInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -4528,11 +4544,11 @@ export type ContractUncheckedUpdateWithoutRentalRequestInput = {
 }
 
 export type ContractUncheckedUpdateManyWithoutRentalRequestInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4547,17 +4563,17 @@ export type ContractUncheckedUpdateManyWithoutRentalRequestInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractCreateManyTemplateInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  renterId: string
-  rentalRequestId?: string | null
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
   contractCode: string
   startDate: Date | string
   endDate: Date | string
@@ -4572,13 +4588,12 @@ export type ContractCreateManyTemplateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type ContractUpdateWithoutTemplateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4613,11 +4628,11 @@ export type ContractUpdateWithoutTemplateInput = {
 }
 
 export type ContractUncheckedUpdateWithoutTemplateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4632,9 +4647,9 @@ export type ContractUncheckedUpdateWithoutTemplateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
@@ -4648,11 +4663,11 @@ export type ContractUncheckedUpdateWithoutTemplateInput = {
 }
 
 export type ContractUncheckedUpdateManyWithoutTemplateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  rentalRequestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   contractCode?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4667,9 +4682,9 @@ export type ContractUncheckedUpdateManyWithoutTemplateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -5037,27 +5052,27 @@ export type $ContractPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     /**
      * ID hợp đồng (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant quản lý phòng trọ
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID phòng cho thuê
      */
-    roomId: string
+    roomId: number
     /**
      * ID tài khoản khách thuê chính (người đứng tên ký hợp đồng)
      */
-    renterId: string
+    renterId: number
     /**
      * ID yêu cầu thuê gốc (null nếu tạo hợp đồng trực tiếp không qua yêu cầu trên sàn)
      */
-    rentalRequestId: string | null
+    rentalRequestId: number | null
     /**
      * ID mẫu hợp đồng sử dụng để khởi tạo văn bản hợp đồng (null nếu tự soạn thảo)
      */
-    templateId: string | null
+    templateId: number | null
     /**
      * Mã số hợp đồng duy nhất (phục vụ quản lý và đối soát)
      */
@@ -5117,15 +5132,15 @@ export type $ContractPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["contract"]>
   composites: {}
 }
@@ -5567,12 +5582,12 @@ export interface Prisma__ContractClient<T, Null = never, ExtArgs extends runtime
  * Fields of the Contract model
  */
 export interface ContractFieldRefs {
-  readonly id: Prisma.FieldRef<"Contract", 'String'>
-  readonly tenantId: Prisma.FieldRef<"Contract", 'String'>
-  readonly roomId: Prisma.FieldRef<"Contract", 'String'>
-  readonly renterId: Prisma.FieldRef<"Contract", 'String'>
-  readonly rentalRequestId: Prisma.FieldRef<"Contract", 'String'>
-  readonly templateId: Prisma.FieldRef<"Contract", 'String'>
+  readonly id: Prisma.FieldRef<"Contract", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"Contract", 'Int'>
+  readonly roomId: Prisma.FieldRef<"Contract", 'Int'>
+  readonly renterId: Prisma.FieldRef<"Contract", 'Int'>
+  readonly rentalRequestId: Prisma.FieldRef<"Contract", 'Int'>
+  readonly templateId: Prisma.FieldRef<"Contract", 'Int'>
   readonly contractCode: Prisma.FieldRef<"Contract", 'String'>
   readonly startDate: Prisma.FieldRef<"Contract", 'DateTime'>
   readonly endDate: Prisma.FieldRef<"Contract", 'DateTime'>
@@ -5587,9 +5602,9 @@ export interface ContractFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Contract", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Contract", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Contract", 'DateTime'>
-  readonly createdById: Prisma.FieldRef<"Contract", 'String'>
-  readonly updatedById: Prisma.FieldRef<"Contract", 'String'>
-  readonly deletedById: Prisma.FieldRef<"Contract", 'String'>
+  readonly createdById: Prisma.FieldRef<"Contract", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"Contract", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"Contract", 'Int'>
 }
     
 

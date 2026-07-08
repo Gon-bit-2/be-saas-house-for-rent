@@ -27,21 +27,31 @@ export type AggregateOcrJob = {
 }
 
 export type OcrJobAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  meterId: number | null
+  uploadedBy: number | null
   recognizedValue: runtime.Decimal | null
   confidence: runtime.Decimal | null
 }
 
 export type OcrJobSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  meterId: number | null
+  uploadedBy: number | null
   recognizedValue: runtime.Decimal | null
   confidence: runtime.Decimal | null
 }
 
 export type OcrJobMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  meterId: string | null
-  uploadedBy: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  meterId: number | null
+  uploadedBy: number | null
   imageUrl: string | null
   recognizedValue: runtime.Decimal | null
   confidence: runtime.Decimal | null
@@ -52,11 +62,11 @@ export type OcrJobMinAggregateOutputType = {
 }
 
 export type OcrJobMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
-  meterId: string | null
-  uploadedBy: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+  meterId: number | null
+  uploadedBy: number | null
   imageUrl: string | null
   recognizedValue: runtime.Decimal | null
   confidence: runtime.Decimal | null
@@ -85,11 +95,21 @@ export type OcrJobCountAggregateOutputType = {
 
 
 export type OcrJobAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  meterId?: true
+  uploadedBy?: true
   recognizedValue?: true
   confidence?: true
 }
 
 export type OcrJobSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+  meterId?: true
+  uploadedBy?: true
   recognizedValue?: true
   confidence?: true
 }
@@ -228,11 +248,11 @@ export type OcrJobGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 export type OcrJobGroupByOutputType = {
-  id: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  uploadedBy: string
+  id: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  uploadedBy: number
   imageUrl: string
   recognizedValue: runtime.Decimal | null
   confidence: runtime.Decimal | null
@@ -267,11 +287,11 @@ export type OcrJobWhereInput = {
   AND?: Prisma.OcrJobWhereInput | Prisma.OcrJobWhereInput[]
   OR?: Prisma.OcrJobWhereInput[]
   NOT?: Prisma.OcrJobWhereInput | Prisma.OcrJobWhereInput[]
-  id?: Prisma.UuidFilter<"OcrJob"> | string
-  tenantId?: Prisma.UuidFilter<"OcrJob"> | string
-  roomId?: Prisma.UuidFilter<"OcrJob"> | string
-  meterId?: Prisma.UuidFilter<"OcrJob"> | string
-  uploadedBy?: Prisma.UuidFilter<"OcrJob"> | string
+  id?: Prisma.IntFilter<"OcrJob"> | number
+  tenantId?: Prisma.IntFilter<"OcrJob"> | number
+  roomId?: Prisma.IntFilter<"OcrJob"> | number
+  meterId?: Prisma.IntFilter<"OcrJob"> | number
+  uploadedBy?: Prisma.IntFilter<"OcrJob"> | number
   imageUrl?: Prisma.StringFilter<"OcrJob"> | string
   recognizedValue?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -307,14 +327,14 @@ export type OcrJobOrderByWithRelationInput = {
 }
 
 export type OcrJobWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.OcrJobWhereInput | Prisma.OcrJobWhereInput[]
   OR?: Prisma.OcrJobWhereInput[]
   NOT?: Prisma.OcrJobWhereInput | Prisma.OcrJobWhereInput[]
-  tenantId?: Prisma.UuidFilter<"OcrJob"> | string
-  roomId?: Prisma.UuidFilter<"OcrJob"> | string
-  meterId?: Prisma.UuidFilter<"OcrJob"> | string
-  uploadedBy?: Prisma.UuidFilter<"OcrJob"> | string
+  tenantId?: Prisma.IntFilter<"OcrJob"> | number
+  roomId?: Prisma.IntFilter<"OcrJob"> | number
+  meterId?: Prisma.IntFilter<"OcrJob"> | number
+  uploadedBy?: Prisma.IntFilter<"OcrJob"> | number
   imageUrl?: Prisma.StringFilter<"OcrJob"> | string
   recognizedValue?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -354,11 +374,11 @@ export type OcrJobScalarWhereWithAggregatesInput = {
   AND?: Prisma.OcrJobScalarWhereWithAggregatesInput | Prisma.OcrJobScalarWhereWithAggregatesInput[]
   OR?: Prisma.OcrJobScalarWhereWithAggregatesInput[]
   NOT?: Prisma.OcrJobScalarWhereWithAggregatesInput | Prisma.OcrJobScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"OcrJob"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"OcrJob"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"OcrJob"> | string
-  meterId?: Prisma.UuidWithAggregatesFilter<"OcrJob"> | string
-  uploadedBy?: Prisma.UuidWithAggregatesFilter<"OcrJob"> | string
+  id?: Prisma.IntWithAggregatesFilter<"OcrJob"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"OcrJob"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"OcrJob"> | number
+  meterId?: Prisma.IntWithAggregatesFilter<"OcrJob"> | number
+  uploadedBy?: Prisma.IntWithAggregatesFilter<"OcrJob"> | number
   imageUrl?: Prisma.StringWithAggregatesFilter<"OcrJob"> | string
   recognizedValue?: Prisma.DecimalNullableWithAggregatesFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.DecimalNullableWithAggregatesFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -370,7 +390,6 @@ export type OcrJobScalarWhereWithAggregatesInput = {
 }
 
 export type OcrJobCreateInput = {
-  id?: string
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -386,11 +405,11 @@ export type OcrJobCreateInput = {
 }
 
 export type OcrJobUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  uploadedBy: string
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  uploadedBy: number
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -402,7 +421,6 @@ export type OcrJobUncheckedCreateInput = {
 }
 
 export type OcrJobUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -418,11 +436,11 @@ export type OcrJobUpdateInput = {
 }
 
 export type OcrJobUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -434,11 +452,11 @@ export type OcrJobUncheckedUpdateInput = {
 }
 
 export type OcrJobCreateManyInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
-  uploadedBy: string
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  uploadedBy: number
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -450,7 +468,6 @@ export type OcrJobCreateManyInput = {
 }
 
 export type OcrJobUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -462,11 +479,11 @@ export type OcrJobUpdateManyMutationInput = {
 }
 
 export type OcrJobUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -504,6 +521,11 @@ export type OcrJobCountOrderByAggregateInput = {
 }
 
 export type OcrJobAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  meterId?: Prisma.SortOrder
+  uploadedBy?: Prisma.SortOrder
   recognizedValue?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
 }
@@ -539,6 +561,11 @@ export type OcrJobMinOrderByAggregateInput = {
 }
 
 export type OcrJobSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  meterId?: Prisma.SortOrder
+  uploadedBy?: Prisma.SortOrder
   recognizedValue?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
 }
@@ -716,7 +743,6 @@ export type EnumOcrJobStatusFieldUpdateOperationsInput = {
 }
 
 export type OcrJobCreateWithoutUploadedByUserInput = {
-  id?: string
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -731,10 +757,10 @@ export type OcrJobCreateWithoutUploadedByUserInput = {
 }
 
 export type OcrJobUncheckedCreateWithoutUploadedByUserInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -775,11 +801,11 @@ export type OcrJobScalarWhereInput = {
   AND?: Prisma.OcrJobScalarWhereInput | Prisma.OcrJobScalarWhereInput[]
   OR?: Prisma.OcrJobScalarWhereInput[]
   NOT?: Prisma.OcrJobScalarWhereInput | Prisma.OcrJobScalarWhereInput[]
-  id?: Prisma.UuidFilter<"OcrJob"> | string
-  tenantId?: Prisma.UuidFilter<"OcrJob"> | string
-  roomId?: Prisma.UuidFilter<"OcrJob"> | string
-  meterId?: Prisma.UuidFilter<"OcrJob"> | string
-  uploadedBy?: Prisma.UuidFilter<"OcrJob"> | string
+  id?: Prisma.IntFilter<"OcrJob"> | number
+  tenantId?: Prisma.IntFilter<"OcrJob"> | number
+  roomId?: Prisma.IntFilter<"OcrJob"> | number
+  meterId?: Prisma.IntFilter<"OcrJob"> | number
+  uploadedBy?: Prisma.IntFilter<"OcrJob"> | number
   imageUrl?: Prisma.StringFilter<"OcrJob"> | string
   recognizedValue?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -791,7 +817,6 @@ export type OcrJobScalarWhereInput = {
 }
 
 export type OcrJobCreateWithoutTenantInput = {
-  id?: string
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -806,10 +831,10 @@ export type OcrJobCreateWithoutTenantInput = {
 }
 
 export type OcrJobUncheckedCreateWithoutTenantInput = {
-  id?: string
-  roomId: string
-  meterId: string
-  uploadedBy: string
+  id?: number
+  roomId: number
+  meterId: number
+  uploadedBy: number
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -847,7 +872,6 @@ export type OcrJobUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type OcrJobCreateWithoutRoomInput = {
-  id?: string
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -862,10 +886,10 @@ export type OcrJobCreateWithoutRoomInput = {
 }
 
 export type OcrJobUncheckedCreateWithoutRoomInput = {
-  id?: string
-  tenantId: string
-  meterId: string
-  uploadedBy: string
+  id?: number
+  tenantId: number
+  meterId: number
+  uploadedBy: number
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -903,7 +927,6 @@ export type OcrJobUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type OcrJobCreateWithoutMeterInput = {
-  id?: string
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -918,10 +941,10 @@ export type OcrJobCreateWithoutMeterInput = {
 }
 
 export type OcrJobUncheckedCreateWithoutMeterInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  uploadedBy: string
+  id?: number
+  tenantId: number
+  roomId: number
+  uploadedBy: number
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -959,10 +982,10 @@ export type OcrJobUpdateManyWithWhereWithoutMeterInput = {
 }
 
 export type OcrJobCreateManyUploadedByUserInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  meterId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -974,7 +997,6 @@ export type OcrJobCreateManyUploadedByUserInput = {
 }
 
 export type OcrJobUpdateWithoutUploadedByUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -989,10 +1011,10 @@ export type OcrJobUpdateWithoutUploadedByUserInput = {
 }
 
 export type OcrJobUncheckedUpdateWithoutUploadedByUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1004,10 +1026,10 @@ export type OcrJobUncheckedUpdateWithoutUploadedByUserInput = {
 }
 
 export type OcrJobUncheckedUpdateManyWithoutUploadedByUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1019,10 +1041,10 @@ export type OcrJobUncheckedUpdateManyWithoutUploadedByUserInput = {
 }
 
 export type OcrJobCreateManyTenantInput = {
-  id?: string
-  roomId: string
-  meterId: string
-  uploadedBy: string
+  id?: number
+  roomId: number
+  meterId: number
+  uploadedBy: number
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1034,7 +1056,6 @@ export type OcrJobCreateManyTenantInput = {
 }
 
 export type OcrJobUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1049,10 +1070,10 @@ export type OcrJobUpdateWithoutTenantInput = {
 }
 
 export type OcrJobUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1064,10 +1085,10 @@ export type OcrJobUncheckedUpdateWithoutTenantInput = {
 }
 
 export type OcrJobUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1079,10 +1100,10 @@ export type OcrJobUncheckedUpdateManyWithoutTenantInput = {
 }
 
 export type OcrJobCreateManyRoomInput = {
-  id?: string
-  tenantId: string
-  meterId: string
-  uploadedBy: string
+  id?: number
+  tenantId: number
+  meterId: number
+  uploadedBy: number
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1094,7 +1115,6 @@ export type OcrJobCreateManyRoomInput = {
 }
 
 export type OcrJobUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1109,10 +1129,10 @@ export type OcrJobUpdateWithoutRoomInput = {
 }
 
 export type OcrJobUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1124,10 +1144,10 @@ export type OcrJobUncheckedUpdateWithoutRoomInput = {
 }
 
 export type OcrJobUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  meterId?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1139,10 +1159,10 @@ export type OcrJobUncheckedUpdateManyWithoutRoomInput = {
 }
 
 export type OcrJobCreateManyMeterInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  uploadedBy: string
+  id?: number
+  tenantId: number
+  roomId: number
+  uploadedBy: number
   imageUrl: string
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1154,7 +1174,6 @@ export type OcrJobCreateManyMeterInput = {
 }
 
 export type OcrJobUpdateWithoutMeterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1169,10 +1188,10 @@ export type OcrJobUpdateWithoutMeterInput = {
 }
 
 export type OcrJobUncheckedUpdateWithoutMeterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1184,10 +1203,10 @@ export type OcrJobUncheckedUpdateWithoutMeterInput = {
 }
 
 export type OcrJobUncheckedUpdateManyWithoutMeterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1320,23 +1339,23 @@ export type $OcrJobPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     /**
      * ID tác vụ OCR (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant quản lý
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID phòng được quét ảnh
      */
-    roomId: string
+    roomId: number
     /**
      * ID đồng hồ được quét ảnh
      */
-    meterId: string
+    meterId: number
     /**
      * ID tài khoản người dùng tải ảnh lên xử lý
      */
-    uploadedBy: string
+    uploadedBy: number
     /**
      * Đường dẫn hình ảnh đầu vào tải lên để OCR nhận diện
      */
@@ -1796,11 +1815,11 @@ export interface Prisma__OcrJobClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the OcrJob model
  */
 export interface OcrJobFieldRefs {
-  readonly id: Prisma.FieldRef<"OcrJob", 'String'>
-  readonly tenantId: Prisma.FieldRef<"OcrJob", 'String'>
-  readonly roomId: Prisma.FieldRef<"OcrJob", 'String'>
-  readonly meterId: Prisma.FieldRef<"OcrJob", 'String'>
-  readonly uploadedBy: Prisma.FieldRef<"OcrJob", 'String'>
+  readonly id: Prisma.FieldRef<"OcrJob", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"OcrJob", 'Int'>
+  readonly roomId: Prisma.FieldRef<"OcrJob", 'Int'>
+  readonly meterId: Prisma.FieldRef<"OcrJob", 'Int'>
+  readonly uploadedBy: Prisma.FieldRef<"OcrJob", 'Int'>
   readonly imageUrl: Prisma.FieldRef<"OcrJob", 'String'>
   readonly recognizedValue: Prisma.FieldRef<"OcrJob", 'Decimal'>
   readonly confidence: Prisma.FieldRef<"OcrJob", 'Decimal'>

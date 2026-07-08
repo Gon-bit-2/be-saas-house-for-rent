@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from 'generated/prisma'
+import { Prisma, PrismaClient } from 'generated/prisma/client'
 
 import envConfig from '@src/config/env.config'
 

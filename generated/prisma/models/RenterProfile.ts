@@ -20,13 +20,25 @@ export type RenterProfileModel = runtime.Types.Result.DefaultSelection<Prisma.$R
 
 export type AggregateRenterProfile = {
   _count: RenterProfileCountAggregateOutputType | null
+  _avg: RenterProfileAvgAggregateOutputType | null
+  _sum: RenterProfileSumAggregateOutputType | null
   _min: RenterProfileMinAggregateOutputType | null
   _max: RenterProfileMaxAggregateOutputType | null
 }
 
+export type RenterProfileAvgAggregateOutputType = {
+  id: number | null
+  userId: number | null
+}
+
+export type RenterProfileSumAggregateOutputType = {
+  id: number | null
+  userId: number | null
+}
+
 export type RenterProfileMinAggregateOutputType = {
-  id: string | null
-  userId: string | null
+  id: number | null
+  userId: number | null
   dateOfBirth: Date | null
   gender: $Enums.Gender | null
   identityNumber: string | null
@@ -42,8 +54,8 @@ export type RenterProfileMinAggregateOutputType = {
 }
 
 export type RenterProfileMaxAggregateOutputType = {
-  id: string | null
-  userId: string | null
+  id: number | null
+  userId: number | null
   dateOfBirth: Date | null
   gender: $Enums.Gender | null
   identityNumber: string | null
@@ -76,6 +88,16 @@ export type RenterProfileCountAggregateOutputType = {
   _all: number
 }
 
+
+export type RenterProfileAvgAggregateInputType = {
+  id?: true
+  userId?: true
+}
+
+export type RenterProfileSumAggregateInputType = {
+  id?: true
+  userId?: true
+}
 
 export type RenterProfileMinAggregateInputType = {
   id?: true
@@ -167,6 +189,18 @@ export type RenterProfileAggregateArgs<ExtArgs extends runtime.Types.Extensions.
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: RenterProfileAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: RenterProfileSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: RenterProfileMinAggregateInputType
@@ -197,13 +231,15 @@ export type RenterProfileGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   _count?: RenterProfileCountAggregateInputType | true
+  _avg?: RenterProfileAvgAggregateInputType
+  _sum?: RenterProfileSumAggregateInputType
   _min?: RenterProfileMinAggregateInputType
   _max?: RenterProfileMaxAggregateInputType
 }
 
 export type RenterProfileGroupByOutputType = {
-  id: string
-  userId: string
+  id: number
+  userId: number
   dateOfBirth: Date | null
   gender: $Enums.Gender | null
   identityNumber: string | null
@@ -217,6 +253,8 @@ export type RenterProfileGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   _count: RenterProfileCountAggregateOutputType | null
+  _avg: RenterProfileAvgAggregateOutputType | null
+  _sum: RenterProfileSumAggregateOutputType | null
   _min: RenterProfileMinAggregateOutputType | null
   _max: RenterProfileMaxAggregateOutputType | null
 }
@@ -240,8 +278,8 @@ export type RenterProfileWhereInput = {
   AND?: Prisma.RenterProfileWhereInput | Prisma.RenterProfileWhereInput[]
   OR?: Prisma.RenterProfileWhereInput[]
   NOT?: Prisma.RenterProfileWhereInput | Prisma.RenterProfileWhereInput[]
-  id?: Prisma.UuidFilter<"RenterProfile"> | string
-  userId?: Prisma.UuidFilter<"RenterProfile"> | string
+  id?: Prisma.IntFilter<"RenterProfile"> | number
+  userId?: Prisma.IntFilter<"RenterProfile"> | number
   dateOfBirth?: Prisma.DateTimeNullableFilter<"RenterProfile"> | Date | string | null
   gender?: Prisma.EnumGenderNullableFilter<"RenterProfile"> | $Enums.Gender | null
   identityNumber?: Prisma.StringNullableFilter<"RenterProfile"> | string | null
@@ -276,8 +314,8 @@ export type RenterProfileOrderByWithRelationInput = {
 }
 
 export type RenterProfileWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
-  userId?: string
+  id?: number
+  userId?: number
   AND?: Prisma.RenterProfileWhereInput | Prisma.RenterProfileWhereInput[]
   OR?: Prisma.RenterProfileWhereInput[]
   NOT?: Prisma.RenterProfileWhereInput | Prisma.RenterProfileWhereInput[]
@@ -312,16 +350,18 @@ export type RenterProfileOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.RenterProfileCountOrderByAggregateInput
+  _avg?: Prisma.RenterProfileAvgOrderByAggregateInput
   _max?: Prisma.RenterProfileMaxOrderByAggregateInput
   _min?: Prisma.RenterProfileMinOrderByAggregateInput
+  _sum?: Prisma.RenterProfileSumOrderByAggregateInput
 }
 
 export type RenterProfileScalarWhereWithAggregatesInput = {
   AND?: Prisma.RenterProfileScalarWhereWithAggregatesInput | Prisma.RenterProfileScalarWhereWithAggregatesInput[]
   OR?: Prisma.RenterProfileScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RenterProfileScalarWhereWithAggregatesInput | Prisma.RenterProfileScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"RenterProfile"> | string
-  userId?: Prisma.UuidWithAggregatesFilter<"RenterProfile"> | string
+  id?: Prisma.IntWithAggregatesFilter<"RenterProfile"> | number
+  userId?: Prisma.IntWithAggregatesFilter<"RenterProfile"> | number
   dateOfBirth?: Prisma.DateTimeNullableWithAggregatesFilter<"RenterProfile"> | Date | string | null
   gender?: Prisma.EnumGenderNullableWithAggregatesFilter<"RenterProfile"> | $Enums.Gender | null
   identityNumber?: Prisma.StringNullableWithAggregatesFilter<"RenterProfile"> | string | null
@@ -337,7 +377,6 @@ export type RenterProfileScalarWhereWithAggregatesInput = {
 }
 
 export type RenterProfileCreateInput = {
-  id?: string
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   identityNumber?: string | null
@@ -354,8 +393,8 @@ export type RenterProfileCreateInput = {
 }
 
 export type RenterProfileUncheckedCreateInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   identityNumber?: string | null
@@ -371,7 +410,6 @@ export type RenterProfileUncheckedCreateInput = {
 }
 
 export type RenterProfileUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -388,8 +426,8 @@ export type RenterProfileUpdateInput = {
 }
 
 export type RenterProfileUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -405,8 +443,8 @@ export type RenterProfileUncheckedUpdateInput = {
 }
 
 export type RenterProfileCreateManyInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   identityNumber?: string | null
@@ -422,7 +460,6 @@ export type RenterProfileCreateManyInput = {
 }
 
 export type RenterProfileUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -438,8 +475,8 @@ export type RenterProfileUpdateManyMutationInput = {
 }
 
 export type RenterProfileUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -476,6 +513,11 @@ export type RenterProfileCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type RenterProfileAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+}
+
 export type RenterProfileMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -508,6 +550,11 @@ export type RenterProfileMinOrderByAggregateInput = {
   verificationStatus?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type RenterProfileSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type RenterProfileCreateNestedOneWithoutUserInput = {
@@ -547,7 +594,6 @@ export type NullableEnumGenderFieldUpdateOperationsInput = {
 }
 
 export type RenterProfileCreateWithoutUserInput = {
-  id?: string
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   identityNumber?: string | null
@@ -563,7 +609,7 @@ export type RenterProfileCreateWithoutUserInput = {
 }
 
 export type RenterProfileUncheckedCreateWithoutUserInput = {
-  id?: string
+  id?: number
   dateOfBirth?: Date | string | null
   gender?: $Enums.Gender | null
   identityNumber?: string | null
@@ -595,7 +641,6 @@ export type RenterProfileUpdateToOneWithWhereWithoutUserInput = {
 }
 
 export type RenterProfileUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -611,7 +656,7 @@ export type RenterProfileUpdateWithoutUserInput = {
 }
 
 export type RenterProfileUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   identityNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -722,11 +767,11 @@ export type $RenterProfilePayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * ID hồ sơ (UUID)
      */
-    id: string
+    id: number
     /**
      * ID tài khoản người dùng liên kết (quan hệ 1-1)
      */
-    userId: string
+    userId: number
     /**
      * Ngày tháng năm sinh
      */
@@ -1199,8 +1244,8 @@ export interface Prisma__RenterProfileClient<T, Null = never, ExtArgs extends ru
  * Fields of the RenterProfile model
  */
 export interface RenterProfileFieldRefs {
-  readonly id: Prisma.FieldRef<"RenterProfile", 'String'>
-  readonly userId: Prisma.FieldRef<"RenterProfile", 'String'>
+  readonly id: Prisma.FieldRef<"RenterProfile", 'Int'>
+  readonly userId: Prisma.FieldRef<"RenterProfile", 'Int'>
   readonly dateOfBirth: Prisma.FieldRef<"RenterProfile", 'DateTime'>
   readonly gender: Prisma.FieldRef<"RenterProfile", 'Gender'>
   readonly identityNumber: Prisma.FieldRef<"RenterProfile", 'String'>

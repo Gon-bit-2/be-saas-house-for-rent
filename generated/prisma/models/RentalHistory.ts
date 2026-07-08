@@ -20,16 +20,34 @@ export type RentalHistoryModel = runtime.Types.Result.DefaultSelection<Prisma.$R
 
 export type AggregateRentalHistory = {
   _count: RentalHistoryCountAggregateOutputType | null
+  _avg: RentalHistoryAvgAggregateOutputType | null
+  _sum: RentalHistorySumAggregateOutputType | null
   _min: RentalHistoryMinAggregateOutputType | null
   _max: RentalHistoryMaxAggregateOutputType | null
 }
 
+export type RentalHistoryAvgAggregateOutputType = {
+  id: number | null
+  renterId: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+}
+
+export type RentalHistorySumAggregateOutputType = {
+  id: number | null
+  renterId: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
+}
+
 export type RentalHistoryMinAggregateOutputType = {
-  id: string | null
-  renterId: string | null
-  tenantId: string | null
-  roomId: string | null
-  contractId: string | null
+  id: number | null
+  renterId: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
   startedAt: Date | null
   endedAt: Date | null
   status: $Enums.RentalHistoryStatus | null
@@ -37,11 +55,11 @@ export type RentalHistoryMinAggregateOutputType = {
 }
 
 export type RentalHistoryMaxAggregateOutputType = {
-  id: string | null
-  renterId: string | null
-  tenantId: string | null
-  roomId: string | null
-  contractId: string | null
+  id: number | null
+  renterId: number | null
+  tenantId: number | null
+  roomId: number | null
+  contractId: number | null
   startedAt: Date | null
   endedAt: Date | null
   status: $Enums.RentalHistoryStatus | null
@@ -61,6 +79,22 @@ export type RentalHistoryCountAggregateOutputType = {
   _all: number
 }
 
+
+export type RentalHistoryAvgAggregateInputType = {
+  id?: true
+  renterId?: true
+  tenantId?: true
+  roomId?: true
+  contractId?: true
+}
+
+export type RentalHistorySumAggregateInputType = {
+  id?: true
+  renterId?: true
+  tenantId?: true
+  roomId?: true
+  contractId?: true
+}
 
 export type RentalHistoryMinAggregateInputType = {
   id?: true
@@ -137,6 +171,18 @@ export type RentalHistoryAggregateArgs<ExtArgs extends runtime.Types.Extensions.
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: RentalHistoryAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: RentalHistorySumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: RentalHistoryMinAggregateInputType
@@ -167,21 +213,25 @@ export type RentalHistoryGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   _count?: RentalHistoryCountAggregateInputType | true
+  _avg?: RentalHistoryAvgAggregateInputType
+  _sum?: RentalHistorySumAggregateInputType
   _min?: RentalHistoryMinAggregateInputType
   _max?: RentalHistoryMaxAggregateInputType
 }
 
 export type RentalHistoryGroupByOutputType = {
-  id: string
-  renterId: string
-  tenantId: string
-  roomId: string
-  contractId: string
+  id: number
+  renterId: number
+  tenantId: number
+  roomId: number
+  contractId: number
   startedAt: Date
   endedAt: Date | null
   status: $Enums.RentalHistoryStatus
   createdAt: Date
   _count: RentalHistoryCountAggregateOutputType | null
+  _avg: RentalHistoryAvgAggregateOutputType | null
+  _sum: RentalHistorySumAggregateOutputType | null
   _min: RentalHistoryMinAggregateOutputType | null
   _max: RentalHistoryMaxAggregateOutputType | null
 }
@@ -205,11 +255,11 @@ export type RentalHistoryWhereInput = {
   AND?: Prisma.RentalHistoryWhereInput | Prisma.RentalHistoryWhereInput[]
   OR?: Prisma.RentalHistoryWhereInput[]
   NOT?: Prisma.RentalHistoryWhereInput | Prisma.RentalHistoryWhereInput[]
-  id?: Prisma.UuidFilter<"RentalHistory"> | string
-  renterId?: Prisma.UuidFilter<"RentalHistory"> | string
-  tenantId?: Prisma.UuidFilter<"RentalHistory"> | string
-  roomId?: Prisma.UuidFilter<"RentalHistory"> | string
-  contractId?: Prisma.UuidFilter<"RentalHistory"> | string
+  id?: Prisma.IntFilter<"RentalHistory"> | number
+  renterId?: Prisma.IntFilter<"RentalHistory"> | number
+  tenantId?: Prisma.IntFilter<"RentalHistory"> | number
+  roomId?: Prisma.IntFilter<"RentalHistory"> | number
+  contractId?: Prisma.IntFilter<"RentalHistory"> | number
   startedAt?: Prisma.DateTimeFilter<"RentalHistory"> | Date | string
   endedAt?: Prisma.DateTimeNullableFilter<"RentalHistory"> | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFilter<"RentalHistory"> | $Enums.RentalHistoryStatus
@@ -237,14 +287,14 @@ export type RentalHistoryOrderByWithRelationInput = {
 }
 
 export type RentalHistoryWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.RentalHistoryWhereInput | Prisma.RentalHistoryWhereInput[]
   OR?: Prisma.RentalHistoryWhereInput[]
   NOT?: Prisma.RentalHistoryWhereInput | Prisma.RentalHistoryWhereInput[]
-  renterId?: Prisma.UuidFilter<"RentalHistory"> | string
-  tenantId?: Prisma.UuidFilter<"RentalHistory"> | string
-  roomId?: Prisma.UuidFilter<"RentalHistory"> | string
-  contractId?: Prisma.UuidFilter<"RentalHistory"> | string
+  renterId?: Prisma.IntFilter<"RentalHistory"> | number
+  tenantId?: Prisma.IntFilter<"RentalHistory"> | number
+  roomId?: Prisma.IntFilter<"RentalHistory"> | number
+  contractId?: Prisma.IntFilter<"RentalHistory"> | number
   startedAt?: Prisma.DateTimeFilter<"RentalHistory"> | Date | string
   endedAt?: Prisma.DateTimeNullableFilter<"RentalHistory"> | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFilter<"RentalHistory"> | $Enums.RentalHistoryStatus
@@ -266,19 +316,21 @@ export type RentalHistoryOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.RentalHistoryCountOrderByAggregateInput
+  _avg?: Prisma.RentalHistoryAvgOrderByAggregateInput
   _max?: Prisma.RentalHistoryMaxOrderByAggregateInput
   _min?: Prisma.RentalHistoryMinOrderByAggregateInput
+  _sum?: Prisma.RentalHistorySumOrderByAggregateInput
 }
 
 export type RentalHistoryScalarWhereWithAggregatesInput = {
   AND?: Prisma.RentalHistoryScalarWhereWithAggregatesInput | Prisma.RentalHistoryScalarWhereWithAggregatesInput[]
   OR?: Prisma.RentalHistoryScalarWhereWithAggregatesInput[]
   NOT?: Prisma.RentalHistoryScalarWhereWithAggregatesInput | Prisma.RentalHistoryScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"RentalHistory"> | string
-  renterId?: Prisma.UuidWithAggregatesFilter<"RentalHistory"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"RentalHistory"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"RentalHistory"> | string
-  contractId?: Prisma.UuidWithAggregatesFilter<"RentalHistory"> | string
+  id?: Prisma.IntWithAggregatesFilter<"RentalHistory"> | number
+  renterId?: Prisma.IntWithAggregatesFilter<"RentalHistory"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"RentalHistory"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"RentalHistory"> | number
+  contractId?: Prisma.IntWithAggregatesFilter<"RentalHistory"> | number
   startedAt?: Prisma.DateTimeWithAggregatesFilter<"RentalHistory"> | Date | string
   endedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"RentalHistory"> | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusWithAggregatesFilter<"RentalHistory"> | $Enums.RentalHistoryStatus
@@ -286,7 +338,6 @@ export type RentalHistoryScalarWhereWithAggregatesInput = {
 }
 
 export type RentalHistoryCreateInput = {
-  id?: string
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -298,11 +349,11 @@ export type RentalHistoryCreateInput = {
 }
 
 export type RentalHistoryUncheckedCreateInput = {
-  id?: string
-  renterId: string
-  tenantId: string
-  roomId: string
-  contractId: string
+  id?: number
+  renterId: number
+  tenantId: number
+  roomId: number
+  contractId: number
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -310,7 +361,6 @@ export type RentalHistoryUncheckedCreateInput = {
 }
 
 export type RentalHistoryUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -322,11 +372,11 @@ export type RentalHistoryUpdateInput = {
 }
 
 export type RentalHistoryUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -334,11 +384,11 @@ export type RentalHistoryUncheckedUpdateInput = {
 }
 
 export type RentalHistoryCreateManyInput = {
-  id?: string
-  renterId: string
-  tenantId: string
-  roomId: string
-  contractId: string
+  id?: number
+  renterId: number
+  tenantId: number
+  roomId: number
+  contractId: number
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -346,7 +396,6 @@ export type RentalHistoryCreateManyInput = {
 }
 
 export type RentalHistoryUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -354,11 +403,11 @@ export type RentalHistoryUpdateManyMutationInput = {
 }
 
 export type RentalHistoryUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -387,6 +436,14 @@ export type RentalHistoryCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
+export type RentalHistoryAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  renterId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
+}
+
 export type RentalHistoryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   renterId?: Prisma.SortOrder
@@ -409,6 +466,14 @@ export type RentalHistoryMinOrderByAggregateInput = {
   endedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type RentalHistorySumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  renterId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
 }
 
 export type RentalHistoryCreateNestedManyWithoutRenterInput = {
@@ -584,7 +649,6 @@ export type RentalHistoryUncheckedUpdateManyWithoutContractNestedInput = {
 }
 
 export type RentalHistoryCreateWithoutRenterInput = {
-  id?: string
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -595,10 +659,10 @@ export type RentalHistoryCreateWithoutRenterInput = {
 }
 
 export type RentalHistoryUncheckedCreateWithoutRenterInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId: number
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -635,11 +699,11 @@ export type RentalHistoryScalarWhereInput = {
   AND?: Prisma.RentalHistoryScalarWhereInput | Prisma.RentalHistoryScalarWhereInput[]
   OR?: Prisma.RentalHistoryScalarWhereInput[]
   NOT?: Prisma.RentalHistoryScalarWhereInput | Prisma.RentalHistoryScalarWhereInput[]
-  id?: Prisma.UuidFilter<"RentalHistory"> | string
-  renterId?: Prisma.UuidFilter<"RentalHistory"> | string
-  tenantId?: Prisma.UuidFilter<"RentalHistory"> | string
-  roomId?: Prisma.UuidFilter<"RentalHistory"> | string
-  contractId?: Prisma.UuidFilter<"RentalHistory"> | string
+  id?: Prisma.IntFilter<"RentalHistory"> | number
+  renterId?: Prisma.IntFilter<"RentalHistory"> | number
+  tenantId?: Prisma.IntFilter<"RentalHistory"> | number
+  roomId?: Prisma.IntFilter<"RentalHistory"> | number
+  contractId?: Prisma.IntFilter<"RentalHistory"> | number
   startedAt?: Prisma.DateTimeFilter<"RentalHistory"> | Date | string
   endedAt?: Prisma.DateTimeNullableFilter<"RentalHistory"> | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFilter<"RentalHistory"> | $Enums.RentalHistoryStatus
@@ -647,7 +711,6 @@ export type RentalHistoryScalarWhereInput = {
 }
 
 export type RentalHistoryCreateWithoutTenantInput = {
-  id?: string
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -658,10 +721,10 @@ export type RentalHistoryCreateWithoutTenantInput = {
 }
 
 export type RentalHistoryUncheckedCreateWithoutTenantInput = {
-  id?: string
-  renterId: string
-  roomId: string
-  contractId: string
+  id?: number
+  renterId: number
+  roomId: number
+  contractId: number
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -695,7 +758,6 @@ export type RentalHistoryUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type RentalHistoryCreateWithoutRoomInput = {
-  id?: string
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -706,10 +768,10 @@ export type RentalHistoryCreateWithoutRoomInput = {
 }
 
 export type RentalHistoryUncheckedCreateWithoutRoomInput = {
-  id?: string
-  renterId: string
-  tenantId: string
-  contractId: string
+  id?: number
+  renterId: number
+  tenantId: number
+  contractId: number
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -743,7 +805,6 @@ export type RentalHistoryUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type RentalHistoryCreateWithoutContractInput = {
-  id?: string
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -754,10 +815,10 @@ export type RentalHistoryCreateWithoutContractInput = {
 }
 
 export type RentalHistoryUncheckedCreateWithoutContractInput = {
-  id?: string
-  renterId: string
-  tenantId: string
-  roomId: string
+  id?: number
+  renterId: number
+  tenantId: number
+  roomId: number
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -791,10 +852,10 @@ export type RentalHistoryUpdateManyWithWhereWithoutContractInput = {
 }
 
 export type RentalHistoryCreateManyRenterInput = {
-  id?: string
-  tenantId: string
-  roomId: string
-  contractId: string
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId: number
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -802,7 +863,6 @@ export type RentalHistoryCreateManyRenterInput = {
 }
 
 export type RentalHistoryUpdateWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -813,10 +873,10 @@ export type RentalHistoryUpdateWithoutRenterInput = {
 }
 
 export type RentalHistoryUncheckedUpdateWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -824,10 +884,10 @@ export type RentalHistoryUncheckedUpdateWithoutRenterInput = {
 }
 
 export type RentalHistoryUncheckedUpdateManyWithoutRenterInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -835,10 +895,10 @@ export type RentalHistoryUncheckedUpdateManyWithoutRenterInput = {
 }
 
 export type RentalHistoryCreateManyTenantInput = {
-  id?: string
-  renterId: string
-  roomId: string
-  contractId: string
+  id?: number
+  renterId: number
+  roomId: number
+  contractId: number
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -846,7 +906,6 @@ export type RentalHistoryCreateManyTenantInput = {
 }
 
 export type RentalHistoryUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -857,10 +916,10 @@ export type RentalHistoryUpdateWithoutTenantInput = {
 }
 
 export type RentalHistoryUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -868,10 +927,10 @@ export type RentalHistoryUncheckedUpdateWithoutTenantInput = {
 }
 
 export type RentalHistoryUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -879,10 +938,10 @@ export type RentalHistoryUncheckedUpdateManyWithoutTenantInput = {
 }
 
 export type RentalHistoryCreateManyRoomInput = {
-  id?: string
-  renterId: string
-  tenantId: string
-  contractId: string
+  id?: number
+  renterId: number
+  tenantId: number
+  contractId: number
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -890,7 +949,6 @@ export type RentalHistoryCreateManyRoomInput = {
 }
 
 export type RentalHistoryUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -901,10 +959,10 @@ export type RentalHistoryUpdateWithoutRoomInput = {
 }
 
 export type RentalHistoryUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -912,10 +970,10 @@ export type RentalHistoryUncheckedUpdateWithoutRoomInput = {
 }
 
 export type RentalHistoryUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -923,10 +981,10 @@ export type RentalHistoryUncheckedUpdateManyWithoutRoomInput = {
 }
 
 export type RentalHistoryCreateManyContractInput = {
-  id?: string
-  renterId: string
-  tenantId: string
-  roomId: string
+  id?: number
+  renterId: number
+  tenantId: number
+  roomId: number
   startedAt: Date | string
   endedAt?: Date | string | null
   status?: $Enums.RentalHistoryStatus
@@ -934,7 +992,6 @@ export type RentalHistoryCreateManyContractInput = {
 }
 
 export type RentalHistoryUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -945,10 +1002,10 @@ export type RentalHistoryUpdateWithoutContractInput = {
 }
 
 export type RentalHistoryUncheckedUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -956,10 +1013,10 @@ export type RentalHistoryUncheckedUpdateWithoutContractInput = {
 }
 
 export type RentalHistoryUncheckedUpdateManyWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  renterId?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFieldUpdateOperationsInput | $Enums.RentalHistoryStatus
@@ -1072,23 +1129,23 @@ export type $RentalHistoryPayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * ID bản ghi lịch sử (UUID)
      */
-    id: string
+    id: number
     /**
      * ID người thuê (tài khoản User)
      */
-    renterId: string
+    renterId: number
     /**
      * ID Tenant (chủ trọ quản lý)
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID phòng thuê
      */
-    roomId: string
+    roomId: number
     /**
      * ID hợp đồng thuê liên quan
      */
-    contractId: string
+    contractId: number
     /**
      * Ngày bắt đầu thuê thực tế
      */
@@ -1532,11 +1589,11 @@ export interface Prisma__RentalHistoryClient<T, Null = never, ExtArgs extends ru
  * Fields of the RentalHistory model
  */
 export interface RentalHistoryFieldRefs {
-  readonly id: Prisma.FieldRef<"RentalHistory", 'String'>
-  readonly renterId: Prisma.FieldRef<"RentalHistory", 'String'>
-  readonly tenantId: Prisma.FieldRef<"RentalHistory", 'String'>
-  readonly roomId: Prisma.FieldRef<"RentalHistory", 'String'>
-  readonly contractId: Prisma.FieldRef<"RentalHistory", 'String'>
+  readonly id: Prisma.FieldRef<"RentalHistory", 'Int'>
+  readonly renterId: Prisma.FieldRef<"RentalHistory", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"RentalHistory", 'Int'>
+  readonly roomId: Prisma.FieldRef<"RentalHistory", 'Int'>
+  readonly contractId: Prisma.FieldRef<"RentalHistory", 'Int'>
   readonly startedAt: Prisma.FieldRef<"RentalHistory", 'DateTime'>
   readonly endedAt: Prisma.FieldRef<"RentalHistory", 'DateTime'>
   readonly status: Prisma.FieldRef<"RentalHistory", 'RentalHistoryStatus'>

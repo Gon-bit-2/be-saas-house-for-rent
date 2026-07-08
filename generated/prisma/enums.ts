@@ -79,6 +79,15 @@ export const MarketplaceStatus = {
 export type MarketplaceStatus = (typeof MarketplaceStatus)[keyof typeof MarketplaceStatus]
 
 
+export const VerificationCodeType = {
+  REGISTER: 'REGISTER',
+  FORGOT_PASSWORD: 'FORGOT_PASSWORD',
+  LOGIN: 'LOGIN'
+} as const
+
+export type VerificationCodeType = (typeof VerificationCodeType)[keyof typeof VerificationCodeType]
+
+
 export const UserStatus = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
@@ -463,39 +472,6 @@ export const DevicePlatform = {
 } as const
 
 export type DevicePlatform = (typeof DevicePlatform)[keyof typeof DevicePlatform]
-
-
-export const AiLogType = {
-  ROOM_RECOMMENDATION: 'ROOM_RECOMMENDATION',
-  PRICE_SUGGESTION: 'PRICE_SUGGESTION'
-} as const
-
-export type AiLogType = (typeof AiLogType)[keyof typeof AiLogType]
-
-
-export const ChatbotChannel = {
-  WEB: 'WEB',
-  MOBILE: 'MOBILE'
-} as const
-
-export type ChatbotChannel = (typeof ChatbotChannel)[keyof typeof ChatbotChannel]
-
-
-export const ChatbotSessionStatus = {
-  ACTIVE: 'ACTIVE',
-  CLOSED: 'CLOSED'
-} as const
-
-export type ChatbotSessionStatus = (typeof ChatbotSessionStatus)[keyof typeof ChatbotSessionStatus]
-
-
-export const ChatbotSenderType = {
-  USER: 'USER',
-  BOT: 'BOT',
-  STAFF: 'STAFF'
-} as const
-
-export type ChatbotSenderType = (typeof ChatbotSenderType)[keyof typeof ChatbotSenderType]
 
 
 export const BackgroundJobStatus = {

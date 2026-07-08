@@ -20,12 +20,22 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
 
+export type UserAvgAggregateOutputType = {
+  id: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  id: number | null
+}
+
 export type UserMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   fullName: string | null
   email: string | null
   phone: string | null
@@ -43,7 +53,7 @@ export type UserMinAggregateOutputType = {
 }
 
 export type UserMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   fullName: string | null
   email: string | null
   phone: string | null
@@ -79,6 +89,14 @@ export type UserCountAggregateOutputType = {
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  id?: true
+}
+
+export type UserSumAggregateInputType = {
+  id?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -173,6 +191,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -203,12 +233,14 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
 
 export type UserGroupByOutputType = {
-  id: string
+  id: number
   fullName: string
   email: string
   phone: string | null
@@ -224,6 +256,8 @@ export type UserGroupByOutputType = {
   updatedAt: Date
   deletedAt: Date | null
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -247,7 +281,7 @@ export type UserWhereInput = {
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  id?: Prisma.UuidFilter<"User"> | string
+  id?: Prisma.IntFilter<"User"> | number
   fullName?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   phone?: Prisma.StringNullableFilter<"User"> | string | null
@@ -286,9 +320,9 @@ export type UserWhereInput = {
   handledReports?: Prisma.ReportListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   deviceTokens?: Prisma.DeviceTokenListRelationFilter
-  aiRecommendationLogs?: Prisma.AiRecommendationLogListRelationFilter
+  refreshTokens?: Prisma.RefreshTokenListRelationFilter
+  devices?: Prisma.DeviceListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
-  chatbotSessions?: Prisma.ChatbotSessionListRelationFilter
   createdTenants?: Prisma.TenantListRelationFilter
   updatedTenants?: Prisma.TenantListRelationFilter
   deletedTenants?: Prisma.TenantListRelationFilter
@@ -391,9 +425,9 @@ export type UserOrderByWithRelationInput = {
   handledReports?: Prisma.ReportOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   deviceTokens?: Prisma.DeviceTokenOrderByRelationAggregateInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogOrderByRelationAggregateInput
+  refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
+  devices?: Prisma.DeviceOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
-  chatbotSessions?: Prisma.ChatbotSessionOrderByRelationAggregateInput
   createdTenants?: Prisma.TenantOrderByRelationAggregateInput
   updatedTenants?: Prisma.TenantOrderByRelationAggregateInput
   deletedTenants?: Prisma.TenantOrderByRelationAggregateInput
@@ -457,7 +491,7 @@ export type UserOrderByWithRelationInput = {
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   email?: string
   phone?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -499,9 +533,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   handledReports?: Prisma.ReportListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   deviceTokens?: Prisma.DeviceTokenListRelationFilter
-  aiRecommendationLogs?: Prisma.AiRecommendationLogListRelationFilter
+  refreshTokens?: Prisma.RefreshTokenListRelationFilter
+  devices?: Prisma.DeviceListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
-  chatbotSessions?: Prisma.ChatbotSessionListRelationFilter
   createdTenants?: Prisma.TenantListRelationFilter
   updatedTenants?: Prisma.TenantListRelationFilter
   deletedTenants?: Prisma.TenantListRelationFilter
@@ -581,15 +615,17 @@ export type UserOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
   AND?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   OR?: Prisma.UserScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"User"> | string
+  id?: Prisma.IntWithAggregatesFilter<"User"> | number
   fullName?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -607,7 +643,6 @@ export type UserScalarWhereWithAggregatesInput = {
 }
 
 export type UserCreateInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -646,9 +681,9 @@ export type UserCreateInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -712,7 +747,7 @@ export type UserCreateInput = {
 }
 
 export type UserUncheckedCreateInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -751,9 +786,9 @@ export type UserUncheckedCreateInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -817,7 +852,6 @@ export type UserUncheckedCreateInput = {
 }
 
 export type UserUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -856,9 +890,9 @@ export type UserUpdateInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -922,7 +956,7 @@ export type UserUpdateInput = {
 }
 
 export type UserUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -961,9 +995,9 @@ export type UserUncheckedUpdateInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -1027,7 +1061,7 @@ export type UserUncheckedUpdateInput = {
 }
 
 export type UserCreateManyInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -1045,7 +1079,6 @@ export type UserCreateManyInput = {
 }
 
 export type UserUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1063,7 +1096,7 @@ export type UserUpdateManyMutationInput = {
 }
 
 export type UserUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1096,6 +1129,10 @@ export type UserCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -1134,14 +1171,18 @@ export type UserMinOrderByAggregateInput = {
   deletedAt?: Prisma.SortOrder
 }
 
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
+export type UserSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -1162,6 +1203,42 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type UserCreateNestedOneWithoutRefreshTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRefreshTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRefreshTokensInput
+  upsert?: Prisma.UserUpsertWithoutRefreshTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRefreshTokensInput, Prisma.UserUpdateWithoutRefreshTokensInput>, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>
+}
+
+export type UserCreateNestedOneWithoutDevicesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDevicesInput, Prisma.UserUncheckedCreateWithoutDevicesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDevicesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDevicesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDevicesInput, Prisma.UserUncheckedCreateWithoutDevicesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDevicesInput
+  upsert?: Prisma.UserUpsertWithoutDevicesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDevicesInput, Prisma.UserUpdateWithoutDevicesInput>, Prisma.UserUncheckedUpdateWithoutDevicesInput>
 }
 
 export type UserCreateNestedOneWithoutCreatedRolesInput = {
@@ -2468,38 +2545,6 @@ export type UserUpdateOneRequiredWithoutDeviceTokensNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDeviceTokensInput, Prisma.UserUpdateWithoutDeviceTokensInput>, Prisma.UserUncheckedUpdateWithoutDeviceTokensInput>
 }
 
-export type UserCreateNestedOneWithoutAiRecommendationLogsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAiRecommendationLogsInput, Prisma.UserUncheckedCreateWithoutAiRecommendationLogsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAiRecommendationLogsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneWithoutAiRecommendationLogsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAiRecommendationLogsInput, Prisma.UserUncheckedCreateWithoutAiRecommendationLogsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAiRecommendationLogsInput
-  upsert?: Prisma.UserUpsertWithoutAiRecommendationLogsInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAiRecommendationLogsInput, Prisma.UserUpdateWithoutAiRecommendationLogsInput>, Prisma.UserUncheckedUpdateWithoutAiRecommendationLogsInput>
-}
-
-export type UserCreateNestedOneWithoutChatbotSessionsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutChatbotSessionsInput, Prisma.UserUncheckedCreateWithoutChatbotSessionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutChatbotSessionsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneWithoutChatbotSessionsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutChatbotSessionsInput, Prisma.UserUncheckedCreateWithoutChatbotSessionsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutChatbotSessionsInput
-  upsert?: Prisma.UserUpsertWithoutChatbotSessionsInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutChatbotSessionsInput, Prisma.UserUpdateWithoutChatbotSessionsInput>, Prisma.UserUncheckedUpdateWithoutChatbotSessionsInput>
-}
-
 export type UserCreateNestedOneWithoutAuditLogsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAuditLogsInput, Prisma.UserUncheckedCreateWithoutAuditLogsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuditLogsInput
@@ -2516,8 +2561,7 @@ export type UserUpdateOneWithoutAuditLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.UserUpdateWithoutAuditLogsInput>, Prisma.UserUncheckedUpdateWithoutAuditLogsInput>
 }
 
-export type UserCreateWithoutCreatedRolesInput = {
-  id?: string
+export type UserCreateWithoutRefreshTokensInput = {
   fullName: string
   email: string
   phone?: string | null
@@ -2556,9 +2600,869 @@ export type UserCreateWithoutCreatedRolesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
+  createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserUncheckedCreateWithoutRefreshTokensInput = {
+  id?: number
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileUncheckedCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserCreateOrConnectWithoutRefreshTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+}
+
+export type UserUpsertWithoutRefreshTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRefreshTokensInput, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRefreshTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRefreshTokensInput, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>
+}
+
+export type UserUpdateWithoutRefreshTokensInput = {
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUpdateManyWithoutDeletedByNestedInput
+  createdContracts?: Prisma.ContractUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUpdateManyWithoutDeletedByNestedInput
+  createdPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRefreshTokensInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUncheckedUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContracts?: Prisma.ContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserCreateWithoutDevicesInput = {
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserUncheckedCreateWithoutDevicesInput = {
+  id?: number
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileUncheckedCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserCreateOrConnectWithoutDevicesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDevicesInput, Prisma.UserUncheckedCreateWithoutDevicesInput>
+}
+
+export type UserUpsertWithoutDevicesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDevicesInput, Prisma.UserUncheckedUpdateWithoutDevicesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDevicesInput, Prisma.UserUncheckedCreateWithoutDevicesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDevicesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDevicesInput, Prisma.UserUncheckedUpdateWithoutDevicesInput>
+}
+
+export type UserUpdateWithoutDevicesInput = {
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUpdateManyWithoutDeletedByNestedInput
+  createdContracts?: Prisma.ContractUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUpdateManyWithoutDeletedByNestedInput
+  createdPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDevicesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUncheckedUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContracts?: Prisma.ContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserCreateWithoutCreatedRolesInput = {
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -2621,7 +3525,7 @@ export type UserCreateWithoutCreatedRolesInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedRolesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -2660,9 +3564,9 @@ export type UserUncheckedCreateWithoutCreatedRolesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -2730,7 +3634,6 @@ export type UserCreateOrConnectWithoutCreatedRolesInput = {
 }
 
 export type UserCreateWithoutUpdatedRolesInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -2769,9 +3672,9 @@ export type UserCreateWithoutUpdatedRolesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -2834,7 +3737,7 @@ export type UserCreateWithoutUpdatedRolesInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedRolesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -2873,9 +3776,9 @@ export type UserUncheckedCreateWithoutUpdatedRolesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -2943,7 +3846,6 @@ export type UserCreateOrConnectWithoutUpdatedRolesInput = {
 }
 
 export type UserCreateWithoutDeletedRolesInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -2982,9 +3884,9 @@ export type UserCreateWithoutDeletedRolesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -3047,7 +3949,7 @@ export type UserCreateWithoutDeletedRolesInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedRolesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -3086,9 +3988,9 @@ export type UserUncheckedCreateWithoutDeletedRolesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -3167,7 +4069,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedRolesInput = {
 }
 
 export type UserUpdateWithoutCreatedRolesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3206,9 +4107,9 @@ export type UserUpdateWithoutCreatedRolesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -3271,7 +4172,7 @@ export type UserUpdateWithoutCreatedRolesInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedRolesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3310,9 +4211,9 @@ export type UserUncheckedUpdateWithoutCreatedRolesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -3386,7 +4287,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedRolesInput = {
 }
 
 export type UserUpdateWithoutUpdatedRolesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3425,9 +4325,9 @@ export type UserUpdateWithoutUpdatedRolesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -3490,7 +4390,7 @@ export type UserUpdateWithoutUpdatedRolesInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedRolesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3529,9 +4429,9 @@ export type UserUncheckedUpdateWithoutUpdatedRolesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -3605,7 +4505,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedRolesInput = {
 }
 
 export type UserUpdateWithoutDeletedRolesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3644,9 +4543,9 @@ export type UserUpdateWithoutDeletedRolesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -3709,7 +4608,7 @@ export type UserUpdateWithoutDeletedRolesInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedRolesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3748,9 +4647,9 @@ export type UserUncheckedUpdateWithoutDeletedRolesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -3813,7 +4712,6 @@ export type UserUncheckedUpdateWithoutDeletedRolesInput = {
 }
 
 export type UserCreateWithoutCreatedPermissionsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -3852,9 +4750,9 @@ export type UserCreateWithoutCreatedPermissionsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -3917,7 +4815,7 @@ export type UserCreateWithoutCreatedPermissionsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedPermissionsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -3956,9 +4854,9 @@ export type UserUncheckedCreateWithoutCreatedPermissionsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -4026,7 +4924,6 @@ export type UserCreateOrConnectWithoutCreatedPermissionsInput = {
 }
 
 export type UserCreateWithoutUpdatedPermissionsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -4065,9 +4962,9 @@ export type UserCreateWithoutUpdatedPermissionsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -4130,7 +5027,7 @@ export type UserCreateWithoutUpdatedPermissionsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedPermissionsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -4169,9 +5066,9 @@ export type UserUncheckedCreateWithoutUpdatedPermissionsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -4239,7 +5136,6 @@ export type UserCreateOrConnectWithoutUpdatedPermissionsInput = {
 }
 
 export type UserCreateWithoutDeletedPermissionsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -4278,9 +5174,9 @@ export type UserCreateWithoutDeletedPermissionsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -4343,7 +5239,7 @@ export type UserCreateWithoutDeletedPermissionsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedPermissionsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -4382,9 +5278,9 @@ export type UserUncheckedCreateWithoutDeletedPermissionsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -4463,7 +5359,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedPermissionsInput = {
 }
 
 export type UserUpdateWithoutCreatedPermissionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4502,9 +5397,9 @@ export type UserUpdateWithoutCreatedPermissionsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -4567,7 +5462,7 @@ export type UserUpdateWithoutCreatedPermissionsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedPermissionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4606,9 +5501,9 @@ export type UserUncheckedUpdateWithoutCreatedPermissionsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -4682,7 +5577,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedPermissionsInput = {
 }
 
 export type UserUpdateWithoutUpdatedPermissionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4721,9 +5615,9 @@ export type UserUpdateWithoutUpdatedPermissionsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -4786,7 +5680,7 @@ export type UserUpdateWithoutUpdatedPermissionsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedPermissionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4825,9 +5719,9 @@ export type UserUncheckedUpdateWithoutUpdatedPermissionsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -4901,7 +5795,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedPermissionsInput = {
 }
 
 export type UserUpdateWithoutDeletedPermissionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4940,9 +5833,9 @@ export type UserUpdateWithoutDeletedPermissionsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -5005,7 +5898,7 @@ export type UserUpdateWithoutDeletedPermissionsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedPermissionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5044,9 +5937,9 @@ export type UserUncheckedUpdateWithoutDeletedPermissionsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -5109,7 +6002,6 @@ export type UserUncheckedUpdateWithoutDeletedPermissionsInput = {
 }
 
 export type UserCreateWithoutOwnedTenantsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -5147,9 +6039,9 @@ export type UserCreateWithoutOwnedTenantsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -5213,7 +6105,7 @@ export type UserCreateWithoutOwnedTenantsInput = {
 }
 
 export type UserUncheckedCreateWithoutOwnedTenantsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -5251,9 +6143,9 @@ export type UserUncheckedCreateWithoutOwnedTenantsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -5322,7 +6214,6 @@ export type UserCreateOrConnectWithoutOwnedTenantsInput = {
 }
 
 export type UserCreateWithoutCreatedTenantsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -5361,9 +6252,9 @@ export type UserCreateWithoutCreatedTenantsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
   createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
@@ -5426,7 +6317,7 @@ export type UserCreateWithoutCreatedTenantsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedTenantsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -5465,9 +6356,9 @@ export type UserUncheckedCreateWithoutCreatedTenantsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
   createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5535,7 +6426,6 @@ export type UserCreateOrConnectWithoutCreatedTenantsInput = {
 }
 
 export type UserCreateWithoutUpdatedTenantsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -5574,9 +6464,9 @@ export type UserCreateWithoutUpdatedTenantsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
   createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
@@ -5639,7 +6529,7 @@ export type UserCreateWithoutUpdatedTenantsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedTenantsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -5678,9 +6568,9 @@ export type UserUncheckedCreateWithoutUpdatedTenantsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
   createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5748,7 +6638,6 @@ export type UserCreateOrConnectWithoutUpdatedTenantsInput = {
 }
 
 export type UserCreateWithoutDeletedTenantsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -5787,9 +6676,9 @@ export type UserCreateWithoutDeletedTenantsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
@@ -5852,7 +6741,7 @@ export type UserCreateWithoutDeletedTenantsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedTenantsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -5891,9 +6780,9 @@ export type UserUncheckedCreateWithoutDeletedTenantsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5972,7 +6861,6 @@ export type UserUpdateToOneWithWhereWithoutOwnedTenantsInput = {
 }
 
 export type UserUpdateWithoutOwnedTenantsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6010,9 +6898,9 @@ export type UserUpdateWithoutOwnedTenantsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -6076,7 +6964,7 @@ export type UserUpdateWithoutOwnedTenantsInput = {
 }
 
 export type UserUncheckedUpdateWithoutOwnedTenantsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6114,9 +7002,9 @@ export type UserUncheckedUpdateWithoutOwnedTenantsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -6191,7 +7079,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedTenantsInput = {
 }
 
 export type UserUpdateWithoutCreatedTenantsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6230,9 +7117,9 @@ export type UserUpdateWithoutCreatedTenantsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
   createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
@@ -6295,7 +7182,7 @@ export type UserUpdateWithoutCreatedTenantsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedTenantsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6334,9 +7221,9 @@ export type UserUncheckedUpdateWithoutCreatedTenantsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
   createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -6410,7 +7297,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedTenantsInput = {
 }
 
 export type UserUpdateWithoutUpdatedTenantsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6449,9 +7335,9 @@ export type UserUpdateWithoutUpdatedTenantsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
   createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
@@ -6514,7 +7400,7 @@ export type UserUpdateWithoutUpdatedTenantsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedTenantsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6553,9 +7439,9 @@ export type UserUncheckedUpdateWithoutUpdatedTenantsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
   createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -6629,7 +7515,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedTenantsInput = {
 }
 
 export type UserUpdateWithoutDeletedTenantsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6668,9 +7553,9 @@ export type UserUpdateWithoutDeletedTenantsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
@@ -6733,7 +7618,7 @@ export type UserUpdateWithoutDeletedTenantsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedTenantsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6772,9 +7657,9 @@ export type UserUncheckedUpdateWithoutDeletedTenantsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -6837,7 +7722,6 @@ export type UserUncheckedUpdateWithoutDeletedTenantsInput = {
 }
 
 export type UserCreateWithoutTenantMembersInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -6875,9 +7759,9 @@ export type UserCreateWithoutTenantMembersInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -6941,7 +7825,7 @@ export type UserCreateWithoutTenantMembersInput = {
 }
 
 export type UserUncheckedCreateWithoutTenantMembersInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -6979,9 +7863,9 @@ export type UserUncheckedCreateWithoutTenantMembersInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -7061,7 +7945,6 @@ export type UserUpdateToOneWithWhereWithoutTenantMembersInput = {
 }
 
 export type UserUpdateWithoutTenantMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7099,9 +7982,9 @@ export type UserUpdateWithoutTenantMembersInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -7165,7 +8048,7 @@ export type UserUpdateWithoutTenantMembersInput = {
 }
 
 export type UserUncheckedUpdateWithoutTenantMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7203,9 +8086,9 @@ export type UserUncheckedUpdateWithoutTenantMembersInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -7269,7 +8152,6 @@ export type UserUncheckedUpdateWithoutTenantMembersInput = {
 }
 
 export type UserCreateWithoutCreatedPlansInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -7308,9 +8190,9 @@ export type UserCreateWithoutCreatedPlansInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -7373,7 +8255,7 @@ export type UserCreateWithoutCreatedPlansInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedPlansInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -7412,9 +8294,9 @@ export type UserUncheckedCreateWithoutCreatedPlansInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -7482,7 +8364,6 @@ export type UserCreateOrConnectWithoutCreatedPlansInput = {
 }
 
 export type UserCreateWithoutUpdatedPlansInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -7521,9 +8402,9 @@ export type UserCreateWithoutUpdatedPlansInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -7586,7 +8467,7 @@ export type UserCreateWithoutUpdatedPlansInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedPlansInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -7625,9 +8506,9 @@ export type UserUncheckedCreateWithoutUpdatedPlansInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -7695,7 +8576,6 @@ export type UserCreateOrConnectWithoutUpdatedPlansInput = {
 }
 
 export type UserCreateWithoutDeletedPlansInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -7734,9 +8614,9 @@ export type UserCreateWithoutDeletedPlansInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -7799,7 +8679,7 @@ export type UserCreateWithoutDeletedPlansInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedPlansInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -7838,9 +8718,9 @@ export type UserUncheckedCreateWithoutDeletedPlansInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -7919,7 +8799,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedPlansInput = {
 }
 
 export type UserUpdateWithoutCreatedPlansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7958,9 +8837,9 @@ export type UserUpdateWithoutCreatedPlansInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -8023,7 +8902,7 @@ export type UserUpdateWithoutCreatedPlansInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedPlansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8062,9 +8941,9 @@ export type UserUncheckedUpdateWithoutCreatedPlansInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -8138,7 +9017,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedPlansInput = {
 }
 
 export type UserUpdateWithoutUpdatedPlansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8177,9 +9055,9 @@ export type UserUpdateWithoutUpdatedPlansInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -8242,7 +9120,7 @@ export type UserUpdateWithoutUpdatedPlansInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedPlansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8281,9 +9159,9 @@ export type UserUncheckedUpdateWithoutUpdatedPlansInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -8357,7 +9235,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedPlansInput = {
 }
 
 export type UserUpdateWithoutDeletedPlansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8396,9 +9273,9 @@ export type UserUpdateWithoutDeletedPlansInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -8461,7 +9338,7 @@ export type UserUpdateWithoutDeletedPlansInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedPlansInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8500,9 +9377,9 @@ export type UserUncheckedUpdateWithoutDeletedPlansInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -8565,7 +9442,6 @@ export type UserUncheckedUpdateWithoutDeletedPlansInput = {
 }
 
 export type UserCreateWithoutCreatedPropertysInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -8604,9 +9480,9 @@ export type UserCreateWithoutCreatedPropertysInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -8669,7 +9545,7 @@ export type UserCreateWithoutCreatedPropertysInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedPropertysInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -8708,9 +9584,9 @@ export type UserUncheckedCreateWithoutCreatedPropertysInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -8778,7 +9654,6 @@ export type UserCreateOrConnectWithoutCreatedPropertysInput = {
 }
 
 export type UserCreateWithoutUpdatedPropertysInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -8817,9 +9692,9 @@ export type UserCreateWithoutUpdatedPropertysInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -8882,7 +9757,7 @@ export type UserCreateWithoutUpdatedPropertysInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedPropertysInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -8921,9 +9796,9 @@ export type UserUncheckedCreateWithoutUpdatedPropertysInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -8991,7 +9866,6 @@ export type UserCreateOrConnectWithoutUpdatedPropertysInput = {
 }
 
 export type UserCreateWithoutDeletedPropertysInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -9030,9 +9904,9 @@ export type UserCreateWithoutDeletedPropertysInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -9095,7 +9969,7 @@ export type UserCreateWithoutDeletedPropertysInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedPropertysInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -9134,9 +10008,9 @@ export type UserUncheckedCreateWithoutDeletedPropertysInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -9215,7 +10089,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedPropertysInput = {
 }
 
 export type UserUpdateWithoutCreatedPropertysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9254,9 +10127,9 @@ export type UserUpdateWithoutCreatedPropertysInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -9319,7 +10192,7 @@ export type UserUpdateWithoutCreatedPropertysInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedPropertysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9358,9 +10231,9 @@ export type UserUncheckedUpdateWithoutCreatedPropertysInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -9434,7 +10307,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedPropertysInput = {
 }
 
 export type UserUpdateWithoutUpdatedPropertysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9473,9 +10345,9 @@ export type UserUpdateWithoutUpdatedPropertysInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -9538,7 +10410,7 @@ export type UserUpdateWithoutUpdatedPropertysInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedPropertysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9577,9 +10449,9 @@ export type UserUncheckedUpdateWithoutUpdatedPropertysInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -9653,7 +10525,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedPropertysInput = {
 }
 
 export type UserUpdateWithoutDeletedPropertysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9692,9 +10563,9 @@ export type UserUpdateWithoutDeletedPropertysInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -9757,7 +10628,7 @@ export type UserUpdateWithoutDeletedPropertysInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedPropertysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9796,9 +10667,9 @@ export type UserUncheckedUpdateWithoutDeletedPropertysInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -9861,7 +10732,6 @@ export type UserUncheckedUpdateWithoutDeletedPropertysInput = {
 }
 
 export type UserCreateWithoutCreatedRoomsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -9900,9 +10770,9 @@ export type UserCreateWithoutCreatedRoomsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -9965,7 +10835,7 @@ export type UserCreateWithoutCreatedRoomsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedRoomsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -10004,9 +10874,9 @@ export type UserUncheckedCreateWithoutCreatedRoomsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -10074,7 +10944,6 @@ export type UserCreateOrConnectWithoutCreatedRoomsInput = {
 }
 
 export type UserCreateWithoutUpdatedRoomsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -10113,9 +10982,9 @@ export type UserCreateWithoutUpdatedRoomsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -10178,7 +11047,7 @@ export type UserCreateWithoutUpdatedRoomsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedRoomsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -10217,9 +11086,9 @@ export type UserUncheckedCreateWithoutUpdatedRoomsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -10287,7 +11156,6 @@ export type UserCreateOrConnectWithoutUpdatedRoomsInput = {
 }
 
 export type UserCreateWithoutDeletedRoomsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -10326,9 +11194,9 @@ export type UserCreateWithoutDeletedRoomsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -10391,7 +11259,7 @@ export type UserCreateWithoutDeletedRoomsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedRoomsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -10430,9 +11298,9 @@ export type UserUncheckedCreateWithoutDeletedRoomsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -10511,7 +11379,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedRoomsInput = {
 }
 
 export type UserUpdateWithoutCreatedRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10550,9 +11417,9 @@ export type UserUpdateWithoutCreatedRoomsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -10615,7 +11482,7 @@ export type UserUpdateWithoutCreatedRoomsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10654,9 +11521,9 @@ export type UserUncheckedUpdateWithoutCreatedRoomsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -10730,7 +11597,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedRoomsInput = {
 }
 
 export type UserUpdateWithoutUpdatedRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10769,9 +11635,9 @@ export type UserUpdateWithoutUpdatedRoomsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -10834,7 +11700,7 @@ export type UserUpdateWithoutUpdatedRoomsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10873,9 +11739,9 @@ export type UserUncheckedUpdateWithoutUpdatedRoomsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -10949,7 +11815,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedRoomsInput = {
 }
 
 export type UserUpdateWithoutDeletedRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10988,9 +11853,9 @@ export type UserUpdateWithoutDeletedRoomsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -11053,7 +11918,7 @@ export type UserUpdateWithoutDeletedRoomsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11092,9 +11957,9 @@ export type UserUncheckedUpdateWithoutDeletedRoomsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -11157,7 +12022,6 @@ export type UserUncheckedUpdateWithoutDeletedRoomsInput = {
 }
 
 export type UserCreateWithoutCreatedAmenitysInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -11196,9 +12060,9 @@ export type UserCreateWithoutCreatedAmenitysInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -11261,7 +12125,7 @@ export type UserCreateWithoutCreatedAmenitysInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedAmenitysInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -11300,9 +12164,9 @@ export type UserUncheckedCreateWithoutCreatedAmenitysInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -11370,7 +12234,6 @@ export type UserCreateOrConnectWithoutCreatedAmenitysInput = {
 }
 
 export type UserCreateWithoutUpdatedAmenitysInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -11409,9 +12272,9 @@ export type UserCreateWithoutUpdatedAmenitysInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -11474,7 +12337,7 @@ export type UserCreateWithoutUpdatedAmenitysInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedAmenitysInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -11513,9 +12376,9 @@ export type UserUncheckedCreateWithoutUpdatedAmenitysInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -11583,7 +12446,6 @@ export type UserCreateOrConnectWithoutUpdatedAmenitysInput = {
 }
 
 export type UserCreateWithoutDeletedAmenitysInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -11622,9 +12484,9 @@ export type UserCreateWithoutDeletedAmenitysInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -11687,7 +12549,7 @@ export type UserCreateWithoutDeletedAmenitysInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedAmenitysInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -11726,9 +12588,9 @@ export type UserUncheckedCreateWithoutDeletedAmenitysInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -11807,7 +12669,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedAmenitysInput = {
 }
 
 export type UserUpdateWithoutCreatedAmenitysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11846,9 +12707,9 @@ export type UserUpdateWithoutCreatedAmenitysInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -11911,7 +12772,7 @@ export type UserUpdateWithoutCreatedAmenitysInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedAmenitysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11950,9 +12811,9 @@ export type UserUncheckedUpdateWithoutCreatedAmenitysInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -12026,7 +12887,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedAmenitysInput = {
 }
 
 export type UserUpdateWithoutUpdatedAmenitysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12065,9 +12925,9 @@ export type UserUpdateWithoutUpdatedAmenitysInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -12130,7 +12990,7 @@ export type UserUpdateWithoutUpdatedAmenitysInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedAmenitysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12169,9 +13029,9 @@ export type UserUncheckedUpdateWithoutUpdatedAmenitysInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -12245,7 +13105,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedAmenitysInput = {
 }
 
 export type UserUpdateWithoutDeletedAmenitysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12284,9 +13143,9 @@ export type UserUpdateWithoutDeletedAmenitysInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -12349,7 +13208,7 @@ export type UserUpdateWithoutDeletedAmenitysInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedAmenitysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12388,9 +13247,9 @@ export type UserUncheckedUpdateWithoutDeletedAmenitysInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -12453,7 +13312,6 @@ export type UserUncheckedUpdateWithoutDeletedAmenitysInput = {
 }
 
 export type UserCreateWithoutRenterProfileInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -12491,9 +13349,9 @@ export type UserCreateWithoutRenterProfileInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -12557,7 +13415,7 @@ export type UserCreateWithoutRenterProfileInput = {
 }
 
 export type UserUncheckedCreateWithoutRenterProfileInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -12595,9 +13453,9 @@ export type UserUncheckedCreateWithoutRenterProfileInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -12677,7 +13535,6 @@ export type UserUpdateToOneWithWhereWithoutRenterProfileInput = {
 }
 
 export type UserUpdateWithoutRenterProfileInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12715,9 +13572,9 @@ export type UserUpdateWithoutRenterProfileInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -12781,7 +13638,7 @@ export type UserUpdateWithoutRenterProfileInput = {
 }
 
 export type UserUncheckedUpdateWithoutRenterProfileInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12819,9 +13676,9 @@ export type UserUncheckedUpdateWithoutRenterProfileInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -12885,7 +13742,6 @@ export type UserUncheckedUpdateWithoutRenterProfileInput = {
 }
 
 export type UserCreateWithoutRentalHistoriesInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -12923,9 +13779,9 @@ export type UserCreateWithoutRentalHistoriesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -12989,7 +13845,7 @@ export type UserCreateWithoutRentalHistoriesInput = {
 }
 
 export type UserUncheckedCreateWithoutRentalHistoriesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -13027,9 +13883,9 @@ export type UserUncheckedCreateWithoutRentalHistoriesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -13109,7 +13965,6 @@ export type UserUpdateToOneWithWhereWithoutRentalHistoriesInput = {
 }
 
 export type UserUpdateWithoutRentalHistoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13147,9 +14002,9 @@ export type UserUpdateWithoutRentalHistoriesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -13213,7 +14068,7 @@ export type UserUpdateWithoutRentalHistoriesInput = {
 }
 
 export type UserUncheckedUpdateWithoutRentalHistoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13251,9 +14106,9 @@ export type UserUncheckedUpdateWithoutRentalHistoriesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -13317,7 +14172,6 @@ export type UserUncheckedUpdateWithoutRentalHistoriesInput = {
 }
 
 export type UserCreateWithoutRoomViewLogsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -13355,9 +14209,9 @@ export type UserCreateWithoutRoomViewLogsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -13421,7 +14275,7 @@ export type UserCreateWithoutRoomViewLogsInput = {
 }
 
 export type UserUncheckedCreateWithoutRoomViewLogsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -13459,9 +14313,9 @@ export type UserUncheckedCreateWithoutRoomViewLogsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -13541,7 +14395,6 @@ export type UserUpdateToOneWithWhereWithoutRoomViewLogsInput = {
 }
 
 export type UserUpdateWithoutRoomViewLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13579,9 +14432,9 @@ export type UserUpdateWithoutRoomViewLogsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -13645,7 +14498,7 @@ export type UserUpdateWithoutRoomViewLogsInput = {
 }
 
 export type UserUncheckedUpdateWithoutRoomViewLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13683,9 +14536,9 @@ export type UserUncheckedUpdateWithoutRoomViewLogsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -13749,7 +14602,6 @@ export type UserUncheckedUpdateWithoutRoomViewLogsInput = {
 }
 
 export type UserCreateWithoutFavoriteRoomsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -13787,9 +14639,9 @@ export type UserCreateWithoutFavoriteRoomsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -13853,7 +14705,7 @@ export type UserCreateWithoutFavoriteRoomsInput = {
 }
 
 export type UserUncheckedCreateWithoutFavoriteRoomsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -13891,9 +14743,9 @@ export type UserUncheckedCreateWithoutFavoriteRoomsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -13973,7 +14825,6 @@ export type UserUpdateToOneWithWhereWithoutFavoriteRoomsInput = {
 }
 
 export type UserUpdateWithoutFavoriteRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14011,9 +14862,9 @@ export type UserUpdateWithoutFavoriteRoomsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -14077,7 +14928,7 @@ export type UserUpdateWithoutFavoriteRoomsInput = {
 }
 
 export type UserUncheckedUpdateWithoutFavoriteRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14115,9 +14966,9 @@ export type UserUncheckedUpdateWithoutFavoriteRoomsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -14181,7 +15032,6 @@ export type UserUncheckedUpdateWithoutFavoriteRoomsInput = {
 }
 
 export type UserCreateWithoutViewingAppointmentsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -14219,9 +15069,9 @@ export type UserCreateWithoutViewingAppointmentsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -14285,7 +15135,7 @@ export type UserCreateWithoutViewingAppointmentsInput = {
 }
 
 export type UserUncheckedCreateWithoutViewingAppointmentsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -14323,9 +15173,9 @@ export type UserUncheckedCreateWithoutViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -14394,7 +15244,6 @@ export type UserCreateOrConnectWithoutViewingAppointmentsInput = {
 }
 
 export type UserCreateWithoutAssignedAppointmentsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -14432,9 +15281,9 @@ export type UserCreateWithoutAssignedAppointmentsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -14498,7 +15347,7 @@ export type UserCreateWithoutAssignedAppointmentsInput = {
 }
 
 export type UserUncheckedCreateWithoutAssignedAppointmentsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -14536,9 +15385,9 @@ export type UserUncheckedCreateWithoutAssignedAppointmentsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -14607,7 +15456,6 @@ export type UserCreateOrConnectWithoutAssignedAppointmentsInput = {
 }
 
 export type UserCreateWithoutCreatedRoomViewingAppointmentsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -14646,9 +15494,9 @@ export type UserCreateWithoutCreatedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -14711,7 +15559,7 @@ export type UserCreateWithoutCreatedRoomViewingAppointmentsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedRoomViewingAppointmentsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -14750,9 +15598,9 @@ export type UserUncheckedCreateWithoutCreatedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -14820,7 +15668,6 @@ export type UserCreateOrConnectWithoutCreatedRoomViewingAppointmentsInput = {
 }
 
 export type UserCreateWithoutUpdatedRoomViewingAppointmentsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -14859,9 +15706,9 @@ export type UserCreateWithoutUpdatedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -14924,7 +15771,7 @@ export type UserCreateWithoutUpdatedRoomViewingAppointmentsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedRoomViewingAppointmentsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -14963,9 +15810,9 @@ export type UserUncheckedCreateWithoutUpdatedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -15033,7 +15880,6 @@ export type UserCreateOrConnectWithoutUpdatedRoomViewingAppointmentsInput = {
 }
 
 export type UserCreateWithoutDeletedRoomViewingAppointmentsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -15072,9 +15918,9 @@ export type UserCreateWithoutDeletedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -15137,7 +15983,7 @@ export type UserCreateWithoutDeletedRoomViewingAppointmentsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedRoomViewingAppointmentsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -15176,9 +16022,9 @@ export type UserUncheckedCreateWithoutDeletedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -15257,7 +16103,6 @@ export type UserUpdateToOneWithWhereWithoutViewingAppointmentsInput = {
 }
 
 export type UserUpdateWithoutViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15295,9 +16140,9 @@ export type UserUpdateWithoutViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -15361,7 +16206,7 @@ export type UserUpdateWithoutViewingAppointmentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15399,9 +16244,9 @@ export type UserUncheckedUpdateWithoutViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -15476,7 +16321,6 @@ export type UserUpdateToOneWithWhereWithoutAssignedAppointmentsInput = {
 }
 
 export type UserUpdateWithoutAssignedAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15514,9 +16358,9 @@ export type UserUpdateWithoutAssignedAppointmentsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -15580,7 +16424,7 @@ export type UserUpdateWithoutAssignedAppointmentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutAssignedAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15618,9 +16462,9 @@ export type UserUncheckedUpdateWithoutAssignedAppointmentsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -15695,7 +16539,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedRoomViewingAppointmentsInput =
 }
 
 export type UserUpdateWithoutCreatedRoomViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15734,9 +16577,9 @@ export type UserUpdateWithoutCreatedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -15799,7 +16642,7 @@ export type UserUpdateWithoutCreatedRoomViewingAppointmentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedRoomViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15838,9 +16681,9 @@ export type UserUncheckedUpdateWithoutCreatedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -15914,7 +16757,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedRoomViewingAppointmentsInput =
 }
 
 export type UserUpdateWithoutUpdatedRoomViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15953,9 +16795,9 @@ export type UserUpdateWithoutUpdatedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -16018,7 +16860,7 @@ export type UserUpdateWithoutUpdatedRoomViewingAppointmentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedRoomViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16057,9 +16899,9 @@ export type UserUncheckedUpdateWithoutUpdatedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -16133,7 +16975,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedRoomViewingAppointmentsInput =
 }
 
 export type UserUpdateWithoutDeletedRoomViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16172,9 +17013,9 @@ export type UserUpdateWithoutDeletedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -16237,7 +17078,7 @@ export type UserUpdateWithoutDeletedRoomViewingAppointmentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedRoomViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16276,9 +17117,9 @@ export type UserUncheckedUpdateWithoutDeletedRoomViewingAppointmentsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -16341,7 +17182,6 @@ export type UserUncheckedUpdateWithoutDeletedRoomViewingAppointmentsInput = {
 }
 
 export type UserCreateWithoutRentalRequestsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -16379,9 +17219,9 @@ export type UserCreateWithoutRentalRequestsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -16445,7 +17285,7 @@ export type UserCreateWithoutRentalRequestsInput = {
 }
 
 export type UserUncheckedCreateWithoutRentalRequestsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -16483,9 +17323,9 @@ export type UserUncheckedCreateWithoutRentalRequestsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -16554,7 +17394,6 @@ export type UserCreateOrConnectWithoutRentalRequestsInput = {
 }
 
 export type UserCreateWithoutCreatedRentalRequestsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -16593,9 +17432,9 @@ export type UserCreateWithoutCreatedRentalRequestsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -16658,7 +17497,7 @@ export type UserCreateWithoutCreatedRentalRequestsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedRentalRequestsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -16697,9 +17536,9 @@ export type UserUncheckedCreateWithoutCreatedRentalRequestsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -16767,7 +17606,6 @@ export type UserCreateOrConnectWithoutCreatedRentalRequestsInput = {
 }
 
 export type UserCreateWithoutUpdatedRentalRequestsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -16806,9 +17644,9 @@ export type UserCreateWithoutUpdatedRentalRequestsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -16871,7 +17709,7 @@ export type UserCreateWithoutUpdatedRentalRequestsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedRentalRequestsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -16910,9 +17748,9 @@ export type UserUncheckedCreateWithoutUpdatedRentalRequestsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -16980,7 +17818,6 @@ export type UserCreateOrConnectWithoutUpdatedRentalRequestsInput = {
 }
 
 export type UserCreateWithoutDeletedRentalRequestsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -17019,9 +17856,9 @@ export type UserCreateWithoutDeletedRentalRequestsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -17084,7 +17921,7 @@ export type UserCreateWithoutDeletedRentalRequestsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedRentalRequestsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -17123,9 +17960,9 @@ export type UserUncheckedCreateWithoutDeletedRentalRequestsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -17204,7 +18041,6 @@ export type UserUpdateToOneWithWhereWithoutRentalRequestsInput = {
 }
 
 export type UserUpdateWithoutRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17242,9 +18078,9 @@ export type UserUpdateWithoutRentalRequestsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -17308,7 +18144,7 @@ export type UserUpdateWithoutRentalRequestsInput = {
 }
 
 export type UserUncheckedUpdateWithoutRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17346,9 +18182,9 @@ export type UserUncheckedUpdateWithoutRentalRequestsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -17423,7 +18259,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedRentalRequestsInput = {
 }
 
 export type UserUpdateWithoutCreatedRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17462,9 +18297,9 @@ export type UserUpdateWithoutCreatedRentalRequestsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -17527,7 +18362,7 @@ export type UserUpdateWithoutCreatedRentalRequestsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17566,9 +18401,9 @@ export type UserUncheckedUpdateWithoutCreatedRentalRequestsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -17642,7 +18477,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedRentalRequestsInput = {
 }
 
 export type UserUpdateWithoutUpdatedRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17681,9 +18515,9 @@ export type UserUpdateWithoutUpdatedRentalRequestsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -17746,7 +18580,7 @@ export type UserUpdateWithoutUpdatedRentalRequestsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17785,9 +18619,9 @@ export type UserUncheckedUpdateWithoutUpdatedRentalRequestsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -17861,7 +18695,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedRentalRequestsInput = {
 }
 
 export type UserUpdateWithoutDeletedRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17900,9 +18733,9 @@ export type UserUpdateWithoutDeletedRentalRequestsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -17965,7 +18798,7 @@ export type UserUpdateWithoutDeletedRentalRequestsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18004,9 +18837,9 @@ export type UserUncheckedUpdateWithoutDeletedRentalRequestsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -18069,7 +18902,6 @@ export type UserUncheckedUpdateWithoutDeletedRentalRequestsInput = {
 }
 
 export type UserCreateWithoutCreatedContractTemplatesInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -18108,9 +18940,9 @@ export type UserCreateWithoutCreatedContractTemplatesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -18173,7 +19005,7 @@ export type UserCreateWithoutCreatedContractTemplatesInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedContractTemplatesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -18212,9 +19044,9 @@ export type UserUncheckedCreateWithoutCreatedContractTemplatesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -18282,7 +19114,6 @@ export type UserCreateOrConnectWithoutCreatedContractTemplatesInput = {
 }
 
 export type UserCreateWithoutUpdatedContractTemplatesInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -18321,9 +19152,9 @@ export type UserCreateWithoutUpdatedContractTemplatesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -18386,7 +19217,7 @@ export type UserCreateWithoutUpdatedContractTemplatesInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedContractTemplatesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -18425,9 +19256,9 @@ export type UserUncheckedCreateWithoutUpdatedContractTemplatesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -18495,7 +19326,6 @@ export type UserCreateOrConnectWithoutUpdatedContractTemplatesInput = {
 }
 
 export type UserCreateWithoutDeletedContractTemplatesInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -18534,9 +19364,9 @@ export type UserCreateWithoutDeletedContractTemplatesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -18599,7 +19429,7 @@ export type UserCreateWithoutDeletedContractTemplatesInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedContractTemplatesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -18638,9 +19468,9 @@ export type UserUncheckedCreateWithoutDeletedContractTemplatesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -18719,7 +19549,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedContractTemplatesInput = {
 }
 
 export type UserUpdateWithoutCreatedContractTemplatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18758,9 +19587,9 @@ export type UserUpdateWithoutCreatedContractTemplatesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -18823,7 +19652,7 @@ export type UserUpdateWithoutCreatedContractTemplatesInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedContractTemplatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18862,9 +19691,9 @@ export type UserUncheckedUpdateWithoutCreatedContractTemplatesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -18938,7 +19767,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedContractTemplatesInput = {
 }
 
 export type UserUpdateWithoutUpdatedContractTemplatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18977,9 +19805,9 @@ export type UserUpdateWithoutUpdatedContractTemplatesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -19042,7 +19870,7 @@ export type UserUpdateWithoutUpdatedContractTemplatesInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedContractTemplatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19081,9 +19909,9 @@ export type UserUncheckedUpdateWithoutUpdatedContractTemplatesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -19157,7 +19985,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedContractTemplatesInput = {
 }
 
 export type UserUpdateWithoutDeletedContractTemplatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19196,9 +20023,9 @@ export type UserUpdateWithoutDeletedContractTemplatesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -19261,7 +20088,7 @@ export type UserUpdateWithoutDeletedContractTemplatesInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedContractTemplatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19300,9 +20127,9 @@ export type UserUncheckedUpdateWithoutDeletedContractTemplatesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -19365,7 +20192,6 @@ export type UserUncheckedUpdateWithoutDeletedContractTemplatesInput = {
 }
 
 export type UserCreateWithoutContractsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -19403,9 +20229,9 @@ export type UserCreateWithoutContractsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -19469,7 +20295,7 @@ export type UserCreateWithoutContractsInput = {
 }
 
 export type UserUncheckedCreateWithoutContractsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -19507,9 +20333,9 @@ export type UserUncheckedCreateWithoutContractsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -19578,7 +20404,6 @@ export type UserCreateOrConnectWithoutContractsInput = {
 }
 
 export type UserCreateWithoutCreatedContractsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -19617,9 +20442,9 @@ export type UserCreateWithoutCreatedContractsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -19682,7 +20507,7 @@ export type UserCreateWithoutCreatedContractsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedContractsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -19721,9 +20546,9 @@ export type UserUncheckedCreateWithoutCreatedContractsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -19791,7 +20616,6 @@ export type UserCreateOrConnectWithoutCreatedContractsInput = {
 }
 
 export type UserCreateWithoutUpdatedContractsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -19830,9 +20654,9 @@ export type UserCreateWithoutUpdatedContractsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -19895,7 +20719,7 @@ export type UserCreateWithoutUpdatedContractsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedContractsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -19934,9 +20758,9 @@ export type UserUncheckedCreateWithoutUpdatedContractsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -20004,7 +20828,6 @@ export type UserCreateOrConnectWithoutUpdatedContractsInput = {
 }
 
 export type UserCreateWithoutDeletedContractsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -20043,9 +20866,9 @@ export type UserCreateWithoutDeletedContractsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -20108,7 +20931,7 @@ export type UserCreateWithoutDeletedContractsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedContractsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -20147,9 +20970,9 @@ export type UserUncheckedCreateWithoutDeletedContractsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -20228,7 +21051,6 @@ export type UserUpdateToOneWithWhereWithoutContractsInput = {
 }
 
 export type UserUpdateWithoutContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20266,9 +21088,9 @@ export type UserUpdateWithoutContractsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -20332,7 +21154,7 @@ export type UserUpdateWithoutContractsInput = {
 }
 
 export type UserUncheckedUpdateWithoutContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20370,9 +21192,9 @@ export type UserUncheckedUpdateWithoutContractsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -20447,7 +21269,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedContractsInput = {
 }
 
 export type UserUpdateWithoutCreatedContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20486,9 +21307,9 @@ export type UserUpdateWithoutCreatedContractsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -20551,7 +21372,7 @@ export type UserUpdateWithoutCreatedContractsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20590,9 +21411,9 @@ export type UserUncheckedUpdateWithoutCreatedContractsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -20666,7 +21487,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedContractsInput = {
 }
 
 export type UserUpdateWithoutUpdatedContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20705,9 +21525,9 @@ export type UserUpdateWithoutUpdatedContractsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -20770,7 +21590,7 @@ export type UserUpdateWithoutUpdatedContractsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20809,9 +21629,9 @@ export type UserUncheckedUpdateWithoutUpdatedContractsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -20885,7 +21705,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedContractsInput = {
 }
 
 export type UserUpdateWithoutDeletedContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20924,9 +21743,9 @@ export type UserUpdateWithoutDeletedContractsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -20989,7 +21808,7 @@ export type UserUpdateWithoutDeletedContractsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21028,9 +21847,9 @@ export type UserUncheckedUpdateWithoutDeletedContractsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -21093,7 +21912,6 @@ export type UserUncheckedUpdateWithoutDeletedContractsInput = {
 }
 
 export type UserCreateWithoutContractMembersInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -21131,9 +21949,9 @@ export type UserCreateWithoutContractMembersInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -21197,7 +22015,7 @@ export type UserCreateWithoutContractMembersInput = {
 }
 
 export type UserUncheckedCreateWithoutContractMembersInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -21235,9 +22053,9 @@ export type UserUncheckedCreateWithoutContractMembersInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -21317,7 +22135,6 @@ export type UserUpdateToOneWithWhereWithoutContractMembersInput = {
 }
 
 export type UserUpdateWithoutContractMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21355,9 +22172,9 @@ export type UserUpdateWithoutContractMembersInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -21421,7 +22238,7 @@ export type UserUpdateWithoutContractMembersInput = {
 }
 
 export type UserUncheckedUpdateWithoutContractMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21459,9 +22276,9 @@ export type UserUncheckedUpdateWithoutContractMembersInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -21525,7 +22342,6 @@ export type UserUncheckedUpdateWithoutContractMembersInput = {
 }
 
 export type UserCreateWithoutCreatedContractTerminationRequestsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -21564,9 +22380,9 @@ export type UserCreateWithoutCreatedContractTerminationRequestsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -21629,7 +22445,7 @@ export type UserCreateWithoutCreatedContractTerminationRequestsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedContractTerminationRequestsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -21668,9 +22484,9 @@ export type UserUncheckedCreateWithoutCreatedContractTerminationRequestsInput = 
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -21738,7 +22554,6 @@ export type UserCreateOrConnectWithoutCreatedContractTerminationRequestsInput = 
 }
 
 export type UserCreateWithoutUpdatedContractTerminationRequestsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -21777,9 +22592,9 @@ export type UserCreateWithoutUpdatedContractTerminationRequestsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -21842,7 +22657,7 @@ export type UserCreateWithoutUpdatedContractTerminationRequestsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedContractTerminationRequestsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -21881,9 +22696,9 @@ export type UserUncheckedCreateWithoutUpdatedContractTerminationRequestsInput = 
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -21951,7 +22766,6 @@ export type UserCreateOrConnectWithoutUpdatedContractTerminationRequestsInput = 
 }
 
 export type UserCreateWithoutDeletedContractTerminationRequestsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -21990,9 +22804,9 @@ export type UserCreateWithoutDeletedContractTerminationRequestsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -22055,7 +22869,7 @@ export type UserCreateWithoutDeletedContractTerminationRequestsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedContractTerminationRequestsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -22094,9 +22908,9 @@ export type UserUncheckedCreateWithoutDeletedContractTerminationRequestsInput = 
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -22175,7 +22989,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedContractTerminationRequestsInp
 }
 
 export type UserUpdateWithoutCreatedContractTerminationRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22214,9 +23027,9 @@ export type UserUpdateWithoutCreatedContractTerminationRequestsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -22279,7 +23092,7 @@ export type UserUpdateWithoutCreatedContractTerminationRequestsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedContractTerminationRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22318,9 +23131,9 @@ export type UserUncheckedUpdateWithoutCreatedContractTerminationRequestsInput = 
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -22394,7 +23207,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedContractTerminationRequestsInp
 }
 
 export type UserUpdateWithoutUpdatedContractTerminationRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22433,9 +23245,9 @@ export type UserUpdateWithoutUpdatedContractTerminationRequestsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -22498,7 +23310,7 @@ export type UserUpdateWithoutUpdatedContractTerminationRequestsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedContractTerminationRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22537,9 +23349,9 @@ export type UserUncheckedUpdateWithoutUpdatedContractTerminationRequestsInput = 
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -22613,7 +23425,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedContractTerminationRequestsInp
 }
 
 export type UserUpdateWithoutDeletedContractTerminationRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22652,9 +23463,9 @@ export type UserUpdateWithoutDeletedContractTerminationRequestsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -22717,7 +23528,7 @@ export type UserUpdateWithoutDeletedContractTerminationRequestsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedContractTerminationRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22756,9 +23567,9 @@ export type UserUncheckedUpdateWithoutDeletedContractTerminationRequestsInput = 
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -22821,7 +23632,6 @@ export type UserUncheckedUpdateWithoutDeletedContractTerminationRequestsInput = 
 }
 
 export type UserCreateWithoutCreatedAssetCategorysInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -22860,9 +23670,9 @@ export type UserCreateWithoutCreatedAssetCategorysInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -22925,7 +23735,7 @@ export type UserCreateWithoutCreatedAssetCategorysInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedAssetCategorysInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -22964,9 +23774,9 @@ export type UserUncheckedCreateWithoutCreatedAssetCategorysInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -23034,7 +23844,6 @@ export type UserCreateOrConnectWithoutCreatedAssetCategorysInput = {
 }
 
 export type UserCreateWithoutUpdatedAssetCategorysInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -23073,9 +23882,9 @@ export type UserCreateWithoutUpdatedAssetCategorysInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -23138,7 +23947,7 @@ export type UserCreateWithoutUpdatedAssetCategorysInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedAssetCategorysInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -23177,9 +23986,9 @@ export type UserUncheckedCreateWithoutUpdatedAssetCategorysInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -23247,7 +24056,6 @@ export type UserCreateOrConnectWithoutUpdatedAssetCategorysInput = {
 }
 
 export type UserCreateWithoutDeletedAssetCategorysInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -23286,9 +24094,9 @@ export type UserCreateWithoutDeletedAssetCategorysInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -23351,7 +24159,7 @@ export type UserCreateWithoutDeletedAssetCategorysInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedAssetCategorysInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -23390,9 +24198,9 @@ export type UserUncheckedCreateWithoutDeletedAssetCategorysInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -23471,7 +24279,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedAssetCategorysInput = {
 }
 
 export type UserUpdateWithoutCreatedAssetCategorysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23510,9 +24317,9 @@ export type UserUpdateWithoutCreatedAssetCategorysInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -23575,7 +24382,7 @@ export type UserUpdateWithoutCreatedAssetCategorysInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedAssetCategorysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23614,9 +24421,9 @@ export type UserUncheckedUpdateWithoutCreatedAssetCategorysInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -23690,7 +24497,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedAssetCategorysInput = {
 }
 
 export type UserUpdateWithoutUpdatedAssetCategorysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23729,9 +24535,9 @@ export type UserUpdateWithoutUpdatedAssetCategorysInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -23794,7 +24600,7 @@ export type UserUpdateWithoutUpdatedAssetCategorysInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedAssetCategorysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23833,9 +24639,9 @@ export type UserUncheckedUpdateWithoutUpdatedAssetCategorysInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -23909,7 +24715,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedAssetCategorysInput = {
 }
 
 export type UserUpdateWithoutDeletedAssetCategorysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23948,9 +24753,9 @@ export type UserUpdateWithoutDeletedAssetCategorysInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -24013,7 +24818,7 @@ export type UserUpdateWithoutDeletedAssetCategorysInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedAssetCategorysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -24052,9 +24857,9 @@ export type UserUncheckedUpdateWithoutDeletedAssetCategorysInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -24117,7 +24922,6 @@ export type UserUncheckedUpdateWithoutDeletedAssetCategorysInput = {
 }
 
 export type UserCreateWithoutCreatedRoomAssetsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -24156,9 +24960,9 @@ export type UserCreateWithoutCreatedRoomAssetsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -24221,7 +25025,7 @@ export type UserCreateWithoutCreatedRoomAssetsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedRoomAssetsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -24260,9 +25064,9 @@ export type UserUncheckedCreateWithoutCreatedRoomAssetsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -24330,7 +25134,6 @@ export type UserCreateOrConnectWithoutCreatedRoomAssetsInput = {
 }
 
 export type UserCreateWithoutUpdatedRoomAssetsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -24369,9 +25172,9 @@ export type UserCreateWithoutUpdatedRoomAssetsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -24434,7 +25237,7 @@ export type UserCreateWithoutUpdatedRoomAssetsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedRoomAssetsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -24473,9 +25276,9 @@ export type UserUncheckedCreateWithoutUpdatedRoomAssetsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -24543,7 +25346,6 @@ export type UserCreateOrConnectWithoutUpdatedRoomAssetsInput = {
 }
 
 export type UserCreateWithoutDeletedRoomAssetsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -24582,9 +25384,9 @@ export type UserCreateWithoutDeletedRoomAssetsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -24647,7 +25449,7 @@ export type UserCreateWithoutDeletedRoomAssetsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedRoomAssetsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -24686,9 +25488,9 @@ export type UserUncheckedCreateWithoutDeletedRoomAssetsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -24767,7 +25569,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedRoomAssetsInput = {
 }
 
 export type UserUpdateWithoutCreatedRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -24806,9 +25607,9 @@ export type UserUpdateWithoutCreatedRoomAssetsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -24871,7 +25672,7 @@ export type UserUpdateWithoutCreatedRoomAssetsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -24910,9 +25711,9 @@ export type UserUncheckedUpdateWithoutCreatedRoomAssetsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -24986,7 +25787,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedRoomAssetsInput = {
 }
 
 export type UserUpdateWithoutUpdatedRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25025,9 +25825,9 @@ export type UserUpdateWithoutUpdatedRoomAssetsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -25090,7 +25890,7 @@ export type UserUpdateWithoutUpdatedRoomAssetsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25129,9 +25929,9 @@ export type UserUncheckedUpdateWithoutUpdatedRoomAssetsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -25205,7 +26005,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedRoomAssetsInput = {
 }
 
 export type UserUpdateWithoutDeletedRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25244,9 +26043,9 @@ export type UserUpdateWithoutDeletedRoomAssetsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -25309,7 +26108,7 @@ export type UserUpdateWithoutDeletedRoomAssetsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25348,9 +26147,9 @@ export type UserUncheckedUpdateWithoutDeletedRoomAssetsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -25413,7 +26212,6 @@ export type UserUncheckedUpdateWithoutDeletedRoomAssetsInput = {
 }
 
 export type UserCreateWithoutCreatedHandoverRecordsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -25452,9 +26250,9 @@ export type UserCreateWithoutCreatedHandoverRecordsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -25517,7 +26315,7 @@ export type UserCreateWithoutCreatedHandoverRecordsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedHandoverRecordsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -25556,9 +26354,9 @@ export type UserUncheckedCreateWithoutCreatedHandoverRecordsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -25626,7 +26424,6 @@ export type UserCreateOrConnectWithoutCreatedHandoverRecordsInput = {
 }
 
 export type UserCreateWithoutUpdatedHandoverRecordsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -25665,9 +26462,9 @@ export type UserCreateWithoutUpdatedHandoverRecordsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -25730,7 +26527,7 @@ export type UserCreateWithoutUpdatedHandoverRecordsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedHandoverRecordsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -25769,9 +26566,9 @@ export type UserUncheckedCreateWithoutUpdatedHandoverRecordsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -25839,7 +26636,6 @@ export type UserCreateOrConnectWithoutUpdatedHandoverRecordsInput = {
 }
 
 export type UserCreateWithoutDeletedHandoverRecordsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -25878,9 +26674,9 @@ export type UserCreateWithoutDeletedHandoverRecordsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -25943,7 +26739,7 @@ export type UserCreateWithoutDeletedHandoverRecordsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedHandoverRecordsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -25982,9 +26778,9 @@ export type UserUncheckedCreateWithoutDeletedHandoverRecordsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -26063,7 +26859,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedHandoverRecordsInput = {
 }
 
 export type UserUpdateWithoutCreatedHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26102,9 +26897,9 @@ export type UserUpdateWithoutCreatedHandoverRecordsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -26167,7 +26962,7 @@ export type UserUpdateWithoutCreatedHandoverRecordsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26206,9 +27001,9 @@ export type UserUncheckedUpdateWithoutCreatedHandoverRecordsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -26282,7 +27077,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedHandoverRecordsInput = {
 }
 
 export type UserUpdateWithoutUpdatedHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26321,9 +27115,9 @@ export type UserUpdateWithoutUpdatedHandoverRecordsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -26386,7 +27180,7 @@ export type UserUpdateWithoutUpdatedHandoverRecordsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26425,9 +27219,9 @@ export type UserUncheckedUpdateWithoutUpdatedHandoverRecordsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -26501,7 +27295,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedHandoverRecordsInput = {
 }
 
 export type UserUpdateWithoutDeletedHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26540,9 +27333,9 @@ export type UserUpdateWithoutDeletedHandoverRecordsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -26605,7 +27398,7 @@ export type UserUpdateWithoutDeletedHandoverRecordsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26644,9 +27437,9 @@ export type UserUncheckedUpdateWithoutDeletedHandoverRecordsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -26709,7 +27502,6 @@ export type UserUncheckedUpdateWithoutDeletedHandoverRecordsInput = {
 }
 
 export type UserCreateWithoutCreatedMeterReadingsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -26748,9 +27540,9 @@ export type UserCreateWithoutCreatedMeterReadingsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -26813,7 +27605,7 @@ export type UserCreateWithoutCreatedMeterReadingsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedMeterReadingsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -26852,9 +27644,9 @@ export type UserUncheckedCreateWithoutCreatedMeterReadingsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -26922,7 +27714,6 @@ export type UserCreateOrConnectWithoutCreatedMeterReadingsInput = {
 }
 
 export type UserCreateWithoutUpdatedMeterReadingsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -26961,9 +27752,9 @@ export type UserCreateWithoutUpdatedMeterReadingsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -27026,7 +27817,7 @@ export type UserCreateWithoutUpdatedMeterReadingsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedMeterReadingsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -27065,9 +27856,9 @@ export type UserUncheckedCreateWithoutUpdatedMeterReadingsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -27135,7 +27926,6 @@ export type UserCreateOrConnectWithoutUpdatedMeterReadingsInput = {
 }
 
 export type UserCreateWithoutDeletedMeterReadingsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -27174,9 +27964,9 @@ export type UserCreateWithoutDeletedMeterReadingsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -27239,7 +28029,7 @@ export type UserCreateWithoutDeletedMeterReadingsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedMeterReadingsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -27278,9 +28068,9 @@ export type UserUncheckedCreateWithoutDeletedMeterReadingsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -27359,7 +28149,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedMeterReadingsInput = {
 }
 
 export type UserUpdateWithoutCreatedMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27398,9 +28187,9 @@ export type UserUpdateWithoutCreatedMeterReadingsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -27463,7 +28252,7 @@ export type UserUpdateWithoutCreatedMeterReadingsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27502,9 +28291,9 @@ export type UserUncheckedUpdateWithoutCreatedMeterReadingsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -27578,7 +28367,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedMeterReadingsInput = {
 }
 
 export type UserUpdateWithoutUpdatedMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27617,9 +28405,9 @@ export type UserUpdateWithoutUpdatedMeterReadingsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -27682,7 +28470,7 @@ export type UserUpdateWithoutUpdatedMeterReadingsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27721,9 +28509,9 @@ export type UserUncheckedUpdateWithoutUpdatedMeterReadingsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -27797,7 +28585,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedMeterReadingsInput = {
 }
 
 export type UserUpdateWithoutDeletedMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27836,9 +28623,9 @@ export type UserUpdateWithoutDeletedMeterReadingsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -27901,7 +28688,7 @@ export type UserUpdateWithoutDeletedMeterReadingsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27940,9 +28727,9 @@ export type UserUncheckedUpdateWithoutDeletedMeterReadingsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -28005,7 +28792,6 @@ export type UserUncheckedUpdateWithoutDeletedMeterReadingsInput = {
 }
 
 export type UserCreateWithoutUploadedOcrJobsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -28043,9 +28829,9 @@ export type UserCreateWithoutUploadedOcrJobsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -28109,7 +28895,7 @@ export type UserCreateWithoutUploadedOcrJobsInput = {
 }
 
 export type UserUncheckedCreateWithoutUploadedOcrJobsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -28147,9 +28933,9 @@ export type UserUncheckedCreateWithoutUploadedOcrJobsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -28229,7 +29015,6 @@ export type UserUpdateToOneWithWhereWithoutUploadedOcrJobsInput = {
 }
 
 export type UserUpdateWithoutUploadedOcrJobsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28267,9 +29052,9 @@ export type UserUpdateWithoutUploadedOcrJobsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -28333,7 +29118,7 @@ export type UserUpdateWithoutUploadedOcrJobsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUploadedOcrJobsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28371,9 +29156,9 @@ export type UserUncheckedUpdateWithoutUploadedOcrJobsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -28437,7 +29222,6 @@ export type UserUncheckedUpdateWithoutUploadedOcrJobsInput = {
 }
 
 export type UserCreateWithoutCreatedInvoiceBatchsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -28476,9 +29260,9 @@ export type UserCreateWithoutCreatedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -28541,7 +29325,7 @@ export type UserCreateWithoutCreatedInvoiceBatchsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedInvoiceBatchsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -28580,9 +29364,9 @@ export type UserUncheckedCreateWithoutCreatedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -28650,7 +29434,6 @@ export type UserCreateOrConnectWithoutCreatedInvoiceBatchsInput = {
 }
 
 export type UserCreateWithoutUpdatedInvoiceBatchsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -28689,9 +29472,9 @@ export type UserCreateWithoutUpdatedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -28754,7 +29537,7 @@ export type UserCreateWithoutUpdatedInvoiceBatchsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedInvoiceBatchsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -28793,9 +29576,9 @@ export type UserUncheckedCreateWithoutUpdatedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -28863,7 +29646,6 @@ export type UserCreateOrConnectWithoutUpdatedInvoiceBatchsInput = {
 }
 
 export type UserCreateWithoutDeletedInvoiceBatchsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -28902,9 +29684,9 @@ export type UserCreateWithoutDeletedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -28967,7 +29749,7 @@ export type UserCreateWithoutDeletedInvoiceBatchsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedInvoiceBatchsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -29006,9 +29788,9 @@ export type UserUncheckedCreateWithoutDeletedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -29087,7 +29869,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedInvoiceBatchsInput = {
 }
 
 export type UserUpdateWithoutCreatedInvoiceBatchsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29126,9 +29907,9 @@ export type UserUpdateWithoutCreatedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -29191,7 +29972,7 @@ export type UserUpdateWithoutCreatedInvoiceBatchsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedInvoiceBatchsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29230,9 +30011,9 @@ export type UserUncheckedUpdateWithoutCreatedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -29306,7 +30087,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedInvoiceBatchsInput = {
 }
 
 export type UserUpdateWithoutUpdatedInvoiceBatchsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29345,9 +30125,9 @@ export type UserUpdateWithoutUpdatedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -29410,7 +30190,7 @@ export type UserUpdateWithoutUpdatedInvoiceBatchsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedInvoiceBatchsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29449,9 +30229,9 @@ export type UserUncheckedUpdateWithoutUpdatedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -29525,7 +30305,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedInvoiceBatchsInput = {
 }
 
 export type UserUpdateWithoutDeletedInvoiceBatchsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29564,9 +30343,9 @@ export type UserUpdateWithoutDeletedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -29629,7 +30408,7 @@ export type UserUpdateWithoutDeletedInvoiceBatchsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedInvoiceBatchsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29668,9 +30447,9 @@ export type UserUncheckedUpdateWithoutDeletedInvoiceBatchsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -29733,7 +30512,6 @@ export type UserUncheckedUpdateWithoutDeletedInvoiceBatchsInput = {
 }
 
 export type UserCreateWithoutInvoicesInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -29771,9 +30549,9 @@ export type UserCreateWithoutInvoicesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -29837,7 +30615,7 @@ export type UserCreateWithoutInvoicesInput = {
 }
 
 export type UserUncheckedCreateWithoutInvoicesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -29875,9 +30653,9 @@ export type UserUncheckedCreateWithoutInvoicesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -29946,7 +30724,6 @@ export type UserCreateOrConnectWithoutInvoicesInput = {
 }
 
 export type UserCreateWithoutCreatedInvoicesInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -29985,9 +30762,9 @@ export type UserCreateWithoutCreatedInvoicesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -30050,7 +30827,7 @@ export type UserCreateWithoutCreatedInvoicesInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedInvoicesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -30089,9 +30866,9 @@ export type UserUncheckedCreateWithoutCreatedInvoicesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -30159,7 +30936,6 @@ export type UserCreateOrConnectWithoutCreatedInvoicesInput = {
 }
 
 export type UserCreateWithoutUpdatedInvoicesInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -30198,9 +30974,9 @@ export type UserCreateWithoutUpdatedInvoicesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -30263,7 +31039,7 @@ export type UserCreateWithoutUpdatedInvoicesInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedInvoicesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -30302,9 +31078,9 @@ export type UserUncheckedCreateWithoutUpdatedInvoicesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -30372,7 +31148,6 @@ export type UserCreateOrConnectWithoutUpdatedInvoicesInput = {
 }
 
 export type UserCreateWithoutDeletedInvoicesInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -30411,9 +31186,9 @@ export type UserCreateWithoutDeletedInvoicesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -30476,7 +31251,7 @@ export type UserCreateWithoutDeletedInvoicesInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedInvoicesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -30515,9 +31290,9 @@ export type UserUncheckedCreateWithoutDeletedInvoicesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -30596,7 +31371,6 @@ export type UserUpdateToOneWithWhereWithoutInvoicesInput = {
 }
 
 export type UserUpdateWithoutInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -30634,9 +31408,9 @@ export type UserUpdateWithoutInvoicesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -30700,7 +31474,7 @@ export type UserUpdateWithoutInvoicesInput = {
 }
 
 export type UserUncheckedUpdateWithoutInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -30738,9 +31512,9 @@ export type UserUncheckedUpdateWithoutInvoicesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -30815,7 +31589,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedInvoicesInput = {
 }
 
 export type UserUpdateWithoutCreatedInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -30854,9 +31627,9 @@ export type UserUpdateWithoutCreatedInvoicesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -30919,7 +31692,7 @@ export type UserUpdateWithoutCreatedInvoicesInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -30958,9 +31731,9 @@ export type UserUncheckedUpdateWithoutCreatedInvoicesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -31034,7 +31807,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedInvoicesInput = {
 }
 
 export type UserUpdateWithoutUpdatedInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -31073,9 +31845,9 @@ export type UserUpdateWithoutUpdatedInvoicesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -31138,7 +31910,7 @@ export type UserUpdateWithoutUpdatedInvoicesInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -31177,9 +31949,9 @@ export type UserUncheckedUpdateWithoutUpdatedInvoicesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -31253,7 +32025,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedInvoicesInput = {
 }
 
 export type UserUpdateWithoutDeletedInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -31292,9 +32063,9 @@ export type UserUpdateWithoutDeletedInvoicesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -31357,7 +32128,7 @@ export type UserUpdateWithoutDeletedInvoicesInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -31396,9 +32167,9 @@ export type UserUncheckedUpdateWithoutDeletedInvoicesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -31461,7 +32232,6 @@ export type UserUncheckedUpdateWithoutDeletedInvoicesInput = {
 }
 
 export type UserCreateWithoutPaymentsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -31499,9 +32269,9 @@ export type UserCreateWithoutPaymentsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -31565,7 +32335,7 @@ export type UserCreateWithoutPaymentsInput = {
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -31603,9 +32373,9 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -31674,7 +32444,6 @@ export type UserCreateOrConnectWithoutPaymentsInput = {
 }
 
 export type UserCreateWithoutCreatedPaymentsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -31713,9 +32482,9 @@ export type UserCreateWithoutCreatedPaymentsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -31778,7 +32547,7 @@ export type UserCreateWithoutCreatedPaymentsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedPaymentsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -31817,9 +32586,9 @@ export type UserUncheckedCreateWithoutCreatedPaymentsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -31887,7 +32656,6 @@ export type UserCreateOrConnectWithoutCreatedPaymentsInput = {
 }
 
 export type UserCreateWithoutUpdatedPaymentsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -31926,9 +32694,9 @@ export type UserCreateWithoutUpdatedPaymentsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -31991,7 +32759,7 @@ export type UserCreateWithoutUpdatedPaymentsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedPaymentsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -32030,9 +32798,9 @@ export type UserUncheckedCreateWithoutUpdatedPaymentsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -32100,7 +32868,6 @@ export type UserCreateOrConnectWithoutUpdatedPaymentsInput = {
 }
 
 export type UserCreateWithoutDeletedPaymentsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -32139,9 +32906,9 @@ export type UserCreateWithoutDeletedPaymentsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -32204,7 +32971,7 @@ export type UserCreateWithoutDeletedPaymentsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedPaymentsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -32243,9 +33010,9 @@ export type UserUncheckedCreateWithoutDeletedPaymentsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -32324,7 +33091,6 @@ export type UserUpdateToOneWithWhereWithoutPaymentsInput = {
 }
 
 export type UserUpdateWithoutPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -32362,9 +33128,9 @@ export type UserUpdateWithoutPaymentsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -32428,7 +33194,7 @@ export type UserUpdateWithoutPaymentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -32466,9 +33232,9 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -32543,7 +33309,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedPaymentsInput = {
 }
 
 export type UserUpdateWithoutCreatedPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -32582,9 +33347,9 @@ export type UserUpdateWithoutCreatedPaymentsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -32647,7 +33412,7 @@ export type UserUpdateWithoutCreatedPaymentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -32686,9 +33451,9 @@ export type UserUncheckedUpdateWithoutCreatedPaymentsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -32762,7 +33527,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedPaymentsInput = {
 }
 
 export type UserUpdateWithoutUpdatedPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -32801,9 +33565,9 @@ export type UserUpdateWithoutUpdatedPaymentsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -32866,7 +33630,7 @@ export type UserUpdateWithoutUpdatedPaymentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -32905,9 +33669,9 @@ export type UserUncheckedUpdateWithoutUpdatedPaymentsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -32981,7 +33745,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedPaymentsInput = {
 }
 
 export type UserUpdateWithoutDeletedPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -33020,9 +33783,9 @@ export type UserUpdateWithoutDeletedPaymentsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -33085,7 +33848,7 @@ export type UserUpdateWithoutDeletedPaymentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -33124,9 +33887,9 @@ export type UserUncheckedUpdateWithoutDeletedPaymentsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -33189,7 +33952,6 @@ export type UserUncheckedUpdateWithoutDeletedPaymentsInput = {
 }
 
 export type UserCreateWithoutAssignedTicketsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -33227,9 +33989,9 @@ export type UserCreateWithoutAssignedTicketsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -33293,7 +34055,7 @@ export type UserCreateWithoutAssignedTicketsInput = {
 }
 
 export type UserUncheckedCreateWithoutAssignedTicketsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -33331,9 +34093,9 @@ export type UserUncheckedCreateWithoutAssignedTicketsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -33402,7 +34164,6 @@ export type UserCreateOrConnectWithoutAssignedTicketsInput = {
 }
 
 export type UserCreateWithoutCreatedTicketsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -33441,9 +34202,9 @@ export type UserCreateWithoutCreatedTicketsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -33506,7 +34267,7 @@ export type UserCreateWithoutCreatedTicketsInput = {
 }
 
 export type UserUncheckedCreateWithoutCreatedTicketsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -33545,9 +34306,9 @@ export type UserUncheckedCreateWithoutCreatedTicketsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -33615,7 +34376,6 @@ export type UserCreateOrConnectWithoutCreatedTicketsInput = {
 }
 
 export type UserCreateWithoutUpdatedTicketsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -33654,9 +34414,9 @@ export type UserCreateWithoutUpdatedTicketsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -33719,7 +34479,7 @@ export type UserCreateWithoutUpdatedTicketsInput = {
 }
 
 export type UserUncheckedCreateWithoutUpdatedTicketsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -33758,9 +34518,9 @@ export type UserUncheckedCreateWithoutUpdatedTicketsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -33828,7 +34588,6 @@ export type UserCreateOrConnectWithoutUpdatedTicketsInput = {
 }
 
 export type UserCreateWithoutDeletedTicketsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -33867,9 +34626,9 @@ export type UserCreateWithoutDeletedTicketsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -33932,7 +34691,7 @@ export type UserCreateWithoutDeletedTicketsInput = {
 }
 
 export type UserUncheckedCreateWithoutDeletedTicketsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -33971,9 +34730,9 @@ export type UserUncheckedCreateWithoutDeletedTicketsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -34052,7 +34811,6 @@ export type UserUpdateToOneWithWhereWithoutAssignedTicketsInput = {
 }
 
 export type UserUpdateWithoutAssignedTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34090,9 +34848,9 @@ export type UserUpdateWithoutAssignedTicketsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -34156,7 +34914,7 @@ export type UserUpdateWithoutAssignedTicketsInput = {
 }
 
 export type UserUncheckedUpdateWithoutAssignedTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34194,9 +34952,9 @@ export type UserUncheckedUpdateWithoutAssignedTicketsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -34271,7 +35029,6 @@ export type UserUpdateToOneWithWhereWithoutCreatedTicketsInput = {
 }
 
 export type UserUpdateWithoutCreatedTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34310,9 +35067,9 @@ export type UserUpdateWithoutCreatedTicketsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -34375,7 +35132,7 @@ export type UserUpdateWithoutCreatedTicketsInput = {
 }
 
 export type UserUncheckedUpdateWithoutCreatedTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34414,9 +35171,9 @@ export type UserUncheckedUpdateWithoutCreatedTicketsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -34490,7 +35247,6 @@ export type UserUpdateToOneWithWhereWithoutUpdatedTicketsInput = {
 }
 
 export type UserUpdateWithoutUpdatedTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34529,9 +35285,9 @@ export type UserUpdateWithoutUpdatedTicketsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -34594,7 +35350,7 @@ export type UserUpdateWithoutUpdatedTicketsInput = {
 }
 
 export type UserUncheckedUpdateWithoutUpdatedTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34633,9 +35389,9 @@ export type UserUncheckedUpdateWithoutUpdatedTicketsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -34709,7 +35465,6 @@ export type UserUpdateToOneWithWhereWithoutDeletedTicketsInput = {
 }
 
 export type UserUpdateWithoutDeletedTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34748,9 +35503,9 @@ export type UserUpdateWithoutDeletedTicketsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -34813,7 +35568,7 @@ export type UserUpdateWithoutDeletedTicketsInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeletedTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -34852,9 +35607,9 @@ export type UserUncheckedUpdateWithoutDeletedTicketsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -34917,7 +35672,6 @@ export type UserUncheckedUpdateWithoutDeletedTicketsInput = {
 }
 
 export type UserCreateWithoutTicketAttachmentsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -34955,9 +35709,9 @@ export type UserCreateWithoutTicketAttachmentsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -35021,7 +35775,7 @@ export type UserCreateWithoutTicketAttachmentsInput = {
 }
 
 export type UserUncheckedCreateWithoutTicketAttachmentsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -35059,9 +35813,9 @@ export type UserUncheckedCreateWithoutTicketAttachmentsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -35141,7 +35895,6 @@ export type UserUpdateToOneWithWhereWithoutTicketAttachmentsInput = {
 }
 
 export type UserUpdateWithoutTicketAttachmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -35179,9 +35932,9 @@ export type UserUpdateWithoutTicketAttachmentsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -35245,7 +35998,7 @@ export type UserUpdateWithoutTicketAttachmentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutTicketAttachmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -35283,9 +36036,9 @@ export type UserUncheckedUpdateWithoutTicketAttachmentsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -35349,7 +36102,6 @@ export type UserUncheckedUpdateWithoutTicketAttachmentsInput = {
 }
 
 export type UserCreateWithoutTicketCommentsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -35387,9 +36139,9 @@ export type UserCreateWithoutTicketCommentsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -35453,7 +36205,7 @@ export type UserCreateWithoutTicketCommentsInput = {
 }
 
 export type UserUncheckedCreateWithoutTicketCommentsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -35491,9 +36243,9 @@ export type UserUncheckedCreateWithoutTicketCommentsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -35573,7 +36325,6 @@ export type UserUpdateToOneWithWhereWithoutTicketCommentsInput = {
 }
 
 export type UserUpdateWithoutTicketCommentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -35611,9 +36362,9 @@ export type UserUpdateWithoutTicketCommentsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -35677,7 +36428,7 @@ export type UserUpdateWithoutTicketCommentsInput = {
 }
 
 export type UserUncheckedUpdateWithoutTicketCommentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -35715,9 +36466,9 @@ export type UserUncheckedUpdateWithoutTicketCommentsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -35781,7 +36532,6 @@ export type UserUncheckedUpdateWithoutTicketCommentsInput = {
 }
 
 export type UserCreateWithoutConversationMembersInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -35819,9 +36569,9 @@ export type UserCreateWithoutConversationMembersInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -35885,7 +36635,7 @@ export type UserCreateWithoutConversationMembersInput = {
 }
 
 export type UserUncheckedCreateWithoutConversationMembersInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -35923,9 +36673,9 @@ export type UserUncheckedCreateWithoutConversationMembersInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -36005,7 +36755,6 @@ export type UserUpdateToOneWithWhereWithoutConversationMembersInput = {
 }
 
 export type UserUpdateWithoutConversationMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -36043,9 +36792,9 @@ export type UserUpdateWithoutConversationMembersInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -36109,7 +36858,7 @@ export type UserUpdateWithoutConversationMembersInput = {
 }
 
 export type UserUncheckedUpdateWithoutConversationMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -36147,9 +36896,9 @@ export type UserUncheckedUpdateWithoutConversationMembersInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -36213,7 +36962,6 @@ export type UserUncheckedUpdateWithoutConversationMembersInput = {
 }
 
 export type UserCreateWithoutSentMessagesInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -36251,9 +36999,9 @@ export type UserCreateWithoutSentMessagesInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -36317,7 +37065,7 @@ export type UserCreateWithoutSentMessagesInput = {
 }
 
 export type UserUncheckedCreateWithoutSentMessagesInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -36355,9 +37103,9 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -36437,7 +37185,6 @@ export type UserUpdateToOneWithWhereWithoutSentMessagesInput = {
 }
 
 export type UserUpdateWithoutSentMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -36475,9 +37222,9 @@ export type UserUpdateWithoutSentMessagesInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -36541,7 +37288,7 @@ export type UserUpdateWithoutSentMessagesInput = {
 }
 
 export type UserUncheckedUpdateWithoutSentMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -36579,9 +37326,9 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -36645,7 +37392,6 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
 }
 
 export type UserCreateWithoutReviewsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -36683,9 +37429,9 @@ export type UserCreateWithoutReviewsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -36749,7 +37495,7 @@ export type UserCreateWithoutReviewsInput = {
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -36787,9 +37533,9 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -36869,7 +37615,6 @@ export type UserUpdateToOneWithWhereWithoutReviewsInput = {
 }
 
 export type UserUpdateWithoutReviewsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -36907,9 +37652,9 @@ export type UserUpdateWithoutReviewsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -36973,7 +37718,7 @@ export type UserUpdateWithoutReviewsInput = {
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37011,9 +37756,9 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -37077,7 +37822,6 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
 }
 
 export type UserCreateWithoutReportedItemsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -37115,9 +37859,9 @@ export type UserCreateWithoutReportedItemsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -37181,7 +37925,7 @@ export type UserCreateWithoutReportedItemsInput = {
 }
 
 export type UserUncheckedCreateWithoutReportedItemsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -37219,9 +37963,9 @@ export type UserUncheckedCreateWithoutReportedItemsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -37290,7 +38034,6 @@ export type UserCreateOrConnectWithoutReportedItemsInput = {
 }
 
 export type UserCreateWithoutHandledReportsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -37328,9 +38071,9 @@ export type UserCreateWithoutHandledReportsInput = {
   reportedItems?: Prisma.ReportCreateNestedManyWithoutReporterInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -37394,7 +38137,7 @@ export type UserCreateWithoutHandledReportsInput = {
 }
 
 export type UserUncheckedCreateWithoutHandledReportsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -37432,9 +38175,9 @@ export type UserUncheckedCreateWithoutHandledReportsInput = {
   reportedItems?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -37514,7 +38257,6 @@ export type UserUpdateToOneWithWhereWithoutReportedItemsInput = {
 }
 
 export type UserUpdateWithoutReportedItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37552,9 +38294,9 @@ export type UserUpdateWithoutReportedItemsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -37618,7 +38360,7 @@ export type UserUpdateWithoutReportedItemsInput = {
 }
 
 export type UserUncheckedUpdateWithoutReportedItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37656,9 +38398,9 @@ export type UserUncheckedUpdateWithoutReportedItemsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -37733,7 +38475,6 @@ export type UserUpdateToOneWithWhereWithoutHandledReportsInput = {
 }
 
 export type UserUpdateWithoutHandledReportsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37771,9 +38512,9 @@ export type UserUpdateWithoutHandledReportsInput = {
   reportedItems?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -37837,7 +38578,7 @@ export type UserUpdateWithoutHandledReportsInput = {
 }
 
 export type UserUncheckedUpdateWithoutHandledReportsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -37875,9 +38616,9 @@ export type UserUncheckedUpdateWithoutHandledReportsInput = {
   reportedItems?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -37941,7 +38682,6 @@ export type UserUncheckedUpdateWithoutHandledReportsInput = {
 }
 
 export type UserCreateWithoutNotificationsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -37979,9 +38719,9 @@ export type UserCreateWithoutNotificationsInput = {
   reportedItems?: Prisma.ReportCreateNestedManyWithoutReporterInput
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -38045,7 +38785,7 @@ export type UserCreateWithoutNotificationsInput = {
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -38083,9 +38823,9 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   reportedItems?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -38165,7 +38905,6 @@ export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
 }
 
 export type UserUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38203,9 +38942,9 @@ export type UserUpdateWithoutNotificationsInput = {
   reportedItems?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -38269,7 +39008,7 @@ export type UserUpdateWithoutNotificationsInput = {
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38307,9 +39046,9 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   reportedItems?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -38373,7 +39112,6 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
 }
 
 export type UserCreateWithoutDeviceTokensInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -38411,9 +39149,9 @@ export type UserCreateWithoutDeviceTokensInput = {
   reportedItems?: Prisma.ReportCreateNestedManyWithoutReporterInput
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -38477,7 +39215,7 @@ export type UserCreateWithoutDeviceTokensInput = {
 }
 
 export type UserUncheckedCreateWithoutDeviceTokensInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -38515,9 +39253,9 @@ export type UserUncheckedCreateWithoutDeviceTokensInput = {
   reportedItems?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -38597,7 +39335,6 @@ export type UserUpdateToOneWithWhereWithoutDeviceTokensInput = {
 }
 
 export type UserUpdateWithoutDeviceTokensInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38635,9 +39372,9 @@ export type UserUpdateWithoutDeviceTokensInput = {
   reportedItems?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -38701,7 +39438,7 @@ export type UserUpdateWithoutDeviceTokensInput = {
 }
 
 export type UserUncheckedUpdateWithoutDeviceTokensInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -38739,872 +39476,8 @@ export type UserUncheckedUpdateWithoutDeviceTokensInput = {
   reportedItems?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
-  createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdRooms?: Prisma.RoomUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedRooms?: Prisma.RoomUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedRooms?: Prisma.RoomUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdContracts?: Prisma.ContractUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedContracts?: Prisma.ContractUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedContracts?: Prisma.ContractUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedTickets?: Prisma.TicketUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedRoles?: Prisma.RoleUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdPlans?: Prisma.PlanUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedPlans?: Prisma.PlanUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedPlans?: Prisma.PlanUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutDeletedByNestedInput
-}
-
-export type UserCreateWithoutAiRecommendationLogsInput = {
-  id?: string
-  fullName: string
-  email: string
-  phone?: string | null
-  passwordHash: string
-  systemRole?: string | null
-  avatarUrl?: string | null
-  totpSecret?: string | null
-  status?: $Enums.UserStatus
-  emailVerifiedAt?: Date | string | null
-  phoneVerifiedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  ownedTenants?: Prisma.TenantCreateNestedManyWithoutOwnerInput
-  tenantMembers?: Prisma.TenantMemberCreateNestedManyWithoutUserInput
-  renterProfile?: Prisma.RenterProfileCreateNestedOneWithoutUserInput
-  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRenterInput
-  roomViewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutUserInput
-  favoriteRooms?: Prisma.FavoriteRoomCreateNestedManyWithoutUserInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRenterInput
-  assignedAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutAssignedStaffInput
-  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRenterInput
-  contracts?: Prisma.ContractCreateNestedManyWithoutRenterInput
-  contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
-  uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
-  invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
-  payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
-  assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
-  ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
-  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
-  conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  reviews?: Prisma.ReviewCreateNestedManyWithoutReviewerInput
-  reportedItems?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
-  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
-  createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
-  updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
-  deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
-  createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
-  updatedPropertys?: Prisma.PropertyCreateNestedManyWithoutUpdatedByInput
-  deletedPropertys?: Prisma.PropertyCreateNestedManyWithoutDeletedByInput
-  createdRooms?: Prisma.RoomCreateNestedManyWithoutCreatedByInput
-  updatedRooms?: Prisma.RoomCreateNestedManyWithoutUpdatedByInput
-  deletedRooms?: Prisma.RoomCreateNestedManyWithoutDeletedByInput
-  createdContracts?: Prisma.ContractCreateNestedManyWithoutCreatedByInput
-  updatedContracts?: Prisma.ContractCreateNestedManyWithoutUpdatedByInput
-  deletedContracts?: Prisma.ContractCreateNestedManyWithoutDeletedByInput
-  createdInvoices?: Prisma.InvoiceCreateNestedManyWithoutCreatedByInput
-  updatedInvoices?: Prisma.InvoiceCreateNestedManyWithoutUpdatedByInput
-  deletedInvoices?: Prisma.InvoiceCreateNestedManyWithoutDeletedByInput
-  createdPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
-  updatedPayments?: Prisma.PaymentCreateNestedManyWithoutUpdatedByInput
-  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
-  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
-  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
-  deletedTickets?: Prisma.TicketCreateNestedManyWithoutDeletedByInput
-  createdRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCreatedByInput
-  updatedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutUpdatedByInput
-  deletedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutDeletedByInput
-  createdHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutCreatedByInput
-  updatedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutUpdatedByInput
-  deletedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutDeletedByInput
-  createdMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutCreatedByInput
-  updatedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutUpdatedByInput
-  deletedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutDeletedByInput
-  createdContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutCreatedByInput
-  updatedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutUpdatedByInput
-  deletedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutDeletedByInput
-  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutCreatedByInput
-  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutUpdatedByInput
-  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutDeletedByInput
-  createdRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutCreatedByInput
-  updatedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutUpdatedByInput
-  deletedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutDeletedByInput
-  createdInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutCreatedByInput
-  updatedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutUpdatedByInput
-  deletedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutDeletedByInput
-  createdContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutCreatedByInput
-  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutUpdatedByInput
-  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutDeletedByInput
-  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
-  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput
-  deletedRoles?: Prisma.RoleCreateNestedManyWithoutDeletedByInput
-  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput
-  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput
-  deletedPermissions?: Prisma.PermissionCreateNestedManyWithoutDeletedByInput
-  createdPlans?: Prisma.PlanCreateNestedManyWithoutCreatedByInput
-  updatedPlans?: Prisma.PlanCreateNestedManyWithoutUpdatedByInput
-  deletedPlans?: Prisma.PlanCreateNestedManyWithoutDeletedByInput
-  createdAmenitys?: Prisma.AmenityCreateNestedManyWithoutCreatedByInput
-  updatedAmenitys?: Prisma.AmenityCreateNestedManyWithoutUpdatedByInput
-  deletedAmenitys?: Prisma.AmenityCreateNestedManyWithoutDeletedByInput
-  createdAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutCreatedByInput
-  updatedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutUpdatedByInput
-  deletedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutDeletedByInput
-}
-
-export type UserUncheckedCreateWithoutAiRecommendationLogsInput = {
-  id?: string
-  fullName: string
-  email: string
-  phone?: string | null
-  passwordHash: string
-  systemRole?: string | null
-  avatarUrl?: string | null
-  totpSecret?: string | null
-  status?: $Enums.UserStatus
-  emailVerifiedAt?: Date | string | null
-  phoneVerifiedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  ownedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutOwnerInput
-  tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutUserInput
-  renterProfile?: Prisma.RenterProfileUncheckedCreateNestedOneWithoutUserInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRenterInput
-  roomViewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutUserInput
-  favoriteRooms?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutUserInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRenterInput
-  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutAssignedStaffInput
-  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRenterInput
-  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRenterInput
-  contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
-  uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
-  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
-  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
-  assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
-  ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
-  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
-  conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReviewerInput
-  reportedItems?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
-  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
-  createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
-  createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutDeletedByInput
-  createdRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutDeletedByInput
-  createdContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutDeletedByInput
-  createdInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutDeletedByInput
-  createdPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
-  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutDeletedByInput
-  createdRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutDeletedByInput
-  createdHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutDeletedByInput
-  createdMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutDeletedByInput
-  createdContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutDeletedByInput
-  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutDeletedByInput
-  createdRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutDeletedByInput
-  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutDeletedByInput
-  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutDeletedByInput
-  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutDeletedByInput
-  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutDeletedByInput
-  createdPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutDeletedByInput
-  createdAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutDeletedByInput
-  createdAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutDeletedByInput
-}
-
-export type UserCreateOrConnectWithoutAiRecommendationLogsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAiRecommendationLogsInput, Prisma.UserUncheckedCreateWithoutAiRecommendationLogsInput>
-}
-
-export type UserUpsertWithoutAiRecommendationLogsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAiRecommendationLogsInput, Prisma.UserUncheckedUpdateWithoutAiRecommendationLogsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAiRecommendationLogsInput, Prisma.UserUncheckedCreateWithoutAiRecommendationLogsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutAiRecommendationLogsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAiRecommendationLogsInput, Prisma.UserUncheckedUpdateWithoutAiRecommendationLogsInput>
-}
-
-export type UserUpdateWithoutAiRecommendationLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  ownedTenants?: Prisma.TenantUpdateManyWithoutOwnerNestedInput
-  tenantMembers?: Prisma.TenantMemberUpdateManyWithoutUserNestedInput
-  renterProfile?: Prisma.RenterProfileUpdateOneWithoutUserNestedInput
-  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRenterNestedInput
-  roomViewLogs?: Prisma.RoomViewLogUpdateManyWithoutUserNestedInput
-  favoriteRooms?: Prisma.FavoriteRoomUpdateManyWithoutUserNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRenterNestedInput
-  assignedAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutAssignedStaffNestedInput
-  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRenterNestedInput
-  contracts?: Prisma.ContractUpdateManyWithoutRenterNestedInput
-  contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
-  uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
-  invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
-  payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
-  assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
-  ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
-  ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
-  conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  reviews?: Prisma.ReviewUpdateManyWithoutReviewerNestedInput
-  reportedItems?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
-  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
-  createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
-  updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
-  deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
-  createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
-  updatedPropertys?: Prisma.PropertyUpdateManyWithoutUpdatedByNestedInput
-  deletedPropertys?: Prisma.PropertyUpdateManyWithoutDeletedByNestedInput
-  createdRooms?: Prisma.RoomUpdateManyWithoutCreatedByNestedInput
-  updatedRooms?: Prisma.RoomUpdateManyWithoutUpdatedByNestedInput
-  deletedRooms?: Prisma.RoomUpdateManyWithoutDeletedByNestedInput
-  createdContracts?: Prisma.ContractUpdateManyWithoutCreatedByNestedInput
-  updatedContracts?: Prisma.ContractUpdateManyWithoutUpdatedByNestedInput
-  deletedContracts?: Prisma.ContractUpdateManyWithoutDeletedByNestedInput
-  createdInvoices?: Prisma.InvoiceUpdateManyWithoutCreatedByNestedInput
-  updatedInvoices?: Prisma.InvoiceUpdateManyWithoutUpdatedByNestedInput
-  deletedInvoices?: Prisma.InvoiceUpdateManyWithoutDeletedByNestedInput
-  createdPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
-  updatedPayments?: Prisma.PaymentUpdateManyWithoutUpdatedByNestedInput
-  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
-  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
-  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
-  deletedTickets?: Prisma.TicketUpdateManyWithoutDeletedByNestedInput
-  createdRoomAssets?: Prisma.RoomAssetUpdateManyWithoutCreatedByNestedInput
-  updatedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutUpdatedByNestedInput
-  deletedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutDeletedByNestedInput
-  createdHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutCreatedByNestedInput
-  updatedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutUpdatedByNestedInput
-  deletedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutDeletedByNestedInput
-  createdMeterReadings?: Prisma.MeterReadingUpdateManyWithoutCreatedByNestedInput
-  updatedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutUpdatedByNestedInput
-  deletedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutDeletedByNestedInput
-  createdContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutCreatedByNestedInput
-  updatedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutUpdatedByNestedInput
-  deletedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutDeletedByNestedInput
-  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutCreatedByNestedInput
-  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutUpdatedByNestedInput
-  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutDeletedByNestedInput
-  createdRentalRequests?: Prisma.RentalRequestUpdateManyWithoutCreatedByNestedInput
-  updatedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutUpdatedByNestedInput
-  deletedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutDeletedByNestedInput
-  createdInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutCreatedByNestedInput
-  updatedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutUpdatedByNestedInput
-  deletedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutDeletedByNestedInput
-  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutCreatedByNestedInput
-  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutUpdatedByNestedInput
-  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutDeletedByNestedInput
-  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
-  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput
-  deletedRoles?: Prisma.RoleUpdateManyWithoutDeletedByNestedInput
-  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput
-  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput
-  deletedPermissions?: Prisma.PermissionUpdateManyWithoutDeletedByNestedInput
-  createdPlans?: Prisma.PlanUpdateManyWithoutCreatedByNestedInput
-  updatedPlans?: Prisma.PlanUpdateManyWithoutUpdatedByNestedInput
-  deletedPlans?: Prisma.PlanUpdateManyWithoutDeletedByNestedInput
-  createdAmenitys?: Prisma.AmenityUpdateManyWithoutCreatedByNestedInput
-  updatedAmenitys?: Prisma.AmenityUpdateManyWithoutUpdatedByNestedInput
-  deletedAmenitys?: Prisma.AmenityUpdateManyWithoutDeletedByNestedInput
-  createdAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutCreatedByNestedInput
-  updatedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutUpdatedByNestedInput
-  deletedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutDeletedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutAiRecommendationLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  ownedTenants?: Prisma.TenantUncheckedUpdateManyWithoutOwnerNestedInput
-  tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutUserNestedInput
-  renterProfile?: Prisma.RenterProfileUncheckedUpdateOneWithoutUserNestedInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRenterNestedInput
-  roomViewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutUserNestedInput
-  favoriteRooms?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutUserNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRenterNestedInput
-  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
-  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRenterNestedInput
-  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRenterNestedInput
-  contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
-  uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
-  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
-  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
-  assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
-  ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
-  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
-  conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutReviewerNestedInput
-  reportedItems?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
-  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
-  createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdRooms?: Prisma.RoomUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedRooms?: Prisma.RoomUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedRooms?: Prisma.RoomUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdContracts?: Prisma.ContractUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedContracts?: Prisma.ContractUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedContracts?: Prisma.ContractUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedTickets?: Prisma.TicketUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedRoles?: Prisma.RoleUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdPlans?: Prisma.PlanUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedPlans?: Prisma.PlanUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedPlans?: Prisma.PlanUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutDeletedByNestedInput
-  createdAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutUpdatedByNestedInput
-  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutDeletedByNestedInput
-}
-
-export type UserCreateWithoutChatbotSessionsInput = {
-  id?: string
-  fullName: string
-  email: string
-  phone?: string | null
-  passwordHash: string
-  systemRole?: string | null
-  avatarUrl?: string | null
-  totpSecret?: string | null
-  status?: $Enums.UserStatus
-  emailVerifiedAt?: Date | string | null
-  phoneVerifiedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  ownedTenants?: Prisma.TenantCreateNestedManyWithoutOwnerInput
-  tenantMembers?: Prisma.TenantMemberCreateNestedManyWithoutUserInput
-  renterProfile?: Prisma.RenterProfileCreateNestedOneWithoutUserInput
-  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRenterInput
-  roomViewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutUserInput
-  favoriteRooms?: Prisma.FavoriteRoomCreateNestedManyWithoutUserInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRenterInput
-  assignedAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutAssignedStaffInput
-  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRenterInput
-  contracts?: Prisma.ContractCreateNestedManyWithoutRenterInput
-  contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
-  uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
-  invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
-  payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
-  assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
-  ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
-  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
-  conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  reviews?: Prisma.ReviewCreateNestedManyWithoutReviewerInput
-  reportedItems?: Prisma.ReportCreateNestedManyWithoutReporterInput
-  handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
-  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
-  createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
-  updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
-  deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
-  createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
-  updatedPropertys?: Prisma.PropertyCreateNestedManyWithoutUpdatedByInput
-  deletedPropertys?: Prisma.PropertyCreateNestedManyWithoutDeletedByInput
-  createdRooms?: Prisma.RoomCreateNestedManyWithoutCreatedByInput
-  updatedRooms?: Prisma.RoomCreateNestedManyWithoutUpdatedByInput
-  deletedRooms?: Prisma.RoomCreateNestedManyWithoutDeletedByInput
-  createdContracts?: Prisma.ContractCreateNestedManyWithoutCreatedByInput
-  updatedContracts?: Prisma.ContractCreateNestedManyWithoutUpdatedByInput
-  deletedContracts?: Prisma.ContractCreateNestedManyWithoutDeletedByInput
-  createdInvoices?: Prisma.InvoiceCreateNestedManyWithoutCreatedByInput
-  updatedInvoices?: Prisma.InvoiceCreateNestedManyWithoutUpdatedByInput
-  deletedInvoices?: Prisma.InvoiceCreateNestedManyWithoutDeletedByInput
-  createdPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
-  updatedPayments?: Prisma.PaymentCreateNestedManyWithoutUpdatedByInput
-  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
-  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
-  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
-  deletedTickets?: Prisma.TicketCreateNestedManyWithoutDeletedByInput
-  createdRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCreatedByInput
-  updatedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutUpdatedByInput
-  deletedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutDeletedByInput
-  createdHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutCreatedByInput
-  updatedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutUpdatedByInput
-  deletedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutDeletedByInput
-  createdMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutCreatedByInput
-  updatedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutUpdatedByInput
-  deletedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutDeletedByInput
-  createdContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutCreatedByInput
-  updatedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutUpdatedByInput
-  deletedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutDeletedByInput
-  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutCreatedByInput
-  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutUpdatedByInput
-  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutDeletedByInput
-  createdRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutCreatedByInput
-  updatedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutUpdatedByInput
-  deletedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutDeletedByInput
-  createdInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutCreatedByInput
-  updatedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutUpdatedByInput
-  deletedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutDeletedByInput
-  createdContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutCreatedByInput
-  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutUpdatedByInput
-  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutDeletedByInput
-  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
-  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput
-  deletedRoles?: Prisma.RoleCreateNestedManyWithoutDeletedByInput
-  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput
-  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput
-  deletedPermissions?: Prisma.PermissionCreateNestedManyWithoutDeletedByInput
-  createdPlans?: Prisma.PlanCreateNestedManyWithoutCreatedByInput
-  updatedPlans?: Prisma.PlanCreateNestedManyWithoutUpdatedByInput
-  deletedPlans?: Prisma.PlanCreateNestedManyWithoutDeletedByInput
-  createdAmenitys?: Prisma.AmenityCreateNestedManyWithoutCreatedByInput
-  updatedAmenitys?: Prisma.AmenityCreateNestedManyWithoutUpdatedByInput
-  deletedAmenitys?: Prisma.AmenityCreateNestedManyWithoutDeletedByInput
-  createdAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutCreatedByInput
-  updatedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutUpdatedByInput
-  deletedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutDeletedByInput
-}
-
-export type UserUncheckedCreateWithoutChatbotSessionsInput = {
-  id?: string
-  fullName: string
-  email: string
-  phone?: string | null
-  passwordHash: string
-  systemRole?: string | null
-  avatarUrl?: string | null
-  totpSecret?: string | null
-  status?: $Enums.UserStatus
-  emailVerifiedAt?: Date | string | null
-  phoneVerifiedAt?: Date | string | null
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  ownedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutOwnerInput
-  tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutUserInput
-  renterProfile?: Prisma.RenterProfileUncheckedCreateNestedOneWithoutUserInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRenterInput
-  roomViewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutUserInput
-  favoriteRooms?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutUserInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRenterInput
-  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutAssignedStaffInput
-  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRenterInput
-  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRenterInput
-  contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
-  uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
-  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
-  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
-  assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
-  ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
-  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
-  conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReviewerInput
-  reportedItems?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
-  handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
-  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
-  createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
-  createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutDeletedByInput
-  createdRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutDeletedByInput
-  createdContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutDeletedByInput
-  createdInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutDeletedByInput
-  createdPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
-  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutDeletedByInput
-  createdRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutDeletedByInput
-  createdHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutDeletedByInput
-  createdMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutDeletedByInput
-  createdContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutDeletedByInput
-  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutDeletedByInput
-  createdRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutDeletedByInput
-  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutDeletedByInput
-  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutDeletedByInput
-  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutDeletedByInput
-  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutDeletedByInput
-  createdPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutDeletedByInput
-  createdAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutDeletedByInput
-  createdAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutUpdatedByInput
-  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutDeletedByInput
-}
-
-export type UserCreateOrConnectWithoutChatbotSessionsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutChatbotSessionsInput, Prisma.UserUncheckedCreateWithoutChatbotSessionsInput>
-}
-
-export type UserUpsertWithoutChatbotSessionsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutChatbotSessionsInput, Prisma.UserUncheckedUpdateWithoutChatbotSessionsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutChatbotSessionsInput, Prisma.UserUncheckedCreateWithoutChatbotSessionsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutChatbotSessionsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutChatbotSessionsInput, Prisma.UserUncheckedUpdateWithoutChatbotSessionsInput>
-}
-
-export type UserUpdateWithoutChatbotSessionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  ownedTenants?: Prisma.TenantUpdateManyWithoutOwnerNestedInput
-  tenantMembers?: Prisma.TenantMemberUpdateManyWithoutUserNestedInput
-  renterProfile?: Prisma.RenterProfileUpdateOneWithoutUserNestedInput
-  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRenterNestedInput
-  roomViewLogs?: Prisma.RoomViewLogUpdateManyWithoutUserNestedInput
-  favoriteRooms?: Prisma.FavoriteRoomUpdateManyWithoutUserNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRenterNestedInput
-  assignedAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutAssignedStaffNestedInput
-  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRenterNestedInput
-  contracts?: Prisma.ContractUpdateManyWithoutRenterNestedInput
-  contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
-  uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
-  invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
-  payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
-  assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
-  ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
-  ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
-  conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  reviews?: Prisma.ReviewUpdateManyWithoutReviewerNestedInput
-  reportedItems?: Prisma.ReportUpdateManyWithoutReporterNestedInput
-  handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
-  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
-  createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
-  updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
-  deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
-  createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
-  updatedPropertys?: Prisma.PropertyUpdateManyWithoutUpdatedByNestedInput
-  deletedPropertys?: Prisma.PropertyUpdateManyWithoutDeletedByNestedInput
-  createdRooms?: Prisma.RoomUpdateManyWithoutCreatedByNestedInput
-  updatedRooms?: Prisma.RoomUpdateManyWithoutUpdatedByNestedInput
-  deletedRooms?: Prisma.RoomUpdateManyWithoutDeletedByNestedInput
-  createdContracts?: Prisma.ContractUpdateManyWithoutCreatedByNestedInput
-  updatedContracts?: Prisma.ContractUpdateManyWithoutUpdatedByNestedInput
-  deletedContracts?: Prisma.ContractUpdateManyWithoutDeletedByNestedInput
-  createdInvoices?: Prisma.InvoiceUpdateManyWithoutCreatedByNestedInput
-  updatedInvoices?: Prisma.InvoiceUpdateManyWithoutUpdatedByNestedInput
-  deletedInvoices?: Prisma.InvoiceUpdateManyWithoutDeletedByNestedInput
-  createdPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
-  updatedPayments?: Prisma.PaymentUpdateManyWithoutUpdatedByNestedInput
-  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
-  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
-  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
-  deletedTickets?: Prisma.TicketUpdateManyWithoutDeletedByNestedInput
-  createdRoomAssets?: Prisma.RoomAssetUpdateManyWithoutCreatedByNestedInput
-  updatedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutUpdatedByNestedInput
-  deletedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutDeletedByNestedInput
-  createdHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutCreatedByNestedInput
-  updatedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutUpdatedByNestedInput
-  deletedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutDeletedByNestedInput
-  createdMeterReadings?: Prisma.MeterReadingUpdateManyWithoutCreatedByNestedInput
-  updatedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutUpdatedByNestedInput
-  deletedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutDeletedByNestedInput
-  createdContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutCreatedByNestedInput
-  updatedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutUpdatedByNestedInput
-  deletedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutDeletedByNestedInput
-  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutCreatedByNestedInput
-  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutUpdatedByNestedInput
-  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutDeletedByNestedInput
-  createdRentalRequests?: Prisma.RentalRequestUpdateManyWithoutCreatedByNestedInput
-  updatedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutUpdatedByNestedInput
-  deletedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutDeletedByNestedInput
-  createdInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutCreatedByNestedInput
-  updatedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutUpdatedByNestedInput
-  deletedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutDeletedByNestedInput
-  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutCreatedByNestedInput
-  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutUpdatedByNestedInput
-  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutDeletedByNestedInput
-  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
-  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput
-  deletedRoles?: Prisma.RoleUpdateManyWithoutDeletedByNestedInput
-  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput
-  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput
-  deletedPermissions?: Prisma.PermissionUpdateManyWithoutDeletedByNestedInput
-  createdPlans?: Prisma.PlanUpdateManyWithoutCreatedByNestedInput
-  updatedPlans?: Prisma.PlanUpdateManyWithoutUpdatedByNestedInput
-  deletedPlans?: Prisma.PlanUpdateManyWithoutDeletedByNestedInput
-  createdAmenitys?: Prisma.AmenityUpdateManyWithoutCreatedByNestedInput
-  updatedAmenitys?: Prisma.AmenityUpdateManyWithoutUpdatedByNestedInput
-  deletedAmenitys?: Prisma.AmenityUpdateManyWithoutDeletedByNestedInput
-  createdAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutCreatedByNestedInput
-  updatedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutUpdatedByNestedInput
-  deletedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutDeletedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutChatbotSessionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  ownedTenants?: Prisma.TenantUncheckedUpdateManyWithoutOwnerNestedInput
-  tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutUserNestedInput
-  renterProfile?: Prisma.RenterProfileUncheckedUpdateOneWithoutUserNestedInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRenterNestedInput
-  roomViewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutUserNestedInput
-  favoriteRooms?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutUserNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRenterNestedInput
-  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
-  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRenterNestedInput
-  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRenterNestedInput
-  contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
-  uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
-  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
-  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
-  assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
-  ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
-  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
-  conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutReviewerNestedInput
-  reportedItems?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
-  handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
-  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -39669,7 +39542,6 @@ export type UserUncheckedUpdateWithoutChatbotSessionsInput = {
 }
 
 export type UserCreateWithoutAuditLogsInput = {
-  id?: string
   fullName: string
   email: string
   phone?: string | null
@@ -39708,8 +39580,8 @@ export type UserCreateWithoutAuditLogsInput = {
   handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutUserInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -39773,7 +39645,7 @@ export type UserCreateWithoutAuditLogsInput = {
 }
 
 export type UserUncheckedCreateWithoutAuditLogsInput = {
-  id?: string
+  id?: number
   fullName: string
   email: string
   phone?: string | null
@@ -39812,8 +39684,8 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutUserInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -39893,7 +39765,6 @@ export type UserUpdateToOneWithWhereWithoutAuditLogsInput = {
 }
 
 export type UserUpdateWithoutAuditLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -39932,8 +39803,8 @@ export type UserUpdateWithoutAuditLogsInput = {
   handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutUserNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -39997,7 +39868,7 @@ export type UserUpdateWithoutAuditLogsInput = {
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -40036,8 +39907,8 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutUserNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -40129,9 +40000,9 @@ export type UserCountOutputType = {
   handledReports: number
   notifications: number
   deviceTokens: number
-  aiRecommendationLogs: number
+  refreshTokens: number
+  devices: number
   auditLogs: number
-  chatbotSessions: number
   createdTenants: number
   updatedTenants: number
   deletedTenants: number
@@ -40218,9 +40089,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   handledReports?: boolean | UserCountOutputTypeCountHandledReportsArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   deviceTokens?: boolean | UserCountOutputTypeCountDeviceTokensArgs
-  aiRecommendationLogs?: boolean | UserCountOutputTypeCountAiRecommendationLogsArgs
+  refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
+  devices?: boolean | UserCountOutputTypeCountDevicesArgs
   auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
-  chatbotSessions?: boolean | UserCountOutputTypeCountChatbotSessionsArgs
   createdTenants?: boolean | UserCountOutputTypeCountCreatedTenantsArgs
   updatedTenants?: boolean | UserCountOutputTypeCountUpdatedTenantsArgs
   deletedTenants?: boolean | UserCountOutputTypeCountDeletedTenantsArgs
@@ -40457,8 +40328,15 @@ export type UserCountOutputTypeCountDeviceTokensArgs<ExtArgs extends runtime.Typ
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountAiRecommendationLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AiRecommendationLogWhereInput
+export type UserCountOutputTypeCountRefreshTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RefreshTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDevicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DeviceWhereInput
 }
 
 /**
@@ -40466,13 +40344,6 @@ export type UserCountOutputTypeCountAiRecommendationLogsArgs<ExtArgs extends run
  */
 export type UserCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AuditLogWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountChatbotSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ChatbotSessionWhereInput
 }
 
 /**
@@ -40936,9 +40807,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   handledReports?: boolean | Prisma.User$handledReportsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   deviceTokens?: boolean | Prisma.User$deviceTokensArgs<ExtArgs>
-  aiRecommendationLogs?: boolean | Prisma.User$aiRecommendationLogsArgs<ExtArgs>
+  refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
+  devices?: boolean | Prisma.User$devicesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
-  chatbotSessions?: boolean | Prisma.User$chatbotSessionsArgs<ExtArgs>
   createdTenants?: boolean | Prisma.User$createdTenantsArgs<ExtArgs>
   updatedTenants?: boolean | Prisma.User$updatedTenantsArgs<ExtArgs>
   deletedTenants?: boolean | Prisma.User$deletedTenantsArgs<ExtArgs>
@@ -41082,9 +40953,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   handledReports?: boolean | Prisma.User$handledReportsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   deviceTokens?: boolean | Prisma.User$deviceTokensArgs<ExtArgs>
-  aiRecommendationLogs?: boolean | Prisma.User$aiRecommendationLogsArgs<ExtArgs>
+  refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
+  devices?: boolean | Prisma.User$devicesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
-  chatbotSessions?: boolean | Prisma.User$chatbotSessionsArgs<ExtArgs>
   createdTenants?: boolean | Prisma.User$createdTenantsArgs<ExtArgs>
   updatedTenants?: boolean | Prisma.User$updatedTenantsArgs<ExtArgs>
   deletedTenants?: boolean | Prisma.User$deletedTenantsArgs<ExtArgs>
@@ -41250,14 +41121,17 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
      */
     deviceTokens: Prisma.$DeviceTokenPayload<ExtArgs>[]
     /**
-     * Lịch sử các tác vụ AI gợi ý liên quan đến người dùng này
+     * Danh sach refresh token dang hoac da duoc cap cho nguoi dung nay
      */
-    aiRecommendationLogs: Prisma.$AiRecommendationLogPayload<ExtArgs>[]
+    refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
+    /**
+     * Danh sach cac thiet bi dang nhap cua nguoi dung nay
+     */
+    devices: Prisma.$DevicePayload<ExtArgs>[]
     /**
      * Danh sách các audit log do người dùng này thực hiện
      */
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
-    chatbotSessions: Prisma.$ChatbotSessionPayload<ExtArgs>[]
     createdTenants: Prisma.$TenantPayload<ExtArgs>[]
     updatedTenants: Prisma.$TenantPayload<ExtArgs>[]
     deletedTenants: Prisma.$TenantPayload<ExtArgs>[]
@@ -41321,9 +41195,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
-     * ID định danh duy nhất (UUID)
+     * ID định danh duy nhất
      */
-    id: string
+    id: number
     /**
      * Họ và tên đầy đủ
      */
@@ -41798,9 +41672,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   handledReports<T extends Prisma.User$handledReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$handledReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deviceTokens<T extends Prisma.User$deviceTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deviceTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeviceTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  aiRecommendationLogs<T extends Prisma.User$aiRecommendationLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$aiRecommendationLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AiRecommendationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  devices<T extends Prisma.User$devicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$devicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  chatbotSessions<T extends Prisma.User$chatbotSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chatbotSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatbotSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdTenants<T extends Prisma.User$createdTenantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdTenantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedTenants<T extends Prisma.User$updatedTenantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedTenantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deletedTenants<T extends Prisma.User$deletedTenantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deletedTenantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -41890,7 +41764,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the User model
  */
 export interface UserFieldRefs {
-  readonly id: Prisma.FieldRef<"User", 'String'>
+  readonly id: Prisma.FieldRef<"User", 'Int'>
   readonly fullName: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly phone: Prisma.FieldRef<"User", 'String'>
@@ -42869,27 +42743,51 @@ export type User$deviceTokensArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * User.aiRecommendationLogs
+ * User.refreshTokens
  */
-export type User$aiRecommendationLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$refreshTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the AiRecommendationLog
+   * Select specific fields to fetch from the RefreshToken
    */
-  select?: Prisma.AiRecommendationLogSelect<ExtArgs> | null
+  select?: Prisma.RefreshTokenSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the AiRecommendationLog
+   * Omit specific fields from the RefreshToken
    */
-  omit?: Prisma.AiRecommendationLogOmit<ExtArgs> | null
+  omit?: Prisma.RefreshTokenOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.AiRecommendationLogInclude<ExtArgs> | null
-  where?: Prisma.AiRecommendationLogWhereInput
-  orderBy?: Prisma.AiRecommendationLogOrderByWithRelationInput | Prisma.AiRecommendationLogOrderByWithRelationInput[]
-  cursor?: Prisma.AiRecommendationLogWhereUniqueInput
+  include?: Prisma.RefreshTokenInclude<ExtArgs> | null
+  where?: Prisma.RefreshTokenWhereInput
+  orderBy?: Prisma.RefreshTokenOrderByWithRelationInput | Prisma.RefreshTokenOrderByWithRelationInput[]
+  cursor?: Prisma.RefreshTokenWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.AiRecommendationLogScalarFieldEnum | Prisma.AiRecommendationLogScalarFieldEnum[]
+  distinct?: Prisma.RefreshTokenScalarFieldEnum | Prisma.RefreshTokenScalarFieldEnum[]
+}
+
+/**
+ * User.devices
+ */
+export type User$devicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Device
+   */
+  select?: Prisma.DeviceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Device
+   */
+  omit?: Prisma.DeviceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeviceInclude<ExtArgs> | null
+  where?: Prisma.DeviceWhereInput
+  orderBy?: Prisma.DeviceOrderByWithRelationInput | Prisma.DeviceOrderByWithRelationInput[]
+  cursor?: Prisma.DeviceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DeviceScalarFieldEnum | Prisma.DeviceScalarFieldEnum[]
 }
 
 /**
@@ -42914,30 +42812,6 @@ export type User$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.AuditLogScalarFieldEnum | Prisma.AuditLogScalarFieldEnum[]
-}
-
-/**
- * User.chatbotSessions
- */
-export type User$chatbotSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ChatbotSession
-   */
-  select?: Prisma.ChatbotSessionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ChatbotSession
-   */
-  omit?: Prisma.ChatbotSessionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ChatbotSessionInclude<ExtArgs> | null
-  where?: Prisma.ChatbotSessionWhereInput
-  orderBy?: Prisma.ChatbotSessionOrderByWithRelationInput | Prisma.ChatbotSessionOrderByWithRelationInput[]
-  cursor?: Prisma.ChatbotSessionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ChatbotSessionScalarFieldEnum | Prisma.ChatbotSessionScalarFieldEnum[]
 }
 
 /**

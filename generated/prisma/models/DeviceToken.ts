@@ -20,13 +20,25 @@ export type DeviceTokenModel = runtime.Types.Result.DefaultSelection<Prisma.$Dev
 
 export type AggregateDeviceToken = {
   _count: DeviceTokenCountAggregateOutputType | null
+  _avg: DeviceTokenAvgAggregateOutputType | null
+  _sum: DeviceTokenSumAggregateOutputType | null
   _min: DeviceTokenMinAggregateOutputType | null
   _max: DeviceTokenMaxAggregateOutputType | null
 }
 
+export type DeviceTokenAvgAggregateOutputType = {
+  id: number | null
+  userId: number | null
+}
+
+export type DeviceTokenSumAggregateOutputType = {
+  id: number | null
+  userId: number | null
+}
+
 export type DeviceTokenMinAggregateOutputType = {
-  id: string | null
-  userId: string | null
+  id: number | null
+  userId: number | null
   token: string | null
   platform: $Enums.DevicePlatform | null
   deviceName: string | null
@@ -36,8 +48,8 @@ export type DeviceTokenMinAggregateOutputType = {
 }
 
 export type DeviceTokenMaxAggregateOutputType = {
-  id: string | null
-  userId: string | null
+  id: number | null
+  userId: number | null
   token: string | null
   platform: $Enums.DevicePlatform | null
   deviceName: string | null
@@ -58,6 +70,16 @@ export type DeviceTokenCountAggregateOutputType = {
   _all: number
 }
 
+
+export type DeviceTokenAvgAggregateInputType = {
+  id?: true
+  userId?: true
+}
+
+export type DeviceTokenSumAggregateInputType = {
+  id?: true
+  userId?: true
+}
 
 export type DeviceTokenMinAggregateInputType = {
   id?: true
@@ -131,6 +153,18 @@ export type DeviceTokenAggregateArgs<ExtArgs extends runtime.Types.Extensions.In
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: DeviceTokenAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: DeviceTokenSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: DeviceTokenMinAggregateInputType
@@ -161,13 +195,15 @@ export type DeviceTokenGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   _count?: DeviceTokenCountAggregateInputType | true
+  _avg?: DeviceTokenAvgAggregateInputType
+  _sum?: DeviceTokenSumAggregateInputType
   _min?: DeviceTokenMinAggregateInputType
   _max?: DeviceTokenMaxAggregateInputType
 }
 
 export type DeviceTokenGroupByOutputType = {
-  id: string
-  userId: string
+  id: number
+  userId: number
   token: string
   platform: $Enums.DevicePlatform
   deviceName: string | null
@@ -175,6 +211,8 @@ export type DeviceTokenGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   _count: DeviceTokenCountAggregateOutputType | null
+  _avg: DeviceTokenAvgAggregateOutputType | null
+  _sum: DeviceTokenSumAggregateOutputType | null
   _min: DeviceTokenMinAggregateOutputType | null
   _max: DeviceTokenMaxAggregateOutputType | null
 }
@@ -198,8 +236,8 @@ export type DeviceTokenWhereInput = {
   AND?: Prisma.DeviceTokenWhereInput | Prisma.DeviceTokenWhereInput[]
   OR?: Prisma.DeviceTokenWhereInput[]
   NOT?: Prisma.DeviceTokenWhereInput | Prisma.DeviceTokenWhereInput[]
-  id?: Prisma.UuidFilter<"DeviceToken"> | string
-  userId?: Prisma.UuidFilter<"DeviceToken"> | string
+  id?: Prisma.IntFilter<"DeviceToken"> | number
+  userId?: Prisma.IntFilter<"DeviceToken"> | number
   token?: Prisma.StringFilter<"DeviceToken"> | string
   platform?: Prisma.EnumDevicePlatformFilter<"DeviceToken"> | $Enums.DevicePlatform
   deviceName?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
@@ -222,12 +260,12 @@ export type DeviceTokenOrderByWithRelationInput = {
 }
 
 export type DeviceTokenWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   userId_token?: Prisma.DeviceTokenUserIdTokenCompoundUniqueInput
   AND?: Prisma.DeviceTokenWhereInput | Prisma.DeviceTokenWhereInput[]
   OR?: Prisma.DeviceTokenWhereInput[]
   NOT?: Prisma.DeviceTokenWhereInput | Prisma.DeviceTokenWhereInput[]
-  userId?: Prisma.UuidFilter<"DeviceToken"> | string
+  userId?: Prisma.IntFilter<"DeviceToken"> | number
   token?: Prisma.StringFilter<"DeviceToken"> | string
   platform?: Prisma.EnumDevicePlatformFilter<"DeviceToken"> | $Enums.DevicePlatform
   deviceName?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
@@ -247,16 +285,18 @@ export type DeviceTokenOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.DeviceTokenCountOrderByAggregateInput
+  _avg?: Prisma.DeviceTokenAvgOrderByAggregateInput
   _max?: Prisma.DeviceTokenMaxOrderByAggregateInput
   _min?: Prisma.DeviceTokenMinOrderByAggregateInput
+  _sum?: Prisma.DeviceTokenSumOrderByAggregateInput
 }
 
 export type DeviceTokenScalarWhereWithAggregatesInput = {
   AND?: Prisma.DeviceTokenScalarWhereWithAggregatesInput | Prisma.DeviceTokenScalarWhereWithAggregatesInput[]
   OR?: Prisma.DeviceTokenScalarWhereWithAggregatesInput[]
   NOT?: Prisma.DeviceTokenScalarWhereWithAggregatesInput | Prisma.DeviceTokenScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"DeviceToken"> | string
-  userId?: Prisma.UuidWithAggregatesFilter<"DeviceToken"> | string
+  id?: Prisma.IntWithAggregatesFilter<"DeviceToken"> | number
+  userId?: Prisma.IntWithAggregatesFilter<"DeviceToken"> | number
   token?: Prisma.StringWithAggregatesFilter<"DeviceToken"> | string
   platform?: Prisma.EnumDevicePlatformWithAggregatesFilter<"DeviceToken"> | $Enums.DevicePlatform
   deviceName?: Prisma.StringNullableWithAggregatesFilter<"DeviceToken"> | string | null
@@ -266,7 +306,6 @@ export type DeviceTokenScalarWhereWithAggregatesInput = {
 }
 
 export type DeviceTokenCreateInput = {
-  id?: string
   token: string
   platform: $Enums.DevicePlatform
   deviceName?: string | null
@@ -277,8 +316,8 @@ export type DeviceTokenCreateInput = {
 }
 
 export type DeviceTokenUncheckedCreateInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   token: string
   platform: $Enums.DevicePlatform
   deviceName?: string | null
@@ -288,7 +327,6 @@ export type DeviceTokenUncheckedCreateInput = {
 }
 
 export type DeviceTokenUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -299,8 +337,8 @@ export type DeviceTokenUpdateInput = {
 }
 
 export type DeviceTokenUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -310,8 +348,8 @@ export type DeviceTokenUncheckedUpdateInput = {
 }
 
 export type DeviceTokenCreateManyInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   token: string
   platform: $Enums.DevicePlatform
   deviceName?: string | null
@@ -321,7 +359,6 @@ export type DeviceTokenCreateManyInput = {
 }
 
 export type DeviceTokenUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -331,8 +368,8 @@ export type DeviceTokenUpdateManyMutationInput = {
 }
 
 export type DeviceTokenUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -352,7 +389,7 @@ export type DeviceTokenOrderByRelationAggregateInput = {
 }
 
 export type DeviceTokenUserIdTokenCompoundUniqueInput = {
-  userId: string
+  userId: number
   token: string
 }
 
@@ -365,6 +402,11 @@ export type DeviceTokenCountOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type DeviceTokenAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type DeviceTokenMaxOrderByAggregateInput = {
@@ -387,6 +429,11 @@ export type DeviceTokenMinOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type DeviceTokenSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type DeviceTokenCreateNestedManyWithoutUserInput = {
@@ -436,7 +483,6 @@ export type EnumDevicePlatformFieldUpdateOperationsInput = {
 }
 
 export type DeviceTokenCreateWithoutUserInput = {
-  id?: string
   token: string
   platform: $Enums.DevicePlatform
   deviceName?: string | null
@@ -446,7 +492,7 @@ export type DeviceTokenCreateWithoutUserInput = {
 }
 
 export type DeviceTokenUncheckedCreateWithoutUserInput = {
-  id?: string
+  id?: number
   token: string
   platform: $Enums.DevicePlatform
   deviceName?: string | null
@@ -485,8 +531,8 @@ export type DeviceTokenScalarWhereInput = {
   AND?: Prisma.DeviceTokenScalarWhereInput | Prisma.DeviceTokenScalarWhereInput[]
   OR?: Prisma.DeviceTokenScalarWhereInput[]
   NOT?: Prisma.DeviceTokenScalarWhereInput | Prisma.DeviceTokenScalarWhereInput[]
-  id?: Prisma.UuidFilter<"DeviceToken"> | string
-  userId?: Prisma.UuidFilter<"DeviceToken"> | string
+  id?: Prisma.IntFilter<"DeviceToken"> | number
+  userId?: Prisma.IntFilter<"DeviceToken"> | number
   token?: Prisma.StringFilter<"DeviceToken"> | string
   platform?: Prisma.EnumDevicePlatformFilter<"DeviceToken"> | $Enums.DevicePlatform
   deviceName?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
@@ -496,7 +542,7 @@ export type DeviceTokenScalarWhereInput = {
 }
 
 export type DeviceTokenCreateManyUserInput = {
-  id?: string
+  id?: number
   token: string
   platform: $Enums.DevicePlatform
   deviceName?: string | null
@@ -506,7 +552,6 @@ export type DeviceTokenCreateManyUserInput = {
 }
 
 export type DeviceTokenUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -516,7 +561,7 @@ export type DeviceTokenUpdateWithoutUserInput = {
 }
 
 export type DeviceTokenUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -526,7 +571,7 @@ export type DeviceTokenUncheckedUpdateWithoutUserInput = {
 }
 
 export type DeviceTokenUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -607,11 +652,11 @@ export type $DeviceTokenPayload<ExtArgs extends runtime.Types.Extensions.Interna
     /**
      * ID token (UUID)
      */
-    id: string
+    id: number
     /**
      * ID tài khoản người dùng sở hữu thiết bị này
      */
-    userId: string
+    userId: number
     /**
      * Chuỗi token FCM duy nhất phục vụ push notification
      */
@@ -1060,8 +1105,8 @@ export interface Prisma__DeviceTokenClient<T, Null = never, ExtArgs extends runt
  * Fields of the DeviceToken model
  */
 export interface DeviceTokenFieldRefs {
-  readonly id: Prisma.FieldRef<"DeviceToken", 'String'>
-  readonly userId: Prisma.FieldRef<"DeviceToken", 'String'>
+  readonly id: Prisma.FieldRef<"DeviceToken", 'Int'>
+  readonly userId: Prisma.FieldRef<"DeviceToken", 'Int'>
   readonly token: Prisma.FieldRef<"DeviceToken", 'String'>
   readonly platform: Prisma.FieldRef<"DeviceToken", 'DevicePlatform'>
   readonly deviceName: Prisma.FieldRef<"DeviceToken", 'String'>

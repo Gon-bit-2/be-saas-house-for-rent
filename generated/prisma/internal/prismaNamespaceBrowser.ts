@@ -52,6 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  RefreshToken: 'RefreshToken',
+  Device: 'Device',
+  VerificationCode: 'VerificationCode',
   Role: 'Role',
   Permission: 'Permission',
   RolePermission: 'RolePermission',
@@ -102,10 +105,6 @@ export const ModelName = {
   Report: 'Report',
   Notification: 'Notification',
   DeviceToken: 'DeviceToken',
-  AiRecommendationLog: 'AiRecommendationLog',
-  RoomPriceSuggestion: 'RoomPriceSuggestion',
-  ChatbotSession: 'ChatbotSession',
-  ChatbotMessage: 'ChatbotMessage',
   BackgroundJob: 'BackgroundJob',
   AuditLog: 'AuditLog'
 } as const
@@ -145,6 +144,51 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  deviceId: 'deviceId',
+  tokenHash: 'tokenHash',
+  userAgent: 'userAgent',
+  ip: 'ip',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  revokedReason: 'revokedReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
+
+
+export const DeviceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  userAgent: 'userAgent',
+  ip: 'ip',
+  lastActiveAt: 'lastActiveAt',
+  createdAt: 'createdAt',
+  isActive: 'isActive'
+} as const
+
+export type DeviceScalarFieldEnum = (typeof DeviceScalarFieldEnum)[keyof typeof DeviceScalarFieldEnum]
+
+
+export const VerificationCodeScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  codeHash: 'codeHash',
+  type: 'type',
+  attempts: 'attempts',
+  expiresAt: 'expiresAt',
+  consumedAt: 'consumedAt',
+  invalidatedAt: 'invalidatedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type VerificationCodeScalarFieldEnum = (typeof VerificationCodeScalarFieldEnum)[keyof typeof VerificationCodeScalarFieldEnum]
 
 
 export const RoleScalarFieldEnum = {
@@ -226,8 +270,6 @@ export const PlanScalarFieldEnum = {
   maxRooms: 'maxRooms',
   maxStaff: 'maxStaff',
   allowAiOcr: 'allowAiOcr',
-  allowAiPricing: 'allowAiPricing',
-  allowChatbot: 'allowChatbot',
   allowWebhookPayment: 'allowWebhookPayment',
   isActive: 'isActive',
   createdAt: 'createdAt',
@@ -959,61 +1001,6 @@ export const DeviceTokenScalarFieldEnum = {
 } as const
 
 export type DeviceTokenScalarFieldEnum = (typeof DeviceTokenScalarFieldEnum)[keyof typeof DeviceTokenScalarFieldEnum]
-
-
-export const AiRecommendationLogScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  tenantId: 'tenantId',
-  type: 'type',
-  inputData: 'inputData',
-  outputData: 'outputData',
-  modelName: 'modelName',
-  createdAt: 'createdAt'
-} as const
-
-export type AiRecommendationLogScalarFieldEnum = (typeof AiRecommendationLogScalarFieldEnum)[keyof typeof AiRecommendationLogScalarFieldEnum]
-
-
-export const RoomPriceSuggestionScalarFieldEnum = {
-  id: 'id',
-  tenantId: 'tenantId',
-  roomId: 'roomId',
-  suggestedPrice: 'suggestedPrice',
-  minPrice: 'minPrice',
-  maxPrice: 'maxPrice',
-  confidence: 'confidence',
-  reason: 'reason',
-  inputSnapshot: 'inputSnapshot',
-  createdAt: 'createdAt'
-} as const
-
-export type RoomPriceSuggestionScalarFieldEnum = (typeof RoomPriceSuggestionScalarFieldEnum)[keyof typeof RoomPriceSuggestionScalarFieldEnum]
-
-
-export const ChatbotSessionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  tenantId: 'tenantId',
-  channel: 'channel',
-  status: 'status',
-  createdAt: 'createdAt',
-  endedAt: 'endedAt'
-} as const
-
-export type ChatbotSessionScalarFieldEnum = (typeof ChatbotSessionScalarFieldEnum)[keyof typeof ChatbotSessionScalarFieldEnum]
-
-
-export const ChatbotMessageScalarFieldEnum = {
-  id: 'id',
-  sessionId: 'sessionId',
-  senderType: 'senderType',
-  message: 'message',
-  metadata: 'metadata',
-  createdAt: 'createdAt'
-} as const
-
-export type ChatbotMessageScalarFieldEnum = (typeof ChatbotMessageScalarFieldEnum)[keyof typeof ChatbotMessageScalarFieldEnum]
 
 
 export const BackgroundJobScalarFieldEnum = {

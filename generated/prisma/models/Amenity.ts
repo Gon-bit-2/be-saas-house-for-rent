@@ -20,30 +20,46 @@ export type AmenityModel = runtime.Types.Result.DefaultSelection<Prisma.$Amenity
 
 export type AggregateAmenity = {
   _count: AmenityCountAggregateOutputType | null
+  _avg: AmenityAvgAggregateOutputType | null
+  _sum: AmenitySumAggregateOutputType | null
   _min: AmenityMinAggregateOutputType | null
   _max: AmenityMaxAggregateOutputType | null
 }
 
+export type AmenityAvgAggregateOutputType = {
+  id: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
+export type AmenitySumAggregateOutputType = {
+  id: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
 export type AmenityMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   name: string | null
   icon: string | null
   category: string | null
   isActive: boolean | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type AmenityMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   name: string | null
   icon: string | null
   category: string | null
   isActive: boolean | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type AmenityCountAggregateOutputType = {
@@ -58,6 +74,20 @@ export type AmenityCountAggregateOutputType = {
   _all: number
 }
 
+
+export type AmenityAvgAggregateInputType = {
+  id?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
+
+export type AmenitySumAggregateInputType = {
+  id?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
 
 export type AmenityMinAggregateInputType = {
   id?: true
@@ -131,6 +161,18 @@ export type AmenityAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: AmenityAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: AmenitySumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: AmenityMinAggregateInputType
@@ -161,20 +203,24 @@ export type AmenityGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: AmenityCountAggregateInputType | true
+  _avg?: AmenityAvgAggregateInputType
+  _sum?: AmenitySumAggregateInputType
   _min?: AmenityMinAggregateInputType
   _max?: AmenityMaxAggregateInputType
 }
 
 export type AmenityGroupByOutputType = {
-  id: string
+  id: number
   name: string
   icon: string | null
   category: string
   isActive: boolean
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: AmenityCountAggregateOutputType | null
+  _avg: AmenityAvgAggregateOutputType | null
+  _sum: AmenitySumAggregateOutputType | null
   _min: AmenityMinAggregateOutputType | null
   _max: AmenityMaxAggregateOutputType | null
 }
@@ -198,14 +244,14 @@ export type AmenityWhereInput = {
   AND?: Prisma.AmenityWhereInput | Prisma.AmenityWhereInput[]
   OR?: Prisma.AmenityWhereInput[]
   NOT?: Prisma.AmenityWhereInput | Prisma.AmenityWhereInput[]
-  id?: Prisma.UuidFilter<"Amenity"> | string
+  id?: Prisma.IntFilter<"Amenity"> | number
   name?: Prisma.StringFilter<"Amenity"> | string
   icon?: Prisma.StringNullableFilter<"Amenity"> | string | null
   category?: Prisma.StringFilter<"Amenity"> | string
   isActive?: Prisma.BoolFilter<"Amenity"> | boolean
-  createdById?: Prisma.UuidNullableFilter<"Amenity"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Amenity"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Amenity"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Amenity"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Amenity"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Amenity"> | number | null
   rooms?: Prisma.RoomAmenityListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -228,7 +274,7 @@ export type AmenityOrderByWithRelationInput = {
 }
 
 export type AmenityWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.AmenityWhereInput | Prisma.AmenityWhereInput[]
   OR?: Prisma.AmenityWhereInput[]
   NOT?: Prisma.AmenityWhereInput | Prisma.AmenityWhereInput[]
@@ -236,9 +282,9 @@ export type AmenityWhereUniqueInput = Prisma.AtLeast<{
   icon?: Prisma.StringNullableFilter<"Amenity"> | string | null
   category?: Prisma.StringFilter<"Amenity"> | string
   isActive?: Prisma.BoolFilter<"Amenity"> | boolean
-  createdById?: Prisma.UuidNullableFilter<"Amenity"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Amenity"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Amenity"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Amenity"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Amenity"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Amenity"> | number | null
   rooms?: Prisma.RoomAmenityListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -255,26 +301,27 @@ export type AmenityOrderByWithAggregationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.AmenityCountOrderByAggregateInput
+  _avg?: Prisma.AmenityAvgOrderByAggregateInput
   _max?: Prisma.AmenityMaxOrderByAggregateInput
   _min?: Prisma.AmenityMinOrderByAggregateInput
+  _sum?: Prisma.AmenitySumOrderByAggregateInput
 }
 
 export type AmenityScalarWhereWithAggregatesInput = {
   AND?: Prisma.AmenityScalarWhereWithAggregatesInput | Prisma.AmenityScalarWhereWithAggregatesInput[]
   OR?: Prisma.AmenityScalarWhereWithAggregatesInput[]
   NOT?: Prisma.AmenityScalarWhereWithAggregatesInput | Prisma.AmenityScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Amenity"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Amenity"> | number
   name?: Prisma.StringWithAggregatesFilter<"Amenity"> | string
   icon?: Prisma.StringNullableWithAggregatesFilter<"Amenity"> | string | null
   category?: Prisma.StringWithAggregatesFilter<"Amenity"> | string
   isActive?: Prisma.BoolWithAggregatesFilter<"Amenity"> | boolean
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"Amenity"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"Amenity"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"Amenity"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"Amenity"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"Amenity"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"Amenity"> | number | null
 }
 
 export type AmenityCreateInput = {
-  id?: string
   name: string
   icon?: string | null
   category: string
@@ -286,19 +333,18 @@ export type AmenityCreateInput = {
 }
 
 export type AmenityUncheckedCreateInput = {
-  id?: string
+  id?: number
   name: string
   icon?: string | null
   category: string
   isActive?: boolean
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   rooms?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutAmenityInput
 }
 
 export type AmenityUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
@@ -310,30 +356,29 @@ export type AmenityUpdateInput = {
 }
 
 export type AmenityUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rooms?: Prisma.RoomAmenityUncheckedUpdateManyWithoutAmenityNestedInput
 }
 
 export type AmenityCreateManyInput = {
-  id?: string
+  id?: number
   name: string
   icon?: string | null
   category: string
   isActive?: boolean
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type AmenityUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
@@ -341,14 +386,14 @@ export type AmenityUpdateManyMutationInput = {
 }
 
 export type AmenityUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AmenityListRelationFilter = {
@@ -372,6 +417,13 @@ export type AmenityCountOrderByAggregateInput = {
   deletedById?: Prisma.SortOrder
 }
 
+export type AmenityAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
 export type AmenityMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -389,6 +441,13 @@ export type AmenityMinOrderByAggregateInput = {
   icon?: Prisma.SortOrder
   category?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
+export type AmenitySumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -540,7 +599,6 @@ export type AmenityUpdateOneRequiredWithoutRoomsNestedInput = {
 }
 
 export type AmenityCreateWithoutCreatedByInput = {
-  id?: string
   name: string
   icon?: string | null
   category: string
@@ -551,13 +609,13 @@ export type AmenityCreateWithoutCreatedByInput = {
 }
 
 export type AmenityUncheckedCreateWithoutCreatedByInput = {
-  id?: string
+  id?: number
   name: string
   icon?: string | null
   category: string
   isActive?: boolean
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   rooms?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutAmenityInput
 }
 
@@ -572,7 +630,6 @@ export type AmenityCreateManyCreatedByInputEnvelope = {
 }
 
 export type AmenityCreateWithoutUpdatedByInput = {
-  id?: string
   name: string
   icon?: string | null
   category: string
@@ -583,13 +640,13 @@ export type AmenityCreateWithoutUpdatedByInput = {
 }
 
 export type AmenityUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
+  id?: number
   name: string
   icon?: string | null
   category: string
   isActive?: boolean
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   rooms?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutAmenityInput
 }
 
@@ -604,7 +661,6 @@ export type AmenityCreateManyUpdatedByInputEnvelope = {
 }
 
 export type AmenityCreateWithoutDeletedByInput = {
-  id?: string
   name: string
   icon?: string | null
   category: string
@@ -615,13 +671,13 @@ export type AmenityCreateWithoutDeletedByInput = {
 }
 
 export type AmenityUncheckedCreateWithoutDeletedByInput = {
-  id?: string
+  id?: number
   name: string
   icon?: string | null
   category: string
   isActive?: boolean
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   rooms?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutAmenityInput
 }
 
@@ -655,14 +711,14 @@ export type AmenityScalarWhereInput = {
   AND?: Prisma.AmenityScalarWhereInput | Prisma.AmenityScalarWhereInput[]
   OR?: Prisma.AmenityScalarWhereInput[]
   NOT?: Prisma.AmenityScalarWhereInput | Prisma.AmenityScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Amenity"> | string
+  id?: Prisma.IntFilter<"Amenity"> | number
   name?: Prisma.StringFilter<"Amenity"> | string
   icon?: Prisma.StringNullableFilter<"Amenity"> | string | null
   category?: Prisma.StringFilter<"Amenity"> | string
   isActive?: Prisma.BoolFilter<"Amenity"> | boolean
-  createdById?: Prisma.UuidNullableFilter<"Amenity"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Amenity"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Amenity"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Amenity"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Amenity"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Amenity"> | number | null
 }
 
 export type AmenityUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -698,7 +754,6 @@ export type AmenityUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type AmenityCreateWithoutRoomsInput = {
-  id?: string
   name: string
   icon?: string | null
   category: string
@@ -709,14 +764,14 @@ export type AmenityCreateWithoutRoomsInput = {
 }
 
 export type AmenityUncheckedCreateWithoutRoomsInput = {
-  id?: string
+  id?: number
   name: string
   icon?: string | null
   category: string
   isActive?: boolean
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type AmenityCreateOrConnectWithoutRoomsInput = {
@@ -736,7 +791,6 @@ export type AmenityUpdateToOneWithWhereWithoutRoomsInput = {
 }
 
 export type AmenityUpdateWithoutRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
@@ -747,48 +801,47 @@ export type AmenityUpdateWithoutRoomsInput = {
 }
 
 export type AmenityUncheckedUpdateWithoutRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AmenityCreateManyCreatedByInput = {
-  id?: string
+  id?: number
   name: string
   icon?: string | null
   category: string
   isActive?: boolean
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type AmenityCreateManyUpdatedByInput = {
-  id?: string
+  id?: number
   name: string
   icon?: string | null
   category: string
   isActive?: boolean
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type AmenityCreateManyDeletedByInput = {
-  id?: string
+  id?: number
   name: string
   icon?: string | null
   category: string
   isActive?: boolean
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type AmenityUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
@@ -799,28 +852,27 @@ export type AmenityUpdateWithoutCreatedByInput = {
 }
 
 export type AmenityUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rooms?: Prisma.RoomAmenityUncheckedUpdateManyWithoutAmenityNestedInput
 }
 
 export type AmenityUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AmenityUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
@@ -831,28 +883,27 @@ export type AmenityUpdateWithoutUpdatedByInput = {
 }
 
 export type AmenityUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rooms?: Prisma.RoomAmenityUncheckedUpdateManyWithoutAmenityNestedInput
 }
 
 export type AmenityUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type AmenityUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
@@ -863,24 +914,24 @@ export type AmenityUpdateWithoutDeletedByInput = {
 }
 
 export type AmenityUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rooms?: Prisma.RoomAmenityUncheckedUpdateManyWithoutAmenityNestedInput
 }
 
 export type AmenityUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -1003,7 +1054,7 @@ export type $AmenityPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     /**
      * ID tiện ích (UUID)
      */
-    id: string
+    id: number
     /**
      * Tên tiện ích (ví dụ: Máy giặt, Điều hòa, Bãi giữ xe, Thang máy...)
      */
@@ -1023,15 +1074,15 @@ export type $AmenityPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["amenity"]>
   composites: {}
 }
@@ -1459,14 +1510,14 @@ export interface Prisma__AmenityClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Amenity model
  */
 export interface AmenityFieldRefs {
-  readonly id: Prisma.FieldRef<"Amenity", 'String'>
+  readonly id: Prisma.FieldRef<"Amenity", 'Int'>
   readonly name: Prisma.FieldRef<"Amenity", 'String'>
   readonly icon: Prisma.FieldRef<"Amenity", 'String'>
   readonly category: Prisma.FieldRef<"Amenity", 'String'>
   readonly isActive: Prisma.FieldRef<"Amenity", 'Boolean'>
-  readonly createdById: Prisma.FieldRef<"Amenity", 'String'>
-  readonly updatedById: Prisma.FieldRef<"Amenity", 'String'>
-  readonly deletedById: Prisma.FieldRef<"Amenity", 'String'>
+  readonly createdById: Prisma.FieldRef<"Amenity", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"Amenity", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"Amenity", 'Int'>
 }
     
 

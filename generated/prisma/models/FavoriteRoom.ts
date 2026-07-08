@@ -20,19 +20,31 @@ export type FavoriteRoomModel = runtime.Types.Result.DefaultSelection<Prisma.$Fa
 
 export type AggregateFavoriteRoom = {
   _count: FavoriteRoomCountAggregateOutputType | null
+  _avg: FavoriteRoomAvgAggregateOutputType | null
+  _sum: FavoriteRoomSumAggregateOutputType | null
   _min: FavoriteRoomMinAggregateOutputType | null
   _max: FavoriteRoomMaxAggregateOutputType | null
 }
 
+export type FavoriteRoomAvgAggregateOutputType = {
+  userId: number | null
+  roomId: number | null
+}
+
+export type FavoriteRoomSumAggregateOutputType = {
+  userId: number | null
+  roomId: number | null
+}
+
 export type FavoriteRoomMinAggregateOutputType = {
-  userId: string | null
-  roomId: string | null
+  userId: number | null
+  roomId: number | null
   createdAt: Date | null
 }
 
 export type FavoriteRoomMaxAggregateOutputType = {
-  userId: string | null
-  roomId: string | null
+  userId: number | null
+  roomId: number | null
   createdAt: Date | null
 }
 
@@ -43,6 +55,16 @@ export type FavoriteRoomCountAggregateOutputType = {
   _all: number
 }
 
+
+export type FavoriteRoomAvgAggregateInputType = {
+  userId?: true
+  roomId?: true
+}
+
+export type FavoriteRoomSumAggregateInputType = {
+  userId?: true
+  roomId?: true
+}
 
 export type FavoriteRoomMinAggregateInputType = {
   userId?: true
@@ -101,6 +123,18 @@ export type FavoriteRoomAggregateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: FavoriteRoomAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: FavoriteRoomSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: FavoriteRoomMinAggregateInputType
@@ -131,15 +165,19 @@ export type FavoriteRoomGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   _count?: FavoriteRoomCountAggregateInputType | true
+  _avg?: FavoriteRoomAvgAggregateInputType
+  _sum?: FavoriteRoomSumAggregateInputType
   _min?: FavoriteRoomMinAggregateInputType
   _max?: FavoriteRoomMaxAggregateInputType
 }
 
 export type FavoriteRoomGroupByOutputType = {
-  userId: string
-  roomId: string
+  userId: number
+  roomId: number
   createdAt: Date
   _count: FavoriteRoomCountAggregateOutputType | null
+  _avg: FavoriteRoomAvgAggregateOutputType | null
+  _sum: FavoriteRoomSumAggregateOutputType | null
   _min: FavoriteRoomMinAggregateOutputType | null
   _max: FavoriteRoomMaxAggregateOutputType | null
 }
@@ -163,8 +201,8 @@ export type FavoriteRoomWhereInput = {
   AND?: Prisma.FavoriteRoomWhereInput | Prisma.FavoriteRoomWhereInput[]
   OR?: Prisma.FavoriteRoomWhereInput[]
   NOT?: Prisma.FavoriteRoomWhereInput | Prisma.FavoriteRoomWhereInput[]
-  userId?: Prisma.UuidFilter<"FavoriteRoom"> | string
-  roomId?: Prisma.UuidFilter<"FavoriteRoom"> | string
+  userId?: Prisma.IntFilter<"FavoriteRoom"> | number
+  roomId?: Prisma.IntFilter<"FavoriteRoom"> | number
   createdAt?: Prisma.DateTimeFilter<"FavoriteRoom"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
@@ -183,8 +221,8 @@ export type FavoriteRoomWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.FavoriteRoomWhereInput | Prisma.FavoriteRoomWhereInput[]
   OR?: Prisma.FavoriteRoomWhereInput[]
   NOT?: Prisma.FavoriteRoomWhereInput | Prisma.FavoriteRoomWhereInput[]
-  userId?: Prisma.UuidFilter<"FavoriteRoom"> | string
-  roomId?: Prisma.UuidFilter<"FavoriteRoom"> | string
+  userId?: Prisma.IntFilter<"FavoriteRoom"> | number
+  roomId?: Prisma.IntFilter<"FavoriteRoom"> | number
   createdAt?: Prisma.DateTimeFilter<"FavoriteRoom"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
@@ -195,16 +233,18 @@ export type FavoriteRoomOrderByWithAggregationInput = {
   roomId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.FavoriteRoomCountOrderByAggregateInput
+  _avg?: Prisma.FavoriteRoomAvgOrderByAggregateInput
   _max?: Prisma.FavoriteRoomMaxOrderByAggregateInput
   _min?: Prisma.FavoriteRoomMinOrderByAggregateInput
+  _sum?: Prisma.FavoriteRoomSumOrderByAggregateInput
 }
 
 export type FavoriteRoomScalarWhereWithAggregatesInput = {
   AND?: Prisma.FavoriteRoomScalarWhereWithAggregatesInput | Prisma.FavoriteRoomScalarWhereWithAggregatesInput[]
   OR?: Prisma.FavoriteRoomScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FavoriteRoomScalarWhereWithAggregatesInput | Prisma.FavoriteRoomScalarWhereWithAggregatesInput[]
-  userId?: Prisma.UuidWithAggregatesFilter<"FavoriteRoom"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"FavoriteRoom"> | string
+  userId?: Prisma.IntWithAggregatesFilter<"FavoriteRoom"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"FavoriteRoom"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FavoriteRoom"> | Date | string
 }
 
@@ -215,8 +255,8 @@ export type FavoriteRoomCreateInput = {
 }
 
 export type FavoriteRoomUncheckedCreateInput = {
-  userId: string
-  roomId: string
+  userId: number
+  roomId: number
   createdAt?: Date | string
 }
 
@@ -227,14 +267,14 @@ export type FavoriteRoomUpdateInput = {
 }
 
 export type FavoriteRoomUncheckedUpdateInput = {
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FavoriteRoomCreateManyInput = {
-  userId: string
-  roomId: string
+  userId: number
+  roomId: number
   createdAt?: Date | string
 }
 
@@ -243,8 +283,8 @@ export type FavoriteRoomUpdateManyMutationInput = {
 }
 
 export type FavoriteRoomUncheckedUpdateManyInput = {
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -259,14 +299,19 @@ export type FavoriteRoomOrderByRelationAggregateInput = {
 }
 
 export type FavoriteRoomUserIdRoomIdCompoundUniqueInput = {
-  userId: string
-  roomId: string
+  userId: number
+  roomId: number
 }
 
 export type FavoriteRoomCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type FavoriteRoomAvgOrderByAggregateInput = {
+  userId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
 }
 
 export type FavoriteRoomMaxOrderByAggregateInput = {
@@ -279,6 +324,11 @@ export type FavoriteRoomMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type FavoriteRoomSumOrderByAggregateInput = {
+  userId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
 }
 
 export type FavoriteRoomCreateNestedManyWithoutUserInput = {
@@ -371,7 +421,7 @@ export type FavoriteRoomCreateWithoutUserInput = {
 }
 
 export type FavoriteRoomUncheckedCreateWithoutUserInput = {
-  roomId: string
+  roomId: number
   createdAt?: Date | string
 }
 
@@ -405,8 +455,8 @@ export type FavoriteRoomScalarWhereInput = {
   AND?: Prisma.FavoriteRoomScalarWhereInput | Prisma.FavoriteRoomScalarWhereInput[]
   OR?: Prisma.FavoriteRoomScalarWhereInput[]
   NOT?: Prisma.FavoriteRoomScalarWhereInput | Prisma.FavoriteRoomScalarWhereInput[]
-  userId?: Prisma.UuidFilter<"FavoriteRoom"> | string
-  roomId?: Prisma.UuidFilter<"FavoriteRoom"> | string
+  userId?: Prisma.IntFilter<"FavoriteRoom"> | number
+  roomId?: Prisma.IntFilter<"FavoriteRoom"> | number
   createdAt?: Prisma.DateTimeFilter<"FavoriteRoom"> | Date | string
 }
 
@@ -416,7 +466,7 @@ export type FavoriteRoomCreateWithoutRoomInput = {
 }
 
 export type FavoriteRoomUncheckedCreateWithoutRoomInput = {
-  userId: string
+  userId: number
   createdAt?: Date | string
 }
 
@@ -447,7 +497,7 @@ export type FavoriteRoomUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type FavoriteRoomCreateManyUserInput = {
-  roomId: string
+  roomId: number
   createdAt?: Date | string
 }
 
@@ -457,17 +507,17 @@ export type FavoriteRoomUpdateWithoutUserInput = {
 }
 
 export type FavoriteRoomUncheckedUpdateWithoutUserInput = {
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FavoriteRoomUncheckedUpdateManyWithoutUserInput = {
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FavoriteRoomCreateManyRoomInput = {
-  userId: string
+  userId: number
   createdAt?: Date | string
 }
 
@@ -477,12 +527,12 @@ export type FavoriteRoomUpdateWithoutRoomInput = {
 }
 
 export type FavoriteRoomUncheckedUpdateWithoutRoomInput = {
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FavoriteRoomUncheckedUpdateManyWithoutRoomInput = {
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -548,11 +598,11 @@ export type $FavoriteRoomPayload<ExtArgs extends runtime.Types.Extensions.Intern
     /**
      * ID tài khoản người dùng thích phòng
      */
-    userId: string
+    userId: number
     /**
      * ID phòng trọ được thích
      */
-    roomId: string
+    roomId: number
     /**
      * Thời điểm thêm phòng vào danh sách yêu thích
      */
@@ -982,8 +1032,8 @@ export interface Prisma__FavoriteRoomClient<T, Null = never, ExtArgs extends run
  * Fields of the FavoriteRoom model
  */
 export interface FavoriteRoomFieldRefs {
-  readonly userId: Prisma.FieldRef<"FavoriteRoom", 'String'>
-  readonly roomId: Prisma.FieldRef<"FavoriteRoom", 'String'>
+  readonly userId: Prisma.FieldRef<"FavoriteRoom", 'Int'>
+  readonly roomId: Prisma.FieldRef<"FavoriteRoom", 'Int'>
   readonly createdAt: Prisma.FieldRef<"FavoriteRoom", 'DateTime'>
 }
     

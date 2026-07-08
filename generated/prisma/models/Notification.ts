@@ -20,14 +20,28 @@ export type NotificationModel = runtime.Types.Result.DefaultSelection<Prisma.$No
 
 export type AggregateNotification = {
   _count: NotificationCountAggregateOutputType | null
+  _avg: NotificationAvgAggregateOutputType | null
+  _sum: NotificationSumAggregateOutputType | null
   _min: NotificationMinAggregateOutputType | null
   _max: NotificationMaxAggregateOutputType | null
 }
 
+export type NotificationAvgAggregateOutputType = {
+  id: number | null
+  userId: number | null
+  tenantId: number | null
+}
+
+export type NotificationSumAggregateOutputType = {
+  id: number | null
+  userId: number | null
+  tenantId: number | null
+}
+
 export type NotificationMinAggregateOutputType = {
-  id: string | null
-  userId: string | null
-  tenantId: string | null
+  id: number | null
+  userId: number | null
+  tenantId: number | null
   title: string | null
   content: string | null
   type: $Enums.NotificationType | null
@@ -37,9 +51,9 @@ export type NotificationMinAggregateOutputType = {
 }
 
 export type NotificationMaxAggregateOutputType = {
-  id: string | null
-  userId: string | null
-  tenantId: string | null
+  id: number | null
+  userId: number | null
+  tenantId: number | null
   title: string | null
   content: string | null
   type: $Enums.NotificationType | null
@@ -62,6 +76,18 @@ export type NotificationCountAggregateOutputType = {
   _all: number
 }
 
+
+export type NotificationAvgAggregateInputType = {
+  id?: true
+  userId?: true
+  tenantId?: true
+}
+
+export type NotificationSumAggregateInputType = {
+  id?: true
+  userId?: true
+  tenantId?: true
+}
 
 export type NotificationMinAggregateInputType = {
   id?: true
@@ -139,6 +165,18 @@ export type NotificationAggregateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: NotificationAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: NotificationSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: NotificationMinAggregateInputType
@@ -169,14 +207,16 @@ export type NotificationGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   _count?: NotificationCountAggregateInputType | true
+  _avg?: NotificationAvgAggregateInputType
+  _sum?: NotificationSumAggregateInputType
   _min?: NotificationMinAggregateInputType
   _max?: NotificationMaxAggregateInputType
 }
 
 export type NotificationGroupByOutputType = {
-  id: string
-  userId: string
-  tenantId: string | null
+  id: number
+  userId: number
+  tenantId: number | null
   title: string
   content: string
   type: $Enums.NotificationType
@@ -185,6 +225,8 @@ export type NotificationGroupByOutputType = {
   readAt: Date | null
   createdAt: Date
   _count: NotificationCountAggregateOutputType | null
+  _avg: NotificationAvgAggregateOutputType | null
+  _sum: NotificationSumAggregateOutputType | null
   _min: NotificationMinAggregateOutputType | null
   _max: NotificationMaxAggregateOutputType | null
 }
@@ -208,9 +250,9 @@ export type NotificationWhereInput = {
   AND?: Prisma.NotificationWhereInput | Prisma.NotificationWhereInput[]
   OR?: Prisma.NotificationWhereInput[]
   NOT?: Prisma.NotificationWhereInput | Prisma.NotificationWhereInput[]
-  id?: Prisma.UuidFilter<"Notification"> | string
-  userId?: Prisma.UuidFilter<"Notification"> | string
-  tenantId?: Prisma.UuidNullableFilter<"Notification"> | string | null
+  id?: Prisma.IntFilter<"Notification"> | number
+  userId?: Prisma.IntFilter<"Notification"> | number
+  tenantId?: Prisma.IntNullableFilter<"Notification"> | number | null
   title?: Prisma.StringFilter<"Notification"> | string
   content?: Prisma.StringFilter<"Notification"> | string
   type?: Prisma.EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
@@ -238,12 +280,12 @@ export type NotificationOrderByWithRelationInput = {
 }
 
 export type NotificationWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.NotificationWhereInput | Prisma.NotificationWhereInput[]
   OR?: Prisma.NotificationWhereInput[]
   NOT?: Prisma.NotificationWhereInput | Prisma.NotificationWhereInput[]
-  userId?: Prisma.UuidFilter<"Notification"> | string
-  tenantId?: Prisma.UuidNullableFilter<"Notification"> | string | null
+  userId?: Prisma.IntFilter<"Notification"> | number
+  tenantId?: Prisma.IntNullableFilter<"Notification"> | number | null
   title?: Prisma.StringFilter<"Notification"> | string
   content?: Prisma.StringFilter<"Notification"> | string
   type?: Prisma.EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
@@ -267,17 +309,19 @@ export type NotificationOrderByWithAggregationInput = {
   readAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.NotificationCountOrderByAggregateInput
+  _avg?: Prisma.NotificationAvgOrderByAggregateInput
   _max?: Prisma.NotificationMaxOrderByAggregateInput
   _min?: Prisma.NotificationMinOrderByAggregateInput
+  _sum?: Prisma.NotificationSumOrderByAggregateInput
 }
 
 export type NotificationScalarWhereWithAggregatesInput = {
   AND?: Prisma.NotificationScalarWhereWithAggregatesInput | Prisma.NotificationScalarWhereWithAggregatesInput[]
   OR?: Prisma.NotificationScalarWhereWithAggregatesInput[]
   NOT?: Prisma.NotificationScalarWhereWithAggregatesInput | Prisma.NotificationScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Notification"> | string
-  userId?: Prisma.UuidWithAggregatesFilter<"Notification"> | string
-  tenantId?: Prisma.UuidNullableWithAggregatesFilter<"Notification"> | string | null
+  id?: Prisma.IntWithAggregatesFilter<"Notification"> | number
+  userId?: Prisma.IntWithAggregatesFilter<"Notification"> | number
+  tenantId?: Prisma.IntNullableWithAggregatesFilter<"Notification"> | number | null
   title?: Prisma.StringWithAggregatesFilter<"Notification"> | string
   content?: Prisma.StringWithAggregatesFilter<"Notification"> | string
   type?: Prisma.EnumNotificationTypeWithAggregatesFilter<"Notification"> | $Enums.NotificationType
@@ -288,7 +332,6 @@ export type NotificationScalarWhereWithAggregatesInput = {
 }
 
 export type NotificationCreateInput = {
-  id?: string
   title: string
   content: string
   type: $Enums.NotificationType
@@ -301,9 +344,9 @@ export type NotificationCreateInput = {
 }
 
 export type NotificationUncheckedCreateInput = {
-  id?: string
-  userId: string
-  tenantId?: string | null
+  id?: number
+  userId: number
+  tenantId?: number | null
   title: string
   content: string
   type: $Enums.NotificationType
@@ -314,7 +357,6 @@ export type NotificationUncheckedCreateInput = {
 }
 
 export type NotificationUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
@@ -327,9 +369,9 @@ export type NotificationUpdateInput = {
 }
 
 export type NotificationUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
@@ -340,9 +382,9 @@ export type NotificationUncheckedUpdateInput = {
 }
 
 export type NotificationCreateManyInput = {
-  id?: string
-  userId: string
-  tenantId?: string | null
+  id?: number
+  userId: number
+  tenantId?: number | null
   title: string
   content: string
   type: $Enums.NotificationType
@@ -353,7 +395,6 @@ export type NotificationCreateManyInput = {
 }
 
 export type NotificationUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
@@ -364,9 +405,9 @@ export type NotificationUpdateManyMutationInput = {
 }
 
 export type NotificationUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
@@ -399,6 +440,12 @@ export type NotificationCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
+export type NotificationAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+}
+
 export type NotificationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -421,6 +468,12 @@ export type NotificationMinOrderByAggregateInput = {
   isRead?: Prisma.SortOrder
   readAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type NotificationSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
 }
 
 export type NotificationCreateNestedManyWithoutUserInput = {
@@ -512,7 +565,6 @@ export type EnumNotificationTypeFieldUpdateOperationsInput = {
 }
 
 export type NotificationCreateWithoutUserInput = {
-  id?: string
   title: string
   content: string
   type: $Enums.NotificationType
@@ -524,8 +576,8 @@ export type NotificationCreateWithoutUserInput = {
 }
 
 export type NotificationUncheckedCreateWithoutUserInput = {
-  id?: string
-  tenantId?: string | null
+  id?: number
+  tenantId?: number | null
   title: string
   content: string
   type: $Enums.NotificationType
@@ -565,9 +617,9 @@ export type NotificationScalarWhereInput = {
   AND?: Prisma.NotificationScalarWhereInput | Prisma.NotificationScalarWhereInput[]
   OR?: Prisma.NotificationScalarWhereInput[]
   NOT?: Prisma.NotificationScalarWhereInput | Prisma.NotificationScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Notification"> | string
-  userId?: Prisma.UuidFilter<"Notification"> | string
-  tenantId?: Prisma.UuidNullableFilter<"Notification"> | string | null
+  id?: Prisma.IntFilter<"Notification"> | number
+  userId?: Prisma.IntFilter<"Notification"> | number
+  tenantId?: Prisma.IntNullableFilter<"Notification"> | number | null
   title?: Prisma.StringFilter<"Notification"> | string
   content?: Prisma.StringFilter<"Notification"> | string
   type?: Prisma.EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
@@ -578,7 +630,6 @@ export type NotificationScalarWhereInput = {
 }
 
 export type NotificationCreateWithoutTenantInput = {
-  id?: string
   title: string
   content: string
   type: $Enums.NotificationType
@@ -590,8 +641,8 @@ export type NotificationCreateWithoutTenantInput = {
 }
 
 export type NotificationUncheckedCreateWithoutTenantInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   title: string
   content: string
   type: $Enums.NotificationType
@@ -628,8 +679,8 @@ export type NotificationUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type NotificationCreateManyUserInput = {
-  id?: string
-  tenantId?: string | null
+  id?: number
+  tenantId?: number | null
   title: string
   content: string
   type: $Enums.NotificationType
@@ -640,7 +691,6 @@ export type NotificationCreateManyUserInput = {
 }
 
 export type NotificationUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
@@ -652,8 +702,8 @@ export type NotificationUpdateWithoutUserInput = {
 }
 
 export type NotificationUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
@@ -664,8 +714,8 @@ export type NotificationUncheckedUpdateWithoutUserInput = {
 }
 
 export type NotificationUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
@@ -676,8 +726,8 @@ export type NotificationUncheckedUpdateManyWithoutUserInput = {
 }
 
 export type NotificationCreateManyTenantInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   title: string
   content: string
   type: $Enums.NotificationType
@@ -688,7 +738,6 @@ export type NotificationCreateManyTenantInput = {
 }
 
 export type NotificationUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
@@ -700,8 +749,8 @@ export type NotificationUpdateWithoutTenantInput = {
 }
 
 export type NotificationUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
@@ -712,8 +761,8 @@ export type NotificationUncheckedUpdateWithoutTenantInput = {
 }
 
 export type NotificationUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
@@ -813,15 +862,15 @@ export type $NotificationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     /**
      * ID thông báo (UUID)
      */
-    id: string
+    id: number
     /**
      * ID tài khoản nhận thông báo
      */
-    userId: string
+    userId: number
     /**
      * ID Tenant liên quan gửi thông báo (nullable nếu là thông báo hệ thống toàn sàn)
      */
-    tenantId: string | null
+    tenantId: number | null
     /**
      * Tiêu đề thông báo ngắn gọn
      */
@@ -1275,9 +1324,9 @@ export interface Prisma__NotificationClient<T, Null = never, ExtArgs extends run
  * Fields of the Notification model
  */
 export interface NotificationFieldRefs {
-  readonly id: Prisma.FieldRef<"Notification", 'String'>
-  readonly userId: Prisma.FieldRef<"Notification", 'String'>
-  readonly tenantId: Prisma.FieldRef<"Notification", 'String'>
+  readonly id: Prisma.FieldRef<"Notification", 'Int'>
+  readonly userId: Prisma.FieldRef<"Notification", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"Notification", 'Int'>
   readonly title: Prisma.FieldRef<"Notification", 'String'>
   readonly content: Prisma.FieldRef<"Notification", 'String'>
   readonly type: Prisma.FieldRef<"Notification", 'NotificationType'>

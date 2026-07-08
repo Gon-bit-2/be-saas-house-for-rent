@@ -27,17 +27,23 @@ export type AggregateSubscriptionPayment = {
 }
 
 export type SubscriptionPaymentAvgAggregateOutputType = {
+  id: number | null
+  subscriptionId: number | null
+  tenantId: number | null
   amount: runtime.Decimal | null
 }
 
 export type SubscriptionPaymentSumAggregateOutputType = {
+  id: number | null
+  subscriptionId: number | null
+  tenantId: number | null
   amount: runtime.Decimal | null
 }
 
 export type SubscriptionPaymentMinAggregateOutputType = {
-  id: string | null
-  subscriptionId: string | null
-  tenantId: string | null
+  id: number | null
+  subscriptionId: number | null
+  tenantId: number | null
   amount: runtime.Decimal | null
   paymentMethod: string | null
   transactionCode: string | null
@@ -47,9 +53,9 @@ export type SubscriptionPaymentMinAggregateOutputType = {
 }
 
 export type SubscriptionPaymentMaxAggregateOutputType = {
-  id: string | null
-  subscriptionId: string | null
-  tenantId: string | null
+  id: number | null
+  subscriptionId: number | null
+  tenantId: number | null
   amount: runtime.Decimal | null
   paymentMethod: string | null
   transactionCode: string | null
@@ -73,10 +79,16 @@ export type SubscriptionPaymentCountAggregateOutputType = {
 
 
 export type SubscriptionPaymentAvgAggregateInputType = {
+  id?: true
+  subscriptionId?: true
+  tenantId?: true
   amount?: true
 }
 
 export type SubscriptionPaymentSumAggregateInputType = {
+  id?: true
+  subscriptionId?: true
+  tenantId?: true
   amount?: true
 }
 
@@ -204,9 +216,9 @@ export type SubscriptionPaymentGroupByArgs<ExtArgs extends runtime.Types.Extensi
 }
 
 export type SubscriptionPaymentGroupByOutputType = {
-  id: string
-  subscriptionId: string
-  tenantId: string
+  id: number
+  subscriptionId: number
+  tenantId: number
   amount: runtime.Decimal
   paymentMethod: string
   transactionCode: string | null
@@ -239,9 +251,9 @@ export type SubscriptionPaymentWhereInput = {
   AND?: Prisma.SubscriptionPaymentWhereInput | Prisma.SubscriptionPaymentWhereInput[]
   OR?: Prisma.SubscriptionPaymentWhereInput[]
   NOT?: Prisma.SubscriptionPaymentWhereInput | Prisma.SubscriptionPaymentWhereInput[]
-  id?: Prisma.UuidFilter<"SubscriptionPayment"> | string
-  subscriptionId?: Prisma.UuidFilter<"SubscriptionPayment"> | string
-  tenantId?: Prisma.UuidFilter<"SubscriptionPayment"> | string
+  id?: Prisma.IntFilter<"SubscriptionPayment"> | number
+  subscriptionId?: Prisma.IntFilter<"SubscriptionPayment"> | number
+  tenantId?: Prisma.IntFilter<"SubscriptionPayment"> | number
   amount?: Prisma.DecimalFilter<"SubscriptionPayment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFilter<"SubscriptionPayment"> | string
   transactionCode?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
@@ -267,12 +279,12 @@ export type SubscriptionPaymentOrderByWithRelationInput = {
 }
 
 export type SubscriptionPaymentWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.SubscriptionPaymentWhereInput | Prisma.SubscriptionPaymentWhereInput[]
   OR?: Prisma.SubscriptionPaymentWhereInput[]
   NOT?: Prisma.SubscriptionPaymentWhereInput | Prisma.SubscriptionPaymentWhereInput[]
-  subscriptionId?: Prisma.UuidFilter<"SubscriptionPayment"> | string
-  tenantId?: Prisma.UuidFilter<"SubscriptionPayment"> | string
+  subscriptionId?: Prisma.IntFilter<"SubscriptionPayment"> | number
+  tenantId?: Prisma.IntFilter<"SubscriptionPayment"> | number
   amount?: Prisma.DecimalFilter<"SubscriptionPayment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFilter<"SubscriptionPayment"> | string
   transactionCode?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
@@ -304,9 +316,9 @@ export type SubscriptionPaymentScalarWhereWithAggregatesInput = {
   AND?: Prisma.SubscriptionPaymentScalarWhereWithAggregatesInput | Prisma.SubscriptionPaymentScalarWhereWithAggregatesInput[]
   OR?: Prisma.SubscriptionPaymentScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SubscriptionPaymentScalarWhereWithAggregatesInput | Prisma.SubscriptionPaymentScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"SubscriptionPayment"> | string
-  subscriptionId?: Prisma.UuidWithAggregatesFilter<"SubscriptionPayment"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"SubscriptionPayment"> | string
+  id?: Prisma.IntWithAggregatesFilter<"SubscriptionPayment"> | number
+  subscriptionId?: Prisma.IntWithAggregatesFilter<"SubscriptionPayment"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"SubscriptionPayment"> | number
   amount?: Prisma.DecimalWithAggregatesFilter<"SubscriptionPayment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringWithAggregatesFilter<"SubscriptionPayment"> | string
   transactionCode?: Prisma.StringNullableWithAggregatesFilter<"SubscriptionPayment"> | string | null
@@ -316,7 +328,6 @@ export type SubscriptionPaymentScalarWhereWithAggregatesInput = {
 }
 
 export type SubscriptionPaymentCreateInput = {
-  id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod: string
   transactionCode?: string | null
@@ -328,9 +339,9 @@ export type SubscriptionPaymentCreateInput = {
 }
 
 export type SubscriptionPaymentUncheckedCreateInput = {
-  id?: string
-  subscriptionId: string
-  tenantId: string
+  id?: number
+  subscriptionId: number
+  tenantId: number
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod: string
   transactionCode?: string | null
@@ -340,7 +351,6 @@ export type SubscriptionPaymentUncheckedCreateInput = {
 }
 
 export type SubscriptionPaymentUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -352,9 +362,9 @@ export type SubscriptionPaymentUpdateInput = {
 }
 
 export type SubscriptionPaymentUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  subscriptionId?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -364,9 +374,9 @@ export type SubscriptionPaymentUncheckedUpdateInput = {
 }
 
 export type SubscriptionPaymentCreateManyInput = {
-  id?: string
-  subscriptionId: string
-  tenantId: string
+  id?: number
+  subscriptionId: number
+  tenantId: number
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod: string
   transactionCode?: string | null
@@ -376,7 +386,6 @@ export type SubscriptionPaymentCreateManyInput = {
 }
 
 export type SubscriptionPaymentUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -386,9 +395,9 @@ export type SubscriptionPaymentUpdateManyMutationInput = {
 }
 
 export type SubscriptionPaymentUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  subscriptionId?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -420,6 +429,9 @@ export type SubscriptionPaymentCountOrderByAggregateInput = {
 }
 
 export type SubscriptionPaymentAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  subscriptionId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
@@ -448,6 +460,9 @@ export type SubscriptionPaymentMinOrderByAggregateInput = {
 }
 
 export type SubscriptionPaymentSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  subscriptionId?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
@@ -540,7 +555,6 @@ export type EnumSubscriptionPaymentStatusFieldUpdateOperationsInput = {
 }
 
 export type SubscriptionPaymentCreateWithoutTenantInput = {
-  id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod: string
   transactionCode?: string | null
@@ -551,8 +565,8 @@ export type SubscriptionPaymentCreateWithoutTenantInput = {
 }
 
 export type SubscriptionPaymentUncheckedCreateWithoutTenantInput = {
-  id?: string
-  subscriptionId: string
+  id?: number
+  subscriptionId: number
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod: string
   transactionCode?: string | null
@@ -591,9 +605,9 @@ export type SubscriptionPaymentScalarWhereInput = {
   AND?: Prisma.SubscriptionPaymentScalarWhereInput | Prisma.SubscriptionPaymentScalarWhereInput[]
   OR?: Prisma.SubscriptionPaymentScalarWhereInput[]
   NOT?: Prisma.SubscriptionPaymentScalarWhereInput | Prisma.SubscriptionPaymentScalarWhereInput[]
-  id?: Prisma.UuidFilter<"SubscriptionPayment"> | string
-  subscriptionId?: Prisma.UuidFilter<"SubscriptionPayment"> | string
-  tenantId?: Prisma.UuidFilter<"SubscriptionPayment"> | string
+  id?: Prisma.IntFilter<"SubscriptionPayment"> | number
+  subscriptionId?: Prisma.IntFilter<"SubscriptionPayment"> | number
+  tenantId?: Prisma.IntFilter<"SubscriptionPayment"> | number
   amount?: Prisma.DecimalFilter<"SubscriptionPayment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFilter<"SubscriptionPayment"> | string
   transactionCode?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
@@ -603,7 +617,6 @@ export type SubscriptionPaymentScalarWhereInput = {
 }
 
 export type SubscriptionPaymentCreateWithoutSubscriptionInput = {
-  id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod: string
   transactionCode?: string | null
@@ -614,8 +627,8 @@ export type SubscriptionPaymentCreateWithoutSubscriptionInput = {
 }
 
 export type SubscriptionPaymentUncheckedCreateWithoutSubscriptionInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod: string
   transactionCode?: string | null
@@ -651,8 +664,8 @@ export type SubscriptionPaymentUpdateManyWithWhereWithoutSubscriptionInput = {
 }
 
 export type SubscriptionPaymentCreateManyTenantInput = {
-  id?: string
-  subscriptionId: string
+  id?: number
+  subscriptionId: number
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod: string
   transactionCode?: string | null
@@ -662,7 +675,6 @@ export type SubscriptionPaymentCreateManyTenantInput = {
 }
 
 export type SubscriptionPaymentUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -673,8 +685,8 @@ export type SubscriptionPaymentUpdateWithoutTenantInput = {
 }
 
 export type SubscriptionPaymentUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  subscriptionId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -684,8 +696,8 @@ export type SubscriptionPaymentUncheckedUpdateWithoutTenantInput = {
 }
 
 export type SubscriptionPaymentUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  subscriptionId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -695,8 +707,8 @@ export type SubscriptionPaymentUncheckedUpdateManyWithoutTenantInput = {
 }
 
 export type SubscriptionPaymentCreateManySubscriptionInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod: string
   transactionCode?: string | null
@@ -706,7 +718,6 @@ export type SubscriptionPaymentCreateManySubscriptionInput = {
 }
 
 export type SubscriptionPaymentUpdateWithoutSubscriptionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -717,8 +728,8 @@ export type SubscriptionPaymentUpdateWithoutSubscriptionInput = {
 }
 
 export type SubscriptionPaymentUncheckedUpdateWithoutSubscriptionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -728,8 +739,8 @@ export type SubscriptionPaymentUncheckedUpdateWithoutSubscriptionInput = {
 }
 
 export type SubscriptionPaymentUncheckedUpdateManyWithoutSubscriptionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -822,17 +833,17 @@ export type $SubscriptionPaymentPayload<ExtArgs extends runtime.Types.Extensions
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
-     * ID giao dịch thanh toán (UUID)
+     * ID giao dịch thanh toán
      */
-    id: string
+    id: number
     /**
      * ID của bản ghi đăng ký dịch vụ tương ứng
      */
-    subscriptionId: string
+    subscriptionId: number
     /**
      * ID của Tenant thực hiện thanh toán
      */
-    tenantId: string
+    tenantId: number
     /**
      * Số tiền thanh toán thực tế
      */
@@ -1282,9 +1293,9 @@ export interface Prisma__SubscriptionPaymentClient<T, Null = never, ExtArgs exte
  * Fields of the SubscriptionPayment model
  */
 export interface SubscriptionPaymentFieldRefs {
-  readonly id: Prisma.FieldRef<"SubscriptionPayment", 'String'>
-  readonly subscriptionId: Prisma.FieldRef<"SubscriptionPayment", 'String'>
-  readonly tenantId: Prisma.FieldRef<"SubscriptionPayment", 'String'>
+  readonly id: Prisma.FieldRef<"SubscriptionPayment", 'Int'>
+  readonly subscriptionId: Prisma.FieldRef<"SubscriptionPayment", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"SubscriptionPayment", 'Int'>
   readonly amount: Prisma.FieldRef<"SubscriptionPayment", 'Decimal'>
   readonly paymentMethod: Prisma.FieldRef<"SubscriptionPayment", 'String'>
   readonly transactionCode: Prisma.FieldRef<"SubscriptionPayment", 'String'>

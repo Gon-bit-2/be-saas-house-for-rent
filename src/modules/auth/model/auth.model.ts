@@ -3,7 +3,7 @@ import { IsoDateTimeCodec } from '@src/common/utils/date-codec.util'
 import z from 'zod'
 
 export const UserSchema = z.object({
-  id: z.string().uuid(),
+  id: z.number().int(),
   fullName: z.string(),
   email: z.string().email(),
   phone: z.string().optional(),
@@ -61,11 +61,14 @@ export const RegisterResSchema = UserSchema.omit({
 })
 //
 export const VerificationCodeSchema = z.object({
-  id: z.number(),
+  id: z.number().int(),
   email: z.string().email(),
-  code: z.string().length(6),
+  codeHash: z.string(),
   type: z.enum([TypeOfVerificationCode.REGISTER, TypeOfVerificationCode.FORGOT_PASSWORD, TypeOfVerificationCode.LOGIN]),
+  attempts: z.number().int().nonnegative(),
   expiresAt: IsoDateTimeCodec,
+  consumedAt: IsoDateTimeCodec.optional(),
+  invalidatedAt: IsoDateTimeCodec.optional(),
   createdAt: IsoDateTimeCodec,
 })
 export const SendOTPBodySchema = VerificationCodeSchema.pick({
@@ -74,9 +77,12 @@ export const SendOTPBodySchema = VerificationCodeSchema.pick({
 }).strict()
 export const VerifyOTPBodySchema = VerificationCodeSchema.pick({
   email: true,
-  code: true,
   type: true,
-}).strict()
+})
+  .extend({
+    code: z.string().length(6),
+  })
+  .strict()
 // login
 export const LoginBodySchema = UserSchema.pick({
   email: true,
@@ -92,11 +98,16 @@ export const LoginResSchema = z.object({
 })
 //refresh token
 export const RefreshTokenSchema = z.object({
-  token: z.string(),
-  userId: z.number(),
-  deviceId: z.number(),
+  id: z.number().int(),
+  userId: z.number().int(),
+  tokenHash: z.string(),
+  userAgent: z.string().optional(),
+  ip: z.string().optional(),
   expiresAt: IsoDateTimeCodec,
+  revokedAt: IsoDateTimeCodec.optional(),
+  revokedReason: z.string().optional(),
   createdAt: IsoDateTimeCodec,
+  updatedAt: IsoDateTimeCodec,
 })
 export const RefreshTokenBodySchema = z
   .object({
@@ -106,11 +117,11 @@ export const RefreshTokenBodySchema = z
 export const RefreshTokenResSchema = LoginResSchema
 //Device
 export const DeviceSchema = z.object({
-  id: z.number(),
-  userId: z.number(),
+  id: z.number().int(),
+  userId: z.number().int(),
   userAgent: z.string(),
   ip: z.string(),
-  lastActive: IsoDateTimeCodec,
+  lastActiveAt: IsoDateTimeCodec,
   createdAt: IsoDateTimeCodec,
   isActive: z.boolean().optional(),
 })
@@ -198,10 +209,12 @@ export const UpdateProfileResSchema = RegisterResSchema
 export type UserType = z.infer<typeof UserSchema>
 export type TRegisterBodySchema = z.infer<typeof RegisterBodySchema>
 export type TRegisterResSchema = z.infer<typeof RegisterResSchema>
+export type TVerificationCodeSchema = z.infer<typeof VerificationCodeSchema>
 export type TSendOTPBodySchema = z.infer<typeof SendOTPBodySchema>
 export type TVerifyOTPBodySchema = z.infer<typeof VerifyOTPBodySchema>
 export type TLoginBodySchema = z.infer<typeof LoginBodySchema>
 export type TLoginResSchema = z.infer<typeof LoginResSchema>
+export type TRefreshTokenSchema = z.infer<typeof RefreshTokenSchema>
 export type TRefreshTokenBodySchema = z.infer<typeof RefreshTokenBodySchema>
 export type TRefreshTokenResSchema = z.infer<typeof RefreshTokenResSchema>
 // export type TGetUsserProfileResSchema = z.infer<typeof GetUsserProfileResSchema>

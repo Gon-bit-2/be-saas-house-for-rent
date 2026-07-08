@@ -20,23 +20,37 @@ export type TicketCommentModel = runtime.Types.Result.DefaultSelection<Prisma.$T
 
 export type AggregateTicketComment = {
   _count: TicketCommentCountAggregateOutputType | null
+  _avg: TicketCommentAvgAggregateOutputType | null
+  _sum: TicketCommentSumAggregateOutputType | null
   _min: TicketCommentMinAggregateOutputType | null
   _max: TicketCommentMaxAggregateOutputType | null
 }
 
+export type TicketCommentAvgAggregateOutputType = {
+  id: number | null
+  ticketId: number | null
+  userId: number | null
+}
+
+export type TicketCommentSumAggregateOutputType = {
+  id: number | null
+  ticketId: number | null
+  userId: number | null
+}
+
 export type TicketCommentMinAggregateOutputType = {
-  id: string | null
-  ticketId: string | null
-  userId: string | null
+  id: number | null
+  ticketId: number | null
+  userId: number | null
   message: string | null
   isInternal: boolean | null
   createdAt: Date | null
 }
 
 export type TicketCommentMaxAggregateOutputType = {
-  id: string | null
-  ticketId: string | null
-  userId: string | null
+  id: number | null
+  ticketId: number | null
+  userId: number | null
   message: string | null
   isInternal: boolean | null
   createdAt: Date | null
@@ -52,6 +66,18 @@ export type TicketCommentCountAggregateOutputType = {
   _all: number
 }
 
+
+export type TicketCommentAvgAggregateInputType = {
+  id?: true
+  ticketId?: true
+  userId?: true
+}
+
+export type TicketCommentSumAggregateInputType = {
+  id?: true
+  ticketId?: true
+  userId?: true
+}
 
 export type TicketCommentMinAggregateInputType = {
   id?: true
@@ -119,6 +145,18 @@ export type TicketCommentAggregateArgs<ExtArgs extends runtime.Types.Extensions.
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: TicketCommentAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: TicketCommentSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: TicketCommentMinAggregateInputType
@@ -149,18 +187,22 @@ export type TicketCommentGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   _count?: TicketCommentCountAggregateInputType | true
+  _avg?: TicketCommentAvgAggregateInputType
+  _sum?: TicketCommentSumAggregateInputType
   _min?: TicketCommentMinAggregateInputType
   _max?: TicketCommentMaxAggregateInputType
 }
 
 export type TicketCommentGroupByOutputType = {
-  id: string
-  ticketId: string
-  userId: string
+  id: number
+  ticketId: number
+  userId: number
   message: string
   isInternal: boolean
   createdAt: Date
   _count: TicketCommentCountAggregateOutputType | null
+  _avg: TicketCommentAvgAggregateOutputType | null
+  _sum: TicketCommentSumAggregateOutputType | null
   _min: TicketCommentMinAggregateOutputType | null
   _max: TicketCommentMaxAggregateOutputType | null
 }
@@ -184,9 +226,9 @@ export type TicketCommentWhereInput = {
   AND?: Prisma.TicketCommentWhereInput | Prisma.TicketCommentWhereInput[]
   OR?: Prisma.TicketCommentWhereInput[]
   NOT?: Prisma.TicketCommentWhereInput | Prisma.TicketCommentWhereInput[]
-  id?: Prisma.UuidFilter<"TicketComment"> | string
-  ticketId?: Prisma.UuidFilter<"TicketComment"> | string
-  userId?: Prisma.UuidFilter<"TicketComment"> | string
+  id?: Prisma.IntFilter<"TicketComment"> | number
+  ticketId?: Prisma.IntFilter<"TicketComment"> | number
+  userId?: Prisma.IntFilter<"TicketComment"> | number
   message?: Prisma.StringFilter<"TicketComment"> | string
   isInternal?: Prisma.BoolFilter<"TicketComment"> | boolean
   createdAt?: Prisma.DateTimeFilter<"TicketComment"> | Date | string
@@ -206,12 +248,12 @@ export type TicketCommentOrderByWithRelationInput = {
 }
 
 export type TicketCommentWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.TicketCommentWhereInput | Prisma.TicketCommentWhereInput[]
   OR?: Prisma.TicketCommentWhereInput[]
   NOT?: Prisma.TicketCommentWhereInput | Prisma.TicketCommentWhereInput[]
-  ticketId?: Prisma.UuidFilter<"TicketComment"> | string
-  userId?: Prisma.UuidFilter<"TicketComment"> | string
+  ticketId?: Prisma.IntFilter<"TicketComment"> | number
+  userId?: Prisma.IntFilter<"TicketComment"> | number
   message?: Prisma.StringFilter<"TicketComment"> | string
   isInternal?: Prisma.BoolFilter<"TicketComment"> | boolean
   createdAt?: Prisma.DateTimeFilter<"TicketComment"> | Date | string
@@ -227,24 +269,25 @@ export type TicketCommentOrderByWithAggregationInput = {
   isInternal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.TicketCommentCountOrderByAggregateInput
+  _avg?: Prisma.TicketCommentAvgOrderByAggregateInput
   _max?: Prisma.TicketCommentMaxOrderByAggregateInput
   _min?: Prisma.TicketCommentMinOrderByAggregateInput
+  _sum?: Prisma.TicketCommentSumOrderByAggregateInput
 }
 
 export type TicketCommentScalarWhereWithAggregatesInput = {
   AND?: Prisma.TicketCommentScalarWhereWithAggregatesInput | Prisma.TicketCommentScalarWhereWithAggregatesInput[]
   OR?: Prisma.TicketCommentScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TicketCommentScalarWhereWithAggregatesInput | Prisma.TicketCommentScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"TicketComment"> | string
-  ticketId?: Prisma.UuidWithAggregatesFilter<"TicketComment"> | string
-  userId?: Prisma.UuidWithAggregatesFilter<"TicketComment"> | string
+  id?: Prisma.IntWithAggregatesFilter<"TicketComment"> | number
+  ticketId?: Prisma.IntWithAggregatesFilter<"TicketComment"> | number
+  userId?: Prisma.IntWithAggregatesFilter<"TicketComment"> | number
   message?: Prisma.StringWithAggregatesFilter<"TicketComment"> | string
   isInternal?: Prisma.BoolWithAggregatesFilter<"TicketComment"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"TicketComment"> | Date | string
 }
 
 export type TicketCommentCreateInput = {
-  id?: string
   message: string
   isInternal?: boolean
   createdAt?: Date | string
@@ -253,16 +296,15 @@ export type TicketCommentCreateInput = {
 }
 
 export type TicketCommentUncheckedCreateInput = {
-  id?: string
-  ticketId: string
-  userId: string
+  id?: number
+  ticketId: number
+  userId: number
   message: string
   isInternal?: boolean
   createdAt?: Date | string
 }
 
 export type TicketCommentUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isInternal?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -271,34 +313,33 @@ export type TicketCommentUpdateInput = {
 }
 
 export type TicketCommentUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ticketId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ticketId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isInternal?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TicketCommentCreateManyInput = {
-  id?: string
-  ticketId: string
-  userId: string
+  id?: number
+  ticketId: number
+  userId: number
   message: string
   isInternal?: boolean
   createdAt?: Date | string
 }
 
 export type TicketCommentUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isInternal?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TicketCommentUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ticketId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ticketId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isInternal?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -323,6 +364,12 @@ export type TicketCommentCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
+export type TicketCommentAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  ticketId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+}
+
 export type TicketCommentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   ticketId?: Prisma.SortOrder
@@ -339,6 +386,12 @@ export type TicketCommentMinOrderByAggregateInput = {
   message?: Prisma.SortOrder
   isInternal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type TicketCommentSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  ticketId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type TicketCommentCreateNestedManyWithoutUserInput = {
@@ -426,7 +479,6 @@ export type TicketCommentUncheckedUpdateManyWithoutTicketNestedInput = {
 }
 
 export type TicketCommentCreateWithoutUserInput = {
-  id?: string
   message: string
   isInternal?: boolean
   createdAt?: Date | string
@@ -434,8 +486,8 @@ export type TicketCommentCreateWithoutUserInput = {
 }
 
 export type TicketCommentUncheckedCreateWithoutUserInput = {
-  id?: string
-  ticketId: string
+  id?: number
+  ticketId: number
   message: string
   isInternal?: boolean
   createdAt?: Date | string
@@ -471,16 +523,15 @@ export type TicketCommentScalarWhereInput = {
   AND?: Prisma.TicketCommentScalarWhereInput | Prisma.TicketCommentScalarWhereInput[]
   OR?: Prisma.TicketCommentScalarWhereInput[]
   NOT?: Prisma.TicketCommentScalarWhereInput | Prisma.TicketCommentScalarWhereInput[]
-  id?: Prisma.UuidFilter<"TicketComment"> | string
-  ticketId?: Prisma.UuidFilter<"TicketComment"> | string
-  userId?: Prisma.UuidFilter<"TicketComment"> | string
+  id?: Prisma.IntFilter<"TicketComment"> | number
+  ticketId?: Prisma.IntFilter<"TicketComment"> | number
+  userId?: Prisma.IntFilter<"TicketComment"> | number
   message?: Prisma.StringFilter<"TicketComment"> | string
   isInternal?: Prisma.BoolFilter<"TicketComment"> | boolean
   createdAt?: Prisma.DateTimeFilter<"TicketComment"> | Date | string
 }
 
 export type TicketCommentCreateWithoutTicketInput = {
-  id?: string
   message: string
   isInternal?: boolean
   createdAt?: Date | string
@@ -488,8 +539,8 @@ export type TicketCommentCreateWithoutTicketInput = {
 }
 
 export type TicketCommentUncheckedCreateWithoutTicketInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   message: string
   isInternal?: boolean
   createdAt?: Date | string
@@ -522,15 +573,14 @@ export type TicketCommentUpdateManyWithWhereWithoutTicketInput = {
 }
 
 export type TicketCommentCreateManyUserInput = {
-  id?: string
-  ticketId: string
+  id?: number
+  ticketId: number
   message: string
   isInternal?: boolean
   createdAt?: Date | string
 }
 
 export type TicketCommentUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isInternal?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -538,31 +588,30 @@ export type TicketCommentUpdateWithoutUserInput = {
 }
 
 export type TicketCommentUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ticketId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ticketId?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isInternal?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TicketCommentUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ticketId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ticketId?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isInternal?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TicketCommentCreateManyTicketInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   message: string
   isInternal?: boolean
   createdAt?: Date | string
 }
 
 export type TicketCommentUpdateWithoutTicketInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isInternal?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -570,16 +619,16 @@ export type TicketCommentUpdateWithoutTicketInput = {
 }
 
 export type TicketCommentUncheckedUpdateWithoutTicketInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isInternal?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TicketCommentUncheckedUpdateManyWithoutTicketInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   isInternal?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -659,15 +708,15 @@ export type $TicketCommentPayload<ExtArgs extends runtime.Types.Extensions.Inter
     /**
      * ID bình luận (UUID)
      */
-    id: string
+    id: number
     /**
      * ID ticket sự cố liên quan
      */
-    ticketId: string
+    ticketId: number
     /**
      * ID tài khoản người gửi bình luận (khách thuê hoặc chủ trọ/nhân viên)
      */
-    userId: string
+    userId: number
     /**
      * Nội dung tin nhắn trao đổi trong ticket
      */
@@ -1105,9 +1154,9 @@ export interface Prisma__TicketCommentClient<T, Null = never, ExtArgs extends ru
  * Fields of the TicketComment model
  */
 export interface TicketCommentFieldRefs {
-  readonly id: Prisma.FieldRef<"TicketComment", 'String'>
-  readonly ticketId: Prisma.FieldRef<"TicketComment", 'String'>
-  readonly userId: Prisma.FieldRef<"TicketComment", 'String'>
+  readonly id: Prisma.FieldRef<"TicketComment", 'Int'>
+  readonly ticketId: Prisma.FieldRef<"TicketComment", 'Int'>
+  readonly userId: Prisma.FieldRef<"TicketComment", 'Int'>
   readonly message: Prisma.FieldRef<"TicketComment", 'String'>
   readonly isInternal: Prisma.FieldRef<"TicketComment", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"TicketComment", 'DateTime'>

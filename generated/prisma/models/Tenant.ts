@@ -20,13 +20,31 @@ export type TenantModel = runtime.Types.Result.DefaultSelection<Prisma.$TenantPa
 
 export type AggregateTenant = {
   _count: TenantCountAggregateOutputType | null
+  _avg: TenantAvgAggregateOutputType | null
+  _sum: TenantSumAggregateOutputType | null
   _min: TenantMinAggregateOutputType | null
   _max: TenantMaxAggregateOutputType | null
 }
 
+export type TenantAvgAggregateOutputType = {
+  id: number | null
+  ownerUserId: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
+export type TenantSumAggregateOutputType = {
+  id: number | null
+  ownerUserId: number | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
+}
+
 export type TenantMinAggregateOutputType = {
-  id: string | null
-  ownerUserId: string | null
+  id: number | null
+  ownerUserId: number | null
   name: string | null
   slug: string | null
   taxCode: string | null
@@ -38,14 +56,14 @@ export type TenantMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type TenantMaxAggregateOutputType = {
-  id: string | null
-  ownerUserId: string | null
+  id: number | null
+  ownerUserId: number | null
   name: string | null
   slug: string | null
   taxCode: string | null
@@ -57,9 +75,9 @@ export type TenantMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
 }
 
 export type TenantCountAggregateOutputType = {
@@ -82,6 +100,22 @@ export type TenantCountAggregateOutputType = {
   _all: number
 }
 
+
+export type TenantAvgAggregateInputType = {
+  id?: true
+  ownerUserId?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
+
+export type TenantSumAggregateInputType = {
+  id?: true
+  ownerUserId?: true
+  createdById?: true
+  updatedById?: true
+  deletedById?: true
+}
 
 export type TenantMinAggregateInputType = {
   id?: true
@@ -179,6 +213,18 @@ export type TenantAggregateArgs<ExtArgs extends runtime.Types.Extensions.Interna
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: TenantAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: TenantSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: TenantMinAggregateInputType
@@ -209,13 +255,15 @@ export type TenantGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   _count?: TenantCountAggregateInputType | true
+  _avg?: TenantAvgAggregateInputType
+  _sum?: TenantSumAggregateInputType
   _min?: TenantMinAggregateInputType
   _max?: TenantMaxAggregateInputType
 }
 
 export type TenantGroupByOutputType = {
-  id: string
-  ownerUserId: string
+  id: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode: string | null
@@ -227,10 +275,12 @@ export type TenantGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
-  createdById: string | null
-  updatedById: string | null
-  deletedById: string | null
+  createdById: number | null
+  updatedById: number | null
+  deletedById: number | null
   _count: TenantCountAggregateOutputType | null
+  _avg: TenantAvgAggregateOutputType | null
+  _sum: TenantSumAggregateOutputType | null
   _min: TenantMinAggregateOutputType | null
   _max: TenantMaxAggregateOutputType | null
 }
@@ -254,8 +304,8 @@ export type TenantWhereInput = {
   AND?: Prisma.TenantWhereInput | Prisma.TenantWhereInput[]
   OR?: Prisma.TenantWhereInput[]
   NOT?: Prisma.TenantWhereInput | Prisma.TenantWhereInput[]
-  id?: Prisma.UuidFilter<"Tenant"> | string
-  ownerUserId?: Prisma.UuidFilter<"Tenant"> | string
+  id?: Prisma.IntFilter<"Tenant"> | number
+  ownerUserId?: Prisma.IntFilter<"Tenant"> | number
   name?: Prisma.StringFilter<"Tenant"> | string
   slug?: Prisma.StringFilter<"Tenant"> | string
   taxCode?: Prisma.StringNullableFilter<"Tenant"> | string | null
@@ -267,9 +317,9 @@ export type TenantWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Tenant"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Tenant"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Tenant"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Tenant"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Tenant"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Tenant"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Tenant"> | number | null
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   members?: Prisma.TenantMemberListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
@@ -298,9 +348,6 @@ export type TenantWhereInput = {
   reviews?: Prisma.ReviewListRelationFilter
   reputationScores?: Prisma.ReputationScoreListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
-  aiRecommendationLogs?: Prisma.AiRecommendationLogListRelationFilter
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionListRelationFilter
-  chatbotSessions?: Prisma.ChatbotSessionListRelationFilter
   backgroundJobs?: Prisma.BackgroundJobListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -353,9 +400,6 @@ export type TenantOrderByWithRelationInput = {
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   reputationScores?: Prisma.ReputationScoreOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogOrderByRelationAggregateInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionOrderByRelationAggregateInput
-  chatbotSessions?: Prisma.ChatbotSessionOrderByRelationAggregateInput
   backgroundJobs?: Prisma.BackgroundJobOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
   createdBy?: Prisma.UserOrderByWithRelationInput
@@ -364,12 +408,12 @@ export type TenantOrderByWithRelationInput = {
 }
 
 export type TenantWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   slug?: string
   AND?: Prisma.TenantWhereInput | Prisma.TenantWhereInput[]
   OR?: Prisma.TenantWhereInput[]
   NOT?: Prisma.TenantWhereInput | Prisma.TenantWhereInput[]
-  ownerUserId?: Prisma.UuidFilter<"Tenant"> | string
+  ownerUserId?: Prisma.IntFilter<"Tenant"> | number
   name?: Prisma.StringFilter<"Tenant"> | string
   taxCode?: Prisma.StringNullableFilter<"Tenant"> | string | null
   phone?: Prisma.StringNullableFilter<"Tenant"> | string | null
@@ -380,9 +424,9 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Tenant"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Tenant"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Tenant"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Tenant"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Tenant"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Tenant"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Tenant"> | number | null
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   members?: Prisma.TenantMemberListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
@@ -411,9 +455,6 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   reviews?: Prisma.ReviewListRelationFilter
   reputationScores?: Prisma.ReputationScoreListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
-  aiRecommendationLogs?: Prisma.AiRecommendationLogListRelationFilter
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionListRelationFilter
-  chatbotSessions?: Prisma.ChatbotSessionListRelationFilter
   backgroundJobs?: Prisma.BackgroundJobListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -439,16 +480,18 @@ export type TenantOrderByWithAggregationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TenantCountOrderByAggregateInput
+  _avg?: Prisma.TenantAvgOrderByAggregateInput
   _max?: Prisma.TenantMaxOrderByAggregateInput
   _min?: Prisma.TenantMinOrderByAggregateInput
+  _sum?: Prisma.TenantSumOrderByAggregateInput
 }
 
 export type TenantScalarWhereWithAggregatesInput = {
   AND?: Prisma.TenantScalarWhereWithAggregatesInput | Prisma.TenantScalarWhereWithAggregatesInput[]
   OR?: Prisma.TenantScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TenantScalarWhereWithAggregatesInput | Prisma.TenantScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"Tenant"> | string
-  ownerUserId?: Prisma.UuidWithAggregatesFilter<"Tenant"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Tenant"> | number
+  ownerUserId?: Prisma.IntWithAggregatesFilter<"Tenant"> | number
   name?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Tenant"> | string
   taxCode?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
@@ -460,13 +503,12 @@ export type TenantScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Tenant"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Tenant"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Tenant"> | Date | string | null
-  createdById?: Prisma.UuidNullableWithAggregatesFilter<"Tenant"> | string | null
-  updatedById?: Prisma.UuidNullableWithAggregatesFilter<"Tenant"> | string | null
-  deletedById?: Prisma.UuidNullableWithAggregatesFilter<"Tenant"> | string | null
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"Tenant"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"Tenant"> | number | null
+  deletedById?: Prisma.IntNullableWithAggregatesFilter<"Tenant"> | number | null
 }
 
 export type TenantCreateInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -506,9 +548,6 @@ export type TenantCreateInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -517,8 +556,8 @@ export type TenantCreateInput = {
 }
 
 export type TenantUncheckedCreateInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -530,9 +569,9 @@ export type TenantUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -560,15 +599,11 @@ export type TenantUncheckedCreateInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
 
 export type TenantUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -608,9 +643,6 @@ export type TenantUpdateInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -619,8 +651,8 @@ export type TenantUpdateInput = {
 }
 
 export type TenantUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -632,9 +664,9 @@ export type TenantUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -662,16 +694,13 @@ export type TenantUncheckedUpdateInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateManyInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -683,13 +712,12 @@ export type TenantCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type TenantUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -704,8 +732,8 @@ export type TenantUpdateManyMutationInput = {
 }
 
 export type TenantUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -717,9 +745,9 @@ export type TenantUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TenantListRelationFilter = {
@@ -746,6 +774,14 @@ export type TenantCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
+export type TenantAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  ownerUserId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -784,6 +820,14 @@ export type TenantMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+  deletedById?: Prisma.SortOrder
+}
+
+export type TenantSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  ownerUserId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -1357,52 +1401,6 @@ export type TenantUpdateOneWithoutNotificationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutNotificationsInput, Prisma.TenantUpdateWithoutNotificationsInput>, Prisma.TenantUncheckedUpdateWithoutNotificationsInput>
 }
 
-export type TenantCreateNestedOneWithoutAiRecommendationLogsInput = {
-  create?: Prisma.XOR<Prisma.TenantCreateWithoutAiRecommendationLogsInput, Prisma.TenantUncheckedCreateWithoutAiRecommendationLogsInput>
-  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutAiRecommendationLogsInput
-  connect?: Prisma.TenantWhereUniqueInput
-}
-
-export type TenantUpdateOneWithoutAiRecommendationLogsNestedInput = {
-  create?: Prisma.XOR<Prisma.TenantCreateWithoutAiRecommendationLogsInput, Prisma.TenantUncheckedCreateWithoutAiRecommendationLogsInput>
-  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutAiRecommendationLogsInput
-  upsert?: Prisma.TenantUpsertWithoutAiRecommendationLogsInput
-  disconnect?: Prisma.TenantWhereInput | boolean
-  delete?: Prisma.TenantWhereInput | boolean
-  connect?: Prisma.TenantWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutAiRecommendationLogsInput, Prisma.TenantUpdateWithoutAiRecommendationLogsInput>, Prisma.TenantUncheckedUpdateWithoutAiRecommendationLogsInput>
-}
-
-export type TenantCreateNestedOneWithoutRoomPriceSuggestionsInput = {
-  create?: Prisma.XOR<Prisma.TenantCreateWithoutRoomPriceSuggestionsInput, Prisma.TenantUncheckedCreateWithoutRoomPriceSuggestionsInput>
-  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRoomPriceSuggestionsInput
-  connect?: Prisma.TenantWhereUniqueInput
-}
-
-export type TenantUpdateOneRequiredWithoutRoomPriceSuggestionsNestedInput = {
-  create?: Prisma.XOR<Prisma.TenantCreateWithoutRoomPriceSuggestionsInput, Prisma.TenantUncheckedCreateWithoutRoomPriceSuggestionsInput>
-  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRoomPriceSuggestionsInput
-  upsert?: Prisma.TenantUpsertWithoutRoomPriceSuggestionsInput
-  connect?: Prisma.TenantWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutRoomPriceSuggestionsInput, Prisma.TenantUpdateWithoutRoomPriceSuggestionsInput>, Prisma.TenantUncheckedUpdateWithoutRoomPriceSuggestionsInput>
-}
-
-export type TenantCreateNestedOneWithoutChatbotSessionsInput = {
-  create?: Prisma.XOR<Prisma.TenantCreateWithoutChatbotSessionsInput, Prisma.TenantUncheckedCreateWithoutChatbotSessionsInput>
-  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutChatbotSessionsInput
-  connect?: Prisma.TenantWhereUniqueInput
-}
-
-export type TenantUpdateOneWithoutChatbotSessionsNestedInput = {
-  create?: Prisma.XOR<Prisma.TenantCreateWithoutChatbotSessionsInput, Prisma.TenantUncheckedCreateWithoutChatbotSessionsInput>
-  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutChatbotSessionsInput
-  upsert?: Prisma.TenantUpsertWithoutChatbotSessionsInput
-  disconnect?: Prisma.TenantWhereInput | boolean
-  delete?: Prisma.TenantWhereInput | boolean
-  connect?: Prisma.TenantWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutChatbotSessionsInput, Prisma.TenantUpdateWithoutChatbotSessionsInput>, Prisma.TenantUncheckedUpdateWithoutChatbotSessionsInput>
-}
-
 export type TenantCreateNestedOneWithoutBackgroundJobsInput = {
   create?: Prisma.XOR<Prisma.TenantCreateWithoutBackgroundJobsInput, Prisma.TenantUncheckedCreateWithoutBackgroundJobsInput>
   connectOrCreate?: Prisma.TenantCreateOrConnectWithoutBackgroundJobsInput
@@ -1436,7 +1434,6 @@ export type TenantUpdateOneWithoutAuditLogsNestedInput = {
 }
 
 export type TenantCreateWithoutOwnerInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -1475,9 +1472,6 @@ export type TenantCreateWithoutOwnerInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -1486,7 +1480,7 @@ export type TenantCreateWithoutOwnerInput = {
 }
 
 export type TenantUncheckedCreateWithoutOwnerInput = {
-  id?: string
+  id?: number
   name: string
   slug: string
   taxCode?: string | null
@@ -1498,9 +1492,9 @@ export type TenantUncheckedCreateWithoutOwnerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -1528,9 +1522,6 @@ export type TenantUncheckedCreateWithoutOwnerInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -1546,7 +1537,6 @@ export type TenantCreateManyOwnerInputEnvelope = {
 }
 
 export type TenantCreateWithoutCreatedByInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -1586,9 +1576,6 @@ export type TenantCreateWithoutCreatedByInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
@@ -1596,8 +1583,8 @@ export type TenantCreateWithoutCreatedByInput = {
 }
 
 export type TenantUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -1609,8 +1596,8 @@ export type TenantUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -1638,9 +1625,6 @@ export type TenantUncheckedCreateWithoutCreatedByInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -1656,7 +1640,6 @@ export type TenantCreateManyCreatedByInputEnvelope = {
 }
 
 export type TenantCreateWithoutUpdatedByInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -1696,9 +1679,6 @@ export type TenantCreateWithoutUpdatedByInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -1706,8 +1686,8 @@ export type TenantCreateWithoutUpdatedByInput = {
 }
 
 export type TenantUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -1719,8 +1699,8 @@ export type TenantUncheckedCreateWithoutUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -1748,9 +1728,6 @@ export type TenantUncheckedCreateWithoutUpdatedByInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -1766,7 +1743,6 @@ export type TenantCreateManyUpdatedByInputEnvelope = {
 }
 
 export type TenantCreateWithoutDeletedByInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -1806,9 +1782,6 @@ export type TenantCreateWithoutDeletedByInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -1816,8 +1789,8 @@ export type TenantCreateWithoutDeletedByInput = {
 }
 
 export type TenantUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -1829,8 +1802,8 @@ export type TenantUncheckedCreateWithoutDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -1858,9 +1831,6 @@ export type TenantUncheckedCreateWithoutDeletedByInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -1895,8 +1865,8 @@ export type TenantScalarWhereInput = {
   AND?: Prisma.TenantScalarWhereInput | Prisma.TenantScalarWhereInput[]
   OR?: Prisma.TenantScalarWhereInput[]
   NOT?: Prisma.TenantScalarWhereInput | Prisma.TenantScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Tenant"> | string
-  ownerUserId?: Prisma.UuidFilter<"Tenant"> | string
+  id?: Prisma.IntFilter<"Tenant"> | number
+  ownerUserId?: Prisma.IntFilter<"Tenant"> | number
   name?: Prisma.StringFilter<"Tenant"> | string
   slug?: Prisma.StringFilter<"Tenant"> | string
   taxCode?: Prisma.StringNullableFilter<"Tenant"> | string | null
@@ -1908,9 +1878,9 @@ export type TenantScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Tenant"> | Date | string | null
-  createdById?: Prisma.UuidNullableFilter<"Tenant"> | string | null
-  updatedById?: Prisma.UuidNullableFilter<"Tenant"> | string | null
-  deletedById?: Prisma.UuidNullableFilter<"Tenant"> | string | null
+  createdById?: Prisma.IntNullableFilter<"Tenant"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"Tenant"> | number | null
+  deletedById?: Prisma.IntNullableFilter<"Tenant"> | number | null
 }
 
 export type TenantUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1962,7 +1932,6 @@ export type TenantUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type TenantCreateWithoutMembersInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -2001,9 +1970,6 @@ export type TenantCreateWithoutMembersInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -2012,8 +1978,8 @@ export type TenantCreateWithoutMembersInput = {
 }
 
 export type TenantUncheckedCreateWithoutMembersInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -2025,9 +1991,9 @@ export type TenantUncheckedCreateWithoutMembersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
@@ -2054,9 +2020,6 @@ export type TenantUncheckedCreateWithoutMembersInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -2078,7 +2041,6 @@ export type TenantUpdateToOneWithWhereWithoutMembersInput = {
 }
 
 export type TenantUpdateWithoutMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2117,9 +2079,6 @@ export type TenantUpdateWithoutMembersInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -2128,8 +2087,8 @@ export type TenantUpdateWithoutMembersInput = {
 }
 
 export type TenantUncheckedUpdateWithoutMembersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2141,9 +2100,9 @@ export type TenantUncheckedUpdateWithoutMembersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
@@ -2170,15 +2129,11 @@ export type TenantUncheckedUpdateWithoutMembersInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSubscriptionsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -2217,9 +2172,6 @@ export type TenantCreateWithoutSubscriptionsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -2228,8 +2180,8 @@ export type TenantCreateWithoutSubscriptionsInput = {
 }
 
 export type TenantUncheckedCreateWithoutSubscriptionsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -2241,9 +2193,9 @@ export type TenantUncheckedCreateWithoutSubscriptionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
@@ -2270,9 +2222,6 @@ export type TenantUncheckedCreateWithoutSubscriptionsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -2294,7 +2243,6 @@ export type TenantUpdateToOneWithWhereWithoutSubscriptionsInput = {
 }
 
 export type TenantUpdateWithoutSubscriptionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2333,9 +2281,6 @@ export type TenantUpdateWithoutSubscriptionsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -2344,8 +2289,8 @@ export type TenantUpdateWithoutSubscriptionsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutSubscriptionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2357,9 +2302,9 @@ export type TenantUncheckedUpdateWithoutSubscriptionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
@@ -2386,15 +2331,11 @@ export type TenantUncheckedUpdateWithoutSubscriptionsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutSubscriptionPaymentsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -2433,9 +2374,6 @@ export type TenantCreateWithoutSubscriptionPaymentsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -2444,8 +2382,8 @@ export type TenantCreateWithoutSubscriptionPaymentsInput = {
 }
 
 export type TenantUncheckedCreateWithoutSubscriptionPaymentsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -2457,9 +2395,9 @@ export type TenantUncheckedCreateWithoutSubscriptionPaymentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
@@ -2486,9 +2424,6 @@ export type TenantUncheckedCreateWithoutSubscriptionPaymentsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -2510,7 +2445,6 @@ export type TenantUpdateToOneWithWhereWithoutSubscriptionPaymentsInput = {
 }
 
 export type TenantUpdateWithoutSubscriptionPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2549,9 +2483,6 @@ export type TenantUpdateWithoutSubscriptionPaymentsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -2560,8 +2491,8 @@ export type TenantUpdateWithoutSubscriptionPaymentsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutSubscriptionPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2573,9 +2504,9 @@ export type TenantUncheckedUpdateWithoutSubscriptionPaymentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
@@ -2602,15 +2533,11 @@ export type TenantUncheckedUpdateWithoutSubscriptionPaymentsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPropertiesInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -2649,9 +2576,6 @@ export type TenantCreateWithoutPropertiesInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -2660,8 +2584,8 @@ export type TenantCreateWithoutPropertiesInput = {
 }
 
 export type TenantUncheckedCreateWithoutPropertiesInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -2673,9 +2597,9 @@ export type TenantUncheckedCreateWithoutPropertiesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -2702,9 +2626,6 @@ export type TenantUncheckedCreateWithoutPropertiesInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -2726,7 +2647,6 @@ export type TenantUpdateToOneWithWhereWithoutPropertiesInput = {
 }
 
 export type TenantUpdateWithoutPropertiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2765,9 +2685,6 @@ export type TenantUpdateWithoutPropertiesInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -2776,8 +2693,8 @@ export type TenantUpdateWithoutPropertiesInput = {
 }
 
 export type TenantUncheckedUpdateWithoutPropertiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2789,9 +2706,9 @@ export type TenantUncheckedUpdateWithoutPropertiesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -2818,15 +2735,11 @@ export type TenantUncheckedUpdateWithoutPropertiesInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutFloorsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -2865,9 +2778,6 @@ export type TenantCreateWithoutFloorsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -2876,8 +2786,8 @@ export type TenantCreateWithoutFloorsInput = {
 }
 
 export type TenantUncheckedCreateWithoutFloorsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -2889,9 +2799,9 @@ export type TenantUncheckedCreateWithoutFloorsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -2918,9 +2828,6 @@ export type TenantUncheckedCreateWithoutFloorsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -2942,7 +2849,6 @@ export type TenantUpdateToOneWithWhereWithoutFloorsInput = {
 }
 
 export type TenantUpdateWithoutFloorsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2981,9 +2887,6 @@ export type TenantUpdateWithoutFloorsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -2992,8 +2895,8 @@ export type TenantUpdateWithoutFloorsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutFloorsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3005,9 +2908,9 @@ export type TenantUncheckedUpdateWithoutFloorsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -3034,15 +2937,11 @@ export type TenantUncheckedUpdateWithoutFloorsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutRoomsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -3081,9 +2980,6 @@ export type TenantCreateWithoutRoomsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -3092,8 +2988,8 @@ export type TenantCreateWithoutRoomsInput = {
 }
 
 export type TenantUncheckedCreateWithoutRoomsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -3105,9 +3001,9 @@ export type TenantUncheckedCreateWithoutRoomsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -3134,9 +3030,6 @@ export type TenantUncheckedCreateWithoutRoomsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -3158,7 +3051,6 @@ export type TenantUpdateToOneWithWhereWithoutRoomsInput = {
 }
 
 export type TenantUpdateWithoutRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3197,9 +3089,6 @@ export type TenantUpdateWithoutRoomsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -3208,8 +3097,8 @@ export type TenantUpdateWithoutRoomsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutRoomsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3221,9 +3110,9 @@ export type TenantUncheckedUpdateWithoutRoomsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -3250,15 +3139,11 @@ export type TenantUncheckedUpdateWithoutRoomsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutRentalHistoriesInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -3297,9 +3182,6 @@ export type TenantCreateWithoutRentalHistoriesInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -3308,8 +3190,8 @@ export type TenantCreateWithoutRentalHistoriesInput = {
 }
 
 export type TenantUncheckedCreateWithoutRentalHistoriesInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -3321,9 +3203,9 @@ export type TenantUncheckedCreateWithoutRentalHistoriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -3350,9 +3232,6 @@ export type TenantUncheckedCreateWithoutRentalHistoriesInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -3374,7 +3253,6 @@ export type TenantUpdateToOneWithWhereWithoutRentalHistoriesInput = {
 }
 
 export type TenantUpdateWithoutRentalHistoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3413,9 +3291,6 @@ export type TenantUpdateWithoutRentalHistoriesInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -3424,8 +3299,8 @@ export type TenantUpdateWithoutRentalHistoriesInput = {
 }
 
 export type TenantUncheckedUpdateWithoutRentalHistoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3437,9 +3312,9 @@ export type TenantUncheckedUpdateWithoutRentalHistoriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -3466,15 +3341,11 @@ export type TenantUncheckedUpdateWithoutRentalHistoriesInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutViewingAppointmentsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -3513,9 +3384,6 @@ export type TenantCreateWithoutViewingAppointmentsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -3524,8 +3392,8 @@ export type TenantCreateWithoutViewingAppointmentsInput = {
 }
 
 export type TenantUncheckedCreateWithoutViewingAppointmentsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -3537,9 +3405,9 @@ export type TenantUncheckedCreateWithoutViewingAppointmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -3566,9 +3434,6 @@ export type TenantUncheckedCreateWithoutViewingAppointmentsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -3590,7 +3455,6 @@ export type TenantUpdateToOneWithWhereWithoutViewingAppointmentsInput = {
 }
 
 export type TenantUpdateWithoutViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3629,9 +3493,6 @@ export type TenantUpdateWithoutViewingAppointmentsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -3640,8 +3501,8 @@ export type TenantUpdateWithoutViewingAppointmentsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutViewingAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3653,9 +3514,9 @@ export type TenantUncheckedUpdateWithoutViewingAppointmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -3682,15 +3543,11 @@ export type TenantUncheckedUpdateWithoutViewingAppointmentsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutRentalRequestsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -3729,9 +3586,6 @@ export type TenantCreateWithoutRentalRequestsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -3740,8 +3594,8 @@ export type TenantCreateWithoutRentalRequestsInput = {
 }
 
 export type TenantUncheckedCreateWithoutRentalRequestsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -3753,9 +3607,9 @@ export type TenantUncheckedCreateWithoutRentalRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -3782,9 +3636,6 @@ export type TenantUncheckedCreateWithoutRentalRequestsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -3806,7 +3657,6 @@ export type TenantUpdateToOneWithWhereWithoutRentalRequestsInput = {
 }
 
 export type TenantUpdateWithoutRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3845,9 +3695,6 @@ export type TenantUpdateWithoutRentalRequestsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -3856,8 +3703,8 @@ export type TenantUpdateWithoutRentalRequestsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutRentalRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3869,9 +3716,9 @@ export type TenantUncheckedUpdateWithoutRentalRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -3898,15 +3745,11 @@ export type TenantUncheckedUpdateWithoutRentalRequestsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutContractTemplatesInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -3945,9 +3788,6 @@ export type TenantCreateWithoutContractTemplatesInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -3956,8 +3796,8 @@ export type TenantCreateWithoutContractTemplatesInput = {
 }
 
 export type TenantUncheckedCreateWithoutContractTemplatesInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -3969,9 +3809,9 @@ export type TenantUncheckedCreateWithoutContractTemplatesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -3998,9 +3838,6 @@ export type TenantUncheckedCreateWithoutContractTemplatesInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -4022,7 +3859,6 @@ export type TenantUpdateToOneWithWhereWithoutContractTemplatesInput = {
 }
 
 export type TenantUpdateWithoutContractTemplatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4061,9 +3897,6 @@ export type TenantUpdateWithoutContractTemplatesInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -4072,8 +3905,8 @@ export type TenantUpdateWithoutContractTemplatesInput = {
 }
 
 export type TenantUncheckedUpdateWithoutContractTemplatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4085,9 +3918,9 @@ export type TenantUncheckedUpdateWithoutContractTemplatesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -4114,15 +3947,11 @@ export type TenantUncheckedUpdateWithoutContractTemplatesInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutContractsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -4161,9 +3990,6 @@ export type TenantCreateWithoutContractsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -4172,8 +3998,8 @@ export type TenantCreateWithoutContractsInput = {
 }
 
 export type TenantUncheckedCreateWithoutContractsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -4185,9 +4011,9 @@ export type TenantUncheckedCreateWithoutContractsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -4214,9 +4040,6 @@ export type TenantUncheckedCreateWithoutContractsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -4238,7 +4061,6 @@ export type TenantUpdateToOneWithWhereWithoutContractsInput = {
 }
 
 export type TenantUpdateWithoutContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4277,9 +4099,6 @@ export type TenantUpdateWithoutContractsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -4288,8 +4107,8 @@ export type TenantUpdateWithoutContractsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutContractsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4301,9 +4120,9 @@ export type TenantUncheckedUpdateWithoutContractsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -4330,15 +4149,11 @@ export type TenantUncheckedUpdateWithoutContractsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutTerminationRequestsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -4377,9 +4192,6 @@ export type TenantCreateWithoutTerminationRequestsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -4388,8 +4200,8 @@ export type TenantCreateWithoutTerminationRequestsInput = {
 }
 
 export type TenantUncheckedCreateWithoutTerminationRequestsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -4401,9 +4213,9 @@ export type TenantUncheckedCreateWithoutTerminationRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -4430,9 +4242,6 @@ export type TenantUncheckedCreateWithoutTerminationRequestsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -4454,7 +4263,6 @@ export type TenantUpdateToOneWithWhereWithoutTerminationRequestsInput = {
 }
 
 export type TenantUpdateWithoutTerminationRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4493,9 +4301,6 @@ export type TenantUpdateWithoutTerminationRequestsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -4504,8 +4309,8 @@ export type TenantUpdateWithoutTerminationRequestsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutTerminationRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4517,9 +4322,9 @@ export type TenantUncheckedUpdateWithoutTerminationRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -4546,15 +4351,11 @@ export type TenantUncheckedUpdateWithoutTerminationRequestsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutRoomAssetsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -4593,9 +4394,6 @@ export type TenantCreateWithoutRoomAssetsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -4604,8 +4402,8 @@ export type TenantCreateWithoutRoomAssetsInput = {
 }
 
 export type TenantUncheckedCreateWithoutRoomAssetsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -4617,9 +4415,9 @@ export type TenantUncheckedCreateWithoutRoomAssetsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -4646,9 +4444,6 @@ export type TenantUncheckedCreateWithoutRoomAssetsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -4670,7 +4465,6 @@ export type TenantUpdateToOneWithWhereWithoutRoomAssetsInput = {
 }
 
 export type TenantUpdateWithoutRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4709,9 +4503,6 @@ export type TenantUpdateWithoutRoomAssetsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -4720,8 +4511,8 @@ export type TenantUpdateWithoutRoomAssetsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutRoomAssetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4733,9 +4524,9 @@ export type TenantUncheckedUpdateWithoutRoomAssetsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -4762,15 +4553,11 @@ export type TenantUncheckedUpdateWithoutRoomAssetsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutHandoverRecordsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -4809,9 +4596,6 @@ export type TenantCreateWithoutHandoverRecordsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -4820,8 +4604,8 @@ export type TenantCreateWithoutHandoverRecordsInput = {
 }
 
 export type TenantUncheckedCreateWithoutHandoverRecordsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -4833,9 +4617,9 @@ export type TenantUncheckedCreateWithoutHandoverRecordsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -4862,9 +4646,6 @@ export type TenantUncheckedCreateWithoutHandoverRecordsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -4886,7 +4667,6 @@ export type TenantUpdateToOneWithWhereWithoutHandoverRecordsInput = {
 }
 
 export type TenantUpdateWithoutHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4925,9 +4705,6 @@ export type TenantUpdateWithoutHandoverRecordsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -4936,8 +4713,8 @@ export type TenantUpdateWithoutHandoverRecordsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutHandoverRecordsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4949,9 +4726,9 @@ export type TenantUncheckedUpdateWithoutHandoverRecordsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -4978,15 +4755,11 @@ export type TenantUncheckedUpdateWithoutHandoverRecordsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutUtilityMetersInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -5025,9 +4798,6 @@ export type TenantCreateWithoutUtilityMetersInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -5036,8 +4806,8 @@ export type TenantCreateWithoutUtilityMetersInput = {
 }
 
 export type TenantUncheckedCreateWithoutUtilityMetersInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -5049,9 +4819,9 @@ export type TenantUncheckedCreateWithoutUtilityMetersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -5078,9 +4848,6 @@ export type TenantUncheckedCreateWithoutUtilityMetersInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -5102,7 +4869,6 @@ export type TenantUpdateToOneWithWhereWithoutUtilityMetersInput = {
 }
 
 export type TenantUpdateWithoutUtilityMetersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5141,9 +4907,6 @@ export type TenantUpdateWithoutUtilityMetersInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -5152,8 +4915,8 @@ export type TenantUpdateWithoutUtilityMetersInput = {
 }
 
 export type TenantUncheckedUpdateWithoutUtilityMetersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5165,9 +4928,9 @@ export type TenantUncheckedUpdateWithoutUtilityMetersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -5194,15 +4957,11 @@ export type TenantUncheckedUpdateWithoutUtilityMetersInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutMeterReadingsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -5241,9 +5000,6 @@ export type TenantCreateWithoutMeterReadingsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -5252,8 +5008,8 @@ export type TenantCreateWithoutMeterReadingsInput = {
 }
 
 export type TenantUncheckedCreateWithoutMeterReadingsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -5265,9 +5021,9 @@ export type TenantUncheckedCreateWithoutMeterReadingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -5294,9 +5050,6 @@ export type TenantUncheckedCreateWithoutMeterReadingsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -5318,7 +5071,6 @@ export type TenantUpdateToOneWithWhereWithoutMeterReadingsInput = {
 }
 
 export type TenantUpdateWithoutMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5357,9 +5109,6 @@ export type TenantUpdateWithoutMeterReadingsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -5368,8 +5117,8 @@ export type TenantUpdateWithoutMeterReadingsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutMeterReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5381,9 +5130,9 @@ export type TenantUncheckedUpdateWithoutMeterReadingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -5410,15 +5159,11 @@ export type TenantUncheckedUpdateWithoutMeterReadingsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutOcrJobsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -5457,9 +5202,6 @@ export type TenantCreateWithoutOcrJobsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -5468,8 +5210,8 @@ export type TenantCreateWithoutOcrJobsInput = {
 }
 
 export type TenantUncheckedCreateWithoutOcrJobsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -5481,9 +5223,9 @@ export type TenantUncheckedCreateWithoutOcrJobsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -5510,9 +5252,6 @@ export type TenantUncheckedCreateWithoutOcrJobsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -5534,7 +5273,6 @@ export type TenantUpdateToOneWithWhereWithoutOcrJobsInput = {
 }
 
 export type TenantUpdateWithoutOcrJobsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5573,9 +5311,6 @@ export type TenantUpdateWithoutOcrJobsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -5584,8 +5319,8 @@ export type TenantUpdateWithoutOcrJobsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutOcrJobsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5597,9 +5332,9 @@ export type TenantUncheckedUpdateWithoutOcrJobsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -5626,15 +5361,11 @@ export type TenantUncheckedUpdateWithoutOcrJobsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutInvoiceBatchesInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -5673,9 +5404,6 @@ export type TenantCreateWithoutInvoiceBatchesInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -5684,8 +5412,8 @@ export type TenantCreateWithoutInvoiceBatchesInput = {
 }
 
 export type TenantUncheckedCreateWithoutInvoiceBatchesInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -5697,9 +5425,9 @@ export type TenantUncheckedCreateWithoutInvoiceBatchesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -5726,9 +5454,6 @@ export type TenantUncheckedCreateWithoutInvoiceBatchesInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -5750,7 +5475,6 @@ export type TenantUpdateToOneWithWhereWithoutInvoiceBatchesInput = {
 }
 
 export type TenantUpdateWithoutInvoiceBatchesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5789,9 +5513,6 @@ export type TenantUpdateWithoutInvoiceBatchesInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -5800,8 +5521,8 @@ export type TenantUpdateWithoutInvoiceBatchesInput = {
 }
 
 export type TenantUncheckedUpdateWithoutInvoiceBatchesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5813,9 +5534,9 @@ export type TenantUncheckedUpdateWithoutInvoiceBatchesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -5842,15 +5563,11 @@ export type TenantUncheckedUpdateWithoutInvoiceBatchesInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutInvoicesInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -5889,9 +5606,6 @@ export type TenantCreateWithoutInvoicesInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -5900,8 +5614,8 @@ export type TenantCreateWithoutInvoicesInput = {
 }
 
 export type TenantUncheckedCreateWithoutInvoicesInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -5913,9 +5627,9 @@ export type TenantUncheckedCreateWithoutInvoicesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -5942,9 +5656,6 @@ export type TenantUncheckedCreateWithoutInvoicesInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -5966,7 +5677,6 @@ export type TenantUpdateToOneWithWhereWithoutInvoicesInput = {
 }
 
 export type TenantUpdateWithoutInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6005,9 +5715,6 @@ export type TenantUpdateWithoutInvoicesInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -6016,8 +5723,8 @@ export type TenantUpdateWithoutInvoicesInput = {
 }
 
 export type TenantUncheckedUpdateWithoutInvoicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6029,9 +5736,9 @@ export type TenantUncheckedUpdateWithoutInvoicesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -6058,15 +5765,11 @@ export type TenantUncheckedUpdateWithoutInvoicesInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPaymentsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -6105,9 +5808,6 @@ export type TenantCreateWithoutPaymentsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -6116,8 +5816,8 @@ export type TenantCreateWithoutPaymentsInput = {
 }
 
 export type TenantUncheckedCreateWithoutPaymentsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -6129,9 +5829,9 @@ export type TenantUncheckedCreateWithoutPaymentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -6158,9 +5858,6 @@ export type TenantUncheckedCreateWithoutPaymentsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -6182,7 +5879,6 @@ export type TenantUpdateToOneWithWhereWithoutPaymentsInput = {
 }
 
 export type TenantUpdateWithoutPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6221,9 +5917,6 @@ export type TenantUpdateWithoutPaymentsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -6232,8 +5925,8 @@ export type TenantUpdateWithoutPaymentsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutPaymentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6245,9 +5938,9 @@ export type TenantUncheckedUpdateWithoutPaymentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -6274,15 +5967,11 @@ export type TenantUncheckedUpdateWithoutPaymentsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPaymentQrCodesInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -6321,9 +6010,6 @@ export type TenantCreateWithoutPaymentQrCodesInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -6332,8 +6018,8 @@ export type TenantCreateWithoutPaymentQrCodesInput = {
 }
 
 export type TenantUncheckedCreateWithoutPaymentQrCodesInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -6345,9 +6031,9 @@ export type TenantUncheckedCreateWithoutPaymentQrCodesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -6374,9 +6060,6 @@ export type TenantUncheckedCreateWithoutPaymentQrCodesInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -6398,7 +6081,6 @@ export type TenantUpdateToOneWithWhereWithoutPaymentQrCodesInput = {
 }
 
 export type TenantUpdateWithoutPaymentQrCodesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6437,9 +6119,6 @@ export type TenantUpdateWithoutPaymentQrCodesInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -6448,8 +6127,8 @@ export type TenantUpdateWithoutPaymentQrCodesInput = {
 }
 
 export type TenantUncheckedUpdateWithoutPaymentQrCodesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6461,9 +6140,9 @@ export type TenantUncheckedUpdateWithoutPaymentQrCodesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -6490,15 +6169,11 @@ export type TenantUncheckedUpdateWithoutPaymentQrCodesInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutPaymentWebhookLogsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -6537,9 +6212,6 @@ export type TenantCreateWithoutPaymentWebhookLogsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -6548,8 +6220,8 @@ export type TenantCreateWithoutPaymentWebhookLogsInput = {
 }
 
 export type TenantUncheckedCreateWithoutPaymentWebhookLogsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -6561,9 +6233,9 @@ export type TenantUncheckedCreateWithoutPaymentWebhookLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -6590,9 +6262,6 @@ export type TenantUncheckedCreateWithoutPaymentWebhookLogsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -6614,7 +6283,6 @@ export type TenantUpdateToOneWithWhereWithoutPaymentWebhookLogsInput = {
 }
 
 export type TenantUpdateWithoutPaymentWebhookLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6653,9 +6321,6 @@ export type TenantUpdateWithoutPaymentWebhookLogsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -6664,8 +6329,8 @@ export type TenantUpdateWithoutPaymentWebhookLogsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutPaymentWebhookLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6677,9 +6342,9 @@ export type TenantUncheckedUpdateWithoutPaymentWebhookLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -6706,15 +6371,11 @@ export type TenantUncheckedUpdateWithoutPaymentWebhookLogsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutTicketsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -6753,9 +6414,6 @@ export type TenantCreateWithoutTicketsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -6764,8 +6422,8 @@ export type TenantCreateWithoutTicketsInput = {
 }
 
 export type TenantUncheckedCreateWithoutTicketsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -6777,9 +6435,9 @@ export type TenantUncheckedCreateWithoutTicketsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -6806,9 +6464,6 @@ export type TenantUncheckedCreateWithoutTicketsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -6830,7 +6485,6 @@ export type TenantUpdateToOneWithWhereWithoutTicketsInput = {
 }
 
 export type TenantUpdateWithoutTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6869,9 +6523,6 @@ export type TenantUpdateWithoutTicketsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -6880,8 +6531,8 @@ export type TenantUpdateWithoutTicketsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutTicketsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6893,9 +6544,9 @@ export type TenantUncheckedUpdateWithoutTicketsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -6922,15 +6573,11 @@ export type TenantUncheckedUpdateWithoutTicketsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutConversationsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -6969,9 +6616,6 @@ export type TenantCreateWithoutConversationsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -6980,8 +6624,8 @@ export type TenantCreateWithoutConversationsInput = {
 }
 
 export type TenantUncheckedCreateWithoutConversationsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -6993,9 +6637,9 @@ export type TenantUncheckedCreateWithoutConversationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -7022,9 +6666,6 @@ export type TenantUncheckedCreateWithoutConversationsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -7046,7 +6687,6 @@ export type TenantUpdateToOneWithWhereWithoutConversationsInput = {
 }
 
 export type TenantUpdateWithoutConversationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7085,9 +6725,6 @@ export type TenantUpdateWithoutConversationsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -7096,8 +6733,8 @@ export type TenantUpdateWithoutConversationsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutConversationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7109,9 +6746,9 @@ export type TenantUncheckedUpdateWithoutConversationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -7138,15 +6775,11 @@ export type TenantUncheckedUpdateWithoutConversationsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutReviewsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -7185,9 +6818,6 @@ export type TenantCreateWithoutReviewsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -7196,8 +6826,8 @@ export type TenantCreateWithoutReviewsInput = {
 }
 
 export type TenantUncheckedCreateWithoutReviewsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -7209,9 +6839,9 @@ export type TenantUncheckedCreateWithoutReviewsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -7238,9 +6868,6 @@ export type TenantUncheckedCreateWithoutReviewsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -7262,7 +6889,6 @@ export type TenantUpdateToOneWithWhereWithoutReviewsInput = {
 }
 
 export type TenantUpdateWithoutReviewsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7301,9 +6927,6 @@ export type TenantUpdateWithoutReviewsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -7312,8 +6935,8 @@ export type TenantUpdateWithoutReviewsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutReviewsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7325,9 +6948,9 @@ export type TenantUncheckedUpdateWithoutReviewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -7354,15 +6977,11 @@ export type TenantUncheckedUpdateWithoutReviewsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutReputationScoresInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -7401,9 +7020,6 @@ export type TenantCreateWithoutReputationScoresInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -7412,8 +7028,8 @@ export type TenantCreateWithoutReputationScoresInput = {
 }
 
 export type TenantUncheckedCreateWithoutReputationScoresInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -7425,9 +7041,9 @@ export type TenantUncheckedCreateWithoutReputationScoresInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -7454,9 +7070,6 @@ export type TenantUncheckedCreateWithoutReputationScoresInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -7478,7 +7091,6 @@ export type TenantUpdateToOneWithWhereWithoutReputationScoresInput = {
 }
 
 export type TenantUpdateWithoutReputationScoresInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7517,9 +7129,6 @@ export type TenantUpdateWithoutReputationScoresInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -7528,8 +7137,8 @@ export type TenantUpdateWithoutReputationScoresInput = {
 }
 
 export type TenantUncheckedUpdateWithoutReputationScoresInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7541,9 +7150,9 @@ export type TenantUncheckedUpdateWithoutReputationScoresInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -7570,15 +7179,11 @@ export type TenantUncheckedUpdateWithoutReputationScoresInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutNotificationsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -7617,9 +7222,6 @@ export type TenantCreateWithoutNotificationsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
@@ -7628,8 +7230,8 @@ export type TenantCreateWithoutNotificationsInput = {
 }
 
 export type TenantUncheckedCreateWithoutNotificationsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -7641,9 +7243,9 @@ export type TenantUncheckedCreateWithoutNotificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -7670,9 +7272,6 @@ export type TenantUncheckedCreateWithoutNotificationsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
@@ -7694,7 +7293,6 @@ export type TenantUpdateToOneWithWhereWithoutNotificationsInput = {
 }
 
 export type TenantUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7733,9 +7331,6 @@ export type TenantUpdateWithoutNotificationsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -7744,8 +7339,8 @@ export type TenantUpdateWithoutNotificationsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7757,9 +7352,9 @@ export type TenantUncheckedUpdateWithoutNotificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -7786,663 +7381,11 @@ export type TenantUncheckedUpdateWithoutNotificationsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
-  backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
-}
-
-export type TenantCreateWithoutAiRecommendationLogsInput = {
-  id?: string
-  name: string
-  slug: string
-  taxCode?: string | null
-  phone?: string | null
-  email?: string | null
-  address?: string | null
-  verificationStatus?: $Enums.VerificationStatus
-  status?: $Enums.TenantStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  owner: Prisma.UserCreateNestedOneWithoutOwnedTenantsInput
-  members?: Prisma.TenantMemberCreateNestedManyWithoutTenantInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutTenantInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
-  properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
-  floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
-  rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
-  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
-  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
-  contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
-  contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
-  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
-  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
-  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
-  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
-  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
-  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
-  invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
-  invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
-  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
-  paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
-  tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
-  conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
-  reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
-  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
-  backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedTenantsInput
-}
-
-export type TenantUncheckedCreateWithoutAiRecommendationLogsInput = {
-  id?: string
-  ownerUserId: string
-  name: string
-  slug: string
-  taxCode?: string | null
-  phone?: string | null
-  email?: string | null
-  address?: string | null
-  verificationStatus?: $Enums.VerificationStatus
-  status?: $Enums.TenantStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
-  members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
-  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
-  floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
-  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
-  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
-  contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
-  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
-  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
-  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
-  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
-  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
-  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
-  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
-  invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
-  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
-  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
-  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
-  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
-  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
-  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
-  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
-  backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
-}
-
-export type TenantCreateOrConnectWithoutAiRecommendationLogsInput = {
-  where: Prisma.TenantWhereUniqueInput
-  create: Prisma.XOR<Prisma.TenantCreateWithoutAiRecommendationLogsInput, Prisma.TenantUncheckedCreateWithoutAiRecommendationLogsInput>
-}
-
-export type TenantUpsertWithoutAiRecommendationLogsInput = {
-  update: Prisma.XOR<Prisma.TenantUpdateWithoutAiRecommendationLogsInput, Prisma.TenantUncheckedUpdateWithoutAiRecommendationLogsInput>
-  create: Prisma.XOR<Prisma.TenantCreateWithoutAiRecommendationLogsInput, Prisma.TenantUncheckedCreateWithoutAiRecommendationLogsInput>
-  where?: Prisma.TenantWhereInput
-}
-
-export type TenantUpdateToOneWithWhereWithoutAiRecommendationLogsInput = {
-  where?: Prisma.TenantWhereInput
-  data: Prisma.XOR<Prisma.TenantUpdateWithoutAiRecommendationLogsInput, Prisma.TenantUncheckedUpdateWithoutAiRecommendationLogsInput>
-}
-
-export type TenantUpdateWithoutAiRecommendationLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
-  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTenantsNestedInput
-  members?: Prisma.TenantMemberUpdateManyWithoutTenantNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutTenantNestedInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
-  properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
-  floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
-  rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
-  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
-  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
-  contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
-  contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
-  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
-  roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
-  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
-  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
-  meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
-  ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
-  invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
-  invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
-  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
-  paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
-  tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
-  conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
-  reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
-  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
-  backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedTenantsNestedInput
-}
-
-export type TenantUncheckedUpdateWithoutAiRecommendationLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
-  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
-  properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
-  floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
-  rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
-  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
-  contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
-  contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
-  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
-  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
-  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
-  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
-  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
-  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
-  invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
-  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
-  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
-  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
-  tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
-  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
-  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
-  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
-  backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
-}
-
-export type TenantCreateWithoutRoomPriceSuggestionsInput = {
-  id?: string
-  name: string
-  slug: string
-  taxCode?: string | null
-  phone?: string | null
-  email?: string | null
-  address?: string | null
-  verificationStatus?: $Enums.VerificationStatus
-  status?: $Enums.TenantStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  owner: Prisma.UserCreateNestedOneWithoutOwnedTenantsInput
-  members?: Prisma.TenantMemberCreateNestedManyWithoutTenantInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutTenantInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
-  properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
-  floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
-  rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
-  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
-  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
-  contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
-  contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
-  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
-  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
-  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
-  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
-  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
-  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
-  invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
-  invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
-  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
-  paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
-  tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
-  conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
-  reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
-  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
-  backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedTenantsInput
-}
-
-export type TenantUncheckedCreateWithoutRoomPriceSuggestionsInput = {
-  id?: string
-  ownerUserId: string
-  name: string
-  slug: string
-  taxCode?: string | null
-  phone?: string | null
-  email?: string | null
-  address?: string | null
-  verificationStatus?: $Enums.VerificationStatus
-  status?: $Enums.TenantStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
-  members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
-  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
-  floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
-  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
-  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
-  contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
-  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
-  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
-  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
-  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
-  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
-  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
-  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
-  invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
-  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
-  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
-  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
-  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
-  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
-  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
-  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
-  backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
-}
-
-export type TenantCreateOrConnectWithoutRoomPriceSuggestionsInput = {
-  where: Prisma.TenantWhereUniqueInput
-  create: Prisma.XOR<Prisma.TenantCreateWithoutRoomPriceSuggestionsInput, Prisma.TenantUncheckedCreateWithoutRoomPriceSuggestionsInput>
-}
-
-export type TenantUpsertWithoutRoomPriceSuggestionsInput = {
-  update: Prisma.XOR<Prisma.TenantUpdateWithoutRoomPriceSuggestionsInput, Prisma.TenantUncheckedUpdateWithoutRoomPriceSuggestionsInput>
-  create: Prisma.XOR<Prisma.TenantCreateWithoutRoomPriceSuggestionsInput, Prisma.TenantUncheckedCreateWithoutRoomPriceSuggestionsInput>
-  where?: Prisma.TenantWhereInput
-}
-
-export type TenantUpdateToOneWithWhereWithoutRoomPriceSuggestionsInput = {
-  where?: Prisma.TenantWhereInput
-  data: Prisma.XOR<Prisma.TenantUpdateWithoutRoomPriceSuggestionsInput, Prisma.TenantUncheckedUpdateWithoutRoomPriceSuggestionsInput>
-}
-
-export type TenantUpdateWithoutRoomPriceSuggestionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
-  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTenantsNestedInput
-  members?: Prisma.TenantMemberUpdateManyWithoutTenantNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutTenantNestedInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
-  properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
-  floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
-  rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
-  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
-  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
-  contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
-  contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
-  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
-  roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
-  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
-  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
-  meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
-  ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
-  invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
-  invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
-  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
-  paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
-  tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
-  conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
-  reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
-  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
-  backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedTenantsNestedInput
-}
-
-export type TenantUncheckedUpdateWithoutRoomPriceSuggestionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
-  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
-  properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
-  floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
-  rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
-  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
-  contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
-  contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
-  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
-  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
-  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
-  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
-  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
-  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
-  invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
-  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
-  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
-  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
-  tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
-  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
-  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
-  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
-  backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
-}
-
-export type TenantCreateWithoutChatbotSessionsInput = {
-  id?: string
-  name: string
-  slug: string
-  taxCode?: string | null
-  phone?: string | null
-  email?: string | null
-  address?: string | null
-  verificationStatus?: $Enums.VerificationStatus
-  status?: $Enums.TenantStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  owner: Prisma.UserCreateNestedOneWithoutOwnedTenantsInput
-  members?: Prisma.TenantMemberCreateNestedManyWithoutTenantInput
-  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutTenantInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
-  properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
-  floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
-  rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
-  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
-  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
-  contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
-  contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
-  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
-  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
-  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
-  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
-  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
-  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
-  invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
-  invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
-  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
-  paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
-  tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
-  conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
-  reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
-  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedTenantsInput
-}
-
-export type TenantUncheckedCreateWithoutChatbotSessionsInput = {
-  id?: string
-  ownerUserId: string
-  name: string
-  slug: string
-  taxCode?: string | null
-  phone?: string | null
-  email?: string | null
-  address?: string | null
-  verificationStatus?: $Enums.VerificationStatus
-  status?: $Enums.TenantStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
-  members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
-  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
-  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
-  floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
-  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
-  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
-  contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
-  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
-  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
-  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
-  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
-  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
-  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
-  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
-  invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
-  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
-  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
-  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
-  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
-  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
-  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
-  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
-}
-
-export type TenantCreateOrConnectWithoutChatbotSessionsInput = {
-  where: Prisma.TenantWhereUniqueInput
-  create: Prisma.XOR<Prisma.TenantCreateWithoutChatbotSessionsInput, Prisma.TenantUncheckedCreateWithoutChatbotSessionsInput>
-}
-
-export type TenantUpsertWithoutChatbotSessionsInput = {
-  update: Prisma.XOR<Prisma.TenantUpdateWithoutChatbotSessionsInput, Prisma.TenantUncheckedUpdateWithoutChatbotSessionsInput>
-  create: Prisma.XOR<Prisma.TenantCreateWithoutChatbotSessionsInput, Prisma.TenantUncheckedCreateWithoutChatbotSessionsInput>
-  where?: Prisma.TenantWhereInput
-}
-
-export type TenantUpdateToOneWithWhereWithoutChatbotSessionsInput = {
-  where?: Prisma.TenantWhereInput
-  data: Prisma.XOR<Prisma.TenantUpdateWithoutChatbotSessionsInput, Prisma.TenantUncheckedUpdateWithoutChatbotSessionsInput>
-}
-
-export type TenantUpdateWithoutChatbotSessionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
-  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTenantsNestedInput
-  members?: Prisma.TenantMemberUpdateManyWithoutTenantNestedInput
-  subscriptions?: Prisma.SubscriptionUpdateManyWithoutTenantNestedInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
-  properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
-  floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
-  rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
-  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
-  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
-  contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
-  contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
-  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
-  roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
-  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
-  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
-  meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
-  ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
-  invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
-  invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
-  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
-  paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
-  tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
-  conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
-  reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
-  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedTenantsNestedInput
-}
-
-export type TenantUncheckedUpdateWithoutChatbotSessionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
-  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
-  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
-  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
-  properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
-  floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
-  rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
-  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
-  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
-  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
-  contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
-  contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
-  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
-  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
-  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
-  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
-  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
-  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
-  invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
-  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
-  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
-  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
-  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
-  tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
-  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
-  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
-  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutBackgroundJobsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -8482,9 +7425,6 @@ export type TenantCreateWithoutBackgroundJobsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
@@ -8492,8 +7432,8 @@ export type TenantCreateWithoutBackgroundJobsInput = {
 }
 
 export type TenantUncheckedCreateWithoutBackgroundJobsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -8505,9 +7445,9 @@ export type TenantUncheckedCreateWithoutBackgroundJobsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -8535,9 +7475,6 @@ export type TenantUncheckedCreateWithoutBackgroundJobsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
 }
 
@@ -8558,7 +7495,6 @@ export type TenantUpdateToOneWithWhereWithoutBackgroundJobsInput = {
 }
 
 export type TenantUpdateWithoutBackgroundJobsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8598,9 +7534,6 @@ export type TenantUpdateWithoutBackgroundJobsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
@@ -8608,8 +7541,8 @@ export type TenantUpdateWithoutBackgroundJobsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutBackgroundJobsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8621,9 +7554,9 @@ export type TenantUncheckedUpdateWithoutBackgroundJobsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -8651,14 +7584,10 @@ export type TenantUncheckedUpdateWithoutBackgroundJobsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateWithoutAuditLogsInput = {
-  id?: string
   name: string
   slug: string
   taxCode?: string | null
@@ -8698,9 +7627,6 @@ export type TenantCreateWithoutAuditLogsInput = {
   reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
@@ -8708,8 +7634,8 @@ export type TenantCreateWithoutAuditLogsInput = {
 }
 
 export type TenantUncheckedCreateWithoutAuditLogsInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -8721,9 +7647,9 @@ export type TenantUncheckedCreateWithoutAuditLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
   members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
@@ -8751,9 +7677,6 @@ export type TenantUncheckedCreateWithoutAuditLogsInput = {
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedCreateNestedManyWithoutTenantInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedCreateNestedManyWithoutTenantInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedCreateNestedManyWithoutTenantInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
 }
 
@@ -8774,7 +7697,6 @@ export type TenantUpdateToOneWithWhereWithoutAuditLogsInput = {
 }
 
 export type TenantUpdateWithoutAuditLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8814,9 +7736,6 @@ export type TenantUpdateWithoutAuditLogsInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
@@ -8824,8 +7743,8 @@ export type TenantUpdateWithoutAuditLogsInput = {
 }
 
 export type TenantUncheckedUpdateWithoutAuditLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8837,9 +7756,9 @@ export type TenantUncheckedUpdateWithoutAuditLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -8867,14 +7786,11 @@ export type TenantUncheckedUpdateWithoutAuditLogsInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantCreateManyOwnerInput = {
-  id?: string
+  id?: number
   name: string
   slug: string
   taxCode?: string | null
@@ -8886,14 +7802,14 @@ export type TenantCreateManyOwnerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type TenantCreateManyCreatedByInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -8905,13 +7821,13 @@ export type TenantCreateManyCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type TenantCreateManyUpdatedByInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -8923,13 +7839,13 @@ export type TenantCreateManyUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
+  createdById?: number | null
+  deletedById?: number | null
 }
 
 export type TenantCreateManyDeletedByInput = {
-  id?: string
-  ownerUserId: string
+  id?: number
+  ownerUserId: number
   name: string
   slug: string
   taxCode?: string | null
@@ -8941,12 +7857,11 @@ export type TenantCreateManyDeletedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type TenantUpdateWithoutOwnerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8985,9 +7900,6 @@ export type TenantUpdateWithoutOwnerInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -8996,7 +7908,7 @@ export type TenantUpdateWithoutOwnerInput = {
 }
 
 export type TenantUncheckedUpdateWithoutOwnerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9008,9 +7920,9 @@ export type TenantUncheckedUpdateWithoutOwnerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -9038,15 +7950,12 @@ export type TenantUncheckedUpdateWithoutOwnerInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateManyWithoutOwnerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9058,13 +7967,12 @@ export type TenantUncheckedUpdateManyWithoutOwnerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TenantUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9104,9 +8012,6 @@ export type TenantUpdateWithoutCreatedByInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
@@ -9114,8 +8019,8 @@ export type TenantUpdateWithoutCreatedByInput = {
 }
 
 export type TenantUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9127,8 +8032,8 @@ export type TenantUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -9156,16 +8061,13 @@ export type TenantUncheckedUpdateWithoutCreatedByInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9177,12 +8079,11 @@ export type TenantUncheckedUpdateManyWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TenantUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9222,9 +8123,6 @@ export type TenantUpdateWithoutUpdatedByInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -9232,8 +8130,8 @@ export type TenantUpdateWithoutUpdatedByInput = {
 }
 
 export type TenantUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9245,8 +8143,8 @@ export type TenantUncheckedUpdateWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -9274,16 +8172,13 @@ export type TenantUncheckedUpdateWithoutUpdatedByInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9295,12 +8190,11 @@ export type TenantUncheckedUpdateManyWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TenantUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9340,9 +8234,6 @@ export type TenantUpdateWithoutDeletedByInput = {
   reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
@@ -9350,8 +8241,8 @@ export type TenantUpdateWithoutDeletedByInput = {
 }
 
 export type TenantUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9363,8 +8254,8 @@ export type TenantUncheckedUpdateWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -9392,16 +8283,13 @@ export type TenantUncheckedUpdateWithoutDeletedByInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
-  aiRecommendationLogs?: Prisma.AiRecommendationLogUncheckedUpdateManyWithoutTenantNestedInput
-  roomPriceSuggestions?: Prisma.RoomPriceSuggestionUncheckedUpdateManyWithoutTenantNestedInput
-  chatbotSessions?: Prisma.ChatbotSessionUncheckedUpdateManyWithoutTenantNestedInput
   backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
 }
 
 export type TenantUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9413,8 +8301,8 @@ export type TenantUncheckedUpdateManyWithoutDeletedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -9450,9 +8338,6 @@ export type TenantCountOutputType = {
   reviews: number
   reputationScores: number
   notifications: number
-  aiRecommendationLogs: number
-  roomPriceSuggestions: number
-  chatbotSessions: number
   backgroundJobs: number
   auditLogs: number
 }
@@ -9485,9 +8370,6 @@ export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   reviews?: boolean | TenantCountOutputTypeCountReviewsArgs
   reputationScores?: boolean | TenantCountOutputTypeCountReputationScoresArgs
   notifications?: boolean | TenantCountOutputTypeCountNotificationsArgs
-  aiRecommendationLogs?: boolean | TenantCountOutputTypeCountAiRecommendationLogsArgs
-  roomPriceSuggestions?: boolean | TenantCountOutputTypeCountRoomPriceSuggestionsArgs
-  chatbotSessions?: boolean | TenantCountOutputTypeCountChatbotSessionsArgs
   backgroundJobs?: boolean | TenantCountOutputTypeCountBackgroundJobsArgs
   auditLogs?: boolean | TenantCountOutputTypeCountAuditLogsArgs
 }
@@ -9694,27 +8576,6 @@ export type TenantCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.
 /**
  * TenantCountOutputType without action
  */
-export type TenantCountOutputTypeCountAiRecommendationLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AiRecommendationLogWhereInput
-}
-
-/**
- * TenantCountOutputType without action
- */
-export type TenantCountOutputTypeCountRoomPriceSuggestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RoomPriceSuggestionWhereInput
-}
-
-/**
- * TenantCountOutputType without action
- */
-export type TenantCountOutputTypeCountChatbotSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ChatbotSessionWhereInput
-}
-
-/**
- * TenantCountOutputType without action
- */
 export type TenantCountOutputTypeCountBackgroundJobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BackgroundJobWhereInput
 }
@@ -9772,9 +8633,6 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   reviews?: boolean | Prisma.Tenant$reviewsArgs<ExtArgs>
   reputationScores?: boolean | Prisma.Tenant$reputationScoresArgs<ExtArgs>
   notifications?: boolean | Prisma.Tenant$notificationsArgs<ExtArgs>
-  aiRecommendationLogs?: boolean | Prisma.Tenant$aiRecommendationLogsArgs<ExtArgs>
-  roomPriceSuggestions?: boolean | Prisma.Tenant$roomPriceSuggestionsArgs<ExtArgs>
-  chatbotSessions?: boolean | Prisma.Tenant$chatbotSessionsArgs<ExtArgs>
   backgroundJobs?: boolean | Prisma.Tenant$backgroundJobsArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Tenant$auditLogsArgs<ExtArgs>
   createdBy?: boolean | Prisma.Tenant$createdByArgs<ExtArgs>
@@ -9878,9 +8736,6 @@ export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   reviews?: boolean | Prisma.Tenant$reviewsArgs<ExtArgs>
   reputationScores?: boolean | Prisma.Tenant$reputationScoresArgs<ExtArgs>
   notifications?: boolean | Prisma.Tenant$notificationsArgs<ExtArgs>
-  aiRecommendationLogs?: boolean | Prisma.Tenant$aiRecommendationLogsArgs<ExtArgs>
-  roomPriceSuggestions?: boolean | Prisma.Tenant$roomPriceSuggestionsArgs<ExtArgs>
-  chatbotSessions?: boolean | Prisma.Tenant$chatbotSessionsArgs<ExtArgs>
   backgroundJobs?: boolean | Prisma.Tenant$backgroundJobsArgs<ExtArgs>
   auditLogs?: boolean | Prisma.Tenant$auditLogsArgs<ExtArgs>
   createdBy?: boolean | Prisma.Tenant$createdByArgs<ExtArgs>
@@ -10017,18 +8872,6 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
      */
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     /**
-     * Lịch sử các tác vụ AI gợi ý của tenant này
-     */
-    aiRecommendationLogs: Prisma.$AiRecommendationLogPayload<ExtArgs>[]
-    /**
-     * Lịch sử AI gợi ý giá thuê của tenant này
-     */
-    roomPriceSuggestions: Prisma.$RoomPriceSuggestionPayload<ExtArgs>[]
-    /**
-     * Các phiên chat hỗ trợ chatbot của tenant này
-     */
-    chatbotSessions: Prisma.$ChatbotSessionPayload<ExtArgs>[]
-    /**
      * Danh sách tác vụ nền của tenant này
      */
     backgroundJobs: Prisma.$BackgroundJobPayload<ExtArgs>[]
@@ -10042,13 +8885,13 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
-     * ID định danh tổ chức (UUID)
+     * ID định danh tổ chức
      */
-    id: string
+    id: number
     /**
      * ID của người dùng làm chủ sở hữu chính của Tenant
      */
-    ownerUserId: string
+    ownerUserId: number
     /**
      * Tên thương hiệu hoặc tên chủ trọ
      */
@@ -10096,15 +8939,15 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     /**
      * ID người dùng tạo bản ghi
      */
-    createdById: string | null
+    createdById: number | null
     /**
      * ID người dùng cập nhật bản ghi gần nhất
      */
-    updatedById: string | null
+    updatedById: number | null
     /**
      * ID người dùng thực hiện xóa mềm bản ghi
      */
-    deletedById: string | null
+    deletedById: number | null
   }, ExtArgs["result"]["tenant"]>
   composites: {}
 }
@@ -10527,9 +9370,6 @@ export interface Prisma__TenantClient<T, Null = never, ExtArgs extends runtime.T
   reviews<T extends Prisma.Tenant$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reputationScores<T extends Prisma.Tenant$reputationScoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$reputationScoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReputationScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.Tenant$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  aiRecommendationLogs<T extends Prisma.Tenant$aiRecommendationLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$aiRecommendationLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AiRecommendationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  roomPriceSuggestions<T extends Prisma.Tenant$roomPriceSuggestionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$roomPriceSuggestionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomPriceSuggestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  chatbotSessions<T extends Prisma.Tenant$chatbotSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$chatbotSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatbotSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   backgroundJobs<T extends Prisma.Tenant$backgroundJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$backgroundJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BackgroundJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.Tenant$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.Tenant$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -10564,8 +9404,8 @@ export interface Prisma__TenantClient<T, Null = never, ExtArgs extends runtime.T
  * Fields of the Tenant model
  */
 export interface TenantFieldRefs {
-  readonly id: Prisma.FieldRef<"Tenant", 'String'>
-  readonly ownerUserId: Prisma.FieldRef<"Tenant", 'String'>
+  readonly id: Prisma.FieldRef<"Tenant", 'Int'>
+  readonly ownerUserId: Prisma.FieldRef<"Tenant", 'Int'>
   readonly name: Prisma.FieldRef<"Tenant", 'String'>
   readonly slug: Prisma.FieldRef<"Tenant", 'String'>
   readonly taxCode: Prisma.FieldRef<"Tenant", 'String'>
@@ -10577,9 +9417,9 @@ export interface TenantFieldRefs {
   readonly createdAt: Prisma.FieldRef<"Tenant", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Tenant", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Tenant", 'DateTime'>
-  readonly createdById: Prisma.FieldRef<"Tenant", 'String'>
-  readonly updatedById: Prisma.FieldRef<"Tenant", 'String'>
-  readonly deletedById: Prisma.FieldRef<"Tenant", 'String'>
+  readonly createdById: Prisma.FieldRef<"Tenant", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"Tenant", 'Int'>
+  readonly deletedById: Prisma.FieldRef<"Tenant", 'Int'>
 }
     
 
@@ -11626,78 +10466,6 @@ export type Tenant$notificationsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
-}
-
-/**
- * Tenant.aiRecommendationLogs
- */
-export type Tenant$aiRecommendationLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AiRecommendationLog
-   */
-  select?: Prisma.AiRecommendationLogSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AiRecommendationLog
-   */
-  omit?: Prisma.AiRecommendationLogOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AiRecommendationLogInclude<ExtArgs> | null
-  where?: Prisma.AiRecommendationLogWhereInput
-  orderBy?: Prisma.AiRecommendationLogOrderByWithRelationInput | Prisma.AiRecommendationLogOrderByWithRelationInput[]
-  cursor?: Prisma.AiRecommendationLogWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AiRecommendationLogScalarFieldEnum | Prisma.AiRecommendationLogScalarFieldEnum[]
-}
-
-/**
- * Tenant.roomPriceSuggestions
- */
-export type Tenant$roomPriceSuggestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the RoomPriceSuggestion
-   */
-  select?: Prisma.RoomPriceSuggestionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the RoomPriceSuggestion
-   */
-  omit?: Prisma.RoomPriceSuggestionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RoomPriceSuggestionInclude<ExtArgs> | null
-  where?: Prisma.RoomPriceSuggestionWhereInput
-  orderBy?: Prisma.RoomPriceSuggestionOrderByWithRelationInput | Prisma.RoomPriceSuggestionOrderByWithRelationInput[]
-  cursor?: Prisma.RoomPriceSuggestionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.RoomPriceSuggestionScalarFieldEnum | Prisma.RoomPriceSuggestionScalarFieldEnum[]
-}
-
-/**
- * Tenant.chatbotSessions
- */
-export type Tenant$chatbotSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ChatbotSession
-   */
-  select?: Prisma.ChatbotSessionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ChatbotSession
-   */
-  omit?: Prisma.ChatbotSessionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ChatbotSessionInclude<ExtArgs> | null
-  where?: Prisma.ChatbotSessionWhereInput
-  orderBy?: Prisma.ChatbotSessionOrderByWithRelationInput | Prisma.ChatbotSessionOrderByWithRelationInput[]
-  cursor?: Prisma.ChatbotSessionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ChatbotSessionScalarFieldEnum | Prisma.ChatbotSessionScalarFieldEnum[]
 }
 
 /**

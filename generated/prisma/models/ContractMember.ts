@@ -20,22 +20,36 @@ export type ContractMemberModel = runtime.Types.Result.DefaultSelection<Prisma.$
 
 export type AggregateContractMember = {
   _count: ContractMemberCountAggregateOutputType | null
+  _avg: ContractMemberAvgAggregateOutputType | null
+  _sum: ContractMemberSumAggregateOutputType | null
   _min: ContractMemberMinAggregateOutputType | null
   _max: ContractMemberMaxAggregateOutputType | null
 }
 
+export type ContractMemberAvgAggregateOutputType = {
+  id: number | null
+  contractId: number | null
+  userId: number | null
+}
+
+export type ContractMemberSumAggregateOutputType = {
+  id: number | null
+  contractId: number | null
+  userId: number | null
+}
+
 export type ContractMemberMinAggregateOutputType = {
-  id: string | null
-  contractId: string | null
-  userId: string | null
+  id: number | null
+  contractId: number | null
+  userId: number | null
   role: $Enums.ContractMemberRole | null
   createdAt: Date | null
 }
 
 export type ContractMemberMaxAggregateOutputType = {
-  id: string | null
-  contractId: string | null
-  userId: string | null
+  id: number | null
+  contractId: number | null
+  userId: number | null
   role: $Enums.ContractMemberRole | null
   createdAt: Date | null
 }
@@ -49,6 +63,18 @@ export type ContractMemberCountAggregateOutputType = {
   _all: number
 }
 
+
+export type ContractMemberAvgAggregateInputType = {
+  id?: true
+  contractId?: true
+  userId?: true
+}
+
+export type ContractMemberSumAggregateInputType = {
+  id?: true
+  contractId?: true
+  userId?: true
+}
 
 export type ContractMemberMinAggregateInputType = {
   id?: true
@@ -113,6 +139,18 @@ export type ContractMemberAggregateArgs<ExtArgs extends runtime.Types.Extensions
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: ContractMemberAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: ContractMemberSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: ContractMemberMinAggregateInputType
@@ -143,17 +181,21 @@ export type ContractMemberGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   _count?: ContractMemberCountAggregateInputType | true
+  _avg?: ContractMemberAvgAggregateInputType
+  _sum?: ContractMemberSumAggregateInputType
   _min?: ContractMemberMinAggregateInputType
   _max?: ContractMemberMaxAggregateInputType
 }
 
 export type ContractMemberGroupByOutputType = {
-  id: string
-  contractId: string
-  userId: string
+  id: number
+  contractId: number
+  userId: number
   role: $Enums.ContractMemberRole
   createdAt: Date
   _count: ContractMemberCountAggregateOutputType | null
+  _avg: ContractMemberAvgAggregateOutputType | null
+  _sum: ContractMemberSumAggregateOutputType | null
   _min: ContractMemberMinAggregateOutputType | null
   _max: ContractMemberMaxAggregateOutputType | null
 }
@@ -177,9 +219,9 @@ export type ContractMemberWhereInput = {
   AND?: Prisma.ContractMemberWhereInput | Prisma.ContractMemberWhereInput[]
   OR?: Prisma.ContractMemberWhereInput[]
   NOT?: Prisma.ContractMemberWhereInput | Prisma.ContractMemberWhereInput[]
-  id?: Prisma.UuidFilter<"ContractMember"> | string
-  contractId?: Prisma.UuidFilter<"ContractMember"> | string
-  userId?: Prisma.UuidFilter<"ContractMember"> | string
+  id?: Prisma.IntFilter<"ContractMember"> | number
+  contractId?: Prisma.IntFilter<"ContractMember"> | number
+  userId?: Prisma.IntFilter<"ContractMember"> | number
   role?: Prisma.EnumContractMemberRoleFilter<"ContractMember"> | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFilter<"ContractMember"> | Date | string
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
@@ -197,12 +239,12 @@ export type ContractMemberOrderByWithRelationInput = {
 }
 
 export type ContractMemberWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.ContractMemberWhereInput | Prisma.ContractMemberWhereInput[]
   OR?: Prisma.ContractMemberWhereInput[]
   NOT?: Prisma.ContractMemberWhereInput | Prisma.ContractMemberWhereInput[]
-  contractId?: Prisma.UuidFilter<"ContractMember"> | string
-  userId?: Prisma.UuidFilter<"ContractMember"> | string
+  contractId?: Prisma.IntFilter<"ContractMember"> | number
+  userId?: Prisma.IntFilter<"ContractMember"> | number
   role?: Prisma.EnumContractMemberRoleFilter<"ContractMember"> | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFilter<"ContractMember"> | Date | string
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
@@ -216,23 +258,24 @@ export type ContractMemberOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ContractMemberCountOrderByAggregateInput
+  _avg?: Prisma.ContractMemberAvgOrderByAggregateInput
   _max?: Prisma.ContractMemberMaxOrderByAggregateInput
   _min?: Prisma.ContractMemberMinOrderByAggregateInput
+  _sum?: Prisma.ContractMemberSumOrderByAggregateInput
 }
 
 export type ContractMemberScalarWhereWithAggregatesInput = {
   AND?: Prisma.ContractMemberScalarWhereWithAggregatesInput | Prisma.ContractMemberScalarWhereWithAggregatesInput[]
   OR?: Prisma.ContractMemberScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ContractMemberScalarWhereWithAggregatesInput | Prisma.ContractMemberScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"ContractMember"> | string
-  contractId?: Prisma.UuidWithAggregatesFilter<"ContractMember"> | string
-  userId?: Prisma.UuidWithAggregatesFilter<"ContractMember"> | string
+  id?: Prisma.IntWithAggregatesFilter<"ContractMember"> | number
+  contractId?: Prisma.IntWithAggregatesFilter<"ContractMember"> | number
+  userId?: Prisma.IntWithAggregatesFilter<"ContractMember"> | number
   role?: Prisma.EnumContractMemberRoleWithAggregatesFilter<"ContractMember"> | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ContractMember"> | Date | string
 }
 
 export type ContractMemberCreateInput = {
-  id?: string
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
   contract: Prisma.ContractCreateNestedOneWithoutMembersInput
@@ -240,15 +283,14 @@ export type ContractMemberCreateInput = {
 }
 
 export type ContractMemberUncheckedCreateInput = {
-  id?: string
-  contractId: string
-  userId: string
+  id?: number
+  contractId: number
+  userId: number
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
 
 export type ContractMemberUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contract?: Prisma.ContractUpdateOneRequiredWithoutMembersNestedInput
@@ -256,31 +298,30 @@ export type ContractMemberUpdateInput = {
 }
 
 export type ContractMemberUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ContractMemberCreateManyInput = {
-  id?: string
-  contractId: string
-  userId: string
+  id?: number
+  contractId: number
+  userId: number
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
 
 export type ContractMemberUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ContractMemberUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -303,6 +344,12 @@ export type ContractMemberCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
+export type ContractMemberAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+}
+
 export type ContractMemberMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
@@ -317,6 +364,12 @@ export type ContractMemberMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type ContractMemberSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  contractId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ContractMemberCreateNestedManyWithoutUserInput = {
@@ -408,15 +461,14 @@ export type EnumContractMemberRoleFieldUpdateOperationsInput = {
 }
 
 export type ContractMemberCreateWithoutUserInput = {
-  id?: string
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
   contract: Prisma.ContractCreateNestedOneWithoutMembersInput
 }
 
 export type ContractMemberUncheckedCreateWithoutUserInput = {
-  id?: string
-  contractId: string
+  id?: number
+  contractId: number
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
@@ -451,23 +503,22 @@ export type ContractMemberScalarWhereInput = {
   AND?: Prisma.ContractMemberScalarWhereInput | Prisma.ContractMemberScalarWhereInput[]
   OR?: Prisma.ContractMemberScalarWhereInput[]
   NOT?: Prisma.ContractMemberScalarWhereInput | Prisma.ContractMemberScalarWhereInput[]
-  id?: Prisma.UuidFilter<"ContractMember"> | string
-  contractId?: Prisma.UuidFilter<"ContractMember"> | string
-  userId?: Prisma.UuidFilter<"ContractMember"> | string
+  id?: Prisma.IntFilter<"ContractMember"> | number
+  contractId?: Prisma.IntFilter<"ContractMember"> | number
+  userId?: Prisma.IntFilter<"ContractMember"> | number
   role?: Prisma.EnumContractMemberRoleFilter<"ContractMember"> | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFilter<"ContractMember"> | Date | string
 }
 
 export type ContractMemberCreateWithoutContractInput = {
-  id?: string
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutContractMembersInput
 }
 
 export type ContractMemberUncheckedCreateWithoutContractInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
@@ -499,57 +550,55 @@ export type ContractMemberUpdateManyWithWhereWithoutContractInput = {
 }
 
 export type ContractMemberCreateManyUserInput = {
-  id?: string
-  contractId: string
+  id?: number
+  contractId: number
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
 
 export type ContractMemberUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contract?: Prisma.ContractUpdateOneRequiredWithoutMembersNestedInput
 }
 
 export type ContractMemberUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ContractMemberUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  contractId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ContractMemberCreateManyContractInput = {
-  id?: string
-  userId: string
+  id?: number
+  userId: number
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
 
 export type ContractMemberUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutContractMembersNestedInput
 }
 
 export type ContractMemberUncheckedUpdateWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ContractMemberUncheckedUpdateManyWithoutContractInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -624,15 +673,15 @@ export type $ContractMemberPayload<ExtArgs extends runtime.Types.Extensions.Inte
     /**
      * ID bản ghi thành viên (UUID)
      */
-    id: string
+    id: number
     /**
      * ID hợp đồng liên quan
      */
-    contractId: string
+    contractId: number
     /**
      * ID tài khoản người dùng của thành viên ở cùng
      */
-    userId: string
+    userId: number
     /**
      * Vai trò của thành viên trong hợp đồng (Ví dụ: MAIN_RENTER hoặc CO_RENTER)
      */
@@ -1066,9 +1115,9 @@ export interface Prisma__ContractMemberClient<T, Null = never, ExtArgs extends r
  * Fields of the ContractMember model
  */
 export interface ContractMemberFieldRefs {
-  readonly id: Prisma.FieldRef<"ContractMember", 'String'>
-  readonly contractId: Prisma.FieldRef<"ContractMember", 'String'>
-  readonly userId: Prisma.FieldRef<"ContractMember", 'String'>
+  readonly id: Prisma.FieldRef<"ContractMember", 'Int'>
+  readonly contractId: Prisma.FieldRef<"ContractMember", 'Int'>
+  readonly userId: Prisma.FieldRef<"ContractMember", 'Int'>
   readonly role: Prisma.FieldRef<"ContractMember", 'ContractMemberRole'>
   readonly createdAt: Prisma.FieldRef<"ContractMember", 'DateTime'>
 }

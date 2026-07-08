@@ -20,14 +20,28 @@ export type UtilityMeterModel = runtime.Types.Result.DefaultSelection<Prisma.$Ut
 
 export type AggregateUtilityMeter = {
   _count: UtilityMeterCountAggregateOutputType | null
+  _avg: UtilityMeterAvgAggregateOutputType | null
+  _sum: UtilityMeterSumAggregateOutputType | null
   _min: UtilityMeterMinAggregateOutputType | null
   _max: UtilityMeterMaxAggregateOutputType | null
 }
 
+export type UtilityMeterAvgAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+}
+
+export type UtilityMeterSumAggregateOutputType = {
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
+}
+
 export type UtilityMeterMinAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
   type: $Enums.MeterType | null
   meterCode: string | null
   unit: string | null
@@ -36,9 +50,9 @@ export type UtilityMeterMinAggregateOutputType = {
 }
 
 export type UtilityMeterMaxAggregateOutputType = {
-  id: string | null
-  tenantId: string | null
-  roomId: string | null
+  id: number | null
+  tenantId: number | null
+  roomId: number | null
   type: $Enums.MeterType | null
   meterCode: string | null
   unit: string | null
@@ -58,6 +72,18 @@ export type UtilityMeterCountAggregateOutputType = {
   _all: number
 }
 
+
+export type UtilityMeterAvgAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+}
+
+export type UtilityMeterSumAggregateInputType = {
+  id?: true
+  tenantId?: true
+  roomId?: true
+}
 
 export type UtilityMeterMinAggregateInputType = {
   id?: true
@@ -131,6 +157,18 @@ export type UtilityMeterAggregateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UtilityMeterAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UtilityMeterSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UtilityMeterMinAggregateInputType
@@ -161,20 +199,24 @@ export type UtilityMeterGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   _count?: UtilityMeterCountAggregateInputType | true
+  _avg?: UtilityMeterAvgAggregateInputType
+  _sum?: UtilityMeterSumAggregateInputType
   _min?: UtilityMeterMinAggregateInputType
   _max?: UtilityMeterMaxAggregateInputType
 }
 
 export type UtilityMeterGroupByOutputType = {
-  id: string
-  tenantId: string
-  roomId: string
+  id: number
+  tenantId: number
+  roomId: number
   type: $Enums.MeterType
   meterCode: string
   unit: string
   status: $Enums.MeterStatus
   createdAt: Date
   _count: UtilityMeterCountAggregateOutputType | null
+  _avg: UtilityMeterAvgAggregateOutputType | null
+  _sum: UtilityMeterSumAggregateOutputType | null
   _min: UtilityMeterMinAggregateOutputType | null
   _max: UtilityMeterMaxAggregateOutputType | null
 }
@@ -198,9 +240,9 @@ export type UtilityMeterWhereInput = {
   AND?: Prisma.UtilityMeterWhereInput | Prisma.UtilityMeterWhereInput[]
   OR?: Prisma.UtilityMeterWhereInput[]
   NOT?: Prisma.UtilityMeterWhereInput | Prisma.UtilityMeterWhereInput[]
-  id?: Prisma.UuidFilter<"UtilityMeter"> | string
-  tenantId?: Prisma.UuidFilter<"UtilityMeter"> | string
-  roomId?: Prisma.UuidFilter<"UtilityMeter"> | string
+  id?: Prisma.IntFilter<"UtilityMeter"> | number
+  tenantId?: Prisma.IntFilter<"UtilityMeter"> | number
+  roomId?: Prisma.IntFilter<"UtilityMeter"> | number
   type?: Prisma.EnumMeterTypeFilter<"UtilityMeter"> | $Enums.MeterType
   meterCode?: Prisma.StringFilter<"UtilityMeter"> | string
   unit?: Prisma.StringFilter<"UtilityMeter"> | string
@@ -228,13 +270,13 @@ export type UtilityMeterOrderByWithRelationInput = {
 }
 
 export type UtilityMeterWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   roomId_type?: Prisma.UtilityMeterRoomIdTypeCompoundUniqueInput
   AND?: Prisma.UtilityMeterWhereInput | Prisma.UtilityMeterWhereInput[]
   OR?: Prisma.UtilityMeterWhereInput[]
   NOT?: Prisma.UtilityMeterWhereInput | Prisma.UtilityMeterWhereInput[]
-  tenantId?: Prisma.UuidFilter<"UtilityMeter"> | string
-  roomId?: Prisma.UuidFilter<"UtilityMeter"> | string
+  tenantId?: Prisma.IntFilter<"UtilityMeter"> | number
+  roomId?: Prisma.IntFilter<"UtilityMeter"> | number
   type?: Prisma.EnumMeterTypeFilter<"UtilityMeter"> | $Enums.MeterType
   meterCode?: Prisma.StringFilter<"UtilityMeter"> | string
   unit?: Prisma.StringFilter<"UtilityMeter"> | string
@@ -256,17 +298,19 @@ export type UtilityMeterOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UtilityMeterCountOrderByAggregateInput
+  _avg?: Prisma.UtilityMeterAvgOrderByAggregateInput
   _max?: Prisma.UtilityMeterMaxOrderByAggregateInput
   _min?: Prisma.UtilityMeterMinOrderByAggregateInput
+  _sum?: Prisma.UtilityMeterSumOrderByAggregateInput
 }
 
 export type UtilityMeterScalarWhereWithAggregatesInput = {
   AND?: Prisma.UtilityMeterScalarWhereWithAggregatesInput | Prisma.UtilityMeterScalarWhereWithAggregatesInput[]
   OR?: Prisma.UtilityMeterScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UtilityMeterScalarWhereWithAggregatesInput | Prisma.UtilityMeterScalarWhereWithAggregatesInput[]
-  id?: Prisma.UuidWithAggregatesFilter<"UtilityMeter"> | string
-  tenantId?: Prisma.UuidWithAggregatesFilter<"UtilityMeter"> | string
-  roomId?: Prisma.UuidWithAggregatesFilter<"UtilityMeter"> | string
+  id?: Prisma.IntWithAggregatesFilter<"UtilityMeter"> | number
+  tenantId?: Prisma.IntWithAggregatesFilter<"UtilityMeter"> | number
+  roomId?: Prisma.IntWithAggregatesFilter<"UtilityMeter"> | number
   type?: Prisma.EnumMeterTypeWithAggregatesFilter<"UtilityMeter"> | $Enums.MeterType
   meterCode?: Prisma.StringWithAggregatesFilter<"UtilityMeter"> | string
   unit?: Prisma.StringWithAggregatesFilter<"UtilityMeter"> | string
@@ -275,7 +319,6 @@ export type UtilityMeterScalarWhereWithAggregatesInput = {
 }
 
 export type UtilityMeterCreateInput = {
-  id?: string
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -288,9 +331,9 @@ export type UtilityMeterCreateInput = {
 }
 
 export type UtilityMeterUncheckedCreateInput = {
-  id?: string
-  tenantId: string
-  roomId: string
+  id?: number
+  tenantId: number
+  roomId: number
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -301,7 +344,6 @@ export type UtilityMeterUncheckedCreateInput = {
 }
 
 export type UtilityMeterUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -314,9 +356,9 @@ export type UtilityMeterUpdateInput = {
 }
 
 export type UtilityMeterUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -327,9 +369,9 @@ export type UtilityMeterUncheckedUpdateInput = {
 }
 
 export type UtilityMeterCreateManyInput = {
-  id?: string
-  tenantId: string
-  roomId: string
+  id?: number
+  tenantId: number
+  roomId: number
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -338,7 +380,6 @@ export type UtilityMeterCreateManyInput = {
 }
 
 export type UtilityMeterUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -347,9 +388,9 @@ export type UtilityMeterUpdateManyMutationInput = {
 }
 
 export type UtilityMeterUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -368,7 +409,7 @@ export type UtilityMeterOrderByRelationAggregateInput = {
 }
 
 export type UtilityMeterRoomIdTypeCompoundUniqueInput = {
-  roomId: string
+  roomId: number
   type: $Enums.MeterType
 }
 
@@ -381,6 +422,12 @@ export type UtilityMeterCountOrderByAggregateInput = {
   unit?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type UtilityMeterAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
 }
 
 export type UtilityMeterMaxOrderByAggregateInput = {
@@ -403,6 +450,12 @@ export type UtilityMeterMinOrderByAggregateInput = {
   unit?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type UtilityMeterSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  tenantId?: Prisma.SortOrder
+  roomId?: Prisma.SortOrder
 }
 
 export type UtilityMeterScalarRelationFilter = {
@@ -531,7 +584,6 @@ export type UtilityMeterUpdateOneRequiredWithoutOcrJobsNestedInput = {
 }
 
 export type UtilityMeterCreateWithoutTenantInput = {
-  id?: string
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -543,8 +595,8 @@ export type UtilityMeterCreateWithoutTenantInput = {
 }
 
 export type UtilityMeterUncheckedCreateWithoutTenantInput = {
-  id?: string
-  roomId: string
+  id?: number
+  roomId: number
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -584,9 +636,9 @@ export type UtilityMeterScalarWhereInput = {
   AND?: Prisma.UtilityMeterScalarWhereInput | Prisma.UtilityMeterScalarWhereInput[]
   OR?: Prisma.UtilityMeterScalarWhereInput[]
   NOT?: Prisma.UtilityMeterScalarWhereInput | Prisma.UtilityMeterScalarWhereInput[]
-  id?: Prisma.UuidFilter<"UtilityMeter"> | string
-  tenantId?: Prisma.UuidFilter<"UtilityMeter"> | string
-  roomId?: Prisma.UuidFilter<"UtilityMeter"> | string
+  id?: Prisma.IntFilter<"UtilityMeter"> | number
+  tenantId?: Prisma.IntFilter<"UtilityMeter"> | number
+  roomId?: Prisma.IntFilter<"UtilityMeter"> | number
   type?: Prisma.EnumMeterTypeFilter<"UtilityMeter"> | $Enums.MeterType
   meterCode?: Prisma.StringFilter<"UtilityMeter"> | string
   unit?: Prisma.StringFilter<"UtilityMeter"> | string
@@ -595,7 +647,6 @@ export type UtilityMeterScalarWhereInput = {
 }
 
 export type UtilityMeterCreateWithoutRoomInput = {
-  id?: string
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -607,8 +658,8 @@ export type UtilityMeterCreateWithoutRoomInput = {
 }
 
 export type UtilityMeterUncheckedCreateWithoutRoomInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -645,7 +696,6 @@ export type UtilityMeterUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type UtilityMeterCreateWithoutReadingsInput = {
-  id?: string
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -657,9 +707,9 @@ export type UtilityMeterCreateWithoutReadingsInput = {
 }
 
 export type UtilityMeterUncheckedCreateWithoutReadingsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
+  id?: number
+  tenantId: number
+  roomId: number
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -685,7 +735,6 @@ export type UtilityMeterUpdateToOneWithWhereWithoutReadingsInput = {
 }
 
 export type UtilityMeterUpdateWithoutReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -697,9 +746,9 @@ export type UtilityMeterUpdateWithoutReadingsInput = {
 }
 
 export type UtilityMeterUncheckedUpdateWithoutReadingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -709,7 +758,6 @@ export type UtilityMeterUncheckedUpdateWithoutReadingsInput = {
 }
 
 export type UtilityMeterCreateWithoutOcrJobsInput = {
-  id?: string
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -721,9 +769,9 @@ export type UtilityMeterCreateWithoutOcrJobsInput = {
 }
 
 export type UtilityMeterUncheckedCreateWithoutOcrJobsInput = {
-  id?: string
-  tenantId: string
-  roomId: string
+  id?: number
+  tenantId: number
+  roomId: number
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -749,7 +797,6 @@ export type UtilityMeterUpdateToOneWithWhereWithoutOcrJobsInput = {
 }
 
 export type UtilityMeterUpdateWithoutOcrJobsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -761,9 +808,9 @@ export type UtilityMeterUpdateWithoutOcrJobsInput = {
 }
 
 export type UtilityMeterUncheckedUpdateWithoutOcrJobsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -773,8 +820,8 @@ export type UtilityMeterUncheckedUpdateWithoutOcrJobsInput = {
 }
 
 export type UtilityMeterCreateManyTenantInput = {
-  id?: string
-  roomId: string
+  id?: number
+  roomId: number
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -783,7 +830,6 @@ export type UtilityMeterCreateManyTenantInput = {
 }
 
 export type UtilityMeterUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -795,8 +841,8 @@ export type UtilityMeterUpdateWithoutTenantInput = {
 }
 
 export type UtilityMeterUncheckedUpdateWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -807,8 +853,8 @@ export type UtilityMeterUncheckedUpdateWithoutTenantInput = {
 }
 
 export type UtilityMeterUncheckedUpdateManyWithoutTenantInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -817,8 +863,8 @@ export type UtilityMeterUncheckedUpdateManyWithoutTenantInput = {
 }
 
 export type UtilityMeterCreateManyRoomInput = {
-  id?: string
-  tenantId: string
+  id?: number
+  tenantId: number
   type: $Enums.MeterType
   meterCode: string
   unit?: string
@@ -827,7 +873,6 @@ export type UtilityMeterCreateManyRoomInput = {
 }
 
 export type UtilityMeterUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -839,8 +884,8 @@ export type UtilityMeterUpdateWithoutRoomInput = {
 }
 
 export type UtilityMeterUncheckedUpdateWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -851,8 +896,8 @@ export type UtilityMeterUncheckedUpdateWithoutRoomInput = {
 }
 
 export type UtilityMeterUncheckedUpdateManyWithoutRoomInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  tenantId?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMeterTypeFieldUpdateOperationsInput | $Enums.MeterType
   meterCode?: Prisma.StringFieldUpdateOperationsInput | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
@@ -994,15 +1039,15 @@ export type $UtilityMeterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     /**
      * ID đồng hồ (UUID)
      */
-    id: string
+    id: number
     /**
      * ID Tenant quản lý
      */
-    tenantId: string
+    tenantId: number
     /**
      * ID phòng lắp đặt đồng hồ
      */
-    roomId: string
+    roomId: number
     /**
      * Phân loại đồng hồ đo điện hay đo nước
      */
@@ -1450,9 +1495,9 @@ export interface Prisma__UtilityMeterClient<T, Null = never, ExtArgs extends run
  * Fields of the UtilityMeter model
  */
 export interface UtilityMeterFieldRefs {
-  readonly id: Prisma.FieldRef<"UtilityMeter", 'String'>
-  readonly tenantId: Prisma.FieldRef<"UtilityMeter", 'String'>
-  readonly roomId: Prisma.FieldRef<"UtilityMeter", 'String'>
+  readonly id: Prisma.FieldRef<"UtilityMeter", 'Int'>
+  readonly tenantId: Prisma.FieldRef<"UtilityMeter", 'Int'>
+  readonly roomId: Prisma.FieldRef<"UtilityMeter", 'Int'>
   readonly type: Prisma.FieldRef<"UtilityMeter", 'MeterType'>
   readonly meterCode: Prisma.FieldRef<"UtilityMeter", 'String'>
   readonly unit: Prisma.FieldRef<"UtilityMeter", 'String'>
