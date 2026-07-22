@@ -1,0 +1,157 @@
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
+import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
+import { TenantAccessService } from '@src/shared/modules/services/tenant-access.service'
+import type { Prisma } from 'generated/prisma/client'
+import type {
+  TCreateFloorBodySchema,
+  TCreatePropertyBodySchema,
+  TListPropertiesQuerySchema,
+  TUpdateFloorBodySchema,
+  TUpdatePropertyBodySchema,
+  TUpdatePropertyStatusBodySchema,
+} from './model/properties.model'
+import { PropertiesRepository } from './repositories/properties.repo'
+
+/**
+ * Service containing tenant-scoped business rules for properties and floors.
+ */
+@Injectable()
+export class PropertiesService {
+  constructor(
+    private readonly propertiesRepository: PropertiesRepository,
+    private readonly tenantAccessService: TenantAccessService,
+  ) {}
+
+  async list(userId: number, query: TListPropertiesQuerySchema) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const { page, limit, skip } = normalizePagination(query)
+    const where = this.buildListWhere(tenant.tenantId, query)
+    const [properties, total] = await this.propertiesRepository.findManyAndCount(where, skip, limit)
+    return buildPaginatedResult(properties, total, page, limit)
+  }
+
+  async getById(userId: number, id: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    return this.getTenantPropertyOrThrow(tenant.tenantId, id)
+  }
+
+  async create(userId: number, body: TCreatePropertyBodySchema) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    return this.propertiesRepository.create({
+      tenantId: tenant.tenantId,
+      name: body.name,
+      type: body.type,
+      province: body.province,
+      district: body.district,
+      ward: body.ward,
+      addressDetail: body.addressDetail,
+      latitude: body.latitude,
+      longitude: body.longitude,
+      description: body.description ?? null,
+      status: body.status,
+      createdById: userId,
+    })
+  }
+
+  async update(userId: number, id: number, body: TUpdatePropertyBodySchema) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    await this.getTenantPropertyOrThrow(tenant.tenantId, id)
+
+    return this.propertiesRepository.update(id, {
+      ...body,
+      description: body.description === undefined ? undefined : (body.description ?? null),
+      updatedById: userId,
+    })
+  }
+
+  async updateStatus(userId: number, id: number, body: TUpdatePropertyStatusBodySchema) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    await this.getTenantPropertyOrThrow(tenant.tenantId, id)
+    return this.propertiesRepository.update(id, { status: body.status, updatedById: userId })
+  }
+
+  async softDelete(userId: number, id: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    await this.getTenantPropertyOrThrow(tenant.tenantId, id)
+    const blockingRooms = await this.propertiesRepository.countBlockingRoomsForProperty(tenant.tenantId, id)
+    if (blockingRooms > 0) {
+      throw new BadRequestException('Không thể xóa nhà trọ đang có phòng đã thuê hoặc đặt cọc')
+    }
+
+    return this.propertiesRepository.softDeleteProperty(tenant.tenantId, id, userId)
+  }
+
+  async listFloors(userId: number, propertyId: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    await this.getTenantPropertyOrThrow(tenant.tenantId, propertyId)
+    return this.propertiesRepository.findFloorsByProperty(tenant.tenantId, propertyId)
+  }
+
+  async createFloor(userId: number, propertyId: number, body: TCreateFloorBodySchema) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    await this.getTenantPropertyOrThrow(tenant.tenantId, propertyId)
+    return this.propertiesRepository.createFloor({
+      tenantId: tenant.tenantId,
+      propertyId,
+      name: body.name,
+      floorNumber: body.floorNumber,
+    })
+  }
+
+  async updateFloor(userId: number, propertyId: number, floorId: number, body: TUpdateFloorBodySchema) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    await this.getTenantPropertyOrThrow(tenant.tenantId, propertyId)
+    await this.getTenantFloorOrThrow(tenant.tenantId, propertyId, floorId)
+    return this.propertiesRepository.updateFloor(floorId, body)
+  }
+
+  async deleteFloor(userId: number, propertyId: number, floorId: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    await this.getTenantPropertyOrThrow(tenant.tenantId, propertyId)
+    await this.getTenantFloorOrThrow(tenant.tenantId, propertyId, floorId)
+    const roomCount = await this.propertiesRepository.countRoomsForFloor(tenant.tenantId, propertyId, floorId)
+    if (roomCount > 0) {
+      throw new BadRequestException('Không thể xóa tầng đang có phòng')
+    }
+    return this.propertiesRepository.deleteFloor(floorId)
+  }
+
+  private async getTenantPropertyOrThrow(tenantId: number, id: number) {
+    const property = await this.propertiesRepository.findTenantProperty(tenantId, id)
+    if (!property) {
+      throw new NotFoundException('Không tìm thấy nhà trọ')
+    }
+    return property
+  }
+
+  private async getTenantFloorOrThrow(tenantId: number, propertyId: number, floorId: number) {
+    const floor = await this.propertiesRepository.findTenantFloor(tenantId, propertyId, floorId)
+    if (!floor) {
+      throw new NotFoundException('Không tìm thấy tầng')
+    }
+    return floor
+  }
+
+  private buildListWhere(tenantId: number, query: TListPropertiesQuerySchema): Prisma.PropertyWhereInput {
+    return {
+      tenantId,
+      deletedAt: null,
+      ...(query.status ? { status: query.status } : {}),
+      ...(query.type ? { type: query.type } : {}),
+      ...(query.province ? { province: { contains: query.province, mode: 'insensitive' } } : {}),
+      ...(query.district ? { district: { contains: query.district, mode: 'insensitive' } } : {}),
+      ...(query.ward ? { ward: { contains: query.ward, mode: 'insensitive' } } : {}),
+      ...(query.search
+        ? {
+            OR: [
+              { name: { contains: query.search, mode: 'insensitive' } },
+              { addressDetail: { contains: query.search, mode: 'insensitive' } },
+              { province: { contains: query.search, mode: 'insensitive' } },
+              { district: { contains: query.search, mode: 'insensitive' } },
+              { ward: { contains: query.search, mode: 'insensitive' } },
+            ],
+          }
+        : {}),
+    }
+  }
+}
