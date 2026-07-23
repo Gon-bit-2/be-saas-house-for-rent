@@ -1,0 +1,67 @@
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common'
+import roleName from '@src/common/constants/role.constant'
+import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
+import { IsTenant, Roles } from '@src/common/decorators/decorators/roles.decorator'
+import type { AccessTokenPayload } from '@src/common/types/jwt.type'
+import { CreateContractBodyDTO, ListContractsQueryDTO, UpdateContractBodyDTO } from './dto/contracts.dto'
+import { ContractsService } from './contracts.service'
+
+/**
+ * Controller for landlord contract operations and renter contract self-service.
+ */
+@Controller('contracts')
+export class ContractsController {
+  constructor(private readonly contractsService: ContractsService) {}
+
+  @IsTenant()
+  @Get('me')
+  listMine(@ActiveUser() user: AccessTokenPayload, @Query() query: ListContractsQueryDTO) {
+    return this.contractsService.listMine(user.userId, query)
+  }
+
+  @IsTenant()
+  @Get('me/:id')
+  getMine(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
+    return this.contractsService.getMine(user.userId, id)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Get()
+  listForLandlord(@ActiveUser() user: AccessTokenPayload, @Query() query: ListContractsQueryDTO) {
+    return this.contractsService.listForLandlord(user.userId, query)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Get(':id')
+  getForLandlord(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
+    return this.contractsService.getForLandlord(user.userId, id)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Post()
+  createDraft(@ActiveUser() user: AccessTokenPayload, @Body() body: CreateContractBodyDTO) {
+    return this.contractsService.createDraft(user.userId, body)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Patch(':id')
+  updateDraft(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateContractBodyDTO,
+  ) {
+    return this.contractsService.updateDraft(user.userId, id, body)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Patch(':id/activate')
+  activate(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
+    return this.contractsService.activate(user.userId, id)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Patch(':id/cancel')
+  cancel(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
+    return this.contractsService.cancel(user.userId, id)
+  }
+}
