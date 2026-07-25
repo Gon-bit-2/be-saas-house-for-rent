@@ -1,6 +1,8 @@
 import { BadRequestException, ConflictException } from '@nestjs/common'
 
-jest.mock('@src/shared/modules/services/tenant-access.service', () => ({ TenantAccessService: class TenantAccessService {} }))
+jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
+  TenantAccessService: class TenantAccessService {},
+}))
 jest.mock('./repositories/rooms.repo', () => ({ RoomsRepository: class RoomsRepository {} }))
 const { RoomsService } = require('./rooms.service') as typeof import('./rooms.service')
 
@@ -26,20 +28,24 @@ describe('RoomsService', () => {
 
   beforeEach(() => {
     roomsRepository = {
-      findManyAndCount: jest.fn(),
-      findTenantRoom: jest.fn(),
+      findMany: jest.fn(),
+      findById: jest.fn(),
       findPropertyForRoom: jest.fn(),
       findFloorForProperty: jest.fn(),
       findRoomByPropertyCode: jest.fn(),
-      createRoomWithAmenities: jest.fn(),
-      updateRoom: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
+      updateStatus: jest.fn(),
+      updateMarketplace: jest.fn(),
       countActiveAmenities: jest.fn(),
       replaceRoomAmenities: jest.fn(),
       countImages: jest.fn(),
-      softDeleteRoom: jest.fn(),
+      softDelete: jest.fn(),
     }
     tenantAccessService = {
-      getActiveTenantContext: jest.fn().mockResolvedValue({ tenantId: 10, userId: 99, memberId: 1, roleId: 'LANDLORD' }),
+      getActiveTenantContext: jest
+        .fn()
+        .mockResolvedValue({ tenantId: 10, userId: 99, memberId: 1, roleId: 'LANDLORD' }),
     }
     service = new RoomsService(roomsRepository as never, tenantAccessService as never)
   })
@@ -49,11 +55,11 @@ describe('RoomsService', () => {
     roomsRepository.findFloorForProperty.mockResolvedValue({ id: 2 })
     roomsRepository.findRoomByPropertyCode.mockResolvedValue(null)
     roomsRepository.countActiveAmenities.mockResolvedValue(2)
-    roomsRepository.createRoomWithAmenities.mockResolvedValue({ id: 5 })
+    roomsRepository.create.mockResolvedValue({ id: 5 })
 
     await service.create(99, createBody)
 
-    expect(roomsRepository.createRoomWithAmenities).toHaveBeenCalledWith(
+    expect(roomsRepository.create).toHaveBeenCalledWith(
       expect.objectContaining({ tenantId: 10, propertyId: 1, roomCode: 'P101', marketplaceStatus: 'DRAFT' }),
       [1, 2],
     )
@@ -65,28 +71,50 @@ describe('RoomsService', () => {
     roomsRepository.findRoomByPropertyCode.mockResolvedValue({ id: 9 })
 
     await expect(service.create(99, createBody)).rejects.toBeInstanceOf(ConflictException)
-    expect(roomsRepository.createRoomWithAmenities).not.toHaveBeenCalled()
+    expect(roomsRepository.create).not.toHaveBeenCalled()
   })
 
-  it('rejects publishing an available room without images', async () => {
-    roomsRepository.findTenantRoom.mockResolvedValue({ id: 5, status: 'AVAILABLE', property: { status: 'ACTIVE' } })
-    roomsRepository.countImages.mockResolvedValue(0)
+  it('rejects submitting an available room without images', async () => {
+    roomsRepository.findById.mockResolvedValue({
+      id: 5,
+      status: 'AVAILABLE',
+      marketplaceStatus: 'DRAFT',
+      property: { status: 'ACTIVE' },
+      images: [],
+    })
 
-    await expect(service.updateMarketplace(99, 5, { marketplaceStatus: 'PUBLISHED' })).rejects.toBeInstanceOf(BadRequestException)
-    expect(roomsRepository.updateRoom).not.toHaveBeenCalled()
+    await expect(service.updateMarketplace(99, 5, { marketplaceStatus: 'PENDING_REVIEW' })).rejects.toBeInstanceOf(
+      BadRequestException,
+    )
+    expect(roomsRepository.updateMarketplace).not.toHaveBeenCalled()
+  })
+
+  it('submits a valid draft room for admin review', async () => {
+    roomsRepository.findById.mockResolvedValue({
+      id: 5,
+      status: 'AVAILABLE',
+      marketplaceStatus: 'DRAFT',
+      property: { status: 'ACTIVE' },
+      images: [{ id: 1 }],
+    })
+    roomsRepository.updateMarketplace.mockResolvedValue({ id: 5, marketplaceStatus: 'PENDING_REVIEW' })
+
+    await service.updateMarketplace(99, 5, { marketplaceStatus: 'PENDING_REVIEW' })
+
+    expect(roomsRepository.updateMarketplace).toHaveBeenCalledWith(5, 99, 'DRAFT', 'PENDING_REVIEW')
   })
 
   it('hides marketplace when room status changes away from available', async () => {
-    roomsRepository.findTenantRoom.mockResolvedValue({ id: 5, status: 'AVAILABLE', property: { status: 'ACTIVE' } })
-    roomsRepository.updateRoom.mockResolvedValue({ id: 5, status: 'MAINTENANCE' })
+    roomsRepository.findById.mockResolvedValue({
+      id: 5,
+      status: 'AVAILABLE',
+      marketplaceStatus: 'PUBLISHED',
+      property: { status: 'ACTIVE' },
+    })
+    roomsRepository.updateStatus.mockResolvedValue({ id: 5, status: 'MAINTENANCE' })
 
     await service.updateStatus(99, 5, { status: 'MAINTENANCE' })
 
-    expect(roomsRepository.updateRoom).toHaveBeenCalledWith(5, {
-      status: 'MAINTENANCE',
-      marketplaceStatus: 'HIDDEN',
-      updatedById: 99,
-    })
+    expect(roomsRepository.updateStatus).toHaveBeenCalledWith(5, 'MAINTENANCE', 99, 'PUBLISHED')
   })
 })
-

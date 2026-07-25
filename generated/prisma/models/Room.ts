@@ -417,10 +417,12 @@ export type RoomWhereInput = {
   meterReadings?: Prisma.MeterReadingListRelationFilter
   ocrJobs?: Prisma.OcrJobListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
+  debts?: Prisma.DebtListRelationFilter
   tickets?: Prisma.TicketListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   reputationScores?: Prisma.ReputationScoreListRelationFilter
+  marketplaceModerations?: Prisma.MarketplaceModerationListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -466,10 +468,12 @@ export type RoomOrderByWithRelationInput = {
   meterReadings?: Prisma.MeterReadingOrderByRelationAggregateInput
   ocrJobs?: Prisma.OcrJobOrderByRelationAggregateInput
   invoices?: Prisma.InvoiceOrderByRelationAggregateInput
+  debts?: Prisma.DebtOrderByRelationAggregateInput
   tickets?: Prisma.TicketOrderByRelationAggregateInput
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   reputationScores?: Prisma.ReputationScoreOrderByRelationAggregateInput
+  marketplaceModerations?: Prisma.MarketplaceModerationOrderByRelationAggregateInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
   deletedBy?: Prisma.UserOrderByWithRelationInput
@@ -519,10 +523,12 @@ export type RoomWhereUniqueInput = Prisma.AtLeast<{
   meterReadings?: Prisma.MeterReadingListRelationFilter
   ocrJobs?: Prisma.OcrJobListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
+  debts?: Prisma.DebtListRelationFilter
   tickets?: Prisma.TicketListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   reputationScores?: Prisma.ReputationScoreListRelationFilter
+  marketplaceModerations?: Prisma.MarketplaceModerationListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -619,10 +625,12 @@ export type RoomCreateInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -665,10 +673,12 @@ export type RoomUncheckedCreateInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomUpdateInput = {
@@ -704,10 +714,12 @@ export type RoomUpdateInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -750,10 +762,12 @@ export type RoomUncheckedUpdateInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateManyInput = {
@@ -1216,6 +1230,20 @@ export type EnumMarketplaceStatusFieldUpdateOperationsInput = {
   set?: $Enums.MarketplaceStatus
 }
 
+export type RoomCreateNestedOneWithoutMarketplaceModerationsInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutMarketplaceModerationsInput, Prisma.RoomUncheckedCreateWithoutMarketplaceModerationsInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutMarketplaceModerationsInput
+  connect?: Prisma.RoomWhereUniqueInput
+}
+
+export type RoomUpdateOneRequiredWithoutMarketplaceModerationsNestedInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutMarketplaceModerationsInput, Prisma.RoomUncheckedCreateWithoutMarketplaceModerationsInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutMarketplaceModerationsInput
+  upsert?: Prisma.RoomUpsertWithoutMarketplaceModerationsInput
+  connect?: Prisma.RoomWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutMarketplaceModerationsInput, Prisma.RoomUpdateWithoutMarketplaceModerationsInput>, Prisma.RoomUncheckedUpdateWithoutMarketplaceModerationsInput>
+}
+
 export type RoomCreateNestedOneWithoutImagesInput = {
   create?: Prisma.XOR<Prisma.RoomCreateWithoutImagesInput, Prisma.RoomUncheckedCreateWithoutImagesInput>
   connectOrCreate?: Prisma.RoomCreateOrConnectWithoutImagesInput
@@ -1412,6 +1440,20 @@ export type RoomUpdateOneRequiredWithoutInvoicesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutInvoicesInput, Prisma.RoomUpdateWithoutInvoicesInput>, Prisma.RoomUncheckedUpdateWithoutInvoicesInput>
 }
 
+export type RoomCreateNestedOneWithoutDebtsInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutDebtsInput, Prisma.RoomUncheckedCreateWithoutDebtsInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutDebtsInput
+  connect?: Prisma.RoomWhereUniqueInput
+}
+
+export type RoomUpdateOneRequiredWithoutDebtsNestedInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutDebtsInput, Prisma.RoomUncheckedCreateWithoutDebtsInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutDebtsInput
+  upsert?: Prisma.RoomUpsertWithoutDebtsInput
+  connect?: Prisma.RoomWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutDebtsInput, Prisma.RoomUpdateWithoutDebtsInput>, Prisma.RoomUncheckedUpdateWithoutDebtsInput>
+}
+
 export type RoomCreateNestedOneWithoutTicketsInput = {
   create?: Prisma.XOR<Prisma.RoomCreateWithoutTicketsInput, Prisma.RoomUncheckedCreateWithoutTicketsInput>
   connectOrCreate?: Prisma.RoomCreateOrConnectWithoutTicketsInput
@@ -1505,10 +1547,12 @@ export type RoomCreateWithoutCreatedByInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
@@ -1549,10 +1593,12 @@ export type RoomUncheckedCreateWithoutCreatedByInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutCreatedByInput = {
@@ -1598,10 +1644,12 @@ export type RoomCreateWithoutUpdatedByInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
 }
@@ -1642,10 +1690,12 @@ export type RoomUncheckedCreateWithoutUpdatedByInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutUpdatedByInput = {
@@ -1691,10 +1741,12 @@ export type RoomCreateWithoutDeletedByInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
 }
@@ -1735,10 +1787,12 @@ export type RoomUncheckedCreateWithoutDeletedByInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutDeletedByInput = {
@@ -1859,10 +1913,12 @@ export type RoomCreateWithoutTenantInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -1904,10 +1960,12 @@ export type RoomUncheckedCreateWithoutTenantInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutTenantInput = {
@@ -1968,10 +2026,12 @@ export type RoomCreateWithoutPropertyInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -2013,10 +2073,12 @@ export type RoomUncheckedCreateWithoutPropertyInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutPropertyInput = {
@@ -2077,10 +2139,12 @@ export type RoomCreateWithoutFloorInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -2122,10 +2186,12 @@ export type RoomUncheckedCreateWithoutFloorInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutFloorInput = {
@@ -2152,6 +2218,196 @@ export type RoomUpdateWithWhereUniqueWithoutFloorInput = {
 export type RoomUpdateManyWithWhereWithoutFloorInput = {
   where: Prisma.RoomScalarWhereInput
   data: Prisma.XOR<Prisma.RoomUpdateManyMutationInput, Prisma.RoomUncheckedUpdateManyWithoutFloorInput>
+}
+
+export type RoomCreateWithoutMarketplaceModerationsInput = {
+  roomCode: string
+  title: string
+  area: runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants: number
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
+  status?: $Enums.RoomStatus
+  marketplaceStatus?: $Enums.MarketplaceStatus
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutRoomsInput
+  property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
+  floor?: Prisma.FloorCreateNestedOneWithoutRoomsInput
+  images?: Prisma.RoomImageCreateNestedManyWithoutRoomInput
+  amenities?: Prisma.RoomAmenityCreateNestedManyWithoutRoomInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRoomInput
+  viewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutRoomInput
+  favorites?: Prisma.FavoriteRoomCreateNestedManyWithoutRoomInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
+  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
+  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
+  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
+}
+
+export type RoomUncheckedCreateWithoutMarketplaceModerationsInput = {
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
+  roomCode: string
+  title: string
+  area: runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants: number
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
+  status?: $Enums.RoomStatus
+  marketplaceStatus?: $Enums.MarketplaceStatus
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
+  amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
+  viewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutRoomInput
+  favorites?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutRoomInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
+  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
+  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+}
+
+export type RoomCreateOrConnectWithoutMarketplaceModerationsInput = {
+  where: Prisma.RoomWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoomCreateWithoutMarketplaceModerationsInput, Prisma.RoomUncheckedCreateWithoutMarketplaceModerationsInput>
+}
+
+export type RoomUpsertWithoutMarketplaceModerationsInput = {
+  update: Prisma.XOR<Prisma.RoomUpdateWithoutMarketplaceModerationsInput, Prisma.RoomUncheckedUpdateWithoutMarketplaceModerationsInput>
+  create: Prisma.XOR<Prisma.RoomCreateWithoutMarketplaceModerationsInput, Prisma.RoomUncheckedCreateWithoutMarketplaceModerationsInput>
+  where?: Prisma.RoomWhereInput
+}
+
+export type RoomUpdateToOneWithWhereWithoutMarketplaceModerationsInput = {
+  where?: Prisma.RoomWhereInput
+  data: Prisma.XOR<Prisma.RoomUpdateWithoutMarketplaceModerationsInput, Prisma.RoomUncheckedUpdateWithoutMarketplaceModerationsInput>
+}
+
+export type RoomUpdateWithoutMarketplaceModerationsInput = {
+  roomCode?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants?: Prisma.IntFieldUpdateOperationsInput | number
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  marketplaceStatus?: Prisma.EnumMarketplaceStatusFieldUpdateOperationsInput | $Enums.MarketplaceStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutRoomsNestedInput
+  property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
+  floor?: Prisma.FloorUpdateOneWithoutRoomsNestedInput
+  images?: Prisma.RoomImageUpdateManyWithoutRoomNestedInput
+  amenities?: Prisma.RoomAmenityUpdateManyWithoutRoomNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRoomNestedInput
+  viewLogs?: Prisma.RoomViewLogUpdateManyWithoutRoomNestedInput
+  favorites?: Prisma.FavoriteRoomUpdateManyWithoutRoomNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
+  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
+  ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
+  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
+}
+
+export type RoomUncheckedUpdateWithoutMarketplaceModerationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roomCode?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants?: Prisma.IntFieldUpdateOperationsInput | number
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  marketplaceStatus?: Prisma.EnumMarketplaceStatusFieldUpdateOperationsInput | $Enums.MarketplaceStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
+  amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
+  viewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutRoomNestedInput
+  favorites?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutRoomNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
+  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
+  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutImagesInput = {
@@ -2186,10 +2442,12 @@ export type RoomCreateWithoutImagesInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -2231,10 +2489,12 @@ export type RoomUncheckedCreateWithoutImagesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutImagesInput = {
@@ -2285,10 +2545,12 @@ export type RoomUpdateWithoutImagesInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -2330,10 +2592,12 @@ export type RoomUncheckedUpdateWithoutImagesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutAmenitiesInput = {
@@ -2368,10 +2632,12 @@ export type RoomCreateWithoutAmenitiesInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -2413,10 +2679,12 @@ export type RoomUncheckedCreateWithoutAmenitiesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutAmenitiesInput = {
@@ -2467,10 +2735,12 @@ export type RoomUpdateWithoutAmenitiesInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -2512,10 +2782,12 @@ export type RoomUncheckedUpdateWithoutAmenitiesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutRentalHistoriesInput = {
@@ -2550,10 +2822,12 @@ export type RoomCreateWithoutRentalHistoriesInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -2595,10 +2869,12 @@ export type RoomUncheckedCreateWithoutRentalHistoriesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutRentalHistoriesInput = {
@@ -2649,10 +2925,12 @@ export type RoomUpdateWithoutRentalHistoriesInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -2694,10 +2972,12 @@ export type RoomUncheckedUpdateWithoutRentalHistoriesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutViewLogsInput = {
@@ -2732,10 +3012,12 @@ export type RoomCreateWithoutViewLogsInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -2777,10 +3059,12 @@ export type RoomUncheckedCreateWithoutViewLogsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutViewLogsInput = {
@@ -2831,10 +3115,12 @@ export type RoomUpdateWithoutViewLogsInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -2876,10 +3162,12 @@ export type RoomUncheckedUpdateWithoutViewLogsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutFavoritesInput = {
@@ -2914,10 +3202,12 @@ export type RoomCreateWithoutFavoritesInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -2959,10 +3249,12 @@ export type RoomUncheckedCreateWithoutFavoritesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutFavoritesInput = {
@@ -3013,10 +3305,12 @@ export type RoomUpdateWithoutFavoritesInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -3058,10 +3352,12 @@ export type RoomUncheckedUpdateWithoutFavoritesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutViewingAppointmentsInput = {
@@ -3096,10 +3392,12 @@ export type RoomCreateWithoutViewingAppointmentsInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -3141,10 +3439,12 @@ export type RoomUncheckedCreateWithoutViewingAppointmentsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutViewingAppointmentsInput = {
@@ -3195,10 +3495,12 @@ export type RoomUpdateWithoutViewingAppointmentsInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -3240,10 +3542,12 @@ export type RoomUncheckedUpdateWithoutViewingAppointmentsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutRentalRequestsInput = {
@@ -3278,10 +3582,12 @@ export type RoomCreateWithoutRentalRequestsInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -3323,10 +3629,12 @@ export type RoomUncheckedCreateWithoutRentalRequestsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutRentalRequestsInput = {
@@ -3377,10 +3685,12 @@ export type RoomUpdateWithoutRentalRequestsInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -3422,10 +3732,12 @@ export type RoomUncheckedUpdateWithoutRentalRequestsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutContractsInput = {
@@ -3460,10 +3772,12 @@ export type RoomCreateWithoutContractsInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -3505,10 +3819,12 @@ export type RoomUncheckedCreateWithoutContractsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutContractsInput = {
@@ -3559,10 +3875,12 @@ export type RoomUpdateWithoutContractsInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -3604,10 +3922,12 @@ export type RoomUncheckedUpdateWithoutContractsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutRoomAssetsInput = {
@@ -3642,10 +3962,12 @@ export type RoomCreateWithoutRoomAssetsInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -3687,10 +4009,12 @@ export type RoomUncheckedCreateWithoutRoomAssetsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutRoomAssetsInput = {
@@ -3741,10 +4065,12 @@ export type RoomUpdateWithoutRoomAssetsInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -3786,10 +4112,12 @@ export type RoomUncheckedUpdateWithoutRoomAssetsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutHandoverRecordsInput = {
@@ -3824,10 +4152,12 @@ export type RoomCreateWithoutHandoverRecordsInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -3869,10 +4199,12 @@ export type RoomUncheckedCreateWithoutHandoverRecordsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutHandoverRecordsInput = {
@@ -3923,10 +4255,12 @@ export type RoomUpdateWithoutHandoverRecordsInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -3968,10 +4302,12 @@ export type RoomUncheckedUpdateWithoutHandoverRecordsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutUtilityMetersInput = {
@@ -4006,10 +4342,12 @@ export type RoomCreateWithoutUtilityMetersInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -4051,10 +4389,12 @@ export type RoomUncheckedCreateWithoutUtilityMetersInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutUtilityMetersInput = {
@@ -4105,10 +4445,12 @@ export type RoomUpdateWithoutUtilityMetersInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -4150,10 +4492,12 @@ export type RoomUncheckedUpdateWithoutUtilityMetersInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutMeterReadingsInput = {
@@ -4188,10 +4532,12 @@ export type RoomCreateWithoutMeterReadingsInput = {
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -4233,10 +4579,12 @@ export type RoomUncheckedCreateWithoutMeterReadingsInput = {
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutMeterReadingsInput = {
@@ -4287,10 +4635,12 @@ export type RoomUpdateWithoutMeterReadingsInput = {
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -4332,10 +4682,12 @@ export type RoomUncheckedUpdateWithoutMeterReadingsInput = {
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutOcrJobsInput = {
@@ -4370,10 +4722,12 @@ export type RoomCreateWithoutOcrJobsInput = {
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -4415,10 +4769,12 @@ export type RoomUncheckedCreateWithoutOcrJobsInput = {
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutOcrJobsInput = {
@@ -4469,10 +4825,12 @@ export type RoomUpdateWithoutOcrJobsInput = {
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -4514,10 +4872,12 @@ export type RoomUncheckedUpdateWithoutOcrJobsInput = {
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutInvoicesInput = {
@@ -4552,10 +4912,12 @@ export type RoomCreateWithoutInvoicesInput = {
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -4597,10 +4959,12 @@ export type RoomUncheckedCreateWithoutInvoicesInput = {
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutInvoicesInput = {
@@ -4651,10 +5015,12 @@ export type RoomUpdateWithoutInvoicesInput = {
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -4696,10 +5062,202 @@ export type RoomUncheckedUpdateWithoutInvoicesInput = {
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomCreateWithoutDebtsInput = {
+  roomCode: string
+  title: string
+  area: runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants: number
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
+  status?: $Enums.RoomStatus
+  marketplaceStatus?: $Enums.MarketplaceStatus
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutRoomsInput
+  property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
+  floor?: Prisma.FloorCreateNestedOneWithoutRoomsInput
+  images?: Prisma.RoomImageCreateNestedManyWithoutRoomInput
+  amenities?: Prisma.RoomAmenityCreateNestedManyWithoutRoomInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRoomInput
+  viewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutRoomInput
+  favorites?: Prisma.FavoriteRoomCreateNestedManyWithoutRoomInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
+  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
+  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
+  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
+}
+
+export type RoomUncheckedCreateWithoutDebtsInput = {
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
+  roomCode: string
+  title: string
+  area: runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants: number
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
+  status?: $Enums.RoomStatus
+  marketplaceStatus?: $Enums.MarketplaceStatus
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
+  amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
+  viewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutRoomInput
+  favorites?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutRoomInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
+  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
+  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
+}
+
+export type RoomCreateOrConnectWithoutDebtsInput = {
+  where: Prisma.RoomWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoomCreateWithoutDebtsInput, Prisma.RoomUncheckedCreateWithoutDebtsInput>
+}
+
+export type RoomUpsertWithoutDebtsInput = {
+  update: Prisma.XOR<Prisma.RoomUpdateWithoutDebtsInput, Prisma.RoomUncheckedUpdateWithoutDebtsInput>
+  create: Prisma.XOR<Prisma.RoomCreateWithoutDebtsInput, Prisma.RoomUncheckedCreateWithoutDebtsInput>
+  where?: Prisma.RoomWhereInput
+}
+
+export type RoomUpdateToOneWithWhereWithoutDebtsInput = {
+  where?: Prisma.RoomWhereInput
+  data: Prisma.XOR<Prisma.RoomUpdateWithoutDebtsInput, Prisma.RoomUncheckedUpdateWithoutDebtsInput>
+}
+
+export type RoomUpdateWithoutDebtsInput = {
+  roomCode?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants?: Prisma.IntFieldUpdateOperationsInput | number
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  marketplaceStatus?: Prisma.EnumMarketplaceStatusFieldUpdateOperationsInput | $Enums.MarketplaceStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutRoomsNestedInput
+  property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
+  floor?: Prisma.FloorUpdateOneWithoutRoomsNestedInput
+  images?: Prisma.RoomImageUpdateManyWithoutRoomNestedInput
+  amenities?: Prisma.RoomAmenityUpdateManyWithoutRoomNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRoomNestedInput
+  viewLogs?: Prisma.RoomViewLogUpdateManyWithoutRoomNestedInput
+  favorites?: Prisma.FavoriteRoomUpdateManyWithoutRoomNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
+  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
+  ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
+  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
+}
+
+export type RoomUncheckedUpdateWithoutDebtsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roomCode?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants?: Prisma.IntFieldUpdateOperationsInput | number
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  marketplaceStatus?: Prisma.EnumMarketplaceStatusFieldUpdateOperationsInput | $Enums.MarketplaceStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
+  amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
+  viewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutRoomNestedInput
+  favorites?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutRoomNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
+  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
+  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutTicketsInput = {
@@ -4735,9 +5293,11 @@ export type RoomCreateWithoutTicketsInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -4780,9 +5340,11 @@ export type RoomUncheckedCreateWithoutTicketsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutTicketsInput = {
@@ -4834,9 +5396,11 @@ export type RoomUpdateWithoutTicketsInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -4879,9 +5443,11 @@ export type RoomUncheckedUpdateWithoutTicketsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutConversationsInput = {
@@ -4917,9 +5483,11 @@ export type RoomCreateWithoutConversationsInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -4962,9 +5530,11 @@ export type RoomUncheckedCreateWithoutConversationsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutConversationsInput = {
@@ -5016,9 +5586,11 @@ export type RoomUpdateWithoutConversationsInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -5061,9 +5633,11 @@ export type RoomUncheckedUpdateWithoutConversationsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutReviewsInput = {
@@ -5099,9 +5673,11 @@ export type RoomCreateWithoutReviewsInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -5144,9 +5720,11 @@ export type RoomUncheckedCreateWithoutReviewsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutReviewsInput = {
@@ -5198,9 +5776,11 @@ export type RoomUpdateWithoutReviewsInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -5243,9 +5823,11 @@ export type RoomUncheckedUpdateWithoutReviewsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateWithoutReputationScoresInput = {
@@ -5281,9 +5863,11 @@ export type RoomCreateWithoutReputationScoresInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
@@ -5326,9 +5910,11 @@ export type RoomUncheckedCreateWithoutReputationScoresInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
 }
 
 export type RoomCreateOrConnectWithoutReputationScoresInput = {
@@ -5380,9 +5966,11 @@ export type RoomUpdateWithoutReputationScoresInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -5425,9 +6013,11 @@ export type RoomUncheckedUpdateWithoutReputationScoresInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomCreateManyCreatedByInput = {
@@ -5535,10 +6125,12 @@ export type RoomUpdateWithoutCreatedByInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
@@ -5579,10 +6171,12 @@ export type RoomUncheckedUpdateWithoutCreatedByInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutCreatedByInput = {
@@ -5642,10 +6236,12 @@ export type RoomUpdateWithoutUpdatedByInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
 }
@@ -5686,10 +6282,12 @@ export type RoomUncheckedUpdateWithoutUpdatedByInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -5749,10 +6347,12 @@ export type RoomUpdateWithoutDeletedByInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
 }
@@ -5793,10 +6393,12 @@ export type RoomUncheckedUpdateWithoutDeletedByInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutDeletedByInput = {
@@ -5879,10 +6481,12 @@ export type RoomUpdateWithoutTenantInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -5924,10 +6528,12 @@ export type RoomUncheckedUpdateWithoutTenantInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutTenantInput = {
@@ -6010,10 +6616,12 @@ export type RoomUpdateWithoutPropertyInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -6055,10 +6663,12 @@ export type RoomUncheckedUpdateWithoutPropertyInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutPropertyInput = {
@@ -6141,10 +6751,12 @@ export type RoomUpdateWithoutFloorInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
@@ -6186,10 +6798,12 @@ export type RoomUncheckedUpdateWithoutFloorInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
   reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
 }
 
 export type RoomUncheckedUpdateManyWithoutFloorInput = {
@@ -6236,10 +6850,12 @@ export type RoomCountOutputType = {
   meterReadings: number
   ocrJobs: number
   invoices: number
+  debts: number
   tickets: number
   conversations: number
   reviews: number
   reputationScores: number
+  marketplaceModerations: number
 }
 
 export type RoomCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6257,10 +6873,12 @@ export type RoomCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   meterReadings?: boolean | RoomCountOutputTypeCountMeterReadingsArgs
   ocrJobs?: boolean | RoomCountOutputTypeCountOcrJobsArgs
   invoices?: boolean | RoomCountOutputTypeCountInvoicesArgs
+  debts?: boolean | RoomCountOutputTypeCountDebtsArgs
   tickets?: boolean | RoomCountOutputTypeCountTicketsArgs
   conversations?: boolean | RoomCountOutputTypeCountConversationsArgs
   reviews?: boolean | RoomCountOutputTypeCountReviewsArgs
   reputationScores?: boolean | RoomCountOutputTypeCountReputationScoresArgs
+  marketplaceModerations?: boolean | RoomCountOutputTypeCountMarketplaceModerationsArgs
 }
 
 /**
@@ -6374,6 +6992,13 @@ export type RoomCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Types.E
 /**
  * RoomCountOutputType without action
  */
+export type RoomCountOutputTypeCountDebtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DebtWhereInput
+}
+
+/**
+ * RoomCountOutputType without action
+ */
 export type RoomCountOutputTypeCountTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TicketWhereInput
 }
@@ -6397,6 +7022,13 @@ export type RoomCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Ex
  */
 export type RoomCountOutputTypeCountReputationScoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ReputationScoreWhereInput
+}
+
+/**
+ * RoomCountOutputType without action
+ */
+export type RoomCountOutputTypeCountMarketplaceModerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MarketplaceModerationWhereInput
 }
 
 
@@ -6440,10 +7072,12 @@ export type RoomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   meterReadings?: boolean | Prisma.Room$meterReadingsArgs<ExtArgs>
   ocrJobs?: boolean | Prisma.Room$ocrJobsArgs<ExtArgs>
   invoices?: boolean | Prisma.Room$invoicesArgs<ExtArgs>
+  debts?: boolean | Prisma.Room$debtsArgs<ExtArgs>
   tickets?: boolean | Prisma.Room$ticketsArgs<ExtArgs>
   conversations?: boolean | Prisma.Room$conversationsArgs<ExtArgs>
   reviews?: boolean | Prisma.Room$reviewsArgs<ExtArgs>
   reputationScores?: boolean | Prisma.Room$reputationScoresArgs<ExtArgs>
+  marketplaceModerations?: boolean | Prisma.Room$marketplaceModerationsArgs<ExtArgs>
   createdBy?: boolean | Prisma.Room$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Room$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Room$deletedByArgs<ExtArgs>
@@ -6556,10 +7190,12 @@ export type RoomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   meterReadings?: boolean | Prisma.Room$meterReadingsArgs<ExtArgs>
   ocrJobs?: boolean | Prisma.Room$ocrJobsArgs<ExtArgs>
   invoices?: boolean | Prisma.Room$invoicesArgs<ExtArgs>
+  debts?: boolean | Prisma.Room$debtsArgs<ExtArgs>
   tickets?: boolean | Prisma.Room$ticketsArgs<ExtArgs>
   conversations?: boolean | Prisma.Room$conversationsArgs<ExtArgs>
   reviews?: boolean | Prisma.Room$reviewsArgs<ExtArgs>
   reputationScores?: boolean | Prisma.Room$reputationScoresArgs<ExtArgs>
+  marketplaceModerations?: boolean | Prisma.Room$marketplaceModerationsArgs<ExtArgs>
   createdBy?: boolean | Prisma.Room$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Room$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Room$deletedByArgs<ExtArgs>
@@ -6654,6 +7290,10 @@ export type $RoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
      */
     invoices: Prisma.$InvoicePayload<ExtArgs>[]
     /**
+     * Danh sách công nợ phát sinh từ phòng trọ này
+     */
+    debts: Prisma.$DebtPayload<ExtArgs>[]
+    /**
      * Danh sách các sự cố/ticket của phòng trọ này
      */
     tickets: Prisma.$TicketPayload<ExtArgs>[]
@@ -6669,6 +7309,10 @@ export type $RoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
      * Bảng điểm uy tín của phòng trọ này
      */
     reputationScores: Prisma.$ReputationScorePayload<ExtArgs>[]
+    /**
+     * Lịch sử gửi duyệt và kiểm duyệt marketplace
+     */
+    marketplaceModerations: Prisma.$MarketplaceModerationPayload<ExtArgs>[]
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     deletedBy: Prisma.$UserPayload<ExtArgs> | null
@@ -7173,10 +7817,12 @@ export interface Prisma__RoomClient<T, Null = never, ExtArgs extends runtime.Typ
   meterReadings<T extends Prisma.Room$meterReadingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$meterReadingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterReadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ocrJobs<T extends Prisma.Room$ocrJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$ocrJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OcrJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invoices<T extends Prisma.Room$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  debts<T extends Prisma.Room$debtsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$debtsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DebtPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tickets<T extends Prisma.Room$ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conversations<T extends Prisma.Room$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.Room$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reputationScores<T extends Prisma.Room$reputationScoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$reputationScoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReputationScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  marketplaceModerations<T extends Prisma.Room$marketplaceModerationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$marketplaceModerationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketplaceModerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.Room$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.Room$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.Room$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -7987,6 +8633,30 @@ export type Room$invoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
+ * Room.debts
+ */
+export type Room$debtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Debt
+   */
+  select?: Prisma.DebtSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Debt
+   */
+  omit?: Prisma.DebtOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DebtInclude<ExtArgs> | null
+  where?: Prisma.DebtWhereInput
+  orderBy?: Prisma.DebtOrderByWithRelationInput | Prisma.DebtOrderByWithRelationInput[]
+  cursor?: Prisma.DebtWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DebtScalarFieldEnum | Prisma.DebtScalarFieldEnum[]
+}
+
+/**
  * Room.tickets
  */
 export type Room$ticketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -8080,6 +8750,30 @@ export type Room$reputationScoresArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.ReputationScoreScalarFieldEnum | Prisma.ReputationScoreScalarFieldEnum[]
+}
+
+/**
+ * Room.marketplaceModerations
+ */
+export type Room$marketplaceModerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MarketplaceModeration
+   */
+  select?: Prisma.MarketplaceModerationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MarketplaceModeration
+   */
+  omit?: Prisma.MarketplaceModerationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MarketplaceModerationInclude<ExtArgs> | null
+  where?: Prisma.MarketplaceModerationWhereInput
+  orderBy?: Prisma.MarketplaceModerationOrderByWithRelationInput | Prisma.MarketplaceModerationOrderByWithRelationInput[]
+  cursor?: Prisma.MarketplaceModerationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MarketplaceModerationScalarFieldEnum | Prisma.MarketplaceModerationScalarFieldEnum[]
 }
 
 /**

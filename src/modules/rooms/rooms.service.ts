@@ -26,7 +26,7 @@ export class RoomsService {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const { page, limit, skip } = normalizePagination(query)
     const where = this.buildListWhere(tenant.tenantId, query)
-    const [rooms, total] = await this.roomsRepository.findManyAndCount(where, skip, limit)
+    const [rooms, total] = await this.roomsRepository.findMany(where, skip, limit)
     return buildPaginatedResult(rooms, total, page, limit)
   }
 
@@ -42,7 +42,7 @@ export class RoomsService {
     await this.assertRoomCodeAvailable(body.propertyId, body.roomCode)
     const amenityIds = await this.assertActiveAmenities(body.amenityIds)
 
-    return this.roomsRepository.createRoomWithAmenities(
+    return this.roomsRepository.create(
       {
         tenantId: tenant.tenantId,
         propertyId: body.propertyId,
@@ -76,7 +76,7 @@ export class RoomsService {
       await this.assertRoomCodeAvailable(room.propertyId, body.roomCode, id)
     }
 
-    return this.roomsRepository.updateRoom(id, {
+    return this.roomsRepository.update(id, {
       ...body,
       floorId: body.floorId === undefined ? undefined : (body.floorId ?? null),
       description: body.description === undefined ? undefined : (body.description ?? null),
@@ -86,37 +86,38 @@ export class RoomsService {
 
   async updateStatus(userId: number, id: number, body: TUpdateRoomStatusBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
-    await this.getTenantRoomOrThrow(tenant.tenantId, id)
-    return this.roomsRepository.updateRoom(id, {
-      status: body.status,
-      ...(body.status !== 'AVAILABLE' ? { marketplaceStatus: 'HIDDEN' } : {}),
-      updatedById: userId,
-    })
+    const room = await this.getTenantRoomOrThrow(tenant.tenantId, id)
+    return this.roomsRepository.updateStatus(id, body.status, userId, room.marketplaceStatus)
   }
 
   async updateMarketplace(userId: number, id: number, body: TUpdateRoomMarketplaceBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const room = await this.getTenantRoomOrThrow(tenant.tenantId, id)
 
-    if (body.marketplaceStatus === 'PUBLISHED') {
+    this.assertLandlordMarketplaceTransition(room.marketplaceStatus, body.marketplaceStatus)
+
+    if (body.marketplaceStatus === 'PENDING_REVIEW') {
       if (room.status !== 'AVAILABLE') {
-        throw new BadRequestException('Chỉ phòng đang trống mới được đăng marketplace')
+        throw new BadRequestException('Chỉ phòng đang trống mới được gửi duyệt marketplace')
       }
       if (room.property.status !== 'ACTIVE') {
-        throw new BadRequestException('Chỉ nhà trọ đang hoạt động mới được đăng phòng')
+        throw new BadRequestException('Chỉ nhà trọ đang hoạt động mới được gửi duyệt phòng')
       }
-      const imageCount = await this.roomsRepository.countImages(id)
-      if (imageCount === 0) {
-        throw new BadRequestException('Phòng cần có ít nhất một hình ảnh trước khi đăng marketplace')
+      if (room.images.length === 0) {
+        throw new BadRequestException('Phòng cần có ít nhất một hình ảnh trước khi gửi duyệt')
       }
     }
 
-    return this.roomsRepository.updateRoom(id, {
-      marketplaceStatus: body.marketplaceStatus,
-      ...(body.marketplaceStatus === 'PUBLISHED' ? { publishedAt: new Date() } : {}),
-      ...(body.marketplaceStatus === 'DRAFT' ? { publishedAt: null } : {}),
-      updatedById: userId,
-    })
+    const updated = await this.roomsRepository.updateMarketplace(
+      id,
+      userId,
+      room.marketplaceStatus,
+      body.marketplaceStatus,
+    )
+    if (!updated) {
+      throw new ConflictException('Trạng thái marketplace đã thay đổi, vui lòng tải lại dữ liệu')
+    }
+    return updated
   }
 
   async replaceAmenities(userId: number, id: number, body: TReplaceRoomAmenitiesBodySchema) {
@@ -132,11 +133,11 @@ export class RoomsService {
     if (room.status === 'OCCUPIED' || room.status === 'RESERVED') {
       throw new BadRequestException('Không thể xóa phòng đang thuê hoặc đã đặt cọc')
     }
-    return this.roomsRepository.softDeleteRoom(tenant.tenantId, id, userId)
+    return this.roomsRepository.softDelete(tenant.tenantId, id, userId, room.marketplaceStatus)
   }
 
   private async getTenantRoomOrThrow(tenantId: number, id: number) {
-    const room = await this.roomsRepository.findTenantRoom(tenantId, id)
+    const room = await this.roomsRepository.findById(tenantId, id)
     if (!room) {
       throw new NotFoundException('Không tìm thấy phòng')
     }
@@ -177,6 +178,15 @@ export class RoomsService {
     return uniqueIds
   }
 
+  private assertLandlordMarketplaceTransition(current: string, next: string) {
+    const canSubmit = ['DRAFT', 'REJECTED', 'HIDDEN'].includes(current) && next === 'PENDING_REVIEW'
+    const canWithdraw = current === 'PENDING_REVIEW' && next === 'DRAFT'
+    const canHide = current === 'PUBLISHED' && next === 'HIDDEN'
+    if (!canSubmit && !canWithdraw && !canHide) {
+      throw new BadRequestException(`Không thể chuyển trạng thái marketplace từ ${current} sang ${next}`)
+    }
+  }
+
   private buildListWhere(tenantId: number, query: TListRoomsQuerySchema): Prisma.RoomWhereInput {
     return {
       tenantId,
@@ -185,11 +195,21 @@ export class RoomsService {
       ...(query.floorId ? { floorId: query.floorId } : {}),
       ...(query.status ? { status: query.status } : {}),
       ...(query.marketplaceStatus ? { marketplaceStatus: query.marketplaceStatus } : {}),
-      ...((query.minPrice !== undefined || query.maxPrice !== undefined)
-        ? { basePrice: { ...(query.minPrice !== undefined ? { gte: query.minPrice } : {}), ...(query.maxPrice !== undefined ? { lte: query.maxPrice } : {}) } }
+      ...(query.minPrice !== undefined || query.maxPrice !== undefined
+        ? {
+            basePrice: {
+              ...(query.minPrice !== undefined ? { gte: query.minPrice } : {}),
+              ...(query.maxPrice !== undefined ? { lte: query.maxPrice } : {}),
+            },
+          }
         : {}),
-      ...((query.minArea !== undefined || query.maxArea !== undefined)
-        ? { area: { ...(query.minArea !== undefined ? { gte: query.minArea } : {}), ...(query.maxArea !== undefined ? { lte: query.maxArea } : {}) } }
+      ...(query.minArea !== undefined || query.maxArea !== undefined
+        ? {
+            area: {
+              ...(query.minArea !== undefined ? { gte: query.minArea } : {}),
+              ...(query.maxArea !== undefined ? { lte: query.maxArea } : {}),
+            },
+          }
         : {}),
       ...(query.search
         ? {

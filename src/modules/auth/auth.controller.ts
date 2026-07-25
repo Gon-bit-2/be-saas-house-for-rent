@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Ip, Patch, Post, Query, Res } from '@nestjs/common'
+import { Body, Controller, Get, Ip, Patch, Post, Query, Res, UseGuards } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import {
   ForgotPasswordBodyDTO,
@@ -9,13 +9,14 @@ import {
   RegisterBodyDTO,
   SendOTPBodyDTO,
   UpdateProfileBodyDTO,
-  VerifyOTPBodyDTO,
 } from './dto/auth.dto'
 import { isPublic } from '@src/common/decorators/decorators/auth.decorator'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
 import { UserAgent } from '@src/common/decorators/decorators/user-agent.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
 import type { Response } from 'express'
+import { AuthRateLimit } from '@src/common/rate-limit/auth-rate-limit.decorator'
+import { AuthRateLimitGuard } from '@src/common/rate-limit/auth-rate-limit.guard'
 
 /**
  * Controller xử lý các endpoint xác thực người dùng.
@@ -23,6 +24,7 @@ import type { Response } from 'express'
  * gửi/xác thực OTP, quên mật khẩu, xem/cập nhật profile.
  */
 @Controller('auth')
+@UseGuards(AuthRateLimitGuard)
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
@@ -35,6 +37,7 @@ export class AuthController {
    * POST /auth/register
    */
   @isPublic()
+  @AuthRateLimit('verify')
   @Post('register')
   register(@Body() body: RegisterBodyDTO) {
     return this.authService.register(body)
@@ -48,6 +51,7 @@ export class AuthController {
    * POST /auth/login
    */
   @isPublic()
+  @AuthRateLimit('login')
   @Post('login')
   login(@Body() body: LoginBodyDTO, @Ip() ip: string, @UserAgent() userAgent: string) {
     return this.authService.login(body, ip, userAgent)
@@ -59,20 +63,10 @@ export class AuthController {
    * POST /auth/send-otp
    */
   @isPublic()
+  @AuthRateLimit('otp')
   @Post('send-otp')
   sendOTP(@Body() body: SendOTPBodyDTO) {
     return this.authService.sendOTP(body)
-  }
-
-  /**
-   * Xác thực mã OTP.
-   *
-   * POST /auth/verify-otp
-   */
-  @isPublic()
-  @Post('verify-otp')
-  verifyOTP(@Body() body: VerifyOTPBodyDTO) {
-    return this.authService.verifyOTP(body)
   }
 
   /**
@@ -81,6 +75,7 @@ export class AuthController {
    * POST /auth/refresh-token
    */
   @isPublic()
+  @AuthRateLimit('refresh')
   @Post('refresh-token')
   refreshToken(@Body() body: RefreshTokenBodyDTO, @Ip() ip: string, @UserAgent() userAgent: string) {
     return this.authService.refreshToken(body, ip, userAgent)
@@ -93,6 +88,7 @@ export class AuthController {
    * POST /auth/forgot-password
    */
   @isPublic()
+  @AuthRateLimit('verify')
   @Post('forgot-password')
   forgotPassword(@Body() body: ForgotPasswordBodyDTO) {
     return this.authService.forgotPassword(body)

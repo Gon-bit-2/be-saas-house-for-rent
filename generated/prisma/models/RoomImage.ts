@@ -42,6 +42,7 @@ export type RoomImageMinAggregateOutputType = {
   id: number | null
   roomId: number | null
   url: string | null
+  publicId: string | null
   caption: string | null
   sortOrder: number | null
   isThumbnail: boolean | null
@@ -52,6 +53,7 @@ export type RoomImageMaxAggregateOutputType = {
   id: number | null
   roomId: number | null
   url: string | null
+  publicId: string | null
   caption: string | null
   sortOrder: number | null
   isThumbnail: boolean | null
@@ -62,6 +64,7 @@ export type RoomImageCountAggregateOutputType = {
   id: number
   roomId: number
   url: number
+  publicId: number
   caption: number
   sortOrder: number
   isThumbnail: number
@@ -86,6 +89,7 @@ export type RoomImageMinAggregateInputType = {
   id?: true
   roomId?: true
   url?: true
+  publicId?: true
   caption?: true
   sortOrder?: true
   isThumbnail?: true
@@ -96,6 +100,7 @@ export type RoomImageMaxAggregateInputType = {
   id?: true
   roomId?: true
   url?: true
+  publicId?: true
   caption?: true
   sortOrder?: true
   isThumbnail?: true
@@ -106,6 +111,7 @@ export type RoomImageCountAggregateInputType = {
   id?: true
   roomId?: true
   url?: true
+  publicId?: true
   caption?: true
   sortOrder?: true
   isThumbnail?: true
@@ -203,6 +209,7 @@ export type RoomImageGroupByOutputType = {
   id: number
   roomId: number
   url: string
+  publicId: string | null
   caption: string | null
   sortOrder: number
   isThumbnail: boolean
@@ -236,6 +243,7 @@ export type RoomImageWhereInput = {
   id?: Prisma.IntFilter<"RoomImage"> | number
   roomId?: Prisma.IntFilter<"RoomImage"> | number
   url?: Prisma.StringFilter<"RoomImage"> | string
+  publicId?: Prisma.StringNullableFilter<"RoomImage"> | string | null
   caption?: Prisma.StringNullableFilter<"RoomImage"> | string | null
   sortOrder?: Prisma.IntFilter<"RoomImage"> | number
   isThumbnail?: Prisma.BoolFilter<"RoomImage"> | boolean
@@ -247,6 +255,7 @@ export type RoomImageOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  publicId?: Prisma.SortOrderInput | Prisma.SortOrder
   caption?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   isThumbnail?: Prisma.SortOrder
@@ -261,6 +270,7 @@ export type RoomImageWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.RoomImageWhereInput | Prisma.RoomImageWhereInput[]
   roomId?: Prisma.IntFilter<"RoomImage"> | number
   url?: Prisma.StringFilter<"RoomImage"> | string
+  publicId?: Prisma.StringNullableFilter<"RoomImage"> | string | null
   caption?: Prisma.StringNullableFilter<"RoomImage"> | string | null
   sortOrder?: Prisma.IntFilter<"RoomImage"> | number
   isThumbnail?: Prisma.BoolFilter<"RoomImage"> | boolean
@@ -272,6 +282,7 @@ export type RoomImageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  publicId?: Prisma.SortOrderInput | Prisma.SortOrder
   caption?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   isThumbnail?: Prisma.SortOrder
@@ -290,6 +301,7 @@ export type RoomImageScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"RoomImage"> | number
   roomId?: Prisma.IntWithAggregatesFilter<"RoomImage"> | number
   url?: Prisma.StringWithAggregatesFilter<"RoomImage"> | string
+  publicId?: Prisma.StringNullableWithAggregatesFilter<"RoomImage"> | string | null
   caption?: Prisma.StringNullableWithAggregatesFilter<"RoomImage"> | string | null
   sortOrder?: Prisma.IntWithAggregatesFilter<"RoomImage"> | number
   isThumbnail?: Prisma.BoolWithAggregatesFilter<"RoomImage"> | boolean
@@ -298,6 +310,7 @@ export type RoomImageScalarWhereWithAggregatesInput = {
 
 export type RoomImageCreateInput = {
   url: string
+  publicId?: string | null
   caption?: string | null
   sortOrder?: number
   isThumbnail?: boolean
@@ -309,6 +322,7 @@ export type RoomImageUncheckedCreateInput = {
   id?: number
   roomId: number
   url: string
+  publicId?: string | null
   caption?: string | null
   sortOrder?: number
   isThumbnail?: boolean
@@ -317,6 +331,7 @@ export type RoomImageUncheckedCreateInput = {
 
 export type RoomImageUpdateInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isThumbnail?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -328,6 +343,7 @@ export type RoomImageUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isThumbnail?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -338,6 +354,7 @@ export type RoomImageCreateManyInput = {
   id?: number
   roomId: number
   url: string
+  publicId?: string | null
   caption?: string | null
   sortOrder?: number
   isThumbnail?: boolean
@@ -346,6 +363,7 @@ export type RoomImageCreateManyInput = {
 
 export type RoomImageUpdateManyMutationInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isThumbnail?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -356,6 +374,7 @@ export type RoomImageUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isThumbnail?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -376,6 +395,7 @@ export type RoomImageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  publicId?: Prisma.SortOrder
   caption?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   isThumbnail?: Prisma.SortOrder
@@ -392,6 +412,7 @@ export type RoomImageMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  publicId?: Prisma.SortOrder
   caption?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   isThumbnail?: Prisma.SortOrder
@@ -402,6 +423,7 @@ export type RoomImageMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  publicId?: Prisma.SortOrder
   caption?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   isThumbnail?: Prisma.SortOrder
@@ -458,6 +480,7 @@ export type RoomImageUncheckedUpdateManyWithoutRoomNestedInput = {
 
 export type RoomImageCreateWithoutRoomInput = {
   url: string
+  publicId?: string | null
   caption?: string | null
   sortOrder?: number
   isThumbnail?: boolean
@@ -467,6 +490,7 @@ export type RoomImageCreateWithoutRoomInput = {
 export type RoomImageUncheckedCreateWithoutRoomInput = {
   id?: number
   url: string
+  publicId?: string | null
   caption?: string | null
   sortOrder?: number
   isThumbnail?: boolean
@@ -506,6 +530,7 @@ export type RoomImageScalarWhereInput = {
   id?: Prisma.IntFilter<"RoomImage"> | number
   roomId?: Prisma.IntFilter<"RoomImage"> | number
   url?: Prisma.StringFilter<"RoomImage"> | string
+  publicId?: Prisma.StringNullableFilter<"RoomImage"> | string | null
   caption?: Prisma.StringNullableFilter<"RoomImage"> | string | null
   sortOrder?: Prisma.IntFilter<"RoomImage"> | number
   isThumbnail?: Prisma.BoolFilter<"RoomImage"> | boolean
@@ -515,6 +540,7 @@ export type RoomImageScalarWhereInput = {
 export type RoomImageCreateManyRoomInput = {
   id?: number
   url: string
+  publicId?: string | null
   caption?: string | null
   sortOrder?: number
   isThumbnail?: boolean
@@ -523,6 +549,7 @@ export type RoomImageCreateManyRoomInput = {
 
 export type RoomImageUpdateWithoutRoomInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isThumbnail?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -532,6 +559,7 @@ export type RoomImageUpdateWithoutRoomInput = {
 export type RoomImageUncheckedUpdateWithoutRoomInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isThumbnail?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -541,6 +569,7 @@ export type RoomImageUncheckedUpdateWithoutRoomInput = {
 export type RoomImageUncheckedUpdateManyWithoutRoomInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   isThumbnail?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -553,6 +582,7 @@ export type RoomImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   id?: boolean
   roomId?: boolean
   url?: boolean
+  publicId?: boolean
   caption?: boolean
   sortOrder?: boolean
   isThumbnail?: boolean
@@ -564,6 +594,7 @@ export type RoomImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   roomId?: boolean
   url?: boolean
+  publicId?: boolean
   caption?: boolean
   sortOrder?: boolean
   isThumbnail?: boolean
@@ -575,6 +606,7 @@ export type RoomImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   roomId?: boolean
   url?: boolean
+  publicId?: boolean
   caption?: boolean
   sortOrder?: boolean
   isThumbnail?: boolean
@@ -586,13 +618,14 @@ export type RoomImageSelectScalar = {
   id?: boolean
   roomId?: boolean
   url?: boolean
+  publicId?: boolean
   caption?: boolean
   sortOrder?: boolean
   isThumbnail?: boolean
   createdAt?: boolean
 }
 
-export type RoomImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomId" | "url" | "caption" | "sortOrder" | "isThumbnail" | "createdAt", ExtArgs["result"]["roomImage"]>
+export type RoomImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomId" | "url" | "publicId" | "caption" | "sortOrder" | "isThumbnail" | "createdAt", ExtArgs["result"]["roomImage"]>
 export type RoomImageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
 }
@@ -624,6 +657,10 @@ export type $RoomImagePayload<ExtArgs extends runtime.Types.Extensions.InternalA
      * Đường dẫn lưu trữ hình ảnh (ví dụ: trên S3 hoặc Cloudinary)
      */
     url: string
+    /**
+     * Public ID của ảnh trên Cloudinary để có thể xóa tài nguyên khi xóa ảnh
+     */
+    publicId: string | null
     /**
      * Ghi chú mô tả bức ảnh (ví dụ: Nhà vệ sinh, Góc bếp)
      */
@@ -1067,6 +1104,7 @@ export interface RoomImageFieldRefs {
   readonly id: Prisma.FieldRef<"RoomImage", 'Int'>
   readonly roomId: Prisma.FieldRef<"RoomImage", 'Int'>
   readonly url: Prisma.FieldRef<"RoomImage", 'String'>
+  readonly publicId: Prisma.FieldRef<"RoomImage", 'String'>
   readonly caption: Prisma.FieldRef<"RoomImage", 'String'>
   readonly sortOrder: Prisma.FieldRef<"RoomImage", 'Int'>
   readonly isThumbnail: Prisma.FieldRef<"RoomImage", 'Boolean'>

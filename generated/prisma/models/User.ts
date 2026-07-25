@@ -309,7 +309,10 @@ export type UserWhereInput = {
   contractMembers?: Prisma.ContractMemberListRelationFilter
   uploadedOcrJobs?: Prisma.OcrJobListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
+  renterDebts?: Prisma.DebtListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  approvedPayments?: Prisma.PaymentListRelationFilter
+  rejectedPayments?: Prisma.PaymentListRelationFilter
   assignedTickets?: Prisma.TicketListRelationFilter
   ticketAttachments?: Prisma.TicketAttachmentListRelationFilter
   ticketComments?: Prisma.TicketCommentListRelationFilter
@@ -323,6 +326,7 @@ export type UserWhereInput = {
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   devices?: Prisma.DeviceListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
+  marketplaceModerations?: Prisma.MarketplaceModerationListRelationFilter
   createdTenants?: Prisma.TenantListRelationFilter
   updatedTenants?: Prisma.TenantListRelationFilter
   deletedTenants?: Prisma.TenantListRelationFilter
@@ -414,7 +418,10 @@ export type UserOrderByWithRelationInput = {
   contractMembers?: Prisma.ContractMemberOrderByRelationAggregateInput
   uploadedOcrJobs?: Prisma.OcrJobOrderByRelationAggregateInput
   invoices?: Prisma.InvoiceOrderByRelationAggregateInput
+  renterDebts?: Prisma.DebtOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
+  approvedPayments?: Prisma.PaymentOrderByRelationAggregateInput
+  rejectedPayments?: Prisma.PaymentOrderByRelationAggregateInput
   assignedTickets?: Prisma.TicketOrderByRelationAggregateInput
   ticketAttachments?: Prisma.TicketAttachmentOrderByRelationAggregateInput
   ticketComments?: Prisma.TicketCommentOrderByRelationAggregateInput
@@ -428,6 +435,7 @@ export type UserOrderByWithRelationInput = {
   refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
   devices?: Prisma.DeviceOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
+  marketplaceModerations?: Prisma.MarketplaceModerationOrderByRelationAggregateInput
   createdTenants?: Prisma.TenantOrderByRelationAggregateInput
   updatedTenants?: Prisma.TenantOrderByRelationAggregateInput
   deletedTenants?: Prisma.TenantOrderByRelationAggregateInput
@@ -522,7 +530,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   contractMembers?: Prisma.ContractMemberListRelationFilter
   uploadedOcrJobs?: Prisma.OcrJobListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
+  renterDebts?: Prisma.DebtListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
+  approvedPayments?: Prisma.PaymentListRelationFilter
+  rejectedPayments?: Prisma.PaymentListRelationFilter
   assignedTickets?: Prisma.TicketListRelationFilter
   ticketAttachments?: Prisma.TicketAttachmentListRelationFilter
   ticketComments?: Prisma.TicketCommentListRelationFilter
@@ -536,6 +547,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   devices?: Prisma.DeviceListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
+  marketplaceModerations?: Prisma.MarketplaceModerationListRelationFilter
   createdTenants?: Prisma.TenantListRelationFilter
   updatedTenants?: Prisma.TenantListRelationFilter
   deletedTenants?: Prisma.TenantListRelationFilter
@@ -670,7 +682,10 @@ export type UserCreateInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -684,6 +699,7 @@ export type UserCreateInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -775,7 +791,10 @@ export type UserUncheckedCreateInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -789,6 +808,7 @@ export type UserUncheckedCreateInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -879,7 +899,10 @@ export type UserUpdateInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -893,6 +916,7 @@ export type UserUpdateInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -984,7 +1008,10 @@ export type UserUncheckedUpdateInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -998,6 +1025,7 @@ export type UserUncheckedUpdateInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -1555,6 +1583,22 @@ export type UserUpdateOneWithoutDeletedRoomsNestedInput = {
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDeletedRoomsInput, Prisma.UserUpdateWithoutDeletedRoomsInput>, Prisma.UserUncheckedUpdateWithoutDeletedRoomsInput>
+}
+
+export type UserCreateNestedOneWithoutMarketplaceModerationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMarketplaceModerationsInput, Prisma.UserUncheckedCreateWithoutMarketplaceModerationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMarketplaceModerationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutMarketplaceModerationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMarketplaceModerationsInput, Prisma.UserUncheckedCreateWithoutMarketplaceModerationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMarketplaceModerationsInput
+  upsert?: Prisma.UserUpsertWithoutMarketplaceModerationsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMarketplaceModerationsInput, Prisma.UserUpdateWithoutMarketplaceModerationsInput>, Prisma.UserUncheckedUpdateWithoutMarketplaceModerationsInput>
 }
 
 export type UserCreateNestedOneWithoutCreatedAmenitysInput = {
@@ -2291,9 +2335,35 @@ export type UserUpdateOneWithoutDeletedInvoicesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDeletedInvoicesInput, Prisma.UserUpdateWithoutDeletedInvoicesInput>, Prisma.UserUncheckedUpdateWithoutDeletedInvoicesInput>
 }
 
+export type UserCreateNestedOneWithoutRenterDebtsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRenterDebtsInput, Prisma.UserUncheckedCreateWithoutRenterDebtsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRenterDebtsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRenterDebtsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRenterDebtsInput, Prisma.UserUncheckedCreateWithoutRenterDebtsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRenterDebtsInput
+  upsert?: Prisma.UserUpsertWithoutRenterDebtsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRenterDebtsInput, Prisma.UserUpdateWithoutRenterDebtsInput>, Prisma.UserUncheckedUpdateWithoutRenterDebtsInput>
+}
+
 export type UserCreateNestedOneWithoutPaymentsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutApprovedPaymentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutApprovedPaymentsInput, Prisma.UserUncheckedCreateWithoutApprovedPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApprovedPaymentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutRejectedPaymentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRejectedPaymentsInput, Prisma.UserUncheckedCreateWithoutRejectedPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRejectedPaymentsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
@@ -2321,6 +2391,26 @@ export type UserUpdateOneRequiredWithoutPaymentsNestedInput = {
   upsert?: Prisma.UserUpsertWithoutPaymentsInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPaymentsInput, Prisma.UserUpdateWithoutPaymentsInput>, Prisma.UserUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type UserUpdateOneWithoutApprovedPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutApprovedPaymentsInput, Prisma.UserUncheckedCreateWithoutApprovedPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApprovedPaymentsInput
+  upsert?: Prisma.UserUpsertWithoutApprovedPaymentsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutApprovedPaymentsInput, Prisma.UserUpdateWithoutApprovedPaymentsInput>, Prisma.UserUncheckedUpdateWithoutApprovedPaymentsInput>
+}
+
+export type UserUpdateOneWithoutRejectedPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRejectedPaymentsInput, Prisma.UserUncheckedCreateWithoutRejectedPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRejectedPaymentsInput
+  upsert?: Prisma.UserUpsertWithoutRejectedPaymentsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRejectedPaymentsInput, Prisma.UserUpdateWithoutRejectedPaymentsInput>, Prisma.UserUncheckedUpdateWithoutRejectedPaymentsInput>
 }
 
 export type UserUpdateOneWithoutCreatedPaymentsNestedInput = {
@@ -2589,7 +2679,10 @@ export type UserCreateWithoutRefreshTokensInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -2602,6 +2695,7 @@ export type UserCreateWithoutRefreshTokensInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -2693,7 +2787,10 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -2706,6 +2803,7 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -2812,7 +2910,10 @@ export type UserUpdateWithoutRefreshTokensInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -2825,6 +2926,7 @@ export type UserUpdateWithoutRefreshTokensInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -2916,7 +3018,10 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -2929,6 +3034,7 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -3019,7 +3125,10 @@ export type UserCreateWithoutDevicesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -3032,6 +3141,7 @@ export type UserCreateWithoutDevicesInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -3123,7 +3233,10 @@ export type UserUncheckedCreateWithoutDevicesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -3136,6 +3249,7 @@ export type UserUncheckedCreateWithoutDevicesInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -3242,7 +3356,10 @@ export type UserUpdateWithoutDevicesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -3255,6 +3372,7 @@ export type UserUpdateWithoutDevicesInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -3346,7 +3464,10 @@ export type UserUncheckedUpdateWithoutDevicesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -3359,6 +3480,7 @@ export type UserUncheckedUpdateWithoutDevicesInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -3449,7 +3571,10 @@ export type UserCreateWithoutCreatedRolesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -3463,6 +3588,7 @@ export type UserCreateWithoutCreatedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -3553,7 +3679,10 @@ export type UserUncheckedCreateWithoutCreatedRolesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -3567,6 +3696,7 @@ export type UserUncheckedCreateWithoutCreatedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -3661,7 +3791,10 @@ export type UserCreateWithoutUpdatedRolesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -3675,6 +3808,7 @@ export type UserCreateWithoutUpdatedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -3765,7 +3899,10 @@ export type UserUncheckedCreateWithoutUpdatedRolesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -3779,6 +3916,7 @@ export type UserUncheckedCreateWithoutUpdatedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -3873,7 +4011,10 @@ export type UserCreateWithoutDeletedRolesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -3887,6 +4028,7 @@ export type UserCreateWithoutDeletedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -3977,7 +4119,10 @@ export type UserUncheckedCreateWithoutDeletedRolesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -3991,6 +4136,7 @@ export type UserUncheckedCreateWithoutDeletedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -4096,7 +4242,10 @@ export type UserUpdateWithoutCreatedRolesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -4110,6 +4259,7 @@ export type UserUpdateWithoutCreatedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -4200,7 +4350,10 @@ export type UserUncheckedUpdateWithoutCreatedRolesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -4214,6 +4367,7 @@ export type UserUncheckedUpdateWithoutCreatedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -4314,7 +4468,10 @@ export type UserUpdateWithoutUpdatedRolesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -4328,6 +4485,7 @@ export type UserUpdateWithoutUpdatedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -4418,7 +4576,10 @@ export type UserUncheckedUpdateWithoutUpdatedRolesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -4432,6 +4593,7 @@ export type UserUncheckedUpdateWithoutUpdatedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -4532,7 +4694,10 @@ export type UserUpdateWithoutDeletedRolesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -4546,6 +4711,7 @@ export type UserUpdateWithoutDeletedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -4636,7 +4802,10 @@ export type UserUncheckedUpdateWithoutDeletedRolesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -4650,6 +4819,7 @@ export type UserUncheckedUpdateWithoutDeletedRolesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -4739,7 +4909,10 @@ export type UserCreateWithoutCreatedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -4753,6 +4926,7 @@ export type UserCreateWithoutCreatedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -4843,7 +5017,10 @@ export type UserUncheckedCreateWithoutCreatedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -4857,6 +5034,7 @@ export type UserUncheckedCreateWithoutCreatedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -4951,7 +5129,10 @@ export type UserCreateWithoutUpdatedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -4965,6 +5146,7 @@ export type UserCreateWithoutUpdatedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -5055,7 +5237,10 @@ export type UserUncheckedCreateWithoutUpdatedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -5069,6 +5254,7 @@ export type UserUncheckedCreateWithoutUpdatedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -5163,7 +5349,10 @@ export type UserCreateWithoutDeletedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -5177,6 +5366,7 @@ export type UserCreateWithoutDeletedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -5267,7 +5457,10 @@ export type UserUncheckedCreateWithoutDeletedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -5281,6 +5474,7 @@ export type UserUncheckedCreateWithoutDeletedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -5386,7 +5580,10 @@ export type UserUpdateWithoutCreatedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -5400,6 +5597,7 @@ export type UserUpdateWithoutCreatedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -5490,7 +5688,10 @@ export type UserUncheckedUpdateWithoutCreatedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -5504,6 +5705,7 @@ export type UserUncheckedUpdateWithoutCreatedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -5604,7 +5806,10 @@ export type UserUpdateWithoutUpdatedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -5618,6 +5823,7 @@ export type UserUpdateWithoutUpdatedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -5708,7 +5914,10 @@ export type UserUncheckedUpdateWithoutUpdatedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -5722,6 +5931,7 @@ export type UserUncheckedUpdateWithoutUpdatedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -5822,7 +6032,10 @@ export type UserUpdateWithoutDeletedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -5836,6 +6049,7 @@ export type UserUpdateWithoutDeletedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -5926,7 +6140,10 @@ export type UserUncheckedUpdateWithoutDeletedPermissionsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -5940,6 +6157,7 @@ export type UserUncheckedUpdateWithoutDeletedPermissionsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -6028,7 +6246,10 @@ export type UserCreateWithoutOwnedTenantsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -6042,6 +6263,7 @@ export type UserCreateWithoutOwnedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -6132,7 +6354,10 @@ export type UserUncheckedCreateWithoutOwnedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -6146,6 +6371,7 @@ export type UserUncheckedCreateWithoutOwnedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -6241,7 +6467,10 @@ export type UserCreateWithoutCreatedTenantsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -6255,6 +6484,7 @@ export type UserCreateWithoutCreatedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
   createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
@@ -6345,7 +6575,10 @@ export type UserUncheckedCreateWithoutCreatedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -6359,6 +6592,7 @@ export type UserUncheckedCreateWithoutCreatedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
   createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6453,7 +6687,10 @@ export type UserCreateWithoutUpdatedTenantsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -6467,6 +6704,7 @@ export type UserCreateWithoutUpdatedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
   createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
@@ -6557,7 +6795,10 @@ export type UserUncheckedCreateWithoutUpdatedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -6571,6 +6812,7 @@ export type UserUncheckedCreateWithoutUpdatedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
   createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6665,7 +6907,10 @@ export type UserCreateWithoutDeletedTenantsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -6679,6 +6924,7 @@ export type UserCreateWithoutDeletedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
@@ -6769,7 +7015,10 @@ export type UserUncheckedCreateWithoutDeletedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -6783,6 +7032,7 @@ export type UserUncheckedCreateWithoutDeletedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6887,7 +7137,10 @@ export type UserUpdateWithoutOwnedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -6901,6 +7154,7 @@ export type UserUpdateWithoutOwnedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -6991,7 +7245,10 @@ export type UserUncheckedUpdateWithoutOwnedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -7005,6 +7262,7 @@ export type UserUncheckedUpdateWithoutOwnedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -7106,7 +7364,10 @@ export type UserUpdateWithoutCreatedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -7120,6 +7381,7 @@ export type UserUpdateWithoutCreatedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
   createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
@@ -7210,7 +7472,10 @@ export type UserUncheckedUpdateWithoutCreatedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -7224,6 +7489,7 @@ export type UserUncheckedUpdateWithoutCreatedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
   createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7324,7 +7590,10 @@ export type UserUpdateWithoutUpdatedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -7338,6 +7607,7 @@ export type UserUpdateWithoutUpdatedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
   createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
@@ -7428,7 +7698,10 @@ export type UserUncheckedUpdateWithoutUpdatedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -7442,6 +7715,7 @@ export type UserUncheckedUpdateWithoutUpdatedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
   createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7542,7 +7816,10 @@ export type UserUpdateWithoutDeletedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -7556,6 +7833,7 @@ export type UserUpdateWithoutDeletedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
@@ -7646,7 +7924,10 @@ export type UserUncheckedUpdateWithoutDeletedTenantsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -7660,6 +7941,7 @@ export type UserUncheckedUpdateWithoutDeletedTenantsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7748,7 +8030,10 @@ export type UserCreateWithoutTenantMembersInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -7762,6 +8047,7 @@ export type UserCreateWithoutTenantMembersInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -7852,7 +8138,10 @@ export type UserUncheckedCreateWithoutTenantMembersInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -7866,6 +8155,7 @@ export type UserUncheckedCreateWithoutTenantMembersInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -7971,7 +8261,10 @@ export type UserUpdateWithoutTenantMembersInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -7985,6 +8278,7 @@ export type UserUpdateWithoutTenantMembersInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -8075,7 +8369,10 @@ export type UserUncheckedUpdateWithoutTenantMembersInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -8089,6 +8386,7 @@ export type UserUncheckedUpdateWithoutTenantMembersInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -8179,7 +8477,10 @@ export type UserCreateWithoutCreatedPlansInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -8193,6 +8494,7 @@ export type UserCreateWithoutCreatedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -8283,7 +8585,10 @@ export type UserUncheckedCreateWithoutCreatedPlansInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -8297,6 +8602,7 @@ export type UserUncheckedCreateWithoutCreatedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -8391,7 +8697,10 @@ export type UserCreateWithoutUpdatedPlansInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -8405,6 +8714,7 @@ export type UserCreateWithoutUpdatedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -8495,7 +8805,10 @@ export type UserUncheckedCreateWithoutUpdatedPlansInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -8509,6 +8822,7 @@ export type UserUncheckedCreateWithoutUpdatedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -8603,7 +8917,10 @@ export type UserCreateWithoutDeletedPlansInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -8617,6 +8934,7 @@ export type UserCreateWithoutDeletedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -8707,7 +9025,10 @@ export type UserUncheckedCreateWithoutDeletedPlansInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -8721,6 +9042,7 @@ export type UserUncheckedCreateWithoutDeletedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -8826,7 +9148,10 @@ export type UserUpdateWithoutCreatedPlansInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -8840,6 +9165,7 @@ export type UserUpdateWithoutCreatedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -8930,7 +9256,10 @@ export type UserUncheckedUpdateWithoutCreatedPlansInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -8944,6 +9273,7 @@ export type UserUncheckedUpdateWithoutCreatedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -9044,7 +9374,10 @@ export type UserUpdateWithoutUpdatedPlansInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -9058,6 +9391,7 @@ export type UserUpdateWithoutUpdatedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -9148,7 +9482,10 @@ export type UserUncheckedUpdateWithoutUpdatedPlansInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -9162,6 +9499,7 @@ export type UserUncheckedUpdateWithoutUpdatedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -9262,7 +9600,10 @@ export type UserUpdateWithoutDeletedPlansInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -9276,6 +9617,7 @@ export type UserUpdateWithoutDeletedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -9366,7 +9708,10 @@ export type UserUncheckedUpdateWithoutDeletedPlansInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -9380,6 +9725,7 @@ export type UserUncheckedUpdateWithoutDeletedPlansInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -9469,7 +9815,10 @@ export type UserCreateWithoutCreatedPropertysInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -9483,6 +9832,7 @@ export type UserCreateWithoutCreatedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -9573,7 +9923,10 @@ export type UserUncheckedCreateWithoutCreatedPropertysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -9587,6 +9940,7 @@ export type UserUncheckedCreateWithoutCreatedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -9681,7 +10035,10 @@ export type UserCreateWithoutUpdatedPropertysInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -9695,6 +10052,7 @@ export type UserCreateWithoutUpdatedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -9785,7 +10143,10 @@ export type UserUncheckedCreateWithoutUpdatedPropertysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -9799,6 +10160,7 @@ export type UserUncheckedCreateWithoutUpdatedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -9893,7 +10255,10 @@ export type UserCreateWithoutDeletedPropertysInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -9907,6 +10272,7 @@ export type UserCreateWithoutDeletedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -9997,7 +10363,10 @@ export type UserUncheckedCreateWithoutDeletedPropertysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -10011,6 +10380,7 @@ export type UserUncheckedCreateWithoutDeletedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -10116,7 +10486,10 @@ export type UserUpdateWithoutCreatedPropertysInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -10130,6 +10503,7 @@ export type UserUpdateWithoutCreatedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -10220,7 +10594,10 @@ export type UserUncheckedUpdateWithoutCreatedPropertysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -10234,6 +10611,7 @@ export type UserUncheckedUpdateWithoutCreatedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -10334,7 +10712,10 @@ export type UserUpdateWithoutUpdatedPropertysInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -10348,6 +10729,7 @@ export type UserUpdateWithoutUpdatedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -10438,7 +10820,10 @@ export type UserUncheckedUpdateWithoutUpdatedPropertysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -10452,6 +10837,7 @@ export type UserUncheckedUpdateWithoutUpdatedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -10552,7 +10938,10 @@ export type UserUpdateWithoutDeletedPropertysInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -10566,6 +10955,7 @@ export type UserUpdateWithoutDeletedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -10656,7 +11046,10 @@ export type UserUncheckedUpdateWithoutDeletedPropertysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -10670,6 +11063,7 @@ export type UserUncheckedUpdateWithoutDeletedPropertysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -10759,7 +11153,10 @@ export type UserCreateWithoutCreatedRoomsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -10773,6 +11170,7 @@ export type UserCreateWithoutCreatedRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -10863,7 +11261,10 @@ export type UserUncheckedCreateWithoutCreatedRoomsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -10877,6 +11278,7 @@ export type UserUncheckedCreateWithoutCreatedRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -10971,7 +11373,10 @@ export type UserCreateWithoutUpdatedRoomsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -10985,6 +11390,7 @@ export type UserCreateWithoutUpdatedRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -11075,7 +11481,10 @@ export type UserUncheckedCreateWithoutUpdatedRoomsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -11089,6 +11498,7 @@ export type UserUncheckedCreateWithoutUpdatedRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -11183,7 +11593,10 @@ export type UserCreateWithoutDeletedRoomsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -11197,6 +11610,7 @@ export type UserCreateWithoutDeletedRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -11287,7 +11701,10 @@ export type UserUncheckedCreateWithoutDeletedRoomsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -11301,6 +11718,7 @@ export type UserUncheckedCreateWithoutDeletedRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -11406,7 +11824,10 @@ export type UserUpdateWithoutCreatedRoomsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -11420,6 +11841,7 @@ export type UserUpdateWithoutCreatedRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -11510,7 +11932,10 @@ export type UserUncheckedUpdateWithoutCreatedRoomsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -11524,6 +11949,7 @@ export type UserUncheckedUpdateWithoutCreatedRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -11624,7 +12050,10 @@ export type UserUpdateWithoutUpdatedRoomsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -11638,6 +12067,7 @@ export type UserUpdateWithoutUpdatedRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -11728,7 +12158,10 @@ export type UserUncheckedUpdateWithoutUpdatedRoomsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -11742,6 +12175,7 @@ export type UserUncheckedUpdateWithoutUpdatedRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -11842,7 +12276,10 @@ export type UserUpdateWithoutDeletedRoomsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -11856,6 +12293,7 @@ export type UserUpdateWithoutDeletedRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -11946,7 +12384,456 @@ export type UserUncheckedUpdateWithoutDeletedRoomsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
+  assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdContracts?: Prisma.ContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserCreateWithoutMarketplaceModerationsInput = {
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
+  assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserUncheckedCreateWithoutMarketplaceModerationsInput = {
+  id?: number
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileUncheckedCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
+  assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserCreateOrConnectWithoutMarketplaceModerationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMarketplaceModerationsInput, Prisma.UserUncheckedCreateWithoutMarketplaceModerationsInput>
+}
+
+export type UserUpsertWithoutMarketplaceModerationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMarketplaceModerationsInput, Prisma.UserUncheckedUpdateWithoutMarketplaceModerationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMarketplaceModerationsInput, Prisma.UserUncheckedCreateWithoutMarketplaceModerationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMarketplaceModerationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMarketplaceModerationsInput, Prisma.UserUncheckedUpdateWithoutMarketplaceModerationsInput>
+}
+
+export type UserUpdateWithoutMarketplaceModerationsInput = {
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
+  assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUpdateManyWithoutDeletedByNestedInput
+  createdContracts?: Prisma.ContractUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUpdateManyWithoutDeletedByNestedInput
+  createdPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMarketplaceModerationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUncheckedUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -11968,6 +12855,7 @@ export type UserUncheckedUpdateWithoutDeletedRoomsInput = {
   deletedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutDeletedByNestedInput
   createdRooms?: Prisma.RoomUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedRooms?: Prisma.RoomUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUncheckedUpdateManyWithoutDeletedByNestedInput
   createdContracts?: Prisma.ContractUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedContracts?: Prisma.ContractUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedContracts?: Prisma.ContractUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -12049,7 +12937,10 @@ export type UserCreateWithoutCreatedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -12063,6 +12954,7 @@ export type UserCreateWithoutCreatedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -12153,7 +13045,10 @@ export type UserUncheckedCreateWithoutCreatedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -12167,6 +13062,7 @@ export type UserUncheckedCreateWithoutCreatedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -12261,7 +13157,10 @@ export type UserCreateWithoutUpdatedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -12275,6 +13174,7 @@ export type UserCreateWithoutUpdatedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -12365,7 +13265,10 @@ export type UserUncheckedCreateWithoutUpdatedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -12379,6 +13282,7 @@ export type UserUncheckedCreateWithoutUpdatedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -12473,7 +13377,10 @@ export type UserCreateWithoutDeletedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -12487,6 +13394,7 @@ export type UserCreateWithoutDeletedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -12577,7 +13485,10 @@ export type UserUncheckedCreateWithoutDeletedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -12591,6 +13502,7 @@ export type UserUncheckedCreateWithoutDeletedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -12696,7 +13608,10 @@ export type UserUpdateWithoutCreatedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -12710,6 +13625,7 @@ export type UserUpdateWithoutCreatedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -12800,7 +13716,10 @@ export type UserUncheckedUpdateWithoutCreatedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -12814,6 +13733,7 @@ export type UserUncheckedUpdateWithoutCreatedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -12914,7 +13834,10 @@ export type UserUpdateWithoutUpdatedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -12928,6 +13851,7 @@ export type UserUpdateWithoutUpdatedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -13018,7 +13942,10 @@ export type UserUncheckedUpdateWithoutUpdatedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -13032,6 +13959,7 @@ export type UserUncheckedUpdateWithoutUpdatedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -13132,7 +14060,10 @@ export type UserUpdateWithoutDeletedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -13146,6 +14077,7 @@ export type UserUpdateWithoutDeletedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -13236,7 +14168,10 @@ export type UserUncheckedUpdateWithoutDeletedAmenitysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -13250,6 +14185,7 @@ export type UserUncheckedUpdateWithoutDeletedAmenitysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -13338,7 +14274,10 @@ export type UserCreateWithoutRenterProfileInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -13352,6 +14291,7 @@ export type UserCreateWithoutRenterProfileInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -13442,7 +14382,10 @@ export type UserUncheckedCreateWithoutRenterProfileInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -13456,6 +14399,7 @@ export type UserUncheckedCreateWithoutRenterProfileInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -13561,7 +14505,10 @@ export type UserUpdateWithoutRenterProfileInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -13575,6 +14522,7 @@ export type UserUpdateWithoutRenterProfileInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -13665,7 +14613,10 @@ export type UserUncheckedUpdateWithoutRenterProfileInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -13679,6 +14630,7 @@ export type UserUncheckedUpdateWithoutRenterProfileInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -13768,7 +14720,10 @@ export type UserCreateWithoutRentalHistoriesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -13782,6 +14737,7 @@ export type UserCreateWithoutRentalHistoriesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -13872,7 +14828,10 @@ export type UserUncheckedCreateWithoutRentalHistoriesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -13886,6 +14845,7 @@ export type UserUncheckedCreateWithoutRentalHistoriesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -13991,7 +14951,10 @@ export type UserUpdateWithoutRentalHistoriesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -14005,6 +14968,7 @@ export type UserUpdateWithoutRentalHistoriesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -14095,7 +15059,10 @@ export type UserUncheckedUpdateWithoutRentalHistoriesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -14109,6 +15076,7 @@ export type UserUncheckedUpdateWithoutRentalHistoriesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -14198,7 +15166,10 @@ export type UserCreateWithoutRoomViewLogsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -14212,6 +15183,7 @@ export type UserCreateWithoutRoomViewLogsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -14302,7 +15274,10 @@ export type UserUncheckedCreateWithoutRoomViewLogsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -14316,6 +15291,7 @@ export type UserUncheckedCreateWithoutRoomViewLogsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -14421,7 +15397,10 @@ export type UserUpdateWithoutRoomViewLogsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -14435,6 +15414,7 @@ export type UserUpdateWithoutRoomViewLogsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -14525,7 +15505,10 @@ export type UserUncheckedUpdateWithoutRoomViewLogsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -14539,6 +15522,7 @@ export type UserUncheckedUpdateWithoutRoomViewLogsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -14628,7 +15612,10 @@ export type UserCreateWithoutFavoriteRoomsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -14642,6 +15629,7 @@ export type UserCreateWithoutFavoriteRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -14732,7 +15720,10 @@ export type UserUncheckedCreateWithoutFavoriteRoomsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -14746,6 +15737,7 @@ export type UserUncheckedCreateWithoutFavoriteRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -14851,7 +15843,10 @@ export type UserUpdateWithoutFavoriteRoomsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -14865,6 +15860,7 @@ export type UserUpdateWithoutFavoriteRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -14955,7 +15951,10 @@ export type UserUncheckedUpdateWithoutFavoriteRoomsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -14969,6 +15968,7 @@ export type UserUncheckedUpdateWithoutFavoriteRoomsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -15058,7 +16058,10 @@ export type UserCreateWithoutViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -15072,6 +16075,7 @@ export type UserCreateWithoutViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -15162,7 +16166,10 @@ export type UserUncheckedCreateWithoutViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -15176,6 +16183,7 @@ export type UserUncheckedCreateWithoutViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -15270,7 +16278,10 @@ export type UserCreateWithoutAssignedAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -15284,6 +16295,7 @@ export type UserCreateWithoutAssignedAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -15374,7 +16386,10 @@ export type UserUncheckedCreateWithoutAssignedAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -15388,6 +16403,7 @@ export type UserUncheckedCreateWithoutAssignedAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -15483,7 +16499,10 @@ export type UserCreateWithoutCreatedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -15497,6 +16516,7 @@ export type UserCreateWithoutCreatedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -15587,7 +16607,10 @@ export type UserUncheckedCreateWithoutCreatedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -15601,6 +16624,7 @@ export type UserUncheckedCreateWithoutCreatedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -15695,7 +16719,10 @@ export type UserCreateWithoutUpdatedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -15709,6 +16736,7 @@ export type UserCreateWithoutUpdatedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -15799,7 +16827,10 @@ export type UserUncheckedCreateWithoutUpdatedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -15813,6 +16844,7 @@ export type UserUncheckedCreateWithoutUpdatedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -15907,7 +16939,10 @@ export type UserCreateWithoutDeletedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -15921,6 +16956,7 @@ export type UserCreateWithoutDeletedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -16011,7 +17047,10 @@ export type UserUncheckedCreateWithoutDeletedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -16025,6 +17064,7 @@ export type UserUncheckedCreateWithoutDeletedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -16129,7 +17169,10 @@ export type UserUpdateWithoutViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -16143,6 +17186,7 @@ export type UserUpdateWithoutViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -16233,7 +17277,10 @@ export type UserUncheckedUpdateWithoutViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -16247,6 +17294,7 @@ export type UserUncheckedUpdateWithoutViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -16347,7 +17395,10 @@ export type UserUpdateWithoutAssignedAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -16361,6 +17412,7 @@ export type UserUpdateWithoutAssignedAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -16451,7 +17503,10 @@ export type UserUncheckedUpdateWithoutAssignedAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -16465,6 +17520,7 @@ export type UserUncheckedUpdateWithoutAssignedAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -16566,7 +17622,10 @@ export type UserUpdateWithoutCreatedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -16580,6 +17639,7 @@ export type UserUpdateWithoutCreatedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -16670,7 +17730,10 @@ export type UserUncheckedUpdateWithoutCreatedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -16684,6 +17747,7 @@ export type UserUncheckedUpdateWithoutCreatedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -16784,7 +17848,10 @@ export type UserUpdateWithoutUpdatedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -16798,6 +17865,7 @@ export type UserUpdateWithoutUpdatedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -16888,7 +17956,10 @@ export type UserUncheckedUpdateWithoutUpdatedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -16902,6 +17973,7 @@ export type UserUncheckedUpdateWithoutUpdatedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -17002,7 +18074,10 @@ export type UserUpdateWithoutDeletedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -17016,6 +18091,7 @@ export type UserUpdateWithoutDeletedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -17106,7 +18182,10 @@ export type UserUncheckedUpdateWithoutDeletedRoomViewingAppointmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -17120,6 +18199,7 @@ export type UserUncheckedUpdateWithoutDeletedRoomViewingAppointmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -17208,7 +18288,10 @@ export type UserCreateWithoutRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -17222,6 +18305,7 @@ export type UserCreateWithoutRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -17312,7 +18396,10 @@ export type UserUncheckedCreateWithoutRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -17326,6 +18413,7 @@ export type UserUncheckedCreateWithoutRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -17421,7 +18509,10 @@ export type UserCreateWithoutCreatedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -17435,6 +18526,7 @@ export type UserCreateWithoutCreatedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -17525,7 +18617,10 @@ export type UserUncheckedCreateWithoutCreatedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -17539,6 +18634,7 @@ export type UserUncheckedCreateWithoutCreatedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -17633,7 +18729,10 @@ export type UserCreateWithoutUpdatedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -17647,6 +18746,7 @@ export type UserCreateWithoutUpdatedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -17737,7 +18837,10 @@ export type UserUncheckedCreateWithoutUpdatedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -17751,6 +18854,7 @@ export type UserUncheckedCreateWithoutUpdatedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -17845,7 +18949,10 @@ export type UserCreateWithoutDeletedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -17859,6 +18966,7 @@ export type UserCreateWithoutDeletedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -17949,7 +19057,10 @@ export type UserUncheckedCreateWithoutDeletedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -17963,6 +19074,7 @@ export type UserUncheckedCreateWithoutDeletedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -18067,7 +19179,10 @@ export type UserUpdateWithoutRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -18081,6 +19196,7 @@ export type UserUpdateWithoutRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -18171,7 +19287,10 @@ export type UserUncheckedUpdateWithoutRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -18185,6 +19304,7 @@ export type UserUncheckedUpdateWithoutRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -18286,7 +19406,10 @@ export type UserUpdateWithoutCreatedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -18300,6 +19423,7 @@ export type UserUpdateWithoutCreatedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -18390,7 +19514,10 @@ export type UserUncheckedUpdateWithoutCreatedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -18404,6 +19531,7 @@ export type UserUncheckedUpdateWithoutCreatedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -18504,7 +19632,10 @@ export type UserUpdateWithoutUpdatedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -18518,6 +19649,7 @@ export type UserUpdateWithoutUpdatedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -18608,7 +19740,10 @@ export type UserUncheckedUpdateWithoutUpdatedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -18622,6 +19757,7 @@ export type UserUncheckedUpdateWithoutUpdatedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -18722,7 +19858,10 @@ export type UserUpdateWithoutDeletedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -18736,6 +19875,7 @@ export type UserUpdateWithoutDeletedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -18826,7 +19966,10 @@ export type UserUncheckedUpdateWithoutDeletedRentalRequestsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -18840,6 +19983,7 @@ export type UserUncheckedUpdateWithoutDeletedRentalRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -18929,7 +20073,10 @@ export type UserCreateWithoutCreatedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -18943,6 +20090,7 @@ export type UserCreateWithoutCreatedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -19033,7 +20181,10 @@ export type UserUncheckedCreateWithoutCreatedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -19047,6 +20198,7 @@ export type UserUncheckedCreateWithoutCreatedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -19141,7 +20293,10 @@ export type UserCreateWithoutUpdatedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -19155,6 +20310,7 @@ export type UserCreateWithoutUpdatedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -19245,7 +20401,10 @@ export type UserUncheckedCreateWithoutUpdatedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -19259,6 +20418,7 @@ export type UserUncheckedCreateWithoutUpdatedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -19353,7 +20513,10 @@ export type UserCreateWithoutDeletedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -19367,6 +20530,7 @@ export type UserCreateWithoutDeletedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -19457,7 +20621,10 @@ export type UserUncheckedCreateWithoutDeletedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -19471,6 +20638,7 @@ export type UserUncheckedCreateWithoutDeletedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -19576,7 +20744,10 @@ export type UserUpdateWithoutCreatedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -19590,6 +20761,7 @@ export type UserUpdateWithoutCreatedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -19680,7 +20852,10 @@ export type UserUncheckedUpdateWithoutCreatedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -19694,6 +20869,7 @@ export type UserUncheckedUpdateWithoutCreatedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -19794,7 +20970,10 @@ export type UserUpdateWithoutUpdatedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -19808,6 +20987,7 @@ export type UserUpdateWithoutUpdatedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -19898,7 +21078,10 @@ export type UserUncheckedUpdateWithoutUpdatedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -19912,6 +21095,7 @@ export type UserUncheckedUpdateWithoutUpdatedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -20012,7 +21196,10 @@ export type UserUpdateWithoutDeletedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -20026,6 +21213,7 @@ export type UserUpdateWithoutDeletedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -20116,7 +21304,10 @@ export type UserUncheckedUpdateWithoutDeletedContractTemplatesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -20130,6 +21321,7 @@ export type UserUncheckedUpdateWithoutDeletedContractTemplatesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -20218,7 +21410,10 @@ export type UserCreateWithoutContractsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -20232,6 +21427,7 @@ export type UserCreateWithoutContractsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -20322,7 +21518,10 @@ export type UserUncheckedCreateWithoutContractsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -20336,6 +21535,7 @@ export type UserUncheckedCreateWithoutContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -20431,7 +21631,10 @@ export type UserCreateWithoutCreatedContractsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -20445,6 +21648,7 @@ export type UserCreateWithoutCreatedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -20535,7 +21739,10 @@ export type UserUncheckedCreateWithoutCreatedContractsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -20549,6 +21756,7 @@ export type UserUncheckedCreateWithoutCreatedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -20643,7 +21851,10 @@ export type UserCreateWithoutUpdatedContractsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -20657,6 +21868,7 @@ export type UserCreateWithoutUpdatedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -20747,7 +21959,10 @@ export type UserUncheckedCreateWithoutUpdatedContractsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -20761,6 +21976,7 @@ export type UserUncheckedCreateWithoutUpdatedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -20855,7 +22071,10 @@ export type UserCreateWithoutDeletedContractsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -20869,6 +22088,7 @@ export type UserCreateWithoutDeletedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -20959,7 +22179,10 @@ export type UserUncheckedCreateWithoutDeletedContractsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -20973,6 +22196,7 @@ export type UserUncheckedCreateWithoutDeletedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -21077,7 +22301,10 @@ export type UserUpdateWithoutContractsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -21091,6 +22318,7 @@ export type UserUpdateWithoutContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -21181,7 +22409,10 @@ export type UserUncheckedUpdateWithoutContractsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -21195,6 +22426,7 @@ export type UserUncheckedUpdateWithoutContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -21296,7 +22528,10 @@ export type UserUpdateWithoutCreatedContractsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -21310,6 +22545,7 @@ export type UserUpdateWithoutCreatedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -21400,7 +22636,10 @@ export type UserUncheckedUpdateWithoutCreatedContractsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -21414,6 +22653,7 @@ export type UserUncheckedUpdateWithoutCreatedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -21514,7 +22754,10 @@ export type UserUpdateWithoutUpdatedContractsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -21528,6 +22771,7 @@ export type UserUpdateWithoutUpdatedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -21618,7 +22862,10 @@ export type UserUncheckedUpdateWithoutUpdatedContractsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -21632,6 +22879,7 @@ export type UserUncheckedUpdateWithoutUpdatedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -21732,7 +22980,10 @@ export type UserUpdateWithoutDeletedContractsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -21746,6 +22997,7 @@ export type UserUpdateWithoutDeletedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -21836,7 +23088,10 @@ export type UserUncheckedUpdateWithoutDeletedContractsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -21850,6 +23105,7 @@ export type UserUncheckedUpdateWithoutDeletedContractsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -21938,7 +23194,10 @@ export type UserCreateWithoutContractMembersInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutRenterInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -21952,6 +23211,7 @@ export type UserCreateWithoutContractMembersInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -22042,7 +23302,10 @@ export type UserUncheckedCreateWithoutContractMembersInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRenterInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -22056,6 +23319,7 @@ export type UserUncheckedCreateWithoutContractMembersInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -22161,7 +23425,10 @@ export type UserUpdateWithoutContractMembersInput = {
   contracts?: Prisma.ContractUpdateManyWithoutRenterNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -22175,6 +23442,7 @@ export type UserUpdateWithoutContractMembersInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -22265,7 +23533,10 @@ export type UserUncheckedUpdateWithoutContractMembersInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRenterNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -22279,6 +23550,7 @@ export type UserUncheckedUpdateWithoutContractMembersInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -22369,7 +23641,10 @@ export type UserCreateWithoutCreatedContractTerminationRequestsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -22383,6 +23658,7 @@ export type UserCreateWithoutCreatedContractTerminationRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -22473,7 +23749,10 @@ export type UserUncheckedCreateWithoutCreatedContractTerminationRequestsInput = 
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -22487,6 +23766,7 @@ export type UserUncheckedCreateWithoutCreatedContractTerminationRequestsInput = 
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -22581,7 +23861,10 @@ export type UserCreateWithoutUpdatedContractTerminationRequestsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -22595,6 +23878,7 @@ export type UserCreateWithoutUpdatedContractTerminationRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -22685,7 +23969,10 @@ export type UserUncheckedCreateWithoutUpdatedContractTerminationRequestsInput = 
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -22699,6 +23986,7 @@ export type UserUncheckedCreateWithoutUpdatedContractTerminationRequestsInput = 
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -22793,7 +24081,10 @@ export type UserCreateWithoutDeletedContractTerminationRequestsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -22807,6 +24098,7 @@ export type UserCreateWithoutDeletedContractTerminationRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -22897,7 +24189,10 @@ export type UserUncheckedCreateWithoutDeletedContractTerminationRequestsInput = 
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -22911,6 +24206,7 @@ export type UserUncheckedCreateWithoutDeletedContractTerminationRequestsInput = 
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -23016,7 +24312,10 @@ export type UserUpdateWithoutCreatedContractTerminationRequestsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -23030,6 +24329,7 @@ export type UserUpdateWithoutCreatedContractTerminationRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -23120,7 +24420,10 @@ export type UserUncheckedUpdateWithoutCreatedContractTerminationRequestsInput = 
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -23134,6 +24437,7 @@ export type UserUncheckedUpdateWithoutCreatedContractTerminationRequestsInput = 
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -23234,7 +24538,10 @@ export type UserUpdateWithoutUpdatedContractTerminationRequestsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -23248,6 +24555,7 @@ export type UserUpdateWithoutUpdatedContractTerminationRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -23338,7 +24646,10 @@ export type UserUncheckedUpdateWithoutUpdatedContractTerminationRequestsInput = 
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -23352,6 +24663,7 @@ export type UserUncheckedUpdateWithoutUpdatedContractTerminationRequestsInput = 
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -23452,7 +24764,10 @@ export type UserUpdateWithoutDeletedContractTerminationRequestsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -23466,6 +24781,7 @@ export type UserUpdateWithoutDeletedContractTerminationRequestsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -23556,7 +24872,10 @@ export type UserUncheckedUpdateWithoutDeletedContractTerminationRequestsInput = 
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -23570,6 +24889,7 @@ export type UserUncheckedUpdateWithoutDeletedContractTerminationRequestsInput = 
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -23659,7 +24979,10 @@ export type UserCreateWithoutCreatedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -23673,6 +24996,7 @@ export type UserCreateWithoutCreatedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -23763,7 +25087,10 @@ export type UserUncheckedCreateWithoutCreatedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -23777,6 +25104,7 @@ export type UserUncheckedCreateWithoutCreatedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -23871,7 +25199,10 @@ export type UserCreateWithoutUpdatedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -23885,6 +25216,7 @@ export type UserCreateWithoutUpdatedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -23975,7 +25307,10 @@ export type UserUncheckedCreateWithoutUpdatedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -23989,6 +25324,7 @@ export type UserUncheckedCreateWithoutUpdatedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -24083,7 +25419,10 @@ export type UserCreateWithoutDeletedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -24097,6 +25436,7 @@ export type UserCreateWithoutDeletedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -24187,7 +25527,10 @@ export type UserUncheckedCreateWithoutDeletedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -24201,6 +25544,7 @@ export type UserUncheckedCreateWithoutDeletedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -24306,7 +25650,10 @@ export type UserUpdateWithoutCreatedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -24320,6 +25667,7 @@ export type UserUpdateWithoutCreatedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -24410,7 +25758,10 @@ export type UserUncheckedUpdateWithoutCreatedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -24424,6 +25775,7 @@ export type UserUncheckedUpdateWithoutCreatedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -24524,7 +25876,10 @@ export type UserUpdateWithoutUpdatedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -24538,6 +25893,7 @@ export type UserUpdateWithoutUpdatedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -24628,7 +25984,10 @@ export type UserUncheckedUpdateWithoutUpdatedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -24642,6 +26001,7 @@ export type UserUncheckedUpdateWithoutUpdatedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -24742,7 +26102,10 @@ export type UserUpdateWithoutDeletedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -24756,6 +26119,7 @@ export type UserUpdateWithoutDeletedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -24846,7 +26210,10 @@ export type UserUncheckedUpdateWithoutDeletedAssetCategorysInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -24860,6 +26227,7 @@ export type UserUncheckedUpdateWithoutDeletedAssetCategorysInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -24949,7 +26317,10 @@ export type UserCreateWithoutCreatedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -24963,6 +26334,7 @@ export type UserCreateWithoutCreatedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -25053,7 +26425,10 @@ export type UserUncheckedCreateWithoutCreatedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -25067,6 +26442,7 @@ export type UserUncheckedCreateWithoutCreatedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -25161,7 +26537,10 @@ export type UserCreateWithoutUpdatedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -25175,6 +26554,7 @@ export type UserCreateWithoutUpdatedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -25265,7 +26645,10 @@ export type UserUncheckedCreateWithoutUpdatedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -25279,6 +26662,7 @@ export type UserUncheckedCreateWithoutUpdatedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -25373,7 +26757,10 @@ export type UserCreateWithoutDeletedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -25387,6 +26774,7 @@ export type UserCreateWithoutDeletedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -25477,7 +26865,10 @@ export type UserUncheckedCreateWithoutDeletedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -25491,6 +26882,7 @@ export type UserUncheckedCreateWithoutDeletedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -25596,7 +26988,10 @@ export type UserUpdateWithoutCreatedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -25610,6 +27005,7 @@ export type UserUpdateWithoutCreatedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -25700,7 +27096,10 @@ export type UserUncheckedUpdateWithoutCreatedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -25714,6 +27113,7 @@ export type UserUncheckedUpdateWithoutCreatedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -25814,7 +27214,10 @@ export type UserUpdateWithoutUpdatedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -25828,6 +27231,7 @@ export type UserUpdateWithoutUpdatedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -25918,7 +27322,10 @@ export type UserUncheckedUpdateWithoutUpdatedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -25932,6 +27339,7 @@ export type UserUncheckedUpdateWithoutUpdatedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -26032,7 +27440,10 @@ export type UserUpdateWithoutDeletedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -26046,6 +27457,7 @@ export type UserUpdateWithoutDeletedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -26136,7 +27548,10 @@ export type UserUncheckedUpdateWithoutDeletedRoomAssetsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -26150,6 +27565,7 @@ export type UserUncheckedUpdateWithoutDeletedRoomAssetsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -26239,7 +27655,10 @@ export type UserCreateWithoutCreatedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -26253,6 +27672,7 @@ export type UserCreateWithoutCreatedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -26343,7 +27763,10 @@ export type UserUncheckedCreateWithoutCreatedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -26357,6 +27780,7 @@ export type UserUncheckedCreateWithoutCreatedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -26451,7 +27875,10 @@ export type UserCreateWithoutUpdatedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -26465,6 +27892,7 @@ export type UserCreateWithoutUpdatedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -26555,7 +27983,10 @@ export type UserUncheckedCreateWithoutUpdatedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -26569,6 +28000,7 @@ export type UserUncheckedCreateWithoutUpdatedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -26663,7 +28095,10 @@ export type UserCreateWithoutDeletedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -26677,6 +28112,7 @@ export type UserCreateWithoutDeletedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -26767,7 +28203,10 @@ export type UserUncheckedCreateWithoutDeletedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -26781,6 +28220,7 @@ export type UserUncheckedCreateWithoutDeletedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -26886,7 +28326,10 @@ export type UserUpdateWithoutCreatedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -26900,6 +28343,7 @@ export type UserUpdateWithoutCreatedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -26990,7 +28434,10 @@ export type UserUncheckedUpdateWithoutCreatedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -27004,6 +28451,7 @@ export type UserUncheckedUpdateWithoutCreatedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -27104,7 +28552,10 @@ export type UserUpdateWithoutUpdatedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -27118,6 +28569,7 @@ export type UserUpdateWithoutUpdatedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -27208,7 +28660,10 @@ export type UserUncheckedUpdateWithoutUpdatedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -27222,6 +28677,7 @@ export type UserUncheckedUpdateWithoutUpdatedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -27322,7 +28778,10 @@ export type UserUpdateWithoutDeletedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -27336,6 +28795,7 @@ export type UserUpdateWithoutDeletedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -27426,7 +28886,10 @@ export type UserUncheckedUpdateWithoutDeletedHandoverRecordsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -27440,6 +28903,7 @@ export type UserUncheckedUpdateWithoutDeletedHandoverRecordsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -27529,7 +28993,10 @@ export type UserCreateWithoutCreatedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -27543,6 +29010,7 @@ export type UserCreateWithoutCreatedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -27633,7 +29101,10 @@ export type UserUncheckedCreateWithoutCreatedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -27647,6 +29118,7 @@ export type UserUncheckedCreateWithoutCreatedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -27741,7 +29213,10 @@ export type UserCreateWithoutUpdatedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -27755,6 +29230,7 @@ export type UserCreateWithoutUpdatedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -27845,7 +29321,10 @@ export type UserUncheckedCreateWithoutUpdatedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -27859,6 +29338,7 @@ export type UserUncheckedCreateWithoutUpdatedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -27953,7 +29433,10 @@ export type UserCreateWithoutDeletedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -27967,6 +29450,7 @@ export type UserCreateWithoutDeletedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -28057,7 +29541,10 @@ export type UserUncheckedCreateWithoutDeletedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -28071,6 +29558,7 @@ export type UserUncheckedCreateWithoutDeletedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -28176,7 +29664,10 @@ export type UserUpdateWithoutCreatedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -28190,6 +29681,7 @@ export type UserUpdateWithoutCreatedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -28280,7 +29772,10 @@ export type UserUncheckedUpdateWithoutCreatedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -28294,6 +29789,7 @@ export type UserUncheckedUpdateWithoutCreatedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -28394,7 +29890,10 @@ export type UserUpdateWithoutUpdatedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -28408,6 +29907,7 @@ export type UserUpdateWithoutUpdatedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -28498,7 +29998,10 @@ export type UserUncheckedUpdateWithoutUpdatedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -28512,6 +30015,7 @@ export type UserUncheckedUpdateWithoutUpdatedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -28612,7 +30116,10 @@ export type UserUpdateWithoutDeletedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -28626,6 +30133,7 @@ export type UserUpdateWithoutDeletedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -28716,7 +30224,10 @@ export type UserUncheckedUpdateWithoutDeletedMeterReadingsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -28730,6 +30241,7 @@ export type UserUncheckedUpdateWithoutDeletedMeterReadingsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -28818,7 +30330,10 @@ export type UserCreateWithoutUploadedOcrJobsInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutRenterInput
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -28832,6 +30347,7 @@ export type UserCreateWithoutUploadedOcrJobsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -28922,7 +30438,10 @@ export type UserUncheckedCreateWithoutUploadedOcrJobsInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRenterInput
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -28936,6 +30455,7 @@ export type UserUncheckedCreateWithoutUploadedOcrJobsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -29041,7 +30561,10 @@ export type UserUpdateWithoutUploadedOcrJobsInput = {
   contracts?: Prisma.ContractUpdateManyWithoutRenterNestedInput
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -29055,6 +30578,7 @@ export type UserUpdateWithoutUploadedOcrJobsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -29145,7 +30669,10 @@ export type UserUncheckedUpdateWithoutUploadedOcrJobsInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRenterNestedInput
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -29159,6 +30686,7 @@ export type UserUncheckedUpdateWithoutUploadedOcrJobsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -29249,7 +30777,10 @@ export type UserCreateWithoutCreatedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -29263,6 +30794,7 @@ export type UserCreateWithoutCreatedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -29353,7 +30885,10 @@ export type UserUncheckedCreateWithoutCreatedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -29367,6 +30902,7 @@ export type UserUncheckedCreateWithoutCreatedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -29461,7 +30997,10 @@ export type UserCreateWithoutUpdatedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -29475,6 +31014,7 @@ export type UserCreateWithoutUpdatedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -29565,7 +31105,10 @@ export type UserUncheckedCreateWithoutUpdatedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -29579,6 +31122,7 @@ export type UserUncheckedCreateWithoutUpdatedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -29673,7 +31217,10 @@ export type UserCreateWithoutDeletedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -29687,6 +31234,7 @@ export type UserCreateWithoutDeletedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -29777,7 +31325,10 @@ export type UserUncheckedCreateWithoutDeletedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -29791,6 +31342,7 @@ export type UserUncheckedCreateWithoutDeletedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -29896,7 +31448,10 @@ export type UserUpdateWithoutCreatedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -29910,6 +31465,7 @@ export type UserUpdateWithoutCreatedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -30000,7 +31556,10 @@ export type UserUncheckedUpdateWithoutCreatedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -30014,6 +31573,7 @@ export type UserUncheckedUpdateWithoutCreatedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -30114,7 +31674,10 @@ export type UserUpdateWithoutUpdatedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -30128,6 +31691,7 @@ export type UserUpdateWithoutUpdatedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -30218,7 +31782,10 @@ export type UserUncheckedUpdateWithoutUpdatedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -30232,6 +31799,7 @@ export type UserUncheckedUpdateWithoutUpdatedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -30332,7 +31900,10 @@ export type UserUpdateWithoutDeletedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -30346,6 +31917,7 @@ export type UserUpdateWithoutDeletedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -30436,7 +32008,10 @@ export type UserUncheckedUpdateWithoutDeletedInvoiceBatchsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -30450,6 +32025,7 @@ export type UserUncheckedUpdateWithoutDeletedInvoiceBatchsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -30538,7 +32114,10 @@ export type UserCreateWithoutInvoicesInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutRenterInput
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -30552,6 +32131,7 @@ export type UserCreateWithoutInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -30642,7 +32222,10 @@ export type UserUncheckedCreateWithoutInvoicesInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRenterInput
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -30656,6 +32239,7 @@ export type UserUncheckedCreateWithoutInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -30751,7 +32335,10 @@ export type UserCreateWithoutCreatedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -30765,6 +32352,7 @@ export type UserCreateWithoutCreatedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -30855,7 +32443,10 @@ export type UserUncheckedCreateWithoutCreatedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -30869,6 +32460,7 @@ export type UserUncheckedCreateWithoutCreatedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -30963,7 +32555,10 @@ export type UserCreateWithoutUpdatedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -30977,6 +32572,7 @@ export type UserCreateWithoutUpdatedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -31067,7 +32663,10 @@ export type UserUncheckedCreateWithoutUpdatedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -31081,6 +32680,7 @@ export type UserUncheckedCreateWithoutUpdatedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -31175,7 +32775,10 @@ export type UserCreateWithoutDeletedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -31189,6 +32792,7 @@ export type UserCreateWithoutDeletedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -31279,7 +32883,10 @@ export type UserUncheckedCreateWithoutDeletedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -31293,6 +32900,7 @@ export type UserUncheckedCreateWithoutDeletedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -31397,7 +33005,10 @@ export type UserUpdateWithoutInvoicesInput = {
   contracts?: Prisma.ContractUpdateManyWithoutRenterNestedInput
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -31411,6 +33022,7 @@ export type UserUpdateWithoutInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -31501,7 +33113,10 @@ export type UserUncheckedUpdateWithoutInvoicesInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRenterNestedInput
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -31515,6 +33130,7 @@ export type UserUncheckedUpdateWithoutInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -31616,7 +33232,10 @@ export type UserUpdateWithoutCreatedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -31630,6 +33249,7 @@ export type UserUpdateWithoutCreatedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -31720,7 +33340,10 @@ export type UserUncheckedUpdateWithoutCreatedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -31734,6 +33357,7 @@ export type UserUncheckedUpdateWithoutCreatedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -31834,7 +33458,10 @@ export type UserUpdateWithoutUpdatedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -31848,6 +33475,7 @@ export type UserUpdateWithoutUpdatedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -31938,7 +33566,10 @@ export type UserUncheckedUpdateWithoutUpdatedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -31952,6 +33583,7 @@ export type UserUncheckedUpdateWithoutUpdatedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -32052,7 +33684,10 @@ export type UserUpdateWithoutDeletedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -32066,6 +33701,7 @@ export type UserUpdateWithoutDeletedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -32156,7 +33792,10 @@ export type UserUncheckedUpdateWithoutDeletedInvoicesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -32170,6 +33809,7 @@ export type UserUncheckedUpdateWithoutDeletedInvoicesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -32184,6 +33824,452 @@ export type UserUncheckedUpdateWithoutDeletedInvoicesInput = {
   deletedContracts?: Prisma.ContractUncheckedUpdateManyWithoutDeletedByNestedInput
   createdInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserCreateWithoutRenterDebtsInput = {
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
+  assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
+  createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserUncheckedCreateWithoutRenterDebtsInput = {
+  id?: number
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileUncheckedCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
+  assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
+  createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserCreateOrConnectWithoutRenterDebtsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRenterDebtsInput, Prisma.UserUncheckedCreateWithoutRenterDebtsInput>
+}
+
+export type UserUpsertWithoutRenterDebtsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRenterDebtsInput, Prisma.UserUncheckedUpdateWithoutRenterDebtsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRenterDebtsInput, Prisma.UserUncheckedCreateWithoutRenterDebtsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRenterDebtsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRenterDebtsInput, Prisma.UserUncheckedUpdateWithoutRenterDebtsInput>
+}
+
+export type UserUpdateWithoutRenterDebtsInput = {
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
+  assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUpdateManyWithoutDeletedByNestedInput
+  createdContracts?: Prisma.ContractUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUpdateManyWithoutDeletedByNestedInput
+  createdPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRenterDebtsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUncheckedUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
+  assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContracts?: Prisma.ContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutDeletedByNestedInput
   createdPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -32259,6 +34345,9 @@ export type UserCreateWithoutPaymentsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -32272,6 +34361,7 @@ export type UserCreateWithoutPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -32363,6 +34453,9 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -32376,6 +34469,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -32443,6 +34537,446 @@ export type UserCreateOrConnectWithoutPaymentsInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
 }
 
+export type UserCreateWithoutApprovedPaymentsInput = {
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
+  assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
+  createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserUncheckedCreateWithoutApprovedPaymentsInput = {
+  id?: number
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileUncheckedCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
+  assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
+  createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserCreateOrConnectWithoutApprovedPaymentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutApprovedPaymentsInput, Prisma.UserUncheckedCreateWithoutApprovedPaymentsInput>
+}
+
+export type UserCreateWithoutRejectedPaymentsInput = {
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
+  createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserUncheckedCreateWithoutRejectedPaymentsInput = {
+  id?: number
+  fullName: string
+  email: string
+  phone?: string | null
+  passwordHash: string
+  systemRole?: string | null
+  avatarUrl?: string | null
+  totpSecret?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutOwnerInput
+  tenantMembers?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutUserInput
+  renterProfile?: Prisma.RenterProfileUncheckedCreateNestedOneWithoutUserInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRenterInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutUserInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutUserInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRenterInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutAssignedStaffInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRenterInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRenterInput
+  contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
+  ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutReviewerInput
+  reportedItems?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  handledReports?: Prisma.ReportUncheckedCreateNestedManyWithoutHandledByUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
+  createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPropertys?: Prisma.PropertyUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRooms?: Prisma.RoomUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContracts?: Prisma.ContractUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutDeletedByInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutDeletedByInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutDeletedByInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutDeletedByInput
+  createdRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedRoles?: Prisma.RoleUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPermissions?: Prisma.PermissionUncheckedCreateNestedManyWithoutDeletedByInput
+  createdPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedPlans?: Prisma.PlanUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAmenitys?: Prisma.AmenityUncheckedCreateNestedManyWithoutDeletedByInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserCreateOrConnectWithoutRejectedPaymentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRejectedPaymentsInput, Prisma.UserUncheckedCreateWithoutRejectedPaymentsInput>
+}
+
 export type UserCreateWithoutCreatedPaymentsInput = {
   fullName: string
   email: string
@@ -32471,7 +35005,10 @@ export type UserCreateWithoutCreatedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -32485,6 +35022,7 @@ export type UserCreateWithoutCreatedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -32575,7 +35113,10 @@ export type UserUncheckedCreateWithoutCreatedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -32589,6 +35130,7 @@ export type UserUncheckedCreateWithoutCreatedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -32683,7 +35225,10 @@ export type UserCreateWithoutUpdatedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -32697,6 +35242,7 @@ export type UserCreateWithoutUpdatedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -32787,7 +35333,10 @@ export type UserUncheckedCreateWithoutUpdatedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -32801,6 +35350,7 @@ export type UserUncheckedCreateWithoutUpdatedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -32895,7 +35445,10 @@ export type UserCreateWithoutDeletedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -32909,6 +35462,7 @@ export type UserCreateWithoutDeletedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -32999,7 +35553,10 @@ export type UserUncheckedCreateWithoutDeletedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -33013,6 +35570,7 @@ export type UserUncheckedCreateWithoutDeletedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -33118,6 +35676,9 @@ export type UserUpdateWithoutPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -33131,6 +35692,7 @@ export type UserUpdateWithoutPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -33222,6 +35784,9 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -33235,6 +35800,459 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContracts?: Prisma.ContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUpsertWithoutApprovedPaymentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutApprovedPaymentsInput, Prisma.UserUncheckedUpdateWithoutApprovedPaymentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutApprovedPaymentsInput, Prisma.UserUncheckedCreateWithoutApprovedPaymentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutApprovedPaymentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutApprovedPaymentsInput, Prisma.UserUncheckedUpdateWithoutApprovedPaymentsInput>
+}
+
+export type UserUpdateWithoutApprovedPaymentsInput = {
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
+  assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUpdateManyWithoutDeletedByNestedInput
+  createdContracts?: Prisma.ContractUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUpdateManyWithoutDeletedByNestedInput
+  createdPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutApprovedPaymentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUncheckedUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
+  assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContracts?: Prisma.ContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPayments?: Prisma.PaymentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUncheckedUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUncheckedUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUpsertWithoutRejectedPaymentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRejectedPaymentsInput, Prisma.UserUncheckedUpdateWithoutRejectedPaymentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRejectedPaymentsInput, Prisma.UserUncheckedCreateWithoutRejectedPaymentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRejectedPaymentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRejectedPaymentsInput, Prisma.UserUncheckedUpdateWithoutRejectedPaymentsInput>
+}
+
+export type UserUpdateWithoutRejectedPaymentsInput = {
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
+  createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
+  updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
+  deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
+  createdPropertys?: Prisma.PropertyUpdateManyWithoutCreatedByNestedInput
+  updatedPropertys?: Prisma.PropertyUpdateManyWithoutUpdatedByNestedInput
+  deletedPropertys?: Prisma.PropertyUpdateManyWithoutDeletedByNestedInput
+  createdRooms?: Prisma.RoomUpdateManyWithoutCreatedByNestedInput
+  updatedRooms?: Prisma.RoomUpdateManyWithoutUpdatedByNestedInput
+  deletedRooms?: Prisma.RoomUpdateManyWithoutDeletedByNestedInput
+  createdContracts?: Prisma.ContractUpdateManyWithoutCreatedByNestedInput
+  updatedContracts?: Prisma.ContractUpdateManyWithoutUpdatedByNestedInput
+  deletedContracts?: Prisma.ContractUpdateManyWithoutDeletedByNestedInput
+  createdInvoices?: Prisma.InvoiceUpdateManyWithoutCreatedByNestedInput
+  updatedInvoices?: Prisma.InvoiceUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoices?: Prisma.InvoiceUpdateManyWithoutDeletedByNestedInput
+  createdPayments?: Prisma.PaymentUpdateManyWithoutCreatedByNestedInput
+  updatedPayments?: Prisma.PaymentUpdateManyWithoutUpdatedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  deletedTickets?: Prisma.TicketUpdateManyWithoutDeletedByNestedInput
+  createdRoomAssets?: Prisma.RoomAssetUpdateManyWithoutCreatedByNestedInput
+  updatedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomAssets?: Prisma.RoomAssetUpdateManyWithoutDeletedByNestedInput
+  createdHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutCreatedByNestedInput
+  updatedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutUpdatedByNestedInput
+  deletedHandoverRecords?: Prisma.HandoverRecordUpdateManyWithoutDeletedByNestedInput
+  createdMeterReadings?: Prisma.MeterReadingUpdateManyWithoutCreatedByNestedInput
+  updatedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutUpdatedByNestedInput
+  deletedMeterReadings?: Prisma.MeterReadingUpdateManyWithoutDeletedByNestedInput
+  createdContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutCreatedByNestedInput
+  updatedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTemplates?: Prisma.ContractTemplateUpdateManyWithoutDeletedByNestedInput
+  createdRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutCreatedByNestedInput
+  updatedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutUpdatedByNestedInput
+  deletedRoomViewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutDeletedByNestedInput
+  createdRentalRequests?: Prisma.RentalRequestUpdateManyWithoutCreatedByNestedInput
+  updatedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedRentalRequests?: Prisma.RentalRequestUpdateManyWithoutDeletedByNestedInput
+  createdInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutCreatedByNestedInput
+  updatedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutUpdatedByNestedInput
+  deletedInvoiceBatchs?: Prisma.InvoiceBatchUpdateManyWithoutDeletedByNestedInput
+  createdContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutCreatedByNestedInput
+  updatedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutUpdatedByNestedInput
+  deletedContractTerminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutDeletedByNestedInput
+  createdRoles?: Prisma.RoleUpdateManyWithoutCreatedByNestedInput
+  updatedRoles?: Prisma.RoleUpdateManyWithoutUpdatedByNestedInput
+  deletedRoles?: Prisma.RoleUpdateManyWithoutDeletedByNestedInput
+  createdPermissions?: Prisma.PermissionUpdateManyWithoutCreatedByNestedInput
+  updatedPermissions?: Prisma.PermissionUpdateManyWithoutUpdatedByNestedInput
+  deletedPermissions?: Prisma.PermissionUpdateManyWithoutDeletedByNestedInput
+  createdPlans?: Prisma.PlanUpdateManyWithoutCreatedByNestedInput
+  updatedPlans?: Prisma.PlanUpdateManyWithoutUpdatedByNestedInput
+  deletedPlans?: Prisma.PlanUpdateManyWithoutDeletedByNestedInput
+  createdAmenitys?: Prisma.AmenityUpdateManyWithoutCreatedByNestedInput
+  updatedAmenitys?: Prisma.AmenityUpdateManyWithoutUpdatedByNestedInput
+  deletedAmenitys?: Prisma.AmenityUpdateManyWithoutDeletedByNestedInput
+  createdAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutCreatedByNestedInput
+  updatedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutUpdatedByNestedInput
+  deletedAssetCategorys?: Prisma.AssetCategoryUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRejectedPaymentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  systemRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totpSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownedTenants?: Prisma.TenantUncheckedUpdateManyWithoutOwnerNestedInput
+  tenantMembers?: Prisma.TenantMemberUncheckedUpdateManyWithoutUserNestedInput
+  renterProfile?: Prisma.RenterProfileUncheckedUpdateOneWithoutUserNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRenterNestedInput
+  roomViewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutUserNestedInput
+  favoriteRooms?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutUserNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRenterNestedInput
+  assignedAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutAssignedStaffNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRenterNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRenterNestedInput
+  contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
+  uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
+  ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
+  ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
+  conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  reportedItems?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  handledReports?: Prisma.ReportUncheckedUpdateManyWithoutHandledByUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -33336,7 +36354,10 @@ export type UserUpdateWithoutCreatedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -33350,6 +36371,7 @@ export type UserUpdateWithoutCreatedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -33440,7 +36462,10 @@ export type UserUncheckedUpdateWithoutCreatedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -33454,6 +36479,7 @@ export type UserUncheckedUpdateWithoutCreatedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -33554,7 +36580,10 @@ export type UserUpdateWithoutUpdatedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -33568,6 +36597,7 @@ export type UserUpdateWithoutUpdatedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -33658,7 +36688,10 @@ export type UserUncheckedUpdateWithoutUpdatedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -33672,6 +36705,7 @@ export type UserUncheckedUpdateWithoutUpdatedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -33772,7 +36806,10 @@ export type UserUpdateWithoutDeletedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -33786,6 +36823,7 @@ export type UserUpdateWithoutDeletedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -33876,7 +36914,10 @@ export type UserUncheckedUpdateWithoutDeletedPaymentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -33890,6 +36931,7 @@ export type UserUncheckedUpdateWithoutDeletedPaymentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -33979,7 +37021,10 @@ export type UserCreateWithoutAssignedTicketsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
@@ -33992,6 +37037,7 @@ export type UserCreateWithoutAssignedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -34083,7 +37129,10 @@ export type UserUncheckedCreateWithoutAssignedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
@@ -34096,6 +37145,7 @@ export type UserUncheckedCreateWithoutAssignedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -34191,7 +37241,10 @@ export type UserCreateWithoutCreatedTicketsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -34205,6 +37258,7 @@ export type UserCreateWithoutCreatedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -34295,7 +37349,10 @@ export type UserUncheckedCreateWithoutCreatedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -34309,6 +37366,7 @@ export type UserUncheckedCreateWithoutCreatedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -34403,7 +37461,10 @@ export type UserCreateWithoutUpdatedTicketsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -34417,6 +37478,7 @@ export type UserCreateWithoutUpdatedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -34507,7 +37569,10 @@ export type UserUncheckedCreateWithoutUpdatedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -34521,6 +37586,7 @@ export type UserUncheckedCreateWithoutUpdatedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -34615,7 +37681,10 @@ export type UserCreateWithoutDeletedTicketsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -34629,6 +37698,7 @@ export type UserCreateWithoutDeletedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -34719,7 +37789,10 @@ export type UserUncheckedCreateWithoutDeletedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -34733,6 +37806,7 @@ export type UserUncheckedCreateWithoutDeletedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -34838,7 +37912,10 @@ export type UserUpdateWithoutAssignedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
@@ -34851,6 +37928,7 @@ export type UserUpdateWithoutAssignedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -34942,7 +38020,10 @@ export type UserUncheckedUpdateWithoutAssignedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
@@ -34955,6 +38036,7 @@ export type UserUncheckedUpdateWithoutAssignedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -35056,7 +38138,10 @@ export type UserUpdateWithoutCreatedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -35070,6 +38155,7 @@ export type UserUpdateWithoutCreatedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -35160,7 +38246,10 @@ export type UserUncheckedUpdateWithoutCreatedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -35174,6 +38263,7 @@ export type UserUncheckedUpdateWithoutCreatedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -35274,7 +38364,10 @@ export type UserUpdateWithoutUpdatedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -35288,6 +38381,7 @@ export type UserUpdateWithoutUpdatedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -35378,7 +38472,10 @@ export type UserUncheckedUpdateWithoutUpdatedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -35392,6 +38489,7 @@ export type UserUncheckedUpdateWithoutUpdatedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -35492,7 +38590,10 @@ export type UserUpdateWithoutDeletedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -35506,6 +38607,7 @@ export type UserUpdateWithoutDeletedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -35596,7 +38698,10 @@ export type UserUncheckedUpdateWithoutDeletedTicketsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -35610,6 +38715,7 @@ export type UserUncheckedUpdateWithoutDeletedTicketsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -35699,7 +38805,10 @@ export type UserCreateWithoutTicketAttachmentsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
@@ -35712,6 +38821,7 @@ export type UserCreateWithoutTicketAttachmentsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -35803,7 +38913,10 @@ export type UserUncheckedCreateWithoutTicketAttachmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
@@ -35816,6 +38929,7 @@ export type UserUncheckedCreateWithoutTicketAttachmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -35922,7 +39036,10 @@ export type UserUpdateWithoutTicketAttachmentsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
@@ -35935,6 +39052,7 @@ export type UserUpdateWithoutTicketAttachmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -36026,7 +39144,10 @@ export type UserUncheckedUpdateWithoutTicketAttachmentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
@@ -36039,6 +39160,7 @@ export type UserUncheckedUpdateWithoutTicketAttachmentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -36129,7 +39251,10 @@ export type UserCreateWithoutTicketCommentsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
@@ -36142,6 +39267,7 @@ export type UserCreateWithoutTicketCommentsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -36233,7 +39359,10 @@ export type UserUncheckedCreateWithoutTicketCommentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
@@ -36246,6 +39375,7 @@ export type UserUncheckedCreateWithoutTicketCommentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -36352,7 +39482,10 @@ export type UserUpdateWithoutTicketCommentsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
@@ -36365,6 +39498,7 @@ export type UserUpdateWithoutTicketCommentsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -36456,7 +39590,10 @@ export type UserUncheckedUpdateWithoutTicketCommentsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
@@ -36469,6 +39606,7 @@ export type UserUncheckedUpdateWithoutTicketCommentsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -36559,7 +39697,10 @@ export type UserCreateWithoutConversationMembersInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -36572,6 +39713,7 @@ export type UserCreateWithoutConversationMembersInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -36663,7 +39805,10 @@ export type UserUncheckedCreateWithoutConversationMembersInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -36676,6 +39821,7 @@ export type UserUncheckedCreateWithoutConversationMembersInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -36782,7 +39928,10 @@ export type UserUpdateWithoutConversationMembersInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -36795,6 +39944,7 @@ export type UserUpdateWithoutConversationMembersInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -36886,7 +40036,10 @@ export type UserUncheckedUpdateWithoutConversationMembersInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -36899,6 +40052,7 @@ export type UserUncheckedUpdateWithoutConversationMembersInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -36989,7 +40143,10 @@ export type UserCreateWithoutSentMessagesInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -37002,6 +40159,7 @@ export type UserCreateWithoutSentMessagesInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -37093,7 +40251,10 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -37106,6 +40267,7 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -37212,7 +40374,10 @@ export type UserUpdateWithoutSentMessagesInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -37225,6 +40390,7 @@ export type UserUpdateWithoutSentMessagesInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -37316,7 +40482,10 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -37329,6 +40498,7 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -37419,7 +40589,10 @@ export type UserCreateWithoutReviewsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -37432,6 +40605,7 @@ export type UserCreateWithoutReviewsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -37523,7 +40697,10 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -37536,6 +40713,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -37642,7 +40820,10 @@ export type UserUpdateWithoutReviewsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -37655,6 +40836,7 @@ export type UserUpdateWithoutReviewsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -37746,7 +40928,10 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -37759,6 +40944,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -37849,7 +41035,10 @@ export type UserCreateWithoutReportedItemsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -37862,6 +41051,7 @@ export type UserCreateWithoutReportedItemsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -37953,7 +41143,10 @@ export type UserUncheckedCreateWithoutReportedItemsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -37966,6 +41159,7 @@ export type UserUncheckedCreateWithoutReportedItemsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -38061,7 +41255,10 @@ export type UserCreateWithoutHandledReportsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -38074,6 +41271,7 @@ export type UserCreateWithoutHandledReportsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -38165,7 +41363,10 @@ export type UserUncheckedCreateWithoutHandledReportsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -38178,6 +41379,7 @@ export type UserUncheckedCreateWithoutHandledReportsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -38284,7 +41486,10 @@ export type UserUpdateWithoutReportedItemsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -38297,6 +41502,7 @@ export type UserUpdateWithoutReportedItemsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -38388,7 +41594,10 @@ export type UserUncheckedUpdateWithoutReportedItemsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -38401,6 +41610,7 @@ export type UserUncheckedUpdateWithoutReportedItemsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -38502,7 +41712,10 @@ export type UserUpdateWithoutHandledReportsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -38515,6 +41728,7 @@ export type UserUpdateWithoutHandledReportsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -38606,7 +41820,10 @@ export type UserUncheckedUpdateWithoutHandledReportsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -38619,6 +41836,7 @@ export type UserUncheckedUpdateWithoutHandledReportsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -38709,7 +41927,10 @@ export type UserCreateWithoutNotificationsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -38722,6 +41943,7 @@ export type UserCreateWithoutNotificationsInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -38813,7 +42035,10 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -38826,6 +42051,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -38932,7 +42158,10 @@ export type UserUpdateWithoutNotificationsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -38945,6 +42174,7 @@ export type UserUpdateWithoutNotificationsInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -39036,7 +42266,10 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -39049,6 +42282,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -39139,7 +42373,10 @@ export type UserCreateWithoutDeviceTokensInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -39152,6 +42389,7 @@ export type UserCreateWithoutDeviceTokensInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -39243,7 +42481,10 @@ export type UserUncheckedCreateWithoutDeviceTokensInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -39256,6 +42497,7 @@ export type UserUncheckedCreateWithoutDeviceTokensInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -39362,7 +42604,10 @@ export type UserUpdateWithoutDeviceTokensInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -39375,6 +42620,7 @@ export type UserUpdateWithoutDeviceTokensInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -39466,7 +42712,10 @@ export type UserUncheckedUpdateWithoutDeviceTokensInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -39479,6 +42728,7 @@ export type UserUncheckedUpdateWithoutDeviceTokensInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -39569,7 +42819,10 @@ export type UserCreateWithoutAuditLogsInput = {
   contractMembers?: Prisma.ContractMemberCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentCreateNestedManyWithoutUserInput
@@ -39582,6 +42835,7 @@ export type UserCreateWithoutAuditLogsInput = {
   deviceTokens?: Prisma.DeviceTokenCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceCreateNestedManyWithoutUserInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantCreateNestedManyWithoutDeletedByInput
@@ -39673,7 +42927,10 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutUserInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutUploadedByUserInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRenterInput
+  renterDebts?: Prisma.DebtUncheckedCreateNestedManyWithoutRenterInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  approvedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutApprovedByInput
+  rejectedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRejectedByInput
   assignedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutAssignedToUserInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedCreateNestedManyWithoutUploadedByUserInput
   ticketComments?: Prisma.TicketCommentUncheckedCreateNestedManyWithoutUserInput
@@ -39686,6 +42943,7 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutUserInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutActorInput
   createdTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutCreatedByInput
   updatedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutUpdatedByInput
   deletedTenants?: Prisma.TenantUncheckedCreateNestedManyWithoutDeletedByInput
@@ -39792,7 +43050,10 @@ export type UserUpdateWithoutAuditLogsInput = {
   contractMembers?: Prisma.ContractMemberUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUpdateManyWithoutUserNestedInput
@@ -39805,6 +43066,7 @@ export type UserUpdateWithoutAuditLogsInput = {
   deviceTokens?: Prisma.DeviceTokenUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUpdateManyWithoutUserNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUpdateManyWithoutDeletedByNestedInput
@@ -39896,7 +43158,10 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   contractMembers?: Prisma.ContractMemberUncheckedUpdateManyWithoutUserNestedInput
   uploadedOcrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutUploadedByUserNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRenterNestedInput
+  renterDebts?: Prisma.DebtUncheckedUpdateManyWithoutRenterNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  approvedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutApprovedByNestedInput
+  rejectedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRejectedByNestedInput
   assignedTickets?: Prisma.TicketUncheckedUpdateManyWithoutAssignedToUserNestedInput
   ticketAttachments?: Prisma.TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserNestedInput
   ticketComments?: Prisma.TicketCommentUncheckedUpdateManyWithoutUserNestedInput
@@ -39909,6 +43174,7 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   deviceTokens?: Prisma.DeviceTokenUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   devices?: Prisma.DeviceUncheckedUpdateManyWithoutUserNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutActorNestedInput
   createdTenants?: Prisma.TenantUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedTenants?: Prisma.TenantUncheckedUpdateManyWithoutUpdatedByNestedInput
   deletedTenants?: Prisma.TenantUncheckedUpdateManyWithoutDeletedByNestedInput
@@ -39989,7 +43255,10 @@ export type UserCountOutputType = {
   contractMembers: number
   uploadedOcrJobs: number
   invoices: number
+  renterDebts: number
   payments: number
+  approvedPayments: number
+  rejectedPayments: number
   assignedTickets: number
   ticketAttachments: number
   ticketComments: number
@@ -40003,6 +43272,7 @@ export type UserCountOutputType = {
   refreshTokens: number
   devices: number
   auditLogs: number
+  marketplaceModerations: number
   createdTenants: number
   updatedTenants: number
   deletedTenants: number
@@ -40078,7 +43348,10 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   contractMembers?: boolean | UserCountOutputTypeCountContractMembersArgs
   uploadedOcrJobs?: boolean | UserCountOutputTypeCountUploadedOcrJobsArgs
   invoices?: boolean | UserCountOutputTypeCountInvoicesArgs
+  renterDebts?: boolean | UserCountOutputTypeCountRenterDebtsArgs
   payments?: boolean | UserCountOutputTypeCountPaymentsArgs
+  approvedPayments?: boolean | UserCountOutputTypeCountApprovedPaymentsArgs
+  rejectedPayments?: boolean | UserCountOutputTypeCountRejectedPaymentsArgs
   assignedTickets?: boolean | UserCountOutputTypeCountAssignedTicketsArgs
   ticketAttachments?: boolean | UserCountOutputTypeCountTicketAttachmentsArgs
   ticketComments?: boolean | UserCountOutputTypeCountTicketCommentsArgs
@@ -40092,6 +43365,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
   devices?: boolean | UserCountOutputTypeCountDevicesArgs
   auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
+  marketplaceModerations?: boolean | UserCountOutputTypeCountMarketplaceModerationsArgs
   createdTenants?: boolean | UserCountOutputTypeCountCreatedTenantsArgs
   updatedTenants?: boolean | UserCountOutputTypeCountUpdatedTenantsArgs
   deletedTenants?: boolean | UserCountOutputTypeCountDeletedTenantsArgs
@@ -40251,7 +43525,28 @@ export type UserCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountRenterDebtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DebtWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountApprovedPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRejectedPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PaymentWhereInput
 }
 
@@ -40344,6 +43639,13 @@ export type UserCountOutputTypeCountDevicesArgs<ExtArgs extends runtime.Types.Ex
  */
 export type UserCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AuditLogWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMarketplaceModerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MarketplaceModerationWhereInput
 }
 
 /**
@@ -40796,7 +44098,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   contractMembers?: boolean | Prisma.User$contractMembersArgs<ExtArgs>
   uploadedOcrJobs?: boolean | Prisma.User$uploadedOcrJobsArgs<ExtArgs>
   invoices?: boolean | Prisma.User$invoicesArgs<ExtArgs>
+  renterDebts?: boolean | Prisma.User$renterDebtsArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
+  approvedPayments?: boolean | Prisma.User$approvedPaymentsArgs<ExtArgs>
+  rejectedPayments?: boolean | Prisma.User$rejectedPaymentsArgs<ExtArgs>
   assignedTickets?: boolean | Prisma.User$assignedTicketsArgs<ExtArgs>
   ticketAttachments?: boolean | Prisma.User$ticketAttachmentsArgs<ExtArgs>
   ticketComments?: boolean | Prisma.User$ticketCommentsArgs<ExtArgs>
@@ -40810,6 +44115,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   devices?: boolean | Prisma.User$devicesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
+  marketplaceModerations?: boolean | Prisma.User$marketplaceModerationsArgs<ExtArgs>
   createdTenants?: boolean | Prisma.User$createdTenantsArgs<ExtArgs>
   updatedTenants?: boolean | Prisma.User$updatedTenantsArgs<ExtArgs>
   deletedTenants?: boolean | Prisma.User$deletedTenantsArgs<ExtArgs>
@@ -40942,7 +44248,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   contractMembers?: boolean | Prisma.User$contractMembersArgs<ExtArgs>
   uploadedOcrJobs?: boolean | Prisma.User$uploadedOcrJobsArgs<ExtArgs>
   invoices?: boolean | Prisma.User$invoicesArgs<ExtArgs>
+  renterDebts?: boolean | Prisma.User$renterDebtsArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
+  approvedPayments?: boolean | Prisma.User$approvedPaymentsArgs<ExtArgs>
+  rejectedPayments?: boolean | Prisma.User$rejectedPaymentsArgs<ExtArgs>
   assignedTickets?: boolean | Prisma.User$assignedTicketsArgs<ExtArgs>
   ticketAttachments?: boolean | Prisma.User$ticketAttachmentsArgs<ExtArgs>
   ticketComments?: boolean | Prisma.User$ticketCommentsArgs<ExtArgs>
@@ -40956,6 +44265,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   devices?: boolean | Prisma.User$devicesArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
+  marketplaceModerations?: boolean | Prisma.User$marketplaceModerationsArgs<ExtArgs>
   createdTenants?: boolean | Prisma.User$createdTenantsArgs<ExtArgs>
   updatedTenants?: boolean | Prisma.User$updatedTenantsArgs<ExtArgs>
   deletedTenants?: boolean | Prisma.User$deletedTenantsArgs<ExtArgs>
@@ -41077,9 +44387,21 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
      */
     invoices: Prisma.$InvoicePayload<ExtArgs>[]
     /**
+     * Danh sách các công nợ của khách thuê này
+     */
+    renterDebts: Prisma.$DebtPayload<ExtArgs>[]
+    /**
      * Danh sách các thanh toán do khách thuê này thực hiện
      */
     payments: Prisma.$PaymentPayload<ExtArgs>[]
+    /**
+     * Danh sách các thanh toán được người dùng này duyệt
+     */
+    approvedPayments: Prisma.$PaymentPayload<ExtArgs>[]
+    /**
+     * Danh sách các thanh toán bị người dùng này từ chối
+     */
+    rejectedPayments: Prisma.$PaymentPayload<ExtArgs>[]
     /**
      * Danh sách các sự cố/ticket được phân công cho người dùng này xử lý
      */
@@ -41132,6 +44454,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
      * Danh sách các audit log do người dùng này thực hiện
      */
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
+    /**
+     * Lịch sử kiểm duyệt marketplace do người dùng này thực hiện
+     */
+    marketplaceModerations: Prisma.$MarketplaceModerationPayload<ExtArgs>[]
     createdTenants: Prisma.$TenantPayload<ExtArgs>[]
     updatedTenants: Prisma.$TenantPayload<ExtArgs>[]
     deletedTenants: Prisma.$TenantPayload<ExtArgs>[]
@@ -41661,7 +44987,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   contractMembers<T extends Prisma.User$contractMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$contractMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContractMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   uploadedOcrJobs<T extends Prisma.User$uploadedOcrJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$uploadedOcrJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OcrJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invoices<T extends Prisma.User$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  renterDebts<T extends Prisma.User$renterDebtsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$renterDebtsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DebtPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.User$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  approvedPayments<T extends Prisma.User$approvedPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$approvedPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rejectedPayments<T extends Prisma.User$rejectedPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$rejectedPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignedTickets<T extends Prisma.User$assignedTicketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ticketAttachments<T extends Prisma.User$ticketAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ticketComments<T extends Prisma.User$ticketCommentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -41675,6 +45004,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   devices<T extends Prisma.User$devicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$devicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  marketplaceModerations<T extends Prisma.User$marketplaceModerationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$marketplaceModerationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketplaceModerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdTenants<T extends Prisma.User$createdTenantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdTenantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedTenants<T extends Prisma.User$updatedTenantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedTenantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deletedTenants<T extends Prisma.User$deletedTenantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deletedTenantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -42479,9 +45809,81 @@ export type User$invoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
+ * User.renterDebts
+ */
+export type User$renterDebtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Debt
+   */
+  select?: Prisma.DebtSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Debt
+   */
+  omit?: Prisma.DebtOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DebtInclude<ExtArgs> | null
+  where?: Prisma.DebtWhereInput
+  orderBy?: Prisma.DebtOrderByWithRelationInput | Prisma.DebtOrderByWithRelationInput[]
+  cursor?: Prisma.DebtWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DebtScalarFieldEnum | Prisma.DebtScalarFieldEnum[]
+}
+
+/**
  * User.payments
  */
 export type User$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * User.approvedPayments
+ */
+export type User$approvedPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * User.rejectedPayments
+ */
+export type User$rejectedPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Payment
    */
@@ -42812,6 +46214,30 @@ export type User$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.AuditLogScalarFieldEnum | Prisma.AuditLogScalarFieldEnum[]
+}
+
+/**
+ * User.marketplaceModerations
+ */
+export type User$marketplaceModerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MarketplaceModeration
+   */
+  select?: Prisma.MarketplaceModerationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MarketplaceModeration
+   */
+  omit?: Prisma.MarketplaceModerationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MarketplaceModerationInclude<ExtArgs> | null
+  where?: Prisma.MarketplaceModerationWhereInput
+  orderBy?: Prisma.MarketplaceModerationOrderByWithRelationInput | Prisma.MarketplaceModerationOrderByWithRelationInput[]
+  cursor?: Prisma.MarketplaceModerationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MarketplaceModerationScalarFieldEnum | Prisma.MarketplaceModerationScalarFieldEnum[]
 }
 
 /**

@@ -1,6 +1,8 @@
 import { NotFoundException } from '@nestjs/common'
 
-jest.mock('@src/shared/modules/services/tenant-access.service', () => ({ TenantAccessService: class TenantAccessService {} }))
+jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
+  TenantAccessService: class TenantAccessService {},
+}))
 jest.mock('@src/shared/modules/services/cloudinary.service', () => ({ CloudinaryService: class CloudinaryService {} }))
 jest.mock('./repositories/rooms.repo', () => ({ RoomsRepository: class RoomsRepository {} }))
 const { RoomImagesService } = require('./room-images.service') as typeof import('./room-images.service')
@@ -15,7 +17,7 @@ describe('RoomImagesService', () => {
 
   beforeEach(() => {
     roomsRepository = {
-      findTenantRoom: jest.fn(),
+      findById: jest.fn(),
       countImages: jest.fn(),
       createImages: jest.fn(),
       findTenantImage: jest.fn(),
@@ -23,7 +25,9 @@ describe('RoomImagesService', () => {
       deleteImage: jest.fn(),
     }
     tenantAccessService = {
-      getActiveTenantContext: jest.fn().mockResolvedValue({ tenantId: 10, userId: 99, memberId: 1, roleId: 'LANDLORD' }),
+      getActiveTenantContext: jest
+        .fn()
+        .mockResolvedValue({ tenantId: 10, userId: 99, memberId: 1, roleId: 'LANDLORD' }),
     }
     cloudinaryService = {
       uploadImage: jest.fn().mockResolvedValue({ url: 'https://cdn.test/room.png', publicId: 'rooms/10/5/a' }),
@@ -33,7 +37,7 @@ describe('RoomImagesService', () => {
   })
 
   it('uploads the first room image as thumbnail', async () => {
-    roomsRepository.findTenantRoom.mockResolvedValue({ id: 5 })
+    roomsRepository.findById.mockResolvedValue({ id: 5 })
     roomsRepository.countImages.mockResolvedValue(0)
     roomsRepository.createImages.mockResolvedValue({ id: 5 })
 
@@ -51,7 +55,11 @@ describe('RoomImagesService', () => {
 
     await service.updateImage(99, 5, 7, { isThumbnail: true })
 
-    expect(roomsRepository.updateImage).toHaveBeenCalledWith(5, 7, { caption: undefined, sortOrder: undefined, isThumbnail: true })
+    expect(roomsRepository.updateImage).toHaveBeenCalledWith(5, 7, {
+      caption: undefined,
+      sortOrder: undefined,
+      isThumbnail: true,
+    })
   })
 
   it('deletes db image and best-effort Cloudinary asset', async () => {
@@ -70,5 +78,3 @@ describe('RoomImagesService', () => {
     await expect(service.updateImage(99, 5, 7, { isThumbnail: true })).rejects.toBeInstanceOf(NotFoundException)
   })
 })
-
-

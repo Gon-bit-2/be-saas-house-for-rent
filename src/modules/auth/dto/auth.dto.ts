@@ -15,14 +15,12 @@ import {
   SendOTPBodySchema,
   UpdateProfileBodySchema,
   UpdateProfileResSchema,
-  VerifyOTPBodySchema,
 } from '../model/auth.model'
 
 export class RegisterBodyDTO extends createZodDto(RegisterBodySchema) {}
 
 export class RegisterResDTO extends createZodDto(RegisterResSchema) {}
 export class SendOTPBodyDTO extends createZodDto(SendOTPBodySchema) {}
-export class VerifyOTPBodyDTO extends createZodDto(VerifyOTPBodySchema) {}
 export class LoginBodyDTO extends createZodDto(LoginBodySchema) {}
 export class LoginResDTO extends createZodDto(LoginResSchema) {}
 export class RefreshTokenBodyDTO extends createZodDto(RefreshTokenBodySchema) {}

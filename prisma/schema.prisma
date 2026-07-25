@@ -73,8 +73,14 @@ model User {
   uploadedOcrJobs      OcrJob[]                 @relation("UploadedJobs")
   /// Danh sách các hóa đơn của khách thuê này
   invoices             Invoice[]                @relation("RenterInvoices")
+  /// Danh sách các công nợ của khách thuê này
+  renterDebts          Debt[]                   @relation("RenterDebts")
   /// Danh sách các thanh toán do khách thuê này thực hiện
   payments             Payment[]                @relation("PayerPayments")
+  /// Danh sách các thanh toán được người dùng này duyệt
+  approvedPayments     Payment[]                @relation("PaymentApprover")
+  /// Danh sách các thanh toán bị người dùng này từ chối
+  rejectedPayments     Payment[]                @relation("PaymentRejecter")
   /// Danh sách các sự cố/ticket được phân công cho người dùng này xử lý
   assignedTickets      Ticket[]                 @relation("TicketAssignee")
   /// Danh sách các file đính kèm ticket do người dùng này tải lên
@@ -101,6 +107,8 @@ model User {
   devices              Device[]
   /// Danh sách các audit log do người dùng này thực hiện
   auditLogs            AuditLog[]
+  /// Lịch sử kiểm duyệt marketplace do người dùng này thực hiện
+  marketplaceModerations MarketplaceModeration[]
 
   // --- Audit Relations ---
   createdTenants                     Tenant[]                     @relation("TenantCreator")
@@ -383,6 +391,8 @@ model Tenant {
   floors               Floor[]
   /// Danh sách các phòng trọ trực thuộc tenant quản lý
   rooms                Room[]
+  /// Lịch sử kiểm duyệt marketplace của tenant
+  marketplaceModerations MarketplaceModeration[]
   /// Danh sách lịch sử thuê phòng xảy ra tại tenant này
   rentalHistories      RentalHistory[]
   /// Lịch hẹn xem phòng của tenant này
@@ -409,6 +419,8 @@ model Tenant {
   invoiceBatches       InvoiceBatch[]
   /// Danh sách các hóa đơn của tenant
   invoices             Invoice[]
+  /// Danh sách các khoản công nợ của tenant
+  debts                Debt[]
   /// Danh sách lịch sử thanh toán tiền phòng của khách thuê gửi tenant
   payments             Payment[]
   /// Danh sách mã QR thanh toán của tenant
@@ -708,53 +720,57 @@ model Room {
 
   // Các quan hệ (Relations)
   /// Tenant quản lý (khi xóa tenant thì tự động xóa toàn bộ phòng thuộc tenant đó)
-  tenant               Tenant                   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant              Tenant                   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Tòa nhà chứa phòng trọ này (khi xóa tòa nhà thì tự động xóa toàn bộ phòng bên trong)
-  property             Property                 @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  property            Property                 @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   /// Tầng chứa phòng trọ này (khi xóa tầng thì thiết lập trường floorId về null để phòng không bị mất liên kết)
-  floor                Floor?                   @relation(fields: [floorId], references: [id], onDelete: SetNull)
+  floor               Floor?                   @relation(fields: [floorId], references: [id], onDelete: SetNull)
   /// Danh sách hình ảnh thực tế của phòng trọ
-  images               RoomImage[]
+  images              RoomImage[]
   /// Danh sách các tiện ích được trang bị trong phòng trọ này
-  amenities            RoomAmenity[]
+  amenities           RoomAmenity[]
   /// Danh sách lịch sử khách đã từng thuê phòng này
-  rentalHistories      RentalHistory[]
+  rentalHistories     RentalHistory[]
   /// Danh sách nhật ký khách xem phòng trọ này trên Marketplace
-  viewLogs             RoomViewLog[]
+  viewLogs            RoomViewLog[]
   /// Danh sách khách thuê đánh dấu yêu thích phòng này
-  favorites            FavoriteRoom[]
+  favorites           FavoriteRoom[]
   /// Lịch hẹn xem phòng thực tế tại phòng trọ này
-  viewingAppointments  RoomViewingAppointment[]
+  viewingAppointments RoomViewingAppointment[]
   /// Các yêu cầu xin thuê phòng trọ này
-  rentalRequests       RentalRequest[]
+  rentalRequests      RentalRequest[]
   /// Danh sách các hợp đồng thuê phòng trọ này
-  contracts            Contract[]
+  contracts           Contract[]
   /// Danh sách tài sản trong phòng trọ này
-  roomAssets           RoomAsset[]
+  roomAssets          RoomAsset[]
   /// Danh sách biên bản bàn giao phòng trọ này
-  handoverRecords      HandoverRecord[]
+  handoverRecords     HandoverRecord[]
   /// Danh sách đồng hồ điện nước lắp tại phòng trọ này
-  utilityMeters        UtilityMeter[]
+  utilityMeters       UtilityMeter[]
   /// Danh sách chỉ số điện nước của phòng trọ này
-  meterReadings        MeterReading[]
+  meterReadings       MeterReading[]
   /// Danh sách các tác vụ AI OCR của phòng trọ này
-  ocrJobs              OcrJob[]
+  ocrJobs             OcrJob[]
   /// Danh sách hóa đơn của phòng trọ này
-  invoices             Invoice[]
+  invoices            Invoice[]
+  /// Danh sách công nợ phát sinh từ phòng trọ này
+  debts               Debt[]
   /// Danh sách các sự cố/ticket của phòng trọ này
-  tickets              Ticket[]
+  tickets             Ticket[]
   /// Danh sách các phòng chat liên quan đến phòng trọ này
-  conversations        Conversation[]
+  conversations       Conversation[]
   /// Danh sách các đánh giá về phòng trọ này
-  reviews              Review[]
+  reviews             Review[]
   /// Bảng điểm uy tín của phòng trọ này
-  reputationScores     ReputationScore[]
+  reputationScores    ReputationScore[]
+  /// Lịch sử gửi duyệt và kiểm duyệt marketplace
+  marketplaceModerations MarketplaceModeration[]
   /// ID người dùng tạo bản ghi
-  createdById          Int?                     @map("created_by_id")
+  createdById         Int?                     @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById          Int?                     @map("updated_by_id")
+  updatedById         Int?                     @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById          Int?                     @map("deleted_by_id")
+  deletedById         Int?                     @map("deleted_by_id")
 
   createdBy User? @relation("RoomCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("RoomUpdater", fields: [updatedById], references: [id])
@@ -765,7 +781,30 @@ model Room {
   @@index([basePrice])
   @@index([area])
   @@index([status, marketplaceStatus])
+  @@index([marketplaceStatus, updatedAt])
+  @@index([tenantId, status])
   @@map("rooms")
+}
+
+/// Lịch sử chuyển trạng thái tin đăng marketplace
+model MarketplaceModeration {
+  id         Int                @id @default(autoincrement())
+  roomId     Int                @map("room_id")
+  tenantId   Int                @map("tenant_id")
+  actorId    Int?               @map("actor_id")
+  fromStatus MarketplaceStatus? @map("from_status")
+  toStatus   MarketplaceStatus  @map("to_status")
+  reason     String?            @db.Text
+  createdAt  DateTime           @default(now()) @map("created_at") @db.Timestamptz
+
+  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  actor  User?  @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([roomId, createdAt])
+  @@index([tenantId, createdAt])
+  @@index([toStatus, createdAt])
+  @@map("marketplace_moderations")
 }
 
 /// Bảng lưu trữ hình ảnh chi tiết của phòng trọ
@@ -776,6 +815,8 @@ model RoomImage {
   roomId      Int      @map("room_id")
   /// Đường dẫn lưu trữ hình ảnh (ví dụ: trên S3 hoặc Cloudinary)
   url         String   @db.Text
+  /// Public ID của ảnh trên Cloudinary để có thể xóa tài nguyên khi xóa ảnh
+  publicId    String?  @map("public_id") @db.Text
   /// Ghi chú mô tả bức ảnh (ví dụ: Nhà vệ sinh, Góc bếp)
   caption     String?  @db.VarChar(255)
   /// Thứ tự sắp xếp hiển thị ảnh
@@ -1162,6 +1203,8 @@ model Contract {
   meterReadings       MeterReading[]
   /// Danh sách hóa đơn liên quan đến hợp đồng này
   invoices            Invoice[]
+  /// Danh sách công nợ phát sinh từ hợp đồng này
+  debts               Debt[]
   /// Danh sách các sự cố/ticket liên quan đến hợp đồng này
   tickets             Ticket[]
   /// Danh sách các phòng chat thuộc hợp đồng này
@@ -1180,6 +1223,7 @@ model Contract {
   deletedBy User? @relation("ContractDeleter", fields: [deletedById], references: [id])
 
   @@index([tenantId])
+  @@index([tenantId, status])
   @@index([contractCode])
   @@index([status])
   @@map("contracts")
@@ -1663,6 +1707,8 @@ model Invoice {
   qrCodes     PaymentQrCode[]
   /// Danh sách log webhook lịch sử nhận thanh toán liên quan đến hóa đơn này
   webhookLogs PaymentWebhookLog[]
+  /// Bản ghi công nợ tương ứng với hóa đơn này
+  debt        Debt?
 
   /// ID người dùng tạo bản ghi
   createdById Int? @map("created_by_id")
@@ -1711,6 +1757,57 @@ model InvoiceItem {
   @@map("invoice_items")
 }
 
+/// Bảng ghi nhận công nợ phát sinh từ hóa đơn thuê phòng hằng tháng
+model Debt {
+  /// ID công nợ
+  id              Int        @id @default(autoincrement())
+  /// ID Tenant quản lý công nợ
+  tenantId        Int        @map("tenant_id")
+  /// ID hóa đơn phát sinh công nợ; mỗi hóa đơn chỉ có một bản ghi công nợ
+  invoiceId       Int        @unique @map("invoice_id")
+  /// ID hợp đồng liên quan
+  contractId      Int        @map("contract_id")
+  /// ID phòng phát sinh công nợ
+  roomId          Int        @map("room_id")
+  /// ID khách thuê chịu trách nhiệm thanh toán
+  renterId        Int        @map("renter_id")
+  /// Tháng ghi nhận công nợ
+  billingMonth    DateTime   @map("billing_month") @db.Date
+  /// Tổng số tiền ban đầu cần thu từ hóa đơn
+  originalAmount  Decimal    @map("original_amount") @db.Decimal(12, 2)
+  /// Số tiền đã thanh toán thành công
+  paidAmount      Decimal    @default(0.00) @map("paid_amount") @db.Decimal(12, 2)
+  /// Số tiền còn nợ
+  remainingAmount Decimal    @map("remaining_amount") @db.Decimal(12, 2)
+  /// Trạng thái công nợ hiện tại
+  status          DebtStatus @default(OPEN)
+  /// Ngày đến hạn thanh toán
+  dueDate         DateTime   @map("due_date") @db.Date
+  /// Thời điểm công nợ được tất toán hoặc hủy
+  resolvedAt      DateTime?  @map("resolved_at") @db.Timestamptz
+  /// Thời điểm tạo bản ghi công nợ
+  createdAt       DateTime   @default(now()) @map("created_at") @db.Timestamptz
+  /// Thời điểm cập nhật công nợ gần nhất
+  updatedAt       DateTime   @updatedAt @map("updated_at") @db.Timestamptz
+
+  // Các quan hệ (Relations)
+  /// Tenant sở hữu công nợ
+  tenant   Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  /// Hóa đơn nguồn của công nợ
+  invoice  Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  /// Hợp đồng liên quan đến công nợ
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Restrict)
+  /// Phòng phát sinh công nợ
+  room     Room     @relation(fields: [roomId], references: [id], onDelete: Restrict)
+  /// Khách thuê chịu trách nhiệm thanh toán công nợ
+  renter   User     @relation("RenterDebts", fields: [renterId], references: [id], onDelete: Restrict)
+
+  @@index([tenantId, billingMonth])
+  @@index([tenantId, status])
+  @@index([renterId, status])
+  @@map("debts")
+}
+
 /// Bảng ghi nhận các giao dịch thanh toán thực tế của khách thuê cho từng hóa đơn
 model Payment {
   /// ID giao dịch thanh toán (UUID)
@@ -1721,6 +1818,8 @@ model Payment {
   invoiceId       Int           @map("invoice_id")
   /// ID tài khoản người dùng thực hiện giao dịch thanh toán tiền
   payerId         Int           @map("payer_id")
+  /// ID mã QR PayOS/VietQR liên quan đến giao dịch nếu có
+  qrCodeId        Int?          @map("qr_code_id")
   /// Số tiền thực tế khách thực hiện thanh toán trong giao dịch này
   amount          Decimal       @db.Decimal(12, 2)
   /// Phương thức thanh toán (Tiền mặt, Chuyển khoản, Quét QR...)
@@ -1733,16 +1832,40 @@ model Payment {
   status          PaymentStatus @default(PENDING)
   /// Thời điểm giao dịch được ghi nhận thanh toán thành công (null nếu chưa thành công)
   paidAt          DateTime?     @map("paid_at") @db.Timestamptz
+  /// Thời điểm người thuê gửi xác nhận thanh toán
+  submittedAt     DateTime?     @map("submitted_at") @db.Timestamptz
+  /// Đường dẫn minh chứng thanh toán do người thuê gửi
+  evidenceUrl     String?       @map("evidence_url") @db.Text
+  /// Ghi chú người thuê gửi kèm xác nhận thanh toán
+  renterNote      String?       @map("renter_note") @db.Text
+  /// ID người dùng duyệt thanh toán
+  approvedById    Int?          @map("approved_by_id")
+  /// Thời điểm chủ trọ/nhân viên duyệt thanh toán
+  approvedAt      DateTime?     @map("approved_at") @db.Timestamptz
+  /// ID người dùng từ chối thanh toán
+  rejectedById    Int?          @map("rejected_by_id")
+  /// Thời điểm chủ trọ/nhân viên từ chối thanh toán
+  rejectedAt      DateTime?     @map("rejected_at") @db.Timestamptz
+  /// Ghi chú đối soát của chủ trọ/nhân viên
+  landlordNote    String?       @map("landlord_note") @db.Text
   /// Thời điểm tạo yêu cầu giao dịch thanh toán
   createdAt       DateTime      @default(now()) @map("created_at") @db.Timestamptz
+  /// Thời điểm cập nhật giao dịch thanh toán gần nhất
+  updatedAt       DateTime      @updatedAt @map("updated_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Tenant nhận tiền
-  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant     Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Hóa đơn tương ứng được thanh toán (xóa hóa đơn thì cascade xóa giao dịch)
-  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  invoice    Invoice        @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   /// Tài khoản người thanh toán (chặn xóa người dùng này nếu đã phát sinh thanh toán)
-  payer   User    @relation("PayerPayments", fields: [payerId], references: [id], onDelete: Restrict)
+  payer      User           @relation("PayerPayments", fields: [payerId], references: [id], onDelete: Restrict)
+  /// Mã QR liên quan đến giao dịch thanh toán
+  qrCode     PaymentQrCode? @relation(fields: [qrCodeId], references: [id], onDelete: SetNull)
+  /// Người duyệt thanh toán sau đối soát
+  approvedBy User?          @relation("PaymentApprover", fields: [approvedById], references: [id])
+  /// Người từ chối thanh toán sau đối soát
+  rejectedBy User?          @relation("PaymentRejecter", fields: [rejectedById], references: [id])
 
   /// ID người dùng tạo bản ghi
   createdById Int? @map("created_by_id")
@@ -1756,65 +1879,106 @@ model Payment {
   deletedBy User? @relation("PaymentDeleter", fields: [deletedById], references: [id])
 
   @@index([tenantId])
+  @@index([tenantId, status])
+  @@index([tenantId, status, paidAt])
+  @@index([invoiceId, status])
+  @@index([qrCodeId])
   @@index([transactionCode])
   @@index([status])
+  @@unique([provider, transactionCode], map: "payments_provider_transaction_code_key")
   @@map("payments")
 }
 
 /// Bảng lưu trữ thông tin mã VietQR động được tạo phục vụ khách quét thanh toán hóa đơn tiện lợi
 model PaymentQrCode {
   /// ID mã QR (UUID)
-  id         Int          @id @default(autoincrement())
+  id             Int          @id @default(autoincrement())
   /// ID Tenant quản lý
-  tenantId   Int          @map("tenant_id")
+  tenantId       Int          @map("tenant_id")
   /// ID hóa đơn liên quan tạo mã QR
-  invoiceId  Int          @map("invoice_id")
+  invoiceId      Int          @map("invoice_id")
   /// Tên nhà cung cấp dịch vụ QR (ví dụ: VietQR, PayOS, MoMo)
-  provider   String       @db.VarChar(100)
+  provider       String       @db.VarChar(100)
+  /// Mã đơn hàng PayOS dùng để tạo payment link và đối soát webhook
+  orderCode      Int?         @unique @map("order_code")
+  /// ID payment link do PayOS trả về
+  paymentLinkId  String?      @unique @map("payment_link_id") @db.VarChar(100)
   /// Nội dung chuỗi text thô mã hóa trong mã QR phục vụ quét
-  qrContent  String       @map("qr_content") @db.Text
+  qrContent      String?      @map("qr_content") @db.Text
   /// Đường dẫn hình ảnh hiển thị mã QR được sinh động
-  qrImageUrl String?      @map("qr_image_url") @db.Text
+  qrImageUrl     String?      @map("qr_image_url") @db.Text
+  /// URL checkout do PayOS trả về
+  checkoutUrl    String?      @map("checkout_url") @db.Text
   /// Số tiền thanh toán mã hóa trong QR bao gồm cả phí phạt/lẻ nếu có
-  amount     Decimal      @db.Decimal(12, 2)
+  amount         Decimal      @db.Decimal(12, 2)
+  /// Trạng thái payment link theo nhà cung cấp
+  providerStatus String?      @map("provider_status") @db.VarChar(50)
   /// Thời điểm mã QR động này hết hạn hiệu lực quét thanh toán
-  expiredAt  DateTime     @map("expired_at") @db.Timestamptz
+  expiredAt      DateTime     @map("expired_at") @db.Timestamptz
   /// Trạng thái hoạt động của mã QR
-  status     QrCodeStatus @default(ACTIVE)
+  status         QrCodeStatus @default(ACTIVE)
   /// Thời điểm sinh mã QR
-  createdAt  DateTime     @default(now()) @map("created_at") @db.Timestamptz
+  createdAt      DateTime     @default(now()) @map("created_at") @db.Timestamptz
+  /// Thời điểm cập nhật mã QR gần nhất
+  updatedAt      DateTime     @updatedAt @map("updated_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Tenant quản lý
-  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Hóa đơn liên quan (xóa hóa đơn thì cascade xóa mã QR động kèm theo)
-  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  invoice  Invoice   @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  /// Danh sách thanh toán liên quan đến mã QR này
+  payments Payment[]
 
+  @@index([orderCode])
+  @@index([paymentLinkId])
   @@map("payment_qr_codes")
 }
 
 /// Bảng ghi nhận lịch sử các gói tin Webhook gọi từ cổng thanh toán tự động đến hệ thống
 model PaymentWebhookLog {
   /// ID log webhook (UUID)
-  id              Int              @id @default(autoincrement())
+  id                  Int              @id @default(autoincrement())
   /// Tên cổng thanh toán gửi webhook (ví dụ: PayOS, VNPay, MoMo)
-  provider        String           @db.VarChar(100)
+  provider            String           @db.VarChar(100)
   /// ID Tenant liên quan (mới nhận có thể null, sau đó phân tích payload để ánh xạ)
-  tenantId        Int?             @map("tenant_id")
+  tenantId            Int?             @map("tenant_id")
   /// ID hóa đơn liên quan (mới nhận có thể null, sau đó phân tích payload để ánh xạ)
-  invoiceId       Int?             @map("invoice_id")
+  invoiceId           Int?             @map("invoice_id")
+  /// Mã đơn hàng PayOS trong payload webhook
+  orderCode           Int?             @map("order_code")
+  /// ID payment link PayOS trong payload webhook
+  paymentLinkId       String?          @map("payment_link_id") @db.VarChar(100)
+  /// Mã tham chiếu giao dịch ngân hàng trong payload PayOS
+  reference           String?          @db.VarChar(100)
   /// Mã giao dịch tham chiếu của cổng thanh toán gửi trong webhook
-  transactionCode String?          @map("transaction_code") @db.VarChar(100)
+  transactionCode     String?          @map("transaction_code") @db.VarChar(100)
+  /// Số tiền thanh toán trong payload PayOS
+  amount              Decimal?         @db.Decimal(12, 2)
+  /// Đơn vị tiền tệ trong payload PayOS
+  currency            String?          @db.VarChar(10)
+  /// Mã trạng thái PayOS trong phần data
+  providerCode        String?          @map("provider_code") @db.VarChar(20)
+  /// Mô tả trạng thái PayOS trong phần data
+  providerDesc        String?          @map("provider_desc") @db.Text
+  /// Cờ thành công từ payload PayOS
+  success             Boolean?
+  /// Thời điểm giao dịch theo payload PayOS
+  transactionDateTime DateTime?        @map("transaction_date_time") @db.Timestamptz
   /// Dữ liệu thô dạng JSON nhận được từ cổng thanh toán để lưu vết đối soát
-  payload         Json             @db.JsonB
+  payload             Json             @db.JsonB
+  /// HMAC-SHA256 của payload gốc trước khi loại bỏ dữ liệu nhạy cảm
+  payloadDigest       String?          @map("payload_digest") @db.VarChar(64)
+  /// Phiên bản khóa HMAC dùng để tạo digest
+  digestKeyVersion    Int?             @map("digest_key_version")
   /// Đánh dấu chữ ký bảo mật webhook có hợp lệ không
-  signatureValid  Boolean          @default(false) @map("signature_valid")
+  signatureValid      Boolean          @default(false) @map("signature_valid")
   /// Trạng thái xử lý gói tin webhook của hệ thống
-  status          WebhookLogStatus @default(RECEIVED)
+  status              WebhookLogStatus @default(RECEIVED)
   /// Chi tiết thông báo lỗi trong quá trình phân tích và xử lý tự động webhook (nếu có)
-  errorMessage    String?          @map("error_message") @db.Text
+  errorMessage        String?          @map("error_message") @db.Text
   /// Thời điểm hệ thống nhận được request webhook này
-  receivedAt      DateTime         @default(now()) @map("received_at") @db.Timestamptz
+  receivedAt          DateTime         @default(now()) @map("received_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Tenant liên kết (nếu có, xóa tenant thì cascade xóa webhook log)
@@ -1822,6 +1986,12 @@ model PaymentWebhookLog {
   /// Hóa đơn liên quan (nếu có, xóa hóa đơn thì gỡ liên kết trong webhook log này để đối soát độc lập)
   invoice Invoice? @relation(fields: [invoiceId], references: [id], onDelete: SetNull)
 
+  @@index([orderCode])
+  @@index([paymentLinkId])
+  @@index([reference])
+  @@index([provider, reference])
+  @@index([tenantId, status])
+  @@index([receivedAt, id])
   @@map("payment_webhook_logs")
 }
 
@@ -1883,6 +2053,9 @@ model Ticket {
   updatedBy User? @relation("TicketUpdater", fields: [updatedById], references: [id])
   deletedBy User? @relation("TicketDeleter", fields: [deletedById], references: [id])
 
+  @@index([tenantId, status])
+  @@index([tenantId, assignedTo])
+  @@index([createdById, status])
   @@map("tickets")
 }
 
@@ -1907,6 +2080,7 @@ model TicketAttachment {
   /// Người dùng tải file lên (xóa người dùng thì cascade xóa file đính kèm của họ)
   uploadedByUser User   @relation(fields: [uploadedBy], references: [id], onDelete: Cascade)
 
+  @@index([ticketId, createdAt, id])
   @@map("ticket_attachments")
 }
 
@@ -1947,6 +2121,7 @@ model TicketComment {
   /// Người gửi bình luận (chặn xóa người dùng để bảo lưu lịch sử chat của hệ thống)
   user   User   @relation(fields: [userId], references: [id], onDelete: Restrict)
 
+  @@index([ticketId, isInternal, createdAt, id])
   @@map("ticket_comments")
 }
 
@@ -2183,12 +2358,24 @@ model DeviceToken {
   userId     Int            @map("user_id")
   /// Chuỗi token FCM duy nhất phục vụ push notification
   token      String         @db.Text
+  /// Firebase Installation ID mới hơn registration token, dùng để hỗ trợ quản lý vòng đời token
+  fid        String?        @db.VarChar(255)
   /// Hệ điều hành của thiết bị nhận thông báo (iOS, Android hoặc Web)
   platform   DevicePlatform
   /// Tên gọi nhận diện thiết bị vật lý (ví dụ: iPhone 14 Pro, Samsung S23)
   deviceName String?        @map("device_name") @db.VarChar(100)
   /// Đánh dấu token thiết bị có đang hoạt động nhận tin không
   isActive   Boolean        @default(true) @map("is_active")
+  /// Thời điểm client gần nhất gửi/refresh token này
+  lastSeenAt DateTime?      @map("last_seen_at") @db.Timestamptz
+  /// Thời điểm backend gần nhất dùng token này để gửi push
+  lastUsedAt DateTime?      @map("last_used_at") @db.Timestamptz
+  /// Số lần gửi lỗi liên tiếp để hỗ trợ quan sát token không ổn định
+  failureCount Int          @default(0) @map("failure_count")
+  /// Mã lỗi FCM gần nhất nếu có
+  lastError  String?        @map("last_error") @db.Text
+  /// Thời điểm token bị vô hiệu hóa do client xóa hoặc FCM báo invalid
+  disabledAt DateTime?      @map("disabled_at") @db.Timestamptz
   /// Thời điểm đăng ký token thiết bị
   createdAt  DateTime       @default(now()) @map("created_at") @db.Timestamptz
   /// Thời điểm cập nhật trạng thái hoạt động của token gần nhất
@@ -2199,6 +2386,9 @@ model DeviceToken {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, token]) // Tránh lưu trùng lặp một token thiết bị nhiều lần cho cùng người dùng
+  @@index([userId, isActive])
+  @@index([fid])
+  @@index([platform, isActive])
   @@map("device_tokens")
 }
 
@@ -2210,6 +2400,8 @@ model BackgroundJob {
   tenantId     Int?                @map("tenant_id")
   /// Tên hàng đợi (ví dụ: default, email, invoices)
   queueName    String              @map("queue_name") @db.VarChar(100)
+  /// ID job phía BullMQ để đối soát trạng thái retry/complete/fail
+  externalJobId String?            @map("external_job_id") @db.VarChar(100)
   /// Phân loại loại tác vụ cần thực hiện (ví dụ: SEND_EMAIL_INVOICE)
   jobType      String              @map("job_type") @db.VarChar(100)
   /// Dữ liệu đầu vào cấu hình cho tác vụ dạng JSON
@@ -2222,6 +2414,8 @@ model BackgroundJob {
   errorMessage String?             @map("error_message") @db.Text
   /// Thời điểm đăng ký tạo tác vụ
   createdAt    DateTime            @default(now()) @map("created_at") @db.Timestamptz
+  /// Thời điểm cập nhật trạng thái job gần nhất
+  updatedAt    DateTime            @updatedAt @map("updated_at") @db.Timestamptz
   /// Thời điểm bắt đầu xử lý tác vụ
   processedAt  DateTime?           @map("processed_at") @db.Timestamptz
   /// Thời điểm tác vụ hoàn tất xử lý (hoặc thất bại hoàn toàn)
@@ -2233,6 +2427,7 @@ model BackgroundJob {
 
   @@index([tenantId])
   @@index([status])
+  @@index([externalJobId])
   @@map("background_jobs")
 }
 
@@ -2519,6 +2714,20 @@ enum InvoiceStatus {
   /// Đã quá hạn thanh toán
   OVERDUE
   /// Hóa đơn bị hủy bỏ
+  CANCELED
+}
+
+/// Trạng thái công nợ của hóa đơn
+enum DebtStatus {
+  /// Còn nợ và chưa thanh toán
+  OPEN
+  /// Đã thanh toán một phần
+  PARTIAL
+  /// Đã tất toán
+  PAID
+  /// Đã quá hạn thanh toán
+  OVERDUE
+  /// Công nợ bị hủy theo hóa đơn
   CANCELED
 }
 

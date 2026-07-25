@@ -374,6 +374,49 @@ export class AuthRepository {
     })
   }
 
+  async rotateRefreshToken(
+    tokenHash: string,
+    successor: Pick<TRefreshTokenSchema, 'userId' | 'tokenHash' | 'expiresAt' | 'userAgent' | 'ip'>,
+    now = new Date(),
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      const current = await tx.refreshToken.findFirst({
+        where: {
+          tokenHash,
+          userId: successor.userId,
+          revokedAt: null,
+          expiresAt: { gt: now },
+          user: { status: 'ACTIVE', deletedAt: null },
+        },
+        select: { id: true },
+      })
+      if (!current) {
+        return false
+      }
+
+      const revoked = await tx.refreshToken.updateMany({
+        where: {
+          id: current.id,
+          revokedAt: null,
+          expiresAt: { gt: now },
+        },
+        data: {
+          revokedAt: now,
+          revokedReason: 'Token rotation',
+        },
+      })
+      if (revoked.count !== 1) {
+        return false
+      }
+
+      await tx.refreshToken.create({
+        data: successor,
+        select: { id: true },
+      })
+      return true
+    })
+  }
+
   async revokeRefreshTokenByHash(tokenHash: string, revokedReason?: string, revokedAt = new Date()) {
     return await this.prismaService.refreshToken.updateMany({
       where: {
@@ -454,30 +497,65 @@ export class AuthRepository {
     })
   }
 
-  async incrementVerificationAttempts(id: number) {
-    return await this.prismaService.verificationCode.update({
+  async recordVerificationFailure(
+    id: number,
+    email: string,
+    type: TVerificationCodeSchema['type'],
+    maxAttempts: number,
+    now = new Date(),
+  ) {
+    const updated = await this.prismaService.verificationCode.updateMany({
       where: {
         id,
+        email,
+        type,
+        consumedAt: null,
+        invalidatedAt: null,
+        expiresAt: { gt: now },
+        attempts: { lt: maxAttempts },
       },
       data: {
         attempts: {
           increment: 1,
         },
       },
-      select: verificationCodeSelect,
     })
+    if (updated.count === 1) {
+      await this.prismaService.verificationCode.updateMany({
+        where: {
+          id,
+          consumedAt: null,
+          invalidatedAt: null,
+          attempts: { gte: maxAttempts },
+        },
+        data: { invalidatedAt: now },
+      })
+    }
+    return updated.count === 1
   }
 
-  async consumeVerificationCode(id: number, consumedAt = new Date()) {
-    return await this.prismaService.verificationCode.update({
+  async consumeVerificationCode(
+    id: number,
+    email: string,
+    type: TVerificationCodeSchema['type'],
+    maxAttempts: number,
+    consumedAt = new Date(),
+  ) {
+    const updated = await this.prismaService.verificationCode.updateMany({
       where: {
         id,
+        email,
+        type,
+        consumedAt: null,
+        invalidatedAt: null,
+        expiresAt: { gt: consumedAt },
+        attempts: { lt: maxAttempts },
       },
       data: {
         consumedAt,
       },
-      select: verificationCodeSelect,
     })
+    return updated.count === 1
   }
 
   async deleteExpiredVerificationCodes(now = new Date()) {

@@ -416,6 +416,7 @@ export type ContractWhereInput = {
   handoverRecords?: Prisma.HandoverRecordListRelationFilter
   meterReadings?: Prisma.MeterReadingListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
+  debts?: Prisma.DebtListRelationFilter
   tickets?: Prisma.TicketListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
@@ -460,6 +461,7 @@ export type ContractOrderByWithRelationInput = {
   handoverRecords?: Prisma.HandoverRecordOrderByRelationAggregateInput
   meterReadings?: Prisma.MeterReadingOrderByRelationAggregateInput
   invoices?: Prisma.InvoiceOrderByRelationAggregateInput
+  debts?: Prisma.DebtOrderByRelationAggregateInput
   tickets?: Prisma.TicketOrderByRelationAggregateInput
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
@@ -507,6 +509,7 @@ export type ContractWhereUniqueInput = Prisma.AtLeast<{
   handoverRecords?: Prisma.HandoverRecordListRelationFilter
   meterReadings?: Prisma.MeterReadingListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
+  debts?: Prisma.DebtListRelationFilter
   tickets?: Prisma.TicketListRelationFilter
   conversations?: Prisma.ConversationListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
@@ -602,6 +605,7 @@ export type ContractCreateInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -641,6 +645,7 @@ export type ContractUncheckedCreateInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -673,6 +678,7 @@ export type ContractUpdateInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -712,6 +718,7 @@ export type ContractUncheckedUpdateInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -1358,6 +1365,20 @@ export type ContractUpdateOneRequiredWithoutInvoicesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContractUpdateToOneWithWhereWithoutInvoicesInput, Prisma.ContractUpdateWithoutInvoicesInput>, Prisma.ContractUncheckedUpdateWithoutInvoicesInput>
 }
 
+export type ContractCreateNestedOneWithoutDebtsInput = {
+  create?: Prisma.XOR<Prisma.ContractCreateWithoutDebtsInput, Prisma.ContractUncheckedCreateWithoutDebtsInput>
+  connectOrCreate?: Prisma.ContractCreateOrConnectWithoutDebtsInput
+  connect?: Prisma.ContractWhereUniqueInput
+}
+
+export type ContractUpdateOneRequiredWithoutDebtsNestedInput = {
+  create?: Prisma.XOR<Prisma.ContractCreateWithoutDebtsInput, Prisma.ContractUncheckedCreateWithoutDebtsInput>
+  connectOrCreate?: Prisma.ContractCreateOrConnectWithoutDebtsInput
+  upsert?: Prisma.ContractUpsertWithoutDebtsInput
+  connect?: Prisma.ContractWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContractUpdateToOneWithWhereWithoutDebtsInput, Prisma.ContractUpdateWithoutDebtsInput>, Prisma.ContractUncheckedUpdateWithoutDebtsInput>
+}
+
 export type ContractCreateNestedOneWithoutTicketsInput = {
   create?: Prisma.XOR<Prisma.ContractCreateWithoutTicketsInput, Prisma.ContractUncheckedCreateWithoutTicketsInput>
   connectOrCreate?: Prisma.ContractCreateOrConnectWithoutTicketsInput
@@ -1432,6 +1453,7 @@ export type ContractCreateWithoutRenterInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -1470,6 +1492,7 @@ export type ContractUncheckedCreateWithoutRenterInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -1512,6 +1535,7 @@ export type ContractCreateWithoutCreatedByInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -1549,6 +1573,7 @@ export type ContractUncheckedCreateWithoutCreatedByInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -1591,6 +1616,7 @@ export type ContractCreateWithoutUpdatedByInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -1628,6 +1654,7 @@ export type ContractUncheckedCreateWithoutUpdatedByInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -1670,6 +1697,7 @@ export type ContractCreateWithoutDeletedByInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -1707,6 +1735,7 @@ export type ContractUncheckedCreateWithoutDeletedByInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -1841,6 +1870,7 @@ export type ContractCreateWithoutTenantInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -1879,6 +1909,7 @@ export type ContractUncheckedCreateWithoutTenantInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -1936,6 +1967,7 @@ export type ContractCreateWithoutRoomInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -1974,6 +2006,7 @@ export type ContractUncheckedCreateWithoutRoomInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -2031,6 +2064,7 @@ export type ContractCreateWithoutRentalHistoriesInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -2069,6 +2103,7 @@ export type ContractUncheckedCreateWithoutRentalHistoriesInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -2116,6 +2151,7 @@ export type ContractUpdateWithoutRentalHistoriesInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -2154,6 +2190,7 @@ export type ContractUncheckedUpdateWithoutRentalHistoriesInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -2185,6 +2222,7 @@ export type ContractCreateWithoutRentalRequestInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -2223,6 +2261,7 @@ export type ContractUncheckedCreateWithoutRentalRequestInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -2280,6 +2319,7 @@ export type ContractCreateWithoutTemplateInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -2318,6 +2358,7 @@ export type ContractUncheckedCreateWithoutTemplateInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -2375,6 +2416,7 @@ export type ContractCreateWithoutMembersInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -2413,6 +2455,7 @@ export type ContractUncheckedCreateWithoutMembersInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -2460,6 +2503,7 @@ export type ContractUpdateWithoutMembersInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -2498,6 +2542,7 @@ export type ContractUncheckedUpdateWithoutMembersInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -2529,6 +2574,7 @@ export type ContractCreateWithoutFilesInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -2567,6 +2613,7 @@ export type ContractUncheckedCreateWithoutFilesInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -2614,6 +2661,7 @@ export type ContractUpdateWithoutFilesInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -2652,6 +2700,7 @@ export type ContractUncheckedUpdateWithoutFilesInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -2683,6 +2732,7 @@ export type ContractCreateWithoutTerminationRequestsInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -2721,6 +2771,7 @@ export type ContractUncheckedCreateWithoutTerminationRequestsInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -2768,6 +2819,7 @@ export type ContractUpdateWithoutTerminationRequestsInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -2806,6 +2858,7 @@ export type ContractUncheckedUpdateWithoutTerminationRequestsInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -2837,6 +2890,7 @@ export type ContractCreateWithoutHandoverRecordsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -2875,6 +2929,7 @@ export type ContractUncheckedCreateWithoutHandoverRecordsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -2922,6 +2977,7 @@ export type ContractUpdateWithoutHandoverRecordsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -2960,6 +3016,7 @@ export type ContractUncheckedUpdateWithoutHandoverRecordsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -2991,6 +3048,7 @@ export type ContractCreateWithoutMeterReadingsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -3029,6 +3087,7 @@ export type ContractUncheckedCreateWithoutMeterReadingsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -3076,6 +3135,7 @@ export type ContractUpdateWithoutMeterReadingsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -3114,6 +3174,7 @@ export type ContractUncheckedUpdateWithoutMeterReadingsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -3145,6 +3206,7 @@ export type ContractCreateWithoutInvoicesInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
@@ -3183,6 +3245,7 @@ export type ContractUncheckedCreateWithoutInvoicesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
@@ -3230,6 +3293,7 @@ export type ContractUpdateWithoutInvoicesInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -3268,6 +3332,165 @@ export type ContractUncheckedUpdateWithoutInvoicesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
+}
+
+export type ContractCreateWithoutDebtsInput = {
+  contractCode: string
+  startDate: Date | string
+  endDate: Date | string
+  monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  billingCycle: $Enums.ContractBillingCycle
+  paymentDueDay: number
+  contentSnapshot: string
+  status?: $Enums.ContractStatus
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  room: Prisma.RoomCreateNestedOneWithoutContractsInput
+  renter: Prisma.UserCreateNestedOneWithoutContractsInput
+  rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
+  template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
+  members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
+  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedContractsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedContractsInput
+}
+
+export type ContractUncheckedCreateWithoutDebtsInput = {
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
+  contractCode: string
+  startDate: Date | string
+  endDate: Date | string
+  monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  billingCycle: $Enums.ContractBillingCycle
+  paymentDueDay: number
+  contentSnapshot: string
+  status?: $Enums.ContractStatus
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
+}
+
+export type ContractCreateOrConnectWithoutDebtsInput = {
+  where: Prisma.ContractWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContractCreateWithoutDebtsInput, Prisma.ContractUncheckedCreateWithoutDebtsInput>
+}
+
+export type ContractUpsertWithoutDebtsInput = {
+  update: Prisma.XOR<Prisma.ContractUpdateWithoutDebtsInput, Prisma.ContractUncheckedUpdateWithoutDebtsInput>
+  create: Prisma.XOR<Prisma.ContractCreateWithoutDebtsInput, Prisma.ContractUncheckedCreateWithoutDebtsInput>
+  where?: Prisma.ContractWhereInput
+}
+
+export type ContractUpdateToOneWithWhereWithoutDebtsInput = {
+  where?: Prisma.ContractWhereInput
+  data: Prisma.XOR<Prisma.ContractUpdateWithoutDebtsInput, Prisma.ContractUncheckedUpdateWithoutDebtsInput>
+}
+
+export type ContractUpdateWithoutDebtsInput = {
+  contractCode?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
+  paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
+  contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
+  renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
+  rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
+  template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
+  members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedContractsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedContractsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedContractsNestedInput
+}
+
+export type ContractUncheckedUpdateWithoutDebtsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractCode?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
+  paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
+  contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -3300,6 +3523,7 @@ export type ContractCreateWithoutTicketsInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractsInput
@@ -3338,6 +3562,7 @@ export type ContractUncheckedCreateWithoutTicketsInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
 }
@@ -3385,6 +3610,7 @@ export type ContractUpdateWithoutTicketsInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedContractsNestedInput
@@ -3423,6 +3649,7 @@ export type ContractUncheckedUpdateWithoutTicketsInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
 }
@@ -3454,6 +3681,7 @@ export type ContractCreateWithoutConversationsInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractsInput
@@ -3492,6 +3720,7 @@ export type ContractUncheckedCreateWithoutConversationsInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
 }
@@ -3539,6 +3768,7 @@ export type ContractUpdateWithoutConversationsInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedContractsNestedInput
@@ -3577,6 +3807,7 @@ export type ContractUncheckedUpdateWithoutConversationsInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
 }
@@ -3608,6 +3839,7 @@ export type ContractCreateWithoutReviewsInput = {
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractsInput
@@ -3646,6 +3878,7 @@ export type ContractUncheckedCreateWithoutReviewsInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
 }
@@ -3693,6 +3926,7 @@ export type ContractUpdateWithoutReviewsInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedContractsNestedInput
@@ -3731,6 +3965,7 @@ export type ContractUncheckedUpdateWithoutReviewsInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
 }
@@ -3861,6 +4096,7 @@ export type ContractUpdateWithoutRenterInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -3899,6 +4135,7 @@ export type ContractUncheckedUpdateWithoutRenterInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -3956,6 +4193,7 @@ export type ContractUpdateWithoutCreatedByInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -3993,6 +4231,7 @@ export type ContractUncheckedUpdateWithoutCreatedByInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -4050,6 +4289,7 @@ export type ContractUpdateWithoutUpdatedByInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -4087,6 +4327,7 @@ export type ContractUncheckedUpdateWithoutUpdatedByInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -4144,6 +4385,7 @@ export type ContractUpdateWithoutDeletedByInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -4181,6 +4423,7 @@ export type ContractUncheckedUpdateWithoutDeletedByInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -4262,6 +4505,7 @@ export type ContractUpdateWithoutTenantInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -4300,6 +4544,7 @@ export type ContractUncheckedUpdateWithoutTenantInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -4381,6 +4626,7 @@ export type ContractUpdateWithoutRoomInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -4419,6 +4665,7 @@ export type ContractUncheckedUpdateWithoutRoomInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -4500,6 +4747,7 @@ export type ContractUpdateWithoutRentalRequestInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -4538,6 +4786,7 @@ export type ContractUncheckedUpdateWithoutRentalRequestInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -4619,6 +4868,7 @@ export type ContractUpdateWithoutTemplateInput = {
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
@@ -4657,6 +4907,7 @@ export type ContractUncheckedUpdateWithoutTemplateInput = {
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
@@ -4700,6 +4951,7 @@ export type ContractCountOutputType = {
   handoverRecords: number
   meterReadings: number
   invoices: number
+  debts: number
   tickets: number
   conversations: number
   reviews: number
@@ -4713,6 +4965,7 @@ export type ContractCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   handoverRecords?: boolean | ContractCountOutputTypeCountHandoverRecordsArgs
   meterReadings?: boolean | ContractCountOutputTypeCountMeterReadingsArgs
   invoices?: boolean | ContractCountOutputTypeCountInvoicesArgs
+  debts?: boolean | ContractCountOutputTypeCountDebtsArgs
   tickets?: boolean | ContractCountOutputTypeCountTicketsArgs
   conversations?: boolean | ContractCountOutputTypeCountConversationsArgs
   reviews?: boolean | ContractCountOutputTypeCountReviewsArgs
@@ -4780,6 +5033,13 @@ export type ContractCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Typ
 /**
  * ContractCountOutputType without action
  */
+export type ContractCountOutputTypeCountDebtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DebtWhereInput
+}
+
+/**
+ * ContractCountOutputType without action
+ */
 export type ContractCountOutputTypeCountTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TicketWhereInput
 }
@@ -4835,6 +5095,7 @@ export type ContractSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   handoverRecords?: boolean | Prisma.Contract$handoverRecordsArgs<ExtArgs>
   meterReadings?: boolean | Prisma.Contract$meterReadingsArgs<ExtArgs>
   invoices?: boolean | Prisma.Contract$invoicesArgs<ExtArgs>
+  debts?: boolean | Prisma.Contract$debtsArgs<ExtArgs>
   tickets?: boolean | Prisma.Contract$ticketsArgs<ExtArgs>
   conversations?: boolean | Prisma.Contract$conversationsArgs<ExtArgs>
   reviews?: boolean | Prisma.Contract$reviewsArgs<ExtArgs>
@@ -4952,6 +5213,7 @@ export type ContractInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   handoverRecords?: boolean | Prisma.Contract$handoverRecordsArgs<ExtArgs>
   meterReadings?: boolean | Prisma.Contract$meterReadingsArgs<ExtArgs>
   invoices?: boolean | Prisma.Contract$invoicesArgs<ExtArgs>
+  debts?: boolean | Prisma.Contract$debtsArgs<ExtArgs>
   tickets?: boolean | Prisma.Contract$ticketsArgs<ExtArgs>
   conversations?: boolean | Prisma.Contract$conversationsArgs<ExtArgs>
   reviews?: boolean | Prisma.Contract$reviewsArgs<ExtArgs>
@@ -5032,6 +5294,10 @@ export type $ContractPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
      * Danh sách hóa đơn liên quan đến hợp đồng này
      */
     invoices: Prisma.$InvoicePayload<ExtArgs>[]
+    /**
+     * Danh sách công nợ phát sinh từ hợp đồng này
+     */
+    debts: Prisma.$DebtPayload<ExtArgs>[]
     /**
      * Danh sách các sự cố/ticket liên quan đến hợp đồng này
      */
@@ -5547,6 +5813,7 @@ export interface Prisma__ContractClient<T, Null = never, ExtArgs extends runtime
   handoverRecords<T extends Prisma.Contract$handoverRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$handoverRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HandoverRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   meterReadings<T extends Prisma.Contract$meterReadingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$meterReadingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeterReadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invoices<T extends Prisma.Contract$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  debts<T extends Prisma.Contract$debtsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$debtsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DebtPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tickets<T extends Prisma.Contract$ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   conversations<T extends Prisma.Contract$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.Contract$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6209,6 +6476,30 @@ export type Contract$invoicesArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.InvoiceScalarFieldEnum | Prisma.InvoiceScalarFieldEnum[]
+}
+
+/**
+ * Contract.debts
+ */
+export type Contract$debtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Debt
+   */
+  select?: Prisma.DebtSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Debt
+   */
+  omit?: Prisma.DebtOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DebtInclude<ExtArgs> | null
+  where?: Prisma.DebtWhereInput
+  orderBy?: Prisma.DebtOrderByWithRelationInput | Prisma.DebtOrderByWithRelationInput[]
+  cursor?: Prisma.DebtWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DebtScalarFieldEnum | Prisma.DebtScalarFieldEnum[]
 }
 
 /**

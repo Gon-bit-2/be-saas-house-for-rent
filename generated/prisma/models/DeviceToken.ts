@@ -29,20 +29,28 @@ export type AggregateDeviceToken = {
 export type DeviceTokenAvgAggregateOutputType = {
   id: number | null
   userId: number | null
+  failureCount: number | null
 }
 
 export type DeviceTokenSumAggregateOutputType = {
   id: number | null
   userId: number | null
+  failureCount: number | null
 }
 
 export type DeviceTokenMinAggregateOutputType = {
   id: number | null
   userId: number | null
   token: string | null
+  fid: string | null
   platform: $Enums.DevicePlatform | null
   deviceName: string | null
   isActive: boolean | null
+  lastSeenAt: Date | null
+  lastUsedAt: Date | null
+  failureCount: number | null
+  lastError: string | null
+  disabledAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -51,9 +59,15 @@ export type DeviceTokenMaxAggregateOutputType = {
   id: number | null
   userId: number | null
   token: string | null
+  fid: string | null
   platform: $Enums.DevicePlatform | null
   deviceName: string | null
   isActive: boolean | null
+  lastSeenAt: Date | null
+  lastUsedAt: Date | null
+  failureCount: number | null
+  lastError: string | null
+  disabledAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -62,9 +76,15 @@ export type DeviceTokenCountAggregateOutputType = {
   id: number
   userId: number
   token: number
+  fid: number
   platform: number
   deviceName: number
   isActive: number
+  lastSeenAt: number
+  lastUsedAt: number
+  failureCount: number
+  lastError: number
+  disabledAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -74,20 +94,28 @@ export type DeviceTokenCountAggregateOutputType = {
 export type DeviceTokenAvgAggregateInputType = {
   id?: true
   userId?: true
+  failureCount?: true
 }
 
 export type DeviceTokenSumAggregateInputType = {
   id?: true
   userId?: true
+  failureCount?: true
 }
 
 export type DeviceTokenMinAggregateInputType = {
   id?: true
   userId?: true
   token?: true
+  fid?: true
   platform?: true
   deviceName?: true
   isActive?: true
+  lastSeenAt?: true
+  lastUsedAt?: true
+  failureCount?: true
+  lastError?: true
+  disabledAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -96,9 +124,15 @@ export type DeviceTokenMaxAggregateInputType = {
   id?: true
   userId?: true
   token?: true
+  fid?: true
   platform?: true
   deviceName?: true
   isActive?: true
+  lastSeenAt?: true
+  lastUsedAt?: true
+  failureCount?: true
+  lastError?: true
+  disabledAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -107,9 +141,15 @@ export type DeviceTokenCountAggregateInputType = {
   id?: true
   userId?: true
   token?: true
+  fid?: true
   platform?: true
   deviceName?: true
   isActive?: true
+  lastSeenAt?: true
+  lastUsedAt?: true
+  failureCount?: true
+  lastError?: true
+  disabledAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -205,9 +245,15 @@ export type DeviceTokenGroupByOutputType = {
   id: number
   userId: number
   token: string
+  fid: string | null
   platform: $Enums.DevicePlatform
   deviceName: string | null
   isActive: boolean
+  lastSeenAt: Date | null
+  lastUsedAt: Date | null
+  failureCount: number
+  lastError: string | null
+  disabledAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: DeviceTokenCountAggregateOutputType | null
@@ -239,9 +285,15 @@ export type DeviceTokenWhereInput = {
   id?: Prisma.IntFilter<"DeviceToken"> | number
   userId?: Prisma.IntFilter<"DeviceToken"> | number
   token?: Prisma.StringFilter<"DeviceToken"> | string
+  fid?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
   platform?: Prisma.EnumDevicePlatformFilter<"DeviceToken"> | $Enums.DevicePlatform
   deviceName?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
   isActive?: Prisma.BoolFilter<"DeviceToken"> | boolean
+  lastSeenAt?: Prisma.DateTimeNullableFilter<"DeviceToken"> | Date | string | null
+  lastUsedAt?: Prisma.DateTimeNullableFilter<"DeviceToken"> | Date | string | null
+  failureCount?: Prisma.IntFilter<"DeviceToken"> | number
+  lastError?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
+  disabledAt?: Prisma.DateTimeNullableFilter<"DeviceToken"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"DeviceToken"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DeviceToken"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -251,9 +303,15 @@ export type DeviceTokenOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   token?: Prisma.SortOrder
+  fid?: Prisma.SortOrderInput | Prisma.SortOrder
   platform?: Prisma.SortOrder
   deviceName?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  lastSeenAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastUsedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  failureCount?: Prisma.SortOrder
+  lastError?: Prisma.SortOrderInput | Prisma.SortOrder
+  disabledAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -267,9 +325,15 @@ export type DeviceTokenWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.DeviceTokenWhereInput | Prisma.DeviceTokenWhereInput[]
   userId?: Prisma.IntFilter<"DeviceToken"> | number
   token?: Prisma.StringFilter<"DeviceToken"> | string
+  fid?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
   platform?: Prisma.EnumDevicePlatformFilter<"DeviceToken"> | $Enums.DevicePlatform
   deviceName?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
   isActive?: Prisma.BoolFilter<"DeviceToken"> | boolean
+  lastSeenAt?: Prisma.DateTimeNullableFilter<"DeviceToken"> | Date | string | null
+  lastUsedAt?: Prisma.DateTimeNullableFilter<"DeviceToken"> | Date | string | null
+  failureCount?: Prisma.IntFilter<"DeviceToken"> | number
+  lastError?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
+  disabledAt?: Prisma.DateTimeNullableFilter<"DeviceToken"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"DeviceToken"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DeviceToken"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -279,9 +343,15 @@ export type DeviceTokenOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   token?: Prisma.SortOrder
+  fid?: Prisma.SortOrderInput | Prisma.SortOrder
   platform?: Prisma.SortOrder
   deviceName?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  lastSeenAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastUsedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  failureCount?: Prisma.SortOrder
+  lastError?: Prisma.SortOrderInput | Prisma.SortOrder
+  disabledAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.DeviceTokenCountOrderByAggregateInput
@@ -298,18 +368,30 @@ export type DeviceTokenScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"DeviceToken"> | number
   userId?: Prisma.IntWithAggregatesFilter<"DeviceToken"> | number
   token?: Prisma.StringWithAggregatesFilter<"DeviceToken"> | string
+  fid?: Prisma.StringNullableWithAggregatesFilter<"DeviceToken"> | string | null
   platform?: Prisma.EnumDevicePlatformWithAggregatesFilter<"DeviceToken"> | $Enums.DevicePlatform
   deviceName?: Prisma.StringNullableWithAggregatesFilter<"DeviceToken"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"DeviceToken"> | boolean
+  lastSeenAt?: Prisma.DateTimeNullableWithAggregatesFilter<"DeviceToken"> | Date | string | null
+  lastUsedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"DeviceToken"> | Date | string | null
+  failureCount?: Prisma.IntWithAggregatesFilter<"DeviceToken"> | number
+  lastError?: Prisma.StringNullableWithAggregatesFilter<"DeviceToken"> | string | null
+  disabledAt?: Prisma.DateTimeNullableWithAggregatesFilter<"DeviceToken"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DeviceToken"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"DeviceToken"> | Date | string
 }
 
 export type DeviceTokenCreateInput = {
   token: string
+  fid?: string | null
   platform: $Enums.DevicePlatform
   deviceName?: string | null
   isActive?: boolean
+  lastSeenAt?: Date | string | null
+  lastUsedAt?: Date | string | null
+  failureCount?: number
+  lastError?: string | null
+  disabledAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutDeviceTokensInput
@@ -319,18 +401,30 @@ export type DeviceTokenUncheckedCreateInput = {
   id?: number
   userId: number
   token: string
+  fid?: string | null
   platform: $Enums.DevicePlatform
   deviceName?: string | null
   isActive?: boolean
+  lastSeenAt?: Date | string | null
+  lastUsedAt?: Date | string | null
+  failureCount?: number
+  lastError?: string | null
+  disabledAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type DeviceTokenUpdateInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
+  fid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disabledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutDeviceTokensNestedInput
@@ -340,9 +434,15 @@ export type DeviceTokenUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
+  fid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disabledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -351,18 +451,30 @@ export type DeviceTokenCreateManyInput = {
   id?: number
   userId: number
   token: string
+  fid?: string | null
   platform: $Enums.DevicePlatform
   deviceName?: string | null
   isActive?: boolean
+  lastSeenAt?: Date | string | null
+  lastUsedAt?: Date | string | null
+  failureCount?: number
+  lastError?: string | null
+  disabledAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type DeviceTokenUpdateManyMutationInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
+  fid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disabledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -371,9 +483,15 @@ export type DeviceTokenUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
+  fid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disabledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -397,9 +515,15 @@ export type DeviceTokenCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   token?: Prisma.SortOrder
+  fid?: Prisma.SortOrder
   platform?: Prisma.SortOrder
   deviceName?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  lastSeenAt?: Prisma.SortOrder
+  lastUsedAt?: Prisma.SortOrder
+  failureCount?: Prisma.SortOrder
+  lastError?: Prisma.SortOrder
+  disabledAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -407,15 +531,22 @@ export type DeviceTokenCountOrderByAggregateInput = {
 export type DeviceTokenAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  failureCount?: Prisma.SortOrder
 }
 
 export type DeviceTokenMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   token?: Prisma.SortOrder
+  fid?: Prisma.SortOrder
   platform?: Prisma.SortOrder
   deviceName?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  lastSeenAt?: Prisma.SortOrder
+  lastUsedAt?: Prisma.SortOrder
+  failureCount?: Prisma.SortOrder
+  lastError?: Prisma.SortOrder
+  disabledAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -424,9 +555,15 @@ export type DeviceTokenMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   token?: Prisma.SortOrder
+  fid?: Prisma.SortOrder
   platform?: Prisma.SortOrder
   deviceName?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  lastSeenAt?: Prisma.SortOrder
+  lastUsedAt?: Prisma.SortOrder
+  failureCount?: Prisma.SortOrder
+  lastError?: Prisma.SortOrder
+  disabledAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -434,6 +571,7 @@ export type DeviceTokenMinOrderByAggregateInput = {
 export type DeviceTokenSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  failureCount?: Prisma.SortOrder
 }
 
 export type DeviceTokenCreateNestedManyWithoutUserInput = {
@@ -484,9 +622,15 @@ export type EnumDevicePlatformFieldUpdateOperationsInput = {
 
 export type DeviceTokenCreateWithoutUserInput = {
   token: string
+  fid?: string | null
   platform: $Enums.DevicePlatform
   deviceName?: string | null
   isActive?: boolean
+  lastSeenAt?: Date | string | null
+  lastUsedAt?: Date | string | null
+  failureCount?: number
+  lastError?: string | null
+  disabledAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -494,9 +638,15 @@ export type DeviceTokenCreateWithoutUserInput = {
 export type DeviceTokenUncheckedCreateWithoutUserInput = {
   id?: number
   token: string
+  fid?: string | null
   platform: $Enums.DevicePlatform
   deviceName?: string | null
   isActive?: boolean
+  lastSeenAt?: Date | string | null
+  lastUsedAt?: Date | string | null
+  failureCount?: number
+  lastError?: string | null
+  disabledAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -534,9 +684,15 @@ export type DeviceTokenScalarWhereInput = {
   id?: Prisma.IntFilter<"DeviceToken"> | number
   userId?: Prisma.IntFilter<"DeviceToken"> | number
   token?: Prisma.StringFilter<"DeviceToken"> | string
+  fid?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
   platform?: Prisma.EnumDevicePlatformFilter<"DeviceToken"> | $Enums.DevicePlatform
   deviceName?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
   isActive?: Prisma.BoolFilter<"DeviceToken"> | boolean
+  lastSeenAt?: Prisma.DateTimeNullableFilter<"DeviceToken"> | Date | string | null
+  lastUsedAt?: Prisma.DateTimeNullableFilter<"DeviceToken"> | Date | string | null
+  failureCount?: Prisma.IntFilter<"DeviceToken"> | number
+  lastError?: Prisma.StringNullableFilter<"DeviceToken"> | string | null
+  disabledAt?: Prisma.DateTimeNullableFilter<"DeviceToken"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"DeviceToken"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"DeviceToken"> | Date | string
 }
@@ -544,18 +700,30 @@ export type DeviceTokenScalarWhereInput = {
 export type DeviceTokenCreateManyUserInput = {
   id?: number
   token: string
+  fid?: string | null
   platform: $Enums.DevicePlatform
   deviceName?: string | null
   isActive?: boolean
+  lastSeenAt?: Date | string | null
+  lastUsedAt?: Date | string | null
+  failureCount?: number
+  lastError?: string | null
+  disabledAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type DeviceTokenUpdateWithoutUserInput = {
   token?: Prisma.StringFieldUpdateOperationsInput | string
+  fid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disabledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -563,9 +731,15 @@ export type DeviceTokenUpdateWithoutUserInput = {
 export type DeviceTokenUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
+  fid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disabledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -573,9 +747,15 @@ export type DeviceTokenUncheckedUpdateWithoutUserInput = {
 export type DeviceTokenUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   token?: Prisma.StringFieldUpdateOperationsInput | string
+  fid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   platform?: Prisma.EnumDevicePlatformFieldUpdateOperationsInput | $Enums.DevicePlatform
   deviceName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeenAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureCount?: Prisma.IntFieldUpdateOperationsInput | number
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disabledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -586,9 +766,15 @@ export type DeviceTokenSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   id?: boolean
   userId?: boolean
   token?: boolean
+  fid?: boolean
   platform?: boolean
   deviceName?: boolean
   isActive?: boolean
+  lastSeenAt?: boolean
+  lastUsedAt?: boolean
+  failureCount?: boolean
+  lastError?: boolean
+  disabledAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -598,9 +784,15 @@ export type DeviceTokenSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   userId?: boolean
   token?: boolean
+  fid?: boolean
   platform?: boolean
   deviceName?: boolean
   isActive?: boolean
+  lastSeenAt?: boolean
+  lastUsedAt?: boolean
+  failureCount?: boolean
+  lastError?: boolean
+  disabledAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -610,9 +802,15 @@ export type DeviceTokenSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   id?: boolean
   userId?: boolean
   token?: boolean
+  fid?: boolean
   platform?: boolean
   deviceName?: boolean
   isActive?: boolean
+  lastSeenAt?: boolean
+  lastUsedAt?: boolean
+  failureCount?: boolean
+  lastError?: boolean
+  disabledAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -622,14 +820,20 @@ export type DeviceTokenSelectScalar = {
   id?: boolean
   userId?: boolean
   token?: boolean
+  fid?: boolean
   platform?: boolean
   deviceName?: boolean
   isActive?: boolean
+  lastSeenAt?: boolean
+  lastUsedAt?: boolean
+  failureCount?: boolean
+  lastError?: boolean
+  disabledAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DeviceTokenOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "token" | "platform" | "deviceName" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["deviceToken"]>
+export type DeviceTokenOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "token" | "fid" | "platform" | "deviceName" | "isActive" | "lastSeenAt" | "lastUsedAt" | "failureCount" | "lastError" | "disabledAt" | "createdAt" | "updatedAt", ExtArgs["result"]["deviceToken"]>
 export type DeviceTokenInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -662,6 +866,10 @@ export type $DeviceTokenPayload<ExtArgs extends runtime.Types.Extensions.Interna
      */
     token: string
     /**
+     * Firebase Installation ID mới hơn registration token, dùng để hỗ trợ quản lý vòng đời token
+     */
+    fid: string | null
+    /**
      * Hệ điều hành của thiết bị nhận thông báo (iOS, Android hoặc Web)
      */
     platform: $Enums.DevicePlatform
@@ -673,6 +881,26 @@ export type $DeviceTokenPayload<ExtArgs extends runtime.Types.Extensions.Interna
      * Đánh dấu token thiết bị có đang hoạt động nhận tin không
      */
     isActive: boolean
+    /**
+     * Thời điểm client gần nhất gửi/refresh token này
+     */
+    lastSeenAt: Date | null
+    /**
+     * Thời điểm backend gần nhất dùng token này để gửi push
+     */
+    lastUsedAt: Date | null
+    /**
+     * Số lần gửi lỗi liên tiếp để hỗ trợ quan sát token không ổn định
+     */
+    failureCount: number
+    /**
+     * Mã lỗi FCM gần nhất nếu có
+     */
+    lastError: string | null
+    /**
+     * Thời điểm token bị vô hiệu hóa do client xóa hoặc FCM báo invalid
+     */
+    disabledAt: Date | null
     /**
      * Thời điểm đăng ký token thiết bị
      */
@@ -1108,9 +1336,15 @@ export interface DeviceTokenFieldRefs {
   readonly id: Prisma.FieldRef<"DeviceToken", 'Int'>
   readonly userId: Prisma.FieldRef<"DeviceToken", 'Int'>
   readonly token: Prisma.FieldRef<"DeviceToken", 'String'>
+  readonly fid: Prisma.FieldRef<"DeviceToken", 'String'>
   readonly platform: Prisma.FieldRef<"DeviceToken", 'DevicePlatform'>
   readonly deviceName: Prisma.FieldRef<"DeviceToken", 'String'>
   readonly isActive: Prisma.FieldRef<"DeviceToken", 'Boolean'>
+  readonly lastSeenAt: Prisma.FieldRef<"DeviceToken", 'DateTime'>
+  readonly lastUsedAt: Prisma.FieldRef<"DeviceToken", 'DateTime'>
+  readonly failureCount: Prisma.FieldRef<"DeviceToken", 'Int'>
+  readonly lastError: Prisma.FieldRef<"DeviceToken", 'String'>
+  readonly disabledAt: Prisma.FieldRef<"DeviceToken", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"DeviceToken", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"DeviceToken", 'DateTime'>
 }

@@ -460,6 +460,23 @@ export type EnumMarketplaceStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumMarketplaceStatusFilter<$PrismaModel>
 }
 
+export type EnumMarketplaceStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.MarketplaceStatus | Prisma.EnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.MarketplaceStatus[] | Prisma.ListEnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.MarketplaceStatus[] | Prisma.ListEnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumMarketplaceStatusNullableFilter<$PrismaModel> | $Enums.MarketplaceStatus | null
+}
+
+export type EnumMarketplaceStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MarketplaceStatus | Prisma.EnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.MarketplaceStatus[] | Prisma.ListEnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.MarketplaceStatus[] | Prisma.ListEnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumMarketplaceStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.MarketplaceStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMarketplaceStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMarketplaceStatusNullableFilter<$PrismaModel>
+}
+
 export type EnumGenderNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.Gender | Prisma.EnumGenderFieldRefInput<$PrismaModel> | null
   in?: $Enums.Gender[] | Prisma.ListEnumGenderFieldRefInput<$PrismaModel> | null
@@ -885,6 +902,23 @@ export type EnumInvoiceItemTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumInvoiceItemTypeFilter<$PrismaModel>
 }
 
+export type EnumDebtStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.DebtStatus | Prisma.EnumDebtStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DebtStatus[] | Prisma.ListEnumDebtStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DebtStatus[] | Prisma.ListEnumDebtStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDebtStatusFilter<$PrismaModel> | $Enums.DebtStatus
+}
+
+export type EnumDebtStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DebtStatus | Prisma.EnumDebtStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DebtStatus[] | Prisma.ListEnumDebtStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DebtStatus[] | Prisma.ListEnumDebtStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDebtStatusWithAggregatesFilter<$PrismaModel> | $Enums.DebtStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDebtStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDebtStatusFilter<$PrismaModel>
+}
+
 export type EnumPaymentMethodFilter<$PrismaModel = never> = {
   equals?: $Enums.PaymentMethod | Prisma.EnumPaymentMethodFieldRefInput<$PrismaModel>
   in?: $Enums.PaymentMethod[] | Prisma.ListEnumPaymentMethodFieldRefInput<$PrismaModel>
@@ -936,11 +970,24 @@ export type EnumQrCodeStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumQrCodeStatusFilter<$PrismaModel>
 }
 
+export type BoolNullableFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableFilter<$PrismaModel> | boolean | null
+}
+
 export type EnumWebhookLogStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.WebhookLogStatus | Prisma.EnumWebhookLogStatusFieldRefInput<$PrismaModel>
   in?: $Enums.WebhookLogStatus[] | Prisma.ListEnumWebhookLogStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.WebhookLogStatus[] | Prisma.ListEnumWebhookLogStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumWebhookLogStatusFilter<$PrismaModel> | $Enums.WebhookLogStatus
+}
+
+export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedBoolNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
 }
 
 export type EnumWebhookLogStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -1616,6 +1663,23 @@ export type NestedEnumMarketplaceStatusWithAggregatesFilter<$PrismaModel = never
   _max?: Prisma.NestedEnumMarketplaceStatusFilter<$PrismaModel>
 }
 
+export type NestedEnumMarketplaceStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.MarketplaceStatus | Prisma.EnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.MarketplaceStatus[] | Prisma.ListEnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.MarketplaceStatus[] | Prisma.ListEnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumMarketplaceStatusNullableFilter<$PrismaModel> | $Enums.MarketplaceStatus | null
+}
+
+export type NestedEnumMarketplaceStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MarketplaceStatus | Prisma.EnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.MarketplaceStatus[] | Prisma.ListEnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.MarketplaceStatus[] | Prisma.ListEnumMarketplaceStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumMarketplaceStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.MarketplaceStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMarketplaceStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMarketplaceStatusNullableFilter<$PrismaModel>
+}
+
 export type NestedEnumGenderNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.Gender | Prisma.EnumGenderFieldRefInput<$PrismaModel> | null
   in?: $Enums.Gender[] | Prisma.ListEnumGenderFieldRefInput<$PrismaModel> | null
@@ -1987,6 +2051,23 @@ export type NestedEnumInvoiceItemTypeWithAggregatesFilter<$PrismaModel = never> 
   _max?: Prisma.NestedEnumInvoiceItemTypeFilter<$PrismaModel>
 }
 
+export type NestedEnumDebtStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.DebtStatus | Prisma.EnumDebtStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DebtStatus[] | Prisma.ListEnumDebtStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DebtStatus[] | Prisma.ListEnumDebtStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDebtStatusFilter<$PrismaModel> | $Enums.DebtStatus
+}
+
+export type NestedEnumDebtStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DebtStatus | Prisma.EnumDebtStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DebtStatus[] | Prisma.ListEnumDebtStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DebtStatus[] | Prisma.ListEnumDebtStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDebtStatusWithAggregatesFilter<$PrismaModel> | $Enums.DebtStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDebtStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDebtStatusFilter<$PrismaModel>
+}
+
 export type NestedEnumPaymentMethodFilter<$PrismaModel = never> = {
   equals?: $Enums.PaymentMethod | Prisma.EnumPaymentMethodFieldRefInput<$PrismaModel>
   in?: $Enums.PaymentMethod[] | Prisma.ListEnumPaymentMethodFieldRefInput<$PrismaModel>
@@ -2038,11 +2119,24 @@ export type NestedEnumQrCodeStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumQrCodeStatusFilter<$PrismaModel>
 }
 
+export type NestedBoolNullableFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableFilter<$PrismaModel> | boolean | null
+}
+
 export type NestedEnumWebhookLogStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.WebhookLogStatus | Prisma.EnumWebhookLogStatusFieldRefInput<$PrismaModel>
   in?: $Enums.WebhookLogStatus[] | Prisma.ListEnumWebhookLogStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.WebhookLogStatus[] | Prisma.ListEnumWebhookLogStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumWebhookLogStatusFilter<$PrismaModel> | $Enums.WebhookLogStatus
+}
+
+export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedBoolNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumWebhookLogStatusWithAggregatesFilter<$PrismaModel = never> = {

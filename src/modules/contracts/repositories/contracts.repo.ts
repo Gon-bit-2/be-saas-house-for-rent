@@ -100,7 +100,13 @@ export class ContractsRepository {
     }
 
     return this.prismaService.$transaction([
-      this.prismaService.contract.findMany({ where, skip, take, orderBy: [{ createdAt: 'desc' }], select: contractSelect }),
+      this.prismaService.contract.findMany({
+        where,
+        skip,
+        take,
+        orderBy: [{ createdAt: 'desc' }],
+        select: contractSelect,
+      }),
       this.prismaService.contract.count({ where }),
     ])
   }
@@ -207,10 +213,26 @@ export class ContractsRepository {
       })
 
       await tx.contract.update({ where: { id }, data: { status: 'ACTIVE', updatedById: actorId } })
+      const room = await tx.room.findUniqueOrThrow({
+        where: { id: contract.roomId },
+        select: { tenantId: true, marketplaceStatus: true },
+      })
       await tx.room.update({
         where: { id: contract.roomId },
         data: { status: 'OCCUPIED', marketplaceStatus: 'HIDDEN', updatedById: actorId },
       })
+      if (room.marketplaceStatus !== 'HIDDEN') {
+        await tx.marketplaceModeration.create({
+          data: {
+            roomId: contract.roomId,
+            tenantId: room.tenantId,
+            actorId,
+            fromStatus: room.marketplaceStatus,
+            toStatus: 'HIDDEN',
+            reason: 'AUTO_CONTRACT_ACTIVATED',
+          },
+        })
+      }
       await tx.rentalHistory.create({
         data: {
           tenantId,

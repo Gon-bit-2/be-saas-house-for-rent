@@ -327,6 +327,7 @@ export type TenantWhereInput = {
   properties?: Prisma.PropertyListRelationFilter
   floors?: Prisma.FloorListRelationFilter
   rooms?: Prisma.RoomListRelationFilter
+  marketplaceModerations?: Prisma.MarketplaceModerationListRelationFilter
   rentalHistories?: Prisma.RentalHistoryListRelationFilter
   viewingAppointments?: Prisma.RoomViewingAppointmentListRelationFilter
   rentalRequests?: Prisma.RentalRequestListRelationFilter
@@ -340,6 +341,7 @@ export type TenantWhereInput = {
   ocrJobs?: Prisma.OcrJobListRelationFilter
   invoiceBatches?: Prisma.InvoiceBatchListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
+  debts?: Prisma.DebtListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
   paymentQrCodes?: Prisma.PaymentQrCodeListRelationFilter
   paymentWebhookLogs?: Prisma.PaymentWebhookLogListRelationFilter
@@ -379,6 +381,7 @@ export type TenantOrderByWithRelationInput = {
   properties?: Prisma.PropertyOrderByRelationAggregateInput
   floors?: Prisma.FloorOrderByRelationAggregateInput
   rooms?: Prisma.RoomOrderByRelationAggregateInput
+  marketplaceModerations?: Prisma.MarketplaceModerationOrderByRelationAggregateInput
   rentalHistories?: Prisma.RentalHistoryOrderByRelationAggregateInput
   viewingAppointments?: Prisma.RoomViewingAppointmentOrderByRelationAggregateInput
   rentalRequests?: Prisma.RentalRequestOrderByRelationAggregateInput
@@ -392,6 +395,7 @@ export type TenantOrderByWithRelationInput = {
   ocrJobs?: Prisma.OcrJobOrderByRelationAggregateInput
   invoiceBatches?: Prisma.InvoiceBatchOrderByRelationAggregateInput
   invoices?: Prisma.InvoiceOrderByRelationAggregateInput
+  debts?: Prisma.DebtOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
   paymentQrCodes?: Prisma.PaymentQrCodeOrderByRelationAggregateInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogOrderByRelationAggregateInput
@@ -434,6 +438,7 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   properties?: Prisma.PropertyListRelationFilter
   floors?: Prisma.FloorListRelationFilter
   rooms?: Prisma.RoomListRelationFilter
+  marketplaceModerations?: Prisma.MarketplaceModerationListRelationFilter
   rentalHistories?: Prisma.RentalHistoryListRelationFilter
   viewingAppointments?: Prisma.RoomViewingAppointmentListRelationFilter
   rentalRequests?: Prisma.RentalRequestListRelationFilter
@@ -447,6 +452,7 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   ocrJobs?: Prisma.OcrJobListRelationFilter
   invoiceBatches?: Prisma.InvoiceBatchListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
+  debts?: Prisma.DebtListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
   paymentQrCodes?: Prisma.PaymentQrCodeListRelationFilter
   paymentWebhookLogs?: Prisma.PaymentWebhookLogListRelationFilter
@@ -527,6 +533,7 @@ export type TenantCreateInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -540,6 +547,7 @@ export type TenantCreateInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -578,6 +586,7 @@ export type TenantUncheckedCreateInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -591,6 +600,7 @@ export type TenantUncheckedCreateInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -622,6 +632,7 @@ export type TenantUpdateInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -635,6 +646,7 @@ export type TenantUpdateInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -673,6 +685,7 @@ export type TenantUncheckedUpdateInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -686,6 +699,7 @@ export type TenantUncheckedUpdateInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -1103,6 +1117,20 @@ export type TenantUpdateOneRequiredWithoutRoomsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutRoomsInput, Prisma.TenantUpdateWithoutRoomsInput>, Prisma.TenantUncheckedUpdateWithoutRoomsInput>
 }
 
+export type TenantCreateNestedOneWithoutMarketplaceModerationsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutMarketplaceModerationsInput, Prisma.TenantUncheckedCreateWithoutMarketplaceModerationsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutMarketplaceModerationsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutMarketplaceModerationsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutMarketplaceModerationsInput, Prisma.TenantUncheckedCreateWithoutMarketplaceModerationsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutMarketplaceModerationsInput
+  upsert?: Prisma.TenantUpsertWithoutMarketplaceModerationsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutMarketplaceModerationsInput, Prisma.TenantUpdateWithoutMarketplaceModerationsInput>, Prisma.TenantUncheckedUpdateWithoutMarketplaceModerationsInput>
+}
+
 export type TenantCreateNestedOneWithoutRentalHistoriesInput = {
   create?: Prisma.XOR<Prisma.TenantCreateWithoutRentalHistoriesInput, Prisma.TenantUncheckedCreateWithoutRentalHistoriesInput>
   connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRentalHistoriesInput
@@ -1285,6 +1313,20 @@ export type TenantUpdateOneRequiredWithoutInvoicesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutInvoicesInput, Prisma.TenantUpdateWithoutInvoicesInput>, Prisma.TenantUncheckedUpdateWithoutInvoicesInput>
 }
 
+export type TenantCreateNestedOneWithoutDebtsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutDebtsInput, Prisma.TenantUncheckedCreateWithoutDebtsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutDebtsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutDebtsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutDebtsInput, Prisma.TenantUncheckedCreateWithoutDebtsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutDebtsInput
+  upsert?: Prisma.TenantUpsertWithoutDebtsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutDebtsInput, Prisma.TenantUpdateWithoutDebtsInput>, Prisma.TenantUncheckedUpdateWithoutDebtsInput>
+}
+
 export type TenantCreateNestedOneWithoutPaymentsInput = {
   create?: Prisma.XOR<Prisma.TenantCreateWithoutPaymentsInput, Prisma.TenantUncheckedCreateWithoutPaymentsInput>
   connectOrCreate?: Prisma.TenantCreateOrConnectWithoutPaymentsInput
@@ -1451,6 +1493,7 @@ export type TenantCreateWithoutOwnerInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -1464,6 +1507,7 @@ export type TenantCreateWithoutOwnerInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -1501,6 +1545,7 @@ export type TenantUncheckedCreateWithoutOwnerInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -1514,6 +1559,7 @@ export type TenantUncheckedCreateWithoutOwnerInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -1555,6 +1601,7 @@ export type TenantCreateWithoutCreatedByInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -1568,6 +1615,7 @@ export type TenantCreateWithoutCreatedByInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -1604,6 +1652,7 @@ export type TenantUncheckedCreateWithoutCreatedByInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -1617,6 +1666,7 @@ export type TenantUncheckedCreateWithoutCreatedByInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -1658,6 +1708,7 @@ export type TenantCreateWithoutUpdatedByInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -1671,6 +1722,7 @@ export type TenantCreateWithoutUpdatedByInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -1707,6 +1759,7 @@ export type TenantUncheckedCreateWithoutUpdatedByInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -1720,6 +1773,7 @@ export type TenantUncheckedCreateWithoutUpdatedByInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -1761,6 +1815,7 @@ export type TenantCreateWithoutDeletedByInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -1774,6 +1829,7 @@ export type TenantCreateWithoutDeletedByInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -1810,6 +1866,7 @@ export type TenantUncheckedCreateWithoutDeletedByInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -1823,6 +1880,7 @@ export type TenantUncheckedCreateWithoutDeletedByInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -1949,6 +2007,7 @@ export type TenantCreateWithoutMembersInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -1962,6 +2021,7 @@ export type TenantCreateWithoutMembersInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -1999,6 +2059,7 @@ export type TenantUncheckedCreateWithoutMembersInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -2012,6 +2073,7 @@ export type TenantUncheckedCreateWithoutMembersInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -2058,6 +2120,7 @@ export type TenantUpdateWithoutMembersInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -2071,6 +2134,7 @@ export type TenantUpdateWithoutMembersInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -2108,6 +2172,7 @@ export type TenantUncheckedUpdateWithoutMembersInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -2121,6 +2186,7 @@ export type TenantUncheckedUpdateWithoutMembersInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -2151,6 +2217,7 @@ export type TenantCreateWithoutSubscriptionsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -2164,6 +2231,7 @@ export type TenantCreateWithoutSubscriptionsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -2201,6 +2269,7 @@ export type TenantUncheckedCreateWithoutSubscriptionsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -2214,6 +2283,7 @@ export type TenantUncheckedCreateWithoutSubscriptionsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -2260,6 +2330,7 @@ export type TenantUpdateWithoutSubscriptionsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -2273,6 +2344,7 @@ export type TenantUpdateWithoutSubscriptionsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -2310,6 +2382,7 @@ export type TenantUncheckedUpdateWithoutSubscriptionsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -2323,6 +2396,7 @@ export type TenantUncheckedUpdateWithoutSubscriptionsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -2353,6 +2427,7 @@ export type TenantCreateWithoutSubscriptionPaymentsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -2366,6 +2441,7 @@ export type TenantCreateWithoutSubscriptionPaymentsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -2403,6 +2479,7 @@ export type TenantUncheckedCreateWithoutSubscriptionPaymentsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -2416,6 +2493,7 @@ export type TenantUncheckedCreateWithoutSubscriptionPaymentsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -2462,6 +2540,7 @@ export type TenantUpdateWithoutSubscriptionPaymentsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -2475,6 +2554,7 @@ export type TenantUpdateWithoutSubscriptionPaymentsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -2512,6 +2592,7 @@ export type TenantUncheckedUpdateWithoutSubscriptionPaymentsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -2525,6 +2606,7 @@ export type TenantUncheckedUpdateWithoutSubscriptionPaymentsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -2555,6 +2637,7 @@ export type TenantCreateWithoutPropertiesInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -2568,6 +2651,7 @@ export type TenantCreateWithoutPropertiesInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -2605,6 +2689,7 @@ export type TenantUncheckedCreateWithoutPropertiesInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -2618,6 +2703,7 @@ export type TenantUncheckedCreateWithoutPropertiesInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -2664,6 +2750,7 @@ export type TenantUpdateWithoutPropertiesInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -2677,6 +2764,7 @@ export type TenantUpdateWithoutPropertiesInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -2714,6 +2802,7 @@ export type TenantUncheckedUpdateWithoutPropertiesInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -2727,6 +2816,7 @@ export type TenantUncheckedUpdateWithoutPropertiesInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -2757,6 +2847,7 @@ export type TenantCreateWithoutFloorsInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -2770,6 +2861,7 @@ export type TenantCreateWithoutFloorsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -2807,6 +2899,7 @@ export type TenantUncheckedCreateWithoutFloorsInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -2820,6 +2913,7 @@ export type TenantUncheckedCreateWithoutFloorsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -2866,6 +2960,7 @@ export type TenantUpdateWithoutFloorsInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -2879,6 +2974,7 @@ export type TenantUpdateWithoutFloorsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -2916,6 +3012,7 @@ export type TenantUncheckedUpdateWithoutFloorsInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -2929,6 +3026,7 @@ export type TenantUncheckedUpdateWithoutFloorsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -2959,6 +3057,7 @@ export type TenantCreateWithoutRoomsInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -2972,6 +3071,7 @@ export type TenantCreateWithoutRoomsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -3009,6 +3109,7 @@ export type TenantUncheckedCreateWithoutRoomsInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -3022,6 +3123,7 @@ export type TenantUncheckedCreateWithoutRoomsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -3068,6 +3170,7 @@ export type TenantUpdateWithoutRoomsInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -3081,6 +3184,7 @@ export type TenantUpdateWithoutRoomsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -3118,6 +3222,7 @@ export type TenantUncheckedUpdateWithoutRoomsInput = {
   subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -3131,6 +3236,217 @@ export type TenantUncheckedUpdateWithoutRoomsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutMarketplaceModerationsInput = {
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  owner: Prisma.UserCreateNestedOneWithoutOwnedTenantsInput
+  members?: Prisma.TenantMemberCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedTenantsInput
+}
+
+export type TenantUncheckedCreateWithoutMarketplaceModerationsInput = {
+  id?: number
+  ownerUserId: number
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutMarketplaceModerationsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutMarketplaceModerationsInput, Prisma.TenantUncheckedCreateWithoutMarketplaceModerationsInput>
+}
+
+export type TenantUpsertWithoutMarketplaceModerationsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutMarketplaceModerationsInput, Prisma.TenantUncheckedUpdateWithoutMarketplaceModerationsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutMarketplaceModerationsInput, Prisma.TenantUncheckedCreateWithoutMarketplaceModerationsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutMarketplaceModerationsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutMarketplaceModerationsInput, Prisma.TenantUncheckedUpdateWithoutMarketplaceModerationsInput>
+}
+
+export type TenantUpdateWithoutMarketplaceModerationsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTenantsNestedInput
+  members?: Prisma.TenantMemberUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedTenantsNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutMarketplaceModerationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -3162,6 +3478,7 @@ export type TenantCreateWithoutRentalHistoriesInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
@@ -3174,6 +3491,7 @@ export type TenantCreateWithoutRentalHistoriesInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -3212,6 +3530,7 @@ export type TenantUncheckedCreateWithoutRentalHistoriesInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
@@ -3224,6 +3543,7 @@ export type TenantUncheckedCreateWithoutRentalHistoriesInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -3271,6 +3591,7 @@ export type TenantUpdateWithoutRentalHistoriesInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
@@ -3283,6 +3604,7 @@ export type TenantUpdateWithoutRentalHistoriesInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -3321,6 +3643,7 @@ export type TenantUncheckedUpdateWithoutRentalHistoriesInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
@@ -3333,6 +3656,7 @@ export type TenantUncheckedUpdateWithoutRentalHistoriesInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -3364,6 +3688,7 @@ export type TenantCreateWithoutViewingAppointmentsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
@@ -3376,6 +3701,7 @@ export type TenantCreateWithoutViewingAppointmentsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -3414,6 +3740,7 @@ export type TenantUncheckedCreateWithoutViewingAppointmentsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
@@ -3426,6 +3753,7 @@ export type TenantUncheckedCreateWithoutViewingAppointmentsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -3473,6 +3801,7 @@ export type TenantUpdateWithoutViewingAppointmentsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
@@ -3485,6 +3814,7 @@ export type TenantUpdateWithoutViewingAppointmentsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -3523,6 +3853,7 @@ export type TenantUncheckedUpdateWithoutViewingAppointmentsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
@@ -3535,6 +3866,7 @@ export type TenantUncheckedUpdateWithoutViewingAppointmentsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -3566,6 +3898,7 @@ export type TenantCreateWithoutRentalRequestsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
@@ -3578,6 +3911,7 @@ export type TenantCreateWithoutRentalRequestsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -3616,6 +3950,7 @@ export type TenantUncheckedCreateWithoutRentalRequestsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
@@ -3628,6 +3963,7 @@ export type TenantUncheckedCreateWithoutRentalRequestsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -3675,6 +4011,7 @@ export type TenantUpdateWithoutRentalRequestsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
@@ -3687,6 +4024,7 @@ export type TenantUpdateWithoutRentalRequestsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -3725,6 +4063,7 @@ export type TenantUncheckedUpdateWithoutRentalRequestsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
@@ -3737,6 +4076,7 @@ export type TenantUncheckedUpdateWithoutRentalRequestsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -3768,6 +4108,7 @@ export type TenantCreateWithoutContractTemplatesInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -3780,6 +4121,7 @@ export type TenantCreateWithoutContractTemplatesInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -3818,6 +4160,7 @@ export type TenantUncheckedCreateWithoutContractTemplatesInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -3830,6 +4173,7 @@ export type TenantUncheckedCreateWithoutContractTemplatesInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -3877,6 +4221,7 @@ export type TenantUpdateWithoutContractTemplatesInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -3889,6 +4234,7 @@ export type TenantUpdateWithoutContractTemplatesInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -3927,6 +4273,7 @@ export type TenantUncheckedUpdateWithoutContractTemplatesInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -3939,6 +4286,7 @@ export type TenantUncheckedUpdateWithoutContractTemplatesInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -3970,6 +4318,7 @@ export type TenantCreateWithoutContractsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -3982,6 +4331,7 @@ export type TenantCreateWithoutContractsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -4020,6 +4370,7 @@ export type TenantUncheckedCreateWithoutContractsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -4032,6 +4383,7 @@ export type TenantUncheckedCreateWithoutContractsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -4079,6 +4431,7 @@ export type TenantUpdateWithoutContractsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -4091,6 +4444,7 @@ export type TenantUpdateWithoutContractsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -4129,6 +4483,7 @@ export type TenantUncheckedUpdateWithoutContractsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -4141,6 +4496,7 @@ export type TenantUncheckedUpdateWithoutContractsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -4172,6 +4528,7 @@ export type TenantCreateWithoutTerminationRequestsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -4184,6 +4541,7 @@ export type TenantCreateWithoutTerminationRequestsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -4222,6 +4580,7 @@ export type TenantUncheckedCreateWithoutTerminationRequestsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -4234,6 +4593,7 @@ export type TenantUncheckedCreateWithoutTerminationRequestsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -4281,6 +4641,7 @@ export type TenantUpdateWithoutTerminationRequestsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -4293,6 +4654,7 @@ export type TenantUpdateWithoutTerminationRequestsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -4331,6 +4693,7 @@ export type TenantUncheckedUpdateWithoutTerminationRequestsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -4343,6 +4706,7 @@ export type TenantUncheckedUpdateWithoutTerminationRequestsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -4374,6 +4738,7 @@ export type TenantCreateWithoutRoomAssetsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -4386,6 +4751,7 @@ export type TenantCreateWithoutRoomAssetsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -4424,6 +4790,7 @@ export type TenantUncheckedCreateWithoutRoomAssetsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -4436,6 +4803,7 @@ export type TenantUncheckedCreateWithoutRoomAssetsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -4483,6 +4851,7 @@ export type TenantUpdateWithoutRoomAssetsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -4495,6 +4864,7 @@ export type TenantUpdateWithoutRoomAssetsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -4533,6 +4903,7 @@ export type TenantUncheckedUpdateWithoutRoomAssetsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -4545,6 +4916,7 @@ export type TenantUncheckedUpdateWithoutRoomAssetsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -4576,6 +4948,7 @@ export type TenantCreateWithoutHandoverRecordsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -4588,6 +4961,7 @@ export type TenantCreateWithoutHandoverRecordsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -4626,6 +5000,7 @@ export type TenantUncheckedCreateWithoutHandoverRecordsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -4638,6 +5013,7 @@ export type TenantUncheckedCreateWithoutHandoverRecordsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -4685,6 +5061,7 @@ export type TenantUpdateWithoutHandoverRecordsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -4697,6 +5074,7 @@ export type TenantUpdateWithoutHandoverRecordsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -4735,6 +5113,7 @@ export type TenantUncheckedUpdateWithoutHandoverRecordsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -4747,6 +5126,7 @@ export type TenantUncheckedUpdateWithoutHandoverRecordsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -4778,6 +5158,7 @@ export type TenantCreateWithoutUtilityMetersInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -4790,6 +5171,7 @@ export type TenantCreateWithoutUtilityMetersInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -4828,6 +5210,7 @@ export type TenantUncheckedCreateWithoutUtilityMetersInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -4840,6 +5223,7 @@ export type TenantUncheckedCreateWithoutUtilityMetersInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -4887,6 +5271,7 @@ export type TenantUpdateWithoutUtilityMetersInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -4899,6 +5284,7 @@ export type TenantUpdateWithoutUtilityMetersInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -4937,6 +5323,7 @@ export type TenantUncheckedUpdateWithoutUtilityMetersInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -4949,6 +5336,7 @@ export type TenantUncheckedUpdateWithoutUtilityMetersInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -4980,6 +5368,7 @@ export type TenantCreateWithoutMeterReadingsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -4992,6 +5381,7 @@ export type TenantCreateWithoutMeterReadingsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -5030,6 +5420,7 @@ export type TenantUncheckedCreateWithoutMeterReadingsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -5042,6 +5433,7 @@ export type TenantUncheckedCreateWithoutMeterReadingsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -5089,6 +5481,7 @@ export type TenantUpdateWithoutMeterReadingsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -5101,6 +5494,7 @@ export type TenantUpdateWithoutMeterReadingsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -5139,6 +5533,7 @@ export type TenantUncheckedUpdateWithoutMeterReadingsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -5151,6 +5546,7 @@ export type TenantUncheckedUpdateWithoutMeterReadingsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -5182,6 +5578,7 @@ export type TenantCreateWithoutOcrJobsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -5194,6 +5591,7 @@ export type TenantCreateWithoutOcrJobsInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -5232,6 +5630,7 @@ export type TenantUncheckedCreateWithoutOcrJobsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -5244,6 +5643,7 @@ export type TenantUncheckedCreateWithoutOcrJobsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -5291,6 +5691,7 @@ export type TenantUpdateWithoutOcrJobsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -5303,6 +5704,7 @@ export type TenantUpdateWithoutOcrJobsInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -5341,6 +5743,7 @@ export type TenantUncheckedUpdateWithoutOcrJobsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -5353,6 +5756,7 @@ export type TenantUncheckedUpdateWithoutOcrJobsInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -5384,6 +5788,7 @@ export type TenantCreateWithoutInvoiceBatchesInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -5396,6 +5801,7 @@ export type TenantCreateWithoutInvoiceBatchesInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -5434,6 +5840,7 @@ export type TenantUncheckedCreateWithoutInvoiceBatchesInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -5446,6 +5853,7 @@ export type TenantUncheckedCreateWithoutInvoiceBatchesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -5493,6 +5901,7 @@ export type TenantUpdateWithoutInvoiceBatchesInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -5505,6 +5914,7 @@ export type TenantUpdateWithoutInvoiceBatchesInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -5543,6 +5953,7 @@ export type TenantUncheckedUpdateWithoutInvoiceBatchesInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -5555,6 +5966,7 @@ export type TenantUncheckedUpdateWithoutInvoiceBatchesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -5586,6 +5998,7 @@ export type TenantCreateWithoutInvoicesInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -5598,6 +6011,7 @@ export type TenantCreateWithoutInvoicesInput = {
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -5636,6 +6050,7 @@ export type TenantUncheckedCreateWithoutInvoicesInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -5648,6 +6063,7 @@ export type TenantUncheckedCreateWithoutInvoicesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -5695,6 +6111,7 @@ export type TenantUpdateWithoutInvoicesInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -5707,6 +6124,7 @@ export type TenantUpdateWithoutInvoicesInput = {
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -5745,6 +6163,7 @@ export type TenantUncheckedUpdateWithoutInvoicesInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -5757,6 +6176,217 @@ export type TenantUncheckedUpdateWithoutInvoicesInput = {
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutDebtsInput = {
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  owner: Prisma.UserCreateNestedOneWithoutOwnedTenantsInput
+  members?: Prisma.TenantMemberCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedTenantsInput
+}
+
+export type TenantUncheckedCreateWithoutDebtsInput = {
+  id?: number
+  ownerUserId: number
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutDebtsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutDebtsInput, Prisma.TenantUncheckedCreateWithoutDebtsInput>
+}
+
+export type TenantUpsertWithoutDebtsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutDebtsInput, Prisma.TenantUncheckedUpdateWithoutDebtsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutDebtsInput, Prisma.TenantUncheckedCreateWithoutDebtsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutDebtsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutDebtsInput, Prisma.TenantUncheckedUpdateWithoutDebtsInput>
+}
+
+export type TenantUpdateWithoutDebtsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTenantsNestedInput
+  members?: Prisma.TenantMemberUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedTenantsNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutDebtsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -5788,6 +6418,7 @@ export type TenantCreateWithoutPaymentsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -5801,6 +6432,7 @@ export type TenantCreateWithoutPaymentsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
   tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
@@ -5838,6 +6470,7 @@ export type TenantUncheckedCreateWithoutPaymentsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -5851,6 +6484,7 @@ export type TenantUncheckedCreateWithoutPaymentsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
@@ -5897,6 +6531,7 @@ export type TenantUpdateWithoutPaymentsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -5910,6 +6545,7 @@ export type TenantUpdateWithoutPaymentsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
@@ -5947,6 +6583,7 @@ export type TenantUncheckedUpdateWithoutPaymentsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -5960,6 +6597,7 @@ export type TenantUncheckedUpdateWithoutPaymentsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
@@ -5990,6 +6628,7 @@ export type TenantCreateWithoutPaymentQrCodesInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -6003,6 +6642,7 @@ export type TenantCreateWithoutPaymentQrCodesInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
   tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
@@ -6040,6 +6680,7 @@ export type TenantUncheckedCreateWithoutPaymentQrCodesInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -6053,6 +6694,7 @@ export type TenantUncheckedCreateWithoutPaymentQrCodesInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
@@ -6099,6 +6741,7 @@ export type TenantUpdateWithoutPaymentQrCodesInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -6112,6 +6755,7 @@ export type TenantUpdateWithoutPaymentQrCodesInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
@@ -6149,6 +6793,7 @@ export type TenantUncheckedUpdateWithoutPaymentQrCodesInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -6162,6 +6807,7 @@ export type TenantUncheckedUpdateWithoutPaymentQrCodesInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
@@ -6192,6 +6838,7 @@ export type TenantCreateWithoutPaymentWebhookLogsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -6205,6 +6852,7 @@ export type TenantCreateWithoutPaymentWebhookLogsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
@@ -6242,6 +6890,7 @@ export type TenantUncheckedCreateWithoutPaymentWebhookLogsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -6255,6 +6904,7 @@ export type TenantUncheckedCreateWithoutPaymentWebhookLogsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
@@ -6301,6 +6951,7 @@ export type TenantUpdateWithoutPaymentWebhookLogsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -6314,6 +6965,7 @@ export type TenantUpdateWithoutPaymentWebhookLogsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
@@ -6351,6 +7003,7 @@ export type TenantUncheckedUpdateWithoutPaymentWebhookLogsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -6364,6 +7017,7 @@ export type TenantUncheckedUpdateWithoutPaymentWebhookLogsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
@@ -6394,6 +7048,7 @@ export type TenantCreateWithoutTicketsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -6407,6 +7062,7 @@ export type TenantCreateWithoutTicketsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -6444,6 +7100,7 @@ export type TenantUncheckedCreateWithoutTicketsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -6457,6 +7114,7 @@ export type TenantUncheckedCreateWithoutTicketsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -6503,6 +7161,7 @@ export type TenantUpdateWithoutTicketsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -6516,6 +7175,7 @@ export type TenantUpdateWithoutTicketsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -6553,6 +7213,7 @@ export type TenantUncheckedUpdateWithoutTicketsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -6566,6 +7227,7 @@ export type TenantUncheckedUpdateWithoutTicketsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -6596,6 +7258,7 @@ export type TenantCreateWithoutConversationsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -6609,6 +7272,7 @@ export type TenantCreateWithoutConversationsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -6646,6 +7310,7 @@ export type TenantUncheckedCreateWithoutConversationsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -6659,6 +7324,7 @@ export type TenantUncheckedCreateWithoutConversationsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -6705,6 +7371,7 @@ export type TenantUpdateWithoutConversationsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -6718,6 +7385,7 @@ export type TenantUpdateWithoutConversationsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -6755,6 +7423,7 @@ export type TenantUncheckedUpdateWithoutConversationsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -6768,6 +7437,7 @@ export type TenantUncheckedUpdateWithoutConversationsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -6798,6 +7468,7 @@ export type TenantCreateWithoutReviewsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -6811,6 +7482,7 @@ export type TenantCreateWithoutReviewsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -6848,6 +7520,7 @@ export type TenantUncheckedCreateWithoutReviewsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -6861,6 +7534,7 @@ export type TenantUncheckedCreateWithoutReviewsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -6907,6 +7581,7 @@ export type TenantUpdateWithoutReviewsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -6920,6 +7595,7 @@ export type TenantUpdateWithoutReviewsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -6957,6 +7633,7 @@ export type TenantUncheckedUpdateWithoutReviewsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -6970,6 +7647,7 @@ export type TenantUncheckedUpdateWithoutReviewsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -7000,6 +7678,7 @@ export type TenantCreateWithoutReputationScoresInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -7013,6 +7692,7 @@ export type TenantCreateWithoutReputationScoresInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -7050,6 +7730,7 @@ export type TenantUncheckedCreateWithoutReputationScoresInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -7063,6 +7744,7 @@ export type TenantUncheckedCreateWithoutReputationScoresInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -7109,6 +7791,7 @@ export type TenantUpdateWithoutReputationScoresInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -7122,6 +7805,7 @@ export type TenantUpdateWithoutReputationScoresInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -7159,6 +7843,7 @@ export type TenantUncheckedUpdateWithoutReputationScoresInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -7172,6 +7857,7 @@ export type TenantUncheckedUpdateWithoutReputationScoresInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -7202,6 +7888,7 @@ export type TenantCreateWithoutNotificationsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -7215,6 +7902,7 @@ export type TenantCreateWithoutNotificationsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -7252,6 +7940,7 @@ export type TenantUncheckedCreateWithoutNotificationsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -7265,6 +7954,7 @@ export type TenantUncheckedCreateWithoutNotificationsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -7311,6 +8001,7 @@ export type TenantUpdateWithoutNotificationsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -7324,6 +8015,7 @@ export type TenantUpdateWithoutNotificationsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -7361,6 +8053,7 @@ export type TenantUncheckedUpdateWithoutNotificationsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -7374,6 +8067,7 @@ export type TenantUncheckedUpdateWithoutNotificationsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -7404,6 +8098,7 @@ export type TenantCreateWithoutBackgroundJobsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -7417,6 +8112,7 @@ export type TenantCreateWithoutBackgroundJobsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -7454,6 +8150,7 @@ export type TenantUncheckedCreateWithoutBackgroundJobsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -7467,6 +8164,7 @@ export type TenantUncheckedCreateWithoutBackgroundJobsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -7513,6 +8211,7 @@ export type TenantUpdateWithoutBackgroundJobsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -7526,6 +8225,7 @@ export type TenantUpdateWithoutBackgroundJobsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -7563,6 +8263,7 @@ export type TenantUncheckedUpdateWithoutBackgroundJobsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -7576,6 +8277,7 @@ export type TenantUncheckedUpdateWithoutBackgroundJobsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -7606,6 +8308,7 @@ export type TenantCreateWithoutAuditLogsInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
@@ -7619,6 +8322,7 @@ export type TenantCreateWithoutAuditLogsInput = {
   ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
@@ -7656,6 +8360,7 @@ export type TenantUncheckedCreateWithoutAuditLogsInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
   floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
   rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
@@ -7669,6 +8374,7 @@ export type TenantUncheckedCreateWithoutAuditLogsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
@@ -7715,6 +8421,7 @@ export type TenantUpdateWithoutAuditLogsInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -7728,6 +8435,7 @@ export type TenantUpdateWithoutAuditLogsInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -7765,6 +8473,7 @@ export type TenantUncheckedUpdateWithoutAuditLogsInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -7778,6 +8487,7 @@ export type TenantUncheckedUpdateWithoutAuditLogsInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -7879,6 +8589,7 @@ export type TenantUpdateWithoutOwnerInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -7892,6 +8603,7 @@ export type TenantUpdateWithoutOwnerInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -7929,6 +8641,7 @@ export type TenantUncheckedUpdateWithoutOwnerInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -7942,6 +8655,7 @@ export type TenantUncheckedUpdateWithoutOwnerInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -7991,6 +8705,7 @@ export type TenantUpdateWithoutCreatedByInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -8004,6 +8719,7 @@ export type TenantUpdateWithoutCreatedByInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -8040,6 +8756,7 @@ export type TenantUncheckedUpdateWithoutCreatedByInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -8053,6 +8770,7 @@ export type TenantUncheckedUpdateWithoutCreatedByInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -8102,6 +8820,7 @@ export type TenantUpdateWithoutUpdatedByInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -8115,6 +8834,7 @@ export type TenantUpdateWithoutUpdatedByInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -8151,6 +8871,7 @@ export type TenantUncheckedUpdateWithoutUpdatedByInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -8164,6 +8885,7 @@ export type TenantUncheckedUpdateWithoutUpdatedByInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -8213,6 +8935,7 @@ export type TenantUpdateWithoutDeletedByInput = {
   properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
@@ -8226,6 +8949,7 @@ export type TenantUpdateWithoutDeletedByInput = {
   ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
@@ -8262,6 +8986,7 @@ export type TenantUncheckedUpdateWithoutDeletedByInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
   floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
   rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
@@ -8275,6 +9000,7 @@ export type TenantUncheckedUpdateWithoutDeletedByInput = {
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
   invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
   paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
   paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
@@ -8317,6 +9043,7 @@ export type TenantCountOutputType = {
   properties: number
   floors: number
   rooms: number
+  marketplaceModerations: number
   rentalHistories: number
   viewingAppointments: number
   rentalRequests: number
@@ -8330,6 +9057,7 @@ export type TenantCountOutputType = {
   ocrJobs: number
   invoiceBatches: number
   invoices: number
+  debts: number
   payments: number
   paymentQrCodes: number
   paymentWebhookLogs: number
@@ -8349,6 +9077,7 @@ export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   properties?: boolean | TenantCountOutputTypeCountPropertiesArgs
   floors?: boolean | TenantCountOutputTypeCountFloorsArgs
   rooms?: boolean | TenantCountOutputTypeCountRoomsArgs
+  marketplaceModerations?: boolean | TenantCountOutputTypeCountMarketplaceModerationsArgs
   rentalHistories?: boolean | TenantCountOutputTypeCountRentalHistoriesArgs
   viewingAppointments?: boolean | TenantCountOutputTypeCountViewingAppointmentsArgs
   rentalRequests?: boolean | TenantCountOutputTypeCountRentalRequestsArgs
@@ -8362,6 +9091,7 @@ export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   ocrJobs?: boolean | TenantCountOutputTypeCountOcrJobsArgs
   invoiceBatches?: boolean | TenantCountOutputTypeCountInvoiceBatchesArgs
   invoices?: boolean | TenantCountOutputTypeCountInvoicesArgs
+  debts?: boolean | TenantCountOutputTypeCountDebtsArgs
   payments?: boolean | TenantCountOutputTypeCountPaymentsArgs
   paymentQrCodes?: boolean | TenantCountOutputTypeCountPaymentQrCodesArgs
   paymentWebhookLogs?: boolean | TenantCountOutputTypeCountPaymentWebhookLogsArgs
@@ -8424,6 +9154,13 @@ export type TenantCountOutputTypeCountFloorsArgs<ExtArgs extends runtime.Types.E
  */
 export type TenantCountOutputTypeCountRoomsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.RoomWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountMarketplaceModerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MarketplaceModerationWhereInput
 }
 
 /**
@@ -8515,6 +9252,13 @@ export type TenantCountOutputTypeCountInvoiceBatchesArgs<ExtArgs extends runtime
  */
 export type TenantCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.InvoiceWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountDebtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DebtWhereInput
 }
 
 /**
@@ -8612,6 +9356,7 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   properties?: boolean | Prisma.Tenant$propertiesArgs<ExtArgs>
   floors?: boolean | Prisma.Tenant$floorsArgs<ExtArgs>
   rooms?: boolean | Prisma.Tenant$roomsArgs<ExtArgs>
+  marketplaceModerations?: boolean | Prisma.Tenant$marketplaceModerationsArgs<ExtArgs>
   rentalHistories?: boolean | Prisma.Tenant$rentalHistoriesArgs<ExtArgs>
   viewingAppointments?: boolean | Prisma.Tenant$viewingAppointmentsArgs<ExtArgs>
   rentalRequests?: boolean | Prisma.Tenant$rentalRequestsArgs<ExtArgs>
@@ -8625,6 +9370,7 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   ocrJobs?: boolean | Prisma.Tenant$ocrJobsArgs<ExtArgs>
   invoiceBatches?: boolean | Prisma.Tenant$invoiceBatchesArgs<ExtArgs>
   invoices?: boolean | Prisma.Tenant$invoicesArgs<ExtArgs>
+  debts?: boolean | Prisma.Tenant$debtsArgs<ExtArgs>
   payments?: boolean | Prisma.Tenant$paymentsArgs<ExtArgs>
   paymentQrCodes?: boolean | Prisma.Tenant$paymentQrCodesArgs<ExtArgs>
   paymentWebhookLogs?: boolean | Prisma.Tenant$paymentWebhookLogsArgs<ExtArgs>
@@ -8715,6 +9461,7 @@ export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   properties?: boolean | Prisma.Tenant$propertiesArgs<ExtArgs>
   floors?: boolean | Prisma.Tenant$floorsArgs<ExtArgs>
   rooms?: boolean | Prisma.Tenant$roomsArgs<ExtArgs>
+  marketplaceModerations?: boolean | Prisma.Tenant$marketplaceModerationsArgs<ExtArgs>
   rentalHistories?: boolean | Prisma.Tenant$rentalHistoriesArgs<ExtArgs>
   viewingAppointments?: boolean | Prisma.Tenant$viewingAppointmentsArgs<ExtArgs>
   rentalRequests?: boolean | Prisma.Tenant$rentalRequestsArgs<ExtArgs>
@@ -8728,6 +9475,7 @@ export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   ocrJobs?: boolean | Prisma.Tenant$ocrJobsArgs<ExtArgs>
   invoiceBatches?: boolean | Prisma.Tenant$invoiceBatchesArgs<ExtArgs>
   invoices?: boolean | Prisma.Tenant$invoicesArgs<ExtArgs>
+  debts?: boolean | Prisma.Tenant$debtsArgs<ExtArgs>
   payments?: boolean | Prisma.Tenant$paymentsArgs<ExtArgs>
   paymentQrCodes?: boolean | Prisma.Tenant$paymentQrCodesArgs<ExtArgs>
   paymentWebhookLogs?: boolean | Prisma.Tenant$paymentWebhookLogsArgs<ExtArgs>
@@ -8788,6 +9536,10 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
      */
     rooms: Prisma.$RoomPayload<ExtArgs>[]
     /**
+     * Lịch sử kiểm duyệt marketplace của tenant
+     */
+    marketplaceModerations: Prisma.$MarketplaceModerationPayload<ExtArgs>[]
+    /**
      * Danh sách lịch sử thuê phòng xảy ra tại tenant này
      */
     rentalHistories: Prisma.$RentalHistoryPayload<ExtArgs>[]
@@ -8839,6 +9591,10 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
      * Danh sách các hóa đơn của tenant
      */
     invoices: Prisma.$InvoicePayload<ExtArgs>[]
+    /**
+     * Danh sách các khoản công nợ của tenant
+     */
+    debts: Prisma.$DebtPayload<ExtArgs>[]
     /**
      * Danh sách lịch sử thanh toán tiền phòng của khách thuê gửi tenant
      */
@@ -9349,6 +10105,7 @@ export interface Prisma__TenantClient<T, Null = never, ExtArgs extends runtime.T
   properties<T extends Prisma.Tenant$propertiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$propertiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   floors<T extends Prisma.Tenant$floorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$floorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FloorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rooms<T extends Prisma.Tenant$roomsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$roomsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  marketplaceModerations<T extends Prisma.Tenant$marketplaceModerationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$marketplaceModerationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketplaceModerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rentalHistories<T extends Prisma.Tenant$rentalHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$rentalHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   viewingAppointments<T extends Prisma.Tenant$viewingAppointmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$viewingAppointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomViewingAppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rentalRequests<T extends Prisma.Tenant$rentalRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$rentalRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -9362,6 +10119,7 @@ export interface Prisma__TenantClient<T, Null = never, ExtArgs extends runtime.T
   ocrJobs<T extends Prisma.Tenant$ocrJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$ocrJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OcrJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invoiceBatches<T extends Prisma.Tenant$invoiceBatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$invoiceBatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoiceBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invoices<T extends Prisma.Tenant$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  debts<T extends Prisma.Tenant$debtsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$debtsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DebtPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.Tenant$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentQrCodes<T extends Prisma.Tenant$paymentQrCodesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$paymentQrCodesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentQrCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentWebhookLogs<T extends Prisma.Tenant$paymentWebhookLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$paymentWebhookLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentWebhookLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -9965,6 +10723,30 @@ export type Tenant$roomsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 /**
+ * Tenant.marketplaceModerations
+ */
+export type Tenant$marketplaceModerationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MarketplaceModeration
+   */
+  select?: Prisma.MarketplaceModerationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MarketplaceModeration
+   */
+  omit?: Prisma.MarketplaceModerationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MarketplaceModerationInclude<ExtArgs> | null
+  where?: Prisma.MarketplaceModerationWhereInput
+  orderBy?: Prisma.MarketplaceModerationOrderByWithRelationInput | Prisma.MarketplaceModerationOrderByWithRelationInput[]
+  cursor?: Prisma.MarketplaceModerationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MarketplaceModerationScalarFieldEnum | Prisma.MarketplaceModerationScalarFieldEnum[]
+}
+
+/**
  * Tenant.rentalHistories
  */
 export type Tenant$rentalHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -10274,6 +11056,30 @@ export type Tenant$invoicesArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.InvoiceScalarFieldEnum | Prisma.InvoiceScalarFieldEnum[]
+}
+
+/**
+ * Tenant.debts
+ */
+export type Tenant$debtsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Debt
+   */
+  select?: Prisma.DebtSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Debt
+   */
+  omit?: Prisma.DebtOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DebtInclude<ExtArgs> | null
+  where?: Prisma.DebtWhereInput
+  orderBy?: Prisma.DebtOrderByWithRelationInput | Prisma.DebtOrderByWithRelationInput[]
+  cursor?: Prisma.DebtWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DebtScalarFieldEnum | Prisma.DebtScalarFieldEnum[]
 }
 
 /**

@@ -222,6 +222,17 @@ export const InvoiceStatus = {
 export type InvoiceStatus = (typeof InvoiceStatus)[keyof typeof InvoiceStatus]
 
 
+export const DebtStatus = {
+  OPEN: 'OPEN',
+  PARTIAL: 'PARTIAL',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELED: 'CANCELED'
+} as const
+
+export type DebtStatus = (typeof DebtStatus)[keyof typeof DebtStatus]
+
+
 export const InvoiceItemType = {
   RENT: 'RENT',
   ELECTRICITY: 'ELECTRICITY',

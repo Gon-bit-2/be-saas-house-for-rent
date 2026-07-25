@@ -1,6 +1,14 @@
 import { BadRequestException, UnauthorizedException } from '@nestjs/common'
 
 const mockGetToken = jest.fn()
+const mockAddRequestInterceptor = jest.fn()
+type RequestInterceptor = {
+  resolved: (request: { timeout: number; retry: boolean; retryConfig?: unknown }) => Promise<{
+    timeout: number
+    retry: boolean
+    retryConfig?: unknown
+  }>
+}
 const mockGenerateAuthUrl = jest.fn((options: { state?: string; scope?: string[] }) => {
   const url = new URL('https://accounts.google.com/o/oauth2/v2/auth')
   url.searchParams.set('client_id', 'google-client-id')
@@ -15,6 +23,7 @@ jest.mock('google-auth-library', () => ({
   OAuth2Client: jest.fn().mockImplementation(() => ({
     generateAuthUrl: mockGenerateAuthUrl,
     getToken: mockGetToken,
+    transporter: { interceptors: { request: { add: mockAddRequestInterceptor } } },
   })),
 }))
 jest.mock('./repositories/auth.repo', () => ({ AuthRepository: class AuthRepository {} }))
@@ -63,7 +72,11 @@ describe('AuthService Google OAuth2', () => {
       GOOGLE_CLIENT_SECRET: 'google-client-secret',
       GOOGLE_REDIRECT_URI: 'http://localhost:3000/auth/google/callback',
       GOOGLE_CLIENT_REDIRECT_URI: 'http://localhost:5173/oauth/google',
-      GOOGLE_OAUTH_SCOPES: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
+      GOOGLE_OAUTH_SCOPES:
+        'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
+      GOOGLE_OAUTH_TOKEN_TIMEOUT_MS: 5_000,
+      GOOGLE_USERINFO_TIMEOUT_MS: 3_000,
+      GOOGLE_USERINFO_MAX_RETRIES: 1,
     })
 
     mockGetToken.mockReset()
@@ -72,24 +85,36 @@ describe('AuthService Google OAuth2', () => {
 
     authRepository = {
       findByEmail: jest.fn(),
+      findByEmailForCredentials: jest.fn(),
       findById: jest.fn(),
       markEmailVerified: jest.fn(),
       createOAuthTenantUser: jest.fn(),
       createRefreshToken: jest.fn(),
+      rotateRefreshToken: jest.fn(),
+      findLatestValidVerificationCode: jest.fn(),
+      consumeVerificationCode: jest.fn(),
+      recordVerificationFailure: jest.fn(),
       updateLastLoginAt: jest.fn(),
     }
     hashingService = {
       hash: jest.fn().mockResolvedValue('hashed-secret'),
       hashSHA256: jest.fn((value: string) => `sha256:${value}`),
+      compare: jest.fn(),
     }
     tokenService = {
       signAccessToken: jest.fn().mockResolvedValue('access-token'),
       signRefreshToken: jest.fn().mockResolvedValue('refresh-token'),
+      verifyRefreshToken: jest.fn(),
     }
     emailService = {
       sendOtpEmail: jest.fn().mockResolvedValue(undefined),
     }
-    service = new AuthService(authRepository as never, hashingService as never, tokenService as never, emailService as never)
+    service = new AuthService(
+      authRepository as never,
+      hashingService as never,
+      tokenService as never,
+      emailService as never,
+    )
     fetchMock = jest.spyOn(global, 'fetch')
   })
 
@@ -111,10 +136,34 @@ describe('AuthService Google OAuth2', () => {
     expect(url.searchParams.get('state')).toMatch(/^[^.]+\.[^.]+$/)
   })
 
+  it('forces a bounded token exchange with POST retries disabled', async () => {
+    const interceptor = mockAddRequestInterceptor.mock.calls.at(-1)?.[0] as RequestInterceptor
+    const request = await interceptor.resolved({ timeout: 0, retry: true, retryConfig: { retry: 3 } })
+
+    expect(request.timeout).toBe(5_000)
+    expect(request.retry).toBe(false)
+    expect(request.retryConfig).toBeUndefined()
+  })
+
+  it('retries transient Google userinfo failure once', async () => {
+    const user = makeUser()
+    const state = new URL(service.getGoogleAuthorizationUrl('127.0.0.1', 'jest-agent').url).searchParams.get('state')!
+    fetchMock.mockResolvedValueOnce({ ok: false, status: 503 } as Response).mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: () => Promise.resolve({ email: 'user@example.com', email_verified: true, name: 'User' }),
+    } as Response)
+    authRepository.findByEmail.mockResolvedValue(user)
+
+    await service.handleGoogleCallback({ code: 'google-code', state }, '127.0.0.1', 'jest-agent')
+
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
   it('rejects callback when Google returns an OAuth error', async () => {
-    await expect(service.handleGoogleCallback({ error: 'access_denied' }, '127.0.0.1', 'jest-agent')).rejects.toBeInstanceOf(
-      BadRequestException,
-    )
+    await expect(
+      service.handleGoogleCallback({ error: 'access_denied' }, '127.0.0.1', 'jest-agent'),
+    ).rejects.toBeInstanceOf(BadRequestException)
   })
 
   it('logs in an existing active Google user through one-time session exchange', async () => {
@@ -132,7 +181,7 @@ describe('AuthService Google OAuth2', () => {
     const tokens = await service.googleSession({ sessionToken }, '127.0.0.1', 'jest-agent')
 
     expect(tokens).toEqual({ accessToken: 'access-token', refreshToken: 'refresh-token' })
-    expect(tokenService.signAccessToken).toHaveBeenCalledWith({ userId: 1, roleId: 'TENANT', roleName: 'TENANT' })
+    expect(tokenService.signAccessToken).toHaveBeenCalledWith({ userId: 1, ver: 2 })
     expect(authRepository.createRefreshToken).toHaveBeenCalledWith(
       expect.objectContaining({ userId: 1, tokenHash: 'sha256:refresh-token' }),
     )
@@ -142,7 +191,11 @@ describe('AuthService Google OAuth2', () => {
   })
 
   it('creates a default TENANT user when Google email does not exist', async () => {
-    const createdUser = makeUser({ email: 'new@example.com', fullName: 'New User', avatarUrl: 'https://avatar.test/a.png' })
+    const createdUser = makeUser({
+      email: 'new@example.com',
+      fullName: 'New User',
+      avatarUrl: 'https://avatar.test/a.png',
+    })
     const state = new URL(service.getGoogleAuthorizationUrl('127.0.0.1', 'jest-agent').url).searchParams.get('state')!
     fetchMock.mockResolvedValueOnce({
       ok: true,
@@ -176,11 +229,47 @@ describe('AuthService Google OAuth2', () => {
       json: async () => ({ email: 'user@example.com', email_verified: false }),
     } as Response)
 
-    await expect(service.handleGoogleCallback({ code: 'google-code', state }, '127.0.0.1', 'jest-agent')).rejects.toBeInstanceOf(
+    await expect(
+      service.handleGoogleCallback({ code: 'google-code', state }, '127.0.0.1', 'jest-agent'),
+    ).rejects.toBeInstanceOf(UnauthorizedException)
+  })
+
+  it('only consumes login OTP inside the final login action', async () => {
+    const user = makeUser({ passwordHash: 'stored-hash' })
+    authRepository.findByEmailForCredentials.mockResolvedValue(user)
+    authRepository.findLatestValidVerificationCode.mockResolvedValue({
+      id: 7,
+      email: 'user@example.com',
+      type: 'LOGIN',
+      codeHash: 'otp-hash',
+      attempts: 0,
+    })
+    hashingService.compare.mockResolvedValue(true)
+    authRepository.consumeVerificationCode.mockResolvedValue(false)
+
+    await expect(
+      service.login({ email: 'USER@example.com', passwordHash: 'Password1!', code: '123456' }),
+    ).rejects.toBeInstanceOf(BadRequestException)
+    expect(authRepository.consumeVerificationCode).toHaveBeenCalledWith(
+      7,
+      'user@example.com',
+      'LOGIN',
+      envConfig.OTP_MAX_ATTEMPTS,
+    )
+  })
+
+  it('does not persist a second successor when refresh-token CAS loses', async () => {
+    const user = makeUser()
+    tokenService.verifyRefreshToken.mockResolvedValue({ userId: 1 })
+    authRepository.findById.mockResolvedValue(user)
+    authRepository.rotateRefreshToken.mockResolvedValue(false)
+
+    await expect(service.refreshToken({ refreshToken: 'old-refresh' }, '127.0.0.1', 'agent')).rejects.toBeInstanceOf(
       UnauthorizedException,
+    )
+    expect(authRepository.rotateRefreshToken).toHaveBeenCalledWith(
+      'sha256:old-refresh',
+      expect.objectContaining({ userId: 1, tokenHash: 'sha256:refresh-token' }),
     )
   })
 })
-
-
-

@@ -433,6 +433,7 @@ export type InvoiceWhereInput = {
   payments?: Prisma.PaymentListRelationFilter
   qrCodes?: Prisma.PaymentQrCodeListRelationFilter
   webhookLogs?: Prisma.PaymentWebhookLogListRelationFilter
+  debt?: Prisma.XOR<Prisma.DebtNullableScalarRelationFilter, Prisma.DebtWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -472,6 +473,7 @@ export type InvoiceOrderByWithRelationInput = {
   payments?: Prisma.PaymentOrderByRelationAggregateInput
   qrCodes?: Prisma.PaymentQrCodeOrderByRelationAggregateInput
   webhookLogs?: Prisma.PaymentWebhookLogOrderByRelationAggregateInput
+  debt?: Prisma.DebtOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
   deletedBy?: Prisma.UserOrderByWithRelationInput
@@ -514,6 +516,7 @@ export type InvoiceWhereUniqueInput = Prisma.AtLeast<{
   payments?: Prisma.PaymentListRelationFilter
   qrCodes?: Prisma.PaymentQrCodeListRelationFilter
   webhookLogs?: Prisma.PaymentWebhookLogListRelationFilter
+  debt?: Prisma.XOR<Prisma.DebtNullableScalarRelationFilter, Prisma.DebtWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -606,6 +609,7 @@ export type InvoiceCreateInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
@@ -640,6 +644,7 @@ export type InvoiceUncheckedCreateInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceUpdateInput = {
@@ -667,6 +672,7 @@ export type InvoiceUpdateInput = {
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
@@ -701,6 +707,7 @@ export type InvoiceUncheckedUpdateInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceCreateManyInput = {
@@ -1266,6 +1273,20 @@ export type InvoiceUpdateOneRequiredWithoutItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.InvoiceUpdateToOneWithWhereWithoutItemsInput, Prisma.InvoiceUpdateWithoutItemsInput>, Prisma.InvoiceUncheckedUpdateWithoutItemsInput>
 }
 
+export type InvoiceCreateNestedOneWithoutDebtInput = {
+  create?: Prisma.XOR<Prisma.InvoiceCreateWithoutDebtInput, Prisma.InvoiceUncheckedCreateWithoutDebtInput>
+  connectOrCreate?: Prisma.InvoiceCreateOrConnectWithoutDebtInput
+  connect?: Prisma.InvoiceWhereUniqueInput
+}
+
+export type InvoiceUpdateOneRequiredWithoutDebtNestedInput = {
+  create?: Prisma.XOR<Prisma.InvoiceCreateWithoutDebtInput, Prisma.InvoiceUncheckedCreateWithoutDebtInput>
+  connectOrCreate?: Prisma.InvoiceCreateOrConnectWithoutDebtInput
+  upsert?: Prisma.InvoiceUpsertWithoutDebtInput
+  connect?: Prisma.InvoiceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.InvoiceUpdateToOneWithWhereWithoutDebtInput, Prisma.InvoiceUpdateWithoutDebtInput>, Prisma.InvoiceUncheckedUpdateWithoutDebtInput>
+}
+
 export type InvoiceCreateNestedOneWithoutPaymentsInput = {
   create?: Prisma.XOR<Prisma.InvoiceCreateWithoutPaymentsInput, Prisma.InvoiceUncheckedCreateWithoutPaymentsInput>
   connectOrCreate?: Prisma.InvoiceCreateOrConnectWithoutPaymentsInput
@@ -1334,6 +1355,7 @@ export type InvoiceCreateWithoutRenterInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
@@ -1367,6 +1389,7 @@ export type InvoiceUncheckedCreateWithoutRenterInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutRenterInput = {
@@ -1404,6 +1427,7 @@ export type InvoiceCreateWithoutCreatedByInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
 }
@@ -1436,6 +1460,7 @@ export type InvoiceUncheckedCreateWithoutCreatedByInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutCreatedByInput = {
@@ -1473,6 +1498,7 @@ export type InvoiceCreateWithoutUpdatedByInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
 }
@@ -1505,6 +1531,7 @@ export type InvoiceUncheckedCreateWithoutUpdatedByInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutUpdatedByInput = {
@@ -1542,6 +1569,7 @@ export type InvoiceCreateWithoutDeletedByInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
 }
@@ -1574,6 +1602,7 @@ export type InvoiceUncheckedCreateWithoutDeletedByInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutDeletedByInput = {
@@ -1704,6 +1733,7 @@ export type InvoiceCreateWithoutTenantInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
@@ -1737,6 +1767,7 @@ export type InvoiceUncheckedCreateWithoutTenantInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutTenantInput = {
@@ -1789,6 +1820,7 @@ export type InvoiceCreateWithoutRoomInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
@@ -1822,6 +1854,7 @@ export type InvoiceUncheckedCreateWithoutRoomInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutRoomInput = {
@@ -1874,6 +1907,7 @@ export type InvoiceCreateWithoutContractInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
@@ -1907,6 +1941,7 @@ export type InvoiceUncheckedCreateWithoutContractInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutContractInput = {
@@ -1959,6 +1994,7 @@ export type InvoiceCreateWithoutBatchInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
@@ -1992,6 +2028,7 @@ export type InvoiceUncheckedCreateWithoutBatchInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutBatchInput = {
@@ -2044,6 +2081,7 @@ export type InvoiceCreateWithoutItemsInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
@@ -2077,6 +2115,7 @@ export type InvoiceUncheckedCreateWithoutItemsInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutItemsInput = {
@@ -2119,6 +2158,7 @@ export type InvoiceUpdateWithoutItemsInput = {
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
@@ -2152,6 +2192,145 @@ export type InvoiceUncheckedUpdateWithoutItemsInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
+}
+
+export type InvoiceCreateWithoutDebtInput = {
+  invoiceCode: string
+  billingMonth: Date | string
+  issueDate: Date | string
+  dueDate: Date | string
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  penaltyAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  debtAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.InvoiceStatus
+  note?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutInvoicesInput
+  batch?: Prisma.InvoiceBatchCreateNestedOneWithoutInvoicesInput
+  contract: Prisma.ContractCreateNestedOneWithoutInvoicesInput
+  room: Prisma.RoomCreateNestedOneWithoutInvoicesInput
+  renter: Prisma.UserCreateNestedOneWithoutInvoicesInput
+  items?: Prisma.InvoiceItemCreateNestedManyWithoutInvoiceInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
+  qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
+  webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
+}
+
+export type InvoiceUncheckedCreateWithoutDebtInput = {
+  id?: number
+  tenantId: number
+  batchId?: number | null
+  contractId: number
+  roomId: number
+  renterId: number
+  invoiceCode: string
+  billingMonth: Date | string
+  issueDate: Date | string
+  dueDate: Date | string
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  penaltyAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  debtAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.InvoiceStatus
+  note?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
+  qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+}
+
+export type InvoiceCreateOrConnectWithoutDebtInput = {
+  where: Prisma.InvoiceWhereUniqueInput
+  create: Prisma.XOR<Prisma.InvoiceCreateWithoutDebtInput, Prisma.InvoiceUncheckedCreateWithoutDebtInput>
+}
+
+export type InvoiceUpsertWithoutDebtInput = {
+  update: Prisma.XOR<Prisma.InvoiceUpdateWithoutDebtInput, Prisma.InvoiceUncheckedUpdateWithoutDebtInput>
+  create: Prisma.XOR<Prisma.InvoiceCreateWithoutDebtInput, Prisma.InvoiceUncheckedCreateWithoutDebtInput>
+  where?: Prisma.InvoiceWhereInput
+}
+
+export type InvoiceUpdateToOneWithWhereWithoutDebtInput = {
+  where?: Prisma.InvoiceWhereInput
+  data: Prisma.XOR<Prisma.InvoiceUpdateWithoutDebtInput, Prisma.InvoiceUncheckedUpdateWithoutDebtInput>
+}
+
+export type InvoiceUpdateWithoutDebtInput = {
+  invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
+  billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  penaltyAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  debtAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutInvoicesNestedInput
+  batch?: Prisma.InvoiceBatchUpdateOneWithoutInvoicesNestedInput
+  contract?: Prisma.ContractUpdateOneRequiredWithoutInvoicesNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutInvoicesNestedInput
+  renter?: Prisma.UserUpdateOneRequiredWithoutInvoicesNestedInput
+  items?: Prisma.InvoiceItemUpdateManyWithoutInvoiceNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
+  qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
+  webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
+}
+
+export type InvoiceUncheckedUpdateWithoutDebtInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  batchId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceCode?: Prisma.StringFieldUpdateOperationsInput | string
+  billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  issueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  penaltyAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  debtAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
+  qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
 }
 
 export type InvoiceCreateWithoutPaymentsInput = {
@@ -2178,6 +2357,7 @@ export type InvoiceCreateWithoutPaymentsInput = {
   items?: Prisma.InvoiceItemCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
@@ -2211,6 +2391,7 @@ export type InvoiceUncheckedCreateWithoutPaymentsInput = {
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutPaymentsInput = {
@@ -2253,6 +2434,7 @@ export type InvoiceUpdateWithoutPaymentsInput = {
   items?: Prisma.InvoiceItemUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
@@ -2286,6 +2468,7 @@ export type InvoiceUncheckedUpdateWithoutPaymentsInput = {
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceCreateWithoutQrCodesInput = {
@@ -2312,6 +2495,7 @@ export type InvoiceCreateWithoutQrCodesInput = {
   items?: Prisma.InvoiceItemCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
@@ -2345,6 +2529,7 @@ export type InvoiceUncheckedCreateWithoutQrCodesInput = {
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutQrCodesInput = {
@@ -2387,6 +2572,7 @@ export type InvoiceUpdateWithoutQrCodesInput = {
   items?: Prisma.InvoiceItemUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
@@ -2420,6 +2606,7 @@ export type InvoiceUncheckedUpdateWithoutQrCodesInput = {
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceCreateWithoutWebhookLogsInput = {
@@ -2446,6 +2633,7 @@ export type InvoiceCreateWithoutWebhookLogsInput = {
   items?: Prisma.InvoiceItemCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtCreateNestedOneWithoutInvoiceInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedInvoicesInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedInvoicesInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedInvoicesInput
@@ -2479,6 +2667,7 @@ export type InvoiceUncheckedCreateWithoutWebhookLogsInput = {
   items?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutInvoiceInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutInvoiceInput
+  debt?: Prisma.DebtUncheckedCreateNestedOneWithoutInvoiceInput
 }
 
 export type InvoiceCreateOrConnectWithoutWebhookLogsInput = {
@@ -2521,6 +2710,7 @@ export type InvoiceUpdateWithoutWebhookLogsInput = {
   items?: Prisma.InvoiceItemUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
@@ -2554,6 +2744,7 @@ export type InvoiceUncheckedUpdateWithoutWebhookLogsInput = {
   items?: Prisma.InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceCreateManyRenterInput = {
@@ -2684,6 +2875,7 @@ export type InvoiceUpdateWithoutRenterInput = {
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
@@ -2717,6 +2909,7 @@ export type InvoiceUncheckedUpdateWithoutRenterInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceUncheckedUpdateManyWithoutRenterInput = {
@@ -2770,6 +2963,7 @@ export type InvoiceUpdateWithoutCreatedByInput = {
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
 }
@@ -2802,6 +2996,7 @@ export type InvoiceUncheckedUpdateWithoutCreatedByInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceUncheckedUpdateManyWithoutCreatedByInput = {
@@ -2855,6 +3050,7 @@ export type InvoiceUpdateWithoutUpdatedByInput = {
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
 }
@@ -2887,6 +3083,7 @@ export type InvoiceUncheckedUpdateWithoutUpdatedByInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -2940,6 +3137,7 @@ export type InvoiceUpdateWithoutDeletedByInput = {
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
 }
@@ -2972,6 +3170,7 @@ export type InvoiceUncheckedUpdateWithoutDeletedByInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceUncheckedUpdateManyWithoutDeletedByInput = {
@@ -3050,6 +3249,7 @@ export type InvoiceUpdateWithoutTenantInput = {
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
@@ -3083,6 +3283,7 @@ export type InvoiceUncheckedUpdateWithoutTenantInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceUncheckedUpdateManyWithoutTenantInput = {
@@ -3161,6 +3362,7 @@ export type InvoiceUpdateWithoutRoomInput = {
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
@@ -3194,6 +3396,7 @@ export type InvoiceUncheckedUpdateWithoutRoomInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceUncheckedUpdateManyWithoutRoomInput = {
@@ -3272,6 +3475,7 @@ export type InvoiceUpdateWithoutContractInput = {
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
@@ -3305,6 +3509,7 @@ export type InvoiceUncheckedUpdateWithoutContractInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceUncheckedUpdateManyWithoutContractInput = {
@@ -3383,6 +3588,7 @@ export type InvoiceUpdateWithoutBatchInput = {
   payments?: Prisma.PaymentUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUpdateOneWithoutInvoiceNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedInvoicesNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedInvoicesNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedInvoicesNestedInput
@@ -3416,6 +3622,7 @@ export type InvoiceUncheckedUpdateWithoutBatchInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
   qrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput
   webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceNestedInput
+  debt?: Prisma.DebtUncheckedUpdateOneWithoutInvoiceNestedInput
 }
 
 export type InvoiceUncheckedUpdateManyWithoutBatchInput = {
@@ -3536,6 +3743,7 @@ export type InvoiceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   payments?: boolean | Prisma.Invoice$paymentsArgs<ExtArgs>
   qrCodes?: boolean | Prisma.Invoice$qrCodesArgs<ExtArgs>
   webhookLogs?: boolean | Prisma.Invoice$webhookLogsArgs<ExtArgs>
+  debt?: boolean | Prisma.Invoice$debtArgs<ExtArgs>
   createdBy?: boolean | Prisma.Invoice$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Invoice$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Invoice$deletedByArgs<ExtArgs>
@@ -3650,6 +3858,7 @@ export type InvoiceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   payments?: boolean | Prisma.Invoice$paymentsArgs<ExtArgs>
   qrCodes?: boolean | Prisma.Invoice$qrCodesArgs<ExtArgs>
   webhookLogs?: boolean | Prisma.Invoice$webhookLogsArgs<ExtArgs>
+  debt?: boolean | Prisma.Invoice$debtArgs<ExtArgs>
   createdBy?: boolean | Prisma.Invoice$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Invoice$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Invoice$deletedByArgs<ExtArgs>
@@ -3715,6 +3924,10 @@ export type $InvoicePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
      * Danh sách log webhook lịch sử nhận thanh toán liên quan đến hóa đơn này
      */
     webhookLogs: Prisma.$PaymentWebhookLogPayload<ExtArgs>[]
+    /**
+     * Bản ghi công nợ tương ứng với hóa đơn này
+     */
+    debt: Prisma.$DebtPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     deletedBy: Prisma.$UserPayload<ExtArgs> | null
@@ -4219,6 +4432,7 @@ export interface Prisma__InvoiceClient<T, Null = never, ExtArgs extends runtime.
   payments<T extends Prisma.Invoice$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Invoice$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   qrCodes<T extends Prisma.Invoice$qrCodesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Invoice$qrCodesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentQrCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   webhookLogs<T extends Prisma.Invoice$webhookLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Invoice$webhookLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentWebhookLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  debt<T extends Prisma.Invoice$debtArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Invoice$debtArgs<ExtArgs>>): Prisma.Prisma__DebtClient<runtime.Types.Result.GetResult<Prisma.$DebtPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.Invoice$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Invoice$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.Invoice$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Invoice$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.Invoice$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Invoice$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -4788,6 +5002,25 @@ export type Invoice$webhookLogsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.PaymentWebhookLogScalarFieldEnum | Prisma.PaymentWebhookLogScalarFieldEnum[]
+}
+
+/**
+ * Invoice.debt
+ */
+export type Invoice$debtArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Debt
+   */
+  select?: Prisma.DebtSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Debt
+   */
+  omit?: Prisma.DebtOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DebtInclude<ExtArgs> | null
+  where?: Prisma.DebtWhereInput
 }
 
 /**

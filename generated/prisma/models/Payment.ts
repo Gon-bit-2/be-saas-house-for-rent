@@ -31,7 +31,10 @@ export type PaymentAvgAggregateOutputType = {
   tenantId: number | null
   invoiceId: number | null
   payerId: number | null
+  qrCodeId: number | null
   amount: runtime.Decimal | null
+  approvedById: number | null
+  rejectedById: number | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -42,7 +45,10 @@ export type PaymentSumAggregateOutputType = {
   tenantId: number | null
   invoiceId: number | null
   payerId: number | null
+  qrCodeId: number | null
   amount: runtime.Decimal | null
+  approvedById: number | null
+  rejectedById: number | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -53,13 +59,23 @@ export type PaymentMinAggregateOutputType = {
   tenantId: number | null
   invoiceId: number | null
   payerId: number | null
+  qrCodeId: number | null
   amount: runtime.Decimal | null
   method: $Enums.PaymentMethod | null
   provider: string | null
   transactionCode: string | null
   status: $Enums.PaymentStatus | null
   paidAt: Date | null
+  submittedAt: Date | null
+  evidenceUrl: string | null
+  renterNote: string | null
+  approvedById: number | null
+  approvedAt: Date | null
+  rejectedById: number | null
+  rejectedAt: Date | null
+  landlordNote: string | null
   createdAt: Date | null
+  updatedAt: Date | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -70,13 +86,23 @@ export type PaymentMaxAggregateOutputType = {
   tenantId: number | null
   invoiceId: number | null
   payerId: number | null
+  qrCodeId: number | null
   amount: runtime.Decimal | null
   method: $Enums.PaymentMethod | null
   provider: string | null
   transactionCode: string | null
   status: $Enums.PaymentStatus | null
   paidAt: Date | null
+  submittedAt: Date | null
+  evidenceUrl: string | null
+  renterNote: string | null
+  approvedById: number | null
+  approvedAt: Date | null
+  rejectedById: number | null
+  rejectedAt: Date | null
+  landlordNote: string | null
   createdAt: Date | null
+  updatedAt: Date | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -87,13 +113,23 @@ export type PaymentCountAggregateOutputType = {
   tenantId: number
   invoiceId: number
   payerId: number
+  qrCodeId: number
   amount: number
   method: number
   provider: number
   transactionCode: number
   status: number
   paidAt: number
+  submittedAt: number
+  evidenceUrl: number
+  renterNote: number
+  approvedById: number
+  approvedAt: number
+  rejectedById: number
+  rejectedAt: number
+  landlordNote: number
   createdAt: number
+  updatedAt: number
   createdById: number
   updatedById: number
   deletedById: number
@@ -106,7 +142,10 @@ export type PaymentAvgAggregateInputType = {
   tenantId?: true
   invoiceId?: true
   payerId?: true
+  qrCodeId?: true
   amount?: true
+  approvedById?: true
+  rejectedById?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -117,7 +156,10 @@ export type PaymentSumAggregateInputType = {
   tenantId?: true
   invoiceId?: true
   payerId?: true
+  qrCodeId?: true
   amount?: true
+  approvedById?: true
+  rejectedById?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -128,13 +170,23 @@ export type PaymentMinAggregateInputType = {
   tenantId?: true
   invoiceId?: true
   payerId?: true
+  qrCodeId?: true
   amount?: true
   method?: true
   provider?: true
   transactionCode?: true
   status?: true
   paidAt?: true
+  submittedAt?: true
+  evidenceUrl?: true
+  renterNote?: true
+  approvedById?: true
+  approvedAt?: true
+  rejectedById?: true
+  rejectedAt?: true
+  landlordNote?: true
   createdAt?: true
+  updatedAt?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -145,13 +197,23 @@ export type PaymentMaxAggregateInputType = {
   tenantId?: true
   invoiceId?: true
   payerId?: true
+  qrCodeId?: true
   amount?: true
   method?: true
   provider?: true
   transactionCode?: true
   status?: true
   paidAt?: true
+  submittedAt?: true
+  evidenceUrl?: true
+  renterNote?: true
+  approvedById?: true
+  approvedAt?: true
+  rejectedById?: true
+  rejectedAt?: true
+  landlordNote?: true
   createdAt?: true
+  updatedAt?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -162,13 +224,23 @@ export type PaymentCountAggregateInputType = {
   tenantId?: true
   invoiceId?: true
   payerId?: true
+  qrCodeId?: true
   amount?: true
   method?: true
   provider?: true
   transactionCode?: true
   status?: true
   paidAt?: true
+  submittedAt?: true
+  evidenceUrl?: true
+  renterNote?: true
+  approvedById?: true
+  approvedAt?: true
+  rejectedById?: true
+  rejectedAt?: true
+  landlordNote?: true
   createdAt?: true
+  updatedAt?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -266,13 +338,23 @@ export type PaymentGroupByOutputType = {
   tenantId: number
   invoiceId: number
   payerId: number
+  qrCodeId: number | null
   amount: runtime.Decimal
   method: $Enums.PaymentMethod
   provider: string | null
   transactionCode: string | null
   status: $Enums.PaymentStatus
   paidAt: Date | null
+  submittedAt: Date | null
+  evidenceUrl: string | null
+  renterNote: string | null
+  approvedById: number | null
+  approvedAt: Date | null
+  rejectedById: number | null
+  rejectedAt: Date | null
+  landlordNote: string | null
   createdAt: Date
+  updatedAt: Date
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -306,19 +388,32 @@ export type PaymentWhereInput = {
   tenantId?: Prisma.IntFilter<"Payment"> | number
   invoiceId?: Prisma.IntFilter<"Payment"> | number
   payerId?: Prisma.IntFilter<"Payment"> | number
+  qrCodeId?: Prisma.IntNullableFilter<"Payment"> | number | null
   amount?: Prisma.DecimalFilter<"Payment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
   provider?: Prisma.StringNullableFilter<"Payment"> | string | null
   transactionCode?: Prisma.StringNullableFilter<"Payment"> | string | null
   status?: Prisma.EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
   paidAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  submittedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  evidenceUrl?: Prisma.StringNullableFilter<"Payment"> | string | null
+  renterNote?: Prisma.StringNullableFilter<"Payment"> | string | null
+  approvedById?: Prisma.IntNullableFilter<"Payment"> | number | null
+  approvedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  rejectedById?: Prisma.IntNullableFilter<"Payment"> | number | null
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  landlordNote?: Prisma.StringNullableFilter<"Payment"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   createdById?: Prisma.IntNullableFilter<"Payment"> | number | null
   updatedById?: Prisma.IntNullableFilter<"Payment"> | number | null
   deletedById?: Prisma.IntNullableFilter<"Payment"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   invoice?: Prisma.XOR<Prisma.InvoiceScalarRelationFilter, Prisma.InvoiceWhereInput>
   payer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  qrCode?: Prisma.XOR<Prisma.PaymentQrCodeNullableScalarRelationFilter, Prisma.PaymentQrCodeWhereInput> | null
+  approvedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  rejectedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -329,19 +424,32 @@ export type PaymentOrderByWithRelationInput = {
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   payerId?: Prisma.SortOrder
+  qrCodeId?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
   method?: Prisma.SortOrder
   provider?: Prisma.SortOrderInput | Prisma.SortOrder
   transactionCode?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  submittedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  evidenceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  renterNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  approvedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  approvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  landlordNote?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
   invoice?: Prisma.InvoiceOrderByWithRelationInput
   payer?: Prisma.UserOrderByWithRelationInput
+  qrCode?: Prisma.PaymentQrCodeOrderByWithRelationInput
+  approvedBy?: Prisma.UserOrderByWithRelationInput
+  rejectedBy?: Prisma.UserOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
   deletedBy?: Prisma.UserOrderByWithRelationInput
@@ -349,42 +457,66 @@ export type PaymentOrderByWithRelationInput = {
 
 export type PaymentWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  provider_transactionCode?: Prisma.PaymentProviderTransactionCodeCompoundUniqueInput
   AND?: Prisma.PaymentWhereInput | Prisma.PaymentWhereInput[]
   OR?: Prisma.PaymentWhereInput[]
   NOT?: Prisma.PaymentWhereInput | Prisma.PaymentWhereInput[]
   tenantId?: Prisma.IntFilter<"Payment"> | number
   invoiceId?: Prisma.IntFilter<"Payment"> | number
   payerId?: Prisma.IntFilter<"Payment"> | number
+  qrCodeId?: Prisma.IntNullableFilter<"Payment"> | number | null
   amount?: Prisma.DecimalFilter<"Payment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
   provider?: Prisma.StringNullableFilter<"Payment"> | string | null
   transactionCode?: Prisma.StringNullableFilter<"Payment"> | string | null
   status?: Prisma.EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
   paidAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  submittedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  evidenceUrl?: Prisma.StringNullableFilter<"Payment"> | string | null
+  renterNote?: Prisma.StringNullableFilter<"Payment"> | string | null
+  approvedById?: Prisma.IntNullableFilter<"Payment"> | number | null
+  approvedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  rejectedById?: Prisma.IntNullableFilter<"Payment"> | number | null
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  landlordNote?: Prisma.StringNullableFilter<"Payment"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   createdById?: Prisma.IntNullableFilter<"Payment"> | number | null
   updatedById?: Prisma.IntNullableFilter<"Payment"> | number | null
   deletedById?: Prisma.IntNullableFilter<"Payment"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   invoice?: Prisma.XOR<Prisma.InvoiceScalarRelationFilter, Prisma.InvoiceWhereInput>
   payer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  qrCode?: Prisma.XOR<Prisma.PaymentQrCodeNullableScalarRelationFilter, Prisma.PaymentQrCodeWhereInput> | null
+  approvedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  rejectedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-}, "id">
+}, "id" | "provider_transactionCode">
 
 export type PaymentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   payerId?: Prisma.SortOrder
+  qrCodeId?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
   method?: Prisma.SortOrder
   provider?: Prisma.SortOrderInput | Prisma.SortOrder
   transactionCode?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  submittedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  evidenceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  renterNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  approvedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  approvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  landlordNote?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -403,13 +535,23 @@ export type PaymentScalarWhereWithAggregatesInput = {
   tenantId?: Prisma.IntWithAggregatesFilter<"Payment"> | number
   invoiceId?: Prisma.IntWithAggregatesFilter<"Payment"> | number
   payerId?: Prisma.IntWithAggregatesFilter<"Payment"> | number
+  qrCodeId?: Prisma.IntNullableWithAggregatesFilter<"Payment"> | number | null
   amount?: Prisma.DecimalWithAggregatesFilter<"Payment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodWithAggregatesFilter<"Payment"> | $Enums.PaymentMethod
   provider?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
   transactionCode?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
   status?: Prisma.EnumPaymentStatusWithAggregatesFilter<"Payment"> | $Enums.PaymentStatus
   paidAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Payment"> | Date | string | null
+  submittedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Payment"> | Date | string | null
+  evidenceUrl?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
+  renterNote?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
+  approvedById?: Prisma.IntNullableWithAggregatesFilter<"Payment"> | number | null
+  approvedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Payment"> | Date | string | null
+  rejectedById?: Prisma.IntNullableWithAggregatesFilter<"Payment"> | number | null
+  rejectedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Payment"> | Date | string | null
+  landlordNote?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Payment"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Payment"> | Date | string
   createdById?: Prisma.IntNullableWithAggregatesFilter<"Payment"> | number | null
   updatedById?: Prisma.IntNullableWithAggregatesFilter<"Payment"> | number | null
   deletedById?: Prisma.IntNullableWithAggregatesFilter<"Payment"> | number | null
@@ -422,10 +564,20 @@ export type PaymentCreateInput = {
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutPaymentsInput
   invoice: Prisma.InvoiceCreateNestedOneWithoutPaymentsInput
   payer: Prisma.UserCreateNestedOneWithoutPaymentsInput
+  qrCode?: Prisma.PaymentQrCodeCreateNestedOneWithoutPaymentsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedPaymentsInput
+  rejectedBy?: Prisma.UserCreateNestedOneWithoutRejectedPaymentsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPaymentsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPaymentsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPaymentsInput
@@ -436,13 +588,23 @@ export type PaymentUncheckedCreateInput = {
   tenantId: number
   invoiceId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -455,10 +617,20 @@ export type PaymentUpdateInput = {
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentsNestedInput
   invoice?: Prisma.InvoiceUpdateOneRequiredWithoutPaymentsNestedInput
   payer?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
+  qrCode?: Prisma.PaymentQrCodeUpdateOneWithoutPaymentsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedPaymentsNestedInput
+  rejectedBy?: Prisma.UserUpdateOneWithoutRejectedPaymentsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPaymentsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPaymentsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedPaymentsNestedInput
@@ -469,13 +641,23 @@ export type PaymentUncheckedUpdateInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -486,13 +668,23 @@ export type PaymentCreateManyInput = {
   tenantId: number
   invoiceId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -505,7 +697,14 @@ export type PaymentUpdateManyMutationInput = {
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PaymentUncheckedUpdateManyInput = {
@@ -513,13 +712,23 @@ export type PaymentUncheckedUpdateManyInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -535,18 +744,33 @@ export type PaymentOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type PaymentProviderTransactionCodeCompoundUniqueInput = {
+  provider: string
+  transactionCode: string
+}
+
 export type PaymentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   payerId?: Prisma.SortOrder
+  qrCodeId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   method?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   transactionCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
+  submittedAt?: Prisma.SortOrder
+  evidenceUrl?: Prisma.SortOrder
+  renterNote?: Prisma.SortOrder
+  approvedById?: Prisma.SortOrder
+  approvedAt?: Prisma.SortOrder
+  rejectedById?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  landlordNote?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -557,7 +781,10 @@ export type PaymentAvgOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   payerId?: Prisma.SortOrder
+  qrCodeId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  approvedById?: Prisma.SortOrder
+  rejectedById?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -568,13 +795,23 @@ export type PaymentMaxOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   payerId?: Prisma.SortOrder
+  qrCodeId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   method?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   transactionCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
+  submittedAt?: Prisma.SortOrder
+  evidenceUrl?: Prisma.SortOrder
+  renterNote?: Prisma.SortOrder
+  approvedById?: Prisma.SortOrder
+  approvedAt?: Prisma.SortOrder
+  rejectedById?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  landlordNote?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -585,13 +822,23 @@ export type PaymentMinOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   payerId?: Prisma.SortOrder
+  qrCodeId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   method?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   transactionCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
+  submittedAt?: Prisma.SortOrder
+  evidenceUrl?: Prisma.SortOrder
+  renterNote?: Prisma.SortOrder
+  approvedById?: Prisma.SortOrder
+  approvedAt?: Prisma.SortOrder
+  rejectedById?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  landlordNote?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -602,7 +849,10 @@ export type PaymentSumOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   payerId?: Prisma.SortOrder
+  qrCodeId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  approvedById?: Prisma.SortOrder
+  rejectedById?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -612,6 +862,20 @@ export type PaymentCreateNestedManyWithoutPayerInput = {
   create?: Prisma.XOR<Prisma.PaymentCreateWithoutPayerInput, Prisma.PaymentUncheckedCreateWithoutPayerInput> | Prisma.PaymentCreateWithoutPayerInput[] | Prisma.PaymentUncheckedCreateWithoutPayerInput[]
   connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutPayerInput | Prisma.PaymentCreateOrConnectWithoutPayerInput[]
   createMany?: Prisma.PaymentCreateManyPayerInputEnvelope
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+}
+
+export type PaymentCreateNestedManyWithoutApprovedByInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutApprovedByInput, Prisma.PaymentUncheckedCreateWithoutApprovedByInput> | Prisma.PaymentCreateWithoutApprovedByInput[] | Prisma.PaymentUncheckedCreateWithoutApprovedByInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutApprovedByInput | Prisma.PaymentCreateOrConnectWithoutApprovedByInput[]
+  createMany?: Prisma.PaymentCreateManyApprovedByInputEnvelope
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+}
+
+export type PaymentCreateNestedManyWithoutRejectedByInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutRejectedByInput, Prisma.PaymentUncheckedCreateWithoutRejectedByInput> | Prisma.PaymentCreateWithoutRejectedByInput[] | Prisma.PaymentUncheckedCreateWithoutRejectedByInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutRejectedByInput | Prisma.PaymentCreateOrConnectWithoutRejectedByInput[]
+  createMany?: Prisma.PaymentCreateManyRejectedByInputEnvelope
   connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
 }
 
@@ -640,6 +904,20 @@ export type PaymentUncheckedCreateNestedManyWithoutPayerInput = {
   create?: Prisma.XOR<Prisma.PaymentCreateWithoutPayerInput, Prisma.PaymentUncheckedCreateWithoutPayerInput> | Prisma.PaymentCreateWithoutPayerInput[] | Prisma.PaymentUncheckedCreateWithoutPayerInput[]
   connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutPayerInput | Prisma.PaymentCreateOrConnectWithoutPayerInput[]
   createMany?: Prisma.PaymentCreateManyPayerInputEnvelope
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+}
+
+export type PaymentUncheckedCreateNestedManyWithoutApprovedByInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutApprovedByInput, Prisma.PaymentUncheckedCreateWithoutApprovedByInput> | Prisma.PaymentCreateWithoutApprovedByInput[] | Prisma.PaymentUncheckedCreateWithoutApprovedByInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutApprovedByInput | Prisma.PaymentCreateOrConnectWithoutApprovedByInput[]
+  createMany?: Prisma.PaymentCreateManyApprovedByInputEnvelope
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+}
+
+export type PaymentUncheckedCreateNestedManyWithoutRejectedByInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutRejectedByInput, Prisma.PaymentUncheckedCreateWithoutRejectedByInput> | Prisma.PaymentCreateWithoutRejectedByInput[] | Prisma.PaymentUncheckedCreateWithoutRejectedByInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutRejectedByInput | Prisma.PaymentCreateOrConnectWithoutRejectedByInput[]
+  createMany?: Prisma.PaymentCreateManyRejectedByInputEnvelope
   connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
 }
 
@@ -675,6 +953,34 @@ export type PaymentUpdateManyWithoutPayerNestedInput = {
   connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
   update?: Prisma.PaymentUpdateWithWhereUniqueWithoutPayerInput | Prisma.PaymentUpdateWithWhereUniqueWithoutPayerInput[]
   updateMany?: Prisma.PaymentUpdateManyWithWhereWithoutPayerInput | Prisma.PaymentUpdateManyWithWhereWithoutPayerInput[]
+  deleteMany?: Prisma.PaymentScalarWhereInput | Prisma.PaymentScalarWhereInput[]
+}
+
+export type PaymentUpdateManyWithoutApprovedByNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutApprovedByInput, Prisma.PaymentUncheckedCreateWithoutApprovedByInput> | Prisma.PaymentCreateWithoutApprovedByInput[] | Prisma.PaymentUncheckedCreateWithoutApprovedByInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutApprovedByInput | Prisma.PaymentCreateOrConnectWithoutApprovedByInput[]
+  upsert?: Prisma.PaymentUpsertWithWhereUniqueWithoutApprovedByInput | Prisma.PaymentUpsertWithWhereUniqueWithoutApprovedByInput[]
+  createMany?: Prisma.PaymentCreateManyApprovedByInputEnvelope
+  set?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  disconnect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  delete?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  update?: Prisma.PaymentUpdateWithWhereUniqueWithoutApprovedByInput | Prisma.PaymentUpdateWithWhereUniqueWithoutApprovedByInput[]
+  updateMany?: Prisma.PaymentUpdateManyWithWhereWithoutApprovedByInput | Prisma.PaymentUpdateManyWithWhereWithoutApprovedByInput[]
+  deleteMany?: Prisma.PaymentScalarWhereInput | Prisma.PaymentScalarWhereInput[]
+}
+
+export type PaymentUpdateManyWithoutRejectedByNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutRejectedByInput, Prisma.PaymentUncheckedCreateWithoutRejectedByInput> | Prisma.PaymentCreateWithoutRejectedByInput[] | Prisma.PaymentUncheckedCreateWithoutRejectedByInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutRejectedByInput | Prisma.PaymentCreateOrConnectWithoutRejectedByInput[]
+  upsert?: Prisma.PaymentUpsertWithWhereUniqueWithoutRejectedByInput | Prisma.PaymentUpsertWithWhereUniqueWithoutRejectedByInput[]
+  createMany?: Prisma.PaymentCreateManyRejectedByInputEnvelope
+  set?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  disconnect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  delete?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  update?: Prisma.PaymentUpdateWithWhereUniqueWithoutRejectedByInput | Prisma.PaymentUpdateWithWhereUniqueWithoutRejectedByInput[]
+  updateMany?: Prisma.PaymentUpdateManyWithWhereWithoutRejectedByInput | Prisma.PaymentUpdateManyWithWhereWithoutRejectedByInput[]
   deleteMany?: Prisma.PaymentScalarWhereInput | Prisma.PaymentScalarWhereInput[]
 }
 
@@ -731,6 +1037,34 @@ export type PaymentUncheckedUpdateManyWithoutPayerNestedInput = {
   connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
   update?: Prisma.PaymentUpdateWithWhereUniqueWithoutPayerInput | Prisma.PaymentUpdateWithWhereUniqueWithoutPayerInput[]
   updateMany?: Prisma.PaymentUpdateManyWithWhereWithoutPayerInput | Prisma.PaymentUpdateManyWithWhereWithoutPayerInput[]
+  deleteMany?: Prisma.PaymentScalarWhereInput | Prisma.PaymentScalarWhereInput[]
+}
+
+export type PaymentUncheckedUpdateManyWithoutApprovedByNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutApprovedByInput, Prisma.PaymentUncheckedCreateWithoutApprovedByInput> | Prisma.PaymentCreateWithoutApprovedByInput[] | Prisma.PaymentUncheckedCreateWithoutApprovedByInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutApprovedByInput | Prisma.PaymentCreateOrConnectWithoutApprovedByInput[]
+  upsert?: Prisma.PaymentUpsertWithWhereUniqueWithoutApprovedByInput | Prisma.PaymentUpsertWithWhereUniqueWithoutApprovedByInput[]
+  createMany?: Prisma.PaymentCreateManyApprovedByInputEnvelope
+  set?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  disconnect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  delete?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  update?: Prisma.PaymentUpdateWithWhereUniqueWithoutApprovedByInput | Prisma.PaymentUpdateWithWhereUniqueWithoutApprovedByInput[]
+  updateMany?: Prisma.PaymentUpdateManyWithWhereWithoutApprovedByInput | Prisma.PaymentUpdateManyWithWhereWithoutApprovedByInput[]
+  deleteMany?: Prisma.PaymentScalarWhereInput | Prisma.PaymentScalarWhereInput[]
+}
+
+export type PaymentUncheckedUpdateManyWithoutRejectedByNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutRejectedByInput, Prisma.PaymentUncheckedCreateWithoutRejectedByInput> | Prisma.PaymentCreateWithoutRejectedByInput[] | Prisma.PaymentUncheckedCreateWithoutRejectedByInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutRejectedByInput | Prisma.PaymentCreateOrConnectWithoutRejectedByInput[]
+  upsert?: Prisma.PaymentUpsertWithWhereUniqueWithoutRejectedByInput | Prisma.PaymentUpsertWithWhereUniqueWithoutRejectedByInput[]
+  createMany?: Prisma.PaymentCreateManyRejectedByInputEnvelope
+  set?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  disconnect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  delete?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  update?: Prisma.PaymentUpdateWithWhereUniqueWithoutRejectedByInput | Prisma.PaymentUpdateWithWhereUniqueWithoutRejectedByInput[]
+  updateMany?: Prisma.PaymentUpdateManyWithWhereWithoutRejectedByInput | Prisma.PaymentUpdateManyWithWhereWithoutRejectedByInput[]
   deleteMany?: Prisma.PaymentScalarWhereInput | Prisma.PaymentScalarWhereInput[]
 }
 
@@ -868,6 +1202,48 @@ export type EnumPaymentStatusFieldUpdateOperationsInput = {
   set?: $Enums.PaymentStatus
 }
 
+export type PaymentCreateNestedManyWithoutQrCodeInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutQrCodeInput, Prisma.PaymentUncheckedCreateWithoutQrCodeInput> | Prisma.PaymentCreateWithoutQrCodeInput[] | Prisma.PaymentUncheckedCreateWithoutQrCodeInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutQrCodeInput | Prisma.PaymentCreateOrConnectWithoutQrCodeInput[]
+  createMany?: Prisma.PaymentCreateManyQrCodeInputEnvelope
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+}
+
+export type PaymentUncheckedCreateNestedManyWithoutQrCodeInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutQrCodeInput, Prisma.PaymentUncheckedCreateWithoutQrCodeInput> | Prisma.PaymentCreateWithoutQrCodeInput[] | Prisma.PaymentUncheckedCreateWithoutQrCodeInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutQrCodeInput | Prisma.PaymentCreateOrConnectWithoutQrCodeInput[]
+  createMany?: Prisma.PaymentCreateManyQrCodeInputEnvelope
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+}
+
+export type PaymentUpdateManyWithoutQrCodeNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutQrCodeInput, Prisma.PaymentUncheckedCreateWithoutQrCodeInput> | Prisma.PaymentCreateWithoutQrCodeInput[] | Prisma.PaymentUncheckedCreateWithoutQrCodeInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutQrCodeInput | Prisma.PaymentCreateOrConnectWithoutQrCodeInput[]
+  upsert?: Prisma.PaymentUpsertWithWhereUniqueWithoutQrCodeInput | Prisma.PaymentUpsertWithWhereUniqueWithoutQrCodeInput[]
+  createMany?: Prisma.PaymentCreateManyQrCodeInputEnvelope
+  set?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  disconnect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  delete?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  update?: Prisma.PaymentUpdateWithWhereUniqueWithoutQrCodeInput | Prisma.PaymentUpdateWithWhereUniqueWithoutQrCodeInput[]
+  updateMany?: Prisma.PaymentUpdateManyWithWhereWithoutQrCodeInput | Prisma.PaymentUpdateManyWithWhereWithoutQrCodeInput[]
+  deleteMany?: Prisma.PaymentScalarWhereInput | Prisma.PaymentScalarWhereInput[]
+}
+
+export type PaymentUncheckedUpdateManyWithoutQrCodeNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutQrCodeInput, Prisma.PaymentUncheckedCreateWithoutQrCodeInput> | Prisma.PaymentCreateWithoutQrCodeInput[] | Prisma.PaymentUncheckedCreateWithoutQrCodeInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutQrCodeInput | Prisma.PaymentCreateOrConnectWithoutQrCodeInput[]
+  upsert?: Prisma.PaymentUpsertWithWhereUniqueWithoutQrCodeInput | Prisma.PaymentUpsertWithWhereUniqueWithoutQrCodeInput[]
+  createMany?: Prisma.PaymentCreateManyQrCodeInputEnvelope
+  set?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  disconnect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  delete?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  update?: Prisma.PaymentUpdateWithWhereUniqueWithoutQrCodeInput | Prisma.PaymentUpdateWithWhereUniqueWithoutQrCodeInput[]
+  updateMany?: Prisma.PaymentUpdateManyWithWhereWithoutQrCodeInput | Prisma.PaymentUpdateManyWithWhereWithoutQrCodeInput[]
+  deleteMany?: Prisma.PaymentScalarWhereInput | Prisma.PaymentScalarWhereInput[]
+}
+
 export type PaymentCreateWithoutPayerInput = {
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
@@ -875,9 +1251,19 @@ export type PaymentCreateWithoutPayerInput = {
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutPaymentsInput
   invoice: Prisma.InvoiceCreateNestedOneWithoutPaymentsInput
+  qrCode?: Prisma.PaymentQrCodeCreateNestedOneWithoutPaymentsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedPaymentsInput
+  rejectedBy?: Prisma.UserCreateNestedOneWithoutRejectedPaymentsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPaymentsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPaymentsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPaymentsInput
@@ -887,13 +1273,23 @@ export type PaymentUncheckedCreateWithoutPayerInput = {
   id?: number
   tenantId: number
   invoiceId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -909,6 +1305,128 @@ export type PaymentCreateManyPayerInputEnvelope = {
   skipDuplicates?: boolean
 }
 
+export type PaymentCreateWithoutApprovedByInput = {
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: $Enums.PaymentMethod
+  provider?: string | null
+  transactionCode?: string | null
+  status?: $Enums.PaymentStatus
+  paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutPaymentsInput
+  invoice: Prisma.InvoiceCreateNestedOneWithoutPaymentsInput
+  payer: Prisma.UserCreateNestedOneWithoutPaymentsInput
+  qrCode?: Prisma.PaymentQrCodeCreateNestedOneWithoutPaymentsInput
+  rejectedBy?: Prisma.UserCreateNestedOneWithoutRejectedPaymentsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPaymentsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPaymentsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPaymentsInput
+}
+
+export type PaymentUncheckedCreateWithoutApprovedByInput = {
+  id?: number
+  tenantId: number
+  invoiceId: number
+  payerId: number
+  qrCodeId?: number | null
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: $Enums.PaymentMethod
+  provider?: string | null
+  transactionCode?: string | null
+  status?: $Enums.PaymentStatus
+  paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+}
+
+export type PaymentCreateOrConnectWithoutApprovedByInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  create: Prisma.XOR<Prisma.PaymentCreateWithoutApprovedByInput, Prisma.PaymentUncheckedCreateWithoutApprovedByInput>
+}
+
+export type PaymentCreateManyApprovedByInputEnvelope = {
+  data: Prisma.PaymentCreateManyApprovedByInput | Prisma.PaymentCreateManyApprovedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type PaymentCreateWithoutRejectedByInput = {
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: $Enums.PaymentMethod
+  provider?: string | null
+  transactionCode?: string | null
+  status?: $Enums.PaymentStatus
+  paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutPaymentsInput
+  invoice: Prisma.InvoiceCreateNestedOneWithoutPaymentsInput
+  payer: Prisma.UserCreateNestedOneWithoutPaymentsInput
+  qrCode?: Prisma.PaymentQrCodeCreateNestedOneWithoutPaymentsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedPaymentsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPaymentsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPaymentsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPaymentsInput
+}
+
+export type PaymentUncheckedCreateWithoutRejectedByInput = {
+  id?: number
+  tenantId: number
+  invoiceId: number
+  payerId: number
+  qrCodeId?: number | null
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: $Enums.PaymentMethod
+  provider?: string | null
+  transactionCode?: string | null
+  status?: $Enums.PaymentStatus
+  paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+}
+
+export type PaymentCreateOrConnectWithoutRejectedByInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  create: Prisma.XOR<Prisma.PaymentCreateWithoutRejectedByInput, Prisma.PaymentUncheckedCreateWithoutRejectedByInput>
+}
+
+export type PaymentCreateManyRejectedByInputEnvelope = {
+  data: Prisma.PaymentCreateManyRejectedByInput | Prisma.PaymentCreateManyRejectedByInput[]
+  skipDuplicates?: boolean
+}
+
 export type PaymentCreateWithoutCreatedByInput = {
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
@@ -916,10 +1434,20 @@ export type PaymentCreateWithoutCreatedByInput = {
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutPaymentsInput
   invoice: Prisma.InvoiceCreateNestedOneWithoutPaymentsInput
   payer: Prisma.UserCreateNestedOneWithoutPaymentsInput
+  qrCode?: Prisma.PaymentQrCodeCreateNestedOneWithoutPaymentsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedPaymentsInput
+  rejectedBy?: Prisma.UserCreateNestedOneWithoutRejectedPaymentsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPaymentsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPaymentsInput
 }
@@ -929,13 +1457,23 @@ export type PaymentUncheckedCreateWithoutCreatedByInput = {
   tenantId: number
   invoiceId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   updatedById?: number | null
   deletedById?: number | null
 }
@@ -957,10 +1495,20 @@ export type PaymentCreateWithoutUpdatedByInput = {
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutPaymentsInput
   invoice: Prisma.InvoiceCreateNestedOneWithoutPaymentsInput
   payer: Prisma.UserCreateNestedOneWithoutPaymentsInput
+  qrCode?: Prisma.PaymentQrCodeCreateNestedOneWithoutPaymentsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedPaymentsInput
+  rejectedBy?: Prisma.UserCreateNestedOneWithoutRejectedPaymentsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPaymentsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPaymentsInput
 }
@@ -970,13 +1518,23 @@ export type PaymentUncheckedCreateWithoutUpdatedByInput = {
   tenantId: number
   invoiceId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   deletedById?: number | null
 }
@@ -998,10 +1556,20 @@ export type PaymentCreateWithoutDeletedByInput = {
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutPaymentsInput
   invoice: Prisma.InvoiceCreateNestedOneWithoutPaymentsInput
   payer: Prisma.UserCreateNestedOneWithoutPaymentsInput
+  qrCode?: Prisma.PaymentQrCodeCreateNestedOneWithoutPaymentsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedPaymentsInput
+  rejectedBy?: Prisma.UserCreateNestedOneWithoutRejectedPaymentsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPaymentsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPaymentsInput
 }
@@ -1011,13 +1579,23 @@ export type PaymentUncheckedCreateWithoutDeletedByInput = {
   tenantId: number
   invoiceId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
 }
@@ -1056,16 +1634,58 @@ export type PaymentScalarWhereInput = {
   tenantId?: Prisma.IntFilter<"Payment"> | number
   invoiceId?: Prisma.IntFilter<"Payment"> | number
   payerId?: Prisma.IntFilter<"Payment"> | number
+  qrCodeId?: Prisma.IntNullableFilter<"Payment"> | number | null
   amount?: Prisma.DecimalFilter<"Payment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
   provider?: Prisma.StringNullableFilter<"Payment"> | string | null
   transactionCode?: Prisma.StringNullableFilter<"Payment"> | string | null
   status?: Prisma.EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
   paidAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  submittedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  evidenceUrl?: Prisma.StringNullableFilter<"Payment"> | string | null
+  renterNote?: Prisma.StringNullableFilter<"Payment"> | string | null
+  approvedById?: Prisma.IntNullableFilter<"Payment"> | number | null
+  approvedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  rejectedById?: Prisma.IntNullableFilter<"Payment"> | number | null
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  landlordNote?: Prisma.StringNullableFilter<"Payment"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   createdById?: Prisma.IntNullableFilter<"Payment"> | number | null
   updatedById?: Prisma.IntNullableFilter<"Payment"> | number | null
   deletedById?: Prisma.IntNullableFilter<"Payment"> | number | null
+}
+
+export type PaymentUpsertWithWhereUniqueWithoutApprovedByInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  update: Prisma.XOR<Prisma.PaymentUpdateWithoutApprovedByInput, Prisma.PaymentUncheckedUpdateWithoutApprovedByInput>
+  create: Prisma.XOR<Prisma.PaymentCreateWithoutApprovedByInput, Prisma.PaymentUncheckedCreateWithoutApprovedByInput>
+}
+
+export type PaymentUpdateWithWhereUniqueWithoutApprovedByInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  data: Prisma.XOR<Prisma.PaymentUpdateWithoutApprovedByInput, Prisma.PaymentUncheckedUpdateWithoutApprovedByInput>
+}
+
+export type PaymentUpdateManyWithWhereWithoutApprovedByInput = {
+  where: Prisma.PaymentScalarWhereInput
+  data: Prisma.XOR<Prisma.PaymentUpdateManyMutationInput, Prisma.PaymentUncheckedUpdateManyWithoutApprovedByInput>
+}
+
+export type PaymentUpsertWithWhereUniqueWithoutRejectedByInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  update: Prisma.XOR<Prisma.PaymentUpdateWithoutRejectedByInput, Prisma.PaymentUncheckedUpdateWithoutRejectedByInput>
+  create: Prisma.XOR<Prisma.PaymentCreateWithoutRejectedByInput, Prisma.PaymentUncheckedCreateWithoutRejectedByInput>
+}
+
+export type PaymentUpdateWithWhereUniqueWithoutRejectedByInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  data: Prisma.XOR<Prisma.PaymentUpdateWithoutRejectedByInput, Prisma.PaymentUncheckedUpdateWithoutRejectedByInput>
+}
+
+export type PaymentUpdateManyWithWhereWithoutRejectedByInput = {
+  where: Prisma.PaymentScalarWhereInput
+  data: Prisma.XOR<Prisma.PaymentUpdateManyMutationInput, Prisma.PaymentUncheckedUpdateManyWithoutRejectedByInput>
 }
 
 export type PaymentUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1123,9 +1743,19 @@ export type PaymentCreateWithoutTenantInput = {
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   invoice: Prisma.InvoiceCreateNestedOneWithoutPaymentsInput
   payer: Prisma.UserCreateNestedOneWithoutPaymentsInput
+  qrCode?: Prisma.PaymentQrCodeCreateNestedOneWithoutPaymentsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedPaymentsInput
+  rejectedBy?: Prisma.UserCreateNestedOneWithoutRejectedPaymentsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPaymentsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPaymentsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPaymentsInput
@@ -1135,13 +1765,23 @@ export type PaymentUncheckedCreateWithoutTenantInput = {
   id?: number
   invoiceId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1180,9 +1820,19 @@ export type PaymentCreateWithoutInvoiceInput = {
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutPaymentsInput
   payer: Prisma.UserCreateNestedOneWithoutPaymentsInput
+  qrCode?: Prisma.PaymentQrCodeCreateNestedOneWithoutPaymentsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedPaymentsInput
+  rejectedBy?: Prisma.UserCreateNestedOneWithoutRejectedPaymentsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPaymentsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPaymentsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPaymentsInput
@@ -1192,13 +1842,23 @@ export type PaymentUncheckedCreateWithoutInvoiceInput = {
   id?: number
   tenantId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1230,17 +1890,156 @@ export type PaymentUpdateManyWithWhereWithoutInvoiceInput = {
   data: Prisma.XOR<Prisma.PaymentUpdateManyMutationInput, Prisma.PaymentUncheckedUpdateManyWithoutInvoiceInput>
 }
 
-export type PaymentCreateManyPayerInput = {
-  id?: number
-  tenantId: number
-  invoiceId: number
+export type PaymentCreateWithoutQrCodeInput = {
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutPaymentsInput
+  invoice: Prisma.InvoiceCreateNestedOneWithoutPaymentsInput
+  payer: Prisma.UserCreateNestedOneWithoutPaymentsInput
+  approvedBy?: Prisma.UserCreateNestedOneWithoutApprovedPaymentsInput
+  rejectedBy?: Prisma.UserCreateNestedOneWithoutRejectedPaymentsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPaymentsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPaymentsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedPaymentsInput
+}
+
+export type PaymentUncheckedCreateWithoutQrCodeInput = {
+  id?: number
+  tenantId: number
+  invoiceId: number
+  payerId: number
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: $Enums.PaymentMethod
+  provider?: string | null
+  transactionCode?: string | null
+  status?: $Enums.PaymentStatus
+  paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+}
+
+export type PaymentCreateOrConnectWithoutQrCodeInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  create: Prisma.XOR<Prisma.PaymentCreateWithoutQrCodeInput, Prisma.PaymentUncheckedCreateWithoutQrCodeInput>
+}
+
+export type PaymentCreateManyQrCodeInputEnvelope = {
+  data: Prisma.PaymentCreateManyQrCodeInput | Prisma.PaymentCreateManyQrCodeInput[]
+  skipDuplicates?: boolean
+}
+
+export type PaymentUpsertWithWhereUniqueWithoutQrCodeInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  update: Prisma.XOR<Prisma.PaymentUpdateWithoutQrCodeInput, Prisma.PaymentUncheckedUpdateWithoutQrCodeInput>
+  create: Prisma.XOR<Prisma.PaymentCreateWithoutQrCodeInput, Prisma.PaymentUncheckedCreateWithoutQrCodeInput>
+}
+
+export type PaymentUpdateWithWhereUniqueWithoutQrCodeInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  data: Prisma.XOR<Prisma.PaymentUpdateWithoutQrCodeInput, Prisma.PaymentUncheckedUpdateWithoutQrCodeInput>
+}
+
+export type PaymentUpdateManyWithWhereWithoutQrCodeInput = {
+  where: Prisma.PaymentScalarWhereInput
+  data: Prisma.XOR<Prisma.PaymentUpdateManyMutationInput, Prisma.PaymentUncheckedUpdateManyWithoutQrCodeInput>
+}
+
+export type PaymentCreateManyPayerInput = {
+  id?: number
+  tenantId: number
+  invoiceId: number
+  qrCodeId?: number | null
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: $Enums.PaymentMethod
+  provider?: string | null
+  transactionCode?: string | null
+  status?: $Enums.PaymentStatus
+  paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+}
+
+export type PaymentCreateManyApprovedByInput = {
+  id?: number
+  tenantId: number
+  invoiceId: number
+  payerId: number
+  qrCodeId?: number | null
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: $Enums.PaymentMethod
+  provider?: string | null
+  transactionCode?: string | null
+  status?: $Enums.PaymentStatus
+  paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+}
+
+export type PaymentCreateManyRejectedByInput = {
+  id?: number
+  tenantId: number
+  invoiceId: number
+  payerId: number
+  qrCodeId?: number | null
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: $Enums.PaymentMethod
+  provider?: string | null
+  transactionCode?: string | null
+  status?: $Enums.PaymentStatus
+  paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1251,13 +2050,23 @@ export type PaymentCreateManyCreatedByInput = {
   tenantId: number
   invoiceId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   updatedById?: number | null
   deletedById?: number | null
 }
@@ -1267,13 +2076,23 @@ export type PaymentCreateManyUpdatedByInput = {
   tenantId: number
   invoiceId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   deletedById?: number | null
 }
@@ -1283,13 +2102,23 @@ export type PaymentCreateManyDeletedByInput = {
   tenantId: number
   invoiceId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
 }
@@ -1301,9 +2130,19 @@ export type PaymentUpdateWithoutPayerInput = {
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentsNestedInput
   invoice?: Prisma.InvoiceUpdateOneRequiredWithoutPaymentsNestedInput
+  qrCode?: Prisma.PaymentQrCodeUpdateOneWithoutPaymentsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedPaymentsNestedInput
+  rejectedBy?: Prisma.UserUpdateOneWithoutRejectedPaymentsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPaymentsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPaymentsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedPaymentsNestedInput
@@ -1313,13 +2152,23 @@ export type PaymentUncheckedUpdateWithoutPayerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1329,13 +2178,177 @@ export type PaymentUncheckedUpdateManyWithoutPayerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type PaymentUpdateWithoutApprovedByInput = {
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentsNestedInput
+  invoice?: Prisma.InvoiceUpdateOneRequiredWithoutPaymentsNestedInput
+  payer?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
+  qrCode?: Prisma.PaymentQrCodeUpdateOneWithoutPaymentsNestedInput
+  rejectedBy?: Prisma.UserUpdateOneWithoutRejectedPaymentsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedPaymentsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPaymentsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedPaymentsNestedInput
+}
+
+export type PaymentUncheckedUpdateWithoutApprovedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type PaymentUncheckedUpdateManyWithoutApprovedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type PaymentUpdateWithoutRejectedByInput = {
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentsNestedInput
+  invoice?: Prisma.InvoiceUpdateOneRequiredWithoutPaymentsNestedInput
+  payer?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
+  qrCode?: Prisma.PaymentQrCodeUpdateOneWithoutPaymentsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedPaymentsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedPaymentsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPaymentsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedPaymentsNestedInput
+}
+
+export type PaymentUncheckedUpdateWithoutRejectedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type PaymentUncheckedUpdateManyWithoutRejectedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1348,10 +2361,20 @@ export type PaymentUpdateWithoutCreatedByInput = {
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentsNestedInput
   invoice?: Prisma.InvoiceUpdateOneRequiredWithoutPaymentsNestedInput
   payer?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
+  qrCode?: Prisma.PaymentQrCodeUpdateOneWithoutPaymentsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedPaymentsNestedInput
+  rejectedBy?: Prisma.UserUpdateOneWithoutRejectedPaymentsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPaymentsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedPaymentsNestedInput
 }
@@ -1361,13 +2384,23 @@ export type PaymentUncheckedUpdateWithoutCreatedByInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1377,13 +2410,23 @@ export type PaymentUncheckedUpdateManyWithoutCreatedByInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1395,10 +2438,20 @@ export type PaymentUpdateWithoutUpdatedByInput = {
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentsNestedInput
   invoice?: Prisma.InvoiceUpdateOneRequiredWithoutPaymentsNestedInput
   payer?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
+  qrCode?: Prisma.PaymentQrCodeUpdateOneWithoutPaymentsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedPaymentsNestedInput
+  rejectedBy?: Prisma.UserUpdateOneWithoutRejectedPaymentsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPaymentsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedPaymentsNestedInput
 }
@@ -1408,13 +2461,23 @@ export type PaymentUncheckedUpdateWithoutUpdatedByInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1424,13 +2487,23 @@ export type PaymentUncheckedUpdateManyWithoutUpdatedByInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1442,10 +2515,20 @@ export type PaymentUpdateWithoutDeletedByInput = {
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentsNestedInput
   invoice?: Prisma.InvoiceUpdateOneRequiredWithoutPaymentsNestedInput
   payer?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
+  qrCode?: Prisma.PaymentQrCodeUpdateOneWithoutPaymentsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedPaymentsNestedInput
+  rejectedBy?: Prisma.UserUpdateOneWithoutRejectedPaymentsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPaymentsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPaymentsNestedInput
 }
@@ -1455,13 +2538,23 @@ export type PaymentUncheckedUpdateWithoutDeletedByInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1471,13 +2564,23 @@ export type PaymentUncheckedUpdateManyWithoutDeletedByInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1486,13 +2589,23 @@ export type PaymentCreateManyTenantInput = {
   id?: number
   invoiceId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1505,9 +2618,19 @@ export type PaymentUpdateWithoutTenantInput = {
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   invoice?: Prisma.InvoiceUpdateOneRequiredWithoutPaymentsNestedInput
   payer?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
+  qrCode?: Prisma.PaymentQrCodeUpdateOneWithoutPaymentsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedPaymentsNestedInput
+  rejectedBy?: Prisma.UserUpdateOneWithoutRejectedPaymentsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPaymentsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPaymentsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedPaymentsNestedInput
@@ -1517,13 +2640,23 @@ export type PaymentUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1533,13 +2666,23 @@ export type PaymentUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1549,13 +2692,23 @@ export type PaymentCreateManyInvoiceInput = {
   id?: number
   tenantId: number
   payerId: number
+  qrCodeId?: number | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: $Enums.PaymentMethod
   provider?: string | null
   transactionCode?: string | null
   status?: $Enums.PaymentStatus
   paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1568,9 +2721,19 @@ export type PaymentUpdateWithoutInvoiceInput = {
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentsNestedInput
   payer?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
+  qrCode?: Prisma.PaymentQrCodeUpdateOneWithoutPaymentsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedPaymentsNestedInput
+  rejectedBy?: Prisma.UserUpdateOneWithoutRejectedPaymentsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPaymentsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPaymentsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedPaymentsNestedInput
@@ -1580,13 +2743,23 @@ export type PaymentUncheckedUpdateWithoutInvoiceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1596,13 +2769,126 @@ export type PaymentUncheckedUpdateManyWithoutInvoiceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  qrCodeId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type PaymentCreateManyQrCodeInput = {
+  id?: number
+  tenantId: number
+  invoiceId: number
+  payerId: number
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: $Enums.PaymentMethod
+  provider?: string | null
+  transactionCode?: string | null
+  status?: $Enums.PaymentStatus
+  paidAt?: Date | string | null
+  submittedAt?: Date | string | null
+  evidenceUrl?: string | null
+  renterNote?: string | null
+  approvedById?: number | null
+  approvedAt?: Date | string | null
+  rejectedById?: number | null
+  rejectedAt?: Date | string | null
+  landlordNote?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+}
+
+export type PaymentUpdateWithoutQrCodeInput = {
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentsNestedInput
+  invoice?: Prisma.InvoiceUpdateOneRequiredWithoutPaymentsNestedInput
+  payer?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
+  approvedBy?: Prisma.UserUpdateOneWithoutApprovedPaymentsNestedInput
+  rejectedBy?: Prisma.UserUpdateOneWithoutRejectedPaymentsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedPaymentsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPaymentsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedPaymentsNestedInput
+}
+
+export type PaymentUncheckedUpdateWithoutQrCodeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type PaymentUncheckedUpdateManyWithoutQrCodeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  payerId?: Prisma.IntFieldUpdateOperationsInput | number
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  method?: Prisma.EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landlordNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1615,19 +2901,32 @@ export type PaymentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   tenantId?: boolean
   invoiceId?: boolean
   payerId?: boolean
+  qrCodeId?: boolean
   amount?: boolean
   method?: boolean
   provider?: boolean
   transactionCode?: boolean
   status?: boolean
   paidAt?: boolean
+  submittedAt?: boolean
+  evidenceUrl?: boolean
+  renterNote?: boolean
+  approvedById?: boolean
+  approvedAt?: boolean
+  rejectedById?: boolean
+  rejectedAt?: boolean
+  landlordNote?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
   payer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  qrCode?: boolean | Prisma.Payment$qrCodeArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.Payment$approvedByArgs<ExtArgs>
+  rejectedBy?: boolean | Prisma.Payment$rejectedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.Payment$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Payment$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Payment$deletedByArgs<ExtArgs>
@@ -1638,19 +2937,32 @@ export type PaymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   tenantId?: boolean
   invoiceId?: boolean
   payerId?: boolean
+  qrCodeId?: boolean
   amount?: boolean
   method?: boolean
   provider?: boolean
   transactionCode?: boolean
   status?: boolean
   paidAt?: boolean
+  submittedAt?: boolean
+  evidenceUrl?: boolean
+  renterNote?: boolean
+  approvedById?: boolean
+  approvedAt?: boolean
+  rejectedById?: boolean
+  rejectedAt?: boolean
+  landlordNote?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
   payer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  qrCode?: boolean | Prisma.Payment$qrCodeArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.Payment$approvedByArgs<ExtArgs>
+  rejectedBy?: boolean | Prisma.Payment$rejectedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.Payment$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Payment$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Payment$deletedByArgs<ExtArgs>
@@ -1661,19 +2973,32 @@ export type PaymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   tenantId?: boolean
   invoiceId?: boolean
   payerId?: boolean
+  qrCodeId?: boolean
   amount?: boolean
   method?: boolean
   provider?: boolean
   transactionCode?: boolean
   status?: boolean
   paidAt?: boolean
+  submittedAt?: boolean
+  evidenceUrl?: boolean
+  renterNote?: boolean
+  approvedById?: boolean
+  approvedAt?: boolean
+  rejectedById?: boolean
+  rejectedAt?: boolean
+  landlordNote?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
   payer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  qrCode?: boolean | Prisma.Payment$qrCodeArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.Payment$approvedByArgs<ExtArgs>
+  rejectedBy?: boolean | Prisma.Payment$rejectedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.Payment$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Payment$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Payment$deletedByArgs<ExtArgs>
@@ -1684,23 +3009,36 @@ export type PaymentSelectScalar = {
   tenantId?: boolean
   invoiceId?: boolean
   payerId?: boolean
+  qrCodeId?: boolean
   amount?: boolean
   method?: boolean
   provider?: boolean
   transactionCode?: boolean
   status?: boolean
   paidAt?: boolean
+  submittedAt?: boolean
+  evidenceUrl?: boolean
+  renterNote?: boolean
+  approvedById?: boolean
+  approvedAt?: boolean
+  rejectedById?: boolean
+  rejectedAt?: boolean
+  landlordNote?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
 }
 
-export type PaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "invoiceId" | "payerId" | "amount" | "method" | "provider" | "transactionCode" | "status" | "paidAt" | "createdAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["payment"]>
+export type PaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "invoiceId" | "payerId" | "qrCodeId" | "amount" | "method" | "provider" | "transactionCode" | "status" | "paidAt" | "submittedAt" | "evidenceUrl" | "renterNote" | "approvedById" | "approvedAt" | "rejectedById" | "rejectedAt" | "landlordNote" | "createdAt" | "updatedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["payment"]>
 export type PaymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
   payer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  qrCode?: boolean | Prisma.Payment$qrCodeArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.Payment$approvedByArgs<ExtArgs>
+  rejectedBy?: boolean | Prisma.Payment$rejectedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.Payment$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Payment$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Payment$deletedByArgs<ExtArgs>
@@ -1709,6 +3047,9 @@ export type PaymentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
   payer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  qrCode?: boolean | Prisma.Payment$qrCodeArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.Payment$approvedByArgs<ExtArgs>
+  rejectedBy?: boolean | Prisma.Payment$rejectedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.Payment$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Payment$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Payment$deletedByArgs<ExtArgs>
@@ -1717,6 +3058,9 @@ export type PaymentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
   payer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  qrCode?: boolean | Prisma.Payment$qrCodeArgs<ExtArgs>
+  approvedBy?: boolean | Prisma.Payment$approvedByArgs<ExtArgs>
+  rejectedBy?: boolean | Prisma.Payment$rejectedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.Payment$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Payment$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.Payment$deletedByArgs<ExtArgs>
@@ -1737,6 +3081,18 @@ export type $PaymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
      * Tài khoản người thanh toán (chặn xóa người dùng này nếu đã phát sinh thanh toán)
      */
     payer: Prisma.$UserPayload<ExtArgs>
+    /**
+     * Mã QR liên quan đến giao dịch thanh toán
+     */
+    qrCode: Prisma.$PaymentQrCodePayload<ExtArgs> | null
+    /**
+     * Người duyệt thanh toán sau đối soát
+     */
+    approvedBy: Prisma.$UserPayload<ExtArgs> | null
+    /**
+     * Người từ chối thanh toán sau đối soát
+     */
+    rejectedBy: Prisma.$UserPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     deletedBy: Prisma.$UserPayload<ExtArgs> | null
@@ -1758,6 +3114,10 @@ export type $PaymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
      * ID tài khoản người dùng thực hiện giao dịch thanh toán tiền
      */
     payerId: number
+    /**
+     * ID mã QR PayOS/VietQR liên quan đến giao dịch nếu có
+     */
+    qrCodeId: number | null
     /**
      * Số tiền thực tế khách thực hiện thanh toán trong giao dịch này
      */
@@ -1783,9 +3143,45 @@ export type $PaymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
      */
     paidAt: Date | null
     /**
+     * Thời điểm người thuê gửi xác nhận thanh toán
+     */
+    submittedAt: Date | null
+    /**
+     * Đường dẫn minh chứng thanh toán do người thuê gửi
+     */
+    evidenceUrl: string | null
+    /**
+     * Ghi chú người thuê gửi kèm xác nhận thanh toán
+     */
+    renterNote: string | null
+    /**
+     * ID người dùng duyệt thanh toán
+     */
+    approvedById: number | null
+    /**
+     * Thời điểm chủ trọ/nhân viên duyệt thanh toán
+     */
+    approvedAt: Date | null
+    /**
+     * ID người dùng từ chối thanh toán
+     */
+    rejectedById: number | null
+    /**
+     * Thời điểm chủ trọ/nhân viên từ chối thanh toán
+     */
+    rejectedAt: Date | null
+    /**
+     * Ghi chú đối soát của chủ trọ/nhân viên
+     */
+    landlordNote: string | null
+    /**
      * Thời điểm tạo yêu cầu giao dịch thanh toán
      */
     createdAt: Date
+    /**
+     * Thời điểm cập nhật giao dịch thanh toán gần nhất
+     */
+    updatedAt: Date
     /**
      * ID người dùng tạo bản ghi
      */
@@ -2195,6 +3591,9 @@ export interface Prisma__PaymentClient<T, Null = never, ExtArgs extends runtime.
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   invoice<T extends Prisma.InvoiceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InvoiceDefaultArgs<ExtArgs>>): Prisma.Prisma__InvoiceClient<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   payer<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  qrCode<T extends Prisma.Payment$qrCodeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Payment$qrCodeArgs<ExtArgs>>): Prisma.Prisma__PaymentQrCodeClient<runtime.Types.Result.GetResult<Prisma.$PaymentQrCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  approvedBy<T extends Prisma.Payment$approvedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Payment$approvedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  rejectedBy<T extends Prisma.Payment$rejectedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Payment$rejectedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.Payment$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Payment$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.Payment$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Payment$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.Payment$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Payment$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2231,13 +3630,23 @@ export interface PaymentFieldRefs {
   readonly tenantId: Prisma.FieldRef<"Payment", 'Int'>
   readonly invoiceId: Prisma.FieldRef<"Payment", 'Int'>
   readonly payerId: Prisma.FieldRef<"Payment", 'Int'>
+  readonly qrCodeId: Prisma.FieldRef<"Payment", 'Int'>
   readonly amount: Prisma.FieldRef<"Payment", 'Decimal'>
   readonly method: Prisma.FieldRef<"Payment", 'PaymentMethod'>
   readonly provider: Prisma.FieldRef<"Payment", 'String'>
   readonly transactionCode: Prisma.FieldRef<"Payment", 'String'>
   readonly status: Prisma.FieldRef<"Payment", 'PaymentStatus'>
   readonly paidAt: Prisma.FieldRef<"Payment", 'DateTime'>
+  readonly submittedAt: Prisma.FieldRef<"Payment", 'DateTime'>
+  readonly evidenceUrl: Prisma.FieldRef<"Payment", 'String'>
+  readonly renterNote: Prisma.FieldRef<"Payment", 'String'>
+  readonly approvedById: Prisma.FieldRef<"Payment", 'Int'>
+  readonly approvedAt: Prisma.FieldRef<"Payment", 'DateTime'>
+  readonly rejectedById: Prisma.FieldRef<"Payment", 'Int'>
+  readonly rejectedAt: Prisma.FieldRef<"Payment", 'DateTime'>
+  readonly landlordNote: Prisma.FieldRef<"Payment", 'String'>
   readonly createdAt: Prisma.FieldRef<"Payment", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Payment", 'DateTime'>
   readonly createdById: Prisma.FieldRef<"Payment", 'Int'>
   readonly updatedById: Prisma.FieldRef<"Payment", 'Int'>
   readonly deletedById: Prisma.FieldRef<"Payment", 'Int'>
@@ -2639,6 +4048,63 @@ export type PaymentDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Payments to delete.
    */
   limit?: number
+}
+
+/**
+ * Payment.qrCode
+ */
+export type Payment$qrCodeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentQrCode
+   */
+  select?: Prisma.PaymentQrCodeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentQrCode
+   */
+  omit?: Prisma.PaymentQrCodeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentQrCodeInclude<ExtArgs> | null
+  where?: Prisma.PaymentQrCodeWhereInput
+}
+
+/**
+ * Payment.approvedBy
+ */
+export type Payment$approvedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * Payment.rejectedBy
+ */
+export type Payment$rejectedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

@@ -1,14 +1,14 @@
 import {
-  BadGatewayException,
   BadRequestException,
   Injectable,
+  Logger,
   NotFoundException,
+  ServiceUnavailableException,
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common'
 import { createHmac, randomBytes, randomUUID, timingSafeEqual } from 'crypto'
 import { OAuth2Client } from 'google-auth-library'
-import roleName, { RoleNameType } from '@src/common/constants/role.constant'
 import { TypeOfVerificationCode } from '@src/common/constants/auth.constant'
 import envConfig from '@src/config/env.config'
 import { AuthRepository } from './repositories/auth.repo'
@@ -25,7 +25,6 @@ import type {
   TRegisterBodySchema,
   TSendOTPBodySchema,
   TUpdateProfileBodySchema,
-  TVerifyOTPBodySchema,
 } from './model/auth.model'
 
 const TIME_UNIT_IN_MS = {
@@ -71,6 +70,7 @@ type GoogleCallbackQuery = {
  */
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name)
   private readonly oauth2Client: OAuth2Client
   private readonly googleSessions = new Map<
     string,
@@ -83,19 +83,30 @@ export class AuthService {
     private readonly tokenService: TokenService,
     private readonly emailService: EmailService,
   ) {
-    this.oauth2Client = new OAuth2Client(
-      envConfig.GOOGLE_CLIENT_ID,
-      envConfig.GOOGLE_CLIENT_SECRET,
-      envConfig.GOOGLE_REDIRECT_URI,
-    )
+    this.oauth2Client = new OAuth2Client({
+      clientId: envConfig.GOOGLE_CLIENT_ID,
+      clientSecret: envConfig.GOOGLE_CLIENT_SECRET,
+      redirectUri: envConfig.GOOGLE_REDIRECT_URI,
+      transporterOptions: { timeout: envConfig.GOOGLE_OAUTH_TOKEN_TIMEOUT_MS ?? 5_000 },
+    })
+    this.oauth2Client.transporter?.interceptors.request.add({
+      resolved: (request) =>
+        Promise.resolve({
+          ...request,
+          timeout: envConfig.GOOGLE_OAUTH_TOKEN_TIMEOUT_MS ?? 5_000,
+          retry: false,
+          retryConfig: undefined,
+        }),
+    })
   }
 
   // ==================== REGISTER ====================
 
   async register(body: TRegisterBodySchema) {
-    await this.verifyAndConsumeOTP(body.email, body.code, TypeOfVerificationCode.REGISTER)
+    const email = this.normalizeEmail(body.email)
+    await this.verifyAndConsumeOTP(email, body.code, TypeOfVerificationCode.REGISTER)
 
-    const existingUser = await this.authRepository.findByEmail(body.email)
+    const existingUser = await this.authRepository.findByEmail(email)
     if (existingUser) {
       throw new UnprocessableEntityException('Email đã được sử dụng')
     }
@@ -103,6 +114,7 @@ export class AuthService {
     const passwordHash = await this.hashingService.hash(body.passwordHash)
     const user = await this.authRepository.create({
       ...body,
+      email,
       passwordHash,
     })
 
@@ -114,7 +126,8 @@ export class AuthService {
   // ==================== LOGIN (2FA OTP) ====================
 
   async login(body: TLoginBodySchema, ip?: string, userAgent?: string) {
-    const user = await this.authRepository.findByEmailForCredentials(body.email)
+    const email = this.normalizeEmail(body.email)
+    const user = await this.authRepository.findByEmailForCredentials(email)
     if (!user) {
       throw new UnauthorizedException('Email hoặc mật khẩu không đúng')
     }
@@ -132,7 +145,7 @@ export class AuthService {
       return this.completeLoginWith2FA(user, body.code, ip, userAgent)
     }
 
-    await this.generateAndSendOTP(body.email, TypeOfVerificationCode.LOGIN)
+    await this.generateAndSendOTP(email, TypeOfVerificationCode.LOGIN)
 
     return { message: 'OTP đã được gửi đến email của bạn. Vui lòng nhập mã OTP để hoàn tất đăng nhập.' }
   }
@@ -214,40 +227,47 @@ export class AuthService {
 
   async refreshToken(body: TRefreshTokenBodySchema, ip?: string, userAgent?: string) {
     try {
-      await this.tokenService.verifyRefreshToken(body.refreshToken)
+      const payload = await this.tokenService.verifyRefreshToken(body.refreshToken)
+      const user = await this.authRepository.findById(payload.userId)
+      if (!user || user.status !== 'ACTIVE') {
+        throw new UnauthorizedException('Refresh token không hợp lệ hoặc đã bị thu hồi')
+      }
+
+      const tokenPair = await this.buildTokenPair(user)
+      const tokenHash = this.hashingService.hashSHA256(body.refreshToken)
+      const successorHash = this.hashingService.hashSHA256(tokenPair.refreshToken)
+      const rotated = await this.authRepository.rotateRefreshToken(tokenHash, {
+        userId: user.id,
+        tokenHash: successorHash,
+        expiresAt: new Date(Date.now() + durationToMs(envConfig.REFRESH_TOKEN_EXPIRES_IN)),
+        userAgent,
+        ip,
+      })
+      if (!rotated) {
+        this.logger.warn(`security_event=refresh_replay user_id=${user.id}`)
+        throw new UnauthorizedException('Refresh token không hợp lệ hoặc đã bị thu hồi')
+      }
+      await this.authRepository.updateLastLoginAt(user.id)
+      return tokenPair
     } catch {
       throw new UnauthorizedException('Refresh token không hợp lệ hoặc đã hết hạn')
     }
-
-    const tokenHash = this.hashingService.hashSHA256(body.refreshToken)
-    const existingToken = await this.authRepository.findValidRefreshTokenByHash(tokenHash)
-    if (!existingToken) {
-      throw new UnauthorizedException('Refresh token không hợp lệ hoặc đã bị thu hồi')
-    }
-
-    await this.authRepository.revokeRefreshTokenByHash(tokenHash, 'Token rotation')
-
-    return this.issueTokenPair(existingToken.user, ip, userAgent)
   }
 
   // ==================== OTP ====================
 
   async sendOTP(body: TSendOTPBodySchema) {
-    await this.generateAndSendOTP(body.email, body.type)
+    await this.generateAndSendOTP(this.normalizeEmail(body.email), body.type)
     return { message: 'Mã OTP đã được gửi đến email của bạn' }
-  }
-
-  async verifyOTP(body: TVerifyOTPBodySchema) {
-    await this.verifyAndConsumeOTP(body.email, body.code, body.type)
-    return { message: 'Xác thực OTP thành công' }
   }
 
   // ==================== FORGOT PASSWORD ====================
 
   async forgotPassword(body: TForgotPasswordBodySchema) {
-    await this.verifyAndConsumeOTP(body.email, body.code, TypeOfVerificationCode.FORGOT_PASSWORD)
+    const email = this.normalizeEmail(body.email)
+    await this.verifyAndConsumeOTP(email, body.code, TypeOfVerificationCode.FORGOT_PASSWORD)
 
-    const user = await this.authRepository.findByEmail(body.email)
+    const user = await this.authRepository.findByEmail(email)
     if (!user) {
       throw new NotFoundException('Không tìm thấy tài khoản với email này')
     }
@@ -280,23 +300,8 @@ export class AuthService {
   // ==================== PRIVATE HELPERS ====================
 
   private async issueTokenPair(user: AuthUser, ip?: string, userAgent?: string) {
-    const tenantMember = user.tenantMembers?.[0]
-    const fallbackRole = user.systemRole ?? (user.renterProfile ? roleName.TENANT : '')
-    const roleId = tenantMember?.roleId ?? fallbackRole
-    const roleNameValue = (tenantMember?.role?.name ?? fallbackRole) as RoleNameType
-
-    const [accessToken, refreshToken] = await Promise.all([
-      this.tokenService.signAccessToken({
-        userId: user.id,
-        roleId,
-        roleName: roleNameValue,
-      }),
-      this.tokenService.signRefreshToken({
-        userId: user.id,
-      }),
-    ])
-
-    const refreshTokenHash = this.hashingService.hashSHA256(refreshToken)
+    const tokenPair = await this.buildTokenPair(user)
+    const refreshTokenHash = this.hashingService.hashSHA256(tokenPair.refreshToken)
     const expiresAt = new Date(Date.now() + durationToMs(envConfig.REFRESH_TOKEN_EXPIRES_IN))
     await this.authRepository.createRefreshToken({
       userId: user.id,
@@ -308,6 +313,20 @@ export class AuthService {
 
     await this.authRepository.updateLastLoginAt(user.id)
 
+    return tokenPair
+  }
+
+  private async buildTokenPair(user: AuthUser) {
+    const [accessToken, refreshToken] = await Promise.all([
+      this.tokenService.signAccessToken({
+        userId: user.id,
+        ver: 2,
+      }),
+      this.tokenService.signRefreshToken({
+        userId: user.id,
+      }),
+    ])
+
     return { accessToken, refreshToken }
   }
 
@@ -318,19 +337,26 @@ export class AuthService {
   }
 
   private async getGoogleUserInfoFromCode(code: string) {
-    const { tokens } = await this.oauth2Client.getToken(code)
-    if (!tokens.access_token) {
-      throw new BadGatewayException('Google không trả về access token')
+    let accessToken: string | null | undefined
+    try {
+      const result = await this.oauth2Client.getToken(code)
+      accessToken = result.tokens.access_token
+    } catch (error) {
+      this.logger.warn('security_event=google_oauth_token_exchange_failed')
+      const upstreamStatus = (error as { response?: { status?: number } })?.response?.status
+      if (upstreamStatus === 400 || upstreamStatus === 401) {
+        throw new BadRequestException('GOOGLE_OAUTH_CODE_INVALID')
+      }
+      throw new ServiceUnavailableException('GOOGLE_OAUTH_UNAVAILABLE')
+    }
+    if (!accessToken) {
+      throw new ServiceUnavailableException('GOOGLE_OAUTH_UNAVAILABLE')
     }
 
-    const response = await fetch(envConfig.GOOGLE_USERINFO_URL, {
-      headers: {
-        Authorization: `Bearer ${tokens.access_token}`,
-      },
-    })
+    const response = await this.fetchGoogleUserInfo(accessToken)
 
     if (!response.ok) {
-      throw new BadGatewayException('Không thể lấy thông tin người dùng Google')
+      throw new ServiceUnavailableException('GOOGLE_OAUTH_UNAVAILABLE')
     }
 
     const googleUser = (await response.json()) as {
@@ -349,6 +375,32 @@ export class AuthService {
       fullName: googleUser.name?.trim() || googleUser.email,
       avatarUrl: googleUser.picture,
     }
+  }
+
+  private async fetchGoogleUserInfo(accessToken: string) {
+    const maxRetries = envConfig.GOOGLE_USERINFO_MAX_RETRIES ?? 1
+    for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
+      try {
+        const response = await fetch(envConfig.GOOGLE_USERINFO_URL, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+          signal: AbortSignal.timeout(envConfig.GOOGLE_USERINFO_TIMEOUT_MS ?? 3_000),
+        })
+        const retryable = response.status === 429 || [502, 503, 504].includes(response.status)
+        if (!retryable || attempt === maxRetries) {
+          return response
+        }
+      } catch {
+        if (attempt === maxRetries) {
+          this.logger.warn('security_event=google_userinfo_timeout_or_network_error')
+          throw new ServiceUnavailableException('GOOGLE_OAUTH_UNAVAILABLE')
+        }
+      }
+
+      this.logger.warn(`security_event=google_userinfo_retry attempt=${attempt + 1}`)
+      await new Promise((resolve) => setTimeout(resolve, 100 * 2 ** attempt))
+    }
+
+    throw new ServiceUnavailableException('GOOGLE_OAUTH_UNAVAILABLE')
   }
 
   private async findOrCreateGoogleUser(googleUser: { email: string; fullName: string; avatarUrl?: string }) {
@@ -508,12 +560,28 @@ export class AuthService {
 
     const isCodeValid = await this.hashingService.compare(code, verificationCode.codeHash)
     if (!isCodeValid) {
-      await this.authRepository.incrementVerificationAttempts(verificationCode.id)
+      await this.authRepository.recordVerificationFailure(
+        verificationCode.id,
+        email,
+        type as 'REGISTER' | 'FORGOT_PASSWORD' | 'LOGIN',
+        envConfig.OTP_MAX_ATTEMPTS,
+      )
       throw new BadRequestException('Mã OTP không đúng')
     }
 
-    await this.authRepository.consumeVerificationCode(verificationCode.id)
+    const consumed = await this.authRepository.consumeVerificationCode(
+      verificationCode.id,
+      email,
+      type as 'REGISTER' | 'FORGOT_PASSWORD' | 'LOGIN',
+      envConfig.OTP_MAX_ATTEMPTS,
+    )
+    if (!consumed) {
+      this.logger.warn(`security_event=otp_consume_conflict type=${type}`)
+      throw new BadRequestException('Mã OTP không tồn tại hoặc đã hết hạn')
+    }
+  }
+
+  private normalizeEmail(email: string) {
+    return email.trim().toLowerCase()
   }
 }
-
-

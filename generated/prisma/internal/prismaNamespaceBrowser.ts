@@ -66,6 +66,7 @@ export const ModelName = {
   Property: 'Property',
   Floor: 'Floor',
   Room: 'Room',
+  MarketplaceModeration: 'MarketplaceModeration',
   RoomImage: 'RoomImage',
   Amenity: 'Amenity',
   RoomAmenity: 'RoomAmenity',
@@ -90,6 +91,7 @@ export const ModelName = {
   InvoiceBatch: 'InvoiceBatch',
   Invoice: 'Invoice',
   InvoiceItem: 'InvoiceItem',
+  Debt: 'Debt',
   Payment: 'Payment',
   PaymentQrCode: 'PaymentQrCode',
   PaymentWebhookLog: 'PaymentWebhookLog',
@@ -376,10 +378,25 @@ export const RoomScalarFieldEnum = {
 export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
 
 
+export const MarketplaceModerationScalarFieldEnum = {
+  id: 'id',
+  roomId: 'roomId',
+  tenantId: 'tenantId',
+  actorId: 'actorId',
+  fromStatus: 'fromStatus',
+  toStatus: 'toStatus',
+  reason: 'reason',
+  createdAt: 'createdAt'
+} as const
+
+export type MarketplaceModerationScalarFieldEnum = (typeof MarketplaceModerationScalarFieldEnum)[keyof typeof MarketplaceModerationScalarFieldEnum]
+
+
 export const RoomImageScalarFieldEnum = {
   id: 'id',
   roomId: 'roomId',
   url: 'url',
+  publicId: 'publicId',
   caption: 'caption',
   sortOrder: 'sortOrder',
   isThumbnail: 'isThumbnail',
@@ -774,18 +791,49 @@ export const InvoiceItemScalarFieldEnum = {
 export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
 
 
+export const DebtScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  invoiceId: 'invoiceId',
+  contractId: 'contractId',
+  roomId: 'roomId',
+  renterId: 'renterId',
+  billingMonth: 'billingMonth',
+  originalAmount: 'originalAmount',
+  paidAmount: 'paidAmount',
+  remainingAmount: 'remainingAmount',
+  status: 'status',
+  dueDate: 'dueDate',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DebtScalarFieldEnum = (typeof DebtScalarFieldEnum)[keyof typeof DebtScalarFieldEnum]
+
+
 export const PaymentScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   invoiceId: 'invoiceId',
   payerId: 'payerId',
+  qrCodeId: 'qrCodeId',
   amount: 'amount',
   method: 'method',
   provider: 'provider',
   transactionCode: 'transactionCode',
   status: 'status',
   paidAt: 'paidAt',
+  submittedAt: 'submittedAt',
+  evidenceUrl: 'evidenceUrl',
+  renterNote: 'renterNote',
+  approvedById: 'approvedById',
+  approvedAt: 'approvedAt',
+  rejectedById: 'rejectedById',
+  rejectedAt: 'rejectedAt',
+  landlordNote: 'landlordNote',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   createdById: 'createdById',
   updatedById: 'updatedById',
   deletedById: 'deletedById'
@@ -799,12 +847,17 @@ export const PaymentQrCodeScalarFieldEnum = {
   tenantId: 'tenantId',
   invoiceId: 'invoiceId',
   provider: 'provider',
+  orderCode: 'orderCode',
+  paymentLinkId: 'paymentLinkId',
   qrContent: 'qrContent',
   qrImageUrl: 'qrImageUrl',
+  checkoutUrl: 'checkoutUrl',
   amount: 'amount',
+  providerStatus: 'providerStatus',
   expiredAt: 'expiredAt',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type PaymentQrCodeScalarFieldEnum = (typeof PaymentQrCodeScalarFieldEnum)[keyof typeof PaymentQrCodeScalarFieldEnum]
@@ -815,8 +868,19 @@ export const PaymentWebhookLogScalarFieldEnum = {
   provider: 'provider',
   tenantId: 'tenantId',
   invoiceId: 'invoiceId',
+  orderCode: 'orderCode',
+  paymentLinkId: 'paymentLinkId',
+  reference: 'reference',
   transactionCode: 'transactionCode',
+  amount: 'amount',
+  currency: 'currency',
+  providerCode: 'providerCode',
+  providerDesc: 'providerDesc',
+  success: 'success',
+  transactionDateTime: 'transactionDateTime',
   payload: 'payload',
+  payloadDigest: 'payloadDigest',
+  digestKeyVersion: 'digestKeyVersion',
   signatureValid: 'signatureValid',
   status: 'status',
   errorMessage: 'errorMessage',
@@ -993,9 +1057,15 @@ export const DeviceTokenScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   token: 'token',
+  fid: 'fid',
   platform: 'platform',
   deviceName: 'deviceName',
   isActive: 'isActive',
+  lastSeenAt: 'lastSeenAt',
+  lastUsedAt: 'lastUsedAt',
+  failureCount: 'failureCount',
+  lastError: 'lastError',
+  disabledAt: 'disabledAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1007,12 +1077,14 @@ export const BackgroundJobScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   queueName: 'queueName',
+  externalJobId: 'externalJobId',
   jobType: 'jobType',
   payload: 'payload',
   status: 'status',
   attempts: 'attempts',
   errorMessage: 'errorMessage',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   processedAt: 'processedAt',
   completedAt: 'completedAt'
 } as const

@@ -75,14 +75,6 @@ export const SendOTPBodySchema = VerificationCodeSchema.pick({
   email: true,
   type: true,
 }).strict()
-export const VerifyOTPBodySchema = VerificationCodeSchema.pick({
-  email: true,
-  type: true,
-})
-  .extend({
-    code: z.string().length(6),
-  })
-  .strict()
 // login
 export const LoginBodySchema = UserSchema.pick({
   email: true,
@@ -211,7 +203,6 @@ export type TRegisterBodySchema = z.infer<typeof RegisterBodySchema>
 export type TRegisterResSchema = z.infer<typeof RegisterResSchema>
 export type TVerificationCodeSchema = z.infer<typeof VerificationCodeSchema>
 export type TSendOTPBodySchema = z.infer<typeof SendOTPBodySchema>
-export type TVerifyOTPBodySchema = z.infer<typeof VerifyOTPBodySchema>
 export type TLoginBodySchema = z.infer<typeof LoginBodySchema>
 export type TLoginResSchema = z.infer<typeof LoginResSchema>
 export type TRefreshTokenSchema = z.infer<typeof RefreshTokenSchema>

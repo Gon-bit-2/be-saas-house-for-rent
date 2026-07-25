@@ -21,7 +21,7 @@ export class RoomImagesService {
     }
 
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
-    const room = await this.roomsRepository.findTenantRoom(tenant.tenantId, roomId)
+    const room = await this.roomsRepository.findById(tenant.tenantId, roomId)
     if (!room) {
       throw new NotFoundException('Không tìm thấy phòng')
     }
@@ -44,7 +44,9 @@ export class RoomImagesService {
         })),
       )
     } catch (error) {
-      await Promise.all(uploadedImages.map((image) => this.cloudinaryService.deleteImage(image.publicId).catch(() => undefined)))
+      await Promise.all(
+        uploadedImages.map((image) => this.cloudinaryService.deleteImage(image.publicId).catch(() => undefined)),
+      )
       throw error
     }
   }

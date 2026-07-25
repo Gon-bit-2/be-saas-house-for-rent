@@ -42,11 +42,13 @@ export type BackgroundJobMinAggregateOutputType = {
   id: number | null
   tenantId: number | null
   queueName: string | null
+  externalJobId: string | null
   jobType: string | null
   status: $Enums.BackgroundJobStatus | null
   attempts: number | null
   errorMessage: string | null
   createdAt: Date | null
+  updatedAt: Date | null
   processedAt: Date | null
   completedAt: Date | null
 }
@@ -55,11 +57,13 @@ export type BackgroundJobMaxAggregateOutputType = {
   id: number | null
   tenantId: number | null
   queueName: string | null
+  externalJobId: string | null
   jobType: string | null
   status: $Enums.BackgroundJobStatus | null
   attempts: number | null
   errorMessage: string | null
   createdAt: Date | null
+  updatedAt: Date | null
   processedAt: Date | null
   completedAt: Date | null
 }
@@ -68,12 +72,14 @@ export type BackgroundJobCountAggregateOutputType = {
   id: number
   tenantId: number
   queueName: number
+  externalJobId: number
   jobType: number
   payload: number
   status: number
   attempts: number
   errorMessage: number
   createdAt: number
+  updatedAt: number
   processedAt: number
   completedAt: number
   _all: number
@@ -96,11 +102,13 @@ export type BackgroundJobMinAggregateInputType = {
   id?: true
   tenantId?: true
   queueName?: true
+  externalJobId?: true
   jobType?: true
   status?: true
   attempts?: true
   errorMessage?: true
   createdAt?: true
+  updatedAt?: true
   processedAt?: true
   completedAt?: true
 }
@@ -109,11 +117,13 @@ export type BackgroundJobMaxAggregateInputType = {
   id?: true
   tenantId?: true
   queueName?: true
+  externalJobId?: true
   jobType?: true
   status?: true
   attempts?: true
   errorMessage?: true
   createdAt?: true
+  updatedAt?: true
   processedAt?: true
   completedAt?: true
 }
@@ -122,12 +132,14 @@ export type BackgroundJobCountAggregateInputType = {
   id?: true
   tenantId?: true
   queueName?: true
+  externalJobId?: true
   jobType?: true
   payload?: true
   status?: true
   attempts?: true
   errorMessage?: true
   createdAt?: true
+  updatedAt?: true
   processedAt?: true
   completedAt?: true
   _all?: true
@@ -223,12 +235,14 @@ export type BackgroundJobGroupByOutputType = {
   id: number
   tenantId: number | null
   queueName: string
+  externalJobId: string | null
   jobType: string
   payload: runtime.JsonValue
   status: $Enums.BackgroundJobStatus
   attempts: number
   errorMessage: string | null
   createdAt: Date
+  updatedAt: Date
   processedAt: Date | null
   completedAt: Date | null
   _count: BackgroundJobCountAggregateOutputType | null
@@ -260,12 +274,14 @@ export type BackgroundJobWhereInput = {
   id?: Prisma.IntFilter<"BackgroundJob"> | number
   tenantId?: Prisma.IntNullableFilter<"BackgroundJob"> | number | null
   queueName?: Prisma.StringFilter<"BackgroundJob"> | string
+  externalJobId?: Prisma.StringNullableFilter<"BackgroundJob"> | string | null
   jobType?: Prisma.StringFilter<"BackgroundJob"> | string
   payload?: Prisma.JsonFilter<"BackgroundJob">
   status?: Prisma.EnumBackgroundJobStatusFilter<"BackgroundJob"> | $Enums.BackgroundJobStatus
   attempts?: Prisma.IntFilter<"BackgroundJob"> | number
   errorMessage?: Prisma.StringNullableFilter<"BackgroundJob"> | string | null
   createdAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
   processedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   tenant?: Prisma.XOR<Prisma.TenantNullableScalarRelationFilter, Prisma.TenantWhereInput> | null
@@ -275,12 +291,14 @@ export type BackgroundJobOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
   queueName?: Prisma.SortOrder
+  externalJobId?: Prisma.SortOrderInput | Prisma.SortOrder
   jobType?: Prisma.SortOrder
   payload?: Prisma.SortOrder
   status?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
   errorMessage?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   processedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
@@ -293,12 +311,14 @@ export type BackgroundJobWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BackgroundJobWhereInput | Prisma.BackgroundJobWhereInput[]
   tenantId?: Prisma.IntNullableFilter<"BackgroundJob"> | number | null
   queueName?: Prisma.StringFilter<"BackgroundJob"> | string
+  externalJobId?: Prisma.StringNullableFilter<"BackgroundJob"> | string | null
   jobType?: Prisma.StringFilter<"BackgroundJob"> | string
   payload?: Prisma.JsonFilter<"BackgroundJob">
   status?: Prisma.EnumBackgroundJobStatusFilter<"BackgroundJob"> | $Enums.BackgroundJobStatus
   attempts?: Prisma.IntFilter<"BackgroundJob"> | number
   errorMessage?: Prisma.StringNullableFilter<"BackgroundJob"> | string | null
   createdAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
   processedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   tenant?: Prisma.XOR<Prisma.TenantNullableScalarRelationFilter, Prisma.TenantWhereInput> | null
@@ -308,12 +328,14 @@ export type BackgroundJobOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
   queueName?: Prisma.SortOrder
+  externalJobId?: Prisma.SortOrderInput | Prisma.SortOrder
   jobType?: Prisma.SortOrder
   payload?: Prisma.SortOrder
   status?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
   errorMessage?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   processedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BackgroundJobCountOrderByAggregateInput
@@ -330,24 +352,28 @@ export type BackgroundJobScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"BackgroundJob"> | number
   tenantId?: Prisma.IntNullableWithAggregatesFilter<"BackgroundJob"> | number | null
   queueName?: Prisma.StringWithAggregatesFilter<"BackgroundJob"> | string
+  externalJobId?: Prisma.StringNullableWithAggregatesFilter<"BackgroundJob"> | string | null
   jobType?: Prisma.StringWithAggregatesFilter<"BackgroundJob"> | string
   payload?: Prisma.JsonWithAggregatesFilter<"BackgroundJob">
   status?: Prisma.EnumBackgroundJobStatusWithAggregatesFilter<"BackgroundJob"> | $Enums.BackgroundJobStatus
   attempts?: Prisma.IntWithAggregatesFilter<"BackgroundJob"> | number
   errorMessage?: Prisma.StringNullableWithAggregatesFilter<"BackgroundJob"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BackgroundJob"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"BackgroundJob"> | Date | string
   processedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BackgroundJob"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BackgroundJob"> | Date | string | null
 }
 
 export type BackgroundJobCreateInput = {
   queueName: string
+  externalJobId?: string | null
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.BackgroundJobStatus
   attempts?: number
   errorMessage?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   processedAt?: Date | string | null
   completedAt?: Date | string | null
   tenant?: Prisma.TenantCreateNestedOneWithoutBackgroundJobsInput
@@ -357,24 +383,28 @@ export type BackgroundJobUncheckedCreateInput = {
   id?: number
   tenantId?: number | null
   queueName: string
+  externalJobId?: string | null
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.BackgroundJobStatus
   attempts?: number
   errorMessage?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   processedAt?: Date | string | null
   completedAt?: Date | string | null
 }
 
 export type BackgroundJobUpdateInput = {
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
+  externalJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumBackgroundJobStatusFieldUpdateOperationsInput | $Enums.BackgroundJobStatus
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneWithoutBackgroundJobsNestedInput
@@ -384,12 +414,14 @@ export type BackgroundJobUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
+  externalJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumBackgroundJobStatusFieldUpdateOperationsInput | $Enums.BackgroundJobStatus
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -398,24 +430,28 @@ export type BackgroundJobCreateManyInput = {
   id?: number
   tenantId?: number | null
   queueName: string
+  externalJobId?: string | null
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.BackgroundJobStatus
   attempts?: number
   errorMessage?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   processedAt?: Date | string | null
   completedAt?: Date | string | null
 }
 
 export type BackgroundJobUpdateManyMutationInput = {
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
+  externalJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumBackgroundJobStatusFieldUpdateOperationsInput | $Enums.BackgroundJobStatus
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -424,12 +460,14 @@ export type BackgroundJobUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
+  externalJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumBackgroundJobStatusFieldUpdateOperationsInput | $Enums.BackgroundJobStatus
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -448,12 +486,14 @@ export type BackgroundJobCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   queueName?: Prisma.SortOrder
+  externalJobId?: Prisma.SortOrder
   jobType?: Prisma.SortOrder
   payload?: Prisma.SortOrder
   status?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
   errorMessage?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   processedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
 }
@@ -468,11 +508,13 @@ export type BackgroundJobMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   queueName?: Prisma.SortOrder
+  externalJobId?: Prisma.SortOrder
   jobType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
   errorMessage?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   processedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
 }
@@ -481,11 +523,13 @@ export type BackgroundJobMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   queueName?: Prisma.SortOrder
+  externalJobId?: Prisma.SortOrder
   jobType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   attempts?: Prisma.SortOrder
   errorMessage?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   processedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
 }
@@ -544,12 +588,14 @@ export type EnumBackgroundJobStatusFieldUpdateOperationsInput = {
 
 export type BackgroundJobCreateWithoutTenantInput = {
   queueName: string
+  externalJobId?: string | null
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.BackgroundJobStatus
   attempts?: number
   errorMessage?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   processedAt?: Date | string | null
   completedAt?: Date | string | null
 }
@@ -557,12 +603,14 @@ export type BackgroundJobCreateWithoutTenantInput = {
 export type BackgroundJobUncheckedCreateWithoutTenantInput = {
   id?: number
   queueName: string
+  externalJobId?: string | null
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.BackgroundJobStatus
   attempts?: number
   errorMessage?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   processedAt?: Date | string | null
   completedAt?: Date | string | null
 }
@@ -600,12 +648,14 @@ export type BackgroundJobScalarWhereInput = {
   id?: Prisma.IntFilter<"BackgroundJob"> | number
   tenantId?: Prisma.IntNullableFilter<"BackgroundJob"> | number | null
   queueName?: Prisma.StringFilter<"BackgroundJob"> | string
+  externalJobId?: Prisma.StringNullableFilter<"BackgroundJob"> | string | null
   jobType?: Prisma.StringFilter<"BackgroundJob"> | string
   payload?: Prisma.JsonFilter<"BackgroundJob">
   status?: Prisma.EnumBackgroundJobStatusFilter<"BackgroundJob"> | $Enums.BackgroundJobStatus
   attempts?: Prisma.IntFilter<"BackgroundJob"> | number
   errorMessage?: Prisma.StringNullableFilter<"BackgroundJob"> | string | null
   createdAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"BackgroundJob"> | Date | string
   processedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"BackgroundJob"> | Date | string | null
 }
@@ -613,24 +663,28 @@ export type BackgroundJobScalarWhereInput = {
 export type BackgroundJobCreateManyTenantInput = {
   id?: number
   queueName: string
+  externalJobId?: string | null
   jobType: string
   payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: $Enums.BackgroundJobStatus
   attempts?: number
   errorMessage?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   processedAt?: Date | string | null
   completedAt?: Date | string | null
 }
 
 export type BackgroundJobUpdateWithoutTenantInput = {
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
+  externalJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumBackgroundJobStatusFieldUpdateOperationsInput | $Enums.BackgroundJobStatus
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -638,12 +692,14 @@ export type BackgroundJobUpdateWithoutTenantInput = {
 export type BackgroundJobUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
+  externalJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumBackgroundJobStatusFieldUpdateOperationsInput | $Enums.BackgroundJobStatus
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -651,12 +707,14 @@ export type BackgroundJobUncheckedUpdateWithoutTenantInput = {
 export type BackgroundJobUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   queueName?: Prisma.StringFieldUpdateOperationsInput | string
+  externalJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobType?: Prisma.StringFieldUpdateOperationsInput | string
   payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.EnumBackgroundJobStatusFieldUpdateOperationsInput | $Enums.BackgroundJobStatus
   attempts?: Prisma.IntFieldUpdateOperationsInput | number
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -667,12 +725,14 @@ export type BackgroundJobSelect<ExtArgs extends runtime.Types.Extensions.Interna
   id?: boolean
   tenantId?: boolean
   queueName?: boolean
+  externalJobId?: boolean
   jobType?: boolean
   payload?: boolean
   status?: boolean
   attempts?: boolean
   errorMessage?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   processedAt?: boolean
   completedAt?: boolean
   tenant?: boolean | Prisma.BackgroundJob$tenantArgs<ExtArgs>
@@ -682,12 +742,14 @@ export type BackgroundJobSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   tenantId?: boolean
   queueName?: boolean
+  externalJobId?: boolean
   jobType?: boolean
   payload?: boolean
   status?: boolean
   attempts?: boolean
   errorMessage?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   processedAt?: boolean
   completedAt?: boolean
   tenant?: boolean | Prisma.BackgroundJob$tenantArgs<ExtArgs>
@@ -697,12 +759,14 @@ export type BackgroundJobSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   tenantId?: boolean
   queueName?: boolean
+  externalJobId?: boolean
   jobType?: boolean
   payload?: boolean
   status?: boolean
   attempts?: boolean
   errorMessage?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   processedAt?: boolean
   completedAt?: boolean
   tenant?: boolean | Prisma.BackgroundJob$tenantArgs<ExtArgs>
@@ -712,17 +776,19 @@ export type BackgroundJobSelectScalar = {
   id?: boolean
   tenantId?: boolean
   queueName?: boolean
+  externalJobId?: boolean
   jobType?: boolean
   payload?: boolean
   status?: boolean
   attempts?: boolean
   errorMessage?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   processedAt?: boolean
   completedAt?: boolean
 }
 
-export type BackgroundJobOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "queueName" | "jobType" | "payload" | "status" | "attempts" | "errorMessage" | "createdAt" | "processedAt" | "completedAt", ExtArgs["result"]["backgroundJob"]>
+export type BackgroundJobOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "queueName" | "externalJobId" | "jobType" | "payload" | "status" | "attempts" | "errorMessage" | "createdAt" | "updatedAt" | "processedAt" | "completedAt", ExtArgs["result"]["backgroundJob"]>
 export type BackgroundJobInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.BackgroundJob$tenantArgs<ExtArgs>
 }
@@ -755,6 +821,10 @@ export type $BackgroundJobPayload<ExtArgs extends runtime.Types.Extensions.Inter
      */
     queueName: string
     /**
+     * ID job phía BullMQ để đối soát trạng thái retry/complete/fail
+     */
+    externalJobId: string | null
+    /**
      * Phân loại loại tác vụ cần thực hiện (ví dụ: SEND_EMAIL_INVOICE)
      */
     jobType: string
@@ -778,6 +848,10 @@ export type $BackgroundJobPayload<ExtArgs extends runtime.Types.Extensions.Inter
      * Thời điểm đăng ký tạo tác vụ
      */
     createdAt: Date
+    /**
+     * Thời điểm cập nhật trạng thái job gần nhất
+     */
+    updatedAt: Date
     /**
      * Thời điểm bắt đầu xử lý tác vụ
      */
@@ -1213,12 +1287,14 @@ export interface BackgroundJobFieldRefs {
   readonly id: Prisma.FieldRef<"BackgroundJob", 'Int'>
   readonly tenantId: Prisma.FieldRef<"BackgroundJob", 'Int'>
   readonly queueName: Prisma.FieldRef<"BackgroundJob", 'String'>
+  readonly externalJobId: Prisma.FieldRef<"BackgroundJob", 'String'>
   readonly jobType: Prisma.FieldRef<"BackgroundJob", 'String'>
   readonly payload: Prisma.FieldRef<"BackgroundJob", 'Json'>
   readonly status: Prisma.FieldRef<"BackgroundJob", 'BackgroundJobStatus'>
   readonly attempts: Prisma.FieldRef<"BackgroundJob", 'Int'>
   readonly errorMessage: Prisma.FieldRef<"BackgroundJob", 'String'>
   readonly createdAt: Prisma.FieldRef<"BackgroundJob", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"BackgroundJob", 'DateTime'>
   readonly processedAt: Prisma.FieldRef<"BackgroundJob", 'DateTime'>
   readonly completedAt: Prisma.FieldRef<"BackgroundJob", 'DateTime'>
 }

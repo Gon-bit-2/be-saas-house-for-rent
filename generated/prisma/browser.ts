@@ -93,6 +93,11 @@ export type Floor = Prisma.FloorModel
  */
 export type Room = Prisma.RoomModel
 /**
+ * Model MarketplaceModeration
+ * Lịch sử chuyển trạng thái tin đăng marketplace
+ */
+export type MarketplaceModeration = Prisma.MarketplaceModerationModel
+/**
  * Model RoomImage
  * Bảng lưu trữ hình ảnh chi tiết của phòng trọ
  */
@@ -212,6 +217,11 @@ export type Invoice = Prisma.InvoiceModel
  * Bảng chi tiết các khoản phí cấu thành trong một hóa đơn hằng tháng (ví dụ: tiền điện, tiền phòng...)
  */
 export type InvoiceItem = Prisma.InvoiceItemModel
+/**
+ * Model Debt
+ * Bảng ghi nhận công nợ phát sinh từ hóa đơn thuê phòng hằng tháng
+ */
+export type Debt = Prisma.DebtModel
 /**
  * Model Payment
  * Bảng ghi nhận các giao dịch thanh toán thực tế của khách thuê cho từng hóa đơn

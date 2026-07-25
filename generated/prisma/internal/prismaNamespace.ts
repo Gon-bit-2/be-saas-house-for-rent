@@ -399,6 +399,7 @@ export const ModelName = {
   Property: 'Property',
   Floor: 'Floor',
   Room: 'Room',
+  MarketplaceModeration: 'MarketplaceModeration',
   RoomImage: 'RoomImage',
   Amenity: 'Amenity',
   RoomAmenity: 'RoomAmenity',
@@ -423,6 +424,7 @@ export const ModelName = {
   InvoiceBatch: 'InvoiceBatch',
   Invoice: 'Invoice',
   InvoiceItem: 'InvoiceItem',
+  Debt: 'Debt',
   Payment: 'Payment',
   PaymentQrCode: 'PaymentQrCode',
   PaymentWebhookLog: 'PaymentWebhookLog',
@@ -455,7 +457,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "refreshToken" | "device" | "verificationCode" | "role" | "permission" | "rolePermission" | "tenant" | "tenantMember" | "plan" | "subscription" | "subscriptionPayment" | "property" | "floor" | "room" | "roomImage" | "amenity" | "roomAmenity" | "renterProfile" | "rentalHistory" | "roomViewLog" | "favoriteRoom" | "roomViewingAppointment" | "rentalRequest" | "contractTemplate" | "contract" | "contractMember" | "contractFile" | "contractTerminationRequest" | "assetCategory" | "roomAsset" | "handoverRecord" | "handoverAssetItem" | "utilityMeter" | "meterReading" | "ocrJob" | "invoiceBatch" | "invoice" | "invoiceItem" | "payment" | "paymentQrCode" | "paymentWebhookLog" | "ticket" | "ticketAttachment" | "systemSetting" | "ticketComment" | "conversation" | "conversationMember" | "message" | "review" | "reputationScore" | "report" | "notification" | "deviceToken" | "backgroundJob" | "auditLog"
+    modelProps: "user" | "refreshToken" | "device" | "verificationCode" | "role" | "permission" | "rolePermission" | "tenant" | "tenantMember" | "plan" | "subscription" | "subscriptionPayment" | "property" | "floor" | "room" | "marketplaceModeration" | "roomImage" | "amenity" | "roomAmenity" | "renterProfile" | "rentalHistory" | "roomViewLog" | "favoriteRoom" | "roomViewingAppointment" | "rentalRequest" | "contractTemplate" | "contract" | "contractMember" | "contractFile" | "contractTerminationRequest" | "assetCategory" | "roomAsset" | "handoverRecord" | "handoverAssetItem" | "utilityMeter" | "meterReading" | "ocrJob" | "invoiceBatch" | "invoice" | "invoiceItem" | "debt" | "payment" | "paymentQrCode" | "paymentWebhookLog" | "ticket" | "ticketAttachment" | "systemSetting" | "ticketComment" | "conversation" | "conversationMember" | "message" | "review" | "reputationScore" | "report" | "notification" | "deviceToken" | "backgroundJob" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1566,6 +1568,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.RoomCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.RoomCountAggregateOutputType> | number
+        }
+      }
+    }
+    MarketplaceModeration: {
+      payload: Prisma.$MarketplaceModerationPayload<ExtArgs>
+      fields: Prisma.MarketplaceModerationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MarketplaceModerationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketplaceModerationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MarketplaceModerationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketplaceModerationPayload>
+        }
+        findFirst: {
+          args: Prisma.MarketplaceModerationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketplaceModerationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MarketplaceModerationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketplaceModerationPayload>
+        }
+        findMany: {
+          args: Prisma.MarketplaceModerationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketplaceModerationPayload>[]
+        }
+        create: {
+          args: Prisma.MarketplaceModerationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketplaceModerationPayload>
+        }
+        createMany: {
+          args: Prisma.MarketplaceModerationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MarketplaceModerationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketplaceModerationPayload>[]
+        }
+        delete: {
+          args: Prisma.MarketplaceModerationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketplaceModerationPayload>
+        }
+        update: {
+          args: Prisma.MarketplaceModerationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketplaceModerationPayload>
+        }
+        deleteMany: {
+          args: Prisma.MarketplaceModerationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MarketplaceModerationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MarketplaceModerationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketplaceModerationPayload>[]
+        }
+        upsert: {
+          args: Prisma.MarketplaceModerationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketplaceModerationPayload>
+        }
+        aggregate: {
+          args: Prisma.MarketplaceModerationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMarketplaceModeration>
+        }
+        groupBy: {
+          args: Prisma.MarketplaceModerationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MarketplaceModerationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MarketplaceModerationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MarketplaceModerationCountAggregateOutputType> | number
         }
       }
     }
@@ -3345,6 +3421,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Debt: {
+      payload: Prisma.$DebtPayload<ExtArgs>
+      fields: Prisma.DebtFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DebtFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DebtPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DebtFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DebtPayload>
+        }
+        findFirst: {
+          args: Prisma.DebtFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DebtPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DebtFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DebtPayload>
+        }
+        findMany: {
+          args: Prisma.DebtFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DebtPayload>[]
+        }
+        create: {
+          args: Prisma.DebtCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DebtPayload>
+        }
+        createMany: {
+          args: Prisma.DebtCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DebtCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DebtPayload>[]
+        }
+        delete: {
+          args: Prisma.DebtDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DebtPayload>
+        }
+        update: {
+          args: Prisma.DebtUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DebtPayload>
+        }
+        deleteMany: {
+          args: Prisma.DebtDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DebtUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DebtUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DebtPayload>[]
+        }
+        upsert: {
+          args: Prisma.DebtUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DebtPayload>
+        }
+        aggregate: {
+          args: Prisma.DebtAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDebt>
+        }
+        groupBy: {
+          args: Prisma.DebtGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DebtGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DebtCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DebtCountAggregateOutputType> | number
+        }
+      }
+    }
     Payment: {
       payload: Prisma.$PaymentPayload<ExtArgs>
       fields: Prisma.PaymentFieldRefs
@@ -4893,10 +5043,25 @@ export const RoomScalarFieldEnum = {
 export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
 
 
+export const MarketplaceModerationScalarFieldEnum = {
+  id: 'id',
+  roomId: 'roomId',
+  tenantId: 'tenantId',
+  actorId: 'actorId',
+  fromStatus: 'fromStatus',
+  toStatus: 'toStatus',
+  reason: 'reason',
+  createdAt: 'createdAt'
+} as const
+
+export type MarketplaceModerationScalarFieldEnum = (typeof MarketplaceModerationScalarFieldEnum)[keyof typeof MarketplaceModerationScalarFieldEnum]
+
+
 export const RoomImageScalarFieldEnum = {
   id: 'id',
   roomId: 'roomId',
   url: 'url',
+  publicId: 'publicId',
   caption: 'caption',
   sortOrder: 'sortOrder',
   isThumbnail: 'isThumbnail',
@@ -5291,18 +5456,49 @@ export const InvoiceItemScalarFieldEnum = {
 export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
 
 
+export const DebtScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  invoiceId: 'invoiceId',
+  contractId: 'contractId',
+  roomId: 'roomId',
+  renterId: 'renterId',
+  billingMonth: 'billingMonth',
+  originalAmount: 'originalAmount',
+  paidAmount: 'paidAmount',
+  remainingAmount: 'remainingAmount',
+  status: 'status',
+  dueDate: 'dueDate',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DebtScalarFieldEnum = (typeof DebtScalarFieldEnum)[keyof typeof DebtScalarFieldEnum]
+
+
 export const PaymentScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   invoiceId: 'invoiceId',
   payerId: 'payerId',
+  qrCodeId: 'qrCodeId',
   amount: 'amount',
   method: 'method',
   provider: 'provider',
   transactionCode: 'transactionCode',
   status: 'status',
   paidAt: 'paidAt',
+  submittedAt: 'submittedAt',
+  evidenceUrl: 'evidenceUrl',
+  renterNote: 'renterNote',
+  approvedById: 'approvedById',
+  approvedAt: 'approvedAt',
+  rejectedById: 'rejectedById',
+  rejectedAt: 'rejectedAt',
+  landlordNote: 'landlordNote',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   createdById: 'createdById',
   updatedById: 'updatedById',
   deletedById: 'deletedById'
@@ -5316,12 +5512,17 @@ export const PaymentQrCodeScalarFieldEnum = {
   tenantId: 'tenantId',
   invoiceId: 'invoiceId',
   provider: 'provider',
+  orderCode: 'orderCode',
+  paymentLinkId: 'paymentLinkId',
   qrContent: 'qrContent',
   qrImageUrl: 'qrImageUrl',
+  checkoutUrl: 'checkoutUrl',
   amount: 'amount',
+  providerStatus: 'providerStatus',
   expiredAt: 'expiredAt',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type PaymentQrCodeScalarFieldEnum = (typeof PaymentQrCodeScalarFieldEnum)[keyof typeof PaymentQrCodeScalarFieldEnum]
@@ -5332,8 +5533,19 @@ export const PaymentWebhookLogScalarFieldEnum = {
   provider: 'provider',
   tenantId: 'tenantId',
   invoiceId: 'invoiceId',
+  orderCode: 'orderCode',
+  paymentLinkId: 'paymentLinkId',
+  reference: 'reference',
   transactionCode: 'transactionCode',
+  amount: 'amount',
+  currency: 'currency',
+  providerCode: 'providerCode',
+  providerDesc: 'providerDesc',
+  success: 'success',
+  transactionDateTime: 'transactionDateTime',
   payload: 'payload',
+  payloadDigest: 'payloadDigest',
+  digestKeyVersion: 'digestKeyVersion',
   signatureValid: 'signatureValid',
   status: 'status',
   errorMessage: 'errorMessage',
@@ -5510,9 +5722,15 @@ export const DeviceTokenScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   token: 'token',
+  fid: 'fid',
   platform: 'platform',
   deviceName: 'deviceName',
   isActive: 'isActive',
+  lastSeenAt: 'lastSeenAt',
+  lastUsedAt: 'lastUsedAt',
+  failureCount: 'failureCount',
+  lastError: 'lastError',
+  disabledAt: 'disabledAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -5524,12 +5742,14 @@ export const BackgroundJobScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   queueName: 'queueName',
+  externalJobId: 'externalJobId',
   jobType: 'jobType',
   payload: 'payload',
   status: 'status',
   attempts: 'attempts',
   errorMessage: 'errorMessage',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   processedAt: 'processedAt',
   completedAt: 'completedAt'
 } as const
@@ -6120,6 +6340,20 @@ export type ListEnumInvoiceItemTypeFieldRefInput<$PrismaModel> = FieldRefInputTy
 
 
 /**
+ * Reference to a field of type 'DebtStatus'
+ */
+export type EnumDebtStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DebtStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'DebtStatus[]'
+ */
+export type ListEnumDebtStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DebtStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'PaymentMethod'
  */
 export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod'>
@@ -6481,6 +6715,7 @@ export type GlobalOmitConfig = {
   property?: Prisma.PropertyOmit
   floor?: Prisma.FloorOmit
   room?: Prisma.RoomOmit
+  marketplaceModeration?: Prisma.MarketplaceModerationOmit
   roomImage?: Prisma.RoomImageOmit
   amenity?: Prisma.AmenityOmit
   roomAmenity?: Prisma.RoomAmenityOmit
@@ -6505,6 +6740,7 @@ export type GlobalOmitConfig = {
   invoiceBatch?: Prisma.InvoiceBatchOmit
   invoice?: Prisma.InvoiceOmit
   invoiceItem?: Prisma.InvoiceItemOmit
+  debt?: Prisma.DebtOmit
   payment?: Prisma.PaymentOmit
   paymentQrCode?: Prisma.PaymentQrCodeOmit
   paymentWebhookLog?: Prisma.PaymentWebhookLogOmit

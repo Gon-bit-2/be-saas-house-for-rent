@@ -49,6 +49,7 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
     'PROPERTIES',
     'FLOORS',
     'ROOMS',
+    'AMENITIES',
     'ROOM_ASSETS',
     'ASSETS',
     'UTILITY_METERS',
@@ -64,8 +65,10 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
     'HANDOVER_RECORDS',
     'ROOM_VIEWING_APPOINTMENTS',
     'RENTAL_REQUESTS',
+    'RENTERS',
     'CONVERSATIONS',
     'NOTIFICATIONS',
+    'DASHBOARD',
     'REVIEWS',
     'REPORTS',
   ],
@@ -73,6 +76,7 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
     'PROPERTIES',
     'FLOORS',
     'ROOMS',
+    'AMENITIES',
     'ROOM_ASSETS',
     'ASSETS',
     'UTILITY_METERS',
@@ -82,8 +86,10 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
     'HANDOVER_RECORDS',
     'ROOM_VIEWING_APPOINTMENTS',
     'RENTAL_REQUESTS',
+    'RENTERS',
     'CONVERSATIONS',
     'NOTIFICATIONS',
+    'DASHBOARD',
     'REVIEWS',
   ],
   [roleName.ACCOUNTANT]: [
@@ -96,6 +102,7 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
     'CONTRACTS',
     'METER_READINGS',
     'REPORTS',
+    'DASHBOARD',
   ],
   [roleName.MAINTENANCE_STAFF]: [
     'PROPERTIES',
@@ -112,6 +119,7 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
     'FAVORITE_ROOMS',
     'ROOM_VIEWING_APPOINTMENTS',
     'RENTAL_REQUESTS',
+    'RENTERS',
     'CONTRACTS',
     'INVOICES',
     'PAYMENTS',
@@ -324,3 +332,5 @@ bootstrap().catch((error: unknown) => {
   console.error('Error during permission sync:', error)
   process.exit(1)
 })
+
+

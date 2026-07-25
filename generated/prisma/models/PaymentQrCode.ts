@@ -30,6 +30,7 @@ export type PaymentQrCodeAvgAggregateOutputType = {
   id: number | null
   tenantId: number | null
   invoiceId: number | null
+  orderCode: number | null
   amount: runtime.Decimal | null
 }
 
@@ -37,6 +38,7 @@ export type PaymentQrCodeSumAggregateOutputType = {
   id: number | null
   tenantId: number | null
   invoiceId: number | null
+  orderCode: number | null
   amount: runtime.Decimal | null
 }
 
@@ -45,12 +47,17 @@ export type PaymentQrCodeMinAggregateOutputType = {
   tenantId: number | null
   invoiceId: number | null
   provider: string | null
+  orderCode: number | null
+  paymentLinkId: string | null
   qrContent: string | null
   qrImageUrl: string | null
+  checkoutUrl: string | null
   amount: runtime.Decimal | null
+  providerStatus: string | null
   expiredAt: Date | null
   status: $Enums.QrCodeStatus | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type PaymentQrCodeMaxAggregateOutputType = {
@@ -58,12 +65,17 @@ export type PaymentQrCodeMaxAggregateOutputType = {
   tenantId: number | null
   invoiceId: number | null
   provider: string | null
+  orderCode: number | null
+  paymentLinkId: string | null
   qrContent: string | null
   qrImageUrl: string | null
+  checkoutUrl: string | null
   amount: runtime.Decimal | null
+  providerStatus: string | null
   expiredAt: Date | null
   status: $Enums.QrCodeStatus | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type PaymentQrCodeCountAggregateOutputType = {
@@ -71,12 +83,17 @@ export type PaymentQrCodeCountAggregateOutputType = {
   tenantId: number
   invoiceId: number
   provider: number
+  orderCode: number
+  paymentLinkId: number
   qrContent: number
   qrImageUrl: number
+  checkoutUrl: number
   amount: number
+  providerStatus: number
   expiredAt: number
   status: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -85,6 +102,7 @@ export type PaymentQrCodeAvgAggregateInputType = {
   id?: true
   tenantId?: true
   invoiceId?: true
+  orderCode?: true
   amount?: true
 }
 
@@ -92,6 +110,7 @@ export type PaymentQrCodeSumAggregateInputType = {
   id?: true
   tenantId?: true
   invoiceId?: true
+  orderCode?: true
   amount?: true
 }
 
@@ -100,12 +119,17 @@ export type PaymentQrCodeMinAggregateInputType = {
   tenantId?: true
   invoiceId?: true
   provider?: true
+  orderCode?: true
+  paymentLinkId?: true
   qrContent?: true
   qrImageUrl?: true
+  checkoutUrl?: true
   amount?: true
+  providerStatus?: true
   expiredAt?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type PaymentQrCodeMaxAggregateInputType = {
@@ -113,12 +137,17 @@ export type PaymentQrCodeMaxAggregateInputType = {
   tenantId?: true
   invoiceId?: true
   provider?: true
+  orderCode?: true
+  paymentLinkId?: true
   qrContent?: true
   qrImageUrl?: true
+  checkoutUrl?: true
   amount?: true
+  providerStatus?: true
   expiredAt?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type PaymentQrCodeCountAggregateInputType = {
@@ -126,12 +155,17 @@ export type PaymentQrCodeCountAggregateInputType = {
   tenantId?: true
   invoiceId?: true
   provider?: true
+  orderCode?: true
+  paymentLinkId?: true
   qrContent?: true
   qrImageUrl?: true
+  checkoutUrl?: true
   amount?: true
+  providerStatus?: true
   expiredAt?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -226,12 +260,17 @@ export type PaymentQrCodeGroupByOutputType = {
   tenantId: number
   invoiceId: number
   provider: string
-  qrContent: string
+  orderCode: number | null
+  paymentLinkId: string | null
+  qrContent: string | null
   qrImageUrl: string | null
+  checkoutUrl: string | null
   amount: runtime.Decimal
+  providerStatus: string | null
   expiredAt: Date
   status: $Enums.QrCodeStatus
   createdAt: Date
+  updatedAt: Date
   _count: PaymentQrCodeCountAggregateOutputType | null
   _avg: PaymentQrCodeAvgAggregateOutputType | null
   _sum: PaymentQrCodeSumAggregateOutputType | null
@@ -262,14 +301,20 @@ export type PaymentQrCodeWhereInput = {
   tenantId?: Prisma.IntFilter<"PaymentQrCode"> | number
   invoiceId?: Prisma.IntFilter<"PaymentQrCode"> | number
   provider?: Prisma.StringFilter<"PaymentQrCode"> | string
-  qrContent?: Prisma.StringFilter<"PaymentQrCode"> | string
+  orderCode?: Prisma.IntNullableFilter<"PaymentQrCode"> | number | null
+  paymentLinkId?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
+  qrContent?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
   qrImageUrl?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
+  checkoutUrl?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
   amount?: Prisma.DecimalFilter<"PaymentQrCode"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
   expiredAt?: Prisma.DateTimeFilter<"PaymentQrCode"> | Date | string
   status?: Prisma.EnumQrCodeStatusFilter<"PaymentQrCode"> | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFilter<"PaymentQrCode"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"PaymentQrCode"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   invoice?: Prisma.XOR<Prisma.InvoiceScalarRelationFilter, Prisma.InvoiceWhereInput>
+  payments?: Prisma.PaymentListRelationFilter
 }
 
 export type PaymentQrCodeOrderByWithRelationInput = {
@@ -277,45 +322,62 @@ export type PaymentQrCodeOrderByWithRelationInput = {
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   provider?: Prisma.SortOrder
-  qrContent?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentLinkId?: Prisma.SortOrderInput | Prisma.SortOrder
+  qrContent?: Prisma.SortOrderInput | Prisma.SortOrder
   qrImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  checkoutUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   expiredAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
   invoice?: Prisma.InvoiceOrderByWithRelationInput
+  payments?: Prisma.PaymentOrderByRelationAggregateInput
 }
 
 export type PaymentQrCodeWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  orderCode?: number
+  paymentLinkId?: string
   AND?: Prisma.PaymentQrCodeWhereInput | Prisma.PaymentQrCodeWhereInput[]
   OR?: Prisma.PaymentQrCodeWhereInput[]
   NOT?: Prisma.PaymentQrCodeWhereInput | Prisma.PaymentQrCodeWhereInput[]
   tenantId?: Prisma.IntFilter<"PaymentQrCode"> | number
   invoiceId?: Prisma.IntFilter<"PaymentQrCode"> | number
   provider?: Prisma.StringFilter<"PaymentQrCode"> | string
-  qrContent?: Prisma.StringFilter<"PaymentQrCode"> | string
+  qrContent?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
   qrImageUrl?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
+  checkoutUrl?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
   amount?: Prisma.DecimalFilter<"PaymentQrCode"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
   expiredAt?: Prisma.DateTimeFilter<"PaymentQrCode"> | Date | string
   status?: Prisma.EnumQrCodeStatusFilter<"PaymentQrCode"> | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFilter<"PaymentQrCode"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"PaymentQrCode"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   invoice?: Prisma.XOR<Prisma.InvoiceScalarRelationFilter, Prisma.InvoiceWhereInput>
-}, "id">
+  payments?: Prisma.PaymentListRelationFilter
+}, "id" | "orderCode" | "paymentLinkId">
 
 export type PaymentQrCodeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   provider?: Prisma.SortOrder
-  qrContent?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentLinkId?: Prisma.SortOrderInput | Prisma.SortOrder
+  qrContent?: Prisma.SortOrderInput | Prisma.SortOrder
   qrImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  checkoutUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   expiredAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.PaymentQrCodeCountOrderByAggregateInput
   _avg?: Prisma.PaymentQrCodeAvgOrderByAggregateInput
   _max?: Prisma.PaymentQrCodeMaxOrderByAggregateInput
@@ -331,24 +393,35 @@ export type PaymentQrCodeScalarWhereWithAggregatesInput = {
   tenantId?: Prisma.IntWithAggregatesFilter<"PaymentQrCode"> | number
   invoiceId?: Prisma.IntWithAggregatesFilter<"PaymentQrCode"> | number
   provider?: Prisma.StringWithAggregatesFilter<"PaymentQrCode"> | string
-  qrContent?: Prisma.StringWithAggregatesFilter<"PaymentQrCode"> | string
+  orderCode?: Prisma.IntNullableWithAggregatesFilter<"PaymentQrCode"> | number | null
+  paymentLinkId?: Prisma.StringNullableWithAggregatesFilter<"PaymentQrCode"> | string | null
+  qrContent?: Prisma.StringNullableWithAggregatesFilter<"PaymentQrCode"> | string | null
   qrImageUrl?: Prisma.StringNullableWithAggregatesFilter<"PaymentQrCode"> | string | null
+  checkoutUrl?: Prisma.StringNullableWithAggregatesFilter<"PaymentQrCode"> | string | null
   amount?: Prisma.DecimalWithAggregatesFilter<"PaymentQrCode"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.StringNullableWithAggregatesFilter<"PaymentQrCode"> | string | null
   expiredAt?: Prisma.DateTimeWithAggregatesFilter<"PaymentQrCode"> | Date | string
   status?: Prisma.EnumQrCodeStatusWithAggregatesFilter<"PaymentQrCode"> | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PaymentQrCode"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PaymentQrCode"> | Date | string
 }
 
 export type PaymentQrCodeCreateInput = {
   provider: string
-  qrContent: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  qrContent?: string | null
   qrImageUrl?: string | null
+  checkoutUrl?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: string | null
   expiredAt: Date | string
   status?: $Enums.QrCodeStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutPaymentQrCodesInput
   invoice: Prisma.InvoiceCreateNestedOneWithoutQrCodesInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutQrCodeInput
 }
 
 export type PaymentQrCodeUncheckedCreateInput = {
@@ -356,24 +429,36 @@ export type PaymentQrCodeUncheckedCreateInput = {
   tenantId: number
   invoiceId: number
   provider: string
-  qrContent: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  qrContent?: string | null
   qrImageUrl?: string | null
+  checkoutUrl?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: string | null
   expiredAt: Date | string
   status?: $Enums.QrCodeStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutQrCodeInput
 }
 
 export type PaymentQrCodeUpdateInput = {
   provider?: Prisma.StringFieldUpdateOperationsInput | string
-  qrContent?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentQrCodesNestedInput
   invoice?: Prisma.InvoiceUpdateOneRequiredWithoutQrCodesNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutQrCodeNestedInput
 }
 
 export type PaymentQrCodeUncheckedUpdateInput = {
@@ -381,12 +466,18 @@ export type PaymentQrCodeUncheckedUpdateInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
-  qrContent?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutQrCodeNestedInput
 }
 
 export type PaymentQrCodeCreateManyInput = {
@@ -394,22 +485,32 @@ export type PaymentQrCodeCreateManyInput = {
   tenantId: number
   invoiceId: number
   provider: string
-  qrContent: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  qrContent?: string | null
   qrImageUrl?: string | null
+  checkoutUrl?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: string | null
   expiredAt: Date | string
   status?: $Enums.QrCodeStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type PaymentQrCodeUpdateManyMutationInput = {
   provider?: Prisma.StringFieldUpdateOperationsInput | string
-  qrContent?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PaymentQrCodeUncheckedUpdateManyInput = {
@@ -417,12 +518,17 @@ export type PaymentQrCodeUncheckedUpdateManyInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
-  qrContent?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PaymentQrCodeListRelationFilter = {
@@ -435,23 +541,34 @@ export type PaymentQrCodeOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type PaymentQrCodeNullableScalarRelationFilter = {
+  is?: Prisma.PaymentQrCodeWhereInput | null
+  isNot?: Prisma.PaymentQrCodeWhereInput | null
+}
+
 export type PaymentQrCodeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   provider?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrder
+  paymentLinkId?: Prisma.SortOrder
   qrContent?: Prisma.SortOrder
   qrImageUrl?: Prisma.SortOrder
+  checkoutUrl?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrder
   expiredAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PaymentQrCodeAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
@@ -460,12 +577,17 @@ export type PaymentQrCodeMaxOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   provider?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrder
+  paymentLinkId?: Prisma.SortOrder
   qrContent?: Prisma.SortOrder
   qrImageUrl?: Prisma.SortOrder
+  checkoutUrl?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrder
   expiredAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PaymentQrCodeMinOrderByAggregateInput = {
@@ -473,18 +595,24 @@ export type PaymentQrCodeMinOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
   provider?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrder
+  paymentLinkId?: Prisma.SortOrder
   qrContent?: Prisma.SortOrder
   qrImageUrl?: Prisma.SortOrder
+  checkoutUrl?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrder
   expiredAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PaymentQrCodeSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrder
   amount?: Prisma.SortOrder
 }
 
@@ -572,31 +700,59 @@ export type PaymentQrCodeUncheckedUpdateManyWithoutInvoiceNestedInput = {
   deleteMany?: Prisma.PaymentQrCodeScalarWhereInput | Prisma.PaymentQrCodeScalarWhereInput[]
 }
 
+export type PaymentQrCodeCreateNestedOneWithoutPaymentsInput = {
+  create?: Prisma.XOR<Prisma.PaymentQrCodeCreateWithoutPaymentsInput, Prisma.PaymentQrCodeUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.PaymentQrCodeCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.PaymentQrCodeWhereUniqueInput
+}
+
+export type PaymentQrCodeUpdateOneWithoutPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentQrCodeCreateWithoutPaymentsInput, Prisma.PaymentQrCodeUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.PaymentQrCodeCreateOrConnectWithoutPaymentsInput
+  upsert?: Prisma.PaymentQrCodeUpsertWithoutPaymentsInput
+  disconnect?: Prisma.PaymentQrCodeWhereInput | boolean
+  delete?: Prisma.PaymentQrCodeWhereInput | boolean
+  connect?: Prisma.PaymentQrCodeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PaymentQrCodeUpdateToOneWithWhereWithoutPaymentsInput, Prisma.PaymentQrCodeUpdateWithoutPaymentsInput>, Prisma.PaymentQrCodeUncheckedUpdateWithoutPaymentsInput>
+}
+
 export type EnumQrCodeStatusFieldUpdateOperationsInput = {
   set?: $Enums.QrCodeStatus
 }
 
 export type PaymentQrCodeCreateWithoutTenantInput = {
   provider: string
-  qrContent: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  qrContent?: string | null
   qrImageUrl?: string | null
+  checkoutUrl?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: string | null
   expiredAt: Date | string
   status?: $Enums.QrCodeStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   invoice: Prisma.InvoiceCreateNestedOneWithoutQrCodesInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutQrCodeInput
 }
 
 export type PaymentQrCodeUncheckedCreateWithoutTenantInput = {
   id?: number
   invoiceId: number
   provider: string
-  qrContent: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  qrContent?: string | null
   qrImageUrl?: string | null
+  checkoutUrl?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: string | null
   expiredAt: Date | string
   status?: $Enums.QrCodeStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutQrCodeInput
 }
 
 export type PaymentQrCodeCreateOrConnectWithoutTenantInput = {
@@ -633,35 +789,52 @@ export type PaymentQrCodeScalarWhereInput = {
   tenantId?: Prisma.IntFilter<"PaymentQrCode"> | number
   invoiceId?: Prisma.IntFilter<"PaymentQrCode"> | number
   provider?: Prisma.StringFilter<"PaymentQrCode"> | string
-  qrContent?: Prisma.StringFilter<"PaymentQrCode"> | string
+  orderCode?: Prisma.IntNullableFilter<"PaymentQrCode"> | number | null
+  paymentLinkId?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
+  qrContent?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
   qrImageUrl?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
+  checkoutUrl?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
   amount?: Prisma.DecimalFilter<"PaymentQrCode"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.StringNullableFilter<"PaymentQrCode"> | string | null
   expiredAt?: Prisma.DateTimeFilter<"PaymentQrCode"> | Date | string
   status?: Prisma.EnumQrCodeStatusFilter<"PaymentQrCode"> | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFilter<"PaymentQrCode"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"PaymentQrCode"> | Date | string
 }
 
 export type PaymentQrCodeCreateWithoutInvoiceInput = {
   provider: string
-  qrContent: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  qrContent?: string | null
   qrImageUrl?: string | null
+  checkoutUrl?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: string | null
   expiredAt: Date | string
   status?: $Enums.QrCodeStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutPaymentQrCodesInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutQrCodeInput
 }
 
 export type PaymentQrCodeUncheckedCreateWithoutInvoiceInput = {
   id?: number
   tenantId: number
   provider: string
-  qrContent: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  qrContent?: string | null
   qrImageUrl?: string | null
+  checkoutUrl?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: string | null
   expiredAt: Date | string
   status?: $Enums.QrCodeStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutQrCodeInput
 }
 
 export type PaymentQrCodeCreateOrConnectWithoutInvoiceInput = {
@@ -690,100 +863,259 @@ export type PaymentQrCodeUpdateManyWithWhereWithoutInvoiceInput = {
   data: Prisma.XOR<Prisma.PaymentQrCodeUpdateManyMutationInput, Prisma.PaymentQrCodeUncheckedUpdateManyWithoutInvoiceInput>
 }
 
+export type PaymentQrCodeCreateWithoutPaymentsInput = {
+  provider: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  qrContent?: string | null
+  qrImageUrl?: string | null
+  checkoutUrl?: string | null
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: string | null
+  expiredAt: Date | string
+  status?: $Enums.QrCodeStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutPaymentQrCodesInput
+  invoice: Prisma.InvoiceCreateNestedOneWithoutQrCodesInput
+}
+
+export type PaymentQrCodeUncheckedCreateWithoutPaymentsInput = {
+  id?: number
+  tenantId: number
+  invoiceId: number
+  provider: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  qrContent?: string | null
+  qrImageUrl?: string | null
+  checkoutUrl?: string | null
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: string | null
+  expiredAt: Date | string
+  status?: $Enums.QrCodeStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PaymentQrCodeCreateOrConnectWithoutPaymentsInput = {
+  where: Prisma.PaymentQrCodeWhereUniqueInput
+  create: Prisma.XOR<Prisma.PaymentQrCodeCreateWithoutPaymentsInput, Prisma.PaymentQrCodeUncheckedCreateWithoutPaymentsInput>
+}
+
+export type PaymentQrCodeUpsertWithoutPaymentsInput = {
+  update: Prisma.XOR<Prisma.PaymentQrCodeUpdateWithoutPaymentsInput, Prisma.PaymentQrCodeUncheckedUpdateWithoutPaymentsInput>
+  create: Prisma.XOR<Prisma.PaymentQrCodeCreateWithoutPaymentsInput, Prisma.PaymentQrCodeUncheckedCreateWithoutPaymentsInput>
+  where?: Prisma.PaymentQrCodeWhereInput
+}
+
+export type PaymentQrCodeUpdateToOneWithWhereWithoutPaymentsInput = {
+  where?: Prisma.PaymentQrCodeWhereInput
+  data: Prisma.XOR<Prisma.PaymentQrCodeUpdateWithoutPaymentsInput, Prisma.PaymentQrCodeUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type PaymentQrCodeUpdateWithoutPaymentsInput = {
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentQrCodesNestedInput
+  invoice?: Prisma.InvoiceUpdateOneRequiredWithoutQrCodesNestedInput
+}
+
+export type PaymentQrCodeUncheckedUpdateWithoutPaymentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type PaymentQrCodeCreateManyTenantInput = {
   id?: number
   invoiceId: number
   provider: string
-  qrContent: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  qrContent?: string | null
   qrImageUrl?: string | null
+  checkoutUrl?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: string | null
   expiredAt: Date | string
   status?: $Enums.QrCodeStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type PaymentQrCodeUpdateWithoutTenantInput = {
   provider?: Prisma.StringFieldUpdateOperationsInput | string
-  qrContent?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   invoice?: Prisma.InvoiceUpdateOneRequiredWithoutQrCodesNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutQrCodeNestedInput
 }
 
 export type PaymentQrCodeUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
-  qrContent?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutQrCodeNestedInput
 }
 
 export type PaymentQrCodeUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   invoiceId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
-  qrContent?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PaymentQrCodeCreateManyInvoiceInput = {
   id?: number
   tenantId: number
   provider: string
-  qrContent: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  qrContent?: string | null
   qrImageUrl?: string | null
+  checkoutUrl?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: string | null
   expiredAt: Date | string
   status?: $Enums.QrCodeStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type PaymentQrCodeUpdateWithoutInvoiceInput = {
   provider?: Prisma.StringFieldUpdateOperationsInput | string
-  qrContent?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutPaymentQrCodesNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutQrCodeNestedInput
 }
 
 export type PaymentQrCodeUncheckedUpdateWithoutInvoiceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
-  qrContent?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutQrCodeNestedInput
 }
 
 export type PaymentQrCodeUncheckedUpdateManyWithoutInvoiceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
-  qrContent?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   qrImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumQrCodeStatusFieldUpdateOperationsInput | $Enums.QrCodeStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type PaymentQrCodeCountOutputType
+ */
+
+export type PaymentQrCodeCountOutputType = {
+  payments: number
+}
+
+export type PaymentQrCodeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  payments?: boolean | PaymentQrCodeCountOutputTypeCountPaymentsArgs
+}
+
+/**
+ * PaymentQrCodeCountOutputType without action
+ */
+export type PaymentQrCodeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentQrCodeCountOutputType
+   */
+  select?: Prisma.PaymentQrCodeCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PaymentQrCodeCountOutputType without action
+ */
+export type PaymentQrCodeCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
 
 
 export type PaymentQrCodeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -791,14 +1123,21 @@ export type PaymentQrCodeSelect<ExtArgs extends runtime.Types.Extensions.Interna
   tenantId?: boolean
   invoiceId?: boolean
   provider?: boolean
+  orderCode?: boolean
+  paymentLinkId?: boolean
   qrContent?: boolean
   qrImageUrl?: boolean
+  checkoutUrl?: boolean
   amount?: boolean
+  providerStatus?: boolean
   expiredAt?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
+  payments?: boolean | Prisma.PaymentQrCode$paymentsArgs<ExtArgs>
+  _count?: boolean | Prisma.PaymentQrCodeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentQrCode"]>
 
 export type PaymentQrCodeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -806,12 +1145,17 @@ export type PaymentQrCodeSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   tenantId?: boolean
   invoiceId?: boolean
   provider?: boolean
+  orderCode?: boolean
+  paymentLinkId?: boolean
   qrContent?: boolean
   qrImageUrl?: boolean
+  checkoutUrl?: boolean
   amount?: boolean
+  providerStatus?: boolean
   expiredAt?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentQrCode"]>
@@ -821,12 +1165,17 @@ export type PaymentQrCodeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   tenantId?: boolean
   invoiceId?: boolean
   provider?: boolean
+  orderCode?: boolean
+  paymentLinkId?: boolean
   qrContent?: boolean
   qrImageUrl?: boolean
+  checkoutUrl?: boolean
   amount?: boolean
+  providerStatus?: boolean
   expiredAt?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["paymentQrCode"]>
@@ -836,18 +1185,25 @@ export type PaymentQrCodeSelectScalar = {
   tenantId?: boolean
   invoiceId?: boolean
   provider?: boolean
+  orderCode?: boolean
+  paymentLinkId?: boolean
   qrContent?: boolean
   qrImageUrl?: boolean
+  checkoutUrl?: boolean
   amount?: boolean
+  providerStatus?: boolean
   expiredAt?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type PaymentQrCodeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "invoiceId" | "provider" | "qrContent" | "qrImageUrl" | "amount" | "expiredAt" | "status" | "createdAt", ExtArgs["result"]["paymentQrCode"]>
+export type PaymentQrCodeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "invoiceId" | "provider" | "orderCode" | "paymentLinkId" | "qrContent" | "qrImageUrl" | "checkoutUrl" | "amount" | "providerStatus" | "expiredAt" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["paymentQrCode"]>
 export type PaymentQrCodeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   invoice?: boolean | Prisma.InvoiceDefaultArgs<ExtArgs>
+  payments?: boolean | Prisma.PaymentQrCode$paymentsArgs<ExtArgs>
+  _count?: boolean | Prisma.PaymentQrCodeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PaymentQrCodeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
@@ -869,6 +1225,10 @@ export type $PaymentQrCodePayload<ExtArgs extends runtime.Types.Extensions.Inter
      * Hóa đơn liên quan (xóa hóa đơn thì cascade xóa mã QR động kèm theo)
      */
     invoice: Prisma.$InvoicePayload<ExtArgs>
+    /**
+     * Danh sách thanh toán liên quan đến mã QR này
+     */
+    payments: Prisma.$PaymentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
@@ -888,17 +1248,33 @@ export type $PaymentQrCodePayload<ExtArgs extends runtime.Types.Extensions.Inter
      */
     provider: string
     /**
+     * Mã đơn hàng PayOS dùng để tạo payment link và đối soát webhook
+     */
+    orderCode: number | null
+    /**
+     * ID payment link do PayOS trả về
+     */
+    paymentLinkId: string | null
+    /**
      * Nội dung chuỗi text thô mã hóa trong mã QR phục vụ quét
      */
-    qrContent: string
+    qrContent: string | null
     /**
      * Đường dẫn hình ảnh hiển thị mã QR được sinh động
      */
     qrImageUrl: string | null
     /**
+     * URL checkout do PayOS trả về
+     */
+    checkoutUrl: string | null
+    /**
      * Số tiền thanh toán mã hóa trong QR bao gồm cả phí phạt/lẻ nếu có
      */
     amount: runtime.Decimal
+    /**
+     * Trạng thái payment link theo nhà cung cấp
+     */
+    providerStatus: string | null
     /**
      * Thời điểm mã QR động này hết hạn hiệu lực quét thanh toán
      */
@@ -911,6 +1287,10 @@ export type $PaymentQrCodePayload<ExtArgs extends runtime.Types.Extensions.Inter
      * Thời điểm sinh mã QR
      */
     createdAt: Date
+    /**
+     * Thời điểm cập nhật mã QR gần nhất
+     */
+    updatedAt: Date
   }, ExtArgs["result"]["paymentQrCode"]>
   composites: {}
 }
@@ -1307,6 +1687,7 @@ export interface Prisma__PaymentQrCodeClient<T, Null = never, ExtArgs extends ru
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   invoice<T extends Prisma.InvoiceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InvoiceDefaultArgs<ExtArgs>>): Prisma.Prisma__InvoiceClient<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  payments<T extends Prisma.PaymentQrCode$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentQrCode$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1340,12 +1721,17 @@ export interface PaymentQrCodeFieldRefs {
   readonly tenantId: Prisma.FieldRef<"PaymentQrCode", 'Int'>
   readonly invoiceId: Prisma.FieldRef<"PaymentQrCode", 'Int'>
   readonly provider: Prisma.FieldRef<"PaymentQrCode", 'String'>
+  readonly orderCode: Prisma.FieldRef<"PaymentQrCode", 'Int'>
+  readonly paymentLinkId: Prisma.FieldRef<"PaymentQrCode", 'String'>
   readonly qrContent: Prisma.FieldRef<"PaymentQrCode", 'String'>
   readonly qrImageUrl: Prisma.FieldRef<"PaymentQrCode", 'String'>
+  readonly checkoutUrl: Prisma.FieldRef<"PaymentQrCode", 'String'>
   readonly amount: Prisma.FieldRef<"PaymentQrCode", 'Decimal'>
+  readonly providerStatus: Prisma.FieldRef<"PaymentQrCode", 'String'>
   readonly expiredAt: Prisma.FieldRef<"PaymentQrCode", 'DateTime'>
   readonly status: Prisma.FieldRef<"PaymentQrCode", 'QrCodeStatus'>
   readonly createdAt: Prisma.FieldRef<"PaymentQrCode", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"PaymentQrCode", 'DateTime'>
 }
     
 
@@ -1744,6 +2130,30 @@ export type PaymentQrCodeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many PaymentQrCodes to delete.
    */
   limit?: number
+}
+
+/**
+ * PaymentQrCode.payments
+ */
+export type PaymentQrCode$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
 }
 
 /**

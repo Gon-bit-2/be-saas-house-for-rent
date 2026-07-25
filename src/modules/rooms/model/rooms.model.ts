@@ -1,7 +1,7 @@
 import z from 'zod'
 
 const RoomStatusSchema = z.enum(['AVAILABLE', 'OCCUPIED', 'RESERVED', 'MAINTENANCE', 'INACTIVE'])
-const MarketplaceStatusSchema = z.enum(['DRAFT', 'HIDDEN', 'PUBLISHED'])
+const MarketplaceStatusSchema = z.enum(['DRAFT', 'PENDING_REVIEW', 'HIDDEN'])
 
 export const ListRoomsQuerySchema = z
   .object({
@@ -68,4 +68,3 @@ export type TUpdateRoomStatusBodySchema = z.infer<typeof UpdateRoomStatusBodySch
 export type TUpdateRoomMarketplaceBodySchema = z.infer<typeof UpdateRoomMarketplaceBodySchema>
 export type TReplaceRoomAmenitiesBodySchema = z.infer<typeof ReplaceRoomAmenitiesBodySchema>
 export type TUpdateRoomImageBodySchema = z.infer<typeof UpdateRoomImageBodySchema>
-

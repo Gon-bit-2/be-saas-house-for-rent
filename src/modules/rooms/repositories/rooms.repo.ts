@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
-import type { Prisma } from 'generated/prisma/client'
+import type { MarketplaceStatus, Prisma } from 'generated/prisma/client'
 
 const roomImageSelect = {
   id: true,
@@ -92,7 +92,7 @@ type CreateImageInput = {
 export class RoomsRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findManyAndCount(where: Prisma.RoomWhereInput, skip: number, take: number) {
+  async findMany(where: Prisma.RoomWhereInput, skip: number, take: number) {
     return this.prismaService.$transaction([
       this.prismaService.room.findMany({
         where,
@@ -105,7 +105,7 @@ export class RoomsRepository {
     ])
   }
 
-  async findTenantRoom(tenantId: number, id: number) {
+  async findById(tenantId: number, id: number) {
     return this.prismaService.room.findFirst({ where: { id, tenantId, deletedAt: null }, select: roomSelect })
   }
 
@@ -137,7 +137,7 @@ export class RoomsRepository {
   /**
    * Creates a room and its room-amenity join records atomically.
    */
-  async createRoomWithAmenities(data: Prisma.RoomUncheckedCreateInput, amenityIds: number[]) {
+  async create(data: Prisma.RoomUncheckedCreateInput, amenityIds: number[]) {
     return this.prismaService.$transaction(async (tx) => {
       const room = await tx.room.create({ data, select: { id: true } })
       if (amenityIds.length > 0) {
@@ -151,8 +151,65 @@ export class RoomsRepository {
     })
   }
 
-  async updateRoom(id: number, data: Prisma.RoomUncheckedUpdateInput) {
+  async update(id: number, data: Prisma.RoomUncheckedUpdateInput) {
     return this.prismaService.room.update({ where: { id }, data, select: roomSelect })
+  }
+
+  async updateStatus(
+    id: number,
+    status: Prisma.RoomUpdateInput['status'],
+    actorId: number,
+    fromStatus: MarketplaceStatus,
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      const shouldHide = status !== 'AVAILABLE' && fromStatus !== 'HIDDEN'
+      await tx.room.update({
+        where: { id },
+        data: { status, ...(status !== 'AVAILABLE' ? { marketplaceStatus: 'HIDDEN' } : {}), updatedById: actorId },
+      })
+      if (shouldHide) {
+        const room = await tx.room.findUniqueOrThrow({ where: { id }, select: { tenantId: true } })
+        await tx.marketplaceModeration.create({
+          data: {
+            roomId: id,
+            tenantId: room.tenantId,
+            actorId,
+            fromStatus,
+            toStatus: 'HIDDEN',
+            reason: 'AUTO_ROOM_STATUS_CHANGED',
+          },
+        })
+      }
+      return tx.room.findUniqueOrThrow({ where: { id }, select: roomSelect })
+    })
+  }
+
+  async updateMarketplace(id: number, actorId: number, fromStatus: MarketplaceStatus, toStatus: MarketplaceStatus) {
+    return this.prismaService.$transaction(async (tx) => {
+      const updated = await tx.room.updateMany({
+        where: { id, marketplaceStatus: fromStatus },
+        data: {
+          marketplaceStatus: toStatus,
+          ...(toStatus === 'PENDING_REVIEW' || toStatus === 'DRAFT' ? { publishedAt: null } : {}),
+          updatedById: actorId,
+        },
+      })
+      if (updated.count !== 1) {
+        return null
+      }
+
+      const room = await tx.room.findUniqueOrThrow({ where: { id }, select: { tenantId: true } })
+      await tx.marketplaceModeration.create({
+        data: {
+          roomId: id,
+          tenantId: room.tenantId,
+          actorId,
+          fromStatus,
+          toStatus,
+        },
+      })
+      return tx.room.findUniqueOrThrow({ where: { id }, select: roomSelect })
+    })
   }
 
   async countActiveAmenities(amenityIds: number[]) {
@@ -230,15 +287,30 @@ export class RoomsRepository {
     return this.prismaService.roomImage.delete({ where: { id: imageId }, select: roomImageInternalSelect })
   }
 
-  async softDeleteRoom(tenantId: number, id: number, actorId: number) {
-    return this.prismaService.room.update({
-      where: { id, tenantId },
-      data: {
-        deletedAt: new Date(),
-        deletedById: actorId,
-        marketplaceStatus: 'HIDDEN',
-      },
-      select: roomSelect,
+  async softDelete(tenantId: number, id: number, actorId: number, fromStatus: MarketplaceStatus) {
+    return this.prismaService.$transaction(async (tx) => {
+      const room = await tx.room.update({
+        where: { id, tenantId },
+        data: {
+          deletedAt: new Date(),
+          deletedById: actorId,
+          marketplaceStatus: 'HIDDEN',
+        },
+        select: roomSelect,
+      })
+      if (fromStatus !== 'HIDDEN') {
+        await tx.marketplaceModeration.create({
+          data: {
+            roomId: id,
+            tenantId,
+            actorId,
+            fromStatus,
+            toStatus: 'HIDDEN',
+            reason: 'AUTO_ROOM_DELETED',
+          },
+        })
+      }
+      return room
     })
   }
 }

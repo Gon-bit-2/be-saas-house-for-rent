@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt'
 import { v4 as uuidv4 } from 'uuid'
 import { StringValue } from 'ms'
 import {
-  AccessTokenPayload,
+  DecodedAccessToken,
   IAccessTokenPayload,
   IRefreshTokenPayload,
   RefreshTokenPayload,
@@ -32,7 +32,7 @@ export class TokenService {
    */
   signAccessToken(payload: IAccessTokenPayload) {
     const accessToken = this.jwtService.signAsync(
-      { ...payload, uuid: uuidv4() },
+      { ...payload, jti: uuidv4() },
       {
         secret: envConfig.ACCESS_TOKEN_SECRET,
         expiresIn: envConfig.ACCESS_TOKEN_EXPIRES_IN as StringValue,
@@ -73,7 +73,7 @@ export class TokenService {
    * @returns {Promise<AccessTokenPayload>} The decoded token payload if valid.
    * @returns {Promise<AccessTokenPayload>} Payload token đã giải mã nếu hợp lệ.
    */
-  verifyAccessToken(token: string): Promise<AccessTokenPayload> {
+  verifyAccessToken(token: string): Promise<DecodedAccessToken> {
     return this.jwtService.verifyAsync(token, {
       secret: envConfig.ACCESS_TOKEN_SECRET,
     })
