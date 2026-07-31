@@ -18,6 +18,7 @@ describe('ContractsController', () => {
       createDraft: jest.fn(),
       updateDraft: jest.fn(),
       activate: jest.fn(),
+      expire: jest.fn(),
       cancel: jest.fn(),
     }
     controller = new ContractsController(contractsService as never)
@@ -35,6 +36,10 @@ describe('ContractsController', () => {
       roleName.MANAGER,
     ])
     expect(Reflect.getMetadata(ROLES_KEY, ContractsController.prototype.activate)).toEqual([
+      roleName.LANDLORD,
+      roleName.MANAGER,
+    ])
+    expect(Reflect.getMetadata(ROLES_KEY, ContractsController.prototype.expire)).toEqual([
       roleName.LANDLORD,
       roleName.MANAGER,
     ])
@@ -59,6 +64,7 @@ describe('ContractsController', () => {
     await controller.createDraft(user, body)
     await controller.updateDraft(user, 1, { monthlyPrice: 2600000 })
     await controller.activate(user, 1)
+    await controller.expire(user, 1)
     await controller.cancel(user, 1)
 
     expect(contractsService.listForLandlord).toHaveBeenCalledWith(50, query)
@@ -66,6 +72,7 @@ describe('ContractsController', () => {
     expect(contractsService.createDraft).toHaveBeenCalledWith(50, body)
     expect(contractsService.updateDraft).toHaveBeenCalledWith(50, 1, { monthlyPrice: 2600000 })
     expect(contractsService.activate).toHaveBeenCalledWith(50, 1)
+    expect(contractsService.expire).toHaveBeenCalledWith(50, 1)
     expect(contractsService.cancel).toHaveBeenCalledWith(50, 1)
   })
 

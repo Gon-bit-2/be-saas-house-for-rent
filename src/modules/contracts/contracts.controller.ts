@@ -60,6 +60,12 @@ export class ContractsController {
   }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Patch(':id/expire')
+  expire(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
+    return this.contractsService.expire(user.userId, id)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
   @Patch(':id/cancel')
   cancel(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
     return this.contractsService.cancel(user.userId, id)

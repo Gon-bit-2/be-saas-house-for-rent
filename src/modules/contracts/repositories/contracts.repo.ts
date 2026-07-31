@@ -76,7 +76,7 @@ export const contractSelect = {
 export class ContractsRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findContractsAndCount(where: Prisma.ContractWhereInput, skip: number, take: number) {
+  async findMany(where: Prisma.ContractWhereInput, skip: number, take: number) {
     return this.prismaService.$transaction([
       this.prismaService.contract.findMany({
         where,
@@ -89,11 +89,11 @@ export class ContractsRepository {
     ])
   }
 
-  async findTenantContract(tenantId: number, id: number) {
+  async findById(tenantId: number, id: number) {
     return this.prismaService.contract.findFirst({ where: { id, tenantId, deletedAt: null }, select: contractSelect })
   }
 
-  async findMyContractsAndCount(userId: number, skip: number, take: number) {
+  async findMine(userId: number, skip: number, take: number) {
     const where: Prisma.ContractWhereInput = {
       deletedAt: null,
       OR: [{ renterId: userId }, { members: { some: { userId } } }],
@@ -111,7 +111,7 @@ export class ContractsRepository {
     ])
   }
 
-  async findMyContract(userId: number, id: number) {
+  async getMine(userId: number, id: number) {
     return this.prismaService.contract.findFirst({
       where: { id, deletedAt: null, OR: [{ renterId: userId }, { members: { some: { userId } } }] },
       select: contractSelect,
@@ -168,7 +168,7 @@ export class ContractsRepository {
   /**
    * Creates the draft contract and its main/co-renter member rows atomically.
    */
-  async createDraftContract(data: Prisma.ContractUncheckedCreateInput, coRenterIds: number[]) {
+  async create(data: Prisma.ContractUncheckedCreateInput, coRenterIds: number[]) {
     return this.prismaService.$transaction(async (tx) => {
       const contract = await tx.contract.create({ data, select: { id: true, renterId: true } })
       await tx.contractMember.createMany({
@@ -185,7 +185,7 @@ export class ContractsRepository {
   /**
    * Updates editable contract fields and replaces co-renters only when provided.
    */
-  async updateDraftContract(id: number, data: Prisma.ContractUncheckedUpdateInput, coRenterIds?: number[]) {
+  async update(id: number, data: Prisma.ContractUncheckedUpdateInput, coRenterIds?: number[]) {
     return this.prismaService.$transaction(async (tx) => {
       await tx.contract.update({ where: { id }, data })
 
@@ -205,61 +205,147 @@ export class ContractsRepository {
   /**
    * Activates a contract and moves the room/rental journey forward in one transaction.
    */
-  async activateContract(tenantId: number, id: number, actorId: number) {
-    return this.prismaService.$transaction(async (tx) => {
-      const contract = await tx.contract.findFirstOrThrow({
-        where: { id, tenantId, deletedAt: null },
-        select: { id: true, roomId: true, renterId: true, rentalRequestId: true, startDate: true },
-      })
+  async activate(tenantId: number, id: number, actorId: number) {
+    return this.prismaService.$transaction(
+      async (tx) => {
+        const contract = await tx.contract.findFirstOrThrow({
+          where: { id, tenantId, deletedAt: null },
+          select: { id: true, roomId: true, renterId: true, rentalRequestId: true, startDate: true },
+        })
 
-      await tx.contract.update({ where: { id }, data: { status: 'ACTIVE', updatedById: actorId } })
-      const room = await tx.room.findUniqueOrThrow({
-        where: { id: contract.roomId },
-        select: { tenantId: true, marketplaceStatus: true },
-      })
-      await tx.room.update({
-        where: { id: contract.roomId },
-        data: { status: 'OCCUPIED', marketplaceStatus: 'HIDDEN', updatedById: actorId },
-      })
-      if (room.marketplaceStatus !== 'HIDDEN') {
-        await tx.marketplaceModeration.create({
+        const room = await tx.room.findFirstOrThrow({
+          where: { id: contract.roomId, tenantId },
+          select: { tenantId: true, marketplaceStatus: true },
+        })
+        const claimedRoom = await tx.room.updateMany({
+          where: { id: contract.roomId, tenantId, status: { in: ['AVAILABLE', 'RESERVED'] }, deletedAt: null },
+          data: { status: 'OCCUPIED', marketplaceStatus: 'HIDDEN', updatedById: actorId },
+        })
+        if (claimedRoom.count !== 1) throw new Error('CONTRACT_ROOM_CONFLICT')
+        const activated = await tx.contract.updateMany({
+          where: {
+            id,
+            tenantId,
+            status: { in: ['DRAFT', 'WAITING_LANDLORD_SIGN', 'WAITING_RENTER_SIGN'] },
+            deletedAt: null,
+          },
+          data: { status: 'ACTIVE', updatedById: actorId },
+        })
+        if (activated.count !== 1) throw new Error('CONTRACT_ACTIVATION_CONFLICT')
+        if (room.marketplaceStatus !== 'HIDDEN') {
+          await tx.marketplaceModeration.create({
+            data: {
+              roomId: contract.roomId,
+              tenantId: room.tenantId,
+              actorId,
+              fromStatus: room.marketplaceStatus,
+              toStatus: 'HIDDEN',
+              reason: 'AUTO_CONTRACT_ACTIVATED',
+            },
+          })
+        }
+        await tx.rentalHistory.create({
           data: {
+            tenantId,
             roomId: contract.roomId,
-            tenantId: room.tenantId,
-            actorId,
-            fromStatus: room.marketplaceStatus,
-            toStatus: 'HIDDEN',
-            reason: 'AUTO_CONTRACT_ACTIVATED',
+            renterId: contract.renterId,
+            contractId: contract.id,
+            startedAt: contract.startDate,
+            status: 'ACTIVE',
           },
         })
-      }
-      await tx.rentalHistory.create({
-        data: {
-          tenantId,
-          roomId: contract.roomId,
-          renterId: contract.renterId,
-          contractId: contract.id,
-          startedAt: contract.startDate,
-          status: 'ACTIVE',
-        },
-      })
 
-      if (contract.rentalRequestId) {
-        await tx.rentalRequest.update({
-          where: { id: contract.rentalRequestId },
-          data: { status: 'CONVERTED_TO_CONTRACT', updatedById: actorId },
+        if (contract.rentalRequestId) {
+          await tx.rentalRequest.update({
+            where: { id: contract.rentalRequestId },
+            data: { status: 'CONVERTED_TO_CONTRACT', updatedById: actorId },
+          })
+        }
+
+        await tx.auditLog.create({
+          data: {
+            tenantId,
+            actorId,
+            action: 'ACTIVATE_CONTRACT',
+            entityType: 'CONTRACT',
+            entityId: String(id),
+            oldValues: { status: 'DRAFT_OR_WAITING' },
+            newValues: { status: 'ACTIVE', roomStatus: 'OCCUPIED' },
+          },
         })
-      }
 
-      return tx.contract.findUniqueOrThrow({ where: { id }, select: contractSelect })
-    })
+        return tx.contract.findUniqueOrThrow({ where: { id }, select: contractSelect })
+      },
+      { isolationLevel: 'Serializable' },
+    )
   }
 
-  async cancelContract(id: number, actorId: number) {
-    return this.prismaService.contract.update({
-      where: { id },
-      data: { status: 'CANCELED', updatedById: actorId },
-      select: contractSelect,
+  async expire(tenantId: number, id: number, actorId: number) {
+    return this.prismaService.$transaction(
+      async (tx) => {
+        const contract = await tx.contract.findFirstOrThrow({
+          where: { id, tenantId, status: 'ACTIVE', deletedAt: null },
+          select: { id: true, roomId: true, endDate: true },
+        })
+        const expired = await tx.contract.updateMany({
+          where: { id, tenantId, status: 'ACTIVE', deletedAt: null },
+          data: { status: 'EXPIRED', updatedById: actorId },
+        })
+        if (expired.count !== 1) throw new Error('CONTRACT_EXPIRY_CONFLICT')
+        const history = await tx.rentalHistory.updateMany({
+          where: { contractId: id, status: 'ACTIVE' },
+          data: { status: 'ENDED', endedAt: contract.endDate },
+        })
+        if (history.count !== 1) throw new Error('CONTRACT_EXPIRY_CONFLICT')
+        await tx.room.updateMany({
+          where: { id: contract.roomId, tenantId, status: 'OCCUPIED', deletedAt: null },
+          data: { status: 'AVAILABLE', marketplaceStatus: 'HIDDEN', updatedById: actorId },
+        })
+        await tx.auditLog.createMany({
+          data: [
+            {
+              tenantId,
+              actorId,
+              action: 'EXPIRE_CONTRACT',
+              entityType: 'CONTRACT',
+              entityId: String(id),
+              oldValues: { status: 'ACTIVE' },
+              newValues: { status: 'EXPIRED' },
+            },
+            {
+              tenantId,
+              actorId,
+              action: 'RELEASE_ROOM_AFTER_EXPIRY',
+              entityType: 'ROOM',
+              entityId: String(contract.roomId),
+              newValues: { status: 'AVAILABLE', marketplaceStatus: 'HIDDEN' },
+            },
+          ],
+        })
+        return tx.contract.findUniqueOrThrow({ where: { id }, select: contractSelect })
+      },
+      { isolationLevel: 'Serializable' },
+    )
+  }
+
+  async cancel(id: number, actorId: number) {
+    return this.prismaService.$transaction(async (tx) => {
+      const updated = await tx.contract.update({
+        where: { id },
+        data: { status: 'CANCELED', updatedById: actorId },
+        select: contractSelect,
+      })
+      await tx.auditLog.create({
+        data: {
+          tenantId: updated.tenantId,
+          actorId,
+          action: 'CANCEL_CONTRACT',
+          entityType: 'CONTRACT',
+          entityId: String(id),
+          newValues: { status: 'CANCELED' },
+        },
+      })
+      return updated
     })
   }
 }
