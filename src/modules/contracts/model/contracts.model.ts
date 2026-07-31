@@ -1,4 +1,5 @@
 import z from 'zod'
+import { IsoDateInputCodec } from '@src/common/utils/date-codec.util'
 
 const ContractStatusSchema = z.enum([
   'DRAFT',
@@ -36,8 +37,8 @@ export const CreateContractBodySchema = z
     rentalRequestId: z.coerce.number().int().positive().nullable().optional(),
     templateId: z.coerce.number().int().positive().nullable().optional(),
     contractCode: z.string().trim().min(1).max(100).optional(),
-    startDate: z.coerce.date(),
-    endDate: z.coerce.date(),
+    startDate: IsoDateInputCodec,
+    endDate: IsoDateInputCodec,
     monthlyPrice: z.coerce.number().nonnegative(),
     depositAmount: z.coerce.number().nonnegative(),
     billingCycle: ContractBillingCycleSchema,
@@ -49,8 +50,8 @@ export const CreateContractBodySchema = z
 
 export const UpdateContractBodySchema = z
   .object({
-    startDate: z.coerce.date().optional(),
-    endDate: z.coerce.date().optional(),
+    startDate: IsoDateInputCodec.optional(),
+    endDate: IsoDateInputCodec.optional(),
     monthlyPrice: z.coerce.number().nonnegative().optional(),
     depositAmount: z.coerce.number().nonnegative().optional(),
     billingCycle: ContractBillingCycleSchema.optional(),

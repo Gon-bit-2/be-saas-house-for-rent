@@ -25,7 +25,7 @@ export class ContractsService {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const { page, limit, skip } = normalizePagination(query)
     const where = this.buildTenantContractWhere(tenant.tenantId, query)
-    const [contracts, total] = await this.contractsRepository.findContractsAndCount(where, skip, limit)
+    const [contracts, total] = await this.contractsRepository.findMany(where, skip, limit)
     return buildPaginatedResult(contracts, total, page, limit)
   }
 
@@ -68,7 +68,7 @@ export class ContractsService {
 
     const contractCode = await this.resolveContractCode(tenant.tenantId, body.contractCode)
 
-    return this.contractsRepository.createDraftContract(
+    return this.contractsRepository.create(
       {
         tenantId: tenant.tenantId,
         roomId: body.roomId,
@@ -117,7 +117,7 @@ export class ContractsService {
       updatedById: userId,
     }
 
-    return this.contractsRepository.updateDraftContract(id, data, body.coRenterIds)
+    return this.contractsRepository.update(id, data, body.coRenterIds)
   }
 
   async activate(userId: number, id: number) {
@@ -136,7 +136,40 @@ export class ContractsService {
       throw new ConflictException('Phòng đã có hợp đồng đang hiệu lực')
     }
 
-    return this.contractsRepository.activateContract(tenant.tenantId, id, userId)
+    try {
+      return await this.contractsRepository.activate(tenant.tenantId, id, userId)
+    } catch (error) {
+      if (error instanceof Error && ['CONTRACT_ACTIVATION_CONFLICT', 'CONTRACT_ROOM_CONFLICT'].includes(error.message))
+        throw new ConflictException('Hợp đồng hoặc phòng đã được xử lý bởi thao tác khác')
+      if (this.isPrismaError(error, ['P2002', 'P2034']))
+        throw new ConflictException('Phòng đã có hợp đồng đang hiệu lực')
+      throw error
+    }
+  }
+
+  async expire(userId: number, id: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const contract = await this.getTenantContractOrThrow(tenant.tenantId, id)
+    if (contract.status !== 'ACTIVE') {
+      throw new BadRequestException('Chỉ có thể hết hạn hợp đồng đang hiệu lực')
+    }
+    const today = new Date()
+    today.setUTCHours(0, 0, 0, 0)
+    if (new Date(contract.endDate).getTime() > today.getTime()) {
+      throw new BadRequestException('Hợp đồng chưa đến ngày hết hạn')
+    }
+
+    try {
+      return await this.contractsRepository.expire(tenant.tenantId, id, userId)
+    } catch (error) {
+      if (
+        (error instanceof Error && error.message === 'CONTRACT_EXPIRY_CONFLICT') ||
+        this.isPrismaError(error, ['P2034'])
+      ) {
+        throw new ConflictException('Hợp đồng đã được xử lý bởi thao tác khác')
+      }
+      throw error
+    }
   }
 
   async cancel(userId: number, id: number) {
@@ -148,17 +181,17 @@ export class ContractsService {
     if (['EXPIRED', 'TERMINATED', 'CANCELED'].includes(contract.status)) {
       throw new BadRequestException('Không thể hủy hợp đồng ở trạng thái hiện tại')
     }
-    return this.contractsRepository.cancelContract(id, userId)
+    return this.contractsRepository.cancel(id, userId)
   }
 
   async listMine(userId: number, query: TListContractsQuerySchema) {
     const { page, limit, skip } = normalizePagination(query)
-    const [contracts, total] = await this.contractsRepository.findMyContractsAndCount(userId, skip, limit)
+    const [contracts, total] = await this.contractsRepository.findMine(userId, skip, limit)
     return buildPaginatedResult(contracts, total, page, limit)
   }
 
   async getMine(userId: number, id: number) {
-    const contract = await this.contractsRepository.findMyContract(userId, id)
+    const contract = await this.contractsRepository.getMine(userId, id)
     if (!contract) {
       throw new NotFoundException('Không tìm thấy hợp đồng của bạn')
     }
@@ -166,7 +199,7 @@ export class ContractsService {
   }
 
   private async getTenantContractOrThrow(tenantId: number, id: number) {
-    const contract = await this.contractsRepository.findTenantContract(tenantId, id)
+    const contract = await this.contractsRepository.findById(tenantId, id)
     if (!contract) {
       throw new NotFoundException('Không tìm thấy hợp đồng trong tenant hiện tại')
     }
@@ -241,5 +274,10 @@ export class ContractsService {
           }
         : {}),
     }
+  }
+
+  private isPrismaError(error: unknown, codes: string[]) {
+    if (!error || typeof error !== 'object' || !('code' in error)) return false
+    return codes.includes(String(error.code))
   }
 }
