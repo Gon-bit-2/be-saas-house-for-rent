@@ -10,6 +10,7 @@ import type {
   TUpdateTenantStatusBodySchema,
   TUpdateTenantVerificationBodySchema,
 } from './model/tenants.model'
+import { SubscriptionPaymentsService } from '../subscription-payments/subscription-payments.service'
 import { TenantsRepository } from './repositories/tenants.repo'
 
 /**
@@ -20,6 +21,7 @@ export class TenantsService {
   constructor(
     private readonly tenantsRepository: TenantsRepository,
     private readonly hashingService: HashingService,
+    private readonly subscriptionPaymentsService: SubscriptionPaymentsService,
   ) {}
 
   async list(query: TListTenantsQuerySchema) {
@@ -95,6 +97,9 @@ export class TenantsService {
   async assignPlan(id: number, body: TAssignTenantPlanBodySchema, actorId: number) {
     await this.getById(id)
     await this.assertActivePlan(body.planId)
+    if (await this.subscriptionPaymentsService.hasOpen(id)) {
+      throw new ConflictException('Tenant đang có checkout PayOS chưa hoàn tất')
+    }
     const { startedAt, expiredAt } = this.calculateSubscriptionPeriod(body.billingCycle)
 
     return this.tenantsRepository.assignPlan({

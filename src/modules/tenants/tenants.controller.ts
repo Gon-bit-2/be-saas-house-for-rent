@@ -36,7 +36,11 @@ export class TenantsController {
   }
 
   @Patch(':id')
-  update(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number, @Body() body: UpdateTenantBodyDTO) {
+  update(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateTenantBodyDTO,
+  ) {
     return this.tenantsService.update(id, body, user.userId)
   }
 

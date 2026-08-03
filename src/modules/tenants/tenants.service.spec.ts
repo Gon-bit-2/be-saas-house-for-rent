@@ -1,12 +1,16 @@
 import { ConflictException, NotFoundException } from '@nestjs/common'
 
 jest.mock('./repositories/tenants.repo', () => ({ TenantsRepository: class TenantsRepository {} }))
+jest.mock('../subscription-payments/subscription-payments.service', () => ({
+  SubscriptionPaymentsService: class SubscriptionPaymentsService {},
+}))
 const { TenantsService } = require('./tenants.service') as typeof import('./tenants.service')
 
 describe('TenantsService', () => {
   let service: import('./tenants.service').TenantsService
   let tenantsRepository: Record<string, jest.Mock>
   let hashingService: Record<string, jest.Mock>
+  let subscriptionPaymentsService: Record<string, jest.Mock>
 
   const createBody = {
     fullName: 'Nguyen Van A',
@@ -38,7 +42,14 @@ describe('TenantsService', () => {
     hashingService = {
       hash: jest.fn().mockResolvedValue('hashed-password'),
     }
-    service = new TenantsService(tenantsRepository as never, hashingService as never)
+    subscriptionPaymentsService = {
+      hasOpen: jest.fn().mockResolvedValue(false),
+    }
+    service = new TenantsService(
+      tenantsRepository as never,
+      hashingService as never,
+      subscriptionPaymentsService as never,
+    )
     jest.useFakeTimers().setSystemTime(new Date('2026-07-09T00:00:00.000Z'))
   })
 
@@ -107,5 +118,16 @@ describe('TenantsService', () => {
       }),
     )
     expect((tenantsRepository as Record<string, unknown>).createSubscriptionPayment).toBeUndefined()
+  })
+
+  it('blocks an admin plan override while a PayOS checkout is pending', async () => {
+    tenantsRepository.findById.mockResolvedValue({ id: 10 })
+    tenantsRepository.findActivePlan.mockResolvedValue({ id: 2 })
+    subscriptionPaymentsService.hasOpen.mockResolvedValue(true)
+
+    await expect(
+      service.assignPlan(10, { planId: 2, billingCycle: 'YEARLY', autoRenew: false }, 99),
+    ).rejects.toBeInstanceOf(ConflictException)
+    expect(tenantsRepository.assignPlan).not.toHaveBeenCalled()
   })
 })
