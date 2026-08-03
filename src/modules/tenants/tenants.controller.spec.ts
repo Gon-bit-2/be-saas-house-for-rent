@@ -57,6 +57,10 @@ describe('TenantsController', () => {
     expect(tenantsService.update).toHaveBeenCalledWith(1, { name: 'Tenant B' }, 99)
     expect(tenantsService.updateStatus).toHaveBeenCalledWith(1, { status: 'SUSPENDED' }, 99)
     expect(tenantsService.updateVerification).toHaveBeenCalledWith(1, { verificationStatus: 'VERIFIED' }, 99)
-    expect(tenantsService.assignPlan).toHaveBeenCalledWith(1, { planId: 2, billingCycle: 'YEARLY', autoRenew: false }, 99)
+    expect(tenantsService.assignPlan).toHaveBeenCalledWith(
+      1,
+      { planId: 2, billingCycle: 'YEARLY', autoRenew: false },
+      99,
+    )
   })
 })

@@ -1,6 +1,9 @@
 import { NotFoundException } from '@nestjs/common'
+import { BadRequestException } from '@nestjs/common'
 
-jest.mock('@src/shared/modules/services/tenant-access.service', () => ({ TenantAccessService: class TenantAccessService {} }))
+jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
+  TenantAccessService: class TenantAccessService {},
+}))
 jest.mock('./repositories/renters.repo', () => ({ RentersRepository: class RentersRepository {} }))
 const { RentersService } = require('./renters.service') as typeof import('./renters.service')
 
@@ -8,6 +11,8 @@ describe('RentersService', () => {
   let service: import('./renters.service').RentersService
   let rentersRepository: Record<string, jest.Mock>
   let tenantAccessService: Record<string, jest.Mock>
+  let hashingService: Record<string, jest.Mock>
+  let emailService: Record<string, jest.Mock>
 
   beforeEach(() => {
     rentersRepository = {
@@ -17,9 +22,18 @@ describe('RentersService', () => {
       findTenantRenter: jest.fn(),
     }
     tenantAccessService = {
-      getActiveTenantContext: jest.fn().mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
+      getActiveTenantContext: jest
+        .fn()
+        .mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
     }
-    service = new RentersService(rentersRepository as never, tenantAccessService as never)
+    hashingService = { hash: jest.fn(), compare: jest.fn() }
+    emailService = { sendOtpEmail: jest.fn() }
+    service = new RentersService(
+      rentersRepository as never,
+      tenantAccessService as never,
+      hashingService as never,
+      emailService as never,
+    )
   })
 
   it('updates renter self profile after confirming profile exists', async () => {
@@ -55,7 +69,14 @@ describe('RentersService', () => {
     expect(rentersRepository.findManyAndCount).toHaveBeenCalledWith(
       expect.objectContaining({
         AND: expect.arrayContaining([
-          { OR: [{ rentalRequests: { some: { tenantId: 10 } } }, { viewingAppointments: { some: { tenantId: 10 } } }] },
+          {
+            OR: expect.arrayContaining([
+              { rentalRequests: { some: { tenantId: 10 } } },
+              { viewingAppointments: { some: { tenantId: 10 } } },
+              { contracts: { some: { tenantId: 10, deletedAt: null } } },
+              { rentalHistories: { some: { tenantId: 10 } } },
+            ]),
+          },
         ]),
       }),
       0,
@@ -67,5 +88,61 @@ describe('RentersService', () => {
     rentersRepository.findTenantRenter.mockResolvedValue(null)
 
     await expect(service.getForLandlord(50, 99)).rejects.toBeInstanceOf(NotFoundException)
+  })
+
+  it('creates a tenant-scoped invitation and emails a six-digit code', async () => {
+    rentersRepository.findRegisteredUser = jest.fn().mockResolvedValue(null)
+    rentersRepository.createInvitation = jest
+      .fn()
+      .mockResolvedValue({ id: 7, tenantId: 10, email: 'renter@example.com' })
+    hashingService.hash.mockResolvedValue('hashed-code')
+
+    const result = await service.invite(50, {
+      fullName: 'Nguyen Van A',
+      email: ' RENTER@example.com ',
+      phone: '0900000000',
+    })
+
+    expect(rentersRepository.createInvitation).toHaveBeenCalledWith(
+      expect.objectContaining({ tenantId: 10, email: 'renter@example.com', codeHash: 'hashed-code', createdById: 50 }),
+    )
+    expect(emailService.sendOtpEmail).toHaveBeenCalledWith(
+      expect.objectContaining({ email: 'renter@example.com', code: expect.stringMatching(/^\d{6}$/) }),
+    )
+    expect(result).toEqual(expect.objectContaining({ id: 7 }))
+  })
+
+  it('records a failed invitation code attempt', async () => {
+    rentersRepository.findRegisteredUser = jest.fn().mockResolvedValue(null)
+    rentersRepository.findValidInvitation = jest.fn().mockResolvedValue({ id: 7, codeHash: 'hash' })
+    rentersRepository.recordInvitationFailure = jest.fn()
+    hashingService.compare.mockResolvedValue(false)
+
+    await expect(
+      service.acceptInvitation({
+        email: 'renter@example.com',
+        code: '000000',
+        password: 'Strong@123',
+        confirmPassword: 'Strong@123',
+      }),
+    ).rejects.toBeInstanceOf(BadRequestException)
+    expect(rentersRepository.recordInvitationFailure).toHaveBeenCalledWith(7, expect.any(Number))
+  })
+
+  it('hashes the renter-chosen password before atomically accepting an invitation', async () => {
+    rentersRepository.findRegisteredUser = jest.fn().mockResolvedValue(null)
+    rentersRepository.findValidInvitation = jest.fn().mockResolvedValue({ id: 7, codeHash: 'code-hash' })
+    rentersRepository.acceptInvitation = jest.fn().mockResolvedValue({ id: 99, email: 'renter@example.com' })
+    hashingService.compare.mockResolvedValue(true)
+    hashingService.hash.mockResolvedValue('password-hash')
+
+    await service.acceptInvitation({
+      email: 'renter@example.com',
+      code: '123456',
+      password: 'Strong@123',
+      confirmPassword: 'Strong@123',
+    })
+
+    expect(rentersRepository.acceptInvitation).toHaveBeenCalledWith(7, 'renter@example.com', 'password-hash')
   })
 })
