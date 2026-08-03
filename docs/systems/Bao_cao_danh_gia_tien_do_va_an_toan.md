@@ -8,7 +8,7 @@
 
 ## 1. Kết luận điều hành
 
-Backend đã chuyển từ scaffold/core sang giai đoạn **backend MVP feature-complete có điều kiện**: 27 module được nạp, 34 controller, 206 operation; build/lint/Prisma validate và 281 unit test đều đạt. Dashboard platform, subscription billing, marketplace moderation, OCR, renter invitation, service catalog, handover/termination và trust moderation hiện đã có API.
+Backend đã chuyển từ scaffold/core sang giai đoạn **backend MVP feature-complete có điều kiện**: 27 module được nạp, 34 controller, 214 operation; build/lint/Prisma validate và 294 unit test đều đạt. Dashboard platform, subscription billing, marketplace moderation, OCR, renter invitation, service catalog, handover/termination và trust moderation hiện đã có API.
 
 Chưa thể tuyên bố MVP hoàn thành hoặc production-ready vì:
 
@@ -26,9 +26,9 @@ Chưa thể tuyên bố MVP hoàn thành hoặc production-ready vì:
 |---|---|---|
 | `npm run build` | PASS | Nest build exit 0 |
 | ESLint không `--fix` | PASS | Không có finding |
-| `npm test -- --runInBand` | PASS | 74/74 suite, 281/281 test, 0 snapshot |
+| `npm test -- --runInBand` | PASS | 75/75 suite, 294/294 test, 0 snapshot |
 | `npx prisma validate` | PASS | Schema hợp lệ |
-| OpenAPI export | PASS | 206 operation, 34 controller |
+| OpenAPI export | PASS | 214 operation, 34 controller |
 | E2E | NOT RUN | 5 scenario, cần DB seed và có tạo/xóa dữ liệu test |
 | Dependency audit online | NOT RUN | Chưa được phép gửi metadata ra registry |
 | Provider/staging | NOT RUN | Không có credential/môi trường trong phạm vi |

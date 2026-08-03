@@ -9,9 +9,9 @@ Tài liệu phục vụ đồng thời báo cáo đồ án và công việc phá
 | Hạng mục | Trạng thái có bằng chứng |
 |---|---|
 | Backend NestJS | Build và lint đạt |
-| Unit test | 74/74 suite, 281/281 test |
+| Unit test | 75/75 suite, 294/294 test |
 | Prisma schema | `prisma validate` đạt |
-| API runtime | 206 operation, 34 controller |
+| API runtime | 214 operation, 34 controller |
 | E2E | 5 scenario, cần PostgreSQL đã migrate/seed |
 | Frontend | Chưa có implementation |
 | Mobile | Chưa có implementation |

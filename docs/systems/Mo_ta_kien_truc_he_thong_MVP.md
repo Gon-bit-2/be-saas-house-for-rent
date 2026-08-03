@@ -42,7 +42,7 @@ flowchart LR
 | Operations/trust | Tickets, Notifications, Dashboard, Reviews, Reports |
 | Hạ tầng | Database, SharedService, Cache, Throttler, BullMQ |
 
-Các controller được nạp qua `AppModule`; runtime hiện có 34 controller và 206 operation.
+Các controller được nạp qua `AppModule`; runtime hiện có 34 controller và 214 operation.
 
 ## 5. Luồng dữ liệu chính
 
