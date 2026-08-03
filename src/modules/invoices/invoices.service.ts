@@ -39,6 +39,13 @@ export class InvoicesService {
     return buildPaginatedResult(debts, total, page, limit)
   }
 
+  async listMyDebts(userId: number, query: TListDebtsQuerySchema) {
+    const { page, limit, skip } = normalizePagination(query)
+    const where = this.buildDebtWhereForRenter(userId, query)
+    const [debts, total] = await this.invoicesRepository.findDebtsAndCount(where, skip, limit)
+    return buildPaginatedResult(debts, total, page, limit)
+  }
+
   async getForLandlord(userId: number, id: number) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     return this.getTenantInvoiceOrThrow(tenant.tenantId, id)
@@ -46,7 +53,8 @@ export class InvoicesService {
 
   async listMine(userId: number, query: TListInvoicesQuerySchema) {
     const { page, limit, skip } = normalizePagination(query)
-    const [invoices, total] = await this.invoicesRepository.findMyInvoicesAndCount(userId, skip, limit)
+    const where = this.buildInvoiceWhereForRenter(userId, query)
+    const [invoices, total] = await this.invoicesRepository.findInvoicesAndCount(where, skip, limit)
     return buildPaginatedResult(invoices, total, page, limit)
   }
 
@@ -83,7 +91,14 @@ export class InvoicesService {
       contract.roomId,
       billingMonth,
     )
-    const items = this.buildInvoiceItems(contract, billingMonth, readings, body.extraItems)
+    const serviceAssignments = await this.invoicesRepository.findServiceAssignmentsForInvoice(
+      tenant.tenantId,
+      contract.id,
+      contract.roomId,
+      billingMonth,
+      monthEnd,
+    )
+    const items = this.buildInvoiceItems(contract, billingMonth, readings, serviceAssignments, body.extraItems)
     const totals = this.calculateTotals(items)
     const issueDate = body.issueDate ? this.normalizeDateOnly(body.issueDate) : this.todayDateOnly()
     const dueDate = body.dueDate
@@ -132,7 +147,9 @@ export class InvoicesService {
     const extraItems = body.extraItems ?? this.extractExtraItems(invoice.items)
     const items = this.rebuildDraftItems(invoice, extraItems)
     const totals = this.calculateTotals(items)
-    const issueDate = body.issueDate ? this.normalizeDateOnly(body.issueDate) : this.normalizeDateOnly(invoice.issueDate)
+    const issueDate = body.issueDate
+      ? this.normalizeDateOnly(body.issueDate)
+      : this.normalizeDateOnly(invoice.issueDate)
     const dueDate = body.dueDate ? this.normalizeDateOnly(body.dueDate) : this.normalizeDateOnly(invoice.dueDate)
     this.assertDueDateValid(issueDate, dueDate)
 
@@ -213,6 +230,16 @@ export class InvoicesService {
       currentValue: unknown
       meter: { type: 'ELECTRICITY' | 'WATER'; unit: string }
     }>,
+    serviceAssignments: Array<{
+      quantity: unknown
+      unitPrice: unknown
+      serviceItem: {
+        name: string
+        itemType: InvoiceItemType
+        defaultUnitPrice: unknown
+        unitLabel: string
+      }
+    }>,
     extraItems: TExtraInvoiceItemSchema[],
   ): InvoiceItemDraft[] {
     const monthLabel = this.formatBillingMonth(billingMonth)
@@ -225,7 +252,19 @@ export class InvoicesService {
       meterReadingId: null,
     }
     const utilityItems = readings.map((reading) => this.utilityReadingToItem(reading, monthLabel))
-    return [rent, ...utilityItems, ...this.extraItemsToInvoiceItems(extraItems)]
+    const serviceItems: InvoiceItemDraft[] = serviceAssignments.map((assignment) => {
+      const quantity = this.toNumber(assignment.quantity)
+      const unitPrice = this.toNumber(assignment.unitPrice ?? assignment.serviceItem.defaultUnitPrice)
+      return {
+        itemType: assignment.serviceItem.itemType,
+        description: `${assignment.serviceItem.name} (${assignment.serviceItem.unitLabel}) tháng ${monthLabel}`,
+        quantity,
+        unitPrice,
+        amount: quantity * unitPrice,
+        meterReadingId: null,
+      }
+    })
+    return [rent, ...utilityItems, ...serviceItems, ...this.extraItemsToInvoiceItems(extraItems)]
   }
 
   private rebuildDraftItems(invoice: { items: unknown[]; billingMonth: Date }, extraItems: TExtraInvoiceItemSchema[]) {
@@ -296,8 +335,12 @@ export class InvoicesService {
     const subtotal = items
       .filter((item) => item.itemType !== 'PENALTY' && item.itemType !== 'DISCOUNT')
       .reduce((sum, item) => sum + item.amount, 0)
-    const penaltyAmount = items.filter((item) => item.itemType === 'PENALTY').reduce((sum, item) => sum + item.amount, 0)
-    const discountAmount = items.filter((item) => item.itemType === 'DISCOUNT').reduce((sum, item) => sum + item.amount, 0)
+    const penaltyAmount = items
+      .filter((item) => item.itemType === 'PENALTY')
+      .reduce((sum, item) => sum + item.amount, 0)
+    const discountAmount = items
+      .filter((item) => item.itemType === 'DISCOUNT')
+      .reduce((sum, item) => sum + item.amount, 0)
     const totalAmount = Math.max(0, subtotal + penaltyAmount - discountAmount)
     return { subtotal, discountAmount, penaltyAmount, totalAmount, paidAmount: 0, debtAmount: totalAmount }
   }
@@ -340,7 +383,9 @@ export class InvoicesService {
   }
 
   private defaultDueDate(billingMonth: Date, paymentDueDay: number, issueDate: Date) {
-    const contractDueDate = new Date(Date.UTC(billingMonth.getUTCFullYear(), billingMonth.getUTCMonth(), Math.min(28, paymentDueDay)))
+    const contractDueDate = new Date(
+      Date.UTC(billingMonth.getUTCFullYear(), billingMonth.getUTCMonth(), Math.min(28, paymentDueDay)),
+    )
     return contractDueDate.getTime() < issueDate.getTime() ? issueDate : contractDueDate
   }
 
@@ -416,6 +461,14 @@ export class InvoicesService {
         : {}),
     }
   }
+
+  private buildInvoiceWhereForRenter(userId: number, query: TListInvoicesQuerySchema): Prisma.InvoiceWhereInput {
+    const where = this.buildInvoiceWhere(0, { ...query, renterId: undefined })
+    return { ...where, tenantId: undefined, renterId: userId }
+  }
+
+  private buildDebtWhereForRenter(userId: number, query: TListDebtsQuerySchema): Prisma.DebtWhereInput {
+    const where = this.buildDebtWhere(0, { ...query, renterId: undefined })
+    return { ...where, tenantId: undefined, renterId: userId }
+  }
 }
-
-

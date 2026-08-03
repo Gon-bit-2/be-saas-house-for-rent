@@ -1,5 +1,7 @@
 # G03 - Đặc tả nhà trọ, tầng, phòng và tiện ích
 
+> **Snapshot 31/07/2026:** CRUD property/floor/room/image/amenity, soft-delete và state marketplace đã có API. Luồng submit/moderation tin nằm giữa G03–G04; upload ảnh cần Cloudinary thật để nghiệm thu integration.
+
 ## 1. Tổng quan
 
 Tài liệu này mô tả nhóm tính năng G03 của backend: quản lý nhà trọ, tầng, phòng, ảnh phòng, tiện ích của phòng, trạng thái vận hành và trạng thái đăng tin của phòng. Mục tiêu là để người đọc biết API nào cần gọi, dữ liệu nào phải gửi, backend kiểm tra những gì và các bản ghi liên hệ với nhau như thế nào.

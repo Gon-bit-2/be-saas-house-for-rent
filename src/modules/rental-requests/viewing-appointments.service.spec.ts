@@ -1,8 +1,13 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common'
 
-jest.mock('@src/shared/modules/services/tenant-access.service', () => ({ TenantAccessService: class TenantAccessService {} }))
-jest.mock('./repositories/rental-requests.repo', () => ({ RentalRequestsRepository: class RentalRequestsRepository {} }))
-const { ViewingAppointmentsService } = require('./viewing-appointments.service') as typeof import('./viewing-appointments.service')
+jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
+  TenantAccessService: class TenantAccessService {},
+}))
+jest.mock('./repositories/rental-requests.repo', () => ({
+  RentalRequestsRepository: class RentalRequestsRepository {},
+}))
+const { ViewingAppointmentsService } =
+  require('./viewing-appointments.service') as typeof import('./viewing-appointments.service')
 
 describe('ViewingAppointmentsService', () => {
   let service: import('./viewing-appointments.service').ViewingAppointmentsService
@@ -20,7 +25,9 @@ describe('ViewingAppointmentsService', () => {
       cancelRenterAppointment: jest.fn(),
     }
     tenantAccessService = {
-      getActiveTenantContext: jest.fn().mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
+      getActiveTenantContext: jest
+        .fn()
+        .mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
     }
     service = new ViewingAppointmentsService(rentalRequestsRepository as never, tenantAccessService as never)
     jest.useFakeTimers().setSystemTime(new Date('2026-07-09T08:00:00.000Z'))

@@ -68,7 +68,20 @@ export class FirebasePushService {
     return {
       notificationId: String(notification.id),
       type: notification.type,
-      ...Object.fromEntries(Object.entries(rawData).map(([key, value]) => [key, String(value)])),
+      ...Object.fromEntries(Object.entries(rawData).map(([key, value]) => [key, this.stringifyDataValue(value)])),
+    }
+  }
+
+  private stringifyDataValue(value: unknown): string {
+    if (typeof value === 'string') return value
+    if (typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint') {
+      return String(value)
+    }
+    if (value === null || value === undefined) return ''
+    try {
+      return JSON.stringify(value) ?? ''
+    } catch {
+      return ''
     }
   }
 

@@ -26,8 +26,12 @@ describe('MarketplaceController', () => {
   })
 
   it('restricts request and appointment submission to tenants', () => {
-    expect(Reflect.getMetadata(ROLES_KEY, MarketplaceController.prototype.createRentalRequest)).toEqual([roleName.TENANT])
-    expect(Reflect.getMetadata(ROLES_KEY, MarketplaceController.prototype.createViewingAppointment)).toEqual([roleName.TENANT])
+    expect(Reflect.getMetadata(ROLES_KEY, MarketplaceController.prototype.createRentalRequest)).toEqual([
+      roleName.TENANT,
+    ])
+    expect(Reflect.getMetadata(ROLES_KEY, MarketplaceController.prototype.createViewingAppointment)).toEqual([
+      roleName.TENANT,
+    ])
   })
 
   it('delegates renter actions with active user id and room id', async () => {

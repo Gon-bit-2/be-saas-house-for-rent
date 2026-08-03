@@ -70,7 +70,11 @@ export class RoomsController {
   }
 
   @Patch(':id')
-  update(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number, @Body() body: UpdateRoomBodyDTO) {
+  update(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateRoomBodyDTO,
+  ) {
     return this.roomsService.update(user.userId, id, body)
   }
 

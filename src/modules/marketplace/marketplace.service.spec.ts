@@ -26,11 +26,20 @@ describe('MarketplaceService', () => {
   })
 
   it('lists only public available marketplace rooms through repository filters', async () => {
-    marketplaceRepository.findMany.mockResolvedValue([[{ id: 1 }], 1])
+    marketplaceRepository.findMany.mockResolvedValue([
+      [
+        {
+          id: 1,
+          tenantId: 10,
+          property: { id: 2, province: 'Ha Noi', addressDetail: 'Private', latitude: 10, longitude: 106 },
+        },
+      ],
+      1,
+    ])
 
     const result = await service.listRooms({ page: 1, limit: 20, province: 'Ha Noi', amenityIds: [1, 2] })
 
-    expect(result.data).toEqual([{ id: 1 }])
+    expect(result.data).toEqual([{ id: 1, property: { id: 2, province: 'Ha Noi' } }])
     expect(marketplaceRepository.findMany).toHaveBeenCalledWith(
       expect.objectContaining({
         deletedAt: null,
@@ -43,6 +52,29 @@ describe('MarketplaceService', () => {
       0,
       20,
     )
+  })
+
+  it('removes tenant identity and precise location from public room responses', async () => {
+    marketplaceRepository.findById.mockResolvedValue({
+      id: 5,
+      tenantId: 10,
+      property: {
+        id: 2,
+        province: 'Ho Chi Minh City',
+        district: 'Thu Duc',
+        ward: 'Linh Trung',
+        addressDetail: '123 Internal Street',
+        latitude: 10.123,
+        longitude: 106.456,
+      },
+    })
+
+    const result = await service.getRoomById(5)
+
+    expect(result).toEqual({
+      id: 5,
+      property: { id: 2, province: 'Ho Chi Minh City', district: 'Thu Duc', ward: 'Linh Trung' },
+    })
   })
 
   it('creates rental request for a valid renter and public room', async () => {

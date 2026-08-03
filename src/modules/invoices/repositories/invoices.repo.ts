@@ -76,7 +76,9 @@ export const debtSelect = {
   resolvedAt: true,
   createdAt: true,
   updatedAt: true,
-  invoice: { select: { id: true, invoiceCode: true, status: true, totalAmount: true, paidAmount: true, debtAmount: true } },
+  invoice: {
+    select: { id: true, invoiceCode: true, status: true, totalAmount: true, paidAmount: true, debtAmount: true },
+  },
   contract: { select: { id: true, contractCode: true, status: true } },
   room: {
     select: {
@@ -147,13 +149,22 @@ export class InvoicesRepository {
   async findMyInvoicesAndCount(userId: number, skip: number, take: number) {
     const where: Prisma.InvoiceWhereInput = { renterId: userId, deletedAt: null }
     return this.prismaService.$transaction([
-      this.prismaService.invoice.findMany({ where, skip, take, orderBy: [{ billingMonth: 'desc' }], select: invoiceSelect }),
+      this.prismaService.invoice.findMany({
+        where,
+        skip,
+        take,
+        orderBy: [{ billingMonth: 'desc' }],
+        select: invoiceSelect,
+      }),
       this.prismaService.invoice.count({ where }),
     ])
   }
 
   async findMyInvoice(userId: number, id: number) {
-    return this.prismaService.invoice.findFirst({ where: { id, renterId: userId, deletedAt: null }, select: invoiceSelect })
+    return this.prismaService.invoice.findFirst({
+      where: { id, renterId: userId, deletedAt: null },
+      select: invoiceSelect,
+    })
   }
 
   async findActiveContractForInvoice(tenantId: number, contractId: number, monthStart: Date, monthEnd: Date) {
@@ -181,7 +192,12 @@ export class InvoicesRepository {
 
   async findExistingInvoiceForContractMonth(contractId: number, billingMonth: Date, excludedInvoiceId?: number) {
     return this.prismaService.invoice.findFirst({
-      where: { contractId, billingMonth, deletedAt: null, ...(excludedInvoiceId ? { id: { not: excludedInvoiceId } } : {}) },
+      where: {
+        contractId,
+        billingMonth,
+        deletedAt: null,
+        ...(excludedInvoiceId ? { id: { not: excludedInvoiceId } } : {}),
+      },
       select: { id: true, invoiceCode: true },
     })
   }
@@ -209,6 +225,35 @@ export class InvoicesRepository {
     })
   }
 
+  findServiceAssignmentsForInvoice(
+    tenantId: number,
+    contractId: number,
+    roomId: number,
+    monthStart: Date,
+    monthEnd: Date,
+  ) {
+    return this.prismaService.serviceAssignment.findMany({
+      where: {
+        tenantId,
+        isActive: true,
+        serviceItem: { isActive: true },
+        OR: [{ contractId }, { roomId }],
+        AND: [
+          { OR: [{ startsAt: null }, { startsAt: { lte: monthEnd } }] },
+          { OR: [{ endsAt: null }, { endsAt: { gte: monthStart } }] },
+        ],
+      },
+      orderBy: { id: 'asc' },
+      select: {
+        id: true,
+        quantity: true,
+        unitPrice: true,
+        serviceItem: {
+          select: { id: true, name: true, itemType: true, defaultUnitPrice: true, unitLabel: true },
+        },
+      },
+    })
+  }
   async isInvoiceCodeTaken(invoiceCode: string) {
     const invoice = await this.prismaService.invoice.findFirst({ where: { invoiceCode }, select: { id: true } })
     return Boolean(invoice)
@@ -232,7 +277,18 @@ export class InvoicesRepository {
           ...invoiceData,
           items: { create: items },
         },
-        select: { id: true, tenantId: true, contractId: true, roomId: true, renterId: true, billingMonth: true, dueDate: true, totalAmount: true, paidAmount: true, debtAmount: true },
+        select: {
+          id: true,
+          tenantId: true,
+          contractId: true,
+          roomId: true,
+          renterId: true,
+          billingMonth: true,
+          dueDate: true,
+          totalAmount: true,
+          paidAmount: true,
+          debtAmount: true,
+        },
       })
 
       await tx.debt.create({
@@ -259,7 +315,12 @@ export class InvoicesRepository {
   /**
    * Replaces editable draft items and keeps the debt snapshot aligned with invoice totals.
    */
-  async updateDraftInvoiceWithDebt(id: number, invoiceData: Prisma.InvoiceUncheckedUpdateInput, items: InvoiceItemDraft[], totals: InvoiceTotals) {
+  async updateDraftInvoiceWithDebt(
+    id: number,
+    invoiceData: Prisma.InvoiceUncheckedUpdateInput,
+    items: InvoiceItemDraft[],
+    totals: InvoiceTotals,
+  ) {
     return this.prismaService.$transaction(async (tx) => {
       await tx.invoiceItem.deleteMany({ where: { invoiceId: id } })
       await tx.invoice.update({
@@ -290,7 +351,10 @@ export class InvoicesRepository {
       await tx.invoice.update({ where: { id }, data: { status: invoiceStatus, updatedById: actorId } })
       await tx.debt.update({
         where: { invoiceId: id },
-        data: { status: debtStatus, resolvedAt: debtStatus === 'PAID' || debtStatus === 'CANCELED' ? new Date() : null },
+        data: {
+          status: debtStatus,
+          resolvedAt: debtStatus === 'PAID' || debtStatus === 'CANCELED' ? new Date() : null,
+        },
       })
       return tx.invoice.findUniqueOrThrow({ where: { id }, select: invoiceSelect })
     })

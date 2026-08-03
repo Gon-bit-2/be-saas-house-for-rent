@@ -1,10 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
+import type { Request } from 'express'
 import roleName from '@src/common/constants/role.constant'
 import { REQUEST_USER_KEY } from '@src/common/constants/auth.constant'
 import { ROLES_KEY } from '@src/common/decorators/decorators/roles.decorator'
 import { AccessTokenPayload } from '@src/common/types/jwt.type'
+
+type RequestWithUser = Request & {
+  [REQUEST_USER_KEY]?: AccessTokenPayload
+}
 
 /**
  * Guard that restricts endpoint access based on user roles.
@@ -38,8 +42,8 @@ export class RolesGuard implements CanActivate {
     if (!requiredRoles) {
       return true
     }
-    const request = context.switchToHttp().getRequest()
-    const user = request[REQUEST_USER_KEY] as AccessTokenPayload
+    const request = context.switchToHttp().getRequest<RequestWithUser>()
+    const user = request[REQUEST_USER_KEY]
 
     if (!user) {
       throw new ForbiddenException('Error.PermissionDenied')

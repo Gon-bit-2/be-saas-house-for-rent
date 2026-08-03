@@ -288,13 +288,13 @@ export type RentalHistoryOrderByWithRelationInput = {
 
 export type RentalHistoryWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  contractId?: number
   AND?: Prisma.RentalHistoryWhereInput | Prisma.RentalHistoryWhereInput[]
   OR?: Prisma.RentalHistoryWhereInput[]
   NOT?: Prisma.RentalHistoryWhereInput | Prisma.RentalHistoryWhereInput[]
   renterId?: Prisma.IntFilter<"RentalHistory"> | number
   tenantId?: Prisma.IntFilter<"RentalHistory"> | number
   roomId?: Prisma.IntFilter<"RentalHistory"> | number
-  contractId?: Prisma.IntFilter<"RentalHistory"> | number
   startedAt?: Prisma.DateTimeFilter<"RentalHistory"> | Date | string
   endedAt?: Prisma.DateTimeNullableFilter<"RentalHistory"> | Date | string | null
   status?: Prisma.EnumRentalHistoryStatusFilter<"RentalHistory"> | $Enums.RentalHistoryStatus
@@ -303,7 +303,7 @@ export type RentalHistoryWhereUniqueInput = Prisma.AtLeast<{
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
-}, "id">
+}, "id" | "contractId">
 
 export type RentalHistoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

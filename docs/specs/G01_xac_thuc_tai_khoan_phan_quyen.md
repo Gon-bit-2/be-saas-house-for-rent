@@ -1,5 +1,7 @@
 # G01 - Đặc tả xác thực, tài khoản và phân quyền
 
+> **Snapshot 31/07/2026:** Auth/OTP/Google OAuth/access-refresh token/profile/RBAC đã có API. OTP được consume atomically trong action cuối; refresh rotation có replay detection; global/auth rate limit, Helmet/CORS và tenant-context revalidation đã được nạp. Cần kiểm chứng multi-node/provider và E2E PostgreSQL trước production.
+
 ## 1. Tổng quan
 
 Tài liệu này mô tả nhóm tính năng G01 của backend: xác thực, tài khoản, OTP, Google OAuth, JWT, refresh token, RBAC và tenant context. Mục tiêu là để người đọc biết cách sử dụng API, biết request nào cần token, request nào cần quyền, và hiểu backend kiểm tra quyền truy cập như thế nào trước khi cho vào nghiệp vụ.

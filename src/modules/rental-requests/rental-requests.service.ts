@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common'
 import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
 import { TenantAccessService } from '@src/shared/modules/services/tenant-access.service'
 import type { Prisma } from 'generated/prisma/client'
@@ -44,7 +44,14 @@ export class RentalRequestsService {
       if (request.room.status !== 'AVAILABLE') {
         throw new BadRequestException('Phòng không còn trống để duyệt yêu cầu thuê')
       }
-      return this.rentalRequestsRepository.approveRequestAndReserveRoom(tenant.tenantId, id, userId)
+      try {
+        return await this.rentalRequestsRepository.approveRequestAndReserveRoom(tenant.tenantId, id, userId)
+      } catch (error) {
+        if (this.isDecisionConflict(error)) {
+          throw new ConflictException('Phòng hoặc yêu cầu thuê đã được xử lý bởi thao tác khác')
+        }
+        throw error
+      }
     }
 
     return this.rentalRequestsRepository.updateRequestStatus(tenant.tenantId, id, body.status, userId)
@@ -57,6 +64,7 @@ export class RentalRequestsService {
   }
 
   async cancelMine(userId: number, id: number, _body: TCancelMyRentalRequestBodySchema) {
+    void _body
     const request = await this.rentalRequestsRepository.findRenterRequest(userId, id)
     if (!request) {
       throw new NotFoundException('Không tìm thấy yêu cầu thuê của bạn')
@@ -75,7 +83,20 @@ export class RentalRequestsService {
     return request
   }
 
-  private buildTenantRequestWhere(tenantId: number, query: TListRentalRequestsQuerySchema): Prisma.RentalRequestWhereInput {
+  private isDecisionConflict(error: unknown) {
+    if (
+      error instanceof Error &&
+      ['ROOM_RESERVATION_CONFLICT', 'RENTAL_REQUEST_DECISION_CONFLICT'].includes(error.message)
+    ) {
+      return true
+    }
+    return Boolean(error && typeof error === 'object' && 'code' in error && String(error.code) === 'P2034')
+  }
+
+  private buildTenantRequestWhere(
+    tenantId: number,
+    query: TListRentalRequestsQuerySchema,
+  ): Prisma.RentalRequestWhereInput {
     return {
       tenantId,
       ...(query.status ? { status: query.status } : {}),

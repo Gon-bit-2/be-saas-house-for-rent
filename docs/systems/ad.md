@@ -1,23 +1,12 @@
-Contract
-Tạo hợp đồng, liên kết phòng/người thuê, cập nhật trạng thái phòng sang đang thuê khi hợp đồng active.
+# Tóm tắt trạng thái và điều hướng
 
-UtilityMeter, MeterReading
-Cấu hình đồng hồ/đơn giá, nhập chỉ số điện nước thủ công. OCR chỉ để sau nếu còn thời gian.
+Trang này chỉ là điểm vào nhanh, không duy trì một roadmap độc lập.
 
-Invoice, InvoiceItem, Debt
-Tạo hóa đơn tháng, tính tiền phòng/điện/nước/dịch vụ, theo dõi paidAmount, totalAmount, trạng thái công nợ.
+- Trạng thái và finding: [Báo cáo tiến độ và an toàn](Bao_cao_danh_gia_tien_do_va_an_toan.md)
+- Phạm vi MVP: [Yêu cầu chức năng](Tai_lieu_yeu_cau_chuc_nang_MVP.md)
+- Kiến trúc runtime: [Mô tả kiến trúc](Mo_ta_kien_truc_he_thong_MVP.md)
+- Ma trận nhóm/backlog: [Task hiện tại](../task/task.md)
+- API: [API reference](../api/API_REFERENCE.md)
+- Toàn bộ tài liệu: [Mục lục](../README.md)
 
-Payment QR thủ công
-Sinh/hiển thị QR, người thuê gửi xác nhận, chủ trọ duyệt thanh toán, cập nhật hóa đơn/công nợ. Webhook giữ schema nhưng chưa kích hoạt.
-
-Ticket, Notification
-Người thuê gửi sự cố, chủ trọ xử lý. Tạo thông báo nội bộ cho hóa đơn, thanh toán, ticket. Push notification thật để sau.
-
-Dashboard
-Làm sau khi đã có dữ liệu thật từ room/contract/invoice/payment/ticket, vì dashboard chỉ là tổng hợp.
-
-Super Admin nâng cao
-Thống kê toàn hệ thống, quản lý marketplace, khóa/mở khóa chủ trọ, xem dữ liệu tổng quan.
-
-Mở rộng sau MVP
-OCR demo, queue/background job, push notification thật, subscription payment thật, payment webhook tự động
+Baseline 31/07/2026: backend build/lint/Prisma validate đạt, 74 suite và 281 unit test pass; 206 API operation; frontend/mobile chưa triển khai.

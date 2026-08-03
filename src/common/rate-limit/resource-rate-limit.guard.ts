@@ -29,11 +29,17 @@ export class ResourceRateLimitGuard implements CanActivate {
     const response = context.switchToHttp().getResponse<Response>()
     const principal = request[REQUEST_USER_KEY]
     const trackerValue = principal?.userId ? `user:${principal.userId}` : `ip:${request.ip || 'unknown'}`
+    const ttl =
+      profile === 'ocr-create'
+        ? envConfig.OCR_RATE_TTL_MS
+        : profile === 'trust-write'
+          ? envConfig.TRUST_WRITE_RATE_TTL_MS
+          : envConfig.TICKET_WRITE_RATE_TTL_MS
     const result = await this.storage.increment(
       `resource:${profile}:${this.digest(trackerValue)}`,
-      envConfig.TICKET_WRITE_RATE_TTL_MS,
+      ttl,
       this.limitFor(profile),
-      envConfig.TICKET_WRITE_RATE_TTL_MS,
+      ttl,
       'resource',
     )
     if (!result.isBlocked) return true
@@ -44,6 +50,7 @@ export class ResourceRateLimitGuard implements CanActivate {
   }
 
   private limitFor(profile: ResourceRateLimitProfile) {
+    if (profile === 'ocr-create') return envConfig.OCR_CREATE_RATE_LIMIT
     if (profile === 'ticket-create') return envConfig.TICKET_CREATE_RATE_LIMIT
     if (profile === 'ticket-comment') return envConfig.TICKET_COMMENT_RATE_LIMIT
     return envConfig.TICKET_ATTACHMENT_RATE_LIMIT

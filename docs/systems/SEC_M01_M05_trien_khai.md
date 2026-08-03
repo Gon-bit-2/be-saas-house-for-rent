@@ -1,26 +1,52 @@
 # Triển khai SEC-M01–SEC-M05
 
-## Thay đổi API
+> Runbook được rà soát lại ngày 31/07/2026. Không chạy lệnh `--apply` trên production trước khi có backup, secret và phê duyệt.
 
-- `POST /auth/verify-otp` đã bị xóa. Mã OTP chỉ được consume trong `POST /auth/register`, `POST /auth/login` hoặc `POST /auth/forgot-password`.
-- Ticket list/detail không còn nhúng `comments` và `attachments`; response trả `commentCount` và `attachmentCount`.
-- Relation ticket được phân trang bằng `page` và `limit` (mặc định 20, tối đa 50):
-  - renter: `GET /tickets/me/:id/comments`, `GET /tickets/me/:id/attachments`;
-  - staff: `GET /tickets/:id/comments`, `GET /tickets/:id/attachments` và bắt buộc `X-Tenant-Id`.
+## 1. Thay đổi API đã áp dụng
 
-## Rollout webhook log
+- `POST /auth/verify-otp` không tồn tại; OTP được consume atomically trong register/login/forgot-password.
+- Ticket list/detail không nhúng toàn bộ comment/attachment; relation có endpoint phân trang riêng.
+- Renter không nhận comment `isInternal=true` hoặc PII staff không cần thiết.
+- Route tenant dùng `x-tenant-id` và đối chiếu membership/status/role hiện hành.
+- API trả error contract có `requestId`; global/resource rate limit có `429`.
 
-1. Cấu hình `PAYMENT_WEBHOOK_LOG_HMAC_SECRET` riêng, tối thiểu 32 ký tự.
-2. Deploy migration `20260722130000_secure_payment_webhook_logs` và code ghi payload đã sanitize.
-3. Chạy `npm run security:preflight-webhook-logs` để lấy số row nhạy cảm và row quá hạn. Lệnh này không thay đổi dữ liệu.
-4. Sau khi duyệt kết quả, chạy `npm run security:sanitize-webhook-logs`. Lệnh xóa log quá 90 ngày và sanitize row còn giữ theo batch resumable.
-5. Xác nhận không còn sensitive JSON path và không còn `payload_digest IS NULL`, rồi tạo migration kế tiếp đặt `payload_digest` và `digest_key_version` thành `NOT NULL`.
+## 2. Các kiểm soát đã triển khai
 
-Không tự động chạy bước 4 trong schema migration vì HMAC secret chỉ tồn tại ở runtime. Các bản backup đã tạo trước khi sanitize vẫn phải được giới hạn quyền truy cập và hết hạn theo chính sách retention.
+| Kiểm soát | Hiện trạng |
+|---|---|
+| Payment approve/reject | Conditional update/transaction, chống duyệt lặp |
+| PayOS webhook | Provider reference unique/idempotent, payload sanitize |
+| OTP | Atomic consume và giới hạn attempt |
+| Refresh token | Rotation/replay detection |
+| Auth/resource rate limit | Redis-backed profiles |
+| HTTP hardening | Helmet, CORS allowlist, timeout Google |
+| Ticket relation | Tách endpoint, pagination/hard cap |
 
-## Cấu hình vận hành
+## 3. Rollout webhook log
 
-- Production bắt buộc có `CORS_ORIGINS` gồm các origin HTTP(S) chính xác; wildcard và origin có path bị từ chối khi startup.
-- Helmet bật HSTS ở production, không bật preload. CORS không dùng credentials và chỉ expose `Retry-After`.
-- Google token exchange có timeout 5 giây và không retry; userinfo timeout 3 giây, retry tối đa một lần cho `429/502/503/504`.
-- Ticket write limiter dùng Redis, mặc định theo user: create 10/giờ, comment 60/giờ, attachment 30/giờ. Hard cap mặc định là 500 comments và 50 attachments mỗi ticket.
+1. Cấp `PAYMENT_WEBHOOK_LOG_HMAC_SECRET` riêng, tối thiểu theo validation trong `env.config.ts`.
+2. Deploy migration `20260722130000_secure_payment_webhook_logs` và các migration mới hơn.
+3. Chạy `npm run security:preflight-webhook-logs`; lệnh chỉ thống kê row nhạy cảm/quá hạn.
+4. Kiểm tra backup, retention và kết quả preflight.
+5. Khi được phê duyệt, chạy `npm run security:sanitize-webhook-logs` theo batch resumable.
+6. Xác nhận không còn field nhạy cảm, digest thiếu hoặc row quá retention.
+7. Giới hạn/quay vòng backup cũ vì migration không thể sanitize backup ngoại tuyến.
+
+## 4. Cấu hình production
+
+- `CORS_ORIGINS`: origin HTTP(S) chính xác; không wildcard/path.
+- `TRUST_PROXY_HOPS`: chỉ đặt theo reverse proxy thực tế.
+- Redis: bắt buộc cho throttling/queue; bảo vệ bằng network policy và credential.
+- PayOS/Google/Firebase/Cloudinary/Resend: credential qua secret manager.
+- Log: không ghi access token, OTP, raw webhook PII hoặc service-account.
+
+## 5. Xác minh sau deploy
+
+- Health/API docs truy cập theo policy.
+- Auth bị rate-limit đúng và không enumeration.
+- Tenant A không đọc/sửa resource tenant B.
+- Webhook trùng không tạo payment/cộng công nợ lần hai.
+- Ticket renter không thấy internal comment.
+- Queue retry không tạo notification/OCR result trùng.
+
+Các kiểm tra concurrency và provider phải chạy trên staging; unit test không thay thế PostgreSQL/Redis/integration test thật.

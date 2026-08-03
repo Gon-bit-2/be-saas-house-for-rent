@@ -46,6 +46,14 @@ export class PlansRepository {
     })
   }
 
+  async findAvailable() {
+    return this.prismaService.plan.findMany({
+      where: { isActive: true },
+      orderBy: [{ priceMonthly: 'asc' }, { id: 'asc' }],
+      select: planSelect,
+    })
+  }
+
   async findByCode(code: string) {
     return this.prismaService.plan.findUnique({
       where: { code },

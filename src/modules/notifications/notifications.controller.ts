@@ -1,7 +1,11 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
-import { EmptyNotificationBodyDTO, ListNotificationsQueryDTO, RegisterDeviceTokenBodyDTO } from './dto/notifications.dto'
+import {
+  EmptyNotificationBodyDTO,
+  ListNotificationsQueryDTO,
+  RegisterDeviceTokenBodyDTO,
+} from './dto/notifications.dto'
 import { NotificationsService } from './notifications.service'
 
 @Controller()
@@ -24,16 +28,19 @@ export class NotificationsController {
     @Param('id', ParseIntPipe) id: number,
     @Body() _body: EmptyNotificationBodyDTO,
   ) {
+    void _body
     return this.notificationsService.markRead(user.userId, id)
   }
 
   @Patch('notifications/read-all')
   markAllRead(@ActiveUser() user: AccessTokenPayload, @Body() _body: EmptyNotificationBodyDTO) {
+    void _body
     return this.notificationsService.markAllRead(user.userId)
   }
 
   @Post('notifications/test')
   sendTest(@ActiveUser() user: AccessTokenPayload, @Body() _body: EmptyNotificationBodyDTO) {
+    void _body
     return this.notificationsService.sendTest(user.userId)
   }
 

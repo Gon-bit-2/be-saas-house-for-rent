@@ -14,4 +14,3 @@ import { InvoicesRepository } from './repositories/invoices.repo'
   providers: [InvoicesService, InvoicesRepository],
 })
 export class InvoicesModule {}
-

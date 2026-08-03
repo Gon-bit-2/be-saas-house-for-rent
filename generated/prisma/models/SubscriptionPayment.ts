@@ -31,6 +31,9 @@ export type SubscriptionPaymentAvgAggregateOutputType = {
   subscriptionId: number | null
   tenantId: number | null
   amount: runtime.Decimal | null
+  orderCode: number | null
+  createdById: number | null
+  updatedById: number | null
 }
 
 export type SubscriptionPaymentSumAggregateOutputType = {
@@ -38,42 +41,78 @@ export type SubscriptionPaymentSumAggregateOutputType = {
   subscriptionId: number | null
   tenantId: number | null
   amount: runtime.Decimal | null
+  orderCode: number | null
+  createdById: number | null
+  updatedById: number | null
 }
 
 export type SubscriptionPaymentMinAggregateOutputType = {
   id: number | null
   subscriptionId: number | null
   tenantId: number | null
+  purpose: $Enums.SubscriptionPaymentPurpose | null
   amount: runtime.Decimal | null
   paymentMethod: string | null
+  provider: string | null
+  orderCode: number | null
+  paymentLinkId: string | null
+  checkoutUrl: string | null
+  qrContent: string | null
+  providerStatus: string | null
   transactionCode: string | null
   status: $Enums.SubscriptionPaymentStatus | null
   paidAt: Date | null
+  expiredAt: Date | null
   createdAt: Date | null
+  updatedAt: Date | null
+  createdById: number | null
+  updatedById: number | null
 }
 
 export type SubscriptionPaymentMaxAggregateOutputType = {
   id: number | null
   subscriptionId: number | null
   tenantId: number | null
+  purpose: $Enums.SubscriptionPaymentPurpose | null
   amount: runtime.Decimal | null
   paymentMethod: string | null
+  provider: string | null
+  orderCode: number | null
+  paymentLinkId: string | null
+  checkoutUrl: string | null
+  qrContent: string | null
+  providerStatus: string | null
   transactionCode: string | null
   status: $Enums.SubscriptionPaymentStatus | null
   paidAt: Date | null
+  expiredAt: Date | null
   createdAt: Date | null
+  updatedAt: Date | null
+  createdById: number | null
+  updatedById: number | null
 }
 
 export type SubscriptionPaymentCountAggregateOutputType = {
   id: number
   subscriptionId: number
   tenantId: number
+  purpose: number
   amount: number
   paymentMethod: number
+  provider: number
+  orderCode: number
+  paymentLinkId: number
+  checkoutUrl: number
+  qrContent: number
+  providerStatus: number
   transactionCode: number
   status: number
   paidAt: number
+  expiredAt: number
   createdAt: number
+  updatedAt: number
+  createdById: number
+  updatedById: number
   _all: number
 }
 
@@ -83,6 +122,9 @@ export type SubscriptionPaymentAvgAggregateInputType = {
   subscriptionId?: true
   tenantId?: true
   amount?: true
+  orderCode?: true
+  createdById?: true
+  updatedById?: true
 }
 
 export type SubscriptionPaymentSumAggregateInputType = {
@@ -90,42 +132,78 @@ export type SubscriptionPaymentSumAggregateInputType = {
   subscriptionId?: true
   tenantId?: true
   amount?: true
+  orderCode?: true
+  createdById?: true
+  updatedById?: true
 }
 
 export type SubscriptionPaymentMinAggregateInputType = {
   id?: true
   subscriptionId?: true
   tenantId?: true
+  purpose?: true
   amount?: true
   paymentMethod?: true
+  provider?: true
+  orderCode?: true
+  paymentLinkId?: true
+  checkoutUrl?: true
+  qrContent?: true
+  providerStatus?: true
   transactionCode?: true
   status?: true
   paidAt?: true
+  expiredAt?: true
   createdAt?: true
+  updatedAt?: true
+  createdById?: true
+  updatedById?: true
 }
 
 export type SubscriptionPaymentMaxAggregateInputType = {
   id?: true
   subscriptionId?: true
   tenantId?: true
+  purpose?: true
   amount?: true
   paymentMethod?: true
+  provider?: true
+  orderCode?: true
+  paymentLinkId?: true
+  checkoutUrl?: true
+  qrContent?: true
+  providerStatus?: true
   transactionCode?: true
   status?: true
   paidAt?: true
+  expiredAt?: true
   createdAt?: true
+  updatedAt?: true
+  createdById?: true
+  updatedById?: true
 }
 
 export type SubscriptionPaymentCountAggregateInputType = {
   id?: true
   subscriptionId?: true
   tenantId?: true
+  purpose?: true
   amount?: true
   paymentMethod?: true
+  provider?: true
+  orderCode?: true
+  paymentLinkId?: true
+  checkoutUrl?: true
+  qrContent?: true
+  providerStatus?: true
   transactionCode?: true
   status?: true
   paidAt?: true
+  expiredAt?: true
   createdAt?: true
+  updatedAt?: true
+  createdById?: true
+  updatedById?: true
   _all?: true
 }
 
@@ -219,12 +297,23 @@ export type SubscriptionPaymentGroupByOutputType = {
   id: number
   subscriptionId: number
   tenantId: number
+  purpose: $Enums.SubscriptionPaymentPurpose
   amount: runtime.Decimal
   paymentMethod: string
+  provider: string
+  orderCode: number | null
+  paymentLinkId: string | null
+  checkoutUrl: string | null
+  qrContent: string | null
+  providerStatus: string | null
   transactionCode: string | null
   status: $Enums.SubscriptionPaymentStatus
   paidAt: Date | null
+  expiredAt: Date | null
   createdAt: Date
+  updatedAt: Date
+  createdById: number | null
+  updatedById: number | null
   _count: SubscriptionPaymentCountAggregateOutputType | null
   _avg: SubscriptionPaymentAvgAggregateOutputType | null
   _sum: SubscriptionPaymentSumAggregateOutputType | null
@@ -254,57 +343,111 @@ export type SubscriptionPaymentWhereInput = {
   id?: Prisma.IntFilter<"SubscriptionPayment"> | number
   subscriptionId?: Prisma.IntFilter<"SubscriptionPayment"> | number
   tenantId?: Prisma.IntFilter<"SubscriptionPayment"> | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFilter<"SubscriptionPayment"> | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFilter<"SubscriptionPayment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFilter<"SubscriptionPayment"> | string
+  provider?: Prisma.StringFilter<"SubscriptionPayment"> | string
+  orderCode?: Prisma.IntNullableFilter<"SubscriptionPayment"> | number | null
+  paymentLinkId?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
+  checkoutUrl?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
+  qrContent?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
+  providerStatus?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
   transactionCode?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFilter<"SubscriptionPayment"> | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.DateTimeNullableFilter<"SubscriptionPayment"> | Date | string | null
+  expiredAt?: Prisma.DateTimeNullableFilter<"SubscriptionPayment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"SubscriptionPayment"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"SubscriptionPayment"> | Date | string
+  createdById?: Prisma.IntNullableFilter<"SubscriptionPayment"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"SubscriptionPayment"> | number | null
   subscription?: Prisma.XOR<Prisma.SubscriptionScalarRelationFilter, Prisma.SubscriptionWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  webhookLogs?: Prisma.PaymentWebhookLogListRelationFilter
 }
 
 export type SubscriptionPaymentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  purpose?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
+  provider?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentLinkId?: Prisma.SortOrderInput | Prisma.SortOrder
+  checkoutUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  qrContent?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   transactionCode?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  expiredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   subscription?: Prisma.SubscriptionOrderByWithRelationInput
   tenant?: Prisma.TenantOrderByWithRelationInput
+  createdBy?: Prisma.UserOrderByWithRelationInput
+  updatedBy?: Prisma.UserOrderByWithRelationInput
+  webhookLogs?: Prisma.PaymentWebhookLogOrderByRelationAggregateInput
 }
 
 export type SubscriptionPaymentWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  orderCode?: number
+  paymentLinkId?: string
+  provider_transactionCode?: Prisma.SubscriptionPaymentProviderTransactionCodeCompoundUniqueInput
   AND?: Prisma.SubscriptionPaymentWhereInput | Prisma.SubscriptionPaymentWhereInput[]
   OR?: Prisma.SubscriptionPaymentWhereInput[]
   NOT?: Prisma.SubscriptionPaymentWhereInput | Prisma.SubscriptionPaymentWhereInput[]
   subscriptionId?: Prisma.IntFilter<"SubscriptionPayment"> | number
   tenantId?: Prisma.IntFilter<"SubscriptionPayment"> | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFilter<"SubscriptionPayment"> | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFilter<"SubscriptionPayment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFilter<"SubscriptionPayment"> | string
+  provider?: Prisma.StringFilter<"SubscriptionPayment"> | string
+  checkoutUrl?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
+  qrContent?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
+  providerStatus?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
   transactionCode?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFilter<"SubscriptionPayment"> | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.DateTimeNullableFilter<"SubscriptionPayment"> | Date | string | null
+  expiredAt?: Prisma.DateTimeNullableFilter<"SubscriptionPayment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"SubscriptionPayment"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"SubscriptionPayment"> | Date | string
+  createdById?: Prisma.IntNullableFilter<"SubscriptionPayment"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"SubscriptionPayment"> | number | null
   subscription?: Prisma.XOR<Prisma.SubscriptionScalarRelationFilter, Prisma.SubscriptionWhereInput>
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
-}, "id">
+  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  webhookLogs?: Prisma.PaymentWebhookLogListRelationFilter
+}, "id" | "orderCode" | "paymentLinkId" | "provider_transactionCode">
 
 export type SubscriptionPaymentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  purpose?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
+  provider?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentLinkId?: Prisma.SortOrderInput | Prisma.SortOrder
+  checkoutUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  qrContent?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   transactionCode?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  expiredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SubscriptionPaymentCountOrderByAggregateInput
   _avg?: Prisma.SubscriptionPaymentAvgOrderByAggregateInput
   _max?: Prisma.SubscriptionPaymentMaxOrderByAggregateInput
@@ -319,91 +462,181 @@ export type SubscriptionPaymentScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"SubscriptionPayment"> | number
   subscriptionId?: Prisma.IntWithAggregatesFilter<"SubscriptionPayment"> | number
   tenantId?: Prisma.IntWithAggregatesFilter<"SubscriptionPayment"> | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeWithAggregatesFilter<"SubscriptionPayment"> | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalWithAggregatesFilter<"SubscriptionPayment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringWithAggregatesFilter<"SubscriptionPayment"> | string
+  provider?: Prisma.StringWithAggregatesFilter<"SubscriptionPayment"> | string
+  orderCode?: Prisma.IntNullableWithAggregatesFilter<"SubscriptionPayment"> | number | null
+  paymentLinkId?: Prisma.StringNullableWithAggregatesFilter<"SubscriptionPayment"> | string | null
+  checkoutUrl?: Prisma.StringNullableWithAggregatesFilter<"SubscriptionPayment"> | string | null
+  qrContent?: Prisma.StringNullableWithAggregatesFilter<"SubscriptionPayment"> | string | null
+  providerStatus?: Prisma.StringNullableWithAggregatesFilter<"SubscriptionPayment"> | string | null
   transactionCode?: Prisma.StringNullableWithAggregatesFilter<"SubscriptionPayment"> | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusWithAggregatesFilter<"SubscriptionPayment"> | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SubscriptionPayment"> | Date | string | null
+  expiredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SubscriptionPayment"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SubscriptionPayment"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SubscriptionPayment"> | Date | string
+  createdById?: Prisma.IntNullableWithAggregatesFilter<"SubscriptionPayment"> | number | null
+  updatedById?: Prisma.IntNullableWithAggregatesFilter<"SubscriptionPayment"> | number | null
 }
 
 export type SubscriptionPaymentCreateInput = {
+  purpose?: $Enums.SubscriptionPaymentPurpose
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
   transactionCode?: string | null
   status?: $Enums.SubscriptionPaymentStatus
   paidAt?: Date | string | null
+  expiredAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   subscription: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
   tenant: Prisma.TenantCreateNestedOneWithoutSubscriptionPaymentsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedSubscriptionPaymentsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedSubscriptionPaymentsInput
+  webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutSubscriptionPaymentInput
 }
 
 export type SubscriptionPaymentUncheckedCreateInput = {
   id?: number
   subscriptionId: number
   tenantId: number
+  purpose?: $Enums.SubscriptionPaymentPurpose
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
   transactionCode?: string | null
   status?: $Enums.SubscriptionPaymentStatus
   paidAt?: Date | string | null
+  expiredAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutSubscriptionPaymentInput
 }
 
 export type SubscriptionPaymentUpdateInput = {
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscription?: Prisma.SubscriptionUpdateOneRequiredWithoutPaymentsNestedInput
   tenant?: Prisma.TenantUpdateOneRequiredWithoutSubscriptionPaymentsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedSubscriptionPaymentsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedSubscriptionPaymentsNestedInput
+  webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutSubscriptionPaymentNestedInput
 }
 
 export type SubscriptionPaymentUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutSubscriptionPaymentNestedInput
 }
 
 export type SubscriptionPaymentCreateManyInput = {
   id?: number
   subscriptionId: number
   tenantId: number
+  purpose?: $Enums.SubscriptionPaymentPurpose
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
   transactionCode?: string | null
   status?: $Enums.SubscriptionPaymentStatus
   paidAt?: Date | string | null
+  expiredAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type SubscriptionPaymentUpdateManyMutationInput = {
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SubscriptionPaymentUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type SubscriptionPaymentListRelationFilter = {
@@ -416,16 +649,32 @@ export type SubscriptionPaymentOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type SubscriptionPaymentProviderTransactionCodeCompoundUniqueInput = {
+  provider: string
+  transactionCode: string
+}
+
 export type SubscriptionPaymentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  purpose?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
+  provider?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrder
+  paymentLinkId?: Prisma.SortOrder
+  checkoutUrl?: Prisma.SortOrder
+  qrContent?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrder
   transactionCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
+  expiredAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
 }
 
 export type SubscriptionPaymentAvgOrderByAggregateInput = {
@@ -433,30 +682,55 @@ export type SubscriptionPaymentAvgOrderByAggregateInput = {
   subscriptionId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
 }
 
 export type SubscriptionPaymentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  purpose?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
+  provider?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrder
+  paymentLinkId?: Prisma.SortOrder
+  checkoutUrl?: Prisma.SortOrder
+  qrContent?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrder
   transactionCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
+  expiredAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
 }
 
 export type SubscriptionPaymentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   subscriptionId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
+  purpose?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
+  provider?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrder
+  paymentLinkId?: Prisma.SortOrder
+  checkoutUrl?: Prisma.SortOrder
+  qrContent?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrder
   transactionCode?: Prisma.SortOrder
   status?: Prisma.SortOrder
   paidAt?: Prisma.SortOrder
+  expiredAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
 }
 
 export type SubscriptionPaymentSumOrderByAggregateInput = {
@@ -464,6 +738,98 @@ export type SubscriptionPaymentSumOrderByAggregateInput = {
   subscriptionId?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  orderCode?: Prisma.SortOrder
+  createdById?: Prisma.SortOrder
+  updatedById?: Prisma.SortOrder
+}
+
+export type SubscriptionPaymentNullableScalarRelationFilter = {
+  is?: Prisma.SubscriptionPaymentWhereInput | null
+  isNot?: Prisma.SubscriptionPaymentWhereInput | null
+}
+
+export type SubscriptionPaymentCreateNestedManyWithoutCreatedByInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutCreatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutCreatedByInput> | Prisma.SubscriptionPaymentCreateWithoutCreatedByInput[] | Prisma.SubscriptionPaymentUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.SubscriptionPaymentCreateOrConnectWithoutCreatedByInput | Prisma.SubscriptionPaymentCreateOrConnectWithoutCreatedByInput[]
+  createMany?: Prisma.SubscriptionPaymentCreateManyCreatedByInputEnvelope
+  connect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+}
+
+export type SubscriptionPaymentCreateNestedManyWithoutUpdatedByInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutUpdatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutUpdatedByInput> | Prisma.SubscriptionPaymentCreateWithoutUpdatedByInput[] | Prisma.SubscriptionPaymentUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.SubscriptionPaymentCreateOrConnectWithoutUpdatedByInput | Prisma.SubscriptionPaymentCreateOrConnectWithoutUpdatedByInput[]
+  createMany?: Prisma.SubscriptionPaymentCreateManyUpdatedByInputEnvelope
+  connect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+}
+
+export type SubscriptionPaymentUncheckedCreateNestedManyWithoutCreatedByInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutCreatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutCreatedByInput> | Prisma.SubscriptionPaymentCreateWithoutCreatedByInput[] | Prisma.SubscriptionPaymentUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.SubscriptionPaymentCreateOrConnectWithoutCreatedByInput | Prisma.SubscriptionPaymentCreateOrConnectWithoutCreatedByInput[]
+  createMany?: Prisma.SubscriptionPaymentCreateManyCreatedByInputEnvelope
+  connect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+}
+
+export type SubscriptionPaymentUncheckedCreateNestedManyWithoutUpdatedByInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutUpdatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutUpdatedByInput> | Prisma.SubscriptionPaymentCreateWithoutUpdatedByInput[] | Prisma.SubscriptionPaymentUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.SubscriptionPaymentCreateOrConnectWithoutUpdatedByInput | Prisma.SubscriptionPaymentCreateOrConnectWithoutUpdatedByInput[]
+  createMany?: Prisma.SubscriptionPaymentCreateManyUpdatedByInputEnvelope
+  connect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+}
+
+export type SubscriptionPaymentUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutCreatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutCreatedByInput> | Prisma.SubscriptionPaymentCreateWithoutCreatedByInput[] | Prisma.SubscriptionPaymentUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.SubscriptionPaymentCreateOrConnectWithoutCreatedByInput | Prisma.SubscriptionPaymentCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.SubscriptionPaymentUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.SubscriptionPaymentUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.SubscriptionPaymentCreateManyCreatedByInputEnvelope
+  set?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  disconnect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  delete?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  connect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  update?: Prisma.SubscriptionPaymentUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.SubscriptionPaymentUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.SubscriptionPaymentUpdateManyWithWhereWithoutCreatedByInput | Prisma.SubscriptionPaymentUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.SubscriptionPaymentScalarWhereInput | Prisma.SubscriptionPaymentScalarWhereInput[]
+}
+
+export type SubscriptionPaymentUpdateManyWithoutUpdatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutUpdatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutUpdatedByInput> | Prisma.SubscriptionPaymentCreateWithoutUpdatedByInput[] | Prisma.SubscriptionPaymentUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.SubscriptionPaymentCreateOrConnectWithoutUpdatedByInput | Prisma.SubscriptionPaymentCreateOrConnectWithoutUpdatedByInput[]
+  upsert?: Prisma.SubscriptionPaymentUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.SubscriptionPaymentUpsertWithWhereUniqueWithoutUpdatedByInput[]
+  createMany?: Prisma.SubscriptionPaymentCreateManyUpdatedByInputEnvelope
+  set?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  disconnect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  delete?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  connect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  update?: Prisma.SubscriptionPaymentUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.SubscriptionPaymentUpdateWithWhereUniqueWithoutUpdatedByInput[]
+  updateMany?: Prisma.SubscriptionPaymentUpdateManyWithWhereWithoutUpdatedByInput | Prisma.SubscriptionPaymentUpdateManyWithWhereWithoutUpdatedByInput[]
+  deleteMany?: Prisma.SubscriptionPaymentScalarWhereInput | Prisma.SubscriptionPaymentScalarWhereInput[]
+}
+
+export type SubscriptionPaymentUncheckedUpdateManyWithoutCreatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutCreatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutCreatedByInput> | Prisma.SubscriptionPaymentCreateWithoutCreatedByInput[] | Prisma.SubscriptionPaymentUncheckedCreateWithoutCreatedByInput[]
+  connectOrCreate?: Prisma.SubscriptionPaymentCreateOrConnectWithoutCreatedByInput | Prisma.SubscriptionPaymentCreateOrConnectWithoutCreatedByInput[]
+  upsert?: Prisma.SubscriptionPaymentUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.SubscriptionPaymentUpsertWithWhereUniqueWithoutCreatedByInput[]
+  createMany?: Prisma.SubscriptionPaymentCreateManyCreatedByInputEnvelope
+  set?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  disconnect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  delete?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  connect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  update?: Prisma.SubscriptionPaymentUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.SubscriptionPaymentUpdateWithWhereUniqueWithoutCreatedByInput[]
+  updateMany?: Prisma.SubscriptionPaymentUpdateManyWithWhereWithoutCreatedByInput | Prisma.SubscriptionPaymentUpdateManyWithWhereWithoutCreatedByInput[]
+  deleteMany?: Prisma.SubscriptionPaymentScalarWhereInput | Prisma.SubscriptionPaymentScalarWhereInput[]
+}
+
+export type SubscriptionPaymentUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutUpdatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutUpdatedByInput> | Prisma.SubscriptionPaymentCreateWithoutUpdatedByInput[] | Prisma.SubscriptionPaymentUncheckedCreateWithoutUpdatedByInput[]
+  connectOrCreate?: Prisma.SubscriptionPaymentCreateOrConnectWithoutUpdatedByInput | Prisma.SubscriptionPaymentCreateOrConnectWithoutUpdatedByInput[]
+  upsert?: Prisma.SubscriptionPaymentUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.SubscriptionPaymentUpsertWithWhereUniqueWithoutUpdatedByInput[]
+  createMany?: Prisma.SubscriptionPaymentCreateManyUpdatedByInputEnvelope
+  set?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  disconnect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  delete?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  connect?: Prisma.SubscriptionPaymentWhereUniqueInput | Prisma.SubscriptionPaymentWhereUniqueInput[]
+  update?: Prisma.SubscriptionPaymentUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.SubscriptionPaymentUpdateWithWhereUniqueWithoutUpdatedByInput[]
+  updateMany?: Prisma.SubscriptionPaymentUpdateManyWithWhereWithoutUpdatedByInput | Prisma.SubscriptionPaymentUpdateManyWithWhereWithoutUpdatedByInput[]
+  deleteMany?: Prisma.SubscriptionPaymentScalarWhereInput | Prisma.SubscriptionPaymentScalarWhereInput[]
 }
 
 export type SubscriptionPaymentCreateNestedManyWithoutTenantInput = {
@@ -550,29 +916,241 @@ export type SubscriptionPaymentUncheckedUpdateManyWithoutSubscriptionNestedInput
   deleteMany?: Prisma.SubscriptionPaymentScalarWhereInput | Prisma.SubscriptionPaymentScalarWhereInput[]
 }
 
+export type EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput = {
+  set?: $Enums.SubscriptionPaymentPurpose
+}
+
 export type EnumSubscriptionPaymentStatusFieldUpdateOperationsInput = {
   set?: $Enums.SubscriptionPaymentStatus
 }
 
-export type SubscriptionPaymentCreateWithoutTenantInput = {
+export type SubscriptionPaymentCreateNestedOneWithoutWebhookLogsInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutWebhookLogsInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutWebhookLogsInput>
+  connectOrCreate?: Prisma.SubscriptionPaymentCreateOrConnectWithoutWebhookLogsInput
+  connect?: Prisma.SubscriptionPaymentWhereUniqueInput
+}
+
+export type SubscriptionPaymentUpdateOneWithoutWebhookLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutWebhookLogsInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutWebhookLogsInput>
+  connectOrCreate?: Prisma.SubscriptionPaymentCreateOrConnectWithoutWebhookLogsInput
+  upsert?: Prisma.SubscriptionPaymentUpsertWithoutWebhookLogsInput
+  disconnect?: Prisma.SubscriptionPaymentWhereInput | boolean
+  delete?: Prisma.SubscriptionPaymentWhereInput | boolean
+  connect?: Prisma.SubscriptionPaymentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SubscriptionPaymentUpdateToOneWithWhereWithoutWebhookLogsInput, Prisma.SubscriptionPaymentUpdateWithoutWebhookLogsInput>, Prisma.SubscriptionPaymentUncheckedUpdateWithoutWebhookLogsInput>
+}
+
+export type SubscriptionPaymentCreateWithoutCreatedByInput = {
+  purpose?: $Enums.SubscriptionPaymentPurpose
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
   transactionCode?: string | null
   status?: $Enums.SubscriptionPaymentStatus
   paidAt?: Date | string | null
+  expiredAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   subscription: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
+  tenant: Prisma.TenantCreateNestedOneWithoutSubscriptionPaymentsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedSubscriptionPaymentsInput
+  webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutSubscriptionPaymentInput
+}
+
+export type SubscriptionPaymentUncheckedCreateWithoutCreatedByInput = {
+  id?: number
+  subscriptionId: number
+  tenantId: number
+  purpose?: $Enums.SubscriptionPaymentPurpose
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
+  transactionCode?: string | null
+  status?: $Enums.SubscriptionPaymentStatus
+  paidAt?: Date | string | null
+  expiredAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  updatedById?: number | null
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutSubscriptionPaymentInput
+}
+
+export type SubscriptionPaymentCreateOrConnectWithoutCreatedByInput = {
+  where: Prisma.SubscriptionPaymentWhereUniqueInput
+  create: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutCreatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutCreatedByInput>
+}
+
+export type SubscriptionPaymentCreateManyCreatedByInputEnvelope = {
+  data: Prisma.SubscriptionPaymentCreateManyCreatedByInput | Prisma.SubscriptionPaymentCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type SubscriptionPaymentCreateWithoutUpdatedByInput = {
+  purpose?: $Enums.SubscriptionPaymentPurpose
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
+  transactionCode?: string | null
+  status?: $Enums.SubscriptionPaymentStatus
+  paidAt?: Date | string | null
+  expiredAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  subscription: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
+  tenant: Prisma.TenantCreateNestedOneWithoutSubscriptionPaymentsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedSubscriptionPaymentsInput
+  webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutSubscriptionPaymentInput
+}
+
+export type SubscriptionPaymentUncheckedCreateWithoutUpdatedByInput = {
+  id?: number
+  subscriptionId: number
+  tenantId: number
+  purpose?: $Enums.SubscriptionPaymentPurpose
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
+  transactionCode?: string | null
+  status?: $Enums.SubscriptionPaymentStatus
+  paidAt?: Date | string | null
+  expiredAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutSubscriptionPaymentInput
+}
+
+export type SubscriptionPaymentCreateOrConnectWithoutUpdatedByInput = {
+  where: Prisma.SubscriptionPaymentWhereUniqueInput
+  create: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutUpdatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutUpdatedByInput>
+}
+
+export type SubscriptionPaymentCreateManyUpdatedByInputEnvelope = {
+  data: Prisma.SubscriptionPaymentCreateManyUpdatedByInput | Prisma.SubscriptionPaymentCreateManyUpdatedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type SubscriptionPaymentUpsertWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.SubscriptionPaymentWhereUniqueInput
+  update: Prisma.XOR<Prisma.SubscriptionPaymentUpdateWithoutCreatedByInput, Prisma.SubscriptionPaymentUncheckedUpdateWithoutCreatedByInput>
+  create: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutCreatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutCreatedByInput>
+}
+
+export type SubscriptionPaymentUpdateWithWhereUniqueWithoutCreatedByInput = {
+  where: Prisma.SubscriptionPaymentWhereUniqueInput
+  data: Prisma.XOR<Prisma.SubscriptionPaymentUpdateWithoutCreatedByInput, Prisma.SubscriptionPaymentUncheckedUpdateWithoutCreatedByInput>
+}
+
+export type SubscriptionPaymentUpdateManyWithWhereWithoutCreatedByInput = {
+  where: Prisma.SubscriptionPaymentScalarWhereInput
+  data: Prisma.XOR<Prisma.SubscriptionPaymentUpdateManyMutationInput, Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutCreatedByInput>
+}
+
+export type SubscriptionPaymentScalarWhereInput = {
+  AND?: Prisma.SubscriptionPaymentScalarWhereInput | Prisma.SubscriptionPaymentScalarWhereInput[]
+  OR?: Prisma.SubscriptionPaymentScalarWhereInput[]
+  NOT?: Prisma.SubscriptionPaymentScalarWhereInput | Prisma.SubscriptionPaymentScalarWhereInput[]
+  id?: Prisma.IntFilter<"SubscriptionPayment"> | number
+  subscriptionId?: Prisma.IntFilter<"SubscriptionPayment"> | number
+  tenantId?: Prisma.IntFilter<"SubscriptionPayment"> | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFilter<"SubscriptionPayment"> | $Enums.SubscriptionPaymentPurpose
+  amount?: Prisma.DecimalFilter<"SubscriptionPayment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: Prisma.StringFilter<"SubscriptionPayment"> | string
+  provider?: Prisma.StringFilter<"SubscriptionPayment"> | string
+  orderCode?: Prisma.IntNullableFilter<"SubscriptionPayment"> | number | null
+  paymentLinkId?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
+  checkoutUrl?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
+  qrContent?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
+  providerStatus?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
+  transactionCode?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
+  status?: Prisma.EnumSubscriptionPaymentStatusFilter<"SubscriptionPayment"> | $Enums.SubscriptionPaymentStatus
+  paidAt?: Prisma.DateTimeNullableFilter<"SubscriptionPayment"> | Date | string | null
+  expiredAt?: Prisma.DateTimeNullableFilter<"SubscriptionPayment"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"SubscriptionPayment"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"SubscriptionPayment"> | Date | string
+  createdById?: Prisma.IntNullableFilter<"SubscriptionPayment"> | number | null
+  updatedById?: Prisma.IntNullableFilter<"SubscriptionPayment"> | number | null
+}
+
+export type SubscriptionPaymentUpsertWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.SubscriptionPaymentWhereUniqueInput
+  update: Prisma.XOR<Prisma.SubscriptionPaymentUpdateWithoutUpdatedByInput, Prisma.SubscriptionPaymentUncheckedUpdateWithoutUpdatedByInput>
+  create: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutUpdatedByInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutUpdatedByInput>
+}
+
+export type SubscriptionPaymentUpdateWithWhereUniqueWithoutUpdatedByInput = {
+  where: Prisma.SubscriptionPaymentWhereUniqueInput
+  data: Prisma.XOR<Prisma.SubscriptionPaymentUpdateWithoutUpdatedByInput, Prisma.SubscriptionPaymentUncheckedUpdateWithoutUpdatedByInput>
+}
+
+export type SubscriptionPaymentUpdateManyWithWhereWithoutUpdatedByInput = {
+  where: Prisma.SubscriptionPaymentScalarWhereInput
+  data: Prisma.XOR<Prisma.SubscriptionPaymentUpdateManyMutationInput, Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutUpdatedByInput>
+}
+
+export type SubscriptionPaymentCreateWithoutTenantInput = {
+  purpose?: $Enums.SubscriptionPaymentPurpose
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
+  transactionCode?: string | null
+  status?: $Enums.SubscriptionPaymentStatus
+  paidAt?: Date | string | null
+  expiredAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  subscription: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedSubscriptionPaymentsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedSubscriptionPaymentsInput
+  webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutSubscriptionPaymentInput
 }
 
 export type SubscriptionPaymentUncheckedCreateWithoutTenantInput = {
   id?: number
   subscriptionId: number
+  purpose?: $Enums.SubscriptionPaymentPurpose
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
   transactionCode?: string | null
   status?: $Enums.SubscriptionPaymentStatus
   paidAt?: Date | string | null
+  expiredAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutSubscriptionPaymentInput
 }
 
 export type SubscriptionPaymentCreateOrConnectWithoutTenantInput = {
@@ -601,40 +1179,48 @@ export type SubscriptionPaymentUpdateManyWithWhereWithoutTenantInput = {
   data: Prisma.XOR<Prisma.SubscriptionPaymentUpdateManyMutationInput, Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantInput>
 }
 
-export type SubscriptionPaymentScalarWhereInput = {
-  AND?: Prisma.SubscriptionPaymentScalarWhereInput | Prisma.SubscriptionPaymentScalarWhereInput[]
-  OR?: Prisma.SubscriptionPaymentScalarWhereInput[]
-  NOT?: Prisma.SubscriptionPaymentScalarWhereInput | Prisma.SubscriptionPaymentScalarWhereInput[]
-  id?: Prisma.IntFilter<"SubscriptionPayment"> | number
-  subscriptionId?: Prisma.IntFilter<"SubscriptionPayment"> | number
-  tenantId?: Prisma.IntFilter<"SubscriptionPayment"> | number
-  amount?: Prisma.DecimalFilter<"SubscriptionPayment"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod?: Prisma.StringFilter<"SubscriptionPayment"> | string
-  transactionCode?: Prisma.StringNullableFilter<"SubscriptionPayment"> | string | null
-  status?: Prisma.EnumSubscriptionPaymentStatusFilter<"SubscriptionPayment"> | $Enums.SubscriptionPaymentStatus
-  paidAt?: Prisma.DateTimeNullableFilter<"SubscriptionPayment"> | Date | string | null
-  createdAt?: Prisma.DateTimeFilter<"SubscriptionPayment"> | Date | string
-}
-
 export type SubscriptionPaymentCreateWithoutSubscriptionInput = {
+  purpose?: $Enums.SubscriptionPaymentPurpose
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
   transactionCode?: string | null
   status?: $Enums.SubscriptionPaymentStatus
   paidAt?: Date | string | null
+  expiredAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutSubscriptionPaymentsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedSubscriptionPaymentsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedSubscriptionPaymentsInput
+  webhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutSubscriptionPaymentInput
 }
 
 export type SubscriptionPaymentUncheckedCreateWithoutSubscriptionInput = {
   id?: number
-  tenantId: number
+  purpose?: $Enums.SubscriptionPaymentPurpose
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
   transactionCode?: string | null
   status?: $Enums.SubscriptionPaymentStatus
   paidAt?: Date | string | null
+  expiredAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutSubscriptionPaymentInput
 }
 
 export type SubscriptionPaymentCreateOrConnectWithoutSubscriptionInput = {
@@ -663,160 +1249,622 @@ export type SubscriptionPaymentUpdateManyWithWhereWithoutSubscriptionInput = {
   data: Prisma.XOR<Prisma.SubscriptionPaymentUpdateManyMutationInput, Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutSubscriptionInput>
 }
 
-export type SubscriptionPaymentCreateManyTenantInput = {
-  id?: number
-  subscriptionId: number
+export type SubscriptionPaymentCreateWithoutWebhookLogsInput = {
+  purpose?: $Enums.SubscriptionPaymentPurpose
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
   transactionCode?: string | null
   status?: $Enums.SubscriptionPaymentStatus
   paidAt?: Date | string | null
+  expiredAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+  subscription: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
+  tenant: Prisma.TenantCreateNestedOneWithoutSubscriptionPaymentsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedSubscriptionPaymentsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedSubscriptionPaymentsInput
 }
 
-export type SubscriptionPaymentUpdateWithoutTenantInput = {
+export type SubscriptionPaymentUncheckedCreateWithoutWebhookLogsInput = {
+  id?: number
+  subscriptionId: number
+  tenantId: number
+  purpose?: $Enums.SubscriptionPaymentPurpose
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
+  transactionCode?: string | null
+  status?: $Enums.SubscriptionPaymentStatus
+  paidAt?: Date | string | null
+  expiredAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+}
+
+export type SubscriptionPaymentCreateOrConnectWithoutWebhookLogsInput = {
+  where: Prisma.SubscriptionPaymentWhereUniqueInput
+  create: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutWebhookLogsInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutWebhookLogsInput>
+}
+
+export type SubscriptionPaymentUpsertWithoutWebhookLogsInput = {
+  update: Prisma.XOR<Prisma.SubscriptionPaymentUpdateWithoutWebhookLogsInput, Prisma.SubscriptionPaymentUncheckedUpdateWithoutWebhookLogsInput>
+  create: Prisma.XOR<Prisma.SubscriptionPaymentCreateWithoutWebhookLogsInput, Prisma.SubscriptionPaymentUncheckedCreateWithoutWebhookLogsInput>
+  where?: Prisma.SubscriptionPaymentWhereInput
+}
+
+export type SubscriptionPaymentUpdateToOneWithWhereWithoutWebhookLogsInput = {
+  where?: Prisma.SubscriptionPaymentWhereInput
+  data: Prisma.XOR<Prisma.SubscriptionPaymentUpdateWithoutWebhookLogsInput, Prisma.SubscriptionPaymentUncheckedUpdateWithoutWebhookLogsInput>
+}
+
+export type SubscriptionPaymentUpdateWithoutWebhookLogsInput = {
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscription?: Prisma.SubscriptionUpdateOneRequiredWithoutPaymentsNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutSubscriptionPaymentsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedSubscriptionPaymentsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedSubscriptionPaymentsNestedInput
+}
+
+export type SubscriptionPaymentUncheckedUpdateWithoutWebhookLogsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type SubscriptionPaymentCreateManyCreatedByInput = {
+  id?: number
+  subscriptionId: number
+  tenantId: number
+  purpose?: $Enums.SubscriptionPaymentPurpose
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
+  transactionCode?: string | null
+  status?: $Enums.SubscriptionPaymentStatus
+  paidAt?: Date | string | null
+  expiredAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  updatedById?: number | null
+}
+
+export type SubscriptionPaymentCreateManyUpdatedByInput = {
+  id?: number
+  subscriptionId: number
+  tenantId: number
+  purpose?: $Enums.SubscriptionPaymentPurpose
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
+  transactionCode?: string | null
+  status?: $Enums.SubscriptionPaymentStatus
+  paidAt?: Date | string | null
+  expiredAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+}
+
+export type SubscriptionPaymentUpdateWithoutCreatedByInput = {
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscription?: Prisma.SubscriptionUpdateOneRequiredWithoutPaymentsNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutSubscriptionPaymentsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedSubscriptionPaymentsNestedInput
+  webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutSubscriptionPaymentNestedInput
+}
+
+export type SubscriptionPaymentUncheckedUpdateWithoutCreatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutSubscriptionPaymentNestedInput
+}
+
+export type SubscriptionPaymentUncheckedUpdateManyWithoutCreatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type SubscriptionPaymentUpdateWithoutUpdatedByInput = {
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscription?: Prisma.SubscriptionUpdateOneRequiredWithoutPaymentsNestedInput
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutSubscriptionPaymentsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedSubscriptionPaymentsNestedInput
+  webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutSubscriptionPaymentNestedInput
+}
+
+export type SubscriptionPaymentUncheckedUpdateWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutSubscriptionPaymentNestedInput
+}
+
+export type SubscriptionPaymentUncheckedUpdateManyWithoutUpdatedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type SubscriptionPaymentCreateManyTenantInput = {
+  id?: number
+  subscriptionId: number
+  purpose?: $Enums.SubscriptionPaymentPurpose
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
+  transactionCode?: string | null
+  status?: $Enums.SubscriptionPaymentStatus
+  paidAt?: Date | string | null
+  expiredAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+}
+
+export type SubscriptionPaymentUpdateWithoutTenantInput = {
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
+  paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscription?: Prisma.SubscriptionUpdateOneRequiredWithoutPaymentsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedSubscriptionPaymentsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedSubscriptionPaymentsNestedInput
+  webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutSubscriptionPaymentNestedInput
 }
 
 export type SubscriptionPaymentUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutSubscriptionPaymentNestedInput
 }
 
 export type SubscriptionPaymentUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   subscriptionId?: Prisma.IntFieldUpdateOperationsInput | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type SubscriptionPaymentCreateManySubscriptionInput = {
   id?: number
-  tenantId: number
+  purpose?: $Enums.SubscriptionPaymentPurpose
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
-  paymentMethod: string
+  paymentMethod?: string
+  provider?: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  checkoutUrl?: string | null
+  qrContent?: string | null
+  providerStatus?: string | null
   transactionCode?: string | null
   status?: $Enums.SubscriptionPaymentStatus
   paidAt?: Date | string | null
+  expiredAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
 }
 
 export type SubscriptionPaymentUpdateWithoutSubscriptionInput = {
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutSubscriptionPaymentsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedSubscriptionPaymentsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedSubscriptionPaymentsNestedInput
+  webhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutSubscriptionPaymentNestedInput
 }
 
 export type SubscriptionPaymentUncheckedUpdateWithoutSubscriptionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  webhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutSubscriptionPaymentNestedInput
 }
 
 export type SubscriptionPaymentUncheckedUpdateManyWithoutSubscriptionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  purpose?: Prisma.EnumSubscriptionPaymentPurposeFieldUpdateOperationsInput | $Enums.SubscriptionPaymentPurpose
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  checkoutUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  qrContent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSubscriptionPaymentStatusFieldUpdateOperationsInput | $Enums.SubscriptionPaymentStatus
   paidAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expiredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
+
+/**
+ * Count Type SubscriptionPaymentCountOutputType
+ */
+
+export type SubscriptionPaymentCountOutputType = {
+  webhookLogs: number
+}
+
+export type SubscriptionPaymentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  webhookLogs?: boolean | SubscriptionPaymentCountOutputTypeCountWebhookLogsArgs
+}
+
+/**
+ * SubscriptionPaymentCountOutputType without action
+ */
+export type SubscriptionPaymentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubscriptionPaymentCountOutputType
+   */
+  select?: Prisma.SubscriptionPaymentCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SubscriptionPaymentCountOutputType without action
+ */
+export type SubscriptionPaymentCountOutputTypeCountWebhookLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWebhookLogWhereInput
+}
 
 
 export type SubscriptionPaymentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   subscriptionId?: boolean
   tenantId?: boolean
+  purpose?: boolean
   amount?: boolean
   paymentMethod?: boolean
+  provider?: boolean
+  orderCode?: boolean
+  paymentLinkId?: boolean
+  checkoutUrl?: boolean
+  qrContent?: boolean
+  providerStatus?: boolean
   transactionCode?: boolean
   status?: boolean
   paidAt?: boolean
+  expiredAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
+  createdById?: boolean
+  updatedById?: boolean
   subscription?: boolean | Prisma.SubscriptionDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.SubscriptionPayment$createdByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.SubscriptionPayment$updatedByArgs<ExtArgs>
+  webhookLogs?: boolean | Prisma.SubscriptionPayment$webhookLogsArgs<ExtArgs>
+  _count?: boolean | Prisma.SubscriptionPaymentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["subscriptionPayment"]>
 
 export type SubscriptionPaymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   subscriptionId?: boolean
   tenantId?: boolean
+  purpose?: boolean
   amount?: boolean
   paymentMethod?: boolean
+  provider?: boolean
+  orderCode?: boolean
+  paymentLinkId?: boolean
+  checkoutUrl?: boolean
+  qrContent?: boolean
+  providerStatus?: boolean
   transactionCode?: boolean
   status?: boolean
   paidAt?: boolean
+  expiredAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
+  createdById?: boolean
+  updatedById?: boolean
   subscription?: boolean | Prisma.SubscriptionDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.SubscriptionPayment$createdByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.SubscriptionPayment$updatedByArgs<ExtArgs>
 }, ExtArgs["result"]["subscriptionPayment"]>
 
 export type SubscriptionPaymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   subscriptionId?: boolean
   tenantId?: boolean
+  purpose?: boolean
   amount?: boolean
   paymentMethod?: boolean
+  provider?: boolean
+  orderCode?: boolean
+  paymentLinkId?: boolean
+  checkoutUrl?: boolean
+  qrContent?: boolean
+  providerStatus?: boolean
   transactionCode?: boolean
   status?: boolean
   paidAt?: boolean
+  expiredAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
+  createdById?: boolean
+  updatedById?: boolean
   subscription?: boolean | Prisma.SubscriptionDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.SubscriptionPayment$createdByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.SubscriptionPayment$updatedByArgs<ExtArgs>
 }, ExtArgs["result"]["subscriptionPayment"]>
 
 export type SubscriptionPaymentSelectScalar = {
   id?: boolean
   subscriptionId?: boolean
   tenantId?: boolean
+  purpose?: boolean
   amount?: boolean
   paymentMethod?: boolean
+  provider?: boolean
+  orderCode?: boolean
+  paymentLinkId?: boolean
+  checkoutUrl?: boolean
+  qrContent?: boolean
+  providerStatus?: boolean
   transactionCode?: boolean
   status?: boolean
   paidAt?: boolean
+  expiredAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
+  createdById?: boolean
+  updatedById?: boolean
 }
 
-export type SubscriptionPaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "subscriptionId" | "tenantId" | "amount" | "paymentMethod" | "transactionCode" | "status" | "paidAt" | "createdAt", ExtArgs["result"]["subscriptionPayment"]>
+export type SubscriptionPaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "subscriptionId" | "tenantId" | "purpose" | "amount" | "paymentMethod" | "provider" | "orderCode" | "paymentLinkId" | "checkoutUrl" | "qrContent" | "providerStatus" | "transactionCode" | "status" | "paidAt" | "expiredAt" | "createdAt" | "updatedAt" | "createdById" | "updatedById", ExtArgs["result"]["subscriptionPayment"]>
 export type SubscriptionPaymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscription?: boolean | Prisma.SubscriptionDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.SubscriptionPayment$createdByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.SubscriptionPayment$updatedByArgs<ExtArgs>
+  webhookLogs?: boolean | Prisma.SubscriptionPayment$webhookLogsArgs<ExtArgs>
+  _count?: boolean | Prisma.SubscriptionPaymentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SubscriptionPaymentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscription?: boolean | Prisma.SubscriptionDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.SubscriptionPayment$createdByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.SubscriptionPayment$updatedByArgs<ExtArgs>
 }
 export type SubscriptionPaymentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscription?: boolean | Prisma.SubscriptionDefaultArgs<ExtArgs>
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  createdBy?: boolean | Prisma.SubscriptionPayment$createdByArgs<ExtArgs>
+  updatedBy?: boolean | Prisma.SubscriptionPayment$updatedByArgs<ExtArgs>
 }
 
 export type $SubscriptionPaymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -830,6 +1878,18 @@ export type $SubscriptionPaymentPayload<ExtArgs extends runtime.Types.Extensions
      * Tenant liên kết (khi xóa tenant thì tự động xóa lịch sử thanh toán này)
      */
     tenant: Prisma.$TenantPayload<ExtArgs>
+    /**
+     * Người tạo checkout
+     */
+    createdBy: Prisma.$UserPayload<ExtArgs> | null
+    /**
+     * Người cập nhật checkout gần nhất
+     */
+    updatedBy: Prisma.$UserPayload<ExtArgs> | null
+    /**
+     * Các webhook PayOS đã nhận cho checkout này
+     */
+    webhookLogs: Prisma.$PaymentWebhookLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
@@ -845,6 +1905,10 @@ export type $SubscriptionPaymentPayload<ExtArgs extends runtime.Types.Extensions
      */
     tenantId: number
     /**
+     * Mục đích thanh toán: gia hạn hay đổi gói
+     */
+    purpose: $Enums.SubscriptionPaymentPurpose
+    /**
      * Số tiền thanh toán thực tế
      */
     amount: runtime.Decimal
@@ -852,6 +1916,30 @@ export type $SubscriptionPaymentPayload<ExtArgs extends runtime.Types.Extensions
      * Phương thức thanh toán (ví dụ: BANK_TRANSFER, VNPAY, MOMO, CREDIT_CARD)
      */
     paymentMethod: string
+    /**
+     * Nhà cung cấp xử lý giao dịch
+     */
+    provider: string
+    /**
+     * Mã đơn hàng duy nhất gửi sang PayOS
+     */
+    orderCode: number | null
+    /**
+     * ID payment link do PayOS trả về
+     */
+    paymentLinkId: string | null
+    /**
+     * URL checkout do PayOS trả về
+     */
+    checkoutUrl: string | null
+    /**
+     * Nội dung VietQR do PayOS trả về
+     */
+    qrContent: string | null
+    /**
+     * Trạng thái payment link tại PayOS
+     */
+    providerStatus: string | null
     /**
      * Mã giao dịch từ cổng thanh toán hoặc ngân hàng
      */
@@ -865,9 +1953,25 @@ export type $SubscriptionPaymentPayload<ExtArgs extends runtime.Types.Extensions
      */
     paidAt: Date | null
     /**
+     * Thời điểm payment link hết hiệu lực
+     */
+    expiredAt: Date | null
+    /**
      * Thời điểm tạo yêu cầu thanh toán
      */
     createdAt: Date
+    /**
+     * Thời điểm cập nhật yêu cầu thanh toán gần nhất
+     */
+    updatedAt: Date
+    /**
+     * ID người dùng tạo checkout
+     */
+    createdById: number | null
+    /**
+     * ID người dùng cập nhật checkout gần nhất
+     */
+    updatedById: number | null
   }, ExtArgs["result"]["subscriptionPayment"]>
   composites: {}
 }
@@ -1264,6 +2368,9 @@ export interface Prisma__SubscriptionPaymentClient<T, Null = never, ExtArgs exte
   readonly [Symbol.toStringTag]: "PrismaPromise"
   subscription<T extends Prisma.SubscriptionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionDefaultArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  createdBy<T extends Prisma.SubscriptionPayment$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionPayment$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  updatedBy<T extends Prisma.SubscriptionPayment$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionPayment$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  webhookLogs<T extends Prisma.SubscriptionPayment$webhookLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubscriptionPayment$webhookLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentWebhookLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1296,12 +2403,23 @@ export interface SubscriptionPaymentFieldRefs {
   readonly id: Prisma.FieldRef<"SubscriptionPayment", 'Int'>
   readonly subscriptionId: Prisma.FieldRef<"SubscriptionPayment", 'Int'>
   readonly tenantId: Prisma.FieldRef<"SubscriptionPayment", 'Int'>
+  readonly purpose: Prisma.FieldRef<"SubscriptionPayment", 'SubscriptionPaymentPurpose'>
   readonly amount: Prisma.FieldRef<"SubscriptionPayment", 'Decimal'>
   readonly paymentMethod: Prisma.FieldRef<"SubscriptionPayment", 'String'>
+  readonly provider: Prisma.FieldRef<"SubscriptionPayment", 'String'>
+  readonly orderCode: Prisma.FieldRef<"SubscriptionPayment", 'Int'>
+  readonly paymentLinkId: Prisma.FieldRef<"SubscriptionPayment", 'String'>
+  readonly checkoutUrl: Prisma.FieldRef<"SubscriptionPayment", 'String'>
+  readonly qrContent: Prisma.FieldRef<"SubscriptionPayment", 'String'>
+  readonly providerStatus: Prisma.FieldRef<"SubscriptionPayment", 'String'>
   readonly transactionCode: Prisma.FieldRef<"SubscriptionPayment", 'String'>
   readonly status: Prisma.FieldRef<"SubscriptionPayment", 'SubscriptionPaymentStatus'>
   readonly paidAt: Prisma.FieldRef<"SubscriptionPayment", 'DateTime'>
+  readonly expiredAt: Prisma.FieldRef<"SubscriptionPayment", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"SubscriptionPayment", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"SubscriptionPayment", 'DateTime'>
+  readonly createdById: Prisma.FieldRef<"SubscriptionPayment", 'Int'>
+  readonly updatedById: Prisma.FieldRef<"SubscriptionPayment", 'Int'>
 }
     
 
@@ -1700,6 +2818,68 @@ export type SubscriptionPaymentDeleteManyArgs<ExtArgs extends runtime.Types.Exte
    * Limit how many SubscriptionPayments to delete.
    */
   limit?: number
+}
+
+/**
+ * SubscriptionPayment.createdBy
+ */
+export type SubscriptionPayment$createdByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * SubscriptionPayment.updatedBy
+ */
+export type SubscriptionPayment$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * SubscriptionPayment.webhookLogs
+ */
+export type SubscriptionPayment$webhookLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentWebhookLog
+   */
+  select?: Prisma.PaymentWebhookLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentWebhookLog
+   */
+  omit?: Prisma.PaymentWebhookLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentWebhookLogInclude<ExtArgs> | null
+  where?: Prisma.PaymentWebhookLogWhereInput
+  orderBy?: Prisma.PaymentWebhookLogOrderByWithRelationInput | Prisma.PaymentWebhookLogOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWebhookLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentWebhookLogScalarFieldEnum | Prisma.PaymentWebhookLogScalarFieldEnum[]
 }
 
 /**

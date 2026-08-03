@@ -37,6 +37,7 @@ export type ReviewAvgAggregateOutputType = {
   locationScore: number | null
   priceScore: number | null
   serviceScore: number | null
+  moderatedById: number | null
 }
 
 export type ReviewSumAggregateOutputType = {
@@ -50,6 +51,7 @@ export type ReviewSumAggregateOutputType = {
   locationScore: number | null
   priceScore: number | null
   serviceScore: number | null
+  moderatedById: number | null
 }
 
 export type ReviewMinAggregateOutputType = {
@@ -66,7 +68,11 @@ export type ReviewMinAggregateOutputType = {
   serviceScore: number | null
   isVisible: boolean | null
   status: $Enums.ReviewStatus | null
+  moderatedById: number | null
+  moderationReason: string | null
+  moderatedAt: Date | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ReviewMaxAggregateOutputType = {
@@ -83,7 +89,11 @@ export type ReviewMaxAggregateOutputType = {
   serviceScore: number | null
   isVisible: boolean | null
   status: $Enums.ReviewStatus | null
+  moderatedById: number | null
+  moderationReason: string | null
+  moderatedAt: Date | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ReviewCountAggregateOutputType = {
@@ -100,7 +110,11 @@ export type ReviewCountAggregateOutputType = {
   serviceScore: number
   isVisible: number
   status: number
+  moderatedById: number
+  moderationReason: number
+  moderatedAt: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -116,6 +130,7 @@ export type ReviewAvgAggregateInputType = {
   locationScore?: true
   priceScore?: true
   serviceScore?: true
+  moderatedById?: true
 }
 
 export type ReviewSumAggregateInputType = {
@@ -129,6 +144,7 @@ export type ReviewSumAggregateInputType = {
   locationScore?: true
   priceScore?: true
   serviceScore?: true
+  moderatedById?: true
 }
 
 export type ReviewMinAggregateInputType = {
@@ -145,7 +161,11 @@ export type ReviewMinAggregateInputType = {
   serviceScore?: true
   isVisible?: true
   status?: true
+  moderatedById?: true
+  moderationReason?: true
+  moderatedAt?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type ReviewMaxAggregateInputType = {
@@ -162,7 +182,11 @@ export type ReviewMaxAggregateInputType = {
   serviceScore?: true
   isVisible?: true
   status?: true
+  moderatedById?: true
+  moderationReason?: true
+  moderatedAt?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type ReviewCountAggregateInputType = {
@@ -179,7 +203,11 @@ export type ReviewCountAggregateInputType = {
   serviceScore?: true
   isVisible?: true
   status?: true
+  moderatedById?: true
+  moderationReason?: true
+  moderatedAt?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -273,7 +301,7 @@ export type ReviewGroupByOutputType = {
   id: number
   tenantId: number
   roomId: number
-  contractId: number | null
+  contractId: number
   reviewerId: number
   rating: number
   content: string
@@ -283,7 +311,11 @@ export type ReviewGroupByOutputType = {
   serviceScore: number
   isVisible: boolean
   status: $Enums.ReviewStatus
+  moderatedById: number | null
+  moderationReason: string | null
+  moderatedAt: Date | null
   createdAt: Date
+  updatedAt: Date
   _count: ReviewCountAggregateOutputType | null
   _avg: ReviewAvgAggregateOutputType | null
   _sum: ReviewSumAggregateOutputType | null
@@ -313,7 +345,7 @@ export type ReviewWhereInput = {
   id?: Prisma.IntFilter<"Review"> | number
   tenantId?: Prisma.IntFilter<"Review"> | number
   roomId?: Prisma.IntFilter<"Review"> | number
-  contractId?: Prisma.IntNullableFilter<"Review"> | number | null
+  contractId?: Prisma.IntFilter<"Review"> | number
   reviewerId?: Prisma.IntFilter<"Review"> | number
   rating?: Prisma.IntFilter<"Review"> | number
   content?: Prisma.StringFilter<"Review"> | string
@@ -323,18 +355,23 @@ export type ReviewWhereInput = {
   serviceScore?: Prisma.IntFilter<"Review"> | number
   isVisible?: Prisma.BoolFilter<"Review"> | boolean
   status?: Prisma.EnumReviewStatusFilter<"Review"> | $Enums.ReviewStatus
+  moderatedById?: Prisma.IntNullableFilter<"Review"> | number | null
+  moderationReason?: Prisma.StringNullableFilter<"Review"> | string | null
+  moderatedAt?: Prisma.DateTimeNullableFilter<"Review"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Review"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
-  contract?: Prisma.XOR<Prisma.ContractNullableScalarRelationFilter, Prisma.ContractWhereInput> | null
+  contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
   reviewer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  moderator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type ReviewOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
-  contractId?: Prisma.SortOrderInput | Prisma.SortOrder
+  contractId?: Prisma.SortOrder
   reviewerId?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   content?: Prisma.SortOrder
@@ -344,21 +381,27 @@ export type ReviewOrderByWithRelationInput = {
   serviceScore?: Prisma.SortOrder
   isVisible?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  moderatedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  moderationReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  moderatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
   room?: Prisma.RoomOrderByWithRelationInput
   contract?: Prisma.ContractOrderByWithRelationInput
   reviewer?: Prisma.UserOrderByWithRelationInput
+  moderator?: Prisma.UserOrderByWithRelationInput
 }
 
 export type ReviewWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  reviewerId_contractId?: Prisma.ReviewReviewerIdContractIdCompoundUniqueInput
   AND?: Prisma.ReviewWhereInput | Prisma.ReviewWhereInput[]
   OR?: Prisma.ReviewWhereInput[]
   NOT?: Prisma.ReviewWhereInput | Prisma.ReviewWhereInput[]
   tenantId?: Prisma.IntFilter<"Review"> | number
   roomId?: Prisma.IntFilter<"Review"> | number
-  contractId?: Prisma.IntNullableFilter<"Review"> | number | null
+  contractId?: Prisma.IntFilter<"Review"> | number
   reviewerId?: Prisma.IntFilter<"Review"> | number
   rating?: Prisma.IntFilter<"Review"> | number
   content?: Prisma.StringFilter<"Review"> | string
@@ -368,18 +411,23 @@ export type ReviewWhereUniqueInput = Prisma.AtLeast<{
   serviceScore?: Prisma.IntFilter<"Review"> | number
   isVisible?: Prisma.BoolFilter<"Review"> | boolean
   status?: Prisma.EnumReviewStatusFilter<"Review"> | $Enums.ReviewStatus
+  moderatedById?: Prisma.IntNullableFilter<"Review"> | number | null
+  moderationReason?: Prisma.StringNullableFilter<"Review"> | string | null
+  moderatedAt?: Prisma.DateTimeNullableFilter<"Review"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Review"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
-  contract?: Prisma.XOR<Prisma.ContractNullableScalarRelationFilter, Prisma.ContractWhereInput> | null
+  contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
   reviewer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+  moderator?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+}, "id" | "reviewerId_contractId">
 
 export type ReviewOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
-  contractId?: Prisma.SortOrderInput | Prisma.SortOrder
+  contractId?: Prisma.SortOrder
   reviewerId?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   content?: Prisma.SortOrder
@@ -389,7 +437,11 @@ export type ReviewOrderByWithAggregationInput = {
   serviceScore?: Prisma.SortOrder
   isVisible?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  moderatedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  moderationReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  moderatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.ReviewCountOrderByAggregateInput
   _avg?: Prisma.ReviewAvgOrderByAggregateInput
   _max?: Prisma.ReviewMaxOrderByAggregateInput
@@ -404,7 +456,7 @@ export type ReviewScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Review"> | number
   tenantId?: Prisma.IntWithAggregatesFilter<"Review"> | number
   roomId?: Prisma.IntWithAggregatesFilter<"Review"> | number
-  contractId?: Prisma.IntNullableWithAggregatesFilter<"Review"> | number | null
+  contractId?: Prisma.IntWithAggregatesFilter<"Review"> | number
   reviewerId?: Prisma.IntWithAggregatesFilter<"Review"> | number
   rating?: Prisma.IntWithAggregatesFilter<"Review"> | number
   content?: Prisma.StringWithAggregatesFilter<"Review"> | string
@@ -414,7 +466,11 @@ export type ReviewScalarWhereWithAggregatesInput = {
   serviceScore?: Prisma.IntWithAggregatesFilter<"Review"> | number
   isVisible?: Prisma.BoolWithAggregatesFilter<"Review"> | boolean
   status?: Prisma.EnumReviewStatusWithAggregatesFilter<"Review"> | $Enums.ReviewStatus
+  moderatedById?: Prisma.IntNullableWithAggregatesFilter<"Review"> | number | null
+  moderationReason?: Prisma.StringNullableWithAggregatesFilter<"Review"> | string | null
+  moderatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Review"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Review"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Review"> | Date | string
 }
 
 export type ReviewCreateInput = {
@@ -426,18 +482,22 @@ export type ReviewCreateInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutReviewsInput
   room: Prisma.RoomCreateNestedOneWithoutReviewsInput
-  contract?: Prisma.ContractCreateNestedOneWithoutReviewsInput
+  contract: Prisma.ContractCreateNestedOneWithoutReviewsInput
   reviewer: Prisma.UserCreateNestedOneWithoutReviewsInput
+  moderator?: Prisma.UserCreateNestedOneWithoutModeratedReviewsInput
 }
 
 export type ReviewUncheckedCreateInput = {
   id?: number
   tenantId: number
   roomId: number
-  contractId?: number | null
+  contractId: number
   reviewerId: number
   rating: number
   content: string
@@ -447,7 +507,11 @@ export type ReviewUncheckedCreateInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderatedById?: number | null
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewUpdateInput = {
@@ -459,18 +523,22 @@ export type ReviewUpdateInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutReviewsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutReviewsNestedInput
-  contract?: Prisma.ContractUpdateOneWithoutReviewsNestedInput
+  contract?: Prisma.ContractUpdateOneRequiredWithoutReviewsNestedInput
   reviewer?: Prisma.UserUpdateOneRequiredWithoutReviewsNestedInput
+  moderator?: Prisma.UserUpdateOneWithoutModeratedReviewsNestedInput
 }
 
 export type ReviewUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
-  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
@@ -480,14 +548,18 @@ export type ReviewUncheckedUpdateInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewCreateManyInput = {
   id?: number
   tenantId: number
   roomId: number
-  contractId?: number | null
+  contractId: number
   reviewerId: number
   rating: number
   content: string
@@ -497,7 +569,11 @@ export type ReviewCreateManyInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderatedById?: number | null
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewUpdateManyMutationInput = {
@@ -509,14 +585,17 @@ export type ReviewUpdateManyMutationInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
-  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
@@ -526,7 +605,11 @@ export type ReviewUncheckedUpdateManyInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewListRelationFilter = {
@@ -537,6 +620,11 @@ export type ReviewListRelationFilter = {
 
 export type ReviewOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ReviewReviewerIdContractIdCompoundUniqueInput = {
+  reviewerId: number
+  contractId: number
 }
 
 export type ReviewCountOrderByAggregateInput = {
@@ -553,7 +641,11 @@ export type ReviewCountOrderByAggregateInput = {
   serviceScore?: Prisma.SortOrder
   isVisible?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  moderatedById?: Prisma.SortOrder
+  moderationReason?: Prisma.SortOrder
+  moderatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ReviewAvgOrderByAggregateInput = {
@@ -567,6 +659,7 @@ export type ReviewAvgOrderByAggregateInput = {
   locationScore?: Prisma.SortOrder
   priceScore?: Prisma.SortOrder
   serviceScore?: Prisma.SortOrder
+  moderatedById?: Prisma.SortOrder
 }
 
 export type ReviewMaxOrderByAggregateInput = {
@@ -583,7 +676,11 @@ export type ReviewMaxOrderByAggregateInput = {
   serviceScore?: Prisma.SortOrder
   isVisible?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  moderatedById?: Prisma.SortOrder
+  moderationReason?: Prisma.SortOrder
+  moderatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ReviewMinOrderByAggregateInput = {
@@ -600,7 +697,11 @@ export type ReviewMinOrderByAggregateInput = {
   serviceScore?: Prisma.SortOrder
   isVisible?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  moderatedById?: Prisma.SortOrder
+  moderationReason?: Prisma.SortOrder
+  moderatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ReviewSumOrderByAggregateInput = {
@@ -614,6 +715,7 @@ export type ReviewSumOrderByAggregateInput = {
   locationScore?: Prisma.SortOrder
   priceScore?: Prisma.SortOrder
   serviceScore?: Prisma.SortOrder
+  moderatedById?: Prisma.SortOrder
 }
 
 export type ReviewCreateNestedManyWithoutReviewerInput = {
@@ -623,10 +725,24 @@ export type ReviewCreateNestedManyWithoutReviewerInput = {
   connect?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
 }
 
+export type ReviewCreateNestedManyWithoutModeratorInput = {
+  create?: Prisma.XOR<Prisma.ReviewCreateWithoutModeratorInput, Prisma.ReviewUncheckedCreateWithoutModeratorInput> | Prisma.ReviewCreateWithoutModeratorInput[] | Prisma.ReviewUncheckedCreateWithoutModeratorInput[]
+  connectOrCreate?: Prisma.ReviewCreateOrConnectWithoutModeratorInput | Prisma.ReviewCreateOrConnectWithoutModeratorInput[]
+  createMany?: Prisma.ReviewCreateManyModeratorInputEnvelope
+  connect?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
+}
+
 export type ReviewUncheckedCreateNestedManyWithoutReviewerInput = {
   create?: Prisma.XOR<Prisma.ReviewCreateWithoutReviewerInput, Prisma.ReviewUncheckedCreateWithoutReviewerInput> | Prisma.ReviewCreateWithoutReviewerInput[] | Prisma.ReviewUncheckedCreateWithoutReviewerInput[]
   connectOrCreate?: Prisma.ReviewCreateOrConnectWithoutReviewerInput | Prisma.ReviewCreateOrConnectWithoutReviewerInput[]
   createMany?: Prisma.ReviewCreateManyReviewerInputEnvelope
+  connect?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
+}
+
+export type ReviewUncheckedCreateNestedManyWithoutModeratorInput = {
+  create?: Prisma.XOR<Prisma.ReviewCreateWithoutModeratorInput, Prisma.ReviewUncheckedCreateWithoutModeratorInput> | Prisma.ReviewCreateWithoutModeratorInput[] | Prisma.ReviewUncheckedCreateWithoutModeratorInput[]
+  connectOrCreate?: Prisma.ReviewCreateOrConnectWithoutModeratorInput | Prisma.ReviewCreateOrConnectWithoutModeratorInput[]
+  createMany?: Prisma.ReviewCreateManyModeratorInputEnvelope
   connect?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
 }
 
@@ -644,6 +760,20 @@ export type ReviewUpdateManyWithoutReviewerNestedInput = {
   deleteMany?: Prisma.ReviewScalarWhereInput | Prisma.ReviewScalarWhereInput[]
 }
 
+export type ReviewUpdateManyWithoutModeratorNestedInput = {
+  create?: Prisma.XOR<Prisma.ReviewCreateWithoutModeratorInput, Prisma.ReviewUncheckedCreateWithoutModeratorInput> | Prisma.ReviewCreateWithoutModeratorInput[] | Prisma.ReviewUncheckedCreateWithoutModeratorInput[]
+  connectOrCreate?: Prisma.ReviewCreateOrConnectWithoutModeratorInput | Prisma.ReviewCreateOrConnectWithoutModeratorInput[]
+  upsert?: Prisma.ReviewUpsertWithWhereUniqueWithoutModeratorInput | Prisma.ReviewUpsertWithWhereUniqueWithoutModeratorInput[]
+  createMany?: Prisma.ReviewCreateManyModeratorInputEnvelope
+  set?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
+  disconnect?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
+  delete?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
+  connect?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
+  update?: Prisma.ReviewUpdateWithWhereUniqueWithoutModeratorInput | Prisma.ReviewUpdateWithWhereUniqueWithoutModeratorInput[]
+  updateMany?: Prisma.ReviewUpdateManyWithWhereWithoutModeratorInput | Prisma.ReviewUpdateManyWithWhereWithoutModeratorInput[]
+  deleteMany?: Prisma.ReviewScalarWhereInput | Prisma.ReviewScalarWhereInput[]
+}
+
 export type ReviewUncheckedUpdateManyWithoutReviewerNestedInput = {
   create?: Prisma.XOR<Prisma.ReviewCreateWithoutReviewerInput, Prisma.ReviewUncheckedCreateWithoutReviewerInput> | Prisma.ReviewCreateWithoutReviewerInput[] | Prisma.ReviewUncheckedCreateWithoutReviewerInput[]
   connectOrCreate?: Prisma.ReviewCreateOrConnectWithoutReviewerInput | Prisma.ReviewCreateOrConnectWithoutReviewerInput[]
@@ -655,6 +785,20 @@ export type ReviewUncheckedUpdateManyWithoutReviewerNestedInput = {
   connect?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
   update?: Prisma.ReviewUpdateWithWhereUniqueWithoutReviewerInput | Prisma.ReviewUpdateWithWhereUniqueWithoutReviewerInput[]
   updateMany?: Prisma.ReviewUpdateManyWithWhereWithoutReviewerInput | Prisma.ReviewUpdateManyWithWhereWithoutReviewerInput[]
+  deleteMany?: Prisma.ReviewScalarWhereInput | Prisma.ReviewScalarWhereInput[]
+}
+
+export type ReviewUncheckedUpdateManyWithoutModeratorNestedInput = {
+  create?: Prisma.XOR<Prisma.ReviewCreateWithoutModeratorInput, Prisma.ReviewUncheckedCreateWithoutModeratorInput> | Prisma.ReviewCreateWithoutModeratorInput[] | Prisma.ReviewUncheckedCreateWithoutModeratorInput[]
+  connectOrCreate?: Prisma.ReviewCreateOrConnectWithoutModeratorInput | Prisma.ReviewCreateOrConnectWithoutModeratorInput[]
+  upsert?: Prisma.ReviewUpsertWithWhereUniqueWithoutModeratorInput | Prisma.ReviewUpsertWithWhereUniqueWithoutModeratorInput[]
+  createMany?: Prisma.ReviewCreateManyModeratorInputEnvelope
+  set?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
+  disconnect?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
+  delete?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
+  connect?: Prisma.ReviewWhereUniqueInput | Prisma.ReviewWhereUniqueInput[]
+  update?: Prisma.ReviewUpdateWithWhereUniqueWithoutModeratorInput | Prisma.ReviewUpdateWithWhereUniqueWithoutModeratorInput[]
+  updateMany?: Prisma.ReviewUpdateManyWithWhereWithoutModeratorInput | Prisma.ReviewUpdateManyWithWhereWithoutModeratorInput[]
   deleteMany?: Prisma.ReviewScalarWhereInput | Prisma.ReviewScalarWhereInput[]
 }
 
@@ -797,17 +941,21 @@ export type ReviewCreateWithoutReviewerInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutReviewsInput
   room: Prisma.RoomCreateNestedOneWithoutReviewsInput
-  contract?: Prisma.ContractCreateNestedOneWithoutReviewsInput
+  contract: Prisma.ContractCreateNestedOneWithoutReviewsInput
+  moderator?: Prisma.UserCreateNestedOneWithoutModeratedReviewsInput
 }
 
 export type ReviewUncheckedCreateWithoutReviewerInput = {
   id?: number
   tenantId: number
   roomId: number
-  contractId?: number | null
+  contractId: number
   rating: number
   content: string
   cleanlinessScore: number
@@ -816,7 +964,11 @@ export type ReviewUncheckedCreateWithoutReviewerInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderatedById?: number | null
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewCreateOrConnectWithoutReviewerInput = {
@@ -826,6 +978,55 @@ export type ReviewCreateOrConnectWithoutReviewerInput = {
 
 export type ReviewCreateManyReviewerInputEnvelope = {
   data: Prisma.ReviewCreateManyReviewerInput | Prisma.ReviewCreateManyReviewerInput[]
+  skipDuplicates?: boolean
+}
+
+export type ReviewCreateWithoutModeratorInput = {
+  rating: number
+  content: string
+  cleanlinessScore: number
+  locationScore: number
+  priceScore: number
+  serviceScore: number
+  isVisible?: boolean
+  status?: $Enums.ReviewStatus
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutReviewsInput
+  room: Prisma.RoomCreateNestedOneWithoutReviewsInput
+  contract: Prisma.ContractCreateNestedOneWithoutReviewsInput
+  reviewer: Prisma.UserCreateNestedOneWithoutReviewsInput
+}
+
+export type ReviewUncheckedCreateWithoutModeratorInput = {
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId: number
+  reviewerId: number
+  rating: number
+  content: string
+  cleanlinessScore: number
+  locationScore: number
+  priceScore: number
+  serviceScore: number
+  isVisible?: boolean
+  status?: $Enums.ReviewStatus
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReviewCreateOrConnectWithoutModeratorInput = {
+  where: Prisma.ReviewWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReviewCreateWithoutModeratorInput, Prisma.ReviewUncheckedCreateWithoutModeratorInput>
+}
+
+export type ReviewCreateManyModeratorInputEnvelope = {
+  data: Prisma.ReviewCreateManyModeratorInput | Prisma.ReviewCreateManyModeratorInput[]
   skipDuplicates?: boolean
 }
 
@@ -852,7 +1053,7 @@ export type ReviewScalarWhereInput = {
   id?: Prisma.IntFilter<"Review"> | number
   tenantId?: Prisma.IntFilter<"Review"> | number
   roomId?: Prisma.IntFilter<"Review"> | number
-  contractId?: Prisma.IntNullableFilter<"Review"> | number | null
+  contractId?: Prisma.IntFilter<"Review"> | number
   reviewerId?: Prisma.IntFilter<"Review"> | number
   rating?: Prisma.IntFilter<"Review"> | number
   content?: Prisma.StringFilter<"Review"> | string
@@ -862,7 +1063,27 @@ export type ReviewScalarWhereInput = {
   serviceScore?: Prisma.IntFilter<"Review"> | number
   isVisible?: Prisma.BoolFilter<"Review"> | boolean
   status?: Prisma.EnumReviewStatusFilter<"Review"> | $Enums.ReviewStatus
+  moderatedById?: Prisma.IntNullableFilter<"Review"> | number | null
+  moderationReason?: Prisma.StringNullableFilter<"Review"> | string | null
+  moderatedAt?: Prisma.DateTimeNullableFilter<"Review"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Review"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Review"> | Date | string
+}
+
+export type ReviewUpsertWithWhereUniqueWithoutModeratorInput = {
+  where: Prisma.ReviewWhereUniqueInput
+  update: Prisma.XOR<Prisma.ReviewUpdateWithoutModeratorInput, Prisma.ReviewUncheckedUpdateWithoutModeratorInput>
+  create: Prisma.XOR<Prisma.ReviewCreateWithoutModeratorInput, Prisma.ReviewUncheckedCreateWithoutModeratorInput>
+}
+
+export type ReviewUpdateWithWhereUniqueWithoutModeratorInput = {
+  where: Prisma.ReviewWhereUniqueInput
+  data: Prisma.XOR<Prisma.ReviewUpdateWithoutModeratorInput, Prisma.ReviewUncheckedUpdateWithoutModeratorInput>
+}
+
+export type ReviewUpdateManyWithWhereWithoutModeratorInput = {
+  where: Prisma.ReviewScalarWhereInput
+  data: Prisma.XOR<Prisma.ReviewUpdateManyMutationInput, Prisma.ReviewUncheckedUpdateManyWithoutModeratorInput>
 }
 
 export type ReviewCreateWithoutTenantInput = {
@@ -874,16 +1095,20 @@ export type ReviewCreateWithoutTenantInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   room: Prisma.RoomCreateNestedOneWithoutReviewsInput
-  contract?: Prisma.ContractCreateNestedOneWithoutReviewsInput
+  contract: Prisma.ContractCreateNestedOneWithoutReviewsInput
   reviewer: Prisma.UserCreateNestedOneWithoutReviewsInput
+  moderator?: Prisma.UserCreateNestedOneWithoutModeratedReviewsInput
 }
 
 export type ReviewUncheckedCreateWithoutTenantInput = {
   id?: number
   roomId: number
-  contractId?: number | null
+  contractId: number
   reviewerId: number
   rating: number
   content: string
@@ -893,7 +1118,11 @@ export type ReviewUncheckedCreateWithoutTenantInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderatedById?: number | null
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewCreateOrConnectWithoutTenantInput = {
@@ -931,16 +1160,20 @@ export type ReviewCreateWithoutRoomInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutReviewsInput
-  contract?: Prisma.ContractCreateNestedOneWithoutReviewsInput
+  contract: Prisma.ContractCreateNestedOneWithoutReviewsInput
   reviewer: Prisma.UserCreateNestedOneWithoutReviewsInput
+  moderator?: Prisma.UserCreateNestedOneWithoutModeratedReviewsInput
 }
 
 export type ReviewUncheckedCreateWithoutRoomInput = {
   id?: number
   tenantId: number
-  contractId?: number | null
+  contractId: number
   reviewerId: number
   rating: number
   content: string
@@ -950,7 +1183,11 @@ export type ReviewUncheckedCreateWithoutRoomInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderatedById?: number | null
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewCreateOrConnectWithoutRoomInput = {
@@ -988,10 +1225,14 @@ export type ReviewCreateWithoutContractInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutReviewsInput
   room: Prisma.RoomCreateNestedOneWithoutReviewsInput
   reviewer: Prisma.UserCreateNestedOneWithoutReviewsInput
+  moderator?: Prisma.UserCreateNestedOneWithoutModeratedReviewsInput
 }
 
 export type ReviewUncheckedCreateWithoutContractInput = {
@@ -1007,7 +1248,11 @@ export type ReviewUncheckedCreateWithoutContractInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderatedById?: number | null
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewCreateOrConnectWithoutContractInput = {
@@ -1040,7 +1285,7 @@ export type ReviewCreateManyReviewerInput = {
   id?: number
   tenantId: number
   roomId: number
-  contractId?: number | null
+  contractId: number
   rating: number
   content: string
   cleanlinessScore: number
@@ -1049,7 +1294,31 @@ export type ReviewCreateManyReviewerInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderatedById?: number | null
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReviewCreateManyModeratorInput = {
+  id?: number
+  tenantId: number
+  roomId: number
+  contractId: number
+  reviewerId: number
+  rating: number
+  content: string
+  cleanlinessScore: number
+  locationScore: number
+  priceScore: number
+  serviceScore: number
+  isVisible?: boolean
+  status?: $Enums.ReviewStatus
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewUpdateWithoutReviewerInput = {
@@ -1061,17 +1330,21 @@ export type ReviewUpdateWithoutReviewerInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutReviewsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutReviewsNestedInput
-  contract?: Prisma.ContractUpdateOneWithoutReviewsNestedInput
+  contract?: Prisma.ContractUpdateOneRequiredWithoutReviewsNestedInput
+  moderator?: Prisma.UserUpdateOneWithoutModeratedReviewsNestedInput
 }
 
 export type ReviewUncheckedUpdateWithoutReviewerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
-  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1080,14 +1353,18 @@ export type ReviewUncheckedUpdateWithoutReviewerInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewUncheckedUpdateManyWithoutReviewerInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
-  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1096,13 +1373,76 @@ export type ReviewUncheckedUpdateManyWithoutReviewerInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReviewUpdateWithoutModeratorInput = {
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
+  locationScore?: Prisma.IntFieldUpdateOperationsInput | number
+  priceScore?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
+  isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutReviewsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutReviewsNestedInput
+  contract?: Prisma.ContractUpdateOneRequiredWithoutReviewsNestedInput
+  reviewer?: Prisma.UserUpdateOneRequiredWithoutReviewsNestedInput
+}
+
+export type ReviewUncheckedUpdateWithoutModeratorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
+  locationScore?: Prisma.IntFieldUpdateOperationsInput | number
+  priceScore?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
+  isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReviewUncheckedUpdateManyWithoutModeratorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  cleanlinessScore?: Prisma.IntFieldUpdateOperationsInput | number
+  locationScore?: Prisma.IntFieldUpdateOperationsInput | number
+  priceScore?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
+  isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewCreateManyTenantInput = {
   id?: number
   roomId: number
-  contractId?: number | null
+  contractId: number
   reviewerId: number
   rating: number
   content: string
@@ -1112,7 +1452,11 @@ export type ReviewCreateManyTenantInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderatedById?: number | null
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewUpdateWithoutTenantInput = {
@@ -1124,16 +1468,20 @@ export type ReviewUpdateWithoutTenantInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   room?: Prisma.RoomUpdateOneRequiredWithoutReviewsNestedInput
-  contract?: Prisma.ContractUpdateOneWithoutReviewsNestedInput
+  contract?: Prisma.ContractUpdateOneRequiredWithoutReviewsNestedInput
   reviewer?: Prisma.UserUpdateOneRequiredWithoutReviewsNestedInput
+  moderator?: Prisma.UserUpdateOneWithoutModeratedReviewsNestedInput
 }
 
 export type ReviewUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
-  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1143,13 +1491,17 @@ export type ReviewUncheckedUpdateWithoutTenantInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
-  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1159,13 +1511,17 @@ export type ReviewUncheckedUpdateManyWithoutTenantInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewCreateManyRoomInput = {
   id?: number
   tenantId: number
-  contractId?: number | null
+  contractId: number
   reviewerId: number
   rating: number
   content: string
@@ -1175,7 +1531,11 @@ export type ReviewCreateManyRoomInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderatedById?: number | null
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewUpdateWithoutRoomInput = {
@@ -1187,16 +1547,20 @@ export type ReviewUpdateWithoutRoomInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutReviewsNestedInput
-  contract?: Prisma.ContractUpdateOneWithoutReviewsNestedInput
+  contract?: Prisma.ContractUpdateOneRequiredWithoutReviewsNestedInput
   reviewer?: Prisma.UserUpdateOneRequiredWithoutReviewsNestedInput
+  moderator?: Prisma.UserUpdateOneWithoutModeratedReviewsNestedInput
 }
 
 export type ReviewUncheckedUpdateWithoutRoomInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
-  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1206,13 +1570,17 @@ export type ReviewUncheckedUpdateWithoutRoomInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewUncheckedUpdateManyWithoutRoomInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
-  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
   reviewerId?: Prisma.IntFieldUpdateOperationsInput | number
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1222,7 +1590,11 @@ export type ReviewUncheckedUpdateManyWithoutRoomInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewCreateManyContractInput = {
@@ -1238,7 +1610,11 @@ export type ReviewCreateManyContractInput = {
   serviceScore: number
   isVisible?: boolean
   status?: $Enums.ReviewStatus
+  moderatedById?: number | null
+  moderationReason?: string | null
+  moderatedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewUpdateWithoutContractInput = {
@@ -1250,10 +1626,14 @@ export type ReviewUpdateWithoutContractInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutReviewsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutReviewsNestedInput
   reviewer?: Prisma.UserUpdateOneRequiredWithoutReviewsNestedInput
+  moderator?: Prisma.UserUpdateOneWithoutModeratedReviewsNestedInput
 }
 
 export type ReviewUncheckedUpdateWithoutContractInput = {
@@ -1269,7 +1649,11 @@ export type ReviewUncheckedUpdateWithoutContractInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewUncheckedUpdateManyWithoutContractInput = {
@@ -1285,7 +1669,11 @@ export type ReviewUncheckedUpdateManyWithoutContractInput = {
   serviceScore?: Prisma.IntFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   status?: Prisma.EnumReviewStatusFieldUpdateOperationsInput | $Enums.ReviewStatus
+  moderatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  moderationReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  moderatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -1304,11 +1692,16 @@ export type ReviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   serviceScore?: boolean
   isVisible?: boolean
   status?: boolean
+  moderatedById?: boolean
+  moderationReason?: boolean
+  moderatedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  contract?: boolean | Prisma.Review$contractArgs<ExtArgs>
+  contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   reviewer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  moderator?: boolean | Prisma.Review$moderatorArgs<ExtArgs>
 }, ExtArgs["result"]["review"]>
 
 export type ReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1325,11 +1718,16 @@ export type ReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   serviceScore?: boolean
   isVisible?: boolean
   status?: boolean
+  moderatedById?: boolean
+  moderationReason?: boolean
+  moderatedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  contract?: boolean | Prisma.Review$contractArgs<ExtArgs>
+  contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   reviewer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  moderator?: boolean | Prisma.Review$moderatorArgs<ExtArgs>
 }, ExtArgs["result"]["review"]>
 
 export type ReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1346,11 +1744,16 @@ export type ReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   serviceScore?: boolean
   isVisible?: boolean
   status?: boolean
+  moderatedById?: boolean
+  moderationReason?: boolean
+  moderatedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  contract?: boolean | Prisma.Review$contractArgs<ExtArgs>
+  contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   reviewer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  moderator?: boolean | Prisma.Review$moderatorArgs<ExtArgs>
 }, ExtArgs["result"]["review"]>
 
 export type ReviewSelectScalar = {
@@ -1367,27 +1770,34 @@ export type ReviewSelectScalar = {
   serviceScore?: boolean
   isVisible?: boolean
   status?: boolean
+  moderatedById?: boolean
+  moderationReason?: boolean
+  moderatedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type ReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "contractId" | "reviewerId" | "rating" | "content" | "cleanlinessScore" | "locationScore" | "priceScore" | "serviceScore" | "isVisible" | "status" | "createdAt", ExtArgs["result"]["review"]>
+export type ReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "contractId" | "reviewerId" | "rating" | "content" | "cleanlinessScore" | "locationScore" | "priceScore" | "serviceScore" | "isVisible" | "status" | "moderatedById" | "moderationReason" | "moderatedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["review"]>
 export type ReviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  contract?: boolean | Prisma.Review$contractArgs<ExtArgs>
+  contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   reviewer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  moderator?: boolean | Prisma.Review$moderatorArgs<ExtArgs>
 }
 export type ReviewIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  contract?: boolean | Prisma.Review$contractArgs<ExtArgs>
+  contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   reviewer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  moderator?: boolean | Prisma.Review$moderatorArgs<ExtArgs>
 }
 export type ReviewIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  contract?: boolean | Prisma.Review$contractArgs<ExtArgs>
+  contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   reviewer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  moderator?: boolean | Prisma.Review$moderatorArgs<ExtArgs>
 }
 
 export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1404,11 +1814,15 @@ export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     /**
      * Hợp đồng thuê phòng liên quan (gỡ liên kết nếu hợp đồng bị xóa)
      */
-    contract: Prisma.$ContractPayload<ExtArgs> | null
+    contract: Prisma.$ContractPayload<ExtArgs>
     /**
      * Tài khoản người đánh giá (chặn xóa tài khoản người đánh giá)
      */
     reviewer: Prisma.$UserPayload<ExtArgs>
+    /**
+     * Quản trị viên kiểm duyệt gần nhất
+     */
+    moderator: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
@@ -1424,9 +1838,9 @@ export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
      */
     roomId: number
     /**
-     * ID hợp đồng thuê liên quan làm căn cứ xác thực khách trọ (nullable)
+     * ID hợp đồng thuê liên quan làm căn cứ xác thực khách trọ
      */
-    contractId: number | null
+    contractId: number
     /**
      * ID tài khoản khách thuê gửi đánh giá phản hồi
      */
@@ -1464,9 +1878,25 @@ export type $ReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
      */
     status: $Enums.ReviewStatus
     /**
+     * ID quản trị viên thực hiện kiểm duyệt gần nhất
+     */
+    moderatedById: number | null
+    /**
+     * Lý do kiểm duyệt gần nhất
+     */
+    moderationReason: string | null
+    /**
+     * Thời điểm kiểm duyệt gần nhất
+     */
+    moderatedAt: Date | null
+    /**
      * Thời điểm gửi đánh giá
      */
     createdAt: Date
+    /**
+     * Thời điểm cập nhật đánh giá gần nhất
+     */
+    updatedAt: Date
   }, ExtArgs["result"]["review"]>
   composites: {}
 }
@@ -1863,8 +2293,9 @@ export interface Prisma__ReviewClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   room<T extends Prisma.RoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomDefaultArgs<ExtArgs>>): Prisma.Prisma__RoomClient<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  contract<T extends Prisma.Review$contractArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Review$contractArgs<ExtArgs>>): Prisma.Prisma__ContractClient<runtime.Types.Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  contract<T extends Prisma.ContractDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContractDefaultArgs<ExtArgs>>): Prisma.Prisma__ContractClient<runtime.Types.Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reviewer<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  moderator<T extends Prisma.Review$moderatorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Review$moderatorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1907,7 +2338,11 @@ export interface ReviewFieldRefs {
   readonly serviceScore: Prisma.FieldRef<"Review", 'Int'>
   readonly isVisible: Prisma.FieldRef<"Review", 'Boolean'>
   readonly status: Prisma.FieldRef<"Review", 'ReviewStatus'>
+  readonly moderatedById: Prisma.FieldRef<"Review", 'Int'>
+  readonly moderationReason: Prisma.FieldRef<"Review", 'String'>
+  readonly moderatedAt: Prisma.FieldRef<"Review", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Review", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Review", 'DateTime'>
 }
     
 
@@ -2309,22 +2744,22 @@ export type ReviewDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Review.contract
+ * Review.moderator
  */
-export type Review$contractArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Review$moderatorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Contract
+   * Select specific fields to fetch from the User
    */
-  select?: Prisma.ContractSelect<ExtArgs> | null
+  select?: Prisma.UserSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Contract
+   * Omit specific fields from the User
    */
-  omit?: Prisma.ContractOmit<ExtArgs> | null
+  omit?: Prisma.UserOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ContractInclude<ExtArgs> | null
-  where?: Prisma.ContractWhereInput
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

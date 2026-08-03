@@ -1,8 +1,12 @@
 import { BadRequestException, ConflictException } from '@nestjs/common'
 
-jest.mock('@src/shared/modules/services/tenant-access.service', () => ({ TenantAccessService: class TenantAccessService {} }))
+jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
+  TenantAccessService: class TenantAccessService {},
+}))
 jest.mock('./repositories/invoices.repo', () => ({ InvoicesRepository: class InvoicesRepository {} }))
-jest.mock('@src/modules/notifications/notification-events.service', () => ({ NotificationEventsService: class NotificationEventsService {} }))
+jest.mock('@src/modules/notifications/notification-events.service', () => ({
+  NotificationEventsService: class NotificationEventsService {},
+}))
 const { InvoicesService } = require('./invoices.service') as typeof import('./invoices.service')
 
 describe('InvoicesService', () => {
@@ -31,6 +35,7 @@ describe('InvoicesService', () => {
       findActiveContractForInvoice: jest.fn(),
       findExistingInvoiceForContractMonth: jest.fn(),
       findConfirmedReadingsForInvoice: jest.fn(),
+      findServiceAssignmentsForInvoice: jest.fn(),
       isInvoiceCodeTaken: jest.fn(),
       countSuccessfulPayments: jest.fn(),
       createInvoiceWithItemsAndDebt: jest.fn(),
@@ -38,13 +43,19 @@ describe('InvoicesService', () => {
       updateInvoiceAndDebtStatus: jest.fn(),
     }
     tenantAccessService = {
-      getActiveTenantContext: jest.fn().mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
+      getActiveTenantContext: jest
+        .fn()
+        .mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
     }
     notificationEventsService = {
       notifyInvoiceIssued: jest.fn(),
       notifyInvoiceOverdue: jest.fn(),
     }
-    service = new InvoicesService(invoicesRepository as never, tenantAccessService as never, notificationEventsService as never)
+    service = new InvoicesService(
+      invoicesRepository as never,
+      tenantAccessService as never,
+      notificationEventsService as never,
+    )
   })
 
   it('creates invoice items and a matching open debt record', async () => {
@@ -59,6 +70,13 @@ describe('InvoicesService', () => {
         previousValue: 100,
         currentValue: 130,
         meter: { type: 'ELECTRICITY', unit: 'kWh' },
+      },
+    ])
+    invoicesRepository.findServiceAssignmentsForInvoice.mockResolvedValue([
+      {
+        quantity: 2,
+        unitPrice: null,
+        serviceItem: { name: 'Giữ xe', itemType: 'PARKING', defaultUnitPrice: 50000, unitLabel: 'xe' },
       },
     ])
     invoicesRepository.isInvoiceCodeTaken.mockResolvedValue(false)
@@ -81,16 +99,17 @@ describe('InvoicesService', () => {
         roomId: 5,
         renterId: 99,
         billingMonth: new Date('2026-07-01T00:00:00.000Z'),
-        subtotal: 2705000,
-        totalAmount: 2705000,
+        subtotal: 2805000,
+        totalAmount: 2805000,
         paidAmount: 0,
-        debtAmount: 2705000,
+        debtAmount: 2805000,
         status: 'UNPAID',
       }),
       expect.arrayContaining([
         expect.objectContaining({ itemType: 'RENT', amount: 2500000 }),
         expect.objectContaining({ itemType: 'ELECTRICITY', amount: 105000, meterReadingId: 1 }),
         expect.objectContaining({ itemType: 'SERVICE', amount: 100000 }),
+        expect.objectContaining({ itemType: 'PARKING', quantity: 2, unitPrice: 50000, amount: 100000 }),
       ]),
       'OPEN',
     )
@@ -145,8 +164,42 @@ describe('InvoicesService', () => {
 
     const result = await service.listDebts(50, { page: 1, limit: 20, status: 'OPEN' })
 
-    expect(invoicesRepository.findDebtsAndCount).toHaveBeenCalledWith(expect.objectContaining({ tenantId: 10, status: 'OPEN' }), 0, 20)
+    expect(invoicesRepository.findDebtsAndCount).toHaveBeenCalledWith(
+      expect.objectContaining({ tenantId: 10, status: 'OPEN' }),
+      0,
+      20,
+    )
     expect(result.meta.total).toBe(1)
   })
-})
 
+  it('applies invoice filters while forcing the authenticated renter id', async () => {
+    invoicesRepository.findInvoicesAndCount.mockResolvedValue([[{ id: 1, renterId: 99 }], 1])
+
+    const result = await service.listMine(99, {
+      page: 1,
+      limit: 20,
+      renterId: 1234,
+      status: 'UNPAID',
+      roomId: 5,
+    })
+
+    expect(invoicesRepository.findInvoicesAndCount).toHaveBeenCalledWith(
+      expect.objectContaining({ renterId: 99, tenantId: undefined, status: 'UNPAID', roomId: 5 }),
+      0,
+      20,
+    )
+    expect(result.meta.total).toBe(1)
+  })
+
+  it('lists debt only for the authenticated renter', async () => {
+    invoicesRepository.findDebtsAndCount.mockResolvedValue([[{ id: 1, renterId: 99 }], 1])
+
+    await service.listMyDebts(99, { page: 1, limit: 20, renterId: 1234, status: 'OPEN' })
+
+    expect(invoicesRepository.findDebtsAndCount).toHaveBeenCalledWith(
+      expect.objectContaining({ renterId: 99, tenantId: undefined, status: 'OPEN' }),
+      0,
+      20,
+    )
+  })
+})

@@ -1,5 +1,7 @@
 # G06 - Đặc tả điện nước, công tơ, chỉ số và dịch vụ
 
+> **Snapshot 31/07/2026:** Utility meter/reading, OCR queue-review-accept, service catalog và service assignment đã có API. Import/batch và kiểm chứng provider/worker thật còn backlog; mọi nhãn cũ “OCR/dịch vụ chỉ để sau” đã hết hiệu lực.
+
 ## 1. Tổng quan
 
 Tài liệu này mô tả nhóm tính năng G06 của backend: cấu hình đồng hồ điện/nước cho phòng, nhập chỉ số thủ công theo kỳ, tính lượng tiêu thụ, snapshot đơn giá và chuyển chỉ số đã xác nhận sang nghiệp vụ hóa đơn.
@@ -20,7 +22,7 @@ Xác nhận reading
 G07 lấy reading CONFIRMED để tạo InvoiceItem
 ```
 
-MVP hiện dùng nhập tay. `OcrJob`, nguồn `OCR` và `IMPORT` tồn tại trong schema nhưng chưa có API xử lý. Hệ thống cũng chưa có danh mục phí dịch vụ định kỳ; các khoản `SERVICE`, `PARKING`, `INTERNET` hiện được nhập thủ công ở G07.
+MVP hỗ trợ nhập tay và OCR công tơ có bước người dùng duyệt trước khi tạo reading. Nguồn `IMPORT` mới chỉ tồn tại trong enum. Hệ thống cũng chưa có danh mục phí dịch vụ định kỳ; các khoản `SERVICE`, `PARKING`, `INTERNET` hiện được nhập thủ công ở G07.
 
 Mục tiêu của tài liệu:
 
@@ -39,7 +41,8 @@ Mục tiêu của tài liệu:
 | Tính toán         | `current - previous`, nhân đơn giá và snapshot amount    |
 | Liên kết hợp đồng | Gắn active contract phù hợp khi tạo reading nếu tìm thấy |
 | Liên kết hóa đơn  | G07 sử dụng reading `CONFIRMED` chưa được dùng           |
-| Nền tảng mở rộng  | OCR/import và cấu hình dịch vụ chưa hoàn thiện           |
+| OCR                | Upload, xử lý nền, review và tạo reading nháp             |
+| Nền tảng mở rộng  | Import và cấu hình dịch vụ chưa hoàn thiện               |
 
 ### 1.2. Ngoài phạm vi
 
@@ -57,11 +60,11 @@ Mục tiêu của tài liệu:
 | ------------------------- | --------------------- | ------------------------------------------------------ |
 | Cấu hình meter            | Đã hoạt động          | Không có delete hoặc quy trình thay thiết bị           |
 | Nhập reading thủ công     | Đã hoạt động          | Có tự lấy previous và giá room                         |
-| Tính consumption/amount   | Đã hoạt động          | Dùng JavaScript number sau khi đọc Decimal             |
+| Tính consumption/amount   | Đã hoạt động          | Tính bằng Decimal cho cả nhập tay và OCR               |
 | Review trạng thái reading | Đã hoạt động một phần | Cho đổi enum trực tiếp, chưa có state machine          |
 | Tích hợp invoice          | Đã hoạt động          | Chỉ lấy confirmed, đúng contract/room/month, chưa dùng |
 | Phí dịch vụ định kỳ       | Chưa có               | Chỉ có extra item nhập tay ở G07                       |
-| OCR                       | Chỉ có schema         | Không có controller/service/worker                     |
+| OCR                       | Đã hoạt động          | Tesseract.js, BullMQ, feature gate và human review     |
 | Import                    | Chỉ có enum           | Không có upload hoặc xử lý file                        |
 | Phát hiện bất thường      | Chưa có               | `ABNORMAL` do người dùng tự chọn                       |
 | Renter self-service       | Chưa có               | Renter chưa có API xem reading                         |
@@ -113,7 +116,7 @@ Tenant
             ├── MeterReading[]
             │   ├── Contract?
             │   └── InvoiceItem[]
-            └── OcrJob[]       [chỉ có schema]
+            └── OcrJob[]       [đã có API/worker/review]
 ```
 
 ### 3.2. UtilityMeter
@@ -182,7 +185,7 @@ Một meter chỉ có một reading cho mỗi tháng.
 | Giá trị  | Trạng thái triển khai |
 | -------- | --------------------- |
 | `MANUAL` | Đang hoạt động        |
-| `OCR`    | Chỉ có schema         |
+| `OCR`    | Đã có upload, worker, review và accept |
 | `IMPORT` | Chỉ có enum           |
 
 ### 4.4. ReadingStatus
@@ -835,15 +838,13 @@ Mọi API đề xuất trong phần này đều **chưa tồn tại**.
 
 ### 14.5. OCR, import và image
 
-| #   | Hiện trạng                 | Ảnh hưởng                       | Hướng triển khai                                    | Dependency             | Tiêu chí hoàn thành                    |
-| --- | -------------------------- | ------------------------------- | --------------------------------------------------- | ---------------------- | -------------------------------------- |
-| 30  | `OcrJob` chỉ có schema     | OCR chưa dùng được              | Module upload → enqueue → recognize → review        | Storage/queue/provider | API idempotent và tenant-scoped        |
-| 31  | `allowAiOcr` chưa enforce  | Plan flag không có tác dụng     | Feature gate trước tạo job                          | G02                    | Plan không cho phép nhận 403 phù hợp   |
-| 32  | Image chỉ nhận URL         | Không kiểm ownership/file       | Multipart upload, MIME/size và signed access        | Storage                | File thuộc đúng tenant/meter           |
-| 33  | Không có confidence policy | Kết quả thấp có thể bị dùng sai | Threshold → `NEED_REVIEW`, không auto-confirm       | OCR                    | Low confidence bắt buộc review         |
-| 34  | Không tạo `source=OCR`     | Schema không nối nghiệp vụ      | Accept result tạo draft reading có OCR link         | OCR                    | Human confirm trước invoice            |
-| 35  | `IMPORT` chỉ có enum       | Không nhập hàng loạt            | CSV/XLSX preview, validate, conflict report, commit | Job/queue              | Partial error minh bạch, retry an toàn |
-| 36  | Không chống ảnh/job trùng  | Tốn chi phí và duplicate        | File hash/idempotency key                           | OCR                    | Upload lại không tạo job ngoài ý muốn  |
+OCR hiện đã có multipart upload, tenant/plan gate, file hash chống trùng, BullMQ processor, Tesseract/Google Vision provider, confidence threshold, `NEED_REVIEW`, retry và accept tạo reading `source=OCR`. Phần còn lại:
+
+| # | Hiện trạng | Ảnh hưởng | Hướng triển khai | Tiêu chí hoàn thành |
+|---|---|---|---|---|
+| 30 | Provider/queue chưa kiểm chứng staging | Không biết behavior khi Redis/provider gián đoạn | Smoke, retry, timeout và idempotency test | Không tạo job/reading trùng khi retry |
+| 31 | `IMPORT` chỉ có enum | Không nhập hàng loạt | CSV/XLSX preview, validate, conflict report, commit | Partial error minh bạch, retry an toàn |
+| 32 | Chưa có retention policy cho ảnh OCR | Tăng chi phí và phạm vi dữ liệu | Chốt storage lifecycle/signed access | Ảnh hết hạn đúng policy, audit đủ |
 
 ### 14.6. Self-service, audit và kiểm thử
 

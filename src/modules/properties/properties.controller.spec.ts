@@ -32,7 +32,15 @@ describe('PropertiesController', () => {
   })
 
   it('delegates property and floor mutations with active user id', async () => {
-    await controller.create(user, { name: 'Nha A', type: 'HOUSE', province: 'HN', district: 'CG', ward: 'DV', addressDetail: '1', status: 'ACTIVE' })
+    await controller.create(user, {
+      name: 'Nha A',
+      type: 'HOUSE',
+      province: 'HN',
+      district: 'CG',
+      ward: 'DV',
+      addressDetail: '1',
+      status: 'ACTIVE',
+    })
     await controller.createFloor(user, 1, { name: 'Tang 1', floorNumber: 1 })
     await controller.deleteFloor(user, 1, 2)
 

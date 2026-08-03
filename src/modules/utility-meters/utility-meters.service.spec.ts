@@ -1,6 +1,8 @@
 import { ConflictException, NotFoundException } from '@nestjs/common'
 
-jest.mock('@src/shared/modules/services/tenant-access.service', () => ({ TenantAccessService: class TenantAccessService {} }))
+jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
+  TenantAccessService: class TenantAccessService {},
+}))
 jest.mock('./repositories/utility-meters.repo', () => ({ UtilityMetersRepository: class UtilityMetersRepository {} }))
 const { UtilityMetersService } = require('./utility-meters.service') as typeof import('./utility-meters.service')
 
@@ -19,7 +21,9 @@ describe('UtilityMetersService', () => {
       updateMeter: jest.fn(),
     }
     tenantAccessService = {
-      getActiveTenantContext: jest.fn().mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
+      getActiveTenantContext: jest
+        .fn()
+        .mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
     }
     service = new UtilityMetersService(utilityMetersRepository as never, tenantAccessService as never)
   })
@@ -44,9 +48,9 @@ describe('UtilityMetersService', () => {
   it('rejects meter creation when room is outside current tenant', async () => {
     utilityMetersRepository.findRoomForMeter.mockResolvedValue(null)
 
-    await expect(service.create(50, { roomId: 5, type: 'ELECTRICITY', meterCode: 'E-001', status: 'ACTIVE' })).rejects.toBeInstanceOf(
-      NotFoundException,
-    )
+    await expect(
+      service.create(50, { roomId: 5, type: 'ELECTRICITY', meterCode: 'E-001', status: 'ACTIVE' }),
+    ).rejects.toBeInstanceOf(NotFoundException)
     expect(utilityMetersRepository.createMeter).not.toHaveBeenCalled()
   })
 
@@ -54,9 +58,9 @@ describe('UtilityMetersService', () => {
     utilityMetersRepository.findRoomForMeter.mockResolvedValue({ id: 5 })
     utilityMetersRepository.findMeterByRoomType.mockResolvedValue({ id: 1 })
 
-    await expect(service.create(50, { roomId: 5, type: 'ELECTRICITY', meterCode: 'E-001', status: 'ACTIVE' })).rejects.toBeInstanceOf(
-      ConflictException,
-    )
+    await expect(
+      service.create(50, { roomId: 5, type: 'ELECTRICITY', meterCode: 'E-001', status: 'ACTIVE' }),
+    ).rejects.toBeInstanceOf(ConflictException)
     expect(utilityMetersRepository.createMeter).not.toHaveBeenCalled()
   })
 

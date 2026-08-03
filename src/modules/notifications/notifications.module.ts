@@ -12,7 +12,10 @@ import { NotificationsService } from './notifications.service'
 import { NotificationsRepository } from './repositories/notifications.repo'
 
 @Module({
-  imports: [SharedServiceModule, BullModule.registerQueue({ name: NOTIFICATIONS_QUEUE })],
+  imports: [
+    SharedServiceModule,
+    BullModule.registerQueue({ name: NOTIFICATIONS_QUEUE, forceDisconnectOnShutdown: true }),
+  ],
   controllers: [NotificationsController],
   providers: [
     NotificationsService,

@@ -39,7 +39,11 @@ export class NotificationsProcessor extends WorkerHost {
         if (result.success) {
           await this.notificationsRepository.markTokenSuccess(result.tokenId)
         } else {
-          await this.notificationsRepository.markTokenFailure(result.tokenId, result.errorCode ?? 'messaging/unknown', result.disableToken)
+          await this.notificationsRepository.markTokenFailure(
+            result.tokenId,
+            result.errorCode ?? 'messaging/unknown',
+            result.disableToken,
+          )
         }
       }
 

@@ -240,6 +240,7 @@ export type ContractMemberOrderByWithRelationInput = {
 
 export type ContractMemberWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  contractId_userId?: Prisma.ContractMemberContractIdUserIdCompoundUniqueInput
   AND?: Prisma.ContractMemberWhereInput | Prisma.ContractMemberWhereInput[]
   OR?: Prisma.ContractMemberWhereInput[]
   NOT?: Prisma.ContractMemberWhereInput | Prisma.ContractMemberWhereInput[]
@@ -249,7 +250,7 @@ export type ContractMemberWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"ContractMember"> | Date | string
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "contractId_userId">
 
 export type ContractMemberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -334,6 +335,11 @@ export type ContractMemberListRelationFilter = {
 
 export type ContractMemberOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ContractMemberContractIdUserIdCompoundUniqueInput = {
+  contractId: number
+  userId: number
 }
 
 export type ContractMemberCountOrderByAggregateInput = {

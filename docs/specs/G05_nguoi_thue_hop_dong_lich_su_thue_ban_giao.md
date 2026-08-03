@@ -1,5 +1,7 @@
 # G05 - Đặc tả người thuê, hợp đồng, lịch sử thuê và bàn giao
 
+> **Snapshot 31/07/2026:** Renter profile, invitation one-time, contract, rental history, asset inventory, handover/dispute và contract termination đã có API cùng migration/transaction. Contract template/file/e-signature và scheduler hết hạn tự động vẫn là backlog. Snapshot này hợp nhất, không thay thế mất các chỉnh sửa G05 đang có trong working tree.
+
 ## 1. Tổng quan
 
 Tài liệu này mô tả nhóm tính năng G05 của backend: hồ sơ người thuê, danh sách người thuê theo tenant, hợp đồng thuê phòng, người thuê chính, người ở cùng và các thay đổi dữ liệu khi hợp đồng được kích hoạt.
@@ -43,16 +45,18 @@ Mục tiêu của tài liệu:
 | Nhóm                   | Trạng thái            | Nhận định                                                                |
 | ---------------------- | --------------------- | ------------------------------------------------------------------------ |
 | Renter self-profile    | Đã hoạt động          | Có xem/cập nhật, chưa có upload giấy tờ hoặc verification workflow       |
-| Landlord renter lookup | Đã hoạt động một phần | Chỉ nhận diện renter qua request/appointment                             |
+| Landlord renter lookup | Đã hoạt động          | Nhận diện qua request, appointment, contract/member và rental history    |
 | Tạo/cập nhật contract  | Đã hoạt động          | Có validation phòng, renter, sức chứa và transaction members             |
-| Kích hoạt contract     | Đã hoạt động một phần | Có transaction cập nhật room/history/request, còn thiếu ký và chống race |
+| Kích hoạt contract     | Đã hoạt động          | Có transaction/CAS cập nhật room/history/request; chữ ký vẫn là luồng riêng |
 | Renter xem contract    | Đã hoạt động          | Main renter và co-renter đều có quyền đọc                                |
 | Hủy contract           | Đã hoạt động một phần | Chỉ hủy contract chưa active, chưa release reservation                   |
 | Ký hợp đồng            | Chỉ có schema         | Chưa có API cập nhật chữ ký hoặc trạng thái chờ ký                       |
-| Hết hạn/thanh lý       | Chỉ có schema         | Chưa có scheduler, API và transaction trả phòng                          |
-| Rental history         | Hoạt động một phần    | Chỉ tạo lúc activate, chưa có API lịch sử hoặc đóng bản ghi              |
+| Hết hạn/thanh lý       | Hoạt động một phần    | Thanh lý/trả phòng đã có API; scheduler hết hạn chưa thuộc phạm vi       |
+| Rental history         | Đã hoạt động          | Có API lịch sử và đóng bản ghi atomically khi hoàn tất thanh lý          |
 | Template/file hợp đồng | Chỉ có schema         | Chưa có module/controller/service                                        |
-| Tài sản/bàn giao       | Chỉ có schema         | Chưa có API vận hành                                                     |
+| Tài sản/bàn giao       | Đã hoạt động          | Có inventory, check-in/check-out, ký hai phía và xử lý tranh chấp        |
+
+Chi tiết API bàn giao và thanh lý mới xem tại `docs/api/G05_HANDOVER_TERMINATION.md`.
 
 ## 2. Actor, xác thực và tenant context
 
@@ -112,11 +116,11 @@ Tenant
         │   ├── ContractTemplate?
         │   ├── ContractFile[]                  [chỉ có schema]
         │   ├── RentalHistory[]
-        │   ├── ContractTerminationRequest[]   [chỉ có schema]
-        │   ├── HandoverRecord[]                [chỉ có schema]
+        │   ├── ContractTerminationRequest[]   [đã có API]
+        │   ├── HandoverRecord[]                [đã có API]
         │   ├── MeterReading[]                  [G06]
         │   └── Invoice[]                       [G07]
-        └── RoomAsset[]                         [chỉ có schema]
+        └── RoomAsset[]                         [đã có API]
 ```
 
 ### 3.2. User và RenterProfile
@@ -694,22 +698,19 @@ Mọi API đề xuất trong phần này đều **chưa tồn tại**. Không d�
 | 25  | Filter `/contracts/me` bị bỏ qua                  | UI filter sai kỳ vọng         | Áp dụng status/room/property/search có giới hạn quyền      | Contract repo      | Contract test từng filter         |
 | 26  | Member response lộ email/phone của nhau           | Rủi ro PII                    | Tách renter/staff projection và mask field                 | Privacy            | Renter chỉ nhận field cần thiết   |
 | 27  | Không có detail scope riêng cho main/co-renter    | Mọi member nhận cùng response | Xây policy field theo vai trò member                       | Product            | Contract test response role-based |
-| 28  | Không có API rental history riêng                 | Không tra cứu quá trình ở     | List mine/tenant có paging                                 | Contract lifecycle | History đúng tenant/user          |
+| 28  | API rental history đã có nhưng chưa E2E DB        | Có thể còn lỗi scope/filter    | Chạy list mine/tenant bằng PostgreSQL seed                  | Contract lifecycle | History đúng tenant/user          |
 | 29  | Contract có `deletedAt` nhưng không có delete API | Soft-delete chưa vận hành     | Chỉ cho archive contract hợp lệ, không xóa lịch sử pháp lý | Legal/audit        | Không phá invoice/history         |
 
-### 10.4. Tính năng chỉ có schema
+### 10.4. Phạm vi đã có API và phần schema-only
 
-| #   | Model                        | Hiện trạng   | Hướng triển khai và tiêu chí                                                |
-| --- | ---------------------------- | ------------ | --------------------------------------------------------------------------- |
-| 30  | `ContractTemplate`           | Chưa có API  | CRUD tenant-scoped, biến có schema, một default hợp lệ, soft delete rõ ràng |
-| 31  | `ContractFile`               | Chưa có API  | Render/upload/download PDF/DOCX, version immutable, access control          |
-| 32  | `ContractTerminationRequest` | Chưa có API  | Renter submit/cancel, landlord approve/reject/complete, transition test     |
-| 33  | `AssetCategory`              | Chưa có API  | Danh mục có scope và policy xóa khi đang tham chiếu                         |
-| 34  | `RoomAsset`                  | Chưa có API  | CRUD tenant-scoped, quantity/condition/image, soft delete                   |
-| 35  | `HandoverRecord`             | Chưa có API  | Check-in/check-out gắn đúng room/contract, draft/confirm/dispute            |
-| 36  | `HandoverAssetItem`          | Chưa có API  | Snapshot quantity/condition/note/image tại lúc bàn giao                     |
-| 37  | Chữ ký bàn giao              | Chỉ có field | Hai bên xác nhận đúng bản biên bản, ghi timestamp và version                |
-| 38  | Tranh chấp/hư hỏng           | Chỉ có enum  | Workflow dispute, evidence và liên kết khoản bồi thường nếu có              |
+`ContractTerminationRequest`, `AssetCategory`, `RoomAsset`, `HandoverRecord` và `HandoverAssetItem` đã có API, transaction và unit test. Phần còn schema/backlog:
+
+| # | Model/capability | Hiện trạng | Hướng triển khai và tiêu chí |
+|---|---|---|---|
+| 30 | `ContractTemplate` | Chưa có API | CRUD tenant-scoped, version/default rõ ràng |
+| 31 | `ContractFile` | Chưa có API | Upload/download/version immutable/access control |
+| 32 | Chữ ký hợp đồng | Chưa có workflow | Identity, consent, hash/version và audit pháp lý |
+| 33 | Bồi thường từ dispute | Chưa nối invoice/debt | Policy duyệt và audit trước khi tạo khoản phải thu |
 
 ### 10.5. Audit, kiểm thử và vận hành
 
@@ -727,7 +728,7 @@ Mọi API đề xuất trong phần này đều **chưa tồn tại**. Không d�
 3. Release reservation, kết thúc rental history và trả trạng thái room an toàn.
 4. Sửa phạm vi renter lookup, filter `/me` và bảo vệ PII.
 5. Contract template, content version và file hợp đồng.
-6. Termination request, tài sản và bàn giao.
+6. Staging/integration test cho termination, tài sản và bàn giao đã có.
 7. Notification, audit, integration test và E2E G04-G08.
 
 ## 12. Checklist kiểm thử tài liệu

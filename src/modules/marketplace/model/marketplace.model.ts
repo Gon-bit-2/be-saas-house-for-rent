@@ -1,4 +1,5 @@
 import z from 'zod'
+import { IsoDateInputCodec } from '@src/common/utils/date-codec.util'
 
 const PropertyTypeSchema = z.enum(['HOUSE', 'MINI_APARTMENT', 'DORM', 'APARTMENT'])
 
@@ -40,7 +41,7 @@ export const ListMarketplaceRoomsQuerySchema = z
 
 export const CreateMarketplaceRentalRequestBodySchema = z
   .object({
-    expectedStartDate: z.coerce.date(),
+    expectedStartDate: IsoDateInputCodec,
     message: z.string().trim().max(2000).nullable().optional(),
     appointmentId: z.coerce.number().int().positive().nullable().optional(),
   })
@@ -48,11 +49,13 @@ export const CreateMarketplaceRentalRequestBodySchema = z
 
 export const CreateMarketplaceViewingAppointmentBodySchema = z
   .object({
-    scheduledAt: z.coerce.date(),
+    scheduledAt: IsoDateInputCodec,
     note: z.string().trim().max(2000).nullable().optional(),
   })
   .strict()
 
 export type TListMarketplaceRoomsQuerySchema = z.infer<typeof ListMarketplaceRoomsQuerySchema>
 export type TCreateMarketplaceRentalRequestBodySchema = z.infer<typeof CreateMarketplaceRentalRequestBodySchema>
-export type TCreateMarketplaceViewingAppointmentBodySchema = z.infer<typeof CreateMarketplaceViewingAppointmentBodySchema>
+export type TCreateMarketplaceViewingAppointmentBodySchema = z.infer<
+  typeof CreateMarketplaceViewingAppointmentBodySchema
+>

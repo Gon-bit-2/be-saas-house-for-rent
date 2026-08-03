@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common'
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common'
 import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
 import { TenantAccessService } from '@src/shared/modules/services/tenant-access.service'
 import type { Prisma } from 'generated/prisma/client'
@@ -83,7 +83,9 @@ export class UtilityMetersService {
     return {
       tenantId,
       ...(query.roomId ? { roomId: query.roomId } : {}),
-      ...(query.propertyId ? { room: { propertyId: query.propertyId, deletedAt: null } } : { room: { deletedAt: null } }),
+      ...(query.propertyId
+        ? { room: { propertyId: query.propertyId, deletedAt: null } }
+        : { room: { deletedAt: null } }),
       ...(query.type ? { type: query.type } : {}),
       ...(query.status ? { status: query.status } : {}),
     }

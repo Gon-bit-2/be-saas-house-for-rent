@@ -287,6 +287,7 @@ export type SubscriptionOrderByWithRelationInput = {
 
 export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  id_tenantId?: Prisma.SubscriptionIdTenantIdCompoundUniqueInput
   AND?: Prisma.SubscriptionWhereInput | Prisma.SubscriptionWhereInput[]
   OR?: Prisma.SubscriptionWhereInput[]
   NOT?: Prisma.SubscriptionWhereInput | Prisma.SubscriptionWhereInput[]
@@ -302,7 +303,7 @@ export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   plan?: Prisma.XOR<Prisma.PlanScalarRelationFilter, Prisma.PlanWhereInput>
   payments?: Prisma.SubscriptionPaymentListRelationFilter
-}, "id">
+}, "id" | "id_tenantId">
 
 export type SubscriptionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -436,6 +437,11 @@ export type SubscriptionListRelationFilter = {
 
 export type SubscriptionOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type SubscriptionIdTenantIdCompoundUniqueInput = {
+  id: number
+  tenantId: number
 }
 
 export type SubscriptionCountOrderByAggregateInput = {

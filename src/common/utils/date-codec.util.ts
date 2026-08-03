@@ -11,3 +11,10 @@ export const IsoDateTimeCodec = z.codec(z.iso.datetime(), z.date(), {
   decode: (value) => new Date(value),
   encode: (value) => value.toISOString(),
 })
+
+const IsoDateInputSchema = z.union([z.iso.date(), z.iso.datetime({ offset: true, local: true })])
+
+export const IsoDateInputCodec = z.codec(IsoDateInputSchema, z.date(), {
+  decode: (value) => new Date(value),
+  encode: (value) => value.toISOString(),
+})

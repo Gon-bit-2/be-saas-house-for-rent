@@ -135,6 +135,11 @@ export type Amenity = Prisma.AmenityModel
  */
 export type RoomAmenity = Prisma.RoomAmenityModel
 /**
+ * Model RenterInvitation
+ * Lời mời tạo tài khoản người thuê do chủ trọ phát hành.
+ */
+export type RenterInvitation = Prisma.RenterInvitationModel
+/**
  * Model RenterProfile
  * Hồ sơ thông tin chi tiết người thuê trên Mobile App
  */
@@ -229,6 +234,16 @@ export type OcrJob = Prisma.OcrJobModel
  * Bảng quản lý các đợt phát hành hóa đơn tiền phòng hàng loạt hằng tháng của chủ trọ
  */
 export type InvoiceBatch = Prisma.InvoiceBatchModel
+/**
+ * Model ServiceCatalogItem
+ * Danh mục phí dịch vụ dùng lại trong một tenant.
+ */
+export type ServiceCatalogItem = Prisma.ServiceCatalogItemModel
+/**
+ * Model ServiceAssignment
+ * Phí định kỳ gán cho đúng một phòng hoặc một hợp đồng.
+ */
+export type ServiceAssignment = Prisma.ServiceAssignmentModel
 /**
  * Model Invoice
  * Bảng lưu trữ thông tin hóa đơn thu tiền phòng, điện nước và dịch vụ hằng tháng

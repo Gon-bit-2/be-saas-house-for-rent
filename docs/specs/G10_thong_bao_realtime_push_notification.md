@@ -1,5 +1,7 @@
 # G10 - Đặc tả thông báo nội bộ, realtime và push notification
 
+> **Snapshot 31/07/2026:** Notification inbox/read, device token, Socket.IO gateway, Firebase push service và BullMQ processor đã có backend. Trạng thái vận hành vẫn phụ thuộc Redis/Firebase và client; không được mô tả là “chỉ giữ nền tảng dữ liệu”.
+
 ## 1. Tổng quan
 
 G10 mô tả cách hệ thống tạo, lưu, đọc và phân phối thông báo đến người dùng. Một business event có thể tạo ba hình thức tiếp nhận:

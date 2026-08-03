@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
-import { IsAdmin } from '@src/common/decorators/decorators/roles.decorator'
+import roleName from '@src/common/constants/role.constant'
+import { IsAdmin, Roles } from '@src/common/decorators/decorators/roles.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
 import { CreatePlanBodyDTO, ListPlansQueryDTO, UpdatePlanBodyDTO } from './dto/plans.dto'
 import { PlansService } from './plans.service'
@@ -18,6 +19,12 @@ export class PlansController {
     return this.plansService.list(query)
   }
 
+  @Roles(roleName.LANDLORD)
+  @Get('available')
+  listAvailable() {
+    return this.plansService.listAvailable()
+  }
+
   @Get(':id')
   getById(@Param('id', ParseIntPipe) id: number) {
     return this.plansService.getById(id)
@@ -29,7 +36,11 @@ export class PlansController {
   }
 
   @Patch(':id')
-  update(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number, @Body() body: UpdatePlanBodyDTO) {
+  update(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdatePlanBodyDTO,
+  ) {
     return this.plansService.update(id, body, user.userId)
   }
 }

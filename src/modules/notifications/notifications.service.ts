@@ -1,6 +1,7 @@
 import { InjectQueue } from '@nestjs/bullmq'
 import { Injectable, Logger, NotFoundException } from '@nestjs/common'
 import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
+import envConfig from '@src/config/env.config'
 import type { NotificationType, Prisma } from 'generated/prisma/client'
 import type { Queue } from 'bullmq'
 import { NOTIFICATIONS_QUEUE, SEND_PUSH_JOB, type SendPushJobData } from './notifications.constants'
@@ -67,6 +68,10 @@ export class NotificationsService {
   }
 
   async sendTest(userId: number) {
+    if (envConfig.NODE_ENV !== 'development') {
+      throw new NotFoundException('Không tìm thấy tài nguyên')
+    }
+
     const [notification] = await this.createAndDispatch({
       userIds: [userId],
       title: 'Thông báo thử nghiệm',

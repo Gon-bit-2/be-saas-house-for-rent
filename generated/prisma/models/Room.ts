@@ -411,6 +411,7 @@ export type RoomWhereInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentListRelationFilter
   rentalRequests?: Prisma.RentalRequestListRelationFilter
   contracts?: Prisma.ContractListRelationFilter
+  serviceAssignments?: Prisma.ServiceAssignmentListRelationFilter
   roomAssets?: Prisma.RoomAssetListRelationFilter
   handoverRecords?: Prisma.HandoverRecordListRelationFilter
   utilityMeters?: Prisma.UtilityMeterListRelationFilter
@@ -462,6 +463,7 @@ export type RoomOrderByWithRelationInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentOrderByRelationAggregateInput
   rentalRequests?: Prisma.RentalRequestOrderByRelationAggregateInput
   contracts?: Prisma.ContractOrderByRelationAggregateInput
+  serviceAssignments?: Prisma.ServiceAssignmentOrderByRelationAggregateInput
   roomAssets?: Prisma.RoomAssetOrderByRelationAggregateInput
   handoverRecords?: Prisma.HandoverRecordOrderByRelationAggregateInput
   utilityMeters?: Prisma.UtilityMeterOrderByRelationAggregateInput
@@ -517,6 +519,7 @@ export type RoomWhereUniqueInput = Prisma.AtLeast<{
   viewingAppointments?: Prisma.RoomViewingAppointmentListRelationFilter
   rentalRequests?: Prisma.RentalRequestListRelationFilter
   contracts?: Prisma.ContractListRelationFilter
+  serviceAssignments?: Prisma.ServiceAssignmentListRelationFilter
   roomAssets?: Prisma.RoomAssetListRelationFilter
   handoverRecords?: Prisma.HandoverRecordListRelationFilter
   utilityMeters?: Prisma.UtilityMeterListRelationFilter
@@ -619,6 +622,7 @@ export type RoomCreateInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -667,6 +671,7 @@ export type RoomUncheckedCreateInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -708,6 +713,7 @@ export type RoomUpdateInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -756,6 +762,7 @@ export type RoomUncheckedUpdateInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -1426,6 +1433,22 @@ export type RoomUpdateOneRequiredWithoutOcrJobsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutOcrJobsInput, Prisma.RoomUpdateWithoutOcrJobsInput>, Prisma.RoomUncheckedUpdateWithoutOcrJobsInput>
 }
 
+export type RoomCreateNestedOneWithoutServiceAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutServiceAssignmentsInput, Prisma.RoomUncheckedCreateWithoutServiceAssignmentsInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutServiceAssignmentsInput
+  connect?: Prisma.RoomWhereUniqueInput
+}
+
+export type RoomUpdateOneWithoutServiceAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.RoomCreateWithoutServiceAssignmentsInput, Prisma.RoomUncheckedCreateWithoutServiceAssignmentsInput>
+  connectOrCreate?: Prisma.RoomCreateOrConnectWithoutServiceAssignmentsInput
+  upsert?: Prisma.RoomUpsertWithoutServiceAssignmentsInput
+  disconnect?: Prisma.RoomWhereInput | boolean
+  delete?: Prisma.RoomWhereInput | boolean
+  connect?: Prisma.RoomWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoomUpdateToOneWithWhereWithoutServiceAssignmentsInput, Prisma.RoomUpdateWithoutServiceAssignmentsInput>, Prisma.RoomUncheckedUpdateWithoutServiceAssignmentsInput>
+}
+
 export type RoomCreateNestedOneWithoutInvoicesInput = {
   create?: Prisma.XOR<Prisma.RoomCreateWithoutInvoicesInput, Prisma.RoomUncheckedCreateWithoutInvoicesInput>
   connectOrCreate?: Prisma.RoomCreateOrConnectWithoutInvoicesInput
@@ -1541,6 +1564,7 @@ export type RoomCreateWithoutCreatedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -1587,6 +1611,7 @@ export type RoomUncheckedCreateWithoutCreatedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -1638,6 +1663,7 @@ export type RoomCreateWithoutUpdatedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -1684,6 +1710,7 @@ export type RoomUncheckedCreateWithoutUpdatedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -1735,6 +1762,7 @@ export type RoomCreateWithoutDeletedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -1781,6 +1809,7 @@ export type RoomUncheckedCreateWithoutDeletedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -1907,6 +1936,7 @@ export type RoomCreateWithoutTenantInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -1954,6 +1984,7 @@ export type RoomUncheckedCreateWithoutTenantInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -2020,6 +2051,7 @@ export type RoomCreateWithoutPropertyInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -2067,6 +2099,7 @@ export type RoomUncheckedCreateWithoutPropertyInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -2133,6 +2166,7 @@ export type RoomCreateWithoutFloorInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -2180,6 +2214,7 @@ export type RoomUncheckedCreateWithoutFloorInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -2247,6 +2282,7 @@ export type RoomCreateWithoutMarketplaceModerationsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -2294,6 +2330,7 @@ export type RoomUncheckedCreateWithoutMarketplaceModerationsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -2350,6 +2387,7 @@ export type RoomUpdateWithoutMarketplaceModerationsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -2397,6 +2435,7 @@ export type RoomUncheckedUpdateWithoutMarketplaceModerationsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -2436,6 +2475,7 @@ export type RoomCreateWithoutImagesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -2483,6 +2523,7 @@ export type RoomUncheckedCreateWithoutImagesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -2539,6 +2580,7 @@ export type RoomUpdateWithoutImagesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -2586,6 +2628,7 @@ export type RoomUncheckedUpdateWithoutImagesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -2626,6 +2669,7 @@ export type RoomCreateWithoutAmenitiesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -2673,6 +2717,7 @@ export type RoomUncheckedCreateWithoutAmenitiesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -2729,6 +2774,7 @@ export type RoomUpdateWithoutAmenitiesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -2776,6 +2822,7 @@ export type RoomUncheckedUpdateWithoutAmenitiesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -2816,6 +2863,7 @@ export type RoomCreateWithoutRentalHistoriesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -2863,6 +2911,7 @@ export type RoomUncheckedCreateWithoutRentalHistoriesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -2919,6 +2968,7 @@ export type RoomUpdateWithoutRentalHistoriesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -2966,6 +3016,7 @@ export type RoomUncheckedUpdateWithoutRentalHistoriesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -3006,6 +3057,7 @@ export type RoomCreateWithoutViewLogsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -3053,6 +3105,7 @@ export type RoomUncheckedCreateWithoutViewLogsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -3109,6 +3162,7 @@ export type RoomUpdateWithoutViewLogsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -3156,6 +3210,7 @@ export type RoomUncheckedUpdateWithoutViewLogsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -3196,6 +3251,7 @@ export type RoomCreateWithoutFavoritesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -3243,6 +3299,7 @@ export type RoomUncheckedCreateWithoutFavoritesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -3299,6 +3356,7 @@ export type RoomUpdateWithoutFavoritesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -3346,6 +3404,7 @@ export type RoomUncheckedUpdateWithoutFavoritesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -3386,6 +3445,7 @@ export type RoomCreateWithoutViewingAppointmentsInput = {
   favorites?: Prisma.FavoriteRoomCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -3433,6 +3493,7 @@ export type RoomUncheckedCreateWithoutViewingAppointmentsInput = {
   favorites?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -3489,6 +3550,7 @@ export type RoomUpdateWithoutViewingAppointmentsInput = {
   favorites?: Prisma.FavoriteRoomUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -3536,6 +3598,7 @@ export type RoomUncheckedUpdateWithoutViewingAppointmentsInput = {
   favorites?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -3576,6 +3639,7 @@ export type RoomCreateWithoutRentalRequestsInput = {
   favorites?: Prisma.FavoriteRoomCreateNestedManyWithoutRoomInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -3623,6 +3687,7 @@ export type RoomUncheckedCreateWithoutRentalRequestsInput = {
   favorites?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutRoomInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -3679,6 +3744,7 @@ export type RoomUpdateWithoutRentalRequestsInput = {
   favorites?: Prisma.FavoriteRoomUpdateManyWithoutRoomNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -3726,6 +3792,7 @@ export type RoomUncheckedUpdateWithoutRentalRequestsInput = {
   favorites?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutRoomNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -3766,6 +3833,7 @@ export type RoomCreateWithoutContractsInput = {
   favorites?: Prisma.FavoriteRoomCreateNestedManyWithoutRoomInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -3813,6 +3881,7 @@ export type RoomUncheckedCreateWithoutContractsInput = {
   favorites?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutRoomInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -3869,6 +3938,7 @@ export type RoomUpdateWithoutContractsInput = {
   favorites?: Prisma.FavoriteRoomUpdateManyWithoutRoomNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -3916,6 +3986,7 @@ export type RoomUncheckedUpdateWithoutContractsInput = {
   favorites?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutRoomNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -3957,6 +4028,7 @@ export type RoomCreateWithoutRoomAssetsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
@@ -4004,6 +4076,7 @@ export type RoomUncheckedCreateWithoutRoomAssetsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
@@ -4060,6 +4133,7 @@ export type RoomUpdateWithoutRoomAssetsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
@@ -4107,6 +4181,7 @@ export type RoomUncheckedUpdateWithoutRoomAssetsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
@@ -4147,6 +4222,7 @@ export type RoomCreateWithoutHandoverRecordsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
@@ -4194,6 +4270,7 @@ export type RoomUncheckedCreateWithoutHandoverRecordsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
@@ -4250,6 +4327,7 @@ export type RoomUpdateWithoutHandoverRecordsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
@@ -4297,6 +4375,7 @@ export type RoomUncheckedUpdateWithoutHandoverRecordsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
@@ -4337,6 +4416,7 @@ export type RoomCreateWithoutUtilityMetersInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
@@ -4384,6 +4464,7 @@ export type RoomUncheckedCreateWithoutUtilityMetersInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
@@ -4440,6 +4521,7 @@ export type RoomUpdateWithoutUtilityMetersInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
@@ -4487,6 +4569,7 @@ export type RoomUncheckedUpdateWithoutUtilityMetersInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
@@ -4527,6 +4610,7 @@ export type RoomCreateWithoutMeterReadingsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -4574,6 +4658,7 @@ export type RoomUncheckedCreateWithoutMeterReadingsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -4630,6 +4715,7 @@ export type RoomUpdateWithoutMeterReadingsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -4677,6 +4763,7 @@ export type RoomUncheckedUpdateWithoutMeterReadingsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -4717,6 +4804,7 @@ export type RoomCreateWithoutOcrJobsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -4764,6 +4852,7 @@ export type RoomUncheckedCreateWithoutOcrJobsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -4820,6 +4909,7 @@ export type RoomUpdateWithoutOcrJobsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -4867,10 +4957,205 @@ export type RoomUncheckedUpdateWithoutOcrJobsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutRoomNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutRoomNestedInput
+  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutRoomNestedInput
+}
+
+export type RoomCreateWithoutServiceAssignmentsInput = {
+  roomCode: string
+  title: string
+  area: runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants: number
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
+  status?: $Enums.RoomStatus
+  marketplaceStatus?: $Enums.MarketplaceStatus
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutRoomsInput
+  property: Prisma.PropertyCreateNestedOneWithoutRoomsInput
+  floor?: Prisma.FloorCreateNestedOneWithoutRoomsInput
+  images?: Prisma.RoomImageCreateNestedManyWithoutRoomInput
+  amenities?: Prisma.RoomAmenityCreateNestedManyWithoutRoomInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutRoomInput
+  viewLogs?: Prisma.RoomViewLogCreateNestedManyWithoutRoomInput
+  favorites?: Prisma.FavoriteRoomCreateNestedManyWithoutRoomInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
+  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutRoomInput
+  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutRoomInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtCreateNestedManyWithoutRoomInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutRoomInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutRoomInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutRoomInput
+  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutRoomInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRoomsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRoomsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedRoomsInput
+}
+
+export type RoomUncheckedCreateWithoutServiceAssignmentsInput = {
+  id?: number
+  tenantId: number
+  propertyId: number
+  floorId?: number | null
+  roomCode: string
+  title: string
+  area: runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants: number
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
+  status?: $Enums.RoomStatus
+  marketplaceStatus?: $Enums.MarketplaceStatus
+  publishedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  images?: Prisma.RoomImageUncheckedCreateNestedManyWithoutRoomInput
+  amenities?: Prisma.RoomAmenityUncheckedCreateNestedManyWithoutRoomInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutRoomInput
+  viewLogs?: Prisma.RoomViewLogUncheckedCreateNestedManyWithoutRoomInput
+  favorites?: Prisma.FavoriteRoomUncheckedCreateNestedManyWithoutRoomInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutRoomInput
+  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutRoomInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutRoomInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutRoomInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutRoomInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutRoomInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutRoomInput
+  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutRoomInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutRoomInput
+}
+
+export type RoomCreateOrConnectWithoutServiceAssignmentsInput = {
+  where: Prisma.RoomWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoomCreateWithoutServiceAssignmentsInput, Prisma.RoomUncheckedCreateWithoutServiceAssignmentsInput>
+}
+
+export type RoomUpsertWithoutServiceAssignmentsInput = {
+  update: Prisma.XOR<Prisma.RoomUpdateWithoutServiceAssignmentsInput, Prisma.RoomUncheckedUpdateWithoutServiceAssignmentsInput>
+  create: Prisma.XOR<Prisma.RoomCreateWithoutServiceAssignmentsInput, Prisma.RoomUncheckedCreateWithoutServiceAssignmentsInput>
+  where?: Prisma.RoomWhereInput
+}
+
+export type RoomUpdateToOneWithWhereWithoutServiceAssignmentsInput = {
+  where?: Prisma.RoomWhereInput
+  data: Prisma.XOR<Prisma.RoomUpdateWithoutServiceAssignmentsInput, Prisma.RoomUncheckedUpdateWithoutServiceAssignmentsInput>
+}
+
+export type RoomUpdateWithoutServiceAssignmentsInput = {
+  roomCode?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants?: Prisma.IntFieldUpdateOperationsInput | number
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  marketplaceStatus?: Prisma.EnumMarketplaceStatusFieldUpdateOperationsInput | $Enums.MarketplaceStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutRoomsNestedInput
+  property?: Prisma.PropertyUpdateOneRequiredWithoutRoomsNestedInput
+  floor?: Prisma.FloorUpdateOneWithoutRoomsNestedInput
+  images?: Prisma.RoomImageUpdateManyWithoutRoomNestedInput
+  amenities?: Prisma.RoomAmenityUpdateManyWithoutRoomNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutRoomNestedInput
+  viewLogs?: Prisma.RoomViewLogUpdateManyWithoutRoomNestedInput
+  favorites?: Prisma.FavoriteRoomUpdateManyWithoutRoomNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
+  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutRoomNestedInput
+  ocrJobs?: Prisma.OcrJobUpdateManyWithoutRoomNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutRoomNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutRoomNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutRoomNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutRoomNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutRoomNestedInput
+  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutRoomNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutRoomNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedRoomsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRoomsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedRoomsNestedInput
+}
+
+export type RoomUncheckedUpdateWithoutServiceAssignmentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  propertyId?: Prisma.IntFieldUpdateOperationsInput | number
+  floorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  roomCode?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  maxOccupants?: Prisma.IntFieldUpdateOperationsInput | number
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  electricityPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  waterPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+  marketplaceStatus?: Prisma.EnumMarketplaceStatusFieldUpdateOperationsInput | $Enums.MarketplaceStatus
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  images?: Prisma.RoomImageUncheckedUpdateManyWithoutRoomNestedInput
+  amenities?: Prisma.RoomAmenityUncheckedUpdateManyWithoutRoomNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutRoomNestedInput
+  viewLogs?: Prisma.RoomViewLogUncheckedUpdateManyWithoutRoomNestedInput
+  favorites?: Prisma.FavoriteRoomUncheckedUpdateManyWithoutRoomNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutRoomNestedInput
+  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutRoomNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutRoomNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutRoomNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutRoomNestedInput
@@ -4907,6 +5192,7 @@ export type RoomCreateWithoutInvoicesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -4954,6 +5240,7 @@ export type RoomUncheckedCreateWithoutInvoicesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -5010,6 +5297,7 @@ export type RoomUpdateWithoutInvoicesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -5057,6 +5345,7 @@ export type RoomUncheckedUpdateWithoutInvoicesInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -5097,6 +5386,7 @@ export type RoomCreateWithoutDebtsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -5144,6 +5434,7 @@ export type RoomUncheckedCreateWithoutDebtsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -5200,6 +5491,7 @@ export type RoomUpdateWithoutDebtsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -5247,6 +5539,7 @@ export type RoomUncheckedUpdateWithoutDebtsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -5287,6 +5580,7 @@ export type RoomCreateWithoutTicketsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -5334,6 +5628,7 @@ export type RoomUncheckedCreateWithoutTicketsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -5390,6 +5685,7 @@ export type RoomUpdateWithoutTicketsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -5437,6 +5733,7 @@ export type RoomUncheckedUpdateWithoutTicketsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -5477,6 +5774,7 @@ export type RoomCreateWithoutConversationsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -5524,6 +5822,7 @@ export type RoomUncheckedCreateWithoutConversationsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -5580,6 +5879,7 @@ export type RoomUpdateWithoutConversationsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -5627,6 +5927,7 @@ export type RoomUncheckedUpdateWithoutConversationsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -5667,6 +5968,7 @@ export type RoomCreateWithoutReviewsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -5714,6 +6016,7 @@ export type RoomUncheckedCreateWithoutReviewsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -5770,6 +6073,7 @@ export type RoomUpdateWithoutReviewsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -5817,6 +6121,7 @@ export type RoomUncheckedUpdateWithoutReviewsInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -5857,6 +6162,7 @@ export type RoomCreateWithoutReputationScoresInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutRoomInput
@@ -5904,6 +6210,7 @@ export type RoomUncheckedCreateWithoutReputationScoresInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutRoomInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutRoomInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutRoomInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutRoomInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutRoomInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutRoomInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutRoomInput
@@ -5960,6 +6267,7 @@ export type RoomUpdateWithoutReputationScoresInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -6007,6 +6315,7 @@ export type RoomUncheckedUpdateWithoutReputationScoresInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -6119,6 +6428,7 @@ export type RoomUpdateWithoutCreatedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -6165,6 +6475,7 @@ export type RoomUncheckedUpdateWithoutCreatedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -6230,6 +6541,7 @@ export type RoomUpdateWithoutUpdatedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -6276,6 +6588,7 @@ export type RoomUncheckedUpdateWithoutUpdatedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -6341,6 +6654,7 @@ export type RoomUpdateWithoutDeletedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -6387,6 +6701,7 @@ export type RoomUncheckedUpdateWithoutDeletedByInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -6475,6 +6790,7 @@ export type RoomUpdateWithoutTenantInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -6522,6 +6838,7 @@ export type RoomUncheckedUpdateWithoutTenantInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -6610,6 +6927,7 @@ export type RoomUpdateWithoutPropertyInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -6657,6 +6975,7 @@ export type RoomUncheckedUpdateWithoutPropertyInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -6745,6 +7064,7 @@ export type RoomUpdateWithoutFloorInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutRoomNestedInput
@@ -6792,6 +7112,7 @@ export type RoomUncheckedUpdateWithoutFloorInput = {
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutRoomNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutRoomNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutRoomNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutRoomNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutRoomNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutRoomNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutRoomNestedInput
@@ -6844,6 +7165,7 @@ export type RoomCountOutputType = {
   viewingAppointments: number
   rentalRequests: number
   contracts: number
+  serviceAssignments: number
   roomAssets: number
   handoverRecords: number
   utilityMeters: number
@@ -6867,6 +7189,7 @@ export type RoomCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   viewingAppointments?: boolean | RoomCountOutputTypeCountViewingAppointmentsArgs
   rentalRequests?: boolean | RoomCountOutputTypeCountRentalRequestsArgs
   contracts?: boolean | RoomCountOutputTypeCountContractsArgs
+  serviceAssignments?: boolean | RoomCountOutputTypeCountServiceAssignmentsArgs
   roomAssets?: boolean | RoomCountOutputTypeCountRoomAssetsArgs
   handoverRecords?: boolean | RoomCountOutputTypeCountHandoverRecordsArgs
   utilityMeters?: boolean | RoomCountOutputTypeCountUtilityMetersArgs
@@ -6945,6 +7268,13 @@ export type RoomCountOutputTypeCountRentalRequestsArgs<ExtArgs extends runtime.T
  */
 export type RoomCountOutputTypeCountContractsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ContractWhereInput
+}
+
+/**
+ * RoomCountOutputType without action
+ */
+export type RoomCountOutputTypeCountServiceAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ServiceAssignmentWhereInput
 }
 
 /**
@@ -7066,6 +7396,7 @@ export type RoomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   viewingAppointments?: boolean | Prisma.Room$viewingAppointmentsArgs<ExtArgs>
   rentalRequests?: boolean | Prisma.Room$rentalRequestsArgs<ExtArgs>
   contracts?: boolean | Prisma.Room$contractsArgs<ExtArgs>
+  serviceAssignments?: boolean | Prisma.Room$serviceAssignmentsArgs<ExtArgs>
   roomAssets?: boolean | Prisma.Room$roomAssetsArgs<ExtArgs>
   handoverRecords?: boolean | Prisma.Room$handoverRecordsArgs<ExtArgs>
   utilityMeters?: boolean | Prisma.Room$utilityMetersArgs<ExtArgs>
@@ -7184,6 +7515,7 @@ export type RoomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   viewingAppointments?: boolean | Prisma.Room$viewingAppointmentsArgs<ExtArgs>
   rentalRequests?: boolean | Prisma.Room$rentalRequestsArgs<ExtArgs>
   contracts?: boolean | Prisma.Room$contractsArgs<ExtArgs>
+  serviceAssignments?: boolean | Prisma.Room$serviceAssignmentsArgs<ExtArgs>
   roomAssets?: boolean | Prisma.Room$roomAssetsArgs<ExtArgs>
   handoverRecords?: boolean | Prisma.Room$handoverRecordsArgs<ExtArgs>
   utilityMeters?: boolean | Prisma.Room$utilityMetersArgs<ExtArgs>
@@ -7265,6 +7597,7 @@ export type $RoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
      * Danh sách các hợp đồng thuê phòng trọ này
      */
     contracts: Prisma.$ContractPayload<ExtArgs>[]
+    serviceAssignments: Prisma.$ServiceAssignmentPayload<ExtArgs>[]
     /**
      * Danh sách tài sản trong phòng trọ này
      */
@@ -7811,6 +8144,7 @@ export interface Prisma__RoomClient<T, Null = never, ExtArgs extends runtime.Typ
   viewingAppointments<T extends Prisma.Room$viewingAppointmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$viewingAppointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomViewingAppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rentalRequests<T extends Prisma.Room$rentalRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$rentalRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contracts<T extends Prisma.Room$contractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$contractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  serviceAssignments<T extends Prisma.Room$serviceAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$serviceAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roomAssets<T extends Prisma.Room$roomAssetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$roomAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   handoverRecords<T extends Prisma.Room$handoverRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$handoverRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HandoverRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   utilityMeters<T extends Prisma.Room$utilityMetersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Room$utilityMetersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilityMeterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -8486,6 +8820,30 @@ export type Room$contractsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.ContractScalarFieldEnum | Prisma.ContractScalarFieldEnum[]
+}
+
+/**
+ * Room.serviceAssignments
+ */
+export type Room$serviceAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ServiceAssignment
+   */
+  select?: Prisma.ServiceAssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ServiceAssignment
+   */
+  omit?: Prisma.ServiceAssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ServiceAssignmentInclude<ExtArgs> | null
+  where?: Prisma.ServiceAssignmentWhereInput
+  orderBy?: Prisma.ServiceAssignmentOrderByWithRelationInput | Prisma.ServiceAssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.ServiceAssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ServiceAssignmentScalarFieldEnum | Prisma.ServiceAssignmentScalarFieldEnum[]
 }
 
 /**

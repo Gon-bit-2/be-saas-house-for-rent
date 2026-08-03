@@ -37,6 +37,7 @@ export type MeterReadingAvgAggregateOutputType = {
   consumption: runtime.Decimal | null
   unitPrice: runtime.Decimal | null
   amount: runtime.Decimal | null
+  ocrJobId: number | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -53,6 +54,7 @@ export type MeterReadingSumAggregateOutputType = {
   consumption: runtime.Decimal | null
   unitPrice: runtime.Decimal | null
   amount: runtime.Decimal | null
+  ocrJobId: number | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -74,6 +76,7 @@ export type MeterReadingMinAggregateOutputType = {
   source: $Enums.ReadingSource | null
   status: $Enums.ReadingStatus | null
   recordedAt: Date | null
+  ocrJobId: number | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -95,6 +98,7 @@ export type MeterReadingMaxAggregateOutputType = {
   source: $Enums.ReadingSource | null
   status: $Enums.ReadingStatus | null
   recordedAt: Date | null
+  ocrJobId: number | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -116,6 +120,7 @@ export type MeterReadingCountAggregateOutputType = {
   source: number
   status: number
   recordedAt: number
+  ocrJobId: number
   createdById: number
   updatedById: number
   deletedById: number
@@ -134,6 +139,7 @@ export type MeterReadingAvgAggregateInputType = {
   consumption?: true
   unitPrice?: true
   amount?: true
+  ocrJobId?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -150,6 +156,7 @@ export type MeterReadingSumAggregateInputType = {
   consumption?: true
   unitPrice?: true
   amount?: true
+  ocrJobId?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -171,6 +178,7 @@ export type MeterReadingMinAggregateInputType = {
   source?: true
   status?: true
   recordedAt?: true
+  ocrJobId?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -192,6 +200,7 @@ export type MeterReadingMaxAggregateInputType = {
   source?: true
   status?: true
   recordedAt?: true
+  ocrJobId?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -213,6 +222,7 @@ export type MeterReadingCountAggregateInputType = {
   source?: true
   status?: true
   recordedAt?: true
+  ocrJobId?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -321,6 +331,7 @@ export type MeterReadingGroupByOutputType = {
   source: $Enums.ReadingSource
   status: $Enums.ReadingStatus
   recordedAt: Date
+  ocrJobId: number | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -365,6 +376,7 @@ export type MeterReadingWhereInput = {
   source?: Prisma.EnumReadingSourceFilter<"MeterReading"> | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFilter<"MeterReading"> | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFilter<"MeterReading"> | Date | string
+  ocrJobId?: Prisma.IntNullableFilter<"MeterReading"> | number | null
   createdById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
   updatedById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
   deletedById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
@@ -373,6 +385,7 @@ export type MeterReadingWhereInput = {
   meter?: Prisma.XOR<Prisma.UtilityMeterScalarRelationFilter, Prisma.UtilityMeterWhereInput>
   contract?: Prisma.XOR<Prisma.ContractNullableScalarRelationFilter, Prisma.ContractWhereInput> | null
   invoiceItems?: Prisma.InvoiceItemListRelationFilter
+  ocrJob?: Prisma.XOR<Prisma.OcrJobNullableScalarRelationFilter, Prisma.OcrJobWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -394,6 +407,7 @@ export type MeterReadingOrderByWithRelationInput = {
   source?: Prisma.SortOrder
   status?: Prisma.SortOrder
   recordedAt?: Prisma.SortOrder
+  ocrJobId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -402,6 +416,7 @@ export type MeterReadingOrderByWithRelationInput = {
   meter?: Prisma.UtilityMeterOrderByWithRelationInput
   contract?: Prisma.ContractOrderByWithRelationInput
   invoiceItems?: Prisma.InvoiceItemOrderByRelationAggregateInput
+  ocrJob?: Prisma.OcrJobOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
   deletedBy?: Prisma.UserOrderByWithRelationInput
@@ -409,6 +424,7 @@ export type MeterReadingOrderByWithRelationInput = {
 
 export type MeterReadingWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  ocrJobId?: number
   meterId_billingMonth?: Prisma.MeterReadingMeterIdBillingMonthCompoundUniqueInput
   AND?: Prisma.MeterReadingWhereInput | Prisma.MeterReadingWhereInput[]
   OR?: Prisma.MeterReadingWhereInput[]
@@ -435,10 +451,11 @@ export type MeterReadingWhereUniqueInput = Prisma.AtLeast<{
   meter?: Prisma.XOR<Prisma.UtilityMeterScalarRelationFilter, Prisma.UtilityMeterWhereInput>
   contract?: Prisma.XOR<Prisma.ContractNullableScalarRelationFilter, Prisma.ContractWhereInput> | null
   invoiceItems?: Prisma.InvoiceItemListRelationFilter
+  ocrJob?: Prisma.XOR<Prisma.OcrJobNullableScalarRelationFilter, Prisma.OcrJobWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-}, "id" | "meterId_billingMonth">
+}, "id" | "ocrJobId" | "meterId_billingMonth">
 
 export type MeterReadingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -456,6 +473,7 @@ export type MeterReadingOrderByWithAggregationInput = {
   source?: Prisma.SortOrder
   status?: Prisma.SortOrder
   recordedAt?: Prisma.SortOrder
+  ocrJobId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -485,6 +503,7 @@ export type MeterReadingScalarWhereWithAggregatesInput = {
   source?: Prisma.EnumReadingSourceWithAggregatesFilter<"MeterReading"> | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusWithAggregatesFilter<"MeterReading"> | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeWithAggregatesFilter<"MeterReading"> | Date | string
+  ocrJobId?: Prisma.IntNullableWithAggregatesFilter<"MeterReading"> | number | null
   createdById?: Prisma.IntNullableWithAggregatesFilter<"MeterReading"> | number | null
   updatedById?: Prisma.IntNullableWithAggregatesFilter<"MeterReading"> | number | null
   deletedById?: Prisma.IntNullableWithAggregatesFilter<"MeterReading"> | number | null
@@ -506,6 +525,7 @@ export type MeterReadingCreateInput = {
   meter: Prisma.UtilityMeterCreateNestedOneWithoutReadingsInput
   contract?: Prisma.ContractCreateNestedOneWithoutMeterReadingsInput
   invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutMeterReadingInput
+  ocrJob?: Prisma.OcrJobCreateNestedOneWithoutReadingInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMeterReadingsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMeterReadingsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMeterReadingsInput
@@ -527,6 +547,7 @@ export type MeterReadingUncheckedCreateInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -549,6 +570,7 @@ export type MeterReadingUpdateInput = {
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutReadingsNestedInput
   contract?: Prisma.ContractUpdateOneWithoutMeterReadingsNestedInput
   invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutMeterReadingNestedInput
+  ocrJob?: Prisma.OcrJobUpdateOneWithoutReadingNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedMeterReadingsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMeterReadingsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedMeterReadingsNestedInput
@@ -570,6 +592,7 @@ export type MeterReadingUncheckedUpdateInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -592,6 +615,7 @@ export type MeterReadingCreateManyInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -626,6 +650,7 @@ export type MeterReadingUncheckedUpdateManyInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -662,6 +687,7 @@ export type MeterReadingCountOrderByAggregateInput = {
   source?: Prisma.SortOrder
   status?: Prisma.SortOrder
   recordedAt?: Prisma.SortOrder
+  ocrJobId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -678,6 +704,7 @@ export type MeterReadingAvgOrderByAggregateInput = {
   consumption?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  ocrJobId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -699,6 +726,7 @@ export type MeterReadingMaxOrderByAggregateInput = {
   source?: Prisma.SortOrder
   status?: Prisma.SortOrder
   recordedAt?: Prisma.SortOrder
+  ocrJobId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -720,6 +748,7 @@ export type MeterReadingMinOrderByAggregateInput = {
   source?: Prisma.SortOrder
   status?: Prisma.SortOrder
   recordedAt?: Prisma.SortOrder
+  ocrJobId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -736,6 +765,7 @@ export type MeterReadingSumOrderByAggregateInput = {
   consumption?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  ocrJobId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -1048,6 +1078,38 @@ export type EnumReadingStatusFieldUpdateOperationsInput = {
   set?: $Enums.ReadingStatus
 }
 
+export type MeterReadingCreateNestedOneWithoutOcrJobInput = {
+  create?: Prisma.XOR<Prisma.MeterReadingCreateWithoutOcrJobInput, Prisma.MeterReadingUncheckedCreateWithoutOcrJobInput>
+  connectOrCreate?: Prisma.MeterReadingCreateOrConnectWithoutOcrJobInput
+  connect?: Prisma.MeterReadingWhereUniqueInput
+}
+
+export type MeterReadingUncheckedCreateNestedOneWithoutOcrJobInput = {
+  create?: Prisma.XOR<Prisma.MeterReadingCreateWithoutOcrJobInput, Prisma.MeterReadingUncheckedCreateWithoutOcrJobInput>
+  connectOrCreate?: Prisma.MeterReadingCreateOrConnectWithoutOcrJobInput
+  connect?: Prisma.MeterReadingWhereUniqueInput
+}
+
+export type MeterReadingUpdateOneWithoutOcrJobNestedInput = {
+  create?: Prisma.XOR<Prisma.MeterReadingCreateWithoutOcrJobInput, Prisma.MeterReadingUncheckedCreateWithoutOcrJobInput>
+  connectOrCreate?: Prisma.MeterReadingCreateOrConnectWithoutOcrJobInput
+  upsert?: Prisma.MeterReadingUpsertWithoutOcrJobInput
+  disconnect?: Prisma.MeterReadingWhereInput | boolean
+  delete?: Prisma.MeterReadingWhereInput | boolean
+  connect?: Prisma.MeterReadingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MeterReadingUpdateToOneWithWhereWithoutOcrJobInput, Prisma.MeterReadingUpdateWithoutOcrJobInput>, Prisma.MeterReadingUncheckedUpdateWithoutOcrJobInput>
+}
+
+export type MeterReadingUncheckedUpdateOneWithoutOcrJobNestedInput = {
+  create?: Prisma.XOR<Prisma.MeterReadingCreateWithoutOcrJobInput, Prisma.MeterReadingUncheckedCreateWithoutOcrJobInput>
+  connectOrCreate?: Prisma.MeterReadingCreateOrConnectWithoutOcrJobInput
+  upsert?: Prisma.MeterReadingUpsertWithoutOcrJobInput
+  disconnect?: Prisma.MeterReadingWhereInput | boolean
+  delete?: Prisma.MeterReadingWhereInput | boolean
+  connect?: Prisma.MeterReadingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MeterReadingUpdateToOneWithWhereWithoutOcrJobInput, Prisma.MeterReadingUpdateWithoutOcrJobInput>, Prisma.MeterReadingUncheckedUpdateWithoutOcrJobInput>
+}
+
 export type MeterReadingCreateNestedOneWithoutInvoiceItemsInput = {
   create?: Prisma.XOR<Prisma.MeterReadingCreateWithoutInvoiceItemsInput, Prisma.MeterReadingUncheckedCreateWithoutInvoiceItemsInput>
   connectOrCreate?: Prisma.MeterReadingCreateOrConnectWithoutInvoiceItemsInput
@@ -1080,6 +1142,7 @@ export type MeterReadingCreateWithoutCreatedByInput = {
   meter: Prisma.UtilityMeterCreateNestedOneWithoutReadingsInput
   contract?: Prisma.ContractCreateNestedOneWithoutMeterReadingsInput
   invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutMeterReadingInput
+  ocrJob?: Prisma.OcrJobCreateNestedOneWithoutReadingInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMeterReadingsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMeterReadingsInput
 }
@@ -1100,6 +1163,7 @@ export type MeterReadingUncheckedCreateWithoutCreatedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   updatedById?: number | null
   deletedById?: number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
@@ -1131,6 +1195,7 @@ export type MeterReadingCreateWithoutUpdatedByInput = {
   meter: Prisma.UtilityMeterCreateNestedOneWithoutReadingsInput
   contract?: Prisma.ContractCreateNestedOneWithoutMeterReadingsInput
   invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutMeterReadingInput
+  ocrJob?: Prisma.OcrJobCreateNestedOneWithoutReadingInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMeterReadingsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMeterReadingsInput
 }
@@ -1151,6 +1216,7 @@ export type MeterReadingUncheckedCreateWithoutUpdatedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   deletedById?: number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
@@ -1182,6 +1248,7 @@ export type MeterReadingCreateWithoutDeletedByInput = {
   meter: Prisma.UtilityMeterCreateNestedOneWithoutReadingsInput
   contract?: Prisma.ContractCreateNestedOneWithoutMeterReadingsInput
   invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutMeterReadingInput
+  ocrJob?: Prisma.OcrJobCreateNestedOneWithoutReadingInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMeterReadingsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMeterReadingsInput
 }
@@ -1202,6 +1269,7 @@ export type MeterReadingUncheckedCreateWithoutDeletedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
@@ -1252,6 +1320,7 @@ export type MeterReadingScalarWhereInput = {
   source?: Prisma.EnumReadingSourceFilter<"MeterReading"> | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFilter<"MeterReading"> | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFilter<"MeterReading"> | Date | string
+  ocrJobId?: Prisma.IntNullableFilter<"MeterReading"> | number | null
   createdById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
   updatedById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
   deletedById?: Prisma.IntNullableFilter<"MeterReading"> | number | null
@@ -1304,6 +1373,7 @@ export type MeterReadingCreateWithoutTenantInput = {
   meter: Prisma.UtilityMeterCreateNestedOneWithoutReadingsInput
   contract?: Prisma.ContractCreateNestedOneWithoutMeterReadingsInput
   invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutMeterReadingInput
+  ocrJob?: Prisma.OcrJobCreateNestedOneWithoutReadingInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMeterReadingsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMeterReadingsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMeterReadingsInput
@@ -1324,6 +1394,7 @@ export type MeterReadingUncheckedCreateWithoutTenantInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1371,6 +1442,7 @@ export type MeterReadingCreateWithoutRoomInput = {
   meter: Prisma.UtilityMeterCreateNestedOneWithoutReadingsInput
   contract?: Prisma.ContractCreateNestedOneWithoutMeterReadingsInput
   invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutMeterReadingInput
+  ocrJob?: Prisma.OcrJobCreateNestedOneWithoutReadingInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMeterReadingsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMeterReadingsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMeterReadingsInput
@@ -1391,6 +1463,7 @@ export type MeterReadingUncheckedCreateWithoutRoomInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1438,6 +1511,7 @@ export type MeterReadingCreateWithoutContractInput = {
   room: Prisma.RoomCreateNestedOneWithoutMeterReadingsInput
   meter: Prisma.UtilityMeterCreateNestedOneWithoutReadingsInput
   invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutMeterReadingInput
+  ocrJob?: Prisma.OcrJobCreateNestedOneWithoutReadingInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMeterReadingsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMeterReadingsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMeterReadingsInput
@@ -1458,6 +1532,7 @@ export type MeterReadingUncheckedCreateWithoutContractInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1505,6 +1580,7 @@ export type MeterReadingCreateWithoutMeterInput = {
   room: Prisma.RoomCreateNestedOneWithoutMeterReadingsInput
   contract?: Prisma.ContractCreateNestedOneWithoutMeterReadingsInput
   invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutMeterReadingInput
+  ocrJob?: Prisma.OcrJobCreateNestedOneWithoutReadingInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMeterReadingsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMeterReadingsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMeterReadingsInput
@@ -1525,6 +1601,7 @@ export type MeterReadingUncheckedCreateWithoutMeterInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1557,6 +1634,108 @@ export type MeterReadingUpdateManyWithWhereWithoutMeterInput = {
   data: Prisma.XOR<Prisma.MeterReadingUpdateManyMutationInput, Prisma.MeterReadingUncheckedUpdateManyWithoutMeterInput>
 }
 
+export type MeterReadingCreateWithoutOcrJobInput = {
+  billingMonth: Date | string
+  previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
+  consumption: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  imageUrl?: string | null
+  source?: $Enums.ReadingSource
+  status?: $Enums.ReadingStatus
+  recordedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutMeterReadingsInput
+  room: Prisma.RoomCreateNestedOneWithoutMeterReadingsInput
+  meter: Prisma.UtilityMeterCreateNestedOneWithoutReadingsInput
+  contract?: Prisma.ContractCreateNestedOneWithoutMeterReadingsInput
+  invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutMeterReadingInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMeterReadingsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMeterReadingsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMeterReadingsInput
+}
+
+export type MeterReadingUncheckedCreateWithoutOcrJobInput = {
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  contractId?: number | null
+  billingMonth: Date | string
+  previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentValue: runtime.Decimal | runtime.DecimalJsLike | number | string
+  consumption: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  imageUrl?: string | null
+  source?: $Enums.ReadingSource
+  status?: $Enums.ReadingStatus
+  recordedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutMeterReadingInput
+}
+
+export type MeterReadingCreateOrConnectWithoutOcrJobInput = {
+  where: Prisma.MeterReadingWhereUniqueInput
+  create: Prisma.XOR<Prisma.MeterReadingCreateWithoutOcrJobInput, Prisma.MeterReadingUncheckedCreateWithoutOcrJobInput>
+}
+
+export type MeterReadingUpsertWithoutOcrJobInput = {
+  update: Prisma.XOR<Prisma.MeterReadingUpdateWithoutOcrJobInput, Prisma.MeterReadingUncheckedUpdateWithoutOcrJobInput>
+  create: Prisma.XOR<Prisma.MeterReadingCreateWithoutOcrJobInput, Prisma.MeterReadingUncheckedCreateWithoutOcrJobInput>
+  where?: Prisma.MeterReadingWhereInput
+}
+
+export type MeterReadingUpdateToOneWithWhereWithoutOcrJobInput = {
+  where?: Prisma.MeterReadingWhereInput
+  data: Prisma.XOR<Prisma.MeterReadingUpdateWithoutOcrJobInput, Prisma.MeterReadingUncheckedUpdateWithoutOcrJobInput>
+}
+
+export type MeterReadingUpdateWithoutOcrJobInput = {
+  billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  consumption?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
+  status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
+  recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutMeterReadingsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutMeterReadingsNestedInput
+  meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutReadingsNestedInput
+  contract?: Prisma.ContractUpdateOneWithoutMeterReadingsNestedInput
+  invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutMeterReadingNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedMeterReadingsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMeterReadingsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedMeterReadingsNestedInput
+}
+
+export type MeterReadingUncheckedUpdateWithoutOcrJobInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  billingMonth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  previousValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  currentValue?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  consumption?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
+  status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
+  recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
+}
+
 export type MeterReadingCreateWithoutInvoiceItemsInput = {
   billingMonth: Date | string
   previousValue: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1572,6 +1751,7 @@ export type MeterReadingCreateWithoutInvoiceItemsInput = {
   room: Prisma.RoomCreateNestedOneWithoutMeterReadingsInput
   meter: Prisma.UtilityMeterCreateNestedOneWithoutReadingsInput
   contract?: Prisma.ContractCreateNestedOneWithoutMeterReadingsInput
+  ocrJob?: Prisma.OcrJobCreateNestedOneWithoutReadingInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMeterReadingsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMeterReadingsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMeterReadingsInput
@@ -1593,6 +1773,7 @@ export type MeterReadingUncheckedCreateWithoutInvoiceItemsInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1629,6 +1810,7 @@ export type MeterReadingUpdateWithoutInvoiceItemsInput = {
   room?: Prisma.RoomUpdateOneRequiredWithoutMeterReadingsNestedInput
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutReadingsNestedInput
   contract?: Prisma.ContractUpdateOneWithoutMeterReadingsNestedInput
+  ocrJob?: Prisma.OcrJobUpdateOneWithoutReadingNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedMeterReadingsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMeterReadingsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedMeterReadingsNestedInput
@@ -1650,6 +1832,7 @@ export type MeterReadingUncheckedUpdateWithoutInvoiceItemsInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1671,6 +1854,7 @@ export type MeterReadingCreateManyCreatedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   updatedById?: number | null
   deletedById?: number | null
 }
@@ -1691,6 +1875,7 @@ export type MeterReadingCreateManyUpdatedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   deletedById?: number | null
 }
@@ -1711,6 +1896,7 @@ export type MeterReadingCreateManyDeletedByInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
 }
@@ -1731,6 +1917,7 @@ export type MeterReadingUpdateWithoutCreatedByInput = {
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutReadingsNestedInput
   contract?: Prisma.ContractUpdateOneWithoutMeterReadingsNestedInput
   invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutMeterReadingNestedInput
+  ocrJob?: Prisma.OcrJobUpdateOneWithoutReadingNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMeterReadingsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedMeterReadingsNestedInput
 }
@@ -1751,6 +1938,7 @@ export type MeterReadingUncheckedUpdateWithoutCreatedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
@@ -1772,6 +1960,7 @@ export type MeterReadingUncheckedUpdateManyWithoutCreatedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1792,6 +1981,7 @@ export type MeterReadingUpdateWithoutUpdatedByInput = {
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutReadingsNestedInput
   contract?: Prisma.ContractUpdateOneWithoutMeterReadingsNestedInput
   invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutMeterReadingNestedInput
+  ocrJob?: Prisma.OcrJobUpdateOneWithoutReadingNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedMeterReadingsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedMeterReadingsNestedInput
 }
@@ -1812,6 +2002,7 @@ export type MeterReadingUncheckedUpdateWithoutUpdatedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
@@ -1833,6 +2024,7 @@ export type MeterReadingUncheckedUpdateManyWithoutUpdatedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1853,6 +2045,7 @@ export type MeterReadingUpdateWithoutDeletedByInput = {
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutReadingsNestedInput
   contract?: Prisma.ContractUpdateOneWithoutMeterReadingsNestedInput
   invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutMeterReadingNestedInput
+  ocrJob?: Prisma.OcrJobUpdateOneWithoutReadingNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedMeterReadingsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMeterReadingsNestedInput
 }
@@ -1873,6 +2066,7 @@ export type MeterReadingUncheckedUpdateWithoutDeletedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutMeterReadingNestedInput
@@ -1894,6 +2088,7 @@ export type MeterReadingUncheckedUpdateManyWithoutDeletedByInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1913,6 +2108,7 @@ export type MeterReadingCreateManyTenantInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1933,6 +2129,7 @@ export type MeterReadingUpdateWithoutTenantInput = {
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutReadingsNestedInput
   contract?: Prisma.ContractUpdateOneWithoutMeterReadingsNestedInput
   invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutMeterReadingNestedInput
+  ocrJob?: Prisma.OcrJobUpdateOneWithoutReadingNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedMeterReadingsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMeterReadingsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedMeterReadingsNestedInput
@@ -1953,6 +2150,7 @@ export type MeterReadingUncheckedUpdateWithoutTenantInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1974,6 +2172,7 @@ export type MeterReadingUncheckedUpdateManyWithoutTenantInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1994,6 +2193,7 @@ export type MeterReadingCreateManyRoomInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -2014,6 +2214,7 @@ export type MeterReadingUpdateWithoutRoomInput = {
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutReadingsNestedInput
   contract?: Prisma.ContractUpdateOneWithoutMeterReadingsNestedInput
   invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutMeterReadingNestedInput
+  ocrJob?: Prisma.OcrJobUpdateOneWithoutReadingNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedMeterReadingsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMeterReadingsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedMeterReadingsNestedInput
@@ -2034,6 +2235,7 @@ export type MeterReadingUncheckedUpdateWithoutRoomInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2055,6 +2257,7 @@ export type MeterReadingUncheckedUpdateManyWithoutRoomInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2075,6 +2278,7 @@ export type MeterReadingCreateManyContractInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -2095,6 +2299,7 @@ export type MeterReadingUpdateWithoutContractInput = {
   room?: Prisma.RoomUpdateOneRequiredWithoutMeterReadingsNestedInput
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutReadingsNestedInput
   invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutMeterReadingNestedInput
+  ocrJob?: Prisma.OcrJobUpdateOneWithoutReadingNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedMeterReadingsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMeterReadingsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedMeterReadingsNestedInput
@@ -2115,6 +2320,7 @@ export type MeterReadingUncheckedUpdateWithoutContractInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2136,6 +2342,7 @@ export type MeterReadingUncheckedUpdateManyWithoutContractInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2156,6 +2363,7 @@ export type MeterReadingCreateManyMeterInput = {
   source?: $Enums.ReadingSource
   status?: $Enums.ReadingStatus
   recordedAt?: Date | string
+  ocrJobId?: number | null
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -2176,6 +2384,7 @@ export type MeterReadingUpdateWithoutMeterInput = {
   room?: Prisma.RoomUpdateOneRequiredWithoutMeterReadingsNestedInput
   contract?: Prisma.ContractUpdateOneWithoutMeterReadingsNestedInput
   invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutMeterReadingNestedInput
+  ocrJob?: Prisma.OcrJobUpdateOneWithoutReadingNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedMeterReadingsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMeterReadingsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedMeterReadingsNestedInput
@@ -2196,6 +2405,7 @@ export type MeterReadingUncheckedUpdateWithoutMeterInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2217,6 +2427,7 @@ export type MeterReadingUncheckedUpdateManyWithoutMeterInput = {
   source?: Prisma.EnumReadingSourceFieldUpdateOperationsInput | $Enums.ReadingSource
   status?: Prisma.EnumReadingStatusFieldUpdateOperationsInput | $Enums.ReadingStatus
   recordedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ocrJobId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2269,6 +2480,7 @@ export type MeterReadingSelect<ExtArgs extends runtime.Types.Extensions.Internal
   source?: boolean
   status?: boolean
   recordedAt?: boolean
+  ocrJobId?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
@@ -2277,6 +2489,7 @@ export type MeterReadingSelect<ExtArgs extends runtime.Types.Extensions.Internal
   meter?: boolean | Prisma.UtilityMeterDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.MeterReading$contractArgs<ExtArgs>
   invoiceItems?: boolean | Prisma.MeterReading$invoiceItemsArgs<ExtArgs>
+  ocrJob?: boolean | Prisma.MeterReading$ocrJobArgs<ExtArgs>
   createdBy?: boolean | Prisma.MeterReading$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.MeterReading$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.MeterReading$deletedByArgs<ExtArgs>
@@ -2299,6 +2512,7 @@ export type MeterReadingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   source?: boolean
   status?: boolean
   recordedAt?: boolean
+  ocrJobId?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
@@ -2306,6 +2520,7 @@ export type MeterReadingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   meter?: boolean | Prisma.UtilityMeterDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.MeterReading$contractArgs<ExtArgs>
+  ocrJob?: boolean | Prisma.MeterReading$ocrJobArgs<ExtArgs>
   createdBy?: boolean | Prisma.MeterReading$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.MeterReading$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.MeterReading$deletedByArgs<ExtArgs>
@@ -2327,6 +2542,7 @@ export type MeterReadingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   source?: boolean
   status?: boolean
   recordedAt?: boolean
+  ocrJobId?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
@@ -2334,6 +2550,7 @@ export type MeterReadingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   meter?: boolean | Prisma.UtilityMeterDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.MeterReading$contractArgs<ExtArgs>
+  ocrJob?: boolean | Prisma.MeterReading$ocrJobArgs<ExtArgs>
   createdBy?: boolean | Prisma.MeterReading$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.MeterReading$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.MeterReading$deletedByArgs<ExtArgs>
@@ -2355,18 +2572,20 @@ export type MeterReadingSelectScalar = {
   source?: boolean
   status?: boolean
   recordedAt?: boolean
+  ocrJobId?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
 }
 
-export type MeterReadingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "meterId" | "contractId" | "billingMonth" | "previousValue" | "currentValue" | "consumption" | "unitPrice" | "amount" | "imageUrl" | "source" | "status" | "recordedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["meterReading"]>
+export type MeterReadingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "meterId" | "contractId" | "billingMonth" | "previousValue" | "currentValue" | "consumption" | "unitPrice" | "amount" | "imageUrl" | "source" | "status" | "recordedAt" | "ocrJobId" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["meterReading"]>
 export type MeterReadingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   meter?: boolean | Prisma.UtilityMeterDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.MeterReading$contractArgs<ExtArgs>
   invoiceItems?: boolean | Prisma.MeterReading$invoiceItemsArgs<ExtArgs>
+  ocrJob?: boolean | Prisma.MeterReading$ocrJobArgs<ExtArgs>
   createdBy?: boolean | Prisma.MeterReading$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.MeterReading$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.MeterReading$deletedByArgs<ExtArgs>
@@ -2377,6 +2596,7 @@ export type MeterReadingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   meter?: boolean | Prisma.UtilityMeterDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.MeterReading$contractArgs<ExtArgs>
+  ocrJob?: boolean | Prisma.MeterReading$ocrJobArgs<ExtArgs>
   createdBy?: boolean | Prisma.MeterReading$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.MeterReading$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.MeterReading$deletedByArgs<ExtArgs>
@@ -2386,6 +2606,7 @@ export type MeterReadingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   meter?: boolean | Prisma.UtilityMeterDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.MeterReading$contractArgs<ExtArgs>
+  ocrJob?: boolean | Prisma.MeterReading$ocrJobArgs<ExtArgs>
   createdBy?: boolean | Prisma.MeterReading$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.MeterReading$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.MeterReading$deletedByArgs<ExtArgs>
@@ -2414,6 +2635,10 @@ export type $MeterReadingPayload<ExtArgs extends runtime.Types.Extensions.Intern
      * Chi tiết hóa đơn liên quan đã sử dụng chỉ số tiêu thụ này để tính tiền
      */
     invoiceItems: Prisma.$InvoiceItemPayload<ExtArgs>[]
+    /**
+     * Tác vụ OCR nguồn của chỉ số (nếu được tạo từ ảnh)
+     */
+    ocrJob: Prisma.$OcrJobPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     deletedBy: Prisma.$UserPayload<ExtArgs> | null
@@ -2479,6 +2704,10 @@ export type $MeterReadingPayload<ExtArgs extends runtime.Types.Extensions.Intern
      * Thời điểm thực hiện hành động ghi nhận chỉ số
      */
     recordedAt: Date
+    /**
+     * ID tác vụ OCR đã tạo chỉ số này, dùng để truy vết và chống duyệt lặp
+     */
+    ocrJobId: number | null
     /**
      * ID người dùng tạo bản ghi
      */
@@ -2890,6 +3119,7 @@ export interface Prisma__MeterReadingClient<T, Null = never, ExtArgs extends run
   meter<T extends Prisma.UtilityMeterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilityMeterDefaultArgs<ExtArgs>>): Prisma.Prisma__UtilityMeterClient<runtime.Types.Result.GetResult<Prisma.$UtilityMeterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   contract<T extends Prisma.MeterReading$contractArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MeterReading$contractArgs<ExtArgs>>): Prisma.Prisma__ContractClient<runtime.Types.Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   invoiceItems<T extends Prisma.MeterReading$invoiceItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MeterReading$invoiceItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ocrJob<T extends Prisma.MeterReading$ocrJobArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MeterReading$ocrJobArgs<ExtArgs>>): Prisma.Prisma__OcrJobClient<runtime.Types.Result.GetResult<Prisma.$OcrJobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.MeterReading$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MeterReading$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.MeterReading$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MeterReading$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.MeterReading$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MeterReading$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2937,6 +3167,7 @@ export interface MeterReadingFieldRefs {
   readonly source: Prisma.FieldRef<"MeterReading", 'ReadingSource'>
   readonly status: Prisma.FieldRef<"MeterReading", 'ReadingStatus'>
   readonly recordedAt: Prisma.FieldRef<"MeterReading", 'DateTime'>
+  readonly ocrJobId: Prisma.FieldRef<"MeterReading", 'Int'>
   readonly createdById: Prisma.FieldRef<"MeterReading", 'Int'>
   readonly updatedById: Prisma.FieldRef<"MeterReading", 'Int'>
   readonly deletedById: Prisma.FieldRef<"MeterReading", 'Int'>
@@ -3381,6 +3612,25 @@ export type MeterReading$invoiceItemsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.InvoiceItemScalarFieldEnum | Prisma.InvoiceItemScalarFieldEnum[]
+}
+
+/**
+ * MeterReading.ocrJob
+ */
+export type MeterReading$ocrJobArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OcrJob
+   */
+  select?: Prisma.OcrJobSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OcrJob
+   */
+  omit?: Prisma.OcrJobOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OcrJobInclude<ExtArgs> | null
+  where?: Prisma.OcrJobWhereInput
 }
 
 /**

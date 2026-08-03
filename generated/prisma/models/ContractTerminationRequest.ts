@@ -30,6 +30,8 @@ export type ContractTerminationRequestAvgAggregateOutputType = {
   id: number | null
   tenantId: number | null
   contractId: number | null
+  reviewedById: number | null
+  outstandingDebt: runtime.Decimal | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -39,6 +41,8 @@ export type ContractTerminationRequestSumAggregateOutputType = {
   id: number | null
   tenantId: number | null
   contractId: number | null
+  reviewedById: number | null
+  outstandingDebt: runtime.Decimal | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -51,6 +55,13 @@ export type ContractTerminationRequestMinAggregateOutputType = {
   reason: string | null
   expectedMoveOutDate: Date | null
   status: $Enums.TerminationRequestStatus | null
+  reviewNote: string | null
+  reviewedById: number | null
+  reviewedAt: Date | null
+  actualMoveOutDate: Date | null
+  completedAt: Date | null
+  completionNote: string | null
+  outstandingDebt: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
   createdById: number | null
@@ -65,6 +76,13 @@ export type ContractTerminationRequestMaxAggregateOutputType = {
   reason: string | null
   expectedMoveOutDate: Date | null
   status: $Enums.TerminationRequestStatus | null
+  reviewNote: string | null
+  reviewedById: number | null
+  reviewedAt: Date | null
+  actualMoveOutDate: Date | null
+  completedAt: Date | null
+  completionNote: string | null
+  outstandingDebt: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
   createdById: number | null
@@ -79,6 +97,13 @@ export type ContractTerminationRequestCountAggregateOutputType = {
   reason: number
   expectedMoveOutDate: number
   status: number
+  reviewNote: number
+  reviewedById: number
+  reviewedAt: number
+  actualMoveOutDate: number
+  completedAt: number
+  completionNote: number
+  outstandingDebt: number
   createdAt: number
   updatedAt: number
   createdById: number
@@ -92,6 +117,8 @@ export type ContractTerminationRequestAvgAggregateInputType = {
   id?: true
   tenantId?: true
   contractId?: true
+  reviewedById?: true
+  outstandingDebt?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -101,6 +128,8 @@ export type ContractTerminationRequestSumAggregateInputType = {
   id?: true
   tenantId?: true
   contractId?: true
+  reviewedById?: true
+  outstandingDebt?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -113,6 +142,13 @@ export type ContractTerminationRequestMinAggregateInputType = {
   reason?: true
   expectedMoveOutDate?: true
   status?: true
+  reviewNote?: true
+  reviewedById?: true
+  reviewedAt?: true
+  actualMoveOutDate?: true
+  completedAt?: true
+  completionNote?: true
+  outstandingDebt?: true
   createdAt?: true
   updatedAt?: true
   createdById?: true
@@ -127,6 +163,13 @@ export type ContractTerminationRequestMaxAggregateInputType = {
   reason?: true
   expectedMoveOutDate?: true
   status?: true
+  reviewNote?: true
+  reviewedById?: true
+  reviewedAt?: true
+  actualMoveOutDate?: true
+  completedAt?: true
+  completionNote?: true
+  outstandingDebt?: true
   createdAt?: true
   updatedAt?: true
   createdById?: true
@@ -141,6 +184,13 @@ export type ContractTerminationRequestCountAggregateInputType = {
   reason?: true
   expectedMoveOutDate?: true
   status?: true
+  reviewNote?: true
+  reviewedById?: true
+  reviewedAt?: true
+  actualMoveOutDate?: true
+  completedAt?: true
+  completionNote?: true
+  outstandingDebt?: true
   createdAt?: true
   updatedAt?: true
   createdById?: true
@@ -242,6 +292,13 @@ export type ContractTerminationRequestGroupByOutputType = {
   reason: string
   expectedMoveOutDate: Date
   status: $Enums.TerminationRequestStatus
+  reviewNote: string | null
+  reviewedById: number | null
+  reviewedAt: Date | null
+  actualMoveOutDate: Date | null
+  completedAt: Date | null
+  completionNote: string | null
+  outstandingDebt: runtime.Decimal | null
   createdAt: Date
   updatedAt: Date
   createdById: number | null
@@ -279,6 +336,13 @@ export type ContractTerminationRequestWhereInput = {
   reason?: Prisma.StringFilter<"ContractTerminationRequest"> | string
   expectedMoveOutDate?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   status?: Prisma.EnumTerminationRequestStatusFilter<"ContractTerminationRequest"> | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.StringNullableFilter<"ContractTerminationRequest"> | string | null
+  reviewedById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
+  reviewedAt?: Prisma.DateTimeNullableFilter<"ContractTerminationRequest"> | Date | string | null
+  actualMoveOutDate?: Prisma.DateTimeNullableFilter<"ContractTerminationRequest"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"ContractTerminationRequest"> | Date | string | null
+  completionNote?: Prisma.StringNullableFilter<"ContractTerminationRequest"> | string | null
+  outstandingDebt?: Prisma.DecimalNullableFilter<"ContractTerminationRequest"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   createdById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
@@ -286,6 +350,7 @@ export type ContractTerminationRequestWhereInput = {
   deletedById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
+  reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -298,6 +363,13 @@ export type ContractTerminationRequestOrderByWithRelationInput = {
   reason?: Prisma.SortOrder
   expectedMoveOutDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  reviewNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  actualMoveOutDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  completionNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  outstandingDebt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -305,6 +377,7 @@ export type ContractTerminationRequestOrderByWithRelationInput = {
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
   contract?: Prisma.ContractOrderByWithRelationInput
+  reviewedBy?: Prisma.UserOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
   deletedBy?: Prisma.UserOrderByWithRelationInput
@@ -320,6 +393,13 @@ export type ContractTerminationRequestWhereUniqueInput = Prisma.AtLeast<{
   reason?: Prisma.StringFilter<"ContractTerminationRequest"> | string
   expectedMoveOutDate?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   status?: Prisma.EnumTerminationRequestStatusFilter<"ContractTerminationRequest"> | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.StringNullableFilter<"ContractTerminationRequest"> | string | null
+  reviewedById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
+  reviewedAt?: Prisma.DateTimeNullableFilter<"ContractTerminationRequest"> | Date | string | null
+  actualMoveOutDate?: Prisma.DateTimeNullableFilter<"ContractTerminationRequest"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"ContractTerminationRequest"> | Date | string | null
+  completionNote?: Prisma.StringNullableFilter<"ContractTerminationRequest"> | string | null
+  outstandingDebt?: Prisma.DecimalNullableFilter<"ContractTerminationRequest"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   createdById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
@@ -327,6 +407,7 @@ export type ContractTerminationRequestWhereUniqueInput = Prisma.AtLeast<{
   deletedById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
+  reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -339,6 +420,13 @@ export type ContractTerminationRequestOrderByWithAggregationInput = {
   reason?: Prisma.SortOrder
   expectedMoveOutDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  reviewNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  actualMoveOutDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  completionNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  outstandingDebt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -361,6 +449,13 @@ export type ContractTerminationRequestScalarWhereWithAggregatesInput = {
   reason?: Prisma.StringWithAggregatesFilter<"ContractTerminationRequest"> | string
   expectedMoveOutDate?: Prisma.DateTimeWithAggregatesFilter<"ContractTerminationRequest"> | Date | string
   status?: Prisma.EnumTerminationRequestStatusWithAggregatesFilter<"ContractTerminationRequest"> | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.StringNullableWithAggregatesFilter<"ContractTerminationRequest"> | string | null
+  reviewedById?: Prisma.IntNullableWithAggregatesFilter<"ContractTerminationRequest"> | number | null
+  reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ContractTerminationRequest"> | Date | string | null
+  actualMoveOutDate?: Prisma.DateTimeNullableWithAggregatesFilter<"ContractTerminationRequest"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ContractTerminationRequest"> | Date | string | null
+  completionNote?: Prisma.StringNullableWithAggregatesFilter<"ContractTerminationRequest"> | string | null
+  outstandingDebt?: Prisma.DecimalNullableWithAggregatesFilter<"ContractTerminationRequest"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ContractTerminationRequest"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ContractTerminationRequest"> | Date | string
   createdById?: Prisma.IntNullableWithAggregatesFilter<"ContractTerminationRequest"> | number | null
@@ -372,10 +467,17 @@ export type ContractTerminationRequestCreateInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutTerminationRequestsInput
   contract: Prisma.ContractCreateNestedOneWithoutTerminationRequestsInput
+  reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedContractTerminationRequestsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractTerminationRequestsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedContractTerminationRequestsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedContractTerminationRequestsInput
@@ -388,6 +490,13 @@ export type ContractTerminationRequestUncheckedCreateInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdById?: number | null
@@ -399,10 +508,17 @@ export type ContractTerminationRequestUpdateInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutTerminationRequestsNestedInput
   contract?: Prisma.ContractUpdateOneRequiredWithoutTerminationRequestsNestedInput
+  reviewedBy?: Prisma.UserUpdateOneWithoutReviewedContractTerminationRequestsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedContractTerminationRequestsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedContractTerminationRequestsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedContractTerminationRequestsNestedInput
@@ -415,6 +531,13 @@ export type ContractTerminationRequestUncheckedUpdateInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -429,6 +552,13 @@ export type ContractTerminationRequestCreateManyInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdById?: number | null
@@ -440,6 +570,12 @@ export type ContractTerminationRequestUpdateManyMutationInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -451,6 +587,13 @@ export type ContractTerminationRequestUncheckedUpdateManyInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -475,6 +618,13 @@ export type ContractTerminationRequestCountOrderByAggregateInput = {
   reason?: Prisma.SortOrder
   expectedMoveOutDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  reviewNote?: Prisma.SortOrder
+  reviewedById?: Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrder
+  actualMoveOutDate?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
+  completionNote?: Prisma.SortOrder
+  outstandingDebt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -486,6 +636,8 @@ export type ContractTerminationRequestAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
+  reviewedById?: Prisma.SortOrder
+  outstandingDebt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -498,6 +650,13 @@ export type ContractTerminationRequestMaxOrderByAggregateInput = {
   reason?: Prisma.SortOrder
   expectedMoveOutDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  reviewNote?: Prisma.SortOrder
+  reviewedById?: Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrder
+  actualMoveOutDate?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
+  completionNote?: Prisma.SortOrder
+  outstandingDebt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -512,6 +671,13 @@ export type ContractTerminationRequestMinOrderByAggregateInput = {
   reason?: Prisma.SortOrder
   expectedMoveOutDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  reviewNote?: Prisma.SortOrder
+  reviewedById?: Prisma.SortOrder
+  reviewedAt?: Prisma.SortOrder
+  actualMoveOutDate?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
+  completionNote?: Prisma.SortOrder
+  outstandingDebt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -523,6 +689,8 @@ export type ContractTerminationRequestSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
+  reviewedById?: Prisma.SortOrder
+  outstandingDebt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -549,6 +717,13 @@ export type ContractTerminationRequestCreateNestedManyWithoutDeletedByInput = {
   connect?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
 }
 
+export type ContractTerminationRequestCreateNestedManyWithoutReviewedByInput = {
+  create?: Prisma.XOR<Prisma.ContractTerminationRequestCreateWithoutReviewedByInput, Prisma.ContractTerminationRequestUncheckedCreateWithoutReviewedByInput> | Prisma.ContractTerminationRequestCreateWithoutReviewedByInput[] | Prisma.ContractTerminationRequestUncheckedCreateWithoutReviewedByInput[]
+  connectOrCreate?: Prisma.ContractTerminationRequestCreateOrConnectWithoutReviewedByInput | Prisma.ContractTerminationRequestCreateOrConnectWithoutReviewedByInput[]
+  createMany?: Prisma.ContractTerminationRequestCreateManyReviewedByInputEnvelope
+  connect?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
+}
+
 export type ContractTerminationRequestUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.ContractTerminationRequestCreateWithoutCreatedByInput, Prisma.ContractTerminationRequestUncheckedCreateWithoutCreatedByInput> | Prisma.ContractTerminationRequestCreateWithoutCreatedByInput[] | Prisma.ContractTerminationRequestUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.ContractTerminationRequestCreateOrConnectWithoutCreatedByInput | Prisma.ContractTerminationRequestCreateOrConnectWithoutCreatedByInput[]
@@ -567,6 +742,13 @@ export type ContractTerminationRequestUncheckedCreateNestedManyWithoutDeletedByI
   create?: Prisma.XOR<Prisma.ContractTerminationRequestCreateWithoutDeletedByInput, Prisma.ContractTerminationRequestUncheckedCreateWithoutDeletedByInput> | Prisma.ContractTerminationRequestCreateWithoutDeletedByInput[] | Prisma.ContractTerminationRequestUncheckedCreateWithoutDeletedByInput[]
   connectOrCreate?: Prisma.ContractTerminationRequestCreateOrConnectWithoutDeletedByInput | Prisma.ContractTerminationRequestCreateOrConnectWithoutDeletedByInput[]
   createMany?: Prisma.ContractTerminationRequestCreateManyDeletedByInputEnvelope
+  connect?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
+}
+
+export type ContractTerminationRequestUncheckedCreateNestedManyWithoutReviewedByInput = {
+  create?: Prisma.XOR<Prisma.ContractTerminationRequestCreateWithoutReviewedByInput, Prisma.ContractTerminationRequestUncheckedCreateWithoutReviewedByInput> | Prisma.ContractTerminationRequestCreateWithoutReviewedByInput[] | Prisma.ContractTerminationRequestUncheckedCreateWithoutReviewedByInput[]
+  connectOrCreate?: Prisma.ContractTerminationRequestCreateOrConnectWithoutReviewedByInput | Prisma.ContractTerminationRequestCreateOrConnectWithoutReviewedByInput[]
+  createMany?: Prisma.ContractTerminationRequestCreateManyReviewedByInputEnvelope
   connect?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
 }
 
@@ -612,6 +794,20 @@ export type ContractTerminationRequestUpdateManyWithoutDeletedByNestedInput = {
   deleteMany?: Prisma.ContractTerminationRequestScalarWhereInput | Prisma.ContractTerminationRequestScalarWhereInput[]
 }
 
+export type ContractTerminationRequestUpdateManyWithoutReviewedByNestedInput = {
+  create?: Prisma.XOR<Prisma.ContractTerminationRequestCreateWithoutReviewedByInput, Prisma.ContractTerminationRequestUncheckedCreateWithoutReviewedByInput> | Prisma.ContractTerminationRequestCreateWithoutReviewedByInput[] | Prisma.ContractTerminationRequestUncheckedCreateWithoutReviewedByInput[]
+  connectOrCreate?: Prisma.ContractTerminationRequestCreateOrConnectWithoutReviewedByInput | Prisma.ContractTerminationRequestCreateOrConnectWithoutReviewedByInput[]
+  upsert?: Prisma.ContractTerminationRequestUpsertWithWhereUniqueWithoutReviewedByInput | Prisma.ContractTerminationRequestUpsertWithWhereUniqueWithoutReviewedByInput[]
+  createMany?: Prisma.ContractTerminationRequestCreateManyReviewedByInputEnvelope
+  set?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
+  disconnect?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
+  delete?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
+  connect?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
+  update?: Prisma.ContractTerminationRequestUpdateWithWhereUniqueWithoutReviewedByInput | Prisma.ContractTerminationRequestUpdateWithWhereUniqueWithoutReviewedByInput[]
+  updateMany?: Prisma.ContractTerminationRequestUpdateManyWithWhereWithoutReviewedByInput | Prisma.ContractTerminationRequestUpdateManyWithWhereWithoutReviewedByInput[]
+  deleteMany?: Prisma.ContractTerminationRequestScalarWhereInput | Prisma.ContractTerminationRequestScalarWhereInput[]
+}
+
 export type ContractTerminationRequestUncheckedUpdateManyWithoutCreatedByNestedInput = {
   create?: Prisma.XOR<Prisma.ContractTerminationRequestCreateWithoutCreatedByInput, Prisma.ContractTerminationRequestUncheckedCreateWithoutCreatedByInput> | Prisma.ContractTerminationRequestCreateWithoutCreatedByInput[] | Prisma.ContractTerminationRequestUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.ContractTerminationRequestCreateOrConnectWithoutCreatedByInput | Prisma.ContractTerminationRequestCreateOrConnectWithoutCreatedByInput[]
@@ -651,6 +847,20 @@ export type ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByNestedI
   connect?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
   update?: Prisma.ContractTerminationRequestUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.ContractTerminationRequestUpdateWithWhereUniqueWithoutDeletedByInput[]
   updateMany?: Prisma.ContractTerminationRequestUpdateManyWithWhereWithoutDeletedByInput | Prisma.ContractTerminationRequestUpdateManyWithWhereWithoutDeletedByInput[]
+  deleteMany?: Prisma.ContractTerminationRequestScalarWhereInput | Prisma.ContractTerminationRequestScalarWhereInput[]
+}
+
+export type ContractTerminationRequestUncheckedUpdateManyWithoutReviewedByNestedInput = {
+  create?: Prisma.XOR<Prisma.ContractTerminationRequestCreateWithoutReviewedByInput, Prisma.ContractTerminationRequestUncheckedCreateWithoutReviewedByInput> | Prisma.ContractTerminationRequestCreateWithoutReviewedByInput[] | Prisma.ContractTerminationRequestUncheckedCreateWithoutReviewedByInput[]
+  connectOrCreate?: Prisma.ContractTerminationRequestCreateOrConnectWithoutReviewedByInput | Prisma.ContractTerminationRequestCreateOrConnectWithoutReviewedByInput[]
+  upsert?: Prisma.ContractTerminationRequestUpsertWithWhereUniqueWithoutReviewedByInput | Prisma.ContractTerminationRequestUpsertWithWhereUniqueWithoutReviewedByInput[]
+  createMany?: Prisma.ContractTerminationRequestCreateManyReviewedByInputEnvelope
+  set?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
+  disconnect?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
+  delete?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
+  connect?: Prisma.ContractTerminationRequestWhereUniqueInput | Prisma.ContractTerminationRequestWhereUniqueInput[]
+  update?: Prisma.ContractTerminationRequestUpdateWithWhereUniqueWithoutReviewedByInput | Prisma.ContractTerminationRequestUpdateWithWhereUniqueWithoutReviewedByInput[]
+  updateMany?: Prisma.ContractTerminationRequestUpdateManyWithWhereWithoutReviewedByInput | Prisma.ContractTerminationRequestUpdateManyWithWhereWithoutReviewedByInput[]
   deleteMany?: Prisma.ContractTerminationRequestScalarWhereInput | Prisma.ContractTerminationRequestScalarWhereInput[]
 }
 
@@ -746,10 +956,17 @@ export type ContractTerminationRequestCreateWithoutCreatedByInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutTerminationRequestsInput
   contract: Prisma.ContractCreateNestedOneWithoutTerminationRequestsInput
+  reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedContractTerminationRequestsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedContractTerminationRequestsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedContractTerminationRequestsInput
 }
@@ -761,6 +978,13 @@ export type ContractTerminationRequestUncheckedCreateWithoutCreatedByInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   updatedById?: number | null
@@ -781,10 +1005,17 @@ export type ContractTerminationRequestCreateWithoutUpdatedByInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutTerminationRequestsInput
   contract: Prisma.ContractCreateNestedOneWithoutTerminationRequestsInput
+  reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedContractTerminationRequestsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractTerminationRequestsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedContractTerminationRequestsInput
 }
@@ -796,6 +1027,13 @@ export type ContractTerminationRequestUncheckedCreateWithoutUpdatedByInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdById?: number | null
@@ -816,10 +1054,17 @@ export type ContractTerminationRequestCreateWithoutDeletedByInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutTerminationRequestsInput
   contract: Prisma.ContractCreateNestedOneWithoutTerminationRequestsInput
+  reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedContractTerminationRequestsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractTerminationRequestsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedContractTerminationRequestsInput
 }
@@ -831,6 +1076,13 @@ export type ContractTerminationRequestUncheckedCreateWithoutDeletedByInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdById?: number | null
@@ -844,6 +1096,55 @@ export type ContractTerminationRequestCreateOrConnectWithoutDeletedByInput = {
 
 export type ContractTerminationRequestCreateManyDeletedByInputEnvelope = {
   data: Prisma.ContractTerminationRequestCreateManyDeletedByInput | Prisma.ContractTerminationRequestCreateManyDeletedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type ContractTerminationRequestCreateWithoutReviewedByInput = {
+  reason: string
+  expectedMoveOutDate: Date | string
+  status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutTerminationRequestsInput
+  contract: Prisma.ContractCreateNestedOneWithoutTerminationRequestsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractTerminationRequestsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedContractTerminationRequestsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedContractTerminationRequestsInput
+}
+
+export type ContractTerminationRequestUncheckedCreateWithoutReviewedByInput = {
+  id?: number
+  tenantId: number
+  contractId: number
+  reason: string
+  expectedMoveOutDate: Date | string
+  status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+}
+
+export type ContractTerminationRequestCreateOrConnectWithoutReviewedByInput = {
+  where: Prisma.ContractTerminationRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContractTerminationRequestCreateWithoutReviewedByInput, Prisma.ContractTerminationRequestUncheckedCreateWithoutReviewedByInput>
+}
+
+export type ContractTerminationRequestCreateManyReviewedByInputEnvelope = {
+  data: Prisma.ContractTerminationRequestCreateManyReviewedByInput | Prisma.ContractTerminationRequestCreateManyReviewedByInput[]
   skipDuplicates?: boolean
 }
 
@@ -873,6 +1174,13 @@ export type ContractTerminationRequestScalarWhereInput = {
   reason?: Prisma.StringFilter<"ContractTerminationRequest"> | string
   expectedMoveOutDate?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   status?: Prisma.EnumTerminationRequestStatusFilter<"ContractTerminationRequest"> | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.StringNullableFilter<"ContractTerminationRequest"> | string | null
+  reviewedById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
+  reviewedAt?: Prisma.DateTimeNullableFilter<"ContractTerminationRequest"> | Date | string | null
+  actualMoveOutDate?: Prisma.DateTimeNullableFilter<"ContractTerminationRequest"> | Date | string | null
+  completedAt?: Prisma.DateTimeNullableFilter<"ContractTerminationRequest"> | Date | string | null
+  completionNote?: Prisma.StringNullableFilter<"ContractTerminationRequest"> | string | null
+  outstandingDebt?: Prisma.DecimalNullableFilter<"ContractTerminationRequest"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ContractTerminationRequest"> | Date | string
   createdById?: Prisma.IntNullableFilter<"ContractTerminationRequest"> | number | null
@@ -912,13 +1220,36 @@ export type ContractTerminationRequestUpdateManyWithWhereWithoutDeletedByInput =
   data: Prisma.XOR<Prisma.ContractTerminationRequestUpdateManyMutationInput, Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByInput>
 }
 
+export type ContractTerminationRequestUpsertWithWhereUniqueWithoutReviewedByInput = {
+  where: Prisma.ContractTerminationRequestWhereUniqueInput
+  update: Prisma.XOR<Prisma.ContractTerminationRequestUpdateWithoutReviewedByInput, Prisma.ContractTerminationRequestUncheckedUpdateWithoutReviewedByInput>
+  create: Prisma.XOR<Prisma.ContractTerminationRequestCreateWithoutReviewedByInput, Prisma.ContractTerminationRequestUncheckedCreateWithoutReviewedByInput>
+}
+
+export type ContractTerminationRequestUpdateWithWhereUniqueWithoutReviewedByInput = {
+  where: Prisma.ContractTerminationRequestWhereUniqueInput
+  data: Prisma.XOR<Prisma.ContractTerminationRequestUpdateWithoutReviewedByInput, Prisma.ContractTerminationRequestUncheckedUpdateWithoutReviewedByInput>
+}
+
+export type ContractTerminationRequestUpdateManyWithWhereWithoutReviewedByInput = {
+  where: Prisma.ContractTerminationRequestScalarWhereInput
+  data: Prisma.XOR<Prisma.ContractTerminationRequestUpdateManyMutationInput, Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutReviewedByInput>
+}
+
 export type ContractTerminationRequestCreateWithoutTenantInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contract: Prisma.ContractCreateNestedOneWithoutTerminationRequestsInput
+  reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedContractTerminationRequestsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractTerminationRequestsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedContractTerminationRequestsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedContractTerminationRequestsInput
@@ -930,6 +1261,13 @@ export type ContractTerminationRequestUncheckedCreateWithoutTenantInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdById?: number | null
@@ -967,9 +1305,16 @@ export type ContractTerminationRequestCreateWithoutContractInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutTerminationRequestsInput
+  reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedContractTerminationRequestsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractTerminationRequestsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedContractTerminationRequestsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedContractTerminationRequestsInput
@@ -981,6 +1326,13 @@ export type ContractTerminationRequestUncheckedCreateWithoutContractInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdById?: number | null
@@ -1021,6 +1373,13 @@ export type ContractTerminationRequestCreateManyCreatedByInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   updatedById?: number | null
@@ -1034,6 +1393,13 @@ export type ContractTerminationRequestCreateManyUpdatedByInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdById?: number | null
@@ -1047,20 +1413,54 @@ export type ContractTerminationRequestCreateManyDeletedByInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
 }
 
+export type ContractTerminationRequestCreateManyReviewedByInput = {
+  id?: number
+  tenantId: number
+  contractId: number
+  reason: string
+  expectedMoveOutDate: Date | string
+  status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+}
+
 export type ContractTerminationRequestUpdateWithoutCreatedByInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutTerminationRequestsNestedInput
   contract?: Prisma.ContractUpdateOneRequiredWithoutTerminationRequestsNestedInput
+  reviewedBy?: Prisma.UserUpdateOneWithoutReviewedContractTerminationRequestsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedContractTerminationRequestsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedContractTerminationRequestsNestedInput
 }
@@ -1072,6 +1472,13 @@ export type ContractTerminationRequestUncheckedUpdateWithoutCreatedByInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1085,6 +1492,13 @@ export type ContractTerminationRequestUncheckedUpdateManyWithoutCreatedByInput =
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1095,10 +1509,17 @@ export type ContractTerminationRequestUpdateWithoutUpdatedByInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutTerminationRequestsNestedInput
   contract?: Prisma.ContractUpdateOneRequiredWithoutTerminationRequestsNestedInput
+  reviewedBy?: Prisma.UserUpdateOneWithoutReviewedContractTerminationRequestsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedContractTerminationRequestsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedContractTerminationRequestsNestedInput
 }
@@ -1110,6 +1531,13 @@ export type ContractTerminationRequestUncheckedUpdateWithoutUpdatedByInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1123,6 +1551,13 @@ export type ContractTerminationRequestUncheckedUpdateManyWithoutUpdatedByInput =
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1133,10 +1568,17 @@ export type ContractTerminationRequestUpdateWithoutDeletedByInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutTerminationRequestsNestedInput
   contract?: Prisma.ContractUpdateOneRequiredWithoutTerminationRequestsNestedInput
+  reviewedBy?: Prisma.UserUpdateOneWithoutReviewedContractTerminationRequestsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedContractTerminationRequestsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedContractTerminationRequestsNestedInput
 }
@@ -1148,6 +1590,13 @@ export type ContractTerminationRequestUncheckedUpdateWithoutDeletedByInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1161,10 +1610,76 @@ export type ContractTerminationRequestUncheckedUpdateManyWithoutDeletedByInput =
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type ContractTerminationRequestUpdateWithoutReviewedByInput = {
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutTerminationRequestsNestedInput
+  contract?: Prisma.ContractUpdateOneRequiredWithoutTerminationRequestsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedContractTerminationRequestsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedContractTerminationRequestsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedContractTerminationRequestsNestedInput
+}
+
+export type ContractTerminationRequestUncheckedUpdateWithoutReviewedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type ContractTerminationRequestUncheckedUpdateManyWithoutReviewedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ContractTerminationRequestCreateManyTenantInput = {
@@ -1173,6 +1688,13 @@ export type ContractTerminationRequestCreateManyTenantInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdById?: number | null
@@ -1184,9 +1706,16 @@ export type ContractTerminationRequestUpdateWithoutTenantInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contract?: Prisma.ContractUpdateOneRequiredWithoutTerminationRequestsNestedInput
+  reviewedBy?: Prisma.UserUpdateOneWithoutReviewedContractTerminationRequestsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedContractTerminationRequestsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedContractTerminationRequestsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedContractTerminationRequestsNestedInput
@@ -1198,6 +1727,13 @@ export type ContractTerminationRequestUncheckedUpdateWithoutTenantInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1211,6 +1747,13 @@ export type ContractTerminationRequestUncheckedUpdateManyWithoutTenantInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1224,6 +1767,13 @@ export type ContractTerminationRequestCreateManyContractInput = {
   reason: string
   expectedMoveOutDate: Date | string
   status?: $Enums.TerminationRequestStatus
+  reviewNote?: string | null
+  reviewedById?: number | null
+  reviewedAt?: Date | string | null
+  actualMoveOutDate?: Date | string | null
+  completedAt?: Date | string | null
+  completionNote?: string | null
+  outstandingDebt?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   createdById?: number | null
@@ -1235,9 +1785,16 @@ export type ContractTerminationRequestUpdateWithoutContractInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutTerminationRequestsNestedInput
+  reviewedBy?: Prisma.UserUpdateOneWithoutReviewedContractTerminationRequestsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedContractTerminationRequestsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedContractTerminationRequestsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedContractTerminationRequestsNestedInput
@@ -1249,6 +1806,13 @@ export type ContractTerminationRequestUncheckedUpdateWithoutContractInput = {
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1262,6 +1826,13 @@ export type ContractTerminationRequestUncheckedUpdateManyWithoutContractInput = 
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   expectedMoveOutDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumTerminationRequestStatusFieldUpdateOperationsInput | $Enums.TerminationRequestStatus
+  reviewNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reviewedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualMoveOutDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  outstandingDebt?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1278,6 +1849,13 @@ export type ContractTerminationRequestSelect<ExtArgs extends runtime.Types.Exten
   reason?: boolean
   expectedMoveOutDate?: boolean
   status?: boolean
+  reviewNote?: boolean
+  reviewedById?: boolean
+  reviewedAt?: boolean
+  actualMoveOutDate?: boolean
+  completedAt?: boolean
+  completionNote?: boolean
+  outstandingDebt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   createdById?: boolean
@@ -1285,6 +1863,7 @@ export type ContractTerminationRequestSelect<ExtArgs extends runtime.Types.Exten
   deletedById?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
+  reviewedBy?: boolean | Prisma.ContractTerminationRequest$reviewedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.ContractTerminationRequest$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ContractTerminationRequest$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.ContractTerminationRequest$deletedByArgs<ExtArgs>
@@ -1297,6 +1876,13 @@ export type ContractTerminationRequestSelectCreateManyAndReturn<ExtArgs extends 
   reason?: boolean
   expectedMoveOutDate?: boolean
   status?: boolean
+  reviewNote?: boolean
+  reviewedById?: boolean
+  reviewedAt?: boolean
+  actualMoveOutDate?: boolean
+  completedAt?: boolean
+  completionNote?: boolean
+  outstandingDebt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   createdById?: boolean
@@ -1304,6 +1890,7 @@ export type ContractTerminationRequestSelectCreateManyAndReturn<ExtArgs extends 
   deletedById?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
+  reviewedBy?: boolean | Prisma.ContractTerminationRequest$reviewedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.ContractTerminationRequest$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ContractTerminationRequest$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.ContractTerminationRequest$deletedByArgs<ExtArgs>
@@ -1316,6 +1903,13 @@ export type ContractTerminationRequestSelectUpdateManyAndReturn<ExtArgs extends 
   reason?: boolean
   expectedMoveOutDate?: boolean
   status?: boolean
+  reviewNote?: boolean
+  reviewedById?: boolean
+  reviewedAt?: boolean
+  actualMoveOutDate?: boolean
+  completedAt?: boolean
+  completionNote?: boolean
+  outstandingDebt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   createdById?: boolean
@@ -1323,6 +1917,7 @@ export type ContractTerminationRequestSelectUpdateManyAndReturn<ExtArgs extends 
   deletedById?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
+  reviewedBy?: boolean | Prisma.ContractTerminationRequest$reviewedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.ContractTerminationRequest$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ContractTerminationRequest$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.ContractTerminationRequest$deletedByArgs<ExtArgs>
@@ -1335,6 +1930,13 @@ export type ContractTerminationRequestSelectScalar = {
   reason?: boolean
   expectedMoveOutDate?: boolean
   status?: boolean
+  reviewNote?: boolean
+  reviewedById?: boolean
+  reviewedAt?: boolean
+  actualMoveOutDate?: boolean
+  completedAt?: boolean
+  completionNote?: boolean
+  outstandingDebt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   createdById?: boolean
@@ -1342,10 +1944,11 @@ export type ContractTerminationRequestSelectScalar = {
   deletedById?: boolean
 }
 
-export type ContractTerminationRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "contractId" | "reason" | "expectedMoveOutDate" | "status" | "createdAt" | "updatedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["contractTerminationRequest"]>
+export type ContractTerminationRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "contractId" | "reason" | "expectedMoveOutDate" | "status" | "reviewNote" | "reviewedById" | "reviewedAt" | "actualMoveOutDate" | "completedAt" | "completionNote" | "outstandingDebt" | "createdAt" | "updatedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["contractTerminationRequest"]>
 export type ContractTerminationRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
+  reviewedBy?: boolean | Prisma.ContractTerminationRequest$reviewedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.ContractTerminationRequest$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ContractTerminationRequest$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.ContractTerminationRequest$deletedByArgs<ExtArgs>
@@ -1353,6 +1956,7 @@ export type ContractTerminationRequestInclude<ExtArgs extends runtime.Types.Exte
 export type ContractTerminationRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
+  reviewedBy?: boolean | Prisma.ContractTerminationRequest$reviewedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.ContractTerminationRequest$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ContractTerminationRequest$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.ContractTerminationRequest$deletedByArgs<ExtArgs>
@@ -1360,6 +1964,7 @@ export type ContractTerminationRequestIncludeCreateManyAndReturn<ExtArgs extends
 export type ContractTerminationRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
+  reviewedBy?: boolean | Prisma.ContractTerminationRequest$reviewedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.ContractTerminationRequest$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ContractTerminationRequest$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.ContractTerminationRequest$deletedByArgs<ExtArgs>
@@ -1376,6 +1981,10 @@ export type $ContractTerminationRequestPayload<ExtArgs extends runtime.Types.Ext
      * Hợp đồng thuê liên quan (xóa hợp đồng thì xóa yêu cầu trả phòng)
      */
     contract: Prisma.$ContractPayload<ExtArgs>
+    /**
+     * Người duyệt hoặc từ chối yêu cầu
+     */
+    reviewedBy: Prisma.$UserPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     deletedBy: Prisma.$UserPayload<ExtArgs> | null
@@ -1405,6 +2014,34 @@ export type $ContractTerminationRequestPayload<ExtArgs extends runtime.Types.Ext
      * Trạng thái xử lý yêu cầu thanh lý
      */
     status: $Enums.TerminationRequestStatus
+    /**
+     * Ghi chú duyệt hoặc lý do từ chối của chủ trọ
+     */
+    reviewNote: string | null
+    /**
+     * Người duyệt hoặc từ chối yêu cầu
+     */
+    reviewedById: number | null
+    /**
+     * Thời điểm duyệt hoặc từ chối
+     */
+    reviewedAt: Date | null
+    /**
+     * Ngày khách thuê thực tế trả phòng
+     */
+    actualMoveOutDate: Date | null
+    /**
+     * Thời điểm hoàn tất thanh lý
+     */
+    completedAt: Date | null
+    /**
+     * Ghi chú hoàn tất và xác nhận nghĩa vụ còn lại
+     */
+    completionNote: string | null
+    /**
+     * Tổng công nợ còn mở tại thời điểm hoàn tất
+     */
+    outstandingDebt: runtime.Decimal | null
     /**
      * Thời điểm gửi yêu cầu
      */
@@ -1821,6 +2458,7 @@ export interface Prisma__ContractTerminationRequestClient<T, Null = never, ExtAr
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   contract<T extends Prisma.ContractDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContractDefaultArgs<ExtArgs>>): Prisma.Prisma__ContractClient<runtime.Types.Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  reviewedBy<T extends Prisma.ContractTerminationRequest$reviewedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContractTerminationRequest$reviewedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.ContractTerminationRequest$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContractTerminationRequest$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.ContractTerminationRequest$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContractTerminationRequest$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.ContractTerminationRequest$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContractTerminationRequest$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -1859,6 +2497,13 @@ export interface ContractTerminationRequestFieldRefs {
   readonly reason: Prisma.FieldRef<"ContractTerminationRequest", 'String'>
   readonly expectedMoveOutDate: Prisma.FieldRef<"ContractTerminationRequest", 'DateTime'>
   readonly status: Prisma.FieldRef<"ContractTerminationRequest", 'TerminationRequestStatus'>
+  readonly reviewNote: Prisma.FieldRef<"ContractTerminationRequest", 'String'>
+  readonly reviewedById: Prisma.FieldRef<"ContractTerminationRequest", 'Int'>
+  readonly reviewedAt: Prisma.FieldRef<"ContractTerminationRequest", 'DateTime'>
+  readonly actualMoveOutDate: Prisma.FieldRef<"ContractTerminationRequest", 'DateTime'>
+  readonly completedAt: Prisma.FieldRef<"ContractTerminationRequest", 'DateTime'>
+  readonly completionNote: Prisma.FieldRef<"ContractTerminationRequest", 'String'>
+  readonly outstandingDebt: Prisma.FieldRef<"ContractTerminationRequest", 'Decimal'>
   readonly createdAt: Prisma.FieldRef<"ContractTerminationRequest", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ContractTerminationRequest", 'DateTime'>
   readonly createdById: Prisma.FieldRef<"ContractTerminationRequest", 'Int'>
@@ -2262,6 +2907,25 @@ export type ContractTerminationRequestDeleteManyArgs<ExtArgs extends runtime.Typ
    * Limit how many ContractTerminationRequests to delete.
    */
   limit?: number
+}
+
+/**
+ * ContractTerminationRequest.reviewedBy
+ */
+export type ContractTerminationRequest$reviewedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**
