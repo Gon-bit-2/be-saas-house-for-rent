@@ -4,7 +4,10 @@ jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
   TenantAccessService: class TenantAccessService {},
 }))
 jest.mock('./repositories/payments.repo', () => ({ PaymentsRepository: class PaymentsRepository {} }))
-jest.mock('./payos.service', () => ({ PayosService: class PayosService {} }))
+jest.mock('../payos/payos.service', () => ({ PayosService: class PayosService {} }))
+jest.mock('../subscription-payments/subscription-payments.service', () => ({
+  SubscriptionPaymentsService: class SubscriptionPaymentsService {},
+}))
 jest.mock('@src/modules/notifications/notification-events.service', () => ({
   NotificationEventsService: class NotificationEventsService {},
 }))
@@ -16,6 +19,7 @@ describe('PaymentsService', () => {
   let tenantAccessService: Record<string, jest.Mock>
   let payosService: Record<string, jest.Mock>
   let notificationEventsService: Record<string, jest.Mock>
+  let subscriptionPaymentsService: Record<string, jest.Mock>
 
   const invoice = {
     id: 10,
@@ -58,11 +62,15 @@ describe('PaymentsService', () => {
       notifyPaymentPending: jest.fn(),
       notifyPaymentReviewed: jest.fn(),
     }
+    subscriptionPaymentsService = {
+      handlePayosWebhook: jest.fn(),
+    }
     service = new PaymentsService(
       paymentsRepository as never,
       tenantAccessService as never,
       payosService as never,
       notificationEventsService as never,
+      subscriptionPaymentsService as never,
     )
   })
 
@@ -251,5 +259,76 @@ describe('PaymentsService', () => {
 
     expect(notificationEventsService.notifyPaymentPending).not.toHaveBeenCalled()
     expect(paymentsRepository.createWebhookLog).toHaveBeenCalledWith(expect.objectContaining({ status: 'IGNORED' }))
+  })
+
+  it('routes a verified non-invoice PayOS webhook to subscription billing', async () => {
+    const payload = {
+      code: '00',
+      desc: 'success',
+      success: true,
+      data: {
+        orderCode: 1000000000,
+        amount: 200000,
+        description: 'SUB7',
+        accountNumber: '12345678',
+        reference: 'REF-SUB-7',
+        transactionDateTime: '2026-07-26 00:01:00',
+        currency: 'VND',
+        paymentLinkId: 'link-sub-7',
+        code: '00',
+        desc: 'Thành công',
+        counterAccountBankId: '',
+        counterAccountBankName: '',
+        counterAccountName: '',
+        counterAccountNumber: '',
+        virtualAccountName: '',
+        virtualAccountNumber: '',
+      },
+      signature: 'signature',
+    }
+    payosService.verifyWebhook.mockResolvedValue(payload.data)
+    paymentsRepository.findQrByPayosIdentifiers.mockResolvedValue(null)
+    subscriptionPaymentsService.handlePayosWebhook.mockResolvedValue({
+      matched: true,
+      status: 'PROCESSED',
+      errorMessage: null,
+      payment: { id: 7, tenantId: 2 },
+    })
+
+    await service.handlePayosWebhook(payload)
+
+    expect(subscriptionPaymentsService.handlePayosWebhook).toHaveBeenCalledWith(
+      expect.objectContaining({ orderCode: 1000000000, paymentLinkId: 'link-sub-7', amount: 200000 }),
+    )
+    expect(paymentsRepository.createWebhookLog).toHaveBeenCalledWith(
+      expect.objectContaining({ subscriptionPaymentId: 7, invoiceId: undefined, status: 'PROCESSED' }),
+    )
+  })
+
+  it('lists only payments submitted by the authenticated renter', async () => {
+    paymentsRepository.findPaymentsAndCount.mockResolvedValue([[{ id: 1, payerId: 50 }], 1])
+
+    const result = await service.listMine(50, {
+      page: 1,
+      limit: 20,
+      renterId: 999,
+      status: 'SUCCESS',
+      search: 'INV-001',
+    })
+
+    expect(paymentsRepository.findPaymentsAndCount).toHaveBeenCalledWith(
+      expect.objectContaining({ payerId: 50, status: 'SUCCESS' }),
+      0,
+      20,
+    )
+    expect(paymentsRepository.findPaymentsAndCount.mock.calls[0][0]).not.toHaveProperty('renterId')
+    expect(result.meta.total).toBe(1)
+  })
+
+  it('does not return another renter payment by id', async () => {
+    paymentsRepository.findMyPayment = jest.fn().mockResolvedValue(null)
+
+    await expect(service.getMine(50, 404)).rejects.toBeInstanceOf(NotFoundException)
+    expect(paymentsRepository.findMyPayment).toHaveBeenCalledWith(50, 404)
   })
 })

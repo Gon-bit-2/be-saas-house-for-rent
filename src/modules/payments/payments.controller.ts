@@ -19,6 +19,18 @@ export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
   @IsTenant()
+  @Get('payments/me')
+  listMine(@ActiveUser() user: AccessTokenPayload, @Query() query: ListPaymentsQueryDTO) {
+    return this.paymentsService.listMine(user.userId, query)
+  }
+
+  @IsTenant()
+  @Get('payments/me/:id')
+  getMine(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
+    return this.paymentsService.getMine(user.userId, id)
+  }
+
+  @IsTenant()
   @Get('invoices/me/:id/payment-qr')
   getMyPaymentQr(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
     return this.paymentsService.getMyPaymentQr(user.userId, id)
@@ -31,6 +43,7 @@ export class PaymentsController {
     @Param('id', ParseIntPipe) id: number,
     @Body() _body: CreatePaymentQrBodyDTO,
   ) {
+    void _body
     return this.paymentsService.createMyPaymentQr(user.userId, id)
   }
 
@@ -58,13 +71,21 @@ export class PaymentsController {
 
   @Roles(roleName.LANDLORD, roleName.MANAGER, roleName.ACCOUNTANT)
   @Patch('payments/:id/approve')
-  approve(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number, @Body() body: ReviewPaymentBodyDTO) {
+  approve(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: ReviewPaymentBodyDTO,
+  ) {
     return this.paymentsService.approve(user.userId, id, body)
   }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER, roleName.ACCOUNTANT)
   @Patch('payments/:id/reject')
-  reject(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number, @Body() body: ReviewPaymentBodyDTO) {
+  reject(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: ReviewPaymentBodyDTO,
+  ) {
     return this.paymentsService.reject(user.userId, id, body)
   }
 

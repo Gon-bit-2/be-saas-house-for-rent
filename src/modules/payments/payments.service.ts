@@ -4,6 +4,8 @@ import envConfig from '@src/config/env.config'
 import { NotificationEventsService } from '@src/modules/notifications/notification-events.service'
 import { TenantAccessService } from '@src/shared/modules/services/tenant-access.service'
 import type { InvoiceStatus, Prisma } from 'generated/prisma/client'
+import { PayosService } from '../payos/payos.service'
+import { SubscriptionPaymentsService } from '../subscription-payments/subscription-payments.service'
 import type {
   TListPaymentsQuerySchema,
   TPayosWebhookBodySchema,
@@ -11,7 +13,6 @@ import type {
   TReviewPaymentBodySchema,
   TSubmitPaymentConfirmationBodySchema,
 } from './model/payments.model'
-import { PayosService } from './payos.service'
 import { PaymentsRepository, type PayableInvoice } from './repositories/payments.repo'
 import { digestWebhookPayload, sanitizePayosWebhookPayload, sanitizeWebhookText } from './webhook-log.security'
 
@@ -25,7 +26,23 @@ export class PaymentsService {
     private readonly tenantAccessService: TenantAccessService,
     private readonly payosService: PayosService,
     private readonly notificationEventsService: NotificationEventsService,
+    private readonly subscriptionPaymentsService: SubscriptionPaymentsService,
   ) {}
+
+  async listMine(userId: number, query: TListPaymentsQuerySchema) {
+    const { page, limit, skip } = normalizePagination(query)
+    const where = this.buildPaymentWhereForRenter(userId, query)
+    const [payments, total] = await this.paymentsRepository.findPaymentsAndCount(where, skip, limit)
+    return buildPaginatedResult(payments, total, page, limit)
+  }
+
+  async getMine(userId: number, id: number) {
+    const payment = await this.paymentsRepository.findMyPayment(userId, id)
+    if (!payment) {
+      throw new NotFoundException('Không tìm thấy thanh toán của bạn')
+    }
+    return payment
+  }
 
   async listForLandlord(userId: number, query: TListPaymentsQuerySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
@@ -150,6 +167,34 @@ export class PaymentsService {
       }
 
       if (!qr) {
+        if (!transactionDateTime) {
+          await this.logWebhook(payload, data, true, 'FAILED', 'Thời gian giao dịch PayOS không hợp lệ', null)
+          return { code: '00', desc: 'success', success: true }
+        }
+
+        const subscriptionResult = await this.subscriptionPaymentsService.handlePayosWebhook({
+          orderCode: data.orderCode,
+          paymentLinkId: data.paymentLinkId,
+          reference: data.reference,
+          amount: data.amount,
+          currency: data.currency,
+          transactionDateTime,
+        })
+        if (subscriptionResult.matched) {
+          await this.logWebhook(
+            payload,
+            data,
+            true,
+            subscriptionResult.status,
+            subscriptionResult.errorMessage,
+            transactionDateTime,
+            subscriptionResult.payment.tenantId,
+            undefined,
+            subscriptionResult.payment.id,
+          )
+          return { code: '00', desc: 'success', success: true }
+        }
+
         await this.logWebhook(
           payload,
           data,
@@ -270,6 +315,25 @@ export class PaymentsService {
     }
   }
 
+  private buildPaymentWhereForRenter(userId: number, query: TListPaymentsQuerySchema): Prisma.PaymentWhereInput {
+    return {
+      payerId: userId,
+      ...(query.status ? { status: query.status } : {}),
+      ...(query.invoiceId ? { invoiceId: query.invoiceId } : {}),
+      ...(query.from || query.to
+        ? { createdAt: { ...(query.from ? { gte: query.from } : {}), ...(query.to ? { lte: query.to } : {}) } }
+        : {}),
+      ...(query.search
+        ? {
+            OR: [
+              { transactionCode: { contains: query.search, mode: 'insensitive' } },
+              { invoice: { invoiceCode: { contains: query.search, mode: 'insensitive' } } },
+            ],
+          }
+        : {}),
+    }
+  }
+
   private buildPayosDescription(invoice: PayableInvoice) {
     return `INV${invoice.id}`.slice(0, 25)
   }
@@ -296,12 +360,14 @@ export class PaymentsService {
     transactionDateTime = this.parsePayosDateTime(data.transactionDateTime),
     tenantId?: number,
     invoiceId?: number,
+    subscriptionPaymentId?: number,
   ) {
     const sanitizedPayload = sanitizePayosWebhookPayload(payload)
     return this.paymentsRepository.createWebhookLog({
       provider: 'PayOS',
       tenantId,
       invoiceId,
+      subscriptionPaymentId,
       orderCode: data.orderCode,
       paymentLinkId: data.paymentLinkId,
       reference: data.reference,

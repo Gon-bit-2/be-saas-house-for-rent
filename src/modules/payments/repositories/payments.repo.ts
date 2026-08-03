@@ -81,6 +81,7 @@ export type CreateWebhookLogInput = {
   provider: string
   tenantId?: number | null
   invoiceId?: number | null
+  subscriptionPaymentId?: number | null
   orderCode?: number | null
   paymentLinkId?: string | null
   reference?: string | null
@@ -120,6 +121,10 @@ export class PaymentsRepository {
     return this.prismaService.payment.findFirst({ where: { id, tenantId }, select: paymentSelect })
   }
 
+  async findMyPayment(userId: number, id: number) {
+    return this.prismaService.payment.findFirst({ where: { id, payerId: userId }, select: paymentSelect })
+  }
+
   async findMyPayableInvoice(userId: number, invoiceId: number) {
     return this.prismaService.invoice.findFirst({
       where: { id: invoiceId, renterId: userId, deletedAt: null },
@@ -155,24 +160,16 @@ export class PaymentsRepository {
   }
 
   async createQrDraft(input: { tenantId: number; invoiceId: number; amount: number; expiredAt: Date }) {
-    return this.prismaService.$transaction(async (tx) => {
-      const qr = await tx.paymentQrCode.create({
-        data: {
-          tenantId: input.tenantId,
-          invoiceId: input.invoiceId,
-          provider: 'PayOS',
-          amount: input.amount,
-          expiredAt: input.expiredAt,
-          status: 'ACTIVE',
-        },
-        select: { id: true },
-      })
-
-      return tx.paymentQrCode.update({
-        where: { id: qr.id },
-        data: { orderCode: qr.id },
-        select: paymentQrSelect,
-      })
+    return this.prismaService.paymentQrCode.create({
+      data: {
+        tenantId: input.tenantId,
+        invoiceId: input.invoiceId,
+        provider: 'PayOS',
+        amount: input.amount,
+        expiredAt: input.expiredAt,
+        status: 'ACTIVE',
+      },
+      select: paymentQrSelect,
     })
   }
 
@@ -228,7 +225,7 @@ export class PaymentsRepository {
 
   async findQrByPayosIdentifiers(orderCode: number, paymentLinkId: string) {
     return this.prismaService.paymentQrCode.findFirst({
-      where: { provider: 'PayOS', OR: [{ orderCode }, { paymentLinkId }] },
+      where: { provider: 'PayOS', orderCode, paymentLinkId },
       select: {
         ...paymentQrSelect,
         invoice: {
@@ -294,6 +291,7 @@ export class PaymentsRepository {
         provider: input.provider,
         tenantId: input.tenantId,
         invoiceId: input.invoiceId,
+        subscriptionPaymentId: input.subscriptionPaymentId,
         orderCode: input.orderCode,
         paymentLinkId: input.paymentLinkId,
         reference: input.reference,
