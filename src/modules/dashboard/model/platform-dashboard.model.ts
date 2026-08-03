@@ -1,8 +1,9 @@
 import z from 'zod'
+import { IsoDateInputCodec } from '@src/common/utils/date-codec.util'
 
 const PlatformDateRangeShape = {
-  from: z.coerce.date().optional(),
-  to: z.coerce.date().optional(),
+  from: IsoDateInputCodec.optional(),
+  to: IsoDateInputCodec.optional(),
 }
 
 export const PlatformDashboardSummaryQuerySchema = z.object(PlatformDateRangeShape).strict()

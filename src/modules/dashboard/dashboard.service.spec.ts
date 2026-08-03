@@ -1,5 +1,7 @@
 import { BadRequestException } from '@nestjs/common'
-jest.mock('@src/shared/modules/services/tenant-access.service', () => ({ TenantAccessService: class TenantAccessService {} }))
+jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
+  TenantAccessService: class TenantAccessService {},
+}))
 jest.mock('./repositories/dashboard.repo', () => ({ DashboardRepository: class DashboardRepository {} }))
 const { DashboardService } = require('./dashboard.service') as typeof import('./dashboard.service')
 
@@ -59,7 +61,13 @@ describe('DashboardService', () => {
     })
 
     expect(tenantAccessService.getActiveTenantContext).toHaveBeenCalledWith(99)
-    expect(result.rooms).toEqual({ totalRooms: 4, occupiedRooms: 2, availableRooms: 1, maintenanceRooms: 1, occupancyRate: 50 })
+    expect(result.rooms).toEqual({
+      totalRooms: 4,
+      occupiedRooms: 2,
+      availableRooms: 1,
+      maintenanceRooms: 1,
+      occupancyRate: 50,
+    })
     expect(result.finance).toEqual({
       invoiceTotal: 5000000,
       paidAmount: 3500000,
@@ -67,7 +75,14 @@ describe('DashboardService', () => {
       outstandingDebt: 1500000,
       overdueDebt: 500000,
     })
-    expect(result.tickets).toEqual({ open: 3, inProgress: 2, waitingRenter: 0, resolved: 0, closed: 1, urgentOpenTickets: 1 })
+    expect(result.tickets).toEqual({
+      open: 3,
+      inProgress: 2,
+      waitingRenter: 0,
+      resolved: 0,
+      closed: 1,
+      urgentOpenTickets: 1,
+    })
   })
 
   it('defaults summary range to current UTC month through current UTC day', async () => {
@@ -99,7 +114,9 @@ describe('DashboardService', () => {
   })
 
   it('infers monthly revenue grouping for long ranges', async () => {
-    dashboardRepository.getRevenueTrend.mockResolvedValue([{ bucket: new Date('2026-01-01T00:00:00.000Z'), amount: '1000', count: 2 }])
+    dashboardRepository.getRevenueTrend.mockResolvedValue([
+      { bucket: new Date('2026-01-01T00:00:00.000Z'), amount: '1000', count: 2 },
+    ])
 
     const result = await service.getRevenueTrend(99, {
       from: new Date('2026-01-01T00:00:00.000Z'),
@@ -110,5 +127,3 @@ describe('DashboardService', () => {
     expect(result.items).toEqual([{ bucket: '2026-01-01T00:00:00.000Z', amount: 1000, count: 2 }])
   })
 })
-
-

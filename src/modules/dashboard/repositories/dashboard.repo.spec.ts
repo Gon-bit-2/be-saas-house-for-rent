@@ -39,14 +39,21 @@ describe('DashboardRepository', () => {
 
   it('uses only settled payment statuses and active debts in finance stats', async () => {
     prismaService.invoice.aggregate.mockResolvedValue({ _sum: { totalAmount: '5000' } })
-    prismaService.payment.aggregate.mockResolvedValueOnce({ _sum: { amount: '3000' } }).mockResolvedValueOnce({ _sum: { amount: '1000' } })
-    prismaService.debt.aggregate.mockResolvedValueOnce({ _sum: { remainingAmount: '2000' } }).mockResolvedValueOnce({ _sum: { remainingAmount: '500' } })
+    prismaService.payment.aggregate
+      .mockResolvedValueOnce({ _sum: { amount: '3000' } })
+      .mockResolvedValueOnce({ _sum: { amount: '1000' } })
+    prismaService.debt.aggregate
+      .mockResolvedValueOnce({ _sum: { remainingAmount: '2000' } })
+      .mockResolvedValueOnce({ _sum: { remainingAmount: '500' } })
 
     await repository.getFinanceStats(2, new Date('2026-07-01T00:00:00.000Z'), new Date('2026-07-31T23:59:59.999Z'))
 
     expect(prismaService.invoice.aggregate).toHaveBeenCalledWith(
       expect.objectContaining({
-        where: expect.objectContaining({ tenantId: 2, status: { in: ['UNPAID', 'PARTIALLY_PAID', 'PAID', 'OVERDUE'] } }),
+        where: expect.objectContaining({
+          tenantId: 2,
+          status: { in: ['UNPAID', 'PARTIALLY_PAID', 'PAID', 'OVERDUE'] },
+        }),
       }),
     )
     expect(prismaService.payment.aggregate).toHaveBeenNthCalledWith(
@@ -67,10 +74,18 @@ describe('DashboardRepository', () => {
     prismaService.ticket.groupBy.mockResolvedValue([{ status: 'OPEN', _count: { _all: 4 } }])
     prismaService.ticket.count.mockResolvedValue(2)
 
-    const result = await repository.getTicketStats(2, new Date('2026-07-01T00:00:00.000Z'), new Date('2026-07-31T23:59:59.999Z'))
+    const result = await repository.getTicketStats(
+      2,
+      new Date('2026-07-01T00:00:00.000Z'),
+      new Date('2026-07-31T23:59:59.999Z'),
+    )
 
     expect(prismaService.ticket.groupBy).toHaveBeenCalledWith(
-      expect.objectContaining({ by: ['status'], where: expect.objectContaining({ tenantId: 2 }), _count: { _all: true } }),
+      expect.objectContaining({
+        by: ['status'],
+        where: expect.objectContaining({ tenantId: 2 }),
+        _count: { _all: true },
+      }),
     )
     expect(prismaService.ticket.count).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -80,4 +95,3 @@ describe('DashboardRepository', () => {
     expect(result.urgentOpenTickets).toBe(2)
   })
 })
-

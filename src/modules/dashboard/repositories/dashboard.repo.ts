@@ -62,33 +62,34 @@ export class DashboardRepository {
   }
 
   async getFinanceStats(tenantId: number, from: Date, to: Date) {
-    const [invoiceTotal, paidAmount, pendingPaymentAmount, outstandingDebt, overdueDebt] = await this.prismaService.$transaction([
-      this.prismaService.invoice.aggregate({
-        where: {
-          tenantId,
-          deletedAt: null,
-          status: { in: ['UNPAID', 'PARTIALLY_PAID', 'PAID', 'OVERDUE'] },
-          billingMonth: { gte: from, lte: to },
-        },
-        _sum: { totalAmount: true },
-      }),
-      this.prismaService.payment.aggregate({
-        where: { tenantId, status: 'SUCCESS', paidAt: { gte: from, lte: to } },
-        _sum: { amount: true },
-      }),
-      this.prismaService.payment.aggregate({
-        where: { tenantId, status: 'PENDING', createdAt: { gte: from, lte: to } },
-        _sum: { amount: true },
-      }),
-      this.prismaService.debt.aggregate({
-        where: { tenantId, status: { in: ['OPEN', 'PARTIAL', 'OVERDUE'] } },
-        _sum: { remainingAmount: true },
-      }),
-      this.prismaService.debt.aggregate({
-        where: { tenantId, status: 'OVERDUE' },
-        _sum: { remainingAmount: true },
-      }),
-    ])
+    const [invoiceTotal, paidAmount, pendingPaymentAmount, outstandingDebt, overdueDebt] =
+      await this.prismaService.$transaction([
+        this.prismaService.invoice.aggregate({
+          where: {
+            tenantId,
+            deletedAt: null,
+            status: { in: ['UNPAID', 'PARTIALLY_PAID', 'PAID', 'OVERDUE'] },
+            billingMonth: { gte: from, lte: to },
+          },
+          _sum: { totalAmount: true },
+        }),
+        this.prismaService.payment.aggregate({
+          where: { tenantId, status: 'SUCCESS', paidAt: { gte: from, lte: to } },
+          _sum: { amount: true },
+        }),
+        this.prismaService.payment.aggregate({
+          where: { tenantId, status: 'PENDING', createdAt: { gte: from, lte: to } },
+          _sum: { amount: true },
+        }),
+        this.prismaService.debt.aggregate({
+          where: { tenantId, status: { in: ['OPEN', 'PARTIAL', 'OVERDUE'] } },
+          _sum: { remainingAmount: true },
+        }),
+        this.prismaService.debt.aggregate({
+          where: { tenantId, status: 'OVERDUE' },
+          _sum: { remainingAmount: true },
+        }),
+      ])
 
     return {
       invoiceTotal: invoiceTotal._sum.totalAmount,
@@ -241,7 +242,9 @@ export class DashboardRepository {
       .slice(0, limit)
   }
 
-  private normalizeStatusCounts<TStatus extends string>(rows: Array<{ status: TStatus; _count?: true | { _all?: number } }>): StatusCountRow<TStatus>[] {
+  private normalizeStatusCounts<TStatus extends string>(
+    rows: Array<{ status: TStatus; _count?: true | { _all?: number } }>,
+  ): StatusCountRow<TStatus>[] {
     return rows.map((row) => ({
       status: row.status,
       _count: { _all: typeof row._count === 'object' ? (row._count._all ?? 0) : 0 },
@@ -256,5 +259,3 @@ export class DashboardRepository {
     return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 23, 59, 59, 999))
   }
 }
-
-
