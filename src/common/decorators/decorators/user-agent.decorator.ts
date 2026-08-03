@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { createParamDecorator, ExecutionContext } from '@nestjs/common'
+import type { Request } from 'express'
 
 /**
  * Parameter decorator to extract the User-Agent header from the HTTP request.
@@ -13,6 +13,7 @@ import { createParamDecorator, ExecutionContext } from '@nestjs/common'
  * @returns {string} Chuỗi header User-Agent.
  */
 export const UserAgent = createParamDecorator((data: unknown, ctx: ExecutionContext): string => {
-  const request = ctx.switchToHttp().getRequest()
-  return request.headers['user-agent']
+  const request = ctx.switchToHttp().getRequest<Request>()
+  const userAgent = request.headers['user-agent']
+  return typeof userAgent === 'string' ? userAgent : ''
 })

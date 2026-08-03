@@ -1,8 +1,11 @@
 import { BadRequestException, ConflictException } from '@nestjs/common'
+import { Decimal } from '@prisma/client/runtime/client'
+import { MeterReadingsService } from './meter-readings.service'
 
-jest.mock('@src/shared/modules/services/tenant-access.service', () => ({ TenantAccessService: class TenantAccessService {} }))
+jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
+  TenantAccessService: class TenantAccessService {},
+}))
 jest.mock('./repositories/utility-meters.repo', () => ({ UtilityMetersRepository: class UtilityMetersRepository {} }))
-const { MeterReadingsService } = require('./meter-readings.service') as typeof import('./meter-readings.service')
 
 describe('MeterReadingsService', () => {
   let service: import('./meter-readings.service').MeterReadingsService
@@ -26,12 +29,14 @@ describe('MeterReadingsService', () => {
       findReadingByMeterMonth: jest.fn(),
       findLatestReadingBeforeMonth: jest.fn(),
       findActiveContractForRoomMonth: jest.fn(),
-      createManualReading: jest.fn(),
+      createReading: jest.fn(),
       updateReading: jest.fn(),
       updateReadingStatus: jest.fn(),
     }
     tenantAccessService = {
-      getActiveTenantContext: jest.fn().mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
+      getActiveTenantContext: jest
+        .fn()
+        .mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
     }
     service = new MeterReadingsService(utilityMetersRepository as never, tenantAccessService as never)
   })
@@ -41,7 +46,7 @@ describe('MeterReadingsService', () => {
     utilityMetersRepository.findReadingByMeterMonth.mockResolvedValue(null)
     utilityMetersRepository.findLatestReadingBeforeMonth.mockResolvedValue({ currentValue: 100 })
     utilityMetersRepository.findActiveContractForRoomMonth.mockResolvedValue({ id: 9 })
-    utilityMetersRepository.createManualReading.mockResolvedValue({ id: 11 })
+    utilityMetersRepository.createReading.mockResolvedValue({ id: 11 })
 
     await service.create(50, {
       meterId: 1,
@@ -50,18 +55,18 @@ describe('MeterReadingsService', () => {
       status: 'CONFIRMED',
     })
 
-    expect(utilityMetersRepository.createManualReading).toHaveBeenCalledWith(
+    expect(utilityMetersRepository.createReading).toHaveBeenCalledWith(
       expect.objectContaining({
         tenantId: 10,
         roomId: 5,
         meterId: 1,
         contractId: 9,
         billingMonth: new Date('2026-07-01T00:00:00.000Z'),
-        previousValue: 100,
-        currentValue: 130,
-        consumption: 30,
-        unitPrice: 3500,
-        amount: 105000,
+        previousValue: new Decimal(100),
+        currentValue: new Decimal(130),
+        consumption: new Decimal(30),
+        unitPrice: new Decimal(3500),
+        amount: new Decimal(105000),
         source: 'MANUAL',
         status: 'CONFIRMED',
       }),
@@ -72,9 +77,14 @@ describe('MeterReadingsService', () => {
     utilityMetersRepository.findMeterForReading.mockResolvedValue({ ...activeElectricMeter, status: 'BROKEN' })
 
     await expect(
-      service.create(50, { meterId: 1, billingMonth: new Date('2026-07-01T00:00:00.000Z'), currentValue: 130, status: 'DRAFT' }),
+      service.create(50, {
+        meterId: 1,
+        billingMonth: new Date('2026-07-01T00:00:00.000Z'),
+        currentValue: 130,
+        status: 'DRAFT',
+      }),
     ).rejects.toBeInstanceOf(BadRequestException)
-    expect(utilityMetersRepository.createManualReading).not.toHaveBeenCalled()
+    expect(utilityMetersRepository.createReading).not.toHaveBeenCalled()
   })
 
   it('rejects duplicate reading for the same meter month', async () => {
@@ -82,9 +92,14 @@ describe('MeterReadingsService', () => {
     utilityMetersRepository.findReadingByMeterMonth.mockResolvedValue({ id: 3 })
 
     await expect(
-      service.create(50, { meterId: 1, billingMonth: new Date('2026-07-01T00:00:00.000Z'), currentValue: 130, status: 'DRAFT' }),
+      service.create(50, {
+        meterId: 1,
+        billingMonth: new Date('2026-07-01T00:00:00.000Z'),
+        currentValue: 130,
+        status: 'DRAFT',
+      }),
     ).rejects.toBeInstanceOf(ConflictException)
-    expect(utilityMetersRepository.createManualReading).not.toHaveBeenCalled()
+    expect(utilityMetersRepository.createReading).not.toHaveBeenCalled()
   })
 
   it('rejects current value lower than previous value', async () => {
@@ -93,9 +108,14 @@ describe('MeterReadingsService', () => {
     utilityMetersRepository.findLatestReadingBeforeMonth.mockResolvedValue({ currentValue: 150 })
 
     await expect(
-      service.create(50, { meterId: 1, billingMonth: new Date('2026-07-01T00:00:00.000Z'), currentValue: 130, status: 'DRAFT' }),
+      service.create(50, {
+        meterId: 1,
+        billingMonth: new Date('2026-07-01T00:00:00.000Z'),
+        currentValue: 130,
+        status: 'DRAFT',
+      }),
     ).rejects.toBeInstanceOf(BadRequestException)
-    expect(utilityMetersRepository.createManualReading).not.toHaveBeenCalled()
+    expect(utilityMetersRepository.createReading).not.toHaveBeenCalled()
   })
 
   it('blocks editing confirmed readings or readings already used by invoices', async () => {

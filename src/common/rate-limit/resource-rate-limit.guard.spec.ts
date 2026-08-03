@@ -35,6 +35,20 @@ describe('ResourceRateLimitGuard', () => {
     )
   })
 
+  it('supports the trust write profile', async () => {
+    reflector.getAllAndOverride.mockReturnValue('trust-write')
+    storage.increment.mockResolvedValue({ isBlocked: false, timeToBlockExpire: 0 })
+    const guard = new ResourceRateLimitGuard(reflector as never, storage as never)
+
+    await expect(guard.canActivate(context as never)).resolves.toBe(true)
+    expect(storage.increment).toHaveBeenCalledWith(
+      expect.stringMatching(/^resource:trust-write:[a-f0-9]{64}$/),
+      expect.any(Number),
+      expect.any(Number),
+      expect.any(Number),
+      'resource',
+    )
+  })
   it('returns Retry-After when the distributed bucket is blocked', async () => {
     storage.increment.mockResolvedValue({ isBlocked: true, timeToBlockExpire: 45 })
     const guard = new ResourceRateLimitGuard(reflector as never, storage as never)

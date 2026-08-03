@@ -32,7 +32,10 @@ describe('AmenitiesController', () => {
     await controller.update(user, 1, { isActive: false })
 
     expect(amenitiesService.list).toHaveBeenCalledWith({ page: 1, limit: 10 }, 'ADMIN')
-    expect(amenitiesService.create).toHaveBeenCalledWith({ name: 'Wifi', category: 'Tien nghi', icon: 'wifi', isActive: true }, 99)
+    expect(amenitiesService.create).toHaveBeenCalledWith(
+      { name: 'Wifi', category: 'Tien nghi', icon: 'wifi', isActive: true },
+      99,
+    )
     expect(amenitiesService.update).toHaveBeenCalledWith(1, { isActive: false }, 99)
   })
 })

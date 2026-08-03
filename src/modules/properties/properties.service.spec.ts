@@ -1,6 +1,8 @@
 import { BadRequestException, NotFoundException } from '@nestjs/common'
 
-jest.mock('@src/shared/modules/services/tenant-access.service', () => ({ TenantAccessService: class TenantAccessService {} }))
+jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
+  TenantAccessService: class TenantAccessService {},
+}))
 jest.mock('./repositories/properties.repo', () => ({ PropertiesRepository: class PropertiesRepository {} }))
 const { PropertiesService } = require('./properties.service') as typeof import('./properties.service')
 
@@ -25,7 +27,9 @@ describe('PropertiesService', () => {
       deleteFloor: jest.fn(),
     }
     tenantAccessService = {
-      getActiveTenantContext: jest.fn().mockResolvedValue({ tenantId: 10, userId: 99, memberId: 1, roleId: 'LANDLORD' }),
+      getActiveTenantContext: jest
+        .fn()
+        .mockResolvedValue({ tenantId: 10, userId: 99, memberId: 1, roleId: 'LANDLORD' }),
     }
     service = new PropertiesService(propertiesRepository as never, tenantAccessService as never)
   })
@@ -71,4 +75,3 @@ describe('PropertiesService', () => {
     expect(propertiesRepository.deleteFloor).not.toHaveBeenCalled()
   })
 })
-

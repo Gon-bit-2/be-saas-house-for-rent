@@ -172,11 +172,7 @@ export class NotificationsRepository {
     return this.prismaService.notification.findUnique({ where: { id }, select: notificationSelect })
   }
 
-  async createBackgroundJob(input: {
-    tenantId?: number | null
-    jobType: string
-    payload: Prisma.InputJsonValue
-  }) {
+  async createBackgroundJob(input: { tenantId?: number | null; jobType: string; payload: Prisma.InputJsonValue }) {
     return this.prismaService.backgroundJob.create({
       data: {
         tenantId: input.tenantId ?? null,
@@ -193,7 +189,11 @@ export class NotificationsRepository {
     return this.prismaService.backgroundJob.update({ where: { id }, data: { externalJobId }, select: { id: true } })
   }
 
-  async updateBackgroundJobStatus(id: number, status: BackgroundJobStatus, data?: { attempts?: number; errorMessage?: string | null }) {
+  async updateBackgroundJobStatus(
+    id: number,
+    status: BackgroundJobStatus,
+    data?: { attempts?: number; errorMessage?: string | null },
+  ) {
     return this.prismaService.backgroundJob.update({
       where: { id },
       data: {

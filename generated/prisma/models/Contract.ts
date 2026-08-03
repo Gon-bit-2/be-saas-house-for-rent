@@ -410,6 +410,7 @@ export type ContractWhereInput = {
   rentalRequest?: Prisma.XOR<Prisma.RentalRequestNullableScalarRelationFilter, Prisma.RentalRequestWhereInput> | null
   template?: Prisma.XOR<Prisma.ContractTemplateNullableScalarRelationFilter, Prisma.ContractTemplateWhereInput> | null
   members?: Prisma.ContractMemberListRelationFilter
+  serviceAssignments?: Prisma.ServiceAssignmentListRelationFilter
   files?: Prisma.ContractFileListRelationFilter
   terminationRequests?: Prisma.ContractTerminationRequestListRelationFilter
   rentalHistories?: Prisma.RentalHistoryListRelationFilter
@@ -455,6 +456,7 @@ export type ContractOrderByWithRelationInput = {
   rentalRequest?: Prisma.RentalRequestOrderByWithRelationInput
   template?: Prisma.ContractTemplateOrderByWithRelationInput
   members?: Prisma.ContractMemberOrderByRelationAggregateInput
+  serviceAssignments?: Prisma.ServiceAssignmentOrderByRelationAggregateInput
   files?: Prisma.ContractFileOrderByRelationAggregateInput
   terminationRequests?: Prisma.ContractTerminationRequestOrderByRelationAggregateInput
   rentalHistories?: Prisma.RentalHistoryOrderByRelationAggregateInput
@@ -503,6 +505,7 @@ export type ContractWhereUniqueInput = Prisma.AtLeast<{
   rentalRequest?: Prisma.XOR<Prisma.RentalRequestNullableScalarRelationFilter, Prisma.RentalRequestWhereInput> | null
   template?: Prisma.XOR<Prisma.ContractTemplateNullableScalarRelationFilter, Prisma.ContractTemplateWhereInput> | null
   members?: Prisma.ContractMemberListRelationFilter
+  serviceAssignments?: Prisma.ServiceAssignmentListRelationFilter
   files?: Prisma.ContractFileListRelationFilter
   terminationRequests?: Prisma.ContractTerminationRequestListRelationFilter
   rentalHistories?: Prisma.RentalHistoryListRelationFilter
@@ -599,6 +602,7 @@ export type ContractCreateInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -639,6 +643,7 @@ export type ContractUncheckedCreateInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -672,6 +677,7 @@ export type ContractUpdateInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -712,6 +718,7 @@ export type ContractUncheckedUpdateInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -1351,6 +1358,22 @@ export type ContractUpdateOneWithoutMeterReadingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContractUpdateToOneWithWhereWithoutMeterReadingsInput, Prisma.ContractUpdateWithoutMeterReadingsInput>, Prisma.ContractUncheckedUpdateWithoutMeterReadingsInput>
 }
 
+export type ContractCreateNestedOneWithoutServiceAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.ContractCreateWithoutServiceAssignmentsInput, Prisma.ContractUncheckedCreateWithoutServiceAssignmentsInput>
+  connectOrCreate?: Prisma.ContractCreateOrConnectWithoutServiceAssignmentsInput
+  connect?: Prisma.ContractWhereUniqueInput
+}
+
+export type ContractUpdateOneWithoutServiceAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ContractCreateWithoutServiceAssignmentsInput, Prisma.ContractUncheckedCreateWithoutServiceAssignmentsInput>
+  connectOrCreate?: Prisma.ContractCreateOrConnectWithoutServiceAssignmentsInput
+  upsert?: Prisma.ContractUpsertWithoutServiceAssignmentsInput
+  disconnect?: Prisma.ContractWhereInput | boolean
+  delete?: Prisma.ContractWhereInput | boolean
+  connect?: Prisma.ContractWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContractUpdateToOneWithWhereWithoutServiceAssignmentsInput, Prisma.ContractUpdateWithoutServiceAssignmentsInput>, Prisma.ContractUncheckedUpdateWithoutServiceAssignmentsInput>
+}
+
 export type ContractCreateNestedOneWithoutInvoicesInput = {
   create?: Prisma.XOR<Prisma.ContractCreateWithoutInvoicesInput, Prisma.ContractUncheckedCreateWithoutInvoicesInput>
   connectOrCreate?: Prisma.ContractCreateOrConnectWithoutInvoicesInput
@@ -1417,12 +1440,10 @@ export type ContractCreateNestedOneWithoutReviewsInput = {
   connect?: Prisma.ContractWhereUniqueInput
 }
 
-export type ContractUpdateOneWithoutReviewsNestedInput = {
+export type ContractUpdateOneRequiredWithoutReviewsNestedInput = {
   create?: Prisma.XOR<Prisma.ContractCreateWithoutReviewsInput, Prisma.ContractUncheckedCreateWithoutReviewsInput>
   connectOrCreate?: Prisma.ContractCreateOrConnectWithoutReviewsInput
   upsert?: Prisma.ContractUpsertWithoutReviewsInput
-  disconnect?: Prisma.ContractWhereInput | boolean
-  delete?: Prisma.ContractWhereInput | boolean
   connect?: Prisma.ContractWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContractUpdateToOneWithWhereWithoutReviewsInput, Prisma.ContractUpdateWithoutReviewsInput>, Prisma.ContractUncheckedUpdateWithoutReviewsInput>
 }
@@ -1447,6 +1468,7 @@ export type ContractCreateWithoutRenterInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -1486,6 +1508,7 @@ export type ContractUncheckedCreateWithoutRenterInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -1529,6 +1552,7 @@ export type ContractCreateWithoutCreatedByInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -1567,6 +1591,7 @@ export type ContractUncheckedCreateWithoutCreatedByInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -1610,6 +1635,7 @@ export type ContractCreateWithoutUpdatedByInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -1648,6 +1674,7 @@ export type ContractUncheckedCreateWithoutUpdatedByInput = {
   createdById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -1691,6 +1718,7 @@ export type ContractCreateWithoutDeletedByInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -1729,6 +1757,7 @@ export type ContractUncheckedCreateWithoutDeletedByInput = {
   createdById?: number | null
   updatedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -1864,6 +1893,7 @@ export type ContractCreateWithoutTenantInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -1903,6 +1933,7 @@ export type ContractUncheckedCreateWithoutTenantInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -1961,6 +1992,7 @@ export type ContractCreateWithoutRoomInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -2000,6 +2032,7 @@ export type ContractUncheckedCreateWithoutRoomInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -2059,6 +2092,7 @@ export type ContractCreateWithoutRentalHistoriesInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
@@ -2098,6 +2132,7 @@ export type ContractUncheckedCreateWithoutRentalHistoriesInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
@@ -2146,6 +2181,7 @@ export type ContractUpdateWithoutRentalHistoriesInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
@@ -2185,6 +2221,7 @@ export type ContractUncheckedUpdateWithoutRentalHistoriesInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
@@ -2216,6 +2253,7 @@ export type ContractCreateWithoutRentalRequestInput = {
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -2255,6 +2293,7 @@ export type ContractUncheckedCreateWithoutRentalRequestInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -2313,6 +2352,7 @@ export type ContractCreateWithoutTemplateInput = {
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -2352,6 +2392,7 @@ export type ContractUncheckedCreateWithoutTemplateInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -2410,6 +2451,7 @@ export type ContractCreateWithoutMembersInput = {
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -2449,6 +2491,7 @@ export type ContractUncheckedCreateWithoutMembersInput = {
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -2497,6 +2540,7 @@ export type ContractUpdateWithoutMembersInput = {
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -2536,6 +2580,7 @@ export type ContractUncheckedUpdateWithoutMembersInput = {
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -2569,6 +2614,7 @@ export type ContractCreateWithoutFilesInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
@@ -2608,6 +2654,7 @@ export type ContractUncheckedCreateWithoutFilesInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
@@ -2656,6 +2703,7 @@ export type ContractUpdateWithoutFilesInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
@@ -2695,6 +2743,7 @@ export type ContractUncheckedUpdateWithoutFilesInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
@@ -2727,6 +2776,7 @@ export type ContractCreateWithoutTerminationRequestsInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
@@ -2766,6 +2816,7 @@ export type ContractUncheckedCreateWithoutTerminationRequestsInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
@@ -2814,6 +2865,7 @@ export type ContractUpdateWithoutTerminationRequestsInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
@@ -2853,6 +2905,7 @@ export type ContractUncheckedUpdateWithoutTerminationRequestsInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
@@ -2885,6 +2938,7 @@ export type ContractCreateWithoutHandoverRecordsInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -2924,6 +2978,7 @@ export type ContractUncheckedCreateWithoutHandoverRecordsInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -2972,6 +3027,7 @@ export type ContractUpdateWithoutHandoverRecordsInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -3011,6 +3067,7 @@ export type ContractUncheckedUpdateWithoutHandoverRecordsInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -3043,6 +3100,7 @@ export type ContractCreateWithoutMeterReadingsInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -3082,6 +3140,7 @@ export type ContractUncheckedCreateWithoutMeterReadingsInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -3130,6 +3189,7 @@ export type ContractUpdateWithoutMeterReadingsInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -3169,10 +3229,173 @@ export type ContractUncheckedUpdateWithoutMeterReadingsInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
+}
+
+export type ContractCreateWithoutServiceAssignmentsInput = {
+  contractCode: string
+  startDate: Date | string
+  endDate: Date | string
+  monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  billingCycle: $Enums.ContractBillingCycle
+  paymentDueDay: number
+  contentSnapshot: string
+  status?: $Enums.ContractStatus
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  room: Prisma.RoomCreateNestedOneWithoutContractsInput
+  renter: Prisma.UserCreateNestedOneWithoutContractsInput
+  rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
+  template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
+  members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
+  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedContractsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedContractsInput
+}
+
+export type ContractUncheckedCreateWithoutServiceAssignmentsInput = {
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
+  contractCode: string
+  startDate: Date | string
+  endDate: Date | string
+  monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  billingCycle: $Enums.ContractBillingCycle
+  paymentDueDay: number
+  contentSnapshot: string
+  status?: $Enums.ContractStatus
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
+}
+
+export type ContractCreateOrConnectWithoutServiceAssignmentsInput = {
+  where: Prisma.ContractWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContractCreateWithoutServiceAssignmentsInput, Prisma.ContractUncheckedCreateWithoutServiceAssignmentsInput>
+}
+
+export type ContractUpsertWithoutServiceAssignmentsInput = {
+  update: Prisma.XOR<Prisma.ContractUpdateWithoutServiceAssignmentsInput, Prisma.ContractUncheckedUpdateWithoutServiceAssignmentsInput>
+  create: Prisma.XOR<Prisma.ContractCreateWithoutServiceAssignmentsInput, Prisma.ContractUncheckedCreateWithoutServiceAssignmentsInput>
+  where?: Prisma.ContractWhereInput
+}
+
+export type ContractUpdateToOneWithWhereWithoutServiceAssignmentsInput = {
+  where?: Prisma.ContractWhereInput
+  data: Prisma.XOR<Prisma.ContractUpdateWithoutServiceAssignmentsInput, Prisma.ContractUncheckedUpdateWithoutServiceAssignmentsInput>
+}
+
+export type ContractUpdateWithoutServiceAssignmentsInput = {
+  contractCode?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
+  paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
+  contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
+  renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
+  rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
+  template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
+  members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedContractsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedContractsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedContractsNestedInput
+}
+
+export type ContractUncheckedUpdateWithoutServiceAssignmentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractCode?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
+  paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
+  contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
@@ -3201,6 +3424,7 @@ export type ContractCreateWithoutInvoicesInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -3240,6 +3464,7 @@ export type ContractUncheckedCreateWithoutInvoicesInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -3288,6 +3513,7 @@ export type ContractUpdateWithoutInvoicesInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -3327,6 +3553,7 @@ export type ContractUncheckedUpdateWithoutInvoicesInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -3359,6 +3586,7 @@ export type ContractCreateWithoutDebtsInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -3398,6 +3626,7 @@ export type ContractUncheckedCreateWithoutDebtsInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -3446,6 +3675,7 @@ export type ContractUpdateWithoutDebtsInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -3485,6 +3715,7 @@ export type ContractUncheckedUpdateWithoutDebtsInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -3517,6 +3748,7 @@ export type ContractCreateWithoutTicketsInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -3556,6 +3788,7 @@ export type ContractUncheckedCreateWithoutTicketsInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -3604,6 +3837,7 @@ export type ContractUpdateWithoutTicketsInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -3643,6 +3877,7 @@ export type ContractUncheckedUpdateWithoutTicketsInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -3675,6 +3910,7 @@ export type ContractCreateWithoutConversationsInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -3714,6 +3950,7 @@ export type ContractUncheckedCreateWithoutConversationsInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -3762,6 +3999,7 @@ export type ContractUpdateWithoutConversationsInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -3801,6 +4039,7 @@ export type ContractUncheckedUpdateWithoutConversationsInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -3833,6 +4072,7 @@ export type ContractCreateWithoutReviewsInput = {
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
   members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
@@ -3872,6 +4112,7 @@ export type ContractUncheckedCreateWithoutReviewsInput = {
   updatedById?: number | null
   deletedById?: number | null
   members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
   files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
@@ -3920,6 +4161,7 @@ export type ContractUpdateWithoutReviewsInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -3959,6 +4201,7 @@ export type ContractUncheckedUpdateWithoutReviewsInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -4090,6 +4333,7 @@ export type ContractUpdateWithoutRenterInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -4129,6 +4373,7 @@ export type ContractUncheckedUpdateWithoutRenterInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -4187,6 +4432,7 @@ export type ContractUpdateWithoutCreatedByInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -4225,6 +4471,7 @@ export type ContractUncheckedUpdateWithoutCreatedByInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -4283,6 +4530,7 @@ export type ContractUpdateWithoutUpdatedByInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -4321,6 +4569,7 @@ export type ContractUncheckedUpdateWithoutUpdatedByInput = {
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -4379,6 +4628,7 @@ export type ContractUpdateWithoutDeletedByInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -4417,6 +4667,7 @@ export type ContractUncheckedUpdateWithoutDeletedByInput = {
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -4499,6 +4750,7 @@ export type ContractUpdateWithoutTenantInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -4538,6 +4790,7 @@ export type ContractUncheckedUpdateWithoutTenantInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -4620,6 +4873,7 @@ export type ContractUpdateWithoutRoomInput = {
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -4659,6 +4913,7 @@ export type ContractUncheckedUpdateWithoutRoomInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -4741,6 +4996,7 @@ export type ContractUpdateWithoutRentalRequestInput = {
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -4780,6 +5036,7 @@ export type ContractUncheckedUpdateWithoutRentalRequestInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -4862,6 +5119,7 @@ export type ContractUpdateWithoutTemplateInput = {
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
@@ -4901,6 +5159,7 @@ export type ContractUncheckedUpdateWithoutTemplateInput = {
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
   files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
@@ -4945,6 +5204,7 @@ export type ContractUncheckedUpdateManyWithoutTemplateInput = {
 
 export type ContractCountOutputType = {
   members: number
+  serviceAssignments: number
   files: number
   terminationRequests: number
   rentalHistories: number
@@ -4959,6 +5219,7 @@ export type ContractCountOutputType = {
 
 export type ContractCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   members?: boolean | ContractCountOutputTypeCountMembersArgs
+  serviceAssignments?: boolean | ContractCountOutputTypeCountServiceAssignmentsArgs
   files?: boolean | ContractCountOutputTypeCountFilesArgs
   terminationRequests?: boolean | ContractCountOutputTypeCountTerminationRequestsArgs
   rentalHistories?: boolean | ContractCountOutputTypeCountRentalHistoriesArgs
@@ -4986,6 +5247,13 @@ export type ContractCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
  */
 export type ContractCountOutputTypeCountMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ContractMemberWhereInput
+}
+
+/**
+ * ContractCountOutputType without action
+ */
+export type ContractCountOutputTypeCountServiceAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ServiceAssignmentWhereInput
 }
 
 /**
@@ -5089,6 +5357,7 @@ export type ContractSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   rentalRequest?: boolean | Prisma.Contract$rentalRequestArgs<ExtArgs>
   template?: boolean | Prisma.Contract$templateArgs<ExtArgs>
   members?: boolean | Prisma.Contract$membersArgs<ExtArgs>
+  serviceAssignments?: boolean | Prisma.Contract$serviceAssignmentsArgs<ExtArgs>
   files?: boolean | Prisma.Contract$filesArgs<ExtArgs>
   terminationRequests?: boolean | Prisma.Contract$terminationRequestsArgs<ExtArgs>
   rentalHistories?: boolean | Prisma.Contract$rentalHistoriesArgs<ExtArgs>
@@ -5207,6 +5476,7 @@ export type ContractInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   rentalRequest?: boolean | Prisma.Contract$rentalRequestArgs<ExtArgs>
   template?: boolean | Prisma.Contract$templateArgs<ExtArgs>
   members?: boolean | Prisma.Contract$membersArgs<ExtArgs>
+  serviceAssignments?: boolean | Prisma.Contract$serviceAssignmentsArgs<ExtArgs>
   files?: boolean | Prisma.Contract$filesArgs<ExtArgs>
   terminationRequests?: boolean | Prisma.Contract$terminationRequestsArgs<ExtArgs>
   rentalHistories?: boolean | Prisma.Contract$rentalHistoriesArgs<ExtArgs>
@@ -5270,6 +5540,7 @@ export type $ContractPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
      * Danh sách thành viên cùng ở phòng thuộc hợp đồng này
      */
     members: Prisma.$ContractMemberPayload<ExtArgs>[]
+    serviceAssignments: Prisma.$ServiceAssignmentPayload<ExtArgs>[]
     /**
      * Danh sách file xuất bản (PDF/DOCX) liên quan đến hợp đồng
      */
@@ -5807,6 +6078,7 @@ export interface Prisma__ContractClient<T, Null = never, ExtArgs extends runtime
   rentalRequest<T extends Prisma.Contract$rentalRequestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$rentalRequestArgs<ExtArgs>>): Prisma.Prisma__RentalRequestClient<runtime.Types.Result.GetResult<Prisma.$RentalRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   template<T extends Prisma.Contract$templateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$templateArgs<ExtArgs>>): Prisma.Prisma__ContractTemplateClient<runtime.Types.Result.GetResult<Prisma.$ContractTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   members<T extends Prisma.Contract$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContractMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  serviceAssignments<T extends Prisma.Contract$serviceAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$serviceAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   files<T extends Prisma.Contract$filesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$filesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContractFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   terminationRequests<T extends Prisma.Contract$terminationRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$terminationRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContractTerminationRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rentalHistories<T extends Prisma.Contract$rentalHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$rentalHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6332,6 +6604,30 @@ export type Contract$membersArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.ContractMemberScalarFieldEnum | Prisma.ContractMemberScalarFieldEnum[]
+}
+
+/**
+ * Contract.serviceAssignments
+ */
+export type Contract$serviceAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ServiceAssignment
+   */
+  select?: Prisma.ServiceAssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ServiceAssignment
+   */
+  omit?: Prisma.ServiceAssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ServiceAssignmentInclude<ExtArgs> | null
+  where?: Prisma.ServiceAssignmentWhereInput
+  orderBy?: Prisma.ServiceAssignmentOrderByWithRelationInput | Prisma.ServiceAssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.ServiceAssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ServiceAssignmentScalarFieldEnum | Prisma.ServiceAssignmentScalarFieldEnum[]
 }
 
 /**

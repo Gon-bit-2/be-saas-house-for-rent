@@ -8,6 +8,8 @@ import type {
 } from './model/marketplace.model'
 import { MarketplaceRepository } from './repositories/marketplace.repo'
 
+type MarketplaceRoomRecord = NonNullable<Awaited<ReturnType<MarketplaceRepository['findById']>>>
+
 /**
  * Service for public room discovery and tenant-side marketplace actions.
  */
@@ -19,19 +21,21 @@ export class MarketplaceService {
     const { page, limit, skip } = normalizePagination(query)
     const where = this.buildPublicRoomWhere(query)
     const [rooms, total] = await this.marketplaceRepository.findMany(where, skip, limit)
-    return buildPaginatedResult(rooms, total, page, limit)
+    return buildPaginatedResult(
+      rooms.map((room) => this.toPublicRoom(room)),
+      total,
+      page,
+      limit,
+    )
   }
 
   async getRoomById(id: number) {
-    const room = await this.marketplaceRepository.findById(id)
-    if (!room) {
-      throw new NotFoundException('Không tìm thấy phòng đang hiển thị trên marketplace')
-    }
-    return room
+    const room = await this.getPublicRoomRecordOrThrow(id)
+    return this.toPublicRoom(room)
   }
 
   async createRentalRequest(userId: number, roomId: number, body: TCreateMarketplaceRentalRequestBodySchema) {
-    const room = await this.getRoomById(roomId)
+    const room = await this.getPublicRoomRecordOrThrow(roomId)
     await this.assertRenterProfile(userId)
     this.assertDateNotInPast(body.expectedStartDate, 'Ngày dự kiến dọn vào không được ở quá khứ')
 
@@ -64,7 +68,7 @@ export class MarketplaceService {
   }
 
   async createViewingAppointment(userId: number, roomId: number, body: TCreateMarketplaceViewingAppointmentBodySchema) {
-    const room = await this.getRoomById(roomId)
+    const room = await this.getPublicRoomRecordOrThrow(roomId)
     await this.assertRenterProfile(userId)
     this.assertFutureDateTime(body.scheduledAt, 'Thời gian hẹn xem phòng phải ở tương lai')
 
@@ -77,6 +81,24 @@ export class MarketplaceService {
       status: 'PENDING',
       createdById: userId,
     })
+  }
+
+  private async getPublicRoomRecordOrThrow(id: number) {
+    const room = await this.marketplaceRepository.findById(id)
+    if (!room) {
+      throw new NotFoundException('Không tìm thấy phòng đang hiển thị trên marketplace')
+    }
+    return room
+  }
+
+  private toPublicRoom(room: MarketplaceRoomRecord) {
+    const { tenantId, property, ...publicRoom } = room
+    const { addressDetail, latitude, longitude, ...publicProperty } = property
+    void tenantId
+    void addressDetail
+    void latitude
+    void longitude
+    return { ...publicRoom, property: publicProperty }
   }
 
   private async assertRenterProfile(userId: number) {

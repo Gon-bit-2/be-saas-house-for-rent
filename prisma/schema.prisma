@@ -48,129 +48,140 @@ model User {
 
   // Các quan hệ (Relations)
   /// Các tổ chức/chủ trọ do người dùng này sở hữu chính
-  ownedTenants         Tenant[]                 @relation("TenantOwner")
+  ownedTenants              Tenant[]                 @relation("TenantOwner")
   /// Danh sách các tổ chức mà người dùng này làm thành viên hoặc nhân viên
-  tenantMembers        TenantMember[]
+  tenantMembers             TenantMember[]
   /// Hồ sơ chi tiết của người thuê (nếu tài khoản là khách thuê)
-  renterProfile        RenterProfile?
+  renterProfile             RenterProfile?
+  acceptedRenterInvitations RenterInvitation[]       @relation("AcceptedRenterInvitations")
+  createdRenterInvitations  RenterInvitation[]       @relation("CreatedRenterInvitations")
   /// Lịch sử thuê phòng của người dùng này
-  rentalHistories      RentalHistory[]
+  rentalHistories           RentalHistory[]
   /// Lịch sử xem phòng trên Marketplace của người dùng này
-  roomViewLogs         RoomViewLog[]
+  roomViewLogs              RoomViewLog[]
   /// Danh sách các phòng trọ yêu thích của khách thuê
-  favoriteRooms        FavoriteRoom[]
+  favoriteRooms             FavoriteRoom[]
   /// Danh sách lịch hẹn xem phòng với tư cách khách thuê
-  viewingAppointments  RoomViewingAppointment[] @relation("RenterAppointments")
+  viewingAppointments       RoomViewingAppointment[] @relation("RenterAppointments")
   /// Danh sách lịch hẹn xem phòng được phân công hỗ trợ (với tư cách nhân viên)
-  assignedAppointments RoomViewingAppointment[] @relation("StaffAppointments")
+  assignedAppointments      RoomViewingAppointment[] @relation("StaffAppointments")
   /// Danh sách các yêu cầu thuê phòng đã gửi
-  rentalRequests       RentalRequest[]
+  rentalRequests            RentalRequest[]
   /// Các hợp đồng thuê phòng mà người dùng này là người ký chính
-  contracts            Contract[]
+  contracts                 Contract[]
   /// Các hợp đồng thuê phòng mà người dùng này tham gia ở cùng (với tư cách thành viên)
-  contractMembers      ContractMember[]
+  contractMembers           ContractMember[]
   /// Danh sách các tác vụ AI OCR do người dùng này tải lên
-  uploadedOcrJobs      OcrJob[]                 @relation("UploadedJobs")
+  uploadedOcrJobs           OcrJob[]                 @relation("UploadedJobs")
   /// Danh sách các hóa đơn của khách thuê này
-  invoices             Invoice[]                @relation("RenterInvoices")
+  invoices                  Invoice[]                @relation("RenterInvoices")
   /// Danh sách các công nợ của khách thuê này
-  renterDebts          Debt[]                   @relation("RenterDebts")
+  renterDebts               Debt[]                   @relation("RenterDebts")
   /// Danh sách các thanh toán do khách thuê này thực hiện
-  payments             Payment[]                @relation("PayerPayments")
+  payments                  Payment[]                @relation("PayerPayments")
   /// Danh sách các thanh toán được người dùng này duyệt
-  approvedPayments     Payment[]                @relation("PaymentApprover")
+  approvedPayments          Payment[]                @relation("PaymentApprover")
   /// Danh sách các thanh toán bị người dùng này từ chối
-  rejectedPayments     Payment[]                @relation("PaymentRejecter")
+  rejectedPayments          Payment[]                @relation("PaymentRejecter")
   /// Danh sách các sự cố/ticket được phân công cho người dùng này xử lý
-  assignedTickets      Ticket[]                 @relation("TicketAssignee")
+  assignedTickets           Ticket[]                 @relation("TicketAssignee")
   /// Danh sách các file đính kèm ticket do người dùng này tải lên
-  ticketAttachments    TicketAttachment[]
+  ticketAttachments         TicketAttachment[]
   /// Danh sách các bình luận sự cố do người dùng này viết
-  ticketComments       TicketComment[]
+  ticketComments            TicketComment[]
   /// Danh sách các phòng chat người dùng này tham gia
-  conversationMembers  ConversationMember[]
+  conversationMembers       ConversationMember[]
   /// Danh sách tin nhắn người dùng này gửi
-  sentMessages         Message[]                @relation("MessageSender")
+  sentMessages              Message[]                @relation("MessageSender")
   /// Danh sách các đánh giá do người dùng này thực hiện
-  reviews              Review[]                 @relation("Reviewer")
+  reviews                   Review[]                 @relation("Reviewer")
+  /// Danh sách các đánh giá do người dùng này kiểm duyệt
+  moderatedReviews          Review[]                 @relation("ReviewModerator")
   /// Danh sách các báo cáo vi phạm do người dùng này gửi
-  reportedItems        Report[]                 @relation("Reporter")
+  reportedItems             Report[]                 @relation("Reporter")
   /// Danh sách các báo cáo vi phạm do người dùng này xử lý (với tư cách admin/staff)
-  handledReports       Report[]                 @relation("ReportHandler")
+  handledReports            Report[]                 @relation("ReportHandler")
   /// Danh sách các thông báo của người dùng này
-  notifications        Notification[]
+  notifications             Notification[]
   /// Danh sách các mã token thiết bị của người dùng này
-  deviceTokens         DeviceToken[]
+  deviceTokens              DeviceToken[]
   /// Danh sach refresh token dang hoac da duoc cap cho nguoi dung nay
-  refreshTokens        RefreshToken[]
+  refreshTokens             RefreshToken[]
   /// Danh sach cac thiet bi dang nhap cua nguoi dung nay
-  devices              Device[]
+  devices                   Device[]
   /// Danh sách các audit log do người dùng này thực hiện
-  auditLogs            AuditLog[]
+  auditLogs                 AuditLog[]
   /// Lịch sử kiểm duyệt marketplace do người dùng này thực hiện
-  marketplaceModerations MarketplaceModeration[]
+  marketplaceModerations    MarketplaceModeration[]
 
   // --- Audit Relations ---
-  createdTenants                     Tenant[]                     @relation("TenantCreator")
-  updatedTenants                     Tenant[]                     @relation("TenantUpdater")
-  deletedTenants                     Tenant[]                     @relation("TenantDeleter")
-  createdPropertys                   Property[]                   @relation("PropertyCreator")
-  updatedPropertys                   Property[]                   @relation("PropertyUpdater")
-  deletedPropertys                   Property[]                   @relation("PropertyDeleter")
-  createdRooms                       Room[]                       @relation("RoomCreator")
-  updatedRooms                       Room[]                       @relation("RoomUpdater")
-  deletedRooms                       Room[]                       @relation("RoomDeleter")
-  createdContracts                   Contract[]                   @relation("ContractCreator")
-  updatedContracts                   Contract[]                   @relation("ContractUpdater")
-  deletedContracts                   Contract[]                   @relation("ContractDeleter")
-  createdInvoices                    Invoice[]                    @relation("InvoiceCreator")
-  updatedInvoices                    Invoice[]                    @relation("InvoiceUpdater")
-  deletedInvoices                    Invoice[]                    @relation("InvoiceDeleter")
-  createdPayments                    Payment[]                    @relation("PaymentCreator")
-  updatedPayments                    Payment[]                    @relation("PaymentUpdater")
-  deletedPayments                    Payment[]                    @relation("PaymentDeleter")
-  createdTickets                     Ticket[]                     @relation("TicketCreator")
-  updatedTickets                     Ticket[]                     @relation("TicketUpdater")
-  deletedTickets                     Ticket[]                     @relation("TicketDeleter")
-  createdRoomAssets                  RoomAsset[]                  @relation("RoomAssetCreator")
-  updatedRoomAssets                  RoomAsset[]                  @relation("RoomAssetUpdater")
-  deletedRoomAssets                  RoomAsset[]                  @relation("RoomAssetDeleter")
-  createdHandoverRecords             HandoverRecord[]             @relation("HandoverRecordCreator")
-  updatedHandoverRecords             HandoverRecord[]             @relation("HandoverRecordUpdater")
-  deletedHandoverRecords             HandoverRecord[]             @relation("HandoverRecordDeleter")
-  createdMeterReadings               MeterReading[]               @relation("MeterReadingCreator")
-  updatedMeterReadings               MeterReading[]               @relation("MeterReadingUpdater")
-  deletedMeterReadings               MeterReading[]               @relation("MeterReadingDeleter")
-  createdContractTemplates           ContractTemplate[]           @relation("ContractTemplateCreator")
-  updatedContractTemplates           ContractTemplate[]           @relation("ContractTemplateUpdater")
-  deletedContractTemplates           ContractTemplate[]           @relation("ContractTemplateDeleter")
-  createdRoomViewingAppointments     RoomViewingAppointment[]     @relation("RoomViewingAppointmentCreator")
-  updatedRoomViewingAppointments     RoomViewingAppointment[]     @relation("RoomViewingAppointmentUpdater")
-  deletedRoomViewingAppointments     RoomViewingAppointment[]     @relation("RoomViewingAppointmentDeleter")
-  createdRentalRequests              RentalRequest[]              @relation("RentalRequestCreator")
-  updatedRentalRequests              RentalRequest[]              @relation("RentalRequestUpdater")
-  deletedRentalRequests              RentalRequest[]              @relation("RentalRequestDeleter")
-  createdInvoiceBatchs               InvoiceBatch[]               @relation("InvoiceBatchCreator")
-  updatedInvoiceBatchs               InvoiceBatch[]               @relation("InvoiceBatchUpdater")
-  deletedInvoiceBatchs               InvoiceBatch[]               @relation("InvoiceBatchDeleter")
-  createdContractTerminationRequests ContractTerminationRequest[] @relation("ContractTerminationRequestCreator")
-  updatedContractTerminationRequests ContractTerminationRequest[] @relation("ContractTerminationRequestUpdater")
-  deletedContractTerminationRequests ContractTerminationRequest[] @relation("ContractTerminationRequestDeleter")
-  createdRoles                       Role[]                       @relation("RoleCreator")
-  updatedRoles                       Role[]                       @relation("RoleUpdater")
-  deletedRoles                       Role[]                       @relation("RoleDeleter")
-  createdPermissions                 Permission[]                 @relation("PermissionCreator")
-  updatedPermissions                 Permission[]                 @relation("PermissionUpdater")
-  deletedPermissions                 Permission[]                 @relation("PermissionDeleter")
-  createdPlans                       Plan[]                       @relation("PlanCreator")
-  updatedPlans                       Plan[]                       @relation("PlanUpdater")
-  deletedPlans                       Plan[]                       @relation("PlanDeleter")
-  createdAmenitys                    Amenity[]                    @relation("AmenityCreator")
-  updatedAmenitys                    Amenity[]                    @relation("AmenityUpdater")
-  deletedAmenitys                    Amenity[]                    @relation("AmenityDeleter")
-  createdAssetCategorys              AssetCategory[]              @relation("AssetCategoryCreator")
-  updatedAssetCategorys              AssetCategory[]              @relation("AssetCategoryUpdater")
-  deletedAssetCategorys              AssetCategory[]              @relation("AssetCategoryDeleter")
+  createdTenants                      Tenant[]                     @relation("TenantCreator")
+  updatedTenants                      Tenant[]                     @relation("TenantUpdater")
+  deletedTenants                      Tenant[]                     @relation("TenantDeleter")
+  createdPropertys                    Property[]                   @relation("PropertyCreator")
+  updatedPropertys                    Property[]                   @relation("PropertyUpdater")
+  deletedPropertys                    Property[]                   @relation("PropertyDeleter")
+  createdRooms                        Room[]                       @relation("RoomCreator")
+  updatedRooms                        Room[]                       @relation("RoomUpdater")
+  deletedRooms                        Room[]                       @relation("RoomDeleter")
+  createdContracts                    Contract[]                   @relation("ContractCreator")
+  updatedContracts                    Contract[]                   @relation("ContractUpdater")
+  deletedContracts                    Contract[]                   @relation("ContractDeleter")
+  createdInvoices                     Invoice[]                    @relation("InvoiceCreator")
+  updatedInvoices                     Invoice[]                    @relation("InvoiceUpdater")
+  deletedInvoices                     Invoice[]                    @relation("InvoiceDeleter")
+  createdPayments                     Payment[]                    @relation("PaymentCreator")
+  updatedPayments                     Payment[]                    @relation("PaymentUpdater")
+  deletedPayments                     Payment[]                    @relation("PaymentDeleter")
+  createdSubscriptionPayments         SubscriptionPayment[]        @relation("SubscriptionPaymentCreator")
+  updatedSubscriptionPayments         SubscriptionPayment[]        @relation("SubscriptionPaymentUpdater")
+  createdTickets                      Ticket[]                     @relation("TicketCreator")
+  updatedTickets                      Ticket[]                     @relation("TicketUpdater")
+  deletedTickets                      Ticket[]                     @relation("TicketDeleter")
+  createdRoomAssets                   RoomAsset[]                  @relation("RoomAssetCreator")
+  updatedRoomAssets                   RoomAsset[]                  @relation("RoomAssetUpdater")
+  deletedRoomAssets                   RoomAsset[]                  @relation("RoomAssetDeleter")
+  createdHandoverRecords              HandoverRecord[]             @relation("HandoverRecordCreator")
+  updatedHandoverRecords              HandoverRecord[]             @relation("HandoverRecordUpdater")
+  deletedHandoverRecords              HandoverRecord[]             @relation("HandoverRecordDeleter")
+  createdMeterReadings                MeterReading[]               @relation("MeterReadingCreator")
+  updatedMeterReadings                MeterReading[]               @relation("MeterReadingUpdater")
+  deletedMeterReadings                MeterReading[]               @relation("MeterReadingDeleter")
+  createdContractTemplates            ContractTemplate[]           @relation("ContractTemplateCreator")
+  updatedContractTemplates            ContractTemplate[]           @relation("ContractTemplateUpdater")
+  deletedContractTemplates            ContractTemplate[]           @relation("ContractTemplateDeleter")
+  createdRoomViewingAppointments      RoomViewingAppointment[]     @relation("RoomViewingAppointmentCreator")
+  updatedRoomViewingAppointments      RoomViewingAppointment[]     @relation("RoomViewingAppointmentUpdater")
+  deletedRoomViewingAppointments      RoomViewingAppointment[]     @relation("RoomViewingAppointmentDeleter")
+  createdRentalRequests               RentalRequest[]              @relation("RentalRequestCreator")
+  updatedRentalRequests               RentalRequest[]              @relation("RentalRequestUpdater")
+  deletedRentalRequests               RentalRequest[]              @relation("RentalRequestDeleter")
+  createdInvoiceBatchs                InvoiceBatch[]               @relation("InvoiceBatchCreator")
+  updatedInvoiceBatchs                InvoiceBatch[]               @relation("InvoiceBatchUpdater")
+  deletedInvoiceBatchs                InvoiceBatch[]               @relation("InvoiceBatchDeleter")
+  createdContractTerminationRequests  ContractTerminationRequest[] @relation("ContractTerminationRequestCreator")
+  updatedContractTerminationRequests  ContractTerminationRequest[] @relation("ContractTerminationRequestUpdater")
+  deletedContractTerminationRequests  ContractTerminationRequest[] @relation("ContractTerminationRequestDeleter")
+  reviewedContractTerminationRequests ContractTerminationRequest[] @relation("ContractTerminationRequestReviewer")
+  signedLandlordHandovers             HandoverRecord[]             @relation("HandoverLandlordSigner")
+  signedRenterHandovers               HandoverRecord[]             @relation("HandoverRenterSigner")
+  disputedHandovers                   HandoverRecord[]             @relation("HandoverDisputer")
+  resolvedHandovers                   HandoverRecord[]             @relation("HandoverResolver")
+  createdRoles                        Role[]                       @relation("RoleCreator")
+  updatedRoles                        Role[]                       @relation("RoleUpdater")
+  deletedRoles                        Role[]                       @relation("RoleDeleter")
+  createdPermissions                  Permission[]                 @relation("PermissionCreator")
+  updatedPermissions                  Permission[]                 @relation("PermissionUpdater")
+  deletedPermissions                  Permission[]                 @relation("PermissionDeleter")
+  createdPlans                        Plan[]                       @relation("PlanCreator")
+  updatedPlans                        Plan[]                       @relation("PlanUpdater")
+  deletedPlans                        Plan[]                       @relation("PlanDeleter")
+  createdAmenitys                     Amenity[]                    @relation("AmenityCreator")
+  updatedAmenitys                     Amenity[]                    @relation("AmenityUpdater")
+  deletedAmenitys                     Amenity[]                    @relation("AmenityDeleter")
+  createdAssetCategorys               AssetCategory[]              @relation("AssetCategoryCreator")
+  updatedAssetCategorys               AssetCategory[]              @relation("AssetCategoryUpdater")
+  deletedAssetCategorys               AssetCategory[]              @relation("AssetCategoryDeleter")
 
   @@index([email])
   @@index([status])
@@ -378,75 +389,79 @@ model Tenant {
 
   // Các quan hệ (Relations)
   /// Người dùng sở hữu Tenant (chặn xóa người dùng nếu đang sở hữu tenant)
-  owner                User                         @relation("TenantOwner", fields: [ownerUserId], references: [id], onDelete: Restrict)
+  owner                  User                         @relation("TenantOwner", fields: [ownerUserId], references: [id], onDelete: Restrict)
   /// Danh sách nhân viên hoặc thành viên trực thuộc tenant
-  members              TenantMember[]
+  members                TenantMember[]
   /// Danh sách các đăng ký gói dịch vụ của tenant này
-  subscriptions        Subscription[]
+  subscriptions          Subscription[]
   /// Lịch sử các giao dịch thanh toán gói SaaS của tenant này
-  subscriptionPayments SubscriptionPayment[]
+  subscriptionPayments   SubscriptionPayment[]
   /// Danh sách các bất động sản/nhà trọ thuộc tenant quản lý
-  properties           Property[]
+  properties             Property[]
   /// Danh sách các tầng thuộc các nhà trọ trong tenant này
-  floors               Floor[]
+  floors                 Floor[]
   /// Danh sách các phòng trọ trực thuộc tenant quản lý
-  rooms                Room[]
+  rooms                  Room[]
   /// Lịch sử kiểm duyệt marketplace của tenant
   marketplaceModerations MarketplaceModeration[]
   /// Danh sách lịch sử thuê phòng xảy ra tại tenant này
-  rentalHistories      RentalHistory[]
+  rentalHistories        RentalHistory[]
   /// Lịch hẹn xem phòng của tenant này
-  viewingAppointments  RoomViewingAppointment[]
+  viewingAppointments    RoomViewingAppointment[]
   /// Yêu cầu thuê phòng được gửi đến tenant này
-  rentalRequests       RentalRequest[]
+  rentalRequests         RentalRequest[]
+  renterInvitations      RenterInvitation[]
   /// Danh sách các mẫu hợp đồng do tenant định nghĩa
-  contractTemplates    ContractTemplate[]
+  contractTemplates      ContractTemplate[]
   /// Danh sách các hợp đồng thuê phòng thuộc tenant quản lý
-  contracts            Contract[]
+  contracts              Contract[]
+  serviceCatalogItems    ServiceCatalogItem[]
+  serviceAssignments     ServiceAssignment[]
   /// Danh sách các yêu cầu trả phòng gửi đến tenant này
-  terminationRequests  ContractTerminationRequest[]
+  terminationRequests    ContractTerminationRequest[]
+  assetCategories        AssetCategory[]
   /// Danh sách tài sản thuộc quản lý của tenant
-  roomAssets           RoomAsset[]
+  roomAssets             RoomAsset[]
   /// Danh sách biên bản bàn giao thuộc tenant
-  handoverRecords      HandoverRecord[]
+  handoverRecords        HandoverRecord[]
   /// Danh sách đồng hồ điện nước thuộc tenant
-  utilityMeters        UtilityMeter[]
+  utilityMeters          UtilityMeter[]
   /// Danh sách các chỉ số điện nước đã ghi nhận của tenant
-  meterReadings        MeterReading[]
+  meterReadings          MeterReading[]
   /// Danh sách các tác vụ AI OCR của tenant
-  ocrJobs              OcrJob[]
+  ocrJobs                OcrJob[]
   /// Danh sách các đợt hóa đơn hàng loạt của tenant
-  invoiceBatches       InvoiceBatch[]
+  invoiceBatches         InvoiceBatch[]
   /// Danh sách các hóa đơn của tenant
-  invoices             Invoice[]
+  invoices               Invoice[]
   /// Danh sách các khoản công nợ của tenant
-  debts                Debt[]
+  debts                  Debt[]
   /// Danh sách lịch sử thanh toán tiền phòng của khách thuê gửi tenant
-  payments             Payment[]
+  payments               Payment[]
   /// Danh sách mã QR thanh toán của tenant
-  paymentQrCodes       PaymentQrCode[]
+  paymentQrCodes         PaymentQrCode[]
   /// Danh sách log webhook thanh toán của tenant
-  paymentWebhookLogs   PaymentWebhookLog[]
+  paymentWebhookLogs     PaymentWebhookLog[]
   /// Danh sách các sự cố/ticket trong tenant này
-  tickets              Ticket[]
+  tickets                Ticket[]
   /// Danh sách các phòng chat trong tenant này
-  conversations        Conversation[]
+  conversations          Conversation[]
   /// Danh sách các đánh giá về các phòng/nhà thuộc tenant này
-  reviews              Review[]
+  reviews                Review[]
   /// Bảng điểm uy tín các đối tượng thuộc tenant này
-  reputationScores     ReputationScore[]
+  reputationScores       ReputationScore[]
   /// Danh sách thông báo liên quan đến tenant này
-  notifications        Notification[]
+  notifications          Notification[]
   /// Danh sách tác vụ nền của tenant này
-  backgroundJobs       BackgroundJob[]
+  backgroundJobs         BackgroundJob[]
   /// Danh sách audit log thao tác của tenant này
-  auditLogs            AuditLog[]
+  auditLogs              AuditLog[]
   /// ID người dùng tạo bản ghi
-  createdById          Int?                         @map("created_by_id")
+  createdById            Int?                         @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById          Int?                         @map("updated_by_id")
+  updatedById            Int?                         @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById          Int?                         @map("deleted_by_id")
+  deletedById            Int?                         @map("deleted_by_id")
 
   createdBy User? @relation("TenantCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("TenantUpdater", fields: [updatedById], references: [id])
@@ -562,36 +577,70 @@ model Subscription {
   /// Các hóa đơn thanh toán liên quan đến chu kỳ đăng ký này
   payments SubscriptionPayment[]
 
+  @@unique([id, tenantId], map: "subscriptions_id_tenant_id_key")
+  @@index([tenantId, status])
   @@map("subscriptions")
 }
 
 /// Bảng lưu trữ lịch sử thanh toán hóa đơn gói SaaS của chủ trọ
 model SubscriptionPayment {
   /// ID giao dịch thanh toán
-  id              Int                       @id @default(autoincrement())
+  id              Int                        @id @default(autoincrement())
   /// ID của bản ghi đăng ký dịch vụ tương ứng
-  subscriptionId  Int                       @map("subscription_id")
+  subscriptionId  Int                        @map("subscription_id")
   /// ID của Tenant thực hiện thanh toán
-  tenantId        Int                       @map("tenant_id")
+  tenantId        Int                        @map("tenant_id")
+  /// Mục đích thanh toán: gia hạn hay đổi gói
+  purpose         SubscriptionPaymentPurpose @default(RENEWAL)
   /// Số tiền thanh toán thực tế
-  amount          Decimal                   @db.Decimal(12, 2)
+  amount          Decimal                    @db.Decimal(12, 2)
   /// Phương thức thanh toán (ví dụ: BANK_TRANSFER, VNPAY, MOMO, CREDIT_CARD)
-  paymentMethod   String                    @map("payment_method") @db.VarChar(100)
+  paymentMethod   String                     @default("QR") @map("payment_method") @db.VarChar(100)
+  /// Nhà cung cấp xử lý giao dịch
+  provider        String                     @default("PayOS") @db.VarChar(100)
+  /// Mã đơn hàng duy nhất gửi sang PayOS
+  orderCode       Int?                       @unique @default(dbgenerated("nextval('payos_order_code_seq'::regclass)")) @map("order_code")
+  /// ID payment link do PayOS trả về
+  paymentLinkId   String?                    @unique @map("payment_link_id") @db.VarChar(100)
+  /// URL checkout do PayOS trả về
+  checkoutUrl     String?                    @map("checkout_url") @db.Text
+  /// Nội dung VietQR do PayOS trả về
+  qrContent       String?                    @map("qr_content") @db.Text
+  /// Trạng thái payment link tại PayOS
+  providerStatus  String?                    @map("provider_status") @db.VarChar(50)
   /// Mã giao dịch từ cổng thanh toán hoặc ngân hàng
-  transactionCode String?                   @map("transaction_code") @db.VarChar(100)
+  transactionCode String?                    @map("transaction_code") @db.VarChar(100)
   /// Trạng thái của giao dịch thanh toán
-  status          SubscriptionPaymentStatus @default(PENDING)
+  status          SubscriptionPaymentStatus  @default(PENDING)
   /// Thời điểm thanh toán thành công (null nếu chưa thanh toán)
-  paidAt          DateTime?                 @map("paid_at") @db.Timestamptz
+  paidAt          DateTime?                  @map("paid_at") @db.Timestamptz
+  /// Thời điểm payment link hết hiệu lực
+  expiredAt       DateTime?                  @map("expired_at") @db.Timestamptz
   /// Thời điểm tạo yêu cầu thanh toán
-  createdAt       DateTime                  @default(now()) @map("created_at") @db.Timestamptz
+  createdAt       DateTime                   @default(now()) @map("created_at") @db.Timestamptz
+  /// Thời điểm cập nhật yêu cầu thanh toán gần nhất
+  updatedAt       DateTime                   @updatedAt @map("updated_at") @db.Timestamptz
+  /// ID người dùng tạo checkout
+  createdById     Int?                       @map("created_by_id")
+  /// ID người dùng cập nhật checkout gần nhất
+  updatedById     Int?                       @map("updated_by_id")
 
   // Các quan hệ (Relations)
   /// Bản ghi đăng ký dịch vụ tương ứng (xóa đăng ký thì xóa lịch sử thanh toán của nó)
-  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  subscription Subscription        @relation(fields: [subscriptionId, tenantId], references: [id, tenantId], onDelete: Cascade)
   /// Tenant liên kết (khi xóa tenant thì tự động xóa lịch sử thanh toán này)
-  tenant       Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant       Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  /// Người tạo checkout
+  createdBy    User?               @relation("SubscriptionPaymentCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  /// Người cập nhật checkout gần nhất
+  updatedBy    User?               @relation("SubscriptionPaymentUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+  /// Các webhook PayOS đã nhận cho checkout này
+  webhookLogs  PaymentWebhookLog[]
 
+  @@unique([provider, transactionCode], map: "subscription_payments_provider_transaction_code_key")
+  @@index([tenantId, createdAt])
+  @@index([subscriptionId, createdAt])
+  @@index([tenantId, status, createdAt])
   @@map("subscription_payments")
 }
 
@@ -720,57 +769,58 @@ model Room {
 
   // Các quan hệ (Relations)
   /// Tenant quản lý (khi xóa tenant thì tự động xóa toàn bộ phòng thuộc tenant đó)
-  tenant              Tenant                   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant                 Tenant                   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Tòa nhà chứa phòng trọ này (khi xóa tòa nhà thì tự động xóa toàn bộ phòng bên trong)
-  property            Property                 @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  property               Property                 @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   /// Tầng chứa phòng trọ này (khi xóa tầng thì thiết lập trường floorId về null để phòng không bị mất liên kết)
-  floor               Floor?                   @relation(fields: [floorId], references: [id], onDelete: SetNull)
+  floor                  Floor?                   @relation(fields: [floorId], references: [id], onDelete: SetNull)
   /// Danh sách hình ảnh thực tế của phòng trọ
-  images              RoomImage[]
+  images                 RoomImage[]
   /// Danh sách các tiện ích được trang bị trong phòng trọ này
-  amenities           RoomAmenity[]
+  amenities              RoomAmenity[]
   /// Danh sách lịch sử khách đã từng thuê phòng này
-  rentalHistories     RentalHistory[]
+  rentalHistories        RentalHistory[]
   /// Danh sách nhật ký khách xem phòng trọ này trên Marketplace
-  viewLogs            RoomViewLog[]
+  viewLogs               RoomViewLog[]
   /// Danh sách khách thuê đánh dấu yêu thích phòng này
-  favorites           FavoriteRoom[]
+  favorites              FavoriteRoom[]
   /// Lịch hẹn xem phòng thực tế tại phòng trọ này
-  viewingAppointments RoomViewingAppointment[]
+  viewingAppointments    RoomViewingAppointment[]
   /// Các yêu cầu xin thuê phòng trọ này
-  rentalRequests      RentalRequest[]
+  rentalRequests         RentalRequest[]
   /// Danh sách các hợp đồng thuê phòng trọ này
-  contracts           Contract[]
+  contracts              Contract[]
+  serviceAssignments     ServiceAssignment[]
   /// Danh sách tài sản trong phòng trọ này
-  roomAssets          RoomAsset[]
+  roomAssets             RoomAsset[]
   /// Danh sách biên bản bàn giao phòng trọ này
-  handoverRecords     HandoverRecord[]
+  handoverRecords        HandoverRecord[]
   /// Danh sách đồng hồ điện nước lắp tại phòng trọ này
-  utilityMeters       UtilityMeter[]
+  utilityMeters          UtilityMeter[]
   /// Danh sách chỉ số điện nước của phòng trọ này
-  meterReadings       MeterReading[]
+  meterReadings          MeterReading[]
   /// Danh sách các tác vụ AI OCR của phòng trọ này
-  ocrJobs             OcrJob[]
+  ocrJobs                OcrJob[]
   /// Danh sách hóa đơn của phòng trọ này
-  invoices            Invoice[]
+  invoices               Invoice[]
   /// Danh sách công nợ phát sinh từ phòng trọ này
-  debts               Debt[]
+  debts                  Debt[]
   /// Danh sách các sự cố/ticket của phòng trọ này
-  tickets             Ticket[]
+  tickets                Ticket[]
   /// Danh sách các phòng chat liên quan đến phòng trọ này
-  conversations       Conversation[]
+  conversations          Conversation[]
   /// Danh sách các đánh giá về phòng trọ này
-  reviews             Review[]
+  reviews                Review[]
   /// Bảng điểm uy tín của phòng trọ này
-  reputationScores    ReputationScore[]
+  reputationScores       ReputationScore[]
   /// Lịch sử gửi duyệt và kiểm duyệt marketplace
   marketplaceModerations MarketplaceModeration[]
   /// ID người dùng tạo bản ghi
-  createdById         Int?                     @map("created_by_id")
+  createdById            Int?                     @map("created_by_id")
   /// ID người dùng cập nhật bản ghi gần nhất
-  updatedById         Int?                     @map("updated_by_id")
+  updatedById            Int?                     @map("updated_by_id")
   /// ID người dùng thực hiện xóa mềm bản ghi
-  deletedById         Int?                     @map("deleted_by_id")
+  deletedById            Int?                     @map("deleted_by_id")
 
   createdBy User? @relation("RoomCreator", fields: [createdById], references: [id])
   updatedBy User? @relation("RoomUpdater", fields: [updatedById], references: [id])
@@ -881,6 +931,33 @@ model RoomAmenity {
   @@map("room_amenities")
 }
 
+/// Lời mời tạo tài khoản người thuê do chủ trọ phát hành.
+model RenterInvitation {
+  id             Int       @id @default(autoincrement())
+  tenantId       Int       @map("tenant_id")
+  email          String    @db.VarChar(255)
+  fullName       String    @map("full_name") @db.VarChar(255)
+  phone          String?   @db.VarChar(50)
+  codeHash       String    @map("code_hash") @db.Text
+  attempts       Int       @default(0)
+  expiresAt      DateTime  @map("expires_at") @db.Timestamptz
+  acceptedAt     DateTime? @map("accepted_at") @db.Timestamptz
+  acceptedUserId Int?      @map("accepted_user_id")
+  revokedAt      DateTime? @map("revoked_at") @db.Timestamptz
+  createdById    Int       @map("created_by_id")
+  createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt      DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  tenant       Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  acceptedUser User?  @relation("AcceptedRenterInvitations", fields: [acceptedUserId], references: [id], onDelete: SetNull)
+  createdBy    User   @relation("CreatedRenterInvitations", fields: [createdById], references: [id], onDelete: Restrict)
+
+  @@index([tenantId, email])
+  @@index([email, expiresAt])
+  @@index([acceptedUserId])
+  @@map("renter_invitations")
+}
+
 /// Hồ sơ thông tin chi tiết người thuê trên Mobile App
 model RenterProfile {
   /// ID hồ sơ (UUID)
@@ -950,6 +1027,9 @@ model RentalHistory {
   /// Hợp đồng thuê liên quan
   contract Contract @relation(fields: [contractId], references: [id], onDelete: Restrict)
 
+  @@unique([contractId])
+  @@index([tenantId, status])
+  @@index([renterId, status])
   @@map("rental_histories")
 }
 
@@ -1191,6 +1271,7 @@ model Contract {
   template            ContractTemplate?            @relation(fields: [templateId], references: [id], onDelete: SetNull)
   /// Danh sách thành viên cùng ở phòng thuộc hợp đồng này
   members             ContractMember[]
+  serviceAssignments  ServiceAssignment[]
   /// Danh sách file xuất bản (PDF/DOCX) liên quan đến hợp đồng
   files               ContractFile[]
   /// Các yêu cầu thanh lý/trả phòng của hợp đồng này
@@ -1248,6 +1329,7 @@ model ContractMember {
   /// Tài khoản người dùng (xóa tài khoản thì tự động xóa liên kết thành viên này)
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([contractId, userId])
   @@map("contract_members")
 }
 
@@ -1288,6 +1370,20 @@ model ContractTerminationRequest {
   expectedMoveOutDate DateTime                 @map("expected_move_out_date") @db.Date
   /// Trạng thái xử lý yêu cầu thanh lý
   status              TerminationRequestStatus @default(PENDING)
+  /// Ghi chú duyệt hoặc lý do từ chối của chủ trọ
+  reviewNote          String?                  @map("review_note") @db.Text
+  /// Người duyệt hoặc từ chối yêu cầu
+  reviewedById        Int?                     @map("reviewed_by_id")
+  /// Thời điểm duyệt hoặc từ chối
+  reviewedAt          DateTime?                @map("reviewed_at") @db.Timestamptz
+  /// Ngày khách thuê thực tế trả phòng
+  actualMoveOutDate   DateTime?                @map("actual_move_out_date") @db.Date
+  /// Thời điểm hoàn tất thanh lý
+  completedAt         DateTime?                @map("completed_at") @db.Timestamptz
+  /// Ghi chú hoàn tất và xác nhận nghĩa vụ còn lại
+  completionNote      String?                  @map("completion_note") @db.Text
+  /// Tổng công nợ còn mở tại thời điểm hoàn tất
+  outstandingDebt     Decimal?                 @map("outstanding_debt") @db.Decimal(12, 2)
   /// Thời điểm gửi yêu cầu
   createdAt           DateTime                 @default(now()) @map("created_at") @db.Timestamptz
   /// Thời điểm cập nhật yêu cầu gần nhất
@@ -1295,9 +1391,11 @@ model ContractTerminationRequest {
 
   // Các quan hệ (Relations)
   /// Tenant quản lý
-  tenant   Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Hợp đồng thuê liên quan (xóa hợp đồng thì xóa yêu cầu trả phòng)
-  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  contract   Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  /// Người duyệt hoặc từ chối yêu cầu
+  reviewedBy User?    @relation("ContractTerminationRequestReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
   // (removed old requestedUser)
   // (removed old requestedUser)
 
@@ -1312,20 +1410,28 @@ model ContractTerminationRequest {
   updatedBy User? @relation("ContractTerminationRequestUpdater", fields: [updatedById], references: [id])
   deletedBy User? @relation("ContractTerminationRequestDeleter", fields: [deletedById], references: [id])
 
+  @@index([tenantId, status])
+  @@index([contractId, status])
   @@map("contract_termination_requests")
 }
 
 /// Bảng danh mục loại tài sản (Ví dụ: Giường, Tủ, Điều hòa, Chìa khóa...)
 model AssetCategory {
   /// ID danh mục tài sản (UUID)
-  id          Int     @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
+  /// Tenant sở hữu danh mục
+  tenantId    Int       @map("tenant_id")
   /// Tên loại tài sản
-  name        String  @db.VarChar(100)
+  name        String    @db.VarChar(100)
   /// Mô tả chi tiết loại tài sản
-  description String? @db.Text
+  description String?   @db.Text
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+  deletedAt   DateTime? @map("deleted_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Danh sách các tài sản thực tế trong các phòng thuộc danh mục này
+  tenant     Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   roomAssets RoomAsset[]
 
   /// ID người dùng tạo bản ghi
@@ -1339,6 +1445,8 @@ model AssetCategory {
   updatedBy User? @relation("AssetCategoryUpdater", fields: [updatedById], references: [id])
   deletedBy User? @relation("AssetCategoryDeleter", fields: [deletedById], references: [id])
 
+  @@unique([tenantId, name])
+  @@index([tenantId, deletedAt])
   @@map("asset_categories")
 }
 
@@ -1390,6 +1498,7 @@ model RoomAsset {
   updatedBy User? @relation("RoomAssetUpdater", fields: [updatedById], references: [id])
   deletedBy User? @relation("RoomAssetDeleter", fields: [deletedById], references: [id])
 
+  @@index([tenantId, roomId, deletedAt])
   @@map("room_assets")
 }
 
@@ -1411,20 +1520,44 @@ model HandoverRecord {
   signedByLandlordAt DateTime?      @map("signed_by_landlord_at") @db.Timestamptz
   /// Thời điểm khách thuê ký tên xác nhận online
   signedByRenterAt   DateTime?      @map("signed_by_renter_at") @db.Timestamptz
+  /// Người đại diện chủ trọ đã xác nhận
+  signedByLandlordId Int?           @map("signed_by_landlord_id")
+  /// Người thuê chính đã xác nhận
+  signedByRenterId   Int?           @map("signed_by_renter_id")
   /// Trạng thái xác nhận của biên bản bàn giao
   status             HandoverStatus @default(DRAFT)
+  /// Phiên bản nội dung; tăng khi xử lý tranh chấp
+  version            Int            @default(1)
+  /// SHA-256 của nội dung và snapshot tài sản
+  contentHash        String         @map("content_hash") @db.VarChar(64)
+  /// Thời điểm đủ xác nhận từ hai phía
+  confirmedAt        DateTime?      @map("confirmed_at") @db.Timestamptz
+  /// Thông tin tranh chấp
+  disputedById       Int?           @map("disputed_by_id")
+  disputeReason      String?        @map("dispute_reason") @db.Text
+  disputedAt         DateTime?      @map("disputed_at") @db.Timestamptz
+  /// Thông tin xử lý tranh chấp
+  resolvedById       Int?           @map("resolved_by_id")
+  resolutionNote     String?        @map("resolution_note") @db.Text
+  resolvedAt         DateTime?      @map("resolved_at") @db.Timestamptz
   /// Thời điểm lập biên bản bàn giao
   createdAt          DateTime       @default(now()) @map("created_at") @db.Timestamptz
+  /// Thời điểm cập nhật biên bản
+  updatedAt          DateTime       @updatedAt @map("updated_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Tenant quản lý
-  tenant     Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant           Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Hợp đồng thuê liên quan (xóa hợp đồng thì cascade xóa biên bản bàn giao)
-  contract   Contract            @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  contract         Contract            @relation(fields: [contractId], references: [id], onDelete: Cascade)
   /// Phòng trọ bàn giao (xóa phòng thì cascade xóa biên bản bàn giao của phòng đó)
-  room       Room                @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  room             Room                @relation(fields: [roomId], references: [id], onDelete: Cascade)
   /// Chi tiết tình trạng các tài sản được ghi nhận trong biên bản này
-  assetItems HandoverAssetItem[]
+  assetItems       HandoverAssetItem[]
+  signedByLandlord User?               @relation("HandoverLandlordSigner", fields: [signedByLandlordId], references: [id], onDelete: SetNull)
+  signedByRenter   User?               @relation("HandoverRenterSigner", fields: [signedByRenterId], references: [id], onDelete: SetNull)
+  disputedBy       User?               @relation("HandoverDisputer", fields: [disputedById], references: [id], onDelete: SetNull)
+  resolvedBy       User?               @relation("HandoverResolver", fields: [resolvedById], references: [id], onDelete: SetNull)
 
   /// ID người dùng tạo bản ghi
   createdById Int? @map("created_by_id")
@@ -1437,6 +1570,8 @@ model HandoverRecord {
   updatedBy User? @relation("HandoverRecordUpdater", fields: [updatedById], references: [id])
   deletedBy User? @relation("HandoverRecordDeleter", fields: [deletedById], references: [id])
 
+  @@unique([contractId, type])
+  @@index([tenantId, status])
   @@map("handover_records")
 }
 
@@ -1448,8 +1583,12 @@ model HandoverAssetItem {
   handoverRecordId Int            @map("handover_record_id")
   /// ID tài sản phòng được bàn giao
   roomAssetId      Int            @map("room_asset_id")
-  /// Số lượng thực tế bàn giao
-  quantity         Int            @default(1)
+  /// Tên và danh mục tài sản được snapshot tại thời điểm lập biên bản
+  assetName        String         @map("asset_name") @db.VarChar(255)
+  categoryName     String         @map("category_name") @db.VarChar(100)
+  /// Số lượng theo inventory/check-in và số lượng thực tế
+  expectedQuantity Int            @map("expected_quantity")
+  actualQuantity   Int            @map("actual_quantity")
   /// Trạng thái chất lượng tài sản được ghi nhận lúc bàn giao
   condition        AssetCondition @default(GOOD)
   /// Ghi chú chi tiết cho tài sản này (ví dụ: bị trầy xước nhẹ ở góc)
@@ -1463,6 +1602,7 @@ model HandoverAssetItem {
   /// Tài sản phòng được tham chiếu (chặn xóa tài sản phòng nếu đang nằm trong biên bản bàn giao để giữ lịch sử pháp lý)
   roomAsset      RoomAsset      @relation(fields: [roomAssetId], references: [id], onDelete: Restrict)
 
+  @@unique([handoverRecordId, roomAssetId])
   @@map("handover_asset_items")
 }
 
@@ -1532,6 +1672,8 @@ model MeterReading {
   // (removed old recordedBy)
   /// Thời điểm thực hiện hành động ghi nhận chỉ số
   recordedAt    DateTime      @default(now()) @map("recorded_at") @db.Timestamptz
+  /// ID tác vụ OCR đã tạo chỉ số này, dùng để truy vết và chống duyệt lặp
+  ocrJobId      Int?          @unique @map("ocr_job_id")
 
   // Các quan hệ (Relations)
   /// Tenant quản lý
@@ -1545,6 +1687,8 @@ model MeterReading {
   // (removed old recordedByUser)
   /// Chi tiết hóa đơn liên quan đã sử dụng chỉ số tiêu thụ này để tính tiền
   invoiceItems InvoiceItem[]
+  /// Tác vụ OCR nguồn của chỉ số (nếu được tạo từ ảnh)
+  ocrJob       OcrJob?       @relation(fields: [ocrJobId], references: [id], onDelete: SetNull)
 
   /// ID người dùng tạo bản ghi
   createdById Int? @map("created_by_id")
@@ -1577,6 +1721,10 @@ model OcrJob {
   uploadedBy      Int          @map("uploaded_by")
   /// Đường dẫn hình ảnh đầu vào tải lên để OCR nhận diện
   imageUrl        String       @map("image_url") @db.Text
+  /// Public ID của ảnh trên Cloudinary để quản lý vòng đời asset
+  imagePublicId   String?      @map("image_public_id") @db.VarChar(255)
+  /// SHA-256 nội dung ảnh để chống tạo tác vụ trùng
+  fileHash        String?      @map("file_hash") @db.VarChar(64)
   /// Giá trị số chỉ số đồng hồ mà AI nhận diện được (null nếu xử lý thất bại)
   recognizedValue Decimal?     @map("recognized_value") @db.Decimal(12, 2)
   /// Độ tin cậy tính toán của kết quả nhận diện từ AI (giá trị từ 0.00 đến 1.00)
@@ -1594,14 +1742,20 @@ model OcrJob {
 
   // Các quan hệ (Relations)
   /// Tenant quản lý
-  tenant         Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant         Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Phòng trọ
-  room           Room         @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  room           Room          @relation(fields: [roomId], references: [id], onDelete: Cascade)
   /// Đồng hồ tương ứng (xóa đồng hồ thì cascade xóa tác vụ OCR liên quan)
-  meter          UtilityMeter @relation(fields: [meterId], references: [id], onDelete: Cascade)
+  meter          UtilityMeter  @relation(fields: [meterId], references: [id], onDelete: Cascade)
   /// Người dùng tải ảnh lên (chặn xóa người dùng này nếu có job OCR)
-  uploadedByUser User         @relation("UploadedJobs", fields: [uploadedBy], references: [id], onDelete: Restrict)
+  uploadedByUser User          @relation("UploadedJobs", fields: [uploadedBy], references: [id], onDelete: Restrict)
+  /// Chỉ số điện nước được tạo sau khi người dùng duyệt kết quả
+  reading        MeterReading?
 
+  @@unique([tenantId, meterId, fileHash])
+  @@index([tenantId, createdAt])
+  @@index([tenantId, status, createdAt])
+  @@index([meterId, createdAt])
   @@map("ocr_jobs")
 }
 
@@ -1641,6 +1795,55 @@ model InvoiceBatch {
 
   @@unique([tenantId, billingMonth]) // Đảm bảo mỗi tenant chỉ tạo tối đa 1 đợt hóa đơn hàng loạt trong 1 tháng
   @@map("invoice_batches")
+}
+
+/// Danh mục phí dịch vụ dùng lại trong một tenant.
+model ServiceCatalogItem {
+  id               Int             @id @default(autoincrement())
+  tenantId         Int             @map("tenant_id")
+  code             String          @db.VarChar(50)
+  name             String          @db.VarChar(255)
+  description      String?         @db.Text
+  itemType         InvoiceItemType @default(SERVICE) @map("item_type")
+  defaultUnitPrice Decimal         @map("default_unit_price") @db.Decimal(12, 2)
+  unitLabel        String          @default("tháng") @map("unit_label") @db.VarChar(50)
+  isActive         Boolean         @default(true) @map("is_active")
+  createdAt        DateTime        @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt        DateTime        @updatedAt @map("updated_at") @db.Timestamptz
+
+  tenant      Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  assignments ServiceAssignment[]
+
+  @@unique([tenantId, code])
+  @@index([tenantId, isActive])
+  @@map("service_catalog_items")
+}
+
+/// Phí định kỳ gán cho đúng một phòng hoặc một hợp đồng.
+model ServiceAssignment {
+  id            Int       @id @default(autoincrement())
+  tenantId      Int       @map("tenant_id")
+  serviceItemId Int       @map("service_item_id")
+  roomId        Int?      @map("room_id")
+  contractId    Int?      @map("contract_id")
+  quantity      Decimal   @default(1) @db.Decimal(12, 2)
+  unitPrice     Decimal?  @map("unit_price") @db.Decimal(12, 2)
+  startsAt      DateTime? @map("starts_at") @db.Date
+  endsAt        DateTime? @map("ends_at") @db.Date
+  isActive      Boolean   @default(true) @map("is_active")
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt     DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  tenant      Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  serviceItem ServiceCatalogItem @relation(fields: [serviceItemId], references: [id], onDelete: Cascade)
+  room        Room?              @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  contract    Contract?          @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, isActive])
+  @@index([serviceItemId])
+  @@index([roomId, isActive])
+  @@index([contractId, isActive])
+  @@map("service_assignments")
 }
 
 /// Bảng lưu trữ thông tin hóa đơn thu tiền phòng, điện nước và dịch vụ hằng tháng
@@ -1878,6 +2081,7 @@ model Payment {
   updatedBy User? @relation("PaymentUpdater", fields: [updatedById], references: [id])
   deletedBy User? @relation("PaymentDeleter", fields: [deletedById], references: [id])
 
+  @@unique([provider, transactionCode], map: "payments_provider_transaction_code_key")
   @@index([tenantId])
   @@index([tenantId, status])
   @@index([tenantId, status, paidAt])
@@ -1885,7 +2089,6 @@ model Payment {
   @@index([qrCodeId])
   @@index([transactionCode])
   @@index([status])
-  @@unique([provider, transactionCode], map: "payments_provider_transaction_code_key")
   @@map("payments")
 }
 
@@ -1900,7 +2103,7 @@ model PaymentQrCode {
   /// Tên nhà cung cấp dịch vụ QR (ví dụ: VietQR, PayOS, MoMo)
   provider       String       @db.VarChar(100)
   /// Mã đơn hàng PayOS dùng để tạo payment link và đối soát webhook
-  orderCode      Int?         @unique @map("order_code")
+  orderCode      Int?         @unique @default(dbgenerated("nextval('payos_order_code_seq'::regclass)")) @map("order_code")
   /// ID payment link do PayOS trả về
   paymentLinkId  String?      @unique @map("payment_link_id") @db.VarChar(100)
   /// Nội dung chuỗi text thô mã hóa trong mã QR phục vụ quét
@@ -1938,59 +2141,64 @@ model PaymentQrCode {
 /// Bảng ghi nhận lịch sử các gói tin Webhook gọi từ cổng thanh toán tự động đến hệ thống
 model PaymentWebhookLog {
   /// ID log webhook (UUID)
-  id                  Int              @id @default(autoincrement())
+  id                    Int              @id @default(autoincrement())
   /// Tên cổng thanh toán gửi webhook (ví dụ: PayOS, VNPay, MoMo)
-  provider            String           @db.VarChar(100)
+  provider              String           @db.VarChar(100)
   /// ID Tenant liên quan (mới nhận có thể null, sau đó phân tích payload để ánh xạ)
-  tenantId            Int?             @map("tenant_id")
+  tenantId              Int?             @map("tenant_id")
   /// ID hóa đơn liên quan (mới nhận có thể null, sau đó phân tích payload để ánh xạ)
-  invoiceId           Int?             @map("invoice_id")
+  invoiceId             Int?             @map("invoice_id")
+  /// ID giao dịch subscription payment liên quan
+  subscriptionPaymentId Int?             @map("subscription_payment_id")
   /// Mã đơn hàng PayOS trong payload webhook
-  orderCode           Int?             @map("order_code")
+  orderCode             Int?             @map("order_code")
   /// ID payment link PayOS trong payload webhook
-  paymentLinkId       String?          @map("payment_link_id") @db.VarChar(100)
+  paymentLinkId         String?          @map("payment_link_id") @db.VarChar(100)
   /// Mã tham chiếu giao dịch ngân hàng trong payload PayOS
-  reference           String?          @db.VarChar(100)
+  reference             String?          @db.VarChar(100)
   /// Mã giao dịch tham chiếu của cổng thanh toán gửi trong webhook
-  transactionCode     String?          @map("transaction_code") @db.VarChar(100)
+  transactionCode       String?          @map("transaction_code") @db.VarChar(100)
   /// Số tiền thanh toán trong payload PayOS
-  amount              Decimal?         @db.Decimal(12, 2)
+  amount                Decimal?         @db.Decimal(12, 2)
   /// Đơn vị tiền tệ trong payload PayOS
-  currency            String?          @db.VarChar(10)
+  currency              String?          @db.VarChar(10)
   /// Mã trạng thái PayOS trong phần data
-  providerCode        String?          @map("provider_code") @db.VarChar(20)
+  providerCode          String?          @map("provider_code") @db.VarChar(20)
   /// Mô tả trạng thái PayOS trong phần data
-  providerDesc        String?          @map("provider_desc") @db.Text
+  providerDesc          String?          @map("provider_desc") @db.Text
   /// Cờ thành công từ payload PayOS
-  success             Boolean?
+  success               Boolean?
   /// Thời điểm giao dịch theo payload PayOS
-  transactionDateTime DateTime?        @map("transaction_date_time") @db.Timestamptz
+  transactionDateTime   DateTime?        @map("transaction_date_time") @db.Timestamptz
   /// Dữ liệu thô dạng JSON nhận được từ cổng thanh toán để lưu vết đối soát
-  payload             Json             @db.JsonB
+  payload               Json             @db.JsonB
   /// HMAC-SHA256 của payload gốc trước khi loại bỏ dữ liệu nhạy cảm
-  payloadDigest       String?          @map("payload_digest") @db.VarChar(64)
+  payloadDigest         String?          @map("payload_digest") @db.VarChar(64)
   /// Phiên bản khóa HMAC dùng để tạo digest
-  digestKeyVersion    Int?             @map("digest_key_version")
+  digestKeyVersion      Int?             @map("digest_key_version")
   /// Đánh dấu chữ ký bảo mật webhook có hợp lệ không
-  signatureValid      Boolean          @default(false) @map("signature_valid")
+  signatureValid        Boolean          @default(false) @map("signature_valid")
   /// Trạng thái xử lý gói tin webhook của hệ thống
-  status              WebhookLogStatus @default(RECEIVED)
+  status                WebhookLogStatus @default(RECEIVED)
   /// Chi tiết thông báo lỗi trong quá trình phân tích và xử lý tự động webhook (nếu có)
-  errorMessage        String?          @map("error_message") @db.Text
+  errorMessage          String?          @map("error_message") @db.Text
   /// Thời điểm hệ thống nhận được request webhook này
-  receivedAt          DateTime         @default(now()) @map("received_at") @db.Timestamptz
+  receivedAt            DateTime         @default(now()) @map("received_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Tenant liên kết (nếu có, xóa tenant thì cascade xóa webhook log)
-  tenant  Tenant?  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant              Tenant?              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Hóa đơn liên quan (nếu có, xóa hóa đơn thì gỡ liên kết trong webhook log này để đối soát độc lập)
-  invoice Invoice? @relation(fields: [invoiceId], references: [id], onDelete: SetNull)
+  invoice             Invoice?             @relation(fields: [invoiceId], references: [id], onDelete: SetNull)
+  /// Subscription payment liên quan (nếu có)
+  subscriptionPayment SubscriptionPayment? @relation(fields: [subscriptionPaymentId], references: [id], onDelete: SetNull)
 
   @@index([orderCode])
   @@index([paymentLinkId])
   @@index([reference])
   @@index([provider, reference])
   @@index([tenantId, status])
+  @@index([subscriptionPaymentId])
   @@index([receivedAt, id])
   @@map("payment_webhook_logs")
 }
@@ -2216,8 +2424,8 @@ model Review {
   tenantId         Int          @map("tenant_id")
   /// ID phòng trọ nhận đánh giá
   roomId           Int          @map("room_id")
-  /// ID hợp đồng thuê liên quan làm căn cứ xác thực khách trọ (nullable)
-  contractId       Int?         @map("contract_id")
+  /// ID hợp đồng thuê liên quan làm căn cứ xác thực khách trọ
+  contractId       Int          @map("contract_id")
   /// ID tài khoản khách thuê gửi đánh giá phản hồi
   reviewerId       Int          @map("reviewer_id")
   /// Điểm đánh giá chung tổng hợp (giá trị từ 1 đến 5 sao)
@@ -2233,22 +2441,36 @@ model Review {
   /// Điểm đánh giá chi tiết về dịch vụ quản lý hỗ trợ (1-5 sao)
   serviceScore     Int          @map("service_score")
   /// Đánh dấu cho phép hiển thị công khai trên Marketplace tìm kiếm phòng
-  isVisible        Boolean      @default(true) @map("is_visible")
+  isVisible        Boolean      @default(false) @map("is_visible")
   /// Trạng thái duyệt nội dung đánh giá phòng trọ
   status           ReviewStatus @default(PENDING)
+  /// ID quản trị viên thực hiện kiểm duyệt gần nhất
+  moderatedById    Int?         @map("moderated_by_id")
+  /// Lý do kiểm duyệt gần nhất
+  moderationReason String?      @map("moderation_reason") @db.Text
+  /// Thời điểm kiểm duyệt gần nhất
+  moderatedAt      DateTime?    @map("moderated_at") @db.Timestamptz
   /// Thời điểm gửi đánh giá
   createdAt        DateTime     @default(now()) @map("created_at") @db.Timestamptz
+  /// Thời điểm cập nhật đánh giá gần nhất
+  updatedAt        DateTime     @updatedAt @map("updated_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Tenant liên quan (xóa tenant thì cascade xóa đánh giá)
-  tenant   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   /// Phòng trọ được đánh giá (xóa phòng thì cascade xóa các đánh giá liên quan)
-  room     Room      @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
   /// Hợp đồng thuê phòng liên quan (gỡ liên kết nếu hợp đồng bị xóa)
-  contract Contract? @relation(fields: [contractId], references: [id], onDelete: SetNull)
+  contract  Contract @relation(fields: [contractId], references: [id], onDelete: Restrict)
   /// Tài khoản người đánh giá (chặn xóa tài khoản người đánh giá)
-  reviewer User      @relation("Reviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
+  reviewer  User     @relation("Reviewer", fields: [reviewerId], references: [id], onDelete: Restrict)
+  /// Quản trị viên kiểm duyệt gần nhất
+  moderator User?    @relation("ReviewModerator", fields: [moderatedById], references: [id], onDelete: SetNull)
 
+  @@unique([reviewerId, contractId])
+  @@index([reviewerId, createdAt])
+  @@index([status, createdAt])
+  @@index([roomId, status, isVisible, createdAt])
   @@map("reviews")
 }
 
@@ -2289,25 +2511,37 @@ model ReputationScore {
 /// Bảng báo cáo hành vi vi phạm hoặc thông tin sai lệch gửi lên Super Admin kiểm duyệt
 model Report {
   /// ID báo cáo vi phạm (UUID)
-  id          Int              @id @default(autoincrement())
+  id             Int              @id @default(autoincrement())
   /// ID tài khoản người dùng gửi báo cáo vi phạm
-  reporterId  Int              @map("reporter_id")
+  reporterId     Int              @map("reporter_id")
   /// Loại đối tượng bị báo cáo vi phạm (Phòng, Chủ trọ, Đánh giá, Người dùng)
-  targetType  ReportTargetType @map("target_type")
+  targetType     ReportTargetType @map("target_type")
   /// ID của đối tượng bị báo cáo (Lưu String dạng mã định danh)
-  targetId    String           @map("target_id") @db.VarChar(50)
+  targetId       String           @map("target_id") @db.VarChar(50)
+  /// Tenant liên quan đến đối tượng tại thời điểm báo cáo, nếu có
+  targetTenantId Int?             @map("target_tenant_id")
+  /// Bản chụp dữ liệu tối thiểu của đối tượng tại thời điểm báo cáo
+  targetSnapshot Json             @map("target_snapshot") @db.JsonB
+  /// Dấu vân tay chống tạo nhiều báo cáo đang mở cho cùng đối tượng
+  fingerprint    String           @db.VarChar(64)
   /// Lý do báo cáo vi phạm (tiêu đề lý do)
-  reason      String           @db.VarChar(255)
+  reason         String           @db.VarChar(255)
   /// Mô tả chi tiết hành vi vi phạm hoặc sai thông tin
-  description String?          @db.Text
+  description    String?          @db.Text
   /// Trạng thái xử lý báo cáo vi phạm của Ban quản trị
-  status      ReportStatus     @default(PENDING)
+  status         ReportStatus     @default(PENDING)
   /// ID tài khoản Super Admin thực hiện xử lý báo cáo (nullable nếu chưa xử lý)
-  handledBy   Int?             @map("handled_by")
+  handledBy      Int?             @map("handled_by")
+  /// Thời điểm quản trị viên nhận xử lý báo cáo
+  reviewingAt    DateTime?        @map("reviewing_at") @db.Timestamptz
+  /// Kết luận an toàn có thể hiển thị cho người gửi
+  resolutionNote String?          @map("resolution_note") @db.Text
   /// Thời điểm gửi báo cáo vi phạm
-  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz
+  createdAt      DateTime         @default(now()) @map("created_at") @db.Timestamptz
   /// Thời điểm Ban quản trị xử lý xong báo cáo
-  resolvedAt  DateTime?        @map("resolved_at") @db.Timestamptz
+  resolvedAt     DateTime?        @map("resolved_at") @db.Timestamptz
+  /// Thời điểm cập nhật báo cáo gần nhất
+  updatedAt      DateTime         @updatedAt @map("updated_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Người dùng gửi báo cáo (chặn xóa người dùng để theo dõi hành vi báo cáo)
@@ -2315,6 +2549,10 @@ model Report {
   /// Admin xử lý báo cáo (gỡ liên kết nếu tài khoản admin bị xóa)
   handledByUser User? @relation("ReportHandler", fields: [handledBy], references: [id], onDelete: SetNull)
 
+  @@index([reporterId, createdAt])
+  @@index([status, createdAt])
+  @@index([targetType, targetId])
+  @@index([handledBy, status])
   @@map("reports")
 }
 
@@ -2353,33 +2591,33 @@ model Notification {
 /// Bảng lưu các mã token thiết bị di động/web phục vụ đẩy thông báo qua Firebase Cloud Messaging (FCM)
 model DeviceToken {
   /// ID token (UUID)
-  id         Int            @id @default(autoincrement())
+  id           Int            @id @default(autoincrement())
   /// ID tài khoản người dùng sở hữu thiết bị này
-  userId     Int            @map("user_id")
+  userId       Int            @map("user_id")
   /// Chuỗi token FCM duy nhất phục vụ push notification
-  token      String         @db.Text
+  token        String         @db.Text
   /// Firebase Installation ID mới hơn registration token, dùng để hỗ trợ quản lý vòng đời token
-  fid        String?        @db.VarChar(255)
+  fid          String?        @db.VarChar(255)
   /// Hệ điều hành của thiết bị nhận thông báo (iOS, Android hoặc Web)
-  platform   DevicePlatform
+  platform     DevicePlatform
   /// Tên gọi nhận diện thiết bị vật lý (ví dụ: iPhone 14 Pro, Samsung S23)
-  deviceName String?        @map("device_name") @db.VarChar(100)
+  deviceName   String?        @map("device_name") @db.VarChar(100)
   /// Đánh dấu token thiết bị có đang hoạt động nhận tin không
-  isActive   Boolean        @default(true) @map("is_active")
+  isActive     Boolean        @default(true) @map("is_active")
   /// Thời điểm client gần nhất gửi/refresh token này
-  lastSeenAt DateTime?      @map("last_seen_at") @db.Timestamptz
+  lastSeenAt   DateTime?      @map("last_seen_at") @db.Timestamptz
   /// Thời điểm backend gần nhất dùng token này để gửi push
-  lastUsedAt DateTime?      @map("last_used_at") @db.Timestamptz
+  lastUsedAt   DateTime?      @map("last_used_at") @db.Timestamptz
   /// Số lần gửi lỗi liên tiếp để hỗ trợ quan sát token không ổn định
-  failureCount Int          @default(0) @map("failure_count")
+  failureCount Int            @default(0) @map("failure_count")
   /// Mã lỗi FCM gần nhất nếu có
-  lastError  String?        @map("last_error") @db.Text
+  lastError    String?        @map("last_error") @db.Text
   /// Thời điểm token bị vô hiệu hóa do client xóa hoặc FCM báo invalid
-  disabledAt DateTime?      @map("disabled_at") @db.Timestamptz
+  disabledAt   DateTime?      @map("disabled_at") @db.Timestamptz
   /// Thời điểm đăng ký token thiết bị
-  createdAt  DateTime       @default(now()) @map("created_at") @db.Timestamptz
+  createdAt    DateTime       @default(now()) @map("created_at") @db.Timestamptz
   /// Thời điểm cập nhật trạng thái hoạt động của token gần nhất
-  updatedAt  DateTime       @updatedAt @map("updated_at") @db.Timestamptz
+  updatedAt    DateTime       @updatedAt @map("updated_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Người dùng sở hữu thiết bị (xóa người dùng thì cascade xóa token thiết bị tương ứng)
@@ -2395,31 +2633,31 @@ model DeviceToken {
 /// Bảng lưu trạng thái và thông tin của các tác vụ chạy ngầm (Background Jobs)
 model BackgroundJob {
   /// ID tác vụ (UUID)
-  id           Int                 @id @default(autoincrement())
+  id            Int                 @id @default(autoincrement())
   /// ID Tenant liên quan (nullable nếu là tác vụ hệ thống)
-  tenantId     Int?                @map("tenant_id")
+  tenantId      Int?                @map("tenant_id")
   /// Tên hàng đợi (ví dụ: default, email, invoices)
-  queueName    String              @map("queue_name") @db.VarChar(100)
+  queueName     String              @map("queue_name") @db.VarChar(100)
   /// ID job phía BullMQ để đối soát trạng thái retry/complete/fail
-  externalJobId String?            @map("external_job_id") @db.VarChar(100)
+  externalJobId String?             @map("external_job_id") @db.VarChar(100)
   /// Phân loại loại tác vụ cần thực hiện (ví dụ: SEND_EMAIL_INVOICE)
-  jobType      String              @map("job_type") @db.VarChar(100)
+  jobType       String              @map("job_type") @db.VarChar(100)
   /// Dữ liệu đầu vào cấu hình cho tác vụ dạng JSON
-  payload      Json                @db.JsonB
+  payload       Json                @db.JsonB
   /// Trạng thái thực thi hiện tại của tác vụ
-  status       BackgroundJobStatus @default(WAITING)
+  status        BackgroundJobStatus @default(WAITING)
   /// Số lần thực thi thử lại khi gặp lỗi
-  attempts     Int                 @default(0)
+  attempts      Int                 @default(0)
   /// Chi tiết thông báo lỗi khi tác vụ thất bại
-  errorMessage String?             @map("error_message") @db.Text
+  errorMessage  String?             @map("error_message") @db.Text
   /// Thời điểm đăng ký tạo tác vụ
-  createdAt    DateTime            @default(now()) @map("created_at") @db.Timestamptz
+  createdAt     DateTime            @default(now()) @map("created_at") @db.Timestamptz
   /// Thời điểm cập nhật trạng thái job gần nhất
-  updatedAt    DateTime            @updatedAt @map("updated_at") @db.Timestamptz
+  updatedAt     DateTime            @updatedAt @map("updated_at") @db.Timestamptz
   /// Thời điểm bắt đầu xử lý tác vụ
-  processedAt  DateTime?           @map("processed_at") @db.Timestamptz
+  processedAt   DateTime?           @map("processed_at") @db.Timestamptz
   /// Thời điểm tác vụ hoàn tất xử lý (hoặc thất bại hoàn toàn)
-  completedAt  DateTime?           @map("completed_at") @db.Timestamptz
+  completedAt   DateTime?           @map("completed_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Tenant liên quan (xóa tenant thì cascade xóa các job nền)
@@ -2470,6 +2708,8 @@ model AuditLog {
 
 /// Trạng thái gói đăng ký dịch vụ SaaS
 enum SubscriptionStatus {
+  /// Đang chờ thanh toán để kích hoạt
+  PENDING
   /// Đang dùng thử
   TRIALING
   /// Đang hoạt động bình thường
@@ -2500,6 +2740,18 @@ enum SubscriptionPaymentStatus {
   FAILED
   /// Giao dịch đã được hoàn tiền
   REFUNDED
+  /// Payment link đã bị hủy
+  CANCELED
+  /// Payment link đã hết hạn
+  EXPIRED
+}
+
+/// Mục đích của giao dịch thanh toán gói SaaS
+enum SubscriptionPaymentPurpose {
+  /// Gia hạn gói hiện tại
+  RENEWAL
+  /// Mua mới hoặc chuyển sang gói/chu kỳ khác
+  PLAN_CHANGE
 }
 
 /// Loại bất động sản/nhà trọ
@@ -2975,13 +3227,13 @@ enum MessageType {
 
 /// Trạng thái kiểm duyệt đánh giá phòng trọ
 enum ReviewStatus {
-  /// Đang chờ chủ trọ hoặc quản trị viên duyệt hiển thị
+  /// Đang chờ quản trị viên duyệt hiển thị
   PENDING
   /// Đã duyệt hiển thị công khai trên Marketplace
   APPROVED
   /// Từ chối hiển thị đánh giá do vi phạm quy định
   REJECTED
-  /// Đã bị ẩn đi bởi chủ trọ/admin
+  /// Đã bị ẩn bởi quản trị viên
   HIDDEN
 }
 
@@ -3029,6 +3281,10 @@ enum NotificationType {
   TICKET
   /// Thông báo nhắc lịch hẹn xem phòng trọ
   APPOINTMENT
+  /// Thông báo liên quan đến đánh giá phòng
+  REVIEW
+  /// Thông báo liên quan đến báo cáo vi phạm
+  REPORT
   /// Thông báo chung hoặc cập nhật từ hệ thống SaaS
   SYSTEM
 }

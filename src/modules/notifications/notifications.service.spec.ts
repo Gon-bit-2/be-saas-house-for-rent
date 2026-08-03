@@ -1,5 +1,6 @@
 import { NotFoundException } from '@nestjs/common'
 import { NotificationsService } from './notifications.service'
+import envConfig from '@src/config/env.config'
 
 jest.mock('./repositories/notifications.repo', () => ({ NotificationsRepository: class NotificationsRepository {} }))
 jest.mock('./notifications.gateway', () => ({ NotificationsGateway: class NotificationsGateway {} }))
@@ -35,11 +36,27 @@ describe('NotificationsService', () => {
 
   it('persists, emits and enqueues push notification jobs', async () => {
     repository.createNotifications.mockResolvedValue([
-      { id: 1, userId: 10, tenantId: 2, title: 'T', content: 'C', type: 'SYSTEM', data: null, isRead: false, readAt: null },
+      {
+        id: 1,
+        userId: 10,
+        tenantId: 2,
+        title: 'T',
+        content: 'C',
+        type: 'SYSTEM',
+        data: null,
+        isRead: false,
+        readAt: null,
+      },
     ])
     repository.createBackgroundJob.mockResolvedValue({ id: 99 })
 
-    const result = await service.createAndDispatch({ userIds: [10, 10], tenantId: 2, title: 'T', content: 'C', type: 'SYSTEM' })
+    const result = await service.createAndDispatch({
+      userIds: [10, 10],
+      tenantId: 2,
+      title: 'T',
+      content: 'C',
+      type: 'SYSTEM',
+    })
 
     expect(repository.createNotifications).toHaveBeenCalledWith(expect.objectContaining({ userIds: [10] }))
     expect(gateway.emitNotificationCreated).toHaveBeenCalledWith(10, expect.objectContaining({ id: 1 }))
@@ -62,5 +79,16 @@ describe('NotificationsService', () => {
     repository.findUserNotification.mockResolvedValue(null)
 
     await expect(service.markRead(10, 404)).rejects.toBeInstanceOf(NotFoundException)
+  })
+
+  it('hides the test endpoint outside development', async () => {
+    const originalNodeEnv = envConfig.NODE_ENV
+    envConfig.NODE_ENV = 'production'
+    try {
+      await expect(service.sendTest(10)).rejects.toBeInstanceOf(NotFoundException)
+      expect(repository.createNotifications).not.toHaveBeenCalled()
+    } finally {
+      envConfig.NODE_ENV = originalNodeEnv
+    }
   })
 })

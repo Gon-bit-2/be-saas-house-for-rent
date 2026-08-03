@@ -52,25 +52,30 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
     'AMENITIES',
     'ROOM_ASSETS',
     'ASSETS',
+    'ASSET_CATEGORIES',
     'UTILITY_METERS',
     'METER_READINGS',
     'OCR',
     'INVOICES',
     'INVOICE_BATCHES',
+    'SERVICE_CATALOG',
+    'SERVICE_ASSIGNMENTS',
     'PAYMENTS',
     'PAYMENT_QR_CODES',
+    'SUBSCRIPTIONS',
+    'SUBSCRIPTION_PAYMENTS',
     'TICKETS',
     'CONTRACTS',
     'CONTRACT_TEMPLATES',
     'HANDOVER_RECORDS',
+    'HANDOVERS',
+    'CONTRACT_TERMINATIONS',
     'ROOM_VIEWING_APPOINTMENTS',
     'RENTAL_REQUESTS',
     'RENTERS',
     'CONVERSATIONS',
     'NOTIFICATIONS',
     'DASHBOARD',
-    'REVIEWS',
-    'REPORTS',
   ],
   [roleName.MANAGER]: [
     'PROPERTIES',
@@ -79,29 +84,34 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
     'AMENITIES',
     'ROOM_ASSETS',
     'ASSETS',
+    'ASSET_CATEGORIES',
     'UTILITY_METERS',
     'METER_READINGS',
+    'SERVICE_CATALOG',
+    'SERVICE_ASSIGNMENTS',
     'TICKETS',
     'CONTRACTS',
     'HANDOVER_RECORDS',
+    'HANDOVERS',
+    'CONTRACT_TERMINATIONS',
     'ROOM_VIEWING_APPOINTMENTS',
     'RENTAL_REQUESTS',
     'RENTERS',
     'CONVERSATIONS',
     'NOTIFICATIONS',
     'DASHBOARD',
-    'REVIEWS',
   ],
   [roleName.ACCOUNTANT]: [
     'INVOICES',
     'INVOICE_BATCHES',
+    'SERVICE_CATALOG',
+    'SERVICE_ASSIGNMENTS',
     'PAYMENTS',
     'PAYMENT_QR_CODES',
     'SUBSCRIPTIONS',
     'SUBSCRIPTION_PAYMENTS',
     'CONTRACTS',
     'METER_READINGS',
-    'REPORTS',
     'DASHBOARD',
   ],
   [roleName.MAINTENANCE_STAFF]: [
@@ -121,12 +131,15 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
     'RENTAL_REQUESTS',
     'RENTERS',
     'CONTRACTS',
+    'HANDOVERS',
+    'CONTRACT_TERMINATIONS',
     'INVOICES',
     'PAYMENTS',
     'TICKETS',
     'CONVERSATIONS',
     'NOTIFICATIONS',
     'REVIEWS',
+    'REPORTS',
   ],
 }
 
@@ -245,7 +258,7 @@ async function bootstrap() {
     const server = app.getHttpAdapter().getInstance() as ExpressLikeServer
     const availableRoutes = getAvailableRoutes(server)
 
-    console.log('Available routes:', availableRoutes)
+    console.log('Available route count:', availableRoutes.length)
 
     await upsertRoles(prisma)
 
@@ -332,5 +345,3 @@ bootstrap().catch((error: unknown) => {
   console.error('Error during permission sync:', error)
   process.exit(1)
 })
-
-

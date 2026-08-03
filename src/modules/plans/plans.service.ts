@@ -26,6 +26,10 @@ export class PlansService {
     return plan
   }
 
+  async listAvailable() {
+    return this.plansRepository.findAvailable()
+  }
+
   /**
    * Creates a plan after normalizing its business code and preventing duplicates.
    */

@@ -13,5 +13,6 @@ import { UtilityMetersService } from './utility-meters.service'
   imports: [SharedServiceModule],
   controllers: [UtilityMetersController, MeterReadingsController],
   providers: [UtilityMetersService, MeterReadingsService, UtilityMetersRepository],
+  exports: [MeterReadingsService],
 })
 export class UtilityMetersModule {}

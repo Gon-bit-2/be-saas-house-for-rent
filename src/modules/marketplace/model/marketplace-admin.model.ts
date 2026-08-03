@@ -1,4 +1,5 @@
 import z from 'zod'
+import { IsoDateInputCodec } from '@src/common/utils/date-codec.util'
 
 const MarketplaceStatusSchema = z.enum(['DRAFT', 'PENDING_REVIEW', 'PUBLISHED', 'REJECTED', 'HIDDEN'])
 const RoomStatusSchema = z.enum(['AVAILABLE', 'OCCUPIED', 'RESERVED', 'MAINTENANCE', 'INACTIVE'])
@@ -13,8 +14,8 @@ export const ListAdminMarketplaceRoomsQuerySchema = z
     tenantId: z.coerce.number().int().positive().optional(),
     province: z.string().trim().min(1).max(100).optional(),
     district: z.string().trim().min(1).max(100).optional(),
-    from: z.coerce.date().optional(),
-    to: z.coerce.date().optional(),
+    from: IsoDateInputCodec.optional(),
+    to: IsoDateInputCodec.optional(),
   })
   .strict()
   .refine((value) => !value.from || !value.to || value.from.getTime() <= value.to.getTime(), {

@@ -1,6 +1,7 @@
 import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common'
 import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
 import { TenantAccessService } from '@src/shared/modules/services/tenant-access.service'
+import { Decimal } from '@prisma/client/runtime/client'
 import type { Prisma } from 'generated/prisma/client'
 import type {
   TCreateMeterReadingBodySchema,
@@ -9,6 +10,14 @@ import type {
   TUpdateMeterReadingStatusBodySchema,
 } from './model/utility-meters.model'
 import { UtilityMetersRepository } from './repositories/utility-meters.repo'
+
+export type PrepareMeterReadingInput = {
+  meterId: number
+  billingMonth: Date
+  currentValue: number
+  previousValue?: number
+  unitPrice?: number
+}
 
 /**
  * Service for manual meter reading entry and validation.
@@ -35,41 +44,10 @@ export class MeterReadingsService {
 
   async create(userId: number, body: TCreateMeterReadingBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
-    const meter = await this.utilityMetersRepository.findMeterForReading(tenant.tenantId, body.meterId)
-    if (!meter) {
-      throw new NotFoundException('Không tìm thấy đồng hồ trong tenant hiện tại')
-    }
-    if (meter.status !== 'ACTIVE') {
-      throw new BadRequestException('Chỉ đồng hồ đang hoạt động mới được ghi chỉ số')
-    }
+    const data = await this.prepare(tenant.tenantId, body)
 
-    const billingMonth = this.normalizeBillingMonth(body.billingMonth)
-    const existingReading = await this.utilityMetersRepository.findReadingByMeterMonth(body.meterId, billingMonth)
-    if (existingReading) {
-      throw new ConflictException('Đồng hồ đã có chỉ số cho kỳ này')
-    }
-
-    const latestReading = await this.utilityMetersRepository.findLatestReadingBeforeMonth(body.meterId, billingMonth)
-    const previousValue = body.previousValue ?? this.toNumber(latestReading?.currentValue ?? 0)
-    const unitPrice = body.unitPrice ?? this.defaultUnitPriceForMeter(meter)
-    const computed = this.computeReading(previousValue, body.currentValue, unitPrice)
-    const contract = await this.utilityMetersRepository.findActiveContractForRoomMonth(
-      tenant.tenantId,
-      meter.roomId,
-      billingMonth,
-    )
-
-    return this.utilityMetersRepository.createManualReading({
-      tenantId: tenant.tenantId,
-      roomId: meter.roomId,
-      meterId: body.meterId,
-      contractId: contract?.id ?? null,
-      billingMonth,
-      previousValue,
-      currentValue: body.currentValue,
-      consumption: computed.consumption,
-      unitPrice,
-      amount: computed.amount,
+    return this.utilityMetersRepository.createReading({
+      ...data,
       imageUrl: body.imageUrl ?? null,
       source: 'MANUAL',
       status: body.status,
@@ -78,14 +56,54 @@ export class MeterReadingsService {
     })
   }
 
+  async prepare(tenantId: number, input: PrepareMeterReadingInput) {
+    const meter = await this.utilityMetersRepository.findMeterForReading(tenantId, input.meterId)
+    if (!meter) {
+      throw new NotFoundException('Không tìm thấy đồng hồ trong tenant hiện tại')
+    }
+    if (meter.status !== 'ACTIVE') {
+      throw new BadRequestException('Chỉ đồng hồ đang hoạt động mới được ghi chỉ số')
+    }
+
+    const billingMonth = this.normalizeBillingMonth(input.billingMonth)
+    const existingReading = await this.utilityMetersRepository.findReadingByMeterMonth(input.meterId, billingMonth)
+    if (existingReading) {
+      throw new ConflictException('Đồng hồ đã có chỉ số cho kỳ này')
+    }
+
+    const latestReading = await this.utilityMetersRepository.findLatestReadingBeforeMonth(input.meterId, billingMonth)
+    const previousValue = this.toDecimal(input.previousValue ?? latestReading?.currentValue ?? 0)
+    const currentValue = this.toDecimal(input.currentValue)
+    const unitPrice = this.toDecimal(input.unitPrice ?? this.defaultUnitPriceForMeter(meter))
+    const computed = this.computeReading(previousValue, currentValue, unitPrice)
+    const contract = await this.utilityMetersRepository.findActiveContractForRoomMonth(
+      tenantId,
+      meter.roomId,
+      billingMonth,
+    )
+
+    return {
+      tenantId,
+      roomId: meter.roomId,
+      meterId: input.meterId,
+      contractId: contract?.id ?? null,
+      billingMonth,
+      previousValue,
+      currentValue,
+      consumption: computed.consumption,
+      unitPrice,
+      amount: computed.amount,
+    } satisfies Prisma.MeterReadingUncheckedCreateInput
+  }
+
   async update(userId: number, id: number, body: TUpdateMeterReadingBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const reading = await this.getTenantReadingOrThrow(tenant.tenantId, id)
     this.assertReadingEditable(reading)
 
-    const previousValue = body.previousValue ?? this.toNumber(reading.previousValue)
-    const currentValue = body.currentValue ?? this.toNumber(reading.currentValue)
-    const unitPrice = body.unitPrice ?? this.toNumber(reading.unitPrice)
+    const previousValue = this.toDecimal(body.previousValue ?? reading.previousValue)
+    const currentValue = this.toDecimal(body.currentValue ?? reading.currentValue)
+    const unitPrice = this.toDecimal(body.unitPrice ?? reading.unitPrice)
     const computed = this.computeReading(previousValue, currentValue, unitPrice)
 
     return this.utilityMetersRepository.updateReading(id, {
@@ -128,27 +146,27 @@ export class MeterReadingsService {
   /**
    * Computes consumption and amount from numeric meter values.
    */
-  private computeReading(previousValue: number, currentValue: number, unitPrice: number) {
-    if (currentValue < previousValue) {
+  private computeReading(previousValue: Decimal, currentValue: Decimal, unitPrice: Decimal) {
+    if (currentValue.lessThan(previousValue)) {
       throw new BadRequestException('Chỉ số mới không được nhỏ hơn chỉ số cũ')
     }
-    const consumption = currentValue - previousValue
-    return { consumption, amount: consumption * unitPrice }
+    const consumption = currentValue.minus(previousValue)
+    return { consumption, amount: consumption.mul(unitPrice) }
   }
 
   private defaultUnitPriceForMeter(meter: {
     type: 'ELECTRICITY' | 'WATER'
     room: { electricityPrice: unknown; waterPrice: unknown }
   }) {
-    return meter.type === 'ELECTRICITY' ? this.toNumber(meter.room.electricityPrice) : this.toNumber(meter.room.waterPrice)
+    return meter.type === 'ELECTRICITY' ? meter.room.electricityPrice : meter.room.waterPrice
   }
 
   private normalizeBillingMonth(date: Date) {
     return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), 1))
   }
 
-  private toNumber(value: unknown) {
-    return Number(value)
+  private toDecimal(value: unknown) {
+    return new Decimal(value as string | number | Decimal)
   }
 
   private buildListWhere(tenantId: number, query: TListMeterReadingsQuerySchema): Prisma.MeterReadingWhereInput {

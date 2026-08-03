@@ -51,6 +51,7 @@ export const meterReadingSelect = {
   unitPrice: true,
   amount: true,
   imageUrl: true,
+  ocrJobId: true,
   source: true,
   status: true,
   recordedAt: true,
@@ -78,7 +79,13 @@ export class UtilityMetersRepository {
 
   async findMetersAndCount(where: Prisma.UtilityMeterWhereInput, skip: number, take: number) {
     return this.prismaService.$transaction([
-      this.prismaService.utilityMeter.findMany({ where, skip, take, orderBy: [{ createdAt: 'desc' }], select: utilityMeterSelect }),
+      this.prismaService.utilityMeter.findMany({
+        where,
+        skip,
+        take,
+        orderBy: [{ createdAt: 'desc' }],
+        select: utilityMeterSelect,
+      }),
       this.prismaService.utilityMeter.count({ where }),
     ])
   }
@@ -170,7 +177,7 @@ export class UtilityMetersRepository {
   /**
    * Creates a manual meter reading with computed consumption and amount.
    */
-  async createManualReading(data: Prisma.MeterReadingUncheckedCreateInput) {
+  async createReading(data: Prisma.MeterReadingUncheckedCreateInput) {
     return this.prismaService.meterReading.create({ data, select: meterReadingSelect })
   }
 

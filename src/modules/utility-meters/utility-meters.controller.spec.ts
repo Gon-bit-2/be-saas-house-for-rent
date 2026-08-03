@@ -2,7 +2,8 @@ import roleName from '@src/common/constants/role.constant'
 import { ROLES_KEY } from '@src/common/decorators/decorators/roles.decorator'
 
 jest.mock('./utility-meters.service', () => ({ UtilityMetersService: class UtilityMetersService {} }))
-const { UtilityMetersController } = require('./utility-meters.controller') as typeof import('./utility-meters.controller')
+const { UtilityMetersController } =
+  require('./utility-meters.controller') as typeof import('./utility-meters.controller')
 
 describe('UtilityMetersController', () => {
   let controller: import('./utility-meters.controller').UtilityMetersController
@@ -33,7 +34,12 @@ describe('UtilityMetersController', () => {
 
     expect(utilityMetersService.list).toHaveBeenCalledWith(50, { page: 1, limit: 20, type: 'ELECTRICITY' })
     expect(utilityMetersService.getById).toHaveBeenCalledWith(50, 1)
-    expect(utilityMetersService.create).toHaveBeenCalledWith(50, { roomId: 5, type: 'WATER', meterCode: 'W-001', status: 'ACTIVE' })
+    expect(utilityMetersService.create).toHaveBeenCalledWith(50, {
+      roomId: 5,
+      type: 'WATER',
+      meterCode: 'W-001',
+      status: 'ACTIVE',
+    })
     expect(utilityMetersService.update).toHaveBeenCalledWith(50, 1, { meterCode: 'W-002' })
     expect(utilityMetersService.updateStatus).toHaveBeenCalledWith(50, 1, { status: 'BROKEN' })
   })

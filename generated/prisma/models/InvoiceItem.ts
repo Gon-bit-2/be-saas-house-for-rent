@@ -562,10 +562,6 @@ export type InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput = {
   deleteMany?: Prisma.InvoiceItemScalarWhereInput | Prisma.InvoiceItemScalarWhereInput[]
 }
 
-export type EnumInvoiceItemTypeFieldUpdateOperationsInput = {
-  set?: $Enums.InvoiceItemType
-}
-
 export type InvoiceItemCreateWithoutMeterReadingInput = {
   itemType: $Enums.InvoiceItemType
   description: string

@@ -1,5 +1,7 @@
 # G11 - Đặc tả dashboard, báo cáo, audit và cấu hình hệ thống
 
+> **Snapshot 31/07/2026:** Dashboard tenant (`summary`, `revenue-trend`, `recent-activity`) và dashboard platform (`summary`, `trends`) đều được nạp trong `AppModule`. `AuditLog` và `SystemSetting` vẫn chỉ có schema/chưa có API quản trị đầy đủ.
+
 ## 1. Tổng quan
 
 G11 mô tả lớp tổng hợp và vận hành của hệ thống:

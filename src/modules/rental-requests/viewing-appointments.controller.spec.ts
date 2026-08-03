@@ -2,7 +2,8 @@ import { ROLES_KEY } from '@src/common/decorators/decorators/roles.decorator'
 import roleName from '@src/common/constants/role.constant'
 
 jest.mock('./viewing-appointments.service', () => ({ ViewingAppointmentsService: class ViewingAppointmentsService {} }))
-const { ViewingAppointmentsController } = require('./viewing-appointments.controller') as typeof import('./viewing-appointments.controller')
+const { ViewingAppointmentsController } =
+  require('./viewing-appointments.controller') as typeof import('./viewing-appointments.controller')
 
 describe('ViewingAppointmentsController', () => {
   let controller: import('./viewing-appointments.controller').ViewingAppointmentsController
@@ -21,7 +22,9 @@ describe('ViewingAppointmentsController', () => {
 
   it('uses tenant role for self routes and landlord/manager roles for schedule handling', () => {
     expect(Reflect.getMetadata(ROLES_KEY, ViewingAppointmentsController.prototype.listMine)).toEqual([roleName.TENANT])
-    expect(Reflect.getMetadata(ROLES_KEY, ViewingAppointmentsController.prototype.cancelMine)).toEqual([roleName.TENANT])
+    expect(Reflect.getMetadata(ROLES_KEY, ViewingAppointmentsController.prototype.cancelMine)).toEqual([
+      roleName.TENANT,
+    ])
     expect(Reflect.getMetadata(ROLES_KEY, ViewingAppointmentsController.prototype.listForLandlord)).toEqual([
       roleName.LANDLORD,
       roleName.MANAGER,
@@ -40,7 +43,11 @@ describe('ViewingAppointmentsController', () => {
 
     expect(viewingAppointmentsService.listMine).toHaveBeenCalledWith(99, { page: 1, limit: 20 })
     expect(viewingAppointmentsService.cancelMine).toHaveBeenCalledWith(99, 3, {})
-    expect(viewingAppointmentsService.listForLandlord).toHaveBeenCalledWith(99, { page: 1, limit: 20, status: 'PENDING' })
+    expect(viewingAppointmentsService.listForLandlord).toHaveBeenCalledWith(99, {
+      page: 1,
+      limit: 20,
+      status: 'PENDING',
+    })
     expect(viewingAppointmentsService.updateStatus).toHaveBeenCalledWith(99, 3, { status: 'CONFIRMED' })
   })
 })

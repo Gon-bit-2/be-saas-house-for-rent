@@ -64,6 +64,7 @@ export class ViewingAppointmentsService {
   }
 
   async cancelMine(userId: number, id: number, _body: TCancelMyViewingAppointmentBodySchema) {
+    void _body
     const appointment = await this.rentalRequestsRepository.findRenterAppointment(userId, id)
     if (!appointment) {
       throw new NotFoundException('Không tìm thấy lịch hẹn của bạn')
@@ -83,7 +84,7 @@ export class ViewingAppointmentsService {
       ...(query.status ? { status: query.status } : {}),
       ...(query.roomId ? { roomId: query.roomId } : {}),
       ...(query.propertyId ? { room: { propertyId: query.propertyId } } : {}),
-      ...((query.from || query.to)
+      ...(query.from || query.to
         ? { scheduledAt: { ...(query.from ? { gte: query.from } : {}), ...(query.to ? { lte: query.to } : {}) } }
         : {}),
     }

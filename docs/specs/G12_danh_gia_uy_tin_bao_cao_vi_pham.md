@@ -1,8 +1,10 @@
 # G12 - Đặc tả đánh giá, uy tín và báo cáo vi phạm
 
+> **Snapshot 31/07/2026:** Review create/self-service/public summary, review moderation, report create/self-service và ADMIN report moderation đã có API/migration/state constraint. `ReputationScore` vẫn chưa có workflow tổng hợp đa nguồn hoàn chỉnh. Snapshot giữ nguyên các bổ sung G12 chưa commit.
+
 ## 1. Tổng quan
 
-G12 là lớp trust và moderation dự kiến giúp marketplace:
+G12 là lớp trust và moderation của marketplace:
 
 - Xác thực đánh giá từ người đã thuê.
 - Công khai phản hồi đáng tin cậy.
@@ -10,13 +12,13 @@ G12 là lớp trust và moderation dự kiến giúp marketplace:
 - Tiếp nhận báo cáo vi phạm.
 - Hỗ trợ Admin kiểm duyệt và thực thi hành động.
 
-Trạng thái quan trọng nhất: **G12 chưa có API hoặc nghiệp vụ backend đang hoạt động**. Source hiện chỉ có Prisma schema và một thư mục `reviews` rỗng.
+Trạng thái hiện tại: **G12 Backend MVP đã có API review, moderation, public summary và report workflow**. Điểm reputation tổng hợp nhiều nguồn vẫn được giữ ngoài MVP cho đến khi có công thức chính thức.
 
 Mục tiêu của tài liệu:
 
 - Người đọc biết chính xác dữ liệu nào đã được thiết kế.
-- Frontend không gọi nhầm endpoint chưa tồn tại.
-- Backend có roadmap rõ để triển khai review, reputation và report.
+- Frontend biết endpoint MVP hiện hành và các phần vẫn là backlog.
+- Backend có hiện trạng rõ cho review/report và roadmap riêng cho reputation/enforcement mở rộng.
 - Product/tester hiểu những policy còn phải khóa.
 - Người lập kế hoạch thấy dependency, rủi ro và tiêu chí hoàn thành.
 
@@ -28,7 +30,7 @@ Mục tiêu của tài liệu:
 - Enum review/reputation/report.
 - Quan hệ với User, Tenant, Room và Contract.
 - Trạng thái triển khai hiện tại.
-- Luồng nghiệp vụ đề xuất cho tương lai.
+- Luồng review/report hiện hành và luồng reputation/appeal đề xuất.
 - Backlog về integrity, moderation, privacy, anti-abuse và testing.
 
 ### 1.2. Ngoài phạm vi
@@ -45,33 +47,26 @@ Mục tiêu của tài liệu:
 
 ### 1.3. Trạng thái triển khai
 
-| Thành phần              | Trạng thái           | Có thể gọi API? |
-| ----------------------- | -------------------- | --------------- |
-| `Review`                | Chỉ có Prisma schema | Không           |
-| `ReputationScore`       | Chỉ có Prisma schema | Không           |
-| `Report`                | Chỉ có Prisma schema | Không           |
-| Review self-service     | Chưa tồn tại         | Không           |
-| Public review           | Chưa tồn tại         | Không           |
-| Review moderation       | Chưa tồn tại         | Không           |
-| Reputation calculation  | Chưa tồn tại         | Không           |
-| Public reputation       | Chưa tồn tại         | Không           |
-| Report submission       | Chưa tồn tại         | Không           |
-| Report moderation       | Chưa tồn tại         | Không           |
-| Notification moderation | Chưa tồn tại         | Không           |
-| Audit moderation        | Chưa tồn tại         | Không           |
-
+| Thành phần | Trạng thái | Có thể gọi API? |
+|---|---|---|
+| `Review` | Đã có schema, constraint và API | Có |
+| Review self-service | Tạo/list/detail từ contract xác thực | Có |
+| Public review | Approved + visible, không lộ PII | Có |
+| Review moderation | Admin state machine + audit | Có |
+| Review summary | Aggregate trực tiếp theo phòng | Có |
+| `Report` | Đã có schema, snapshot và API | Có |
+| Report submission | Target resolver + chống duplicate mở | Có |
+| Report moderation | Admin claim/resolve/reject + audit | Có |
+| Notification moderation | `REVIEW` và `REPORT` | Có |
+| `ReputationScore` tổng hợp | Chưa có công thức/trọng số | Không |
 ### 1.4. Bằng chứng source
 
-- Prisma có `Review`, `ReputationScore`, `Report`.
-- Prisma có các enum liên quan.
-- Không có controller, service, repository hoặc DTO.
-- Không có source gọi `prisma.review`, `prisma.reputationScore` hoặc `prisma.report`.
-- `backend/src/modules/reviews` hiện không có file.
-- `ReviewsModule` không được import vào `AppModule`.
-
-Schema tồn tại không đồng nghĩa nghiệp vụ đã hoạt động hoặc database đã bảo vệ mọi quy tắc được ghi trong comment.
-
-## 2. Hành trình dự kiến
+- `ReviewsModule` và `ReportsModule` được import trong `AppModule`.
+- Mỗi module có controller, service, repository, Zod DTO và unit test.
+- Prisma migration bảo vệ score, visibility, uniqueness và moderation metadata.
+- Public reputation MVP được aggregate trực tiếp từ review approved-visible; không ghi `ReputationScore`.
+- Moderation ghi `AuditLog` cùng transaction và gửi notification sau commit.
+## 2. Hành trình hiện hành và mở rộng
 
 ```text
 Renter đã thuê
@@ -103,8 +98,8 @@ Các actor dưới đây là đề xuất, chưa có guard/controller G12.
 
 Các quyết định chưa được code hóa:
 
-- Landlord có được approve review hay chỉ Admin?
-- Landlord có được hide review tiêu cực hay chỉ phản hồi?
+- MVP chỉ cho `ADMIN` approve/reject/hide/restore review.
+- Landlord không có quyền moderation review trong MVP.
 - Renter được review khi contract `ACTIVE`, `ENDED` hay cả hai?
 - Review có ẩn danh công khai không?
 - Ai có role moderator riêng ngoài `ADMIN`?
@@ -314,47 +309,38 @@ Do không có foreign key target:
 - Backend tương lai phải resolve theo `targetType`.
 - Cần snapshot dữ liệu quan trọng để điều tra sau khi target thay đổi.
 
-### 6.6. Dữ liệu còn thiếu
+### 6.6. Dữ liệu còn thiếu cho phạm vi mở rộng
 
-- Evidence attachment.
-- Moderation note.
-- Resolution reason.
-- Enforcement action.
-- `updatedAt`.
-- `reviewingAt`.
-- Appeal fields.
+Migration hiện đã có moderation reason/time cho review và snapshot/fingerprint/reviewing/resolution/update time cho report. Phần chưa có policy/schema hoàn chỉnh:
+
+- Evidence attachment và retention.
+- Enforcement action liên kết user/tenant/listing.
+- Appeal fields và workflow.
 - Priority/SLA.
-- Source channel/IP/device.
-- Duplicate/fingerprint.
+- Source channel/IP/device với privacy policy.
 
 ## 7. Public interface hiện hành
 
-G12 hiện có:
+### Review
 
-```text
-0 controller
-0 service
-0 repository
-0 DTO
-0 HTTP endpoint
-0 background job
-```
+- `POST /reviews`.
+- `GET /reviews/me`, `GET /reviews/me/:id`.
+- `GET /marketplace/rooms/:roomId/reviews`.
+- `GET /marketplace/rooms/:roomId/review-summary`.
+- `GET /reviews/admin`, `GET /reviews/admin/:id`.
+- `PATCH /reviews/admin/:id/status`.
 
-Không có endpoint để:
+### Report
 
-- Tạo review.
-- Xem review.
-- Duyệt review.
-- Xem reputation.
-- Tạo report.
-- Theo dõi report.
-- Moderation report.
+- `POST /reports`.
+- `GET /reports/me`, `GET /reports/me/:id`.
+- `GET /reports/admin`, `GET /reports/admin/:id`.
+- `PATCH /reports/admin/:id/status`.
 
-Frontend phải coi G12 là chưa khả dụng.
+Các API public chỉ trả review approved-visible và projection không chứa reviewer ID, email, phone hoặc contract ID. API self-service luôn scope theo user hiện tại; moderation chỉ dành cho `ADMIN`.
+## 8. Thiết kế và backlog mở rộng
 
-## 8. Thiết kế triển khai đề xuất - chưa tồn tại
-
-Toàn bộ nội dung chương này là roadmap, không phải API hiện hành.
+Các phần đã có API được mô tả tại mục 7. Các nội dung appeal, reputation đa nguồn, enforcement và retention nâng cao dưới đây vẫn là backlog mở rộng.
 
 ### 8.1. Nhóm interface renter review
 
@@ -699,133 +685,56 @@ Event dự kiến:
 - `report.rejected`.
 - `reputation.recalculated`.
 
-Các event này chưa tồn tại.
+MVP hiện gọi `NotificationEventsService` sau commit và ghi `AuditLog` trong transaction. Transactional outbox cho các event trên vẫn là backlog.
 
-## 17. Chức năng chưa hoàn thiện và hướng triển khai
+## 17. Trạng thái hoàn thành Backend MVP
 
-Toàn bộ G12 hiện chưa hoàn thiện; mọi interface đề xuất đều **chưa tồn tại**.
+- Review eligibility dựa trên main renter/co-renter và contract đã bắt đầu.
+- DTO và database cùng bảo vệ score 1-5; unique reviewer-contract chống duplicate cạnh tranh.
+- Review pending mặc định ẩn; public query luôn dùng điều kiện approved-visible.
+- Admin moderation dùng conditional update, metadata moderator và audit transaction.
+- Public summary trả count, distribution và trung bình trực tiếp từ review hợp lệ.
+- Report resolver hỗ trợ room, tenant, review, user; lưu target snapshot và fingerprint.
+- Report moderation có claim riêng, chỉ handler được resolve/reject và terminal state không mở lại.
+- Notification review/report không chứa reporter identity hoặc internal moderator data.
+- Unit test bao phủ validation, eligibility, privacy, transition, ownership và target resolver.
 
-### 17.1. Review
+## 18. Backlog sau MVP
 
-| #   | Hiện trạng                           | Ảnh hưởng                     | Hướng triển khai                     | Dependency    | Tiêu chí hoàn thành             |
-| --- | ------------------------------------ | ----------------------------- | ------------------------------------ | ------------- | ------------------------------- |
-| 1   | Không module/controller/service      | Không dùng được               | Tạo vertical module review           | G01/G05       | API + tests + docs              |
-| 2   | Chưa chốt eligibility                | User không đúng có thể review | Policy contract/status/date          | G05/Product   | Matrix eligibility có test      |
-| 3   | Không DB score constraint            | Lưu điểm ngoài 1–5            | Zod + DB CHECK                       | Migration     | Mọi score hợp lệ                |
-| 4   | Không unique review                  | Spam nhiều review             | Unique theo policy                   | Migration     | Concurrent create chỉ một thắng |
-| 5   | Không enforce cross-entity           | Review sai tenant/room        | Suy ra từ contract trong transaction | G05           | Không client-controlled tenant  |
-| 6   | Visible true + pending               | Có nguy cơ lộ chưa duyệt      | Default false + public condition kép | Migration/G04 | Pending không public            |
-| 7   | Không edit/delete policy             | Khó sửa hoặc lạm dụng sửa     | Edit window + history/withdraw       | Product/Audit | Không sửa sau policy            |
-| 8   | Không moderation metadata            | Không truy vết quyết định     | Actor/reason/time/history            | G11 audit     | Mọi action có evidence          |
-| 9   | Không appeal                         | Không xử lý khiếu nại         | Appeal model/state/SLA               | Moderation    | Một quy trình rõ                |
-| 10  | Không public list/detail             | Marketplace không hiển thị    | Public read API                      | G04           | Chỉ approved visible            |
-| 11  | Không reviewer masking               | Có thể lộ PII                 | Public projection riêng              | Privacy       | Không email/phone/contract      |
-| 12  | Không landlord response/helpful vote | Thiếu tương tác trust         | Response/vote model có abuse guard   | Product       | Một response, vote unique       |
-| 13  | Không content moderation             | Spam/XSS/toxicity             | Sanitize + policy/manual queue       | Security      | Nội dung độc hại bị chặn        |
-| 14  | Không index                          | List public/moderation chậm   | Index room/tenant/status/time        | Migration     | Query plan đạt SLO              |
-| 15  | Không retention/legal hold           | Xóa dữ liệu không kiểm soát   | Retention + anonymization            | Legal         | Policy/job/audit rõ             |
+1. Công thức `ReputationScore` đa nguồn, algorithm version và history.
+2. Evidence attachment có signed URL, MIME/size validation và access control.
+3. Appeal/reopen workflow và permission moderator riêng.
+4. Enforcement command qua module sở hữu với maker-checker cho hành động nghiêm trọng.
+5. Transactional outbox, SLA dashboard, retention/legal hold và anti-abuse nâng cao.
+6. PostgreSQL integration/E2E race test trong môi trường test database chuyên dụng.
+7. Frontend marketplace, renter mobile và admin moderation UI.
 
-### 17.2. Reputation
+## 19. Tiêu chí nghiệm thu Backend MVP
 
-| #   | Hiện trạng                 | Ảnh hưởng                           | Hướng triển khai                        | Dependency    | Tiêu chí hoàn thành       |
-| --- | -------------------------- | ----------------------------------- | --------------------------------------- | ------------- | ------------------------- |
-| 16  | Không thuật toán/trọng số  | `finalScore` vô nghĩa               | Spec formula versioned                  | Product/Data  | Golden dataset pass       |
-| 17  | Không unique target        | Nhiều score cùng target             | Partial/functional unique strategy      | Migration     | Một current score/target  |
-| 18  | Không target invariant     | Tenant score có room sai            | DB CHECK + service validation           | Migration     | ROOM/TENANT hợp lệ        |
-| 19  | Không recalc job           | Score không được tạo/cập nhật       | Queue worker/event trigger              | G10/outbox    | Idempotent retry          |
-| 20  | Không history/version      | Không giải thích thay đổi           | Reputation history/snapshot             | Schema        | Truy ra version/input     |
-| 21  | Không stale detection      | Hiển thị điểm cũ                    | Source watermark/recalculatedAt         | Scheduler     | Alert/rebuild stale       |
-| 22  | Không anti-gaming          | Review giả thao túng score          | Verified stay, weighting, fraud signals | G05/Security  | Abuse test/monitoring     |
-| 23  | Không public API           | Marketplace không đọc được          | Public projection + cache               | G04           | Không lộ internal factors |
-| 24  | Không marketplace ranking  | Score không ảnh hưởng discovery     | Ranking policy có fallback              | G04           | A/B/off switch            |
-| 25  | Không xử lý review bị hide | Score vẫn dùng dữ liệu không hợp lệ | Event decrement/full recalc             | Review worker | Score khớp approved set   |
+- [x] Review mới là `PENDING` và không public.
+- [x] Tenant/room/reviewer được suy ra từ contract, không nhận từ client.
+- [x] Một reviewer chỉ tạo được một review trên mỗi contract.
+- [x] Public response không chứa reviewer ID, email, phone hoặc contract ID.
+- [x] Moderation review/report có state machine, actor, timestamp và audit.
+- [x] Report target sai hoặc self-report bị từ chối.
+- [x] Duplicate report đang mở bị chặn bằng partial unique index.
+- [x] Summary không có dữ liệu trả average `null`, không trả 0 như điểm xấu.
+- [x] Reputation đa nguồn không bị giả lập bằng component score 0.
+- [x] Prisma validate/generate, unit tests và backend build là release gate.
 
-### 17.3. Report và moderation
+## 20. Giới hạn vận hành
 
-| #   | Hiện trạng                     | Ảnh hưởng                          | Hướng triển khai                      | Dependency     | Tiêu chí hoàn thành        |
-| --- | ------------------------------ | ---------------------------------- | ------------------------------------- | -------------- | -------------------------- |
-| 26  | Không submit/history API       | Không báo vi phạm được             | User report module                    | G01            | Ownership/rate test        |
-| 27  | Target string không FK         | Dangling target                    | Resolver + snapshot + index           | Target modules | Target sai bị từ chối      |
-| 28  | Không evidence                 | Khó điều tra                       | Secure attachment model/upload        | Storage        | Permission/MIME/size       |
-| 29  | Không chống duplicate/spam     | Queue bị ngập                      | Fingerprint/rate/cooldown             | Redis/DB       | Concurrent duplicate chặn  |
-| 30  | Không state machine            | Chuyển trạng thái tùy ý            | Conditional transitions               | Product        | Terminal/reopen test       |
-| 31  | Không handler note/action      | Không biết đã xử lý gì             | Finding/resolution/action fields      | Schema         | Resolve bắt buộc reason    |
-| 32  | Không enforcement mapping      | Resolve không tạo hiệu lực         | Command sang module sở hữu            | G01–G04        | Action atomic/audited      |
-| 33  | Không moderation queue/SLA     | Report tồn đọng                    | Filter/claim/priority/deadline        | G11            | Aging dashboard/alerts     |
-| 34  | Không notification             | Hai phía không biết kết quả        | Privacy-safe G10 events               | G10            | Recipient/content đúng     |
-| 35  | Không audit                    | Action nghiêm trọng không truy vết | Append-only audit/outbox              | G11            | Actor/before/after         |
-| 36  | Không appeal                   | Không sửa quyết định sai           | Appeal workflow                       | Product/Legal  | SLA và independent review  |
-| 37  | Không moderator permission     | ADMIN quá rộng                     | Permission read/claim/resolve/enforce | G01            | Least privilege            |
-| 38  | Không index                    | Queue/list target chậm             | Status/type/time/target index         | Migration      | Query plan đạt SLO         |
-| 39  | Không privacy/redaction        | Lộ reporter/evidence               | Projection/masking/access log         | Privacy        | Target không thấy reporter |
-| 40  | Không retention/legal workflow | Dữ liệu tăng hoặc bị xóa sớm       | Retention/legal hold/export           | Legal          | Policy tự động có audit    |
-
-### 17.4. Kiểm thử và vận hành
-
-| #   | Hiện trạng                    | Ảnh hưởng                      | Hướng triển khai                            | Dependency        | Tiêu chí hoàn thành        |
-| --- | ----------------------------- | ------------------------------ | ------------------------------------------- | ----------------- | -------------------------- |
-| 41  | Không Zod/response contract   | Client/server không thống nhất | Typed DTO + OpenAPI/docs                    | API standard      | Strict validation          |
-| 42  | Không unit/integration/E2E    | Không chứng minh logic         | Test pyramid                                | Test DB/Redis     | Critical paths covered     |
-| 43  | Không isolation test          | Rò review/report tenant/user   | Tenant/user A/B E2E                         | Auth seed         | Không cross-access         |
-| 44  | Không concurrency review      | Duplicate race                 | Parallel PostgreSQL test                    | Unique constraint | Một review thắng           |
-| 45  | Không recalc idempotency test | Retry làm lệch score           | Worker replay tests                         | Queue             | Same event same result     |
-| 46  | Không moderation race test    | Hai Admin xử lý đè             | Claim/CAS test                              | PostgreSQL        | Một decision thắng         |
-| 47  | Không benchmark public list   | Marketplace có thể chậm        | Seed/load/EXPLAIN                           | Dataset           | SLO/index đạt              |
-| 48  | Không E2E review journey      | Không chứng minh trust loop    | Contract → review → approve → reputation    | G04/G05/G10/G11   | Public score đúng          |
-| 49  | Không E2E report journey      | Không chứng minh enforcement   | Report → moderation → action → notify/audit | G01–G11           | State/action nhất quán     |
-| 50  | Không seed/demo data          | Khó demo/QA                    | Deterministic fixtures                      | Seed scripts      | Đủ trạng thái và edge case |
-
-## 18. Thứ tự ưu tiên backlog
-
-1. Review eligibility, validation, uniqueness và tenant integrity.
-2. Moderation state machine, audit và notification.
-3. Public review API, privacy và content safety.
-4. Reputation formula, version, unique target và recalculate.
-5. Report workflow, enforcement action và appeal.
-6. Performance, anti-abuse, seed và E2E.
-
-## 19. Checklist nghiệm thu tài liệu
-
-### 19.1. Hiện trạng
-
-- [ ] Ghi rõ không có API G12 hiện hành.
-- [ ] Không mô tả thư mục reviews như module đã hoạt động.
-- [ ] Không coi comment score 1–5 là DB constraint.
-- [ ] Không tự phát minh công thức reputation.
-- [ ] Không mô tả moderation/notification/audit như đã có.
-
-### 19.2. Schema
-
-- [ ] Field/relation/cascade Review đúng Prisma.
-- [ ] Field/Decimal/target Reputation đúng Prisma.
-- [ ] Target string và handler Report đúng Prisma.
-- [ ] Enum đầy đủ.
-- [ ] Thiếu index/unique/check được ghi rõ.
-
-### 19.3. Roadmap
-
-- [ ] Mọi endpoint đề xuất có nhãn chưa tồn tại.
-- [ ] Eligibility và public visibility được phân biệt.
-- [ ] Moderation có actor/reason/history.
-- [ ] Reputation có version/idempotency.
-- [ ] Report không tự động phạt khi mới submit.
-- [ ] Enforcement dùng module sở hữu.
-- [ ] Privacy reporter/reviewer được đề cập.
-
-## 20. Tiêu chí nghiệm thu tài liệu
-
-- Người đọc biết G12 chưa thể sử dụng qua API.
-- Backend hiểu dữ liệu schema và các invariant còn thiếu.
-- Product biết policy cần khóa trước khi triển khai.
-- Frontend biết public review/reputation là roadmap.
-- Tester có danh sách case integrity, moderation, privacy và concurrency.
-- Người lập kế hoạch có backlog theo dependency và ưu tiên.
-- Không có tính năng tương lai nào bị trình bày như đã hoạt động.
+- Notification là best-effort sau commit; lỗi Redis/FCM không rollback moderation.
+- Migration dừng nếu gặp legacy review/report không thể backfill an toàn.
+- Submit report không tự động khóa, ẩn hoặc suspend target.
+- `ReputationScore` được giữ trong schema nhưng chưa có API hoặc worker.
 
 ## 21. Nguồn mã đối chiếu
 
 - `backend/prisma/schema.prisma`
 - `backend/src/modules/reviews`
+- `backend/src/modules/reports`
+- `backend/prisma/migrations/20260730120000_complete_g12_trust_moderation`
 - `backend/src/app.module.ts`
 - `backend/docs/systems/Tai_lieu_yeu_cau_chuc_nang_MVP.md`
 - `backend/docs/systems/tai_lieu_phan_tich_nghiep_vu_he_thong.md`

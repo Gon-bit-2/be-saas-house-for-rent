@@ -70,6 +70,7 @@ export const ModelName = {
   RoomImage: 'RoomImage',
   Amenity: 'Amenity',
   RoomAmenity: 'RoomAmenity',
+  RenterInvitation: 'RenterInvitation',
   RenterProfile: 'RenterProfile',
   RentalHistory: 'RentalHistory',
   RoomViewLog: 'RoomViewLog',
@@ -89,6 +90,8 @@ export const ModelName = {
   MeterReading: 'MeterReading',
   OcrJob: 'OcrJob',
   InvoiceBatch: 'InvoiceBatch',
+  ServiceCatalogItem: 'ServiceCatalogItem',
+  ServiceAssignment: 'ServiceAssignment',
   Invoice: 'Invoice',
   InvoiceItem: 'InvoiceItem',
   Debt: 'Debt',
@@ -303,12 +306,23 @@ export const SubscriptionPaymentScalarFieldEnum = {
   id: 'id',
   subscriptionId: 'subscriptionId',
   tenantId: 'tenantId',
+  purpose: 'purpose',
   amount: 'amount',
   paymentMethod: 'paymentMethod',
+  provider: 'provider',
+  orderCode: 'orderCode',
+  paymentLinkId: 'paymentLinkId',
+  checkoutUrl: 'checkoutUrl',
+  qrContent: 'qrContent',
+  providerStatus: 'providerStatus',
   transactionCode: 'transactionCode',
   status: 'status',
   paidAt: 'paidAt',
-  createdAt: 'createdAt'
+  expiredAt: 'expiredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById'
 } as const
 
 export type SubscriptionPaymentScalarFieldEnum = (typeof SubscriptionPaymentScalarFieldEnum)[keyof typeof SubscriptionPaymentScalarFieldEnum]
@@ -426,6 +440,26 @@ export const RoomAmenityScalarFieldEnum = {
 } as const
 
 export type RoomAmenityScalarFieldEnum = (typeof RoomAmenityScalarFieldEnum)[keyof typeof RoomAmenityScalarFieldEnum]
+
+
+export const RenterInvitationScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  email: 'email',
+  fullName: 'fullName',
+  phone: 'phone',
+  codeHash: 'codeHash',
+  attempts: 'attempts',
+  expiresAt: 'expiresAt',
+  acceptedAt: 'acceptedAt',
+  acceptedUserId: 'acceptedUserId',
+  revokedAt: 'revokedAt',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RenterInvitationScalarFieldEnum = (typeof RenterInvitationScalarFieldEnum)[keyof typeof RenterInvitationScalarFieldEnum]
 
 
 export const RenterProfileScalarFieldEnum = {
@@ -599,6 +633,13 @@ export const ContractTerminationRequestScalarFieldEnum = {
   reason: 'reason',
   expectedMoveOutDate: 'expectedMoveOutDate',
   status: 'status',
+  reviewNote: 'reviewNote',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  actualMoveOutDate: 'actualMoveOutDate',
+  completedAt: 'completedAt',
+  completionNote: 'completionNote',
+  outstandingDebt: 'outstandingDebt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   createdById: 'createdById',
@@ -611,8 +652,12 @@ export type ContractTerminationRequestScalarFieldEnum = (typeof ContractTerminat
 
 export const AssetCategoryScalarFieldEnum = {
   id: 'id',
+  tenantId: 'tenantId',
   name: 'name',
   description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
   createdById: 'createdById',
   updatedById: 'updatedById',
   deletedById: 'deletedById'
@@ -651,8 +696,20 @@ export const HandoverRecordScalarFieldEnum = {
   note: 'note',
   signedByLandlordAt: 'signedByLandlordAt',
   signedByRenterAt: 'signedByRenterAt',
+  signedByLandlordId: 'signedByLandlordId',
+  signedByRenterId: 'signedByRenterId',
   status: 'status',
+  version: 'version',
+  contentHash: 'contentHash',
+  confirmedAt: 'confirmedAt',
+  disputedById: 'disputedById',
+  disputeReason: 'disputeReason',
+  disputedAt: 'disputedAt',
+  resolvedById: 'resolvedById',
+  resolutionNote: 'resolutionNote',
+  resolvedAt: 'resolvedAt',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   createdById: 'createdById',
   updatedById: 'updatedById',
   deletedById: 'deletedById'
@@ -665,7 +722,10 @@ export const HandoverAssetItemScalarFieldEnum = {
   id: 'id',
   handoverRecordId: 'handoverRecordId',
   roomAssetId: 'roomAssetId',
-  quantity: 'quantity',
+  assetName: 'assetName',
+  categoryName: 'categoryName',
+  expectedQuantity: 'expectedQuantity',
+  actualQuantity: 'actualQuantity',
   condition: 'condition',
   note: 'note',
   imageUrl: 'imageUrl'
@@ -704,6 +764,7 @@ export const MeterReadingScalarFieldEnum = {
   source: 'source',
   status: 'status',
   recordedAt: 'recordedAt',
+  ocrJobId: 'ocrJobId',
   createdById: 'createdById',
   updatedById: 'updatedById',
   deletedById: 'deletedById'
@@ -719,6 +780,8 @@ export const OcrJobScalarFieldEnum = {
   meterId: 'meterId',
   uploadedBy: 'uploadedBy',
   imageUrl: 'imageUrl',
+  imagePublicId: 'imagePublicId',
+  fileHash: 'fileHash',
   recognizedValue: 'recognizedValue',
   confidence: 'confidence',
   rawResult: 'rawResult',
@@ -744,6 +807,41 @@ export const InvoiceBatchScalarFieldEnum = {
 } as const
 
 export type InvoiceBatchScalarFieldEnum = (typeof InvoiceBatchScalarFieldEnum)[keyof typeof InvoiceBatchScalarFieldEnum]
+
+
+export const ServiceCatalogItemScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  itemType: 'itemType',
+  defaultUnitPrice: 'defaultUnitPrice',
+  unitLabel: 'unitLabel',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceCatalogItemScalarFieldEnum = (typeof ServiceCatalogItemScalarFieldEnum)[keyof typeof ServiceCatalogItemScalarFieldEnum]
+
+
+export const ServiceAssignmentScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  serviceItemId: 'serviceItemId',
+  roomId: 'roomId',
+  contractId: 'contractId',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceAssignmentScalarFieldEnum = (typeof ServiceAssignmentScalarFieldEnum)[keyof typeof ServiceAssignmentScalarFieldEnum]
 
 
 export const InvoiceScalarFieldEnum = {
@@ -868,6 +966,7 @@ export const PaymentWebhookLogScalarFieldEnum = {
   provider: 'provider',
   tenantId: 'tenantId',
   invoiceId: 'invoiceId',
+  subscriptionPaymentId: 'subscriptionPaymentId',
   orderCode: 'orderCode',
   paymentLinkId: 'paymentLinkId',
   reference: 'reference',
@@ -998,7 +1097,11 @@ export const ReviewScalarFieldEnum = {
   serviceScore: 'serviceScore',
   isVisible: 'isVisible',
   status: 'status',
-  createdAt: 'createdAt'
+  moderatedById: 'moderatedById',
+  moderationReason: 'moderationReason',
+  moderatedAt: 'moderatedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
@@ -1026,12 +1129,18 @@ export const ReportScalarFieldEnum = {
   reporterId: 'reporterId',
   targetType: 'targetType',
   targetId: 'targetId',
+  targetTenantId: 'targetTenantId',
+  targetSnapshot: 'targetSnapshot',
+  fingerprint: 'fingerprint',
   reason: 'reason',
   description: 'description',
   status: 'status',
   handledBy: 'handledBy',
+  reviewingAt: 'reviewingAt',
+  resolutionNote: 'resolutionNote',
   createdAt: 'createdAt',
-  resolvedAt: 'resolvedAt'
+  resolvedAt: 'resolvedAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]

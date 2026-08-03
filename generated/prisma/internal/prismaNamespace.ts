@@ -403,6 +403,7 @@ export const ModelName = {
   RoomImage: 'RoomImage',
   Amenity: 'Amenity',
   RoomAmenity: 'RoomAmenity',
+  RenterInvitation: 'RenterInvitation',
   RenterProfile: 'RenterProfile',
   RentalHistory: 'RentalHistory',
   RoomViewLog: 'RoomViewLog',
@@ -422,6 +423,8 @@ export const ModelName = {
   MeterReading: 'MeterReading',
   OcrJob: 'OcrJob',
   InvoiceBatch: 'InvoiceBatch',
+  ServiceCatalogItem: 'ServiceCatalogItem',
+  ServiceAssignment: 'ServiceAssignment',
   Invoice: 'Invoice',
   InvoiceItem: 'InvoiceItem',
   Debt: 'Debt',
@@ -457,7 +460,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "refreshToken" | "device" | "verificationCode" | "role" | "permission" | "rolePermission" | "tenant" | "tenantMember" | "plan" | "subscription" | "subscriptionPayment" | "property" | "floor" | "room" | "marketplaceModeration" | "roomImage" | "amenity" | "roomAmenity" | "renterProfile" | "rentalHistory" | "roomViewLog" | "favoriteRoom" | "roomViewingAppointment" | "rentalRequest" | "contractTemplate" | "contract" | "contractMember" | "contractFile" | "contractTerminationRequest" | "assetCategory" | "roomAsset" | "handoverRecord" | "handoverAssetItem" | "utilityMeter" | "meterReading" | "ocrJob" | "invoiceBatch" | "invoice" | "invoiceItem" | "debt" | "payment" | "paymentQrCode" | "paymentWebhookLog" | "ticket" | "ticketAttachment" | "systemSetting" | "ticketComment" | "conversation" | "conversationMember" | "message" | "review" | "reputationScore" | "report" | "notification" | "deviceToken" | "backgroundJob" | "auditLog"
+    modelProps: "user" | "refreshToken" | "device" | "verificationCode" | "role" | "permission" | "rolePermission" | "tenant" | "tenantMember" | "plan" | "subscription" | "subscriptionPayment" | "property" | "floor" | "room" | "marketplaceModeration" | "roomImage" | "amenity" | "roomAmenity" | "renterInvitation" | "renterProfile" | "rentalHistory" | "roomViewLog" | "favoriteRoom" | "roomViewingAppointment" | "rentalRequest" | "contractTemplate" | "contract" | "contractMember" | "contractFile" | "contractTerminationRequest" | "assetCategory" | "roomAsset" | "handoverRecord" | "handoverAssetItem" | "utilityMeter" | "meterReading" | "ocrJob" | "invoiceBatch" | "serviceCatalogItem" | "serviceAssignment" | "invoice" | "invoiceItem" | "debt" | "payment" | "paymentQrCode" | "paymentWebhookLog" | "ticket" | "ticketAttachment" | "systemSetting" | "ticketComment" | "conversation" | "conversationMember" | "message" | "review" | "reputationScore" | "report" | "notification" | "deviceToken" | "backgroundJob" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1867,6 +1870,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RenterInvitation: {
+      payload: Prisma.$RenterInvitationPayload<ExtArgs>
+      fields: Prisma.RenterInvitationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RenterInvitationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RenterInvitationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RenterInvitationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RenterInvitationPayload>
+        }
+        findFirst: {
+          args: Prisma.RenterInvitationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RenterInvitationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RenterInvitationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RenterInvitationPayload>
+        }
+        findMany: {
+          args: Prisma.RenterInvitationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RenterInvitationPayload>[]
+        }
+        create: {
+          args: Prisma.RenterInvitationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RenterInvitationPayload>
+        }
+        createMany: {
+          args: Prisma.RenterInvitationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RenterInvitationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RenterInvitationPayload>[]
+        }
+        delete: {
+          args: Prisma.RenterInvitationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RenterInvitationPayload>
+        }
+        update: {
+          args: Prisma.RenterInvitationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RenterInvitationPayload>
+        }
+        deleteMany: {
+          args: Prisma.RenterInvitationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RenterInvitationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RenterInvitationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RenterInvitationPayload>[]
+        }
+        upsert: {
+          args: Prisma.RenterInvitationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RenterInvitationPayload>
+        }
+        aggregate: {
+          args: Prisma.RenterInvitationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRenterInvitation>
+        }
+        groupBy: {
+          args: Prisma.RenterInvitationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RenterInvitationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RenterInvitationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RenterInvitationCountAggregateOutputType> | number
+        }
+      }
+    }
     RenterProfile: {
       payload: Prisma.$RenterProfilePayload<ExtArgs>
       fields: Prisma.RenterProfileFieldRefs
@@ -3270,6 +3347,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.InvoiceBatchCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.InvoiceBatchCountAggregateOutputType> | number
+        }
+      }
+    }
+    ServiceCatalogItem: {
+      payload: Prisma.$ServiceCatalogItemPayload<ExtArgs>
+      fields: Prisma.ServiceCatalogItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ServiceCatalogItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceCatalogItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ServiceCatalogItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceCatalogItemPayload>
+        }
+        findFirst: {
+          args: Prisma.ServiceCatalogItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceCatalogItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ServiceCatalogItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceCatalogItemPayload>
+        }
+        findMany: {
+          args: Prisma.ServiceCatalogItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceCatalogItemPayload>[]
+        }
+        create: {
+          args: Prisma.ServiceCatalogItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceCatalogItemPayload>
+        }
+        createMany: {
+          args: Prisma.ServiceCatalogItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ServiceCatalogItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceCatalogItemPayload>[]
+        }
+        delete: {
+          args: Prisma.ServiceCatalogItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceCatalogItemPayload>
+        }
+        update: {
+          args: Prisma.ServiceCatalogItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceCatalogItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.ServiceCatalogItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ServiceCatalogItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ServiceCatalogItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceCatalogItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.ServiceCatalogItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceCatalogItemPayload>
+        }
+        aggregate: {
+          args: Prisma.ServiceCatalogItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateServiceCatalogItem>
+        }
+        groupBy: {
+          args: Prisma.ServiceCatalogItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceCatalogItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ServiceCatalogItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceCatalogItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    ServiceAssignment: {
+      payload: Prisma.$ServiceAssignmentPayload<ExtArgs>
+      fields: Prisma.ServiceAssignmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ServiceAssignmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAssignmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ServiceAssignmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAssignmentPayload>
+        }
+        findFirst: {
+          args: Prisma.ServiceAssignmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAssignmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ServiceAssignmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAssignmentPayload>
+        }
+        findMany: {
+          args: Prisma.ServiceAssignmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAssignmentPayload>[]
+        }
+        create: {
+          args: Prisma.ServiceAssignmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAssignmentPayload>
+        }
+        createMany: {
+          args: Prisma.ServiceAssignmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ServiceAssignmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAssignmentPayload>[]
+        }
+        delete: {
+          args: Prisma.ServiceAssignmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAssignmentPayload>
+        }
+        update: {
+          args: Prisma.ServiceAssignmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAssignmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.ServiceAssignmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ServiceAssignmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ServiceAssignmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAssignmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.ServiceAssignmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServiceAssignmentPayload>
+        }
+        aggregate: {
+          args: Prisma.ServiceAssignmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateServiceAssignment>
+        }
+        groupBy: {
+          args: Prisma.ServiceAssignmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceAssignmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ServiceAssignmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceAssignmentCountAggregateOutputType> | number
         }
       }
     }
@@ -4968,12 +5193,23 @@ export const SubscriptionPaymentScalarFieldEnum = {
   id: 'id',
   subscriptionId: 'subscriptionId',
   tenantId: 'tenantId',
+  purpose: 'purpose',
   amount: 'amount',
   paymentMethod: 'paymentMethod',
+  provider: 'provider',
+  orderCode: 'orderCode',
+  paymentLinkId: 'paymentLinkId',
+  checkoutUrl: 'checkoutUrl',
+  qrContent: 'qrContent',
+  providerStatus: 'providerStatus',
   transactionCode: 'transactionCode',
   status: 'status',
   paidAt: 'paidAt',
-  createdAt: 'createdAt'
+  expiredAt: 'expiredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById'
 } as const
 
 export type SubscriptionPaymentScalarFieldEnum = (typeof SubscriptionPaymentScalarFieldEnum)[keyof typeof SubscriptionPaymentScalarFieldEnum]
@@ -5091,6 +5327,26 @@ export const RoomAmenityScalarFieldEnum = {
 } as const
 
 export type RoomAmenityScalarFieldEnum = (typeof RoomAmenityScalarFieldEnum)[keyof typeof RoomAmenityScalarFieldEnum]
+
+
+export const RenterInvitationScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  email: 'email',
+  fullName: 'fullName',
+  phone: 'phone',
+  codeHash: 'codeHash',
+  attempts: 'attempts',
+  expiresAt: 'expiresAt',
+  acceptedAt: 'acceptedAt',
+  acceptedUserId: 'acceptedUserId',
+  revokedAt: 'revokedAt',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RenterInvitationScalarFieldEnum = (typeof RenterInvitationScalarFieldEnum)[keyof typeof RenterInvitationScalarFieldEnum]
 
 
 export const RenterProfileScalarFieldEnum = {
@@ -5264,6 +5520,13 @@ export const ContractTerminationRequestScalarFieldEnum = {
   reason: 'reason',
   expectedMoveOutDate: 'expectedMoveOutDate',
   status: 'status',
+  reviewNote: 'reviewNote',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  actualMoveOutDate: 'actualMoveOutDate',
+  completedAt: 'completedAt',
+  completionNote: 'completionNote',
+  outstandingDebt: 'outstandingDebt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   createdById: 'createdById',
@@ -5276,8 +5539,12 @@ export type ContractTerminationRequestScalarFieldEnum = (typeof ContractTerminat
 
 export const AssetCategoryScalarFieldEnum = {
   id: 'id',
+  tenantId: 'tenantId',
   name: 'name',
   description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
   createdById: 'createdById',
   updatedById: 'updatedById',
   deletedById: 'deletedById'
@@ -5316,8 +5583,20 @@ export const HandoverRecordScalarFieldEnum = {
   note: 'note',
   signedByLandlordAt: 'signedByLandlordAt',
   signedByRenterAt: 'signedByRenterAt',
+  signedByLandlordId: 'signedByLandlordId',
+  signedByRenterId: 'signedByRenterId',
   status: 'status',
+  version: 'version',
+  contentHash: 'contentHash',
+  confirmedAt: 'confirmedAt',
+  disputedById: 'disputedById',
+  disputeReason: 'disputeReason',
+  disputedAt: 'disputedAt',
+  resolvedById: 'resolvedById',
+  resolutionNote: 'resolutionNote',
+  resolvedAt: 'resolvedAt',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   createdById: 'createdById',
   updatedById: 'updatedById',
   deletedById: 'deletedById'
@@ -5330,7 +5609,10 @@ export const HandoverAssetItemScalarFieldEnum = {
   id: 'id',
   handoverRecordId: 'handoverRecordId',
   roomAssetId: 'roomAssetId',
-  quantity: 'quantity',
+  assetName: 'assetName',
+  categoryName: 'categoryName',
+  expectedQuantity: 'expectedQuantity',
+  actualQuantity: 'actualQuantity',
   condition: 'condition',
   note: 'note',
   imageUrl: 'imageUrl'
@@ -5369,6 +5651,7 @@ export const MeterReadingScalarFieldEnum = {
   source: 'source',
   status: 'status',
   recordedAt: 'recordedAt',
+  ocrJobId: 'ocrJobId',
   createdById: 'createdById',
   updatedById: 'updatedById',
   deletedById: 'deletedById'
@@ -5384,6 +5667,8 @@ export const OcrJobScalarFieldEnum = {
   meterId: 'meterId',
   uploadedBy: 'uploadedBy',
   imageUrl: 'imageUrl',
+  imagePublicId: 'imagePublicId',
+  fileHash: 'fileHash',
   recognizedValue: 'recognizedValue',
   confidence: 'confidence',
   rawResult: 'rawResult',
@@ -5409,6 +5694,41 @@ export const InvoiceBatchScalarFieldEnum = {
 } as const
 
 export type InvoiceBatchScalarFieldEnum = (typeof InvoiceBatchScalarFieldEnum)[keyof typeof InvoiceBatchScalarFieldEnum]
+
+
+export const ServiceCatalogItemScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  itemType: 'itemType',
+  defaultUnitPrice: 'defaultUnitPrice',
+  unitLabel: 'unitLabel',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceCatalogItemScalarFieldEnum = (typeof ServiceCatalogItemScalarFieldEnum)[keyof typeof ServiceCatalogItemScalarFieldEnum]
+
+
+export const ServiceAssignmentScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  serviceItemId: 'serviceItemId',
+  roomId: 'roomId',
+  contractId: 'contractId',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceAssignmentScalarFieldEnum = (typeof ServiceAssignmentScalarFieldEnum)[keyof typeof ServiceAssignmentScalarFieldEnum]
 
 
 export const InvoiceScalarFieldEnum = {
@@ -5533,6 +5853,7 @@ export const PaymentWebhookLogScalarFieldEnum = {
   provider: 'provider',
   tenantId: 'tenantId',
   invoiceId: 'invoiceId',
+  subscriptionPaymentId: 'subscriptionPaymentId',
   orderCode: 'orderCode',
   paymentLinkId: 'paymentLinkId',
   reference: 'reference',
@@ -5663,7 +5984,11 @@ export const ReviewScalarFieldEnum = {
   serviceScore: 'serviceScore',
   isVisible: 'isVisible',
   status: 'status',
-  createdAt: 'createdAt'
+  moderatedById: 'moderatedById',
+  moderationReason: 'moderationReason',
+  moderatedAt: 'moderatedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
@@ -5691,12 +6016,18 @@ export const ReportScalarFieldEnum = {
   reporterId: 'reporterId',
   targetType: 'targetType',
   targetId: 'targetId',
+  targetTenantId: 'targetTenantId',
+  targetSnapshot: 'targetSnapshot',
+  fingerprint: 'fingerprint',
   reason: 'reason',
   description: 'description',
   status: 'status',
   handledBy: 'handledBy',
+  reviewingAt: 'reviewingAt',
+  resolutionNote: 'resolutionNote',
   createdAt: 'createdAt',
-  resolvedAt: 'resolvedAt'
+  resolvedAt: 'resolvedAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
@@ -5986,6 +6317,20 @@ export type EnumBillingCycleFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'BillingCycle[]'
  */
 export type ListEnumBillingCycleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillingCycle[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SubscriptionPaymentPurpose'
+ */
+export type EnumSubscriptionPaymentPurposeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionPaymentPurpose'>
+    
+
+
+/**
+ * Reference to a field of type 'SubscriptionPaymentPurpose[]'
+ */
+export type ListEnumSubscriptionPaymentPurposeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionPaymentPurpose[]'>
     
 
 
@@ -6312,20 +6657,6 @@ export type ListEnumInvoiceBatchStatusFieldRefInput<$PrismaModel> = FieldRefInpu
 
 
 /**
- * Reference to a field of type 'InvoiceStatus'
- */
-export type EnumInvoiceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvoiceStatus'>
-    
-
-
-/**
- * Reference to a field of type 'InvoiceStatus[]'
- */
-export type ListEnumInvoiceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvoiceStatus[]'>
-    
-
-
-/**
  * Reference to a field of type 'InvoiceItemType'
  */
 export type EnumInvoiceItemTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvoiceItemType'>
@@ -6336,6 +6667,20 @@ export type EnumInvoiceItemTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$
  * Reference to a field of type 'InvoiceItemType[]'
  */
 export type ListEnumInvoiceItemTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvoiceItemType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'InvoiceStatus'
+ */
+export type EnumInvoiceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvoiceStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'InvoiceStatus[]'
+ */
+export type ListEnumInvoiceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvoiceStatus[]'>
     
 
 
@@ -6719,6 +7064,7 @@ export type GlobalOmitConfig = {
   roomImage?: Prisma.RoomImageOmit
   amenity?: Prisma.AmenityOmit
   roomAmenity?: Prisma.RoomAmenityOmit
+  renterInvitation?: Prisma.RenterInvitationOmit
   renterProfile?: Prisma.RenterProfileOmit
   rentalHistory?: Prisma.RentalHistoryOmit
   roomViewLog?: Prisma.RoomViewLogOmit
@@ -6738,6 +7084,8 @@ export type GlobalOmitConfig = {
   meterReading?: Prisma.MeterReadingOmit
   ocrJob?: Prisma.OcrJobOmit
   invoiceBatch?: Prisma.InvoiceBatchOmit
+  serviceCatalogItem?: Prisma.ServiceCatalogItemOmit
+  serviceAssignment?: Prisma.ServiceAssignmentOmit
   invoice?: Prisma.InvoiceOmit
   invoiceItem?: Prisma.InvoiceItemOmit
   debt?: Prisma.DebtOmit

@@ -53,6 +53,8 @@ export type OcrJobMinAggregateOutputType = {
   meterId: number | null
   uploadedBy: number | null
   imageUrl: string | null
+  imagePublicId: string | null
+  fileHash: string | null
   recognizedValue: runtime.Decimal | null
   confidence: runtime.Decimal | null
   status: $Enums.OcrJobStatus | null
@@ -68,6 +70,8 @@ export type OcrJobMaxAggregateOutputType = {
   meterId: number | null
   uploadedBy: number | null
   imageUrl: string | null
+  imagePublicId: string | null
+  fileHash: string | null
   recognizedValue: runtime.Decimal | null
   confidence: runtime.Decimal | null
   status: $Enums.OcrJobStatus | null
@@ -83,6 +87,8 @@ export type OcrJobCountAggregateOutputType = {
   meterId: number
   uploadedBy: number
   imageUrl: number
+  imagePublicId: number
+  fileHash: number
   recognizedValue: number
   confidence: number
   rawResult: number
@@ -121,6 +127,8 @@ export type OcrJobMinAggregateInputType = {
   meterId?: true
   uploadedBy?: true
   imageUrl?: true
+  imagePublicId?: true
+  fileHash?: true
   recognizedValue?: true
   confidence?: true
   status?: true
@@ -136,6 +144,8 @@ export type OcrJobMaxAggregateInputType = {
   meterId?: true
   uploadedBy?: true
   imageUrl?: true
+  imagePublicId?: true
+  fileHash?: true
   recognizedValue?: true
   confidence?: true
   status?: true
@@ -151,6 +161,8 @@ export type OcrJobCountAggregateInputType = {
   meterId?: true
   uploadedBy?: true
   imageUrl?: true
+  imagePublicId?: true
+  fileHash?: true
   recognizedValue?: true
   confidence?: true
   rawResult?: true
@@ -254,6 +266,8 @@ export type OcrJobGroupByOutputType = {
   meterId: number
   uploadedBy: number
   imageUrl: string
+  imagePublicId: string | null
+  fileHash: string | null
   recognizedValue: runtime.Decimal | null
   confidence: runtime.Decimal | null
   rawResult: runtime.JsonValue | null
@@ -293,6 +307,8 @@ export type OcrJobWhereInput = {
   meterId?: Prisma.IntFilter<"OcrJob"> | number
   uploadedBy?: Prisma.IntFilter<"OcrJob"> | number
   imageUrl?: Prisma.StringFilter<"OcrJob"> | string
+  imagePublicId?: Prisma.StringNullableFilter<"OcrJob"> | string | null
+  fileHash?: Prisma.StringNullableFilter<"OcrJob"> | string | null
   recognizedValue?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.JsonNullableFilter<"OcrJob">
@@ -304,6 +320,7 @@ export type OcrJobWhereInput = {
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   meter?: Prisma.XOR<Prisma.UtilityMeterScalarRelationFilter, Prisma.UtilityMeterWhereInput>
   uploadedByUser?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  reading?: Prisma.XOR<Prisma.MeterReadingNullableScalarRelationFilter, Prisma.MeterReadingWhereInput> | null
 }
 
 export type OcrJobOrderByWithRelationInput = {
@@ -313,6 +330,8 @@ export type OcrJobOrderByWithRelationInput = {
   meterId?: Prisma.SortOrder
   uploadedBy?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
+  imagePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileHash?: Prisma.SortOrderInput | Prisma.SortOrder
   recognizedValue?: Prisma.SortOrderInput | Prisma.SortOrder
   confidence?: Prisma.SortOrderInput | Prisma.SortOrder
   rawResult?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -324,10 +343,12 @@ export type OcrJobOrderByWithRelationInput = {
   room?: Prisma.RoomOrderByWithRelationInput
   meter?: Prisma.UtilityMeterOrderByWithRelationInput
   uploadedByUser?: Prisma.UserOrderByWithRelationInput
+  reading?: Prisma.MeterReadingOrderByWithRelationInput
 }
 
 export type OcrJobWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  tenantId_meterId_fileHash?: Prisma.OcrJobTenantIdMeterIdFileHashCompoundUniqueInput
   AND?: Prisma.OcrJobWhereInput | Prisma.OcrJobWhereInput[]
   OR?: Prisma.OcrJobWhereInput[]
   NOT?: Prisma.OcrJobWhereInput | Prisma.OcrJobWhereInput[]
@@ -336,6 +357,8 @@ export type OcrJobWhereUniqueInput = Prisma.AtLeast<{
   meterId?: Prisma.IntFilter<"OcrJob"> | number
   uploadedBy?: Prisma.IntFilter<"OcrJob"> | number
   imageUrl?: Prisma.StringFilter<"OcrJob"> | string
+  imagePublicId?: Prisma.StringNullableFilter<"OcrJob"> | string | null
+  fileHash?: Prisma.StringNullableFilter<"OcrJob"> | string | null
   recognizedValue?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.JsonNullableFilter<"OcrJob">
@@ -347,7 +370,8 @@ export type OcrJobWhereUniqueInput = Prisma.AtLeast<{
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   meter?: Prisma.XOR<Prisma.UtilityMeterScalarRelationFilter, Prisma.UtilityMeterWhereInput>
   uploadedByUser?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+  reading?: Prisma.XOR<Prisma.MeterReadingNullableScalarRelationFilter, Prisma.MeterReadingWhereInput> | null
+}, "id" | "tenantId_meterId_fileHash">
 
 export type OcrJobOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -356,6 +380,8 @@ export type OcrJobOrderByWithAggregationInput = {
   meterId?: Prisma.SortOrder
   uploadedBy?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
+  imagePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileHash?: Prisma.SortOrderInput | Prisma.SortOrder
   recognizedValue?: Prisma.SortOrderInput | Prisma.SortOrder
   confidence?: Prisma.SortOrderInput | Prisma.SortOrder
   rawResult?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -380,6 +406,8 @@ export type OcrJobScalarWhereWithAggregatesInput = {
   meterId?: Prisma.IntWithAggregatesFilter<"OcrJob"> | number
   uploadedBy?: Prisma.IntWithAggregatesFilter<"OcrJob"> | number
   imageUrl?: Prisma.StringWithAggregatesFilter<"OcrJob"> | string
+  imagePublicId?: Prisma.StringNullableWithAggregatesFilter<"OcrJob"> | string | null
+  fileHash?: Prisma.StringNullableWithAggregatesFilter<"OcrJob"> | string | null
   recognizedValue?: Prisma.DecimalNullableWithAggregatesFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.DecimalNullableWithAggregatesFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.JsonNullableWithAggregatesFilter<"OcrJob">
@@ -391,6 +419,8 @@ export type OcrJobScalarWhereWithAggregatesInput = {
 
 export type OcrJobCreateInput = {
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -402,6 +432,7 @@ export type OcrJobCreateInput = {
   room: Prisma.RoomCreateNestedOneWithoutOcrJobsInput
   meter: Prisma.UtilityMeterCreateNestedOneWithoutOcrJobsInput
   uploadedByUser: Prisma.UserCreateNestedOneWithoutUploadedOcrJobsInput
+  reading?: Prisma.MeterReadingCreateNestedOneWithoutOcrJobInput
 }
 
 export type OcrJobUncheckedCreateInput = {
@@ -411,6 +442,8 @@ export type OcrJobUncheckedCreateInput = {
   meterId: number
   uploadedBy: number
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -418,10 +451,13 @@ export type OcrJobUncheckedCreateInput = {
   errorMessage?: string | null
   createdAt?: Date | string
   processedAt?: Date | string | null
+  reading?: Prisma.MeterReadingUncheckedCreateNestedOneWithoutOcrJobInput
 }
 
 export type OcrJobUpdateInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -433,6 +469,7 @@ export type OcrJobUpdateInput = {
   room?: Prisma.RoomUpdateOneRequiredWithoutOcrJobsNestedInput
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutOcrJobsNestedInput
   uploadedByUser?: Prisma.UserUpdateOneRequiredWithoutUploadedOcrJobsNestedInput
+  reading?: Prisma.MeterReadingUpdateOneWithoutOcrJobNestedInput
 }
 
 export type OcrJobUncheckedUpdateInput = {
@@ -442,6 +479,8 @@ export type OcrJobUncheckedUpdateInput = {
   meterId?: Prisma.IntFieldUpdateOperationsInput | number
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -449,6 +488,7 @@ export type OcrJobUncheckedUpdateInput = {
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reading?: Prisma.MeterReadingUncheckedUpdateOneWithoutOcrJobNestedInput
 }
 
 export type OcrJobCreateManyInput = {
@@ -458,6 +498,8 @@ export type OcrJobCreateManyInput = {
   meterId: number
   uploadedBy: number
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -469,6 +511,8 @@ export type OcrJobCreateManyInput = {
 
 export type OcrJobUpdateManyMutationInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -485,6 +529,8 @@ export type OcrJobUncheckedUpdateManyInput = {
   meterId?: Prisma.IntFieldUpdateOperationsInput | number
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -504,6 +550,17 @@ export type OcrJobOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type OcrJobNullableScalarRelationFilter = {
+  is?: Prisma.OcrJobWhereInput | null
+  isNot?: Prisma.OcrJobWhereInput | null
+}
+
+export type OcrJobTenantIdMeterIdFileHashCompoundUniqueInput = {
+  tenantId: number
+  meterId: number
+  fileHash: string
+}
+
 export type OcrJobCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -511,6 +568,8 @@ export type OcrJobCountOrderByAggregateInput = {
   meterId?: Prisma.SortOrder
   uploadedBy?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
+  imagePublicId?: Prisma.SortOrder
+  fileHash?: Prisma.SortOrder
   recognizedValue?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   rawResult?: Prisma.SortOrder
@@ -537,6 +596,8 @@ export type OcrJobMaxOrderByAggregateInput = {
   meterId?: Prisma.SortOrder
   uploadedBy?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
+  imagePublicId?: Prisma.SortOrder
+  fileHash?: Prisma.SortOrder
   recognizedValue?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -552,6 +613,8 @@ export type OcrJobMinOrderByAggregateInput = {
   meterId?: Prisma.SortOrder
   uploadedBy?: Prisma.SortOrder
   imageUrl?: Prisma.SortOrder
+  imagePublicId?: Prisma.SortOrder
+  fileHash?: Prisma.SortOrder
   recognizedValue?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -738,12 +801,30 @@ export type OcrJobUncheckedUpdateManyWithoutMeterNestedInput = {
   deleteMany?: Prisma.OcrJobScalarWhereInput | Prisma.OcrJobScalarWhereInput[]
 }
 
+export type OcrJobCreateNestedOneWithoutReadingInput = {
+  create?: Prisma.XOR<Prisma.OcrJobCreateWithoutReadingInput, Prisma.OcrJobUncheckedCreateWithoutReadingInput>
+  connectOrCreate?: Prisma.OcrJobCreateOrConnectWithoutReadingInput
+  connect?: Prisma.OcrJobWhereUniqueInput
+}
+
+export type OcrJobUpdateOneWithoutReadingNestedInput = {
+  create?: Prisma.XOR<Prisma.OcrJobCreateWithoutReadingInput, Prisma.OcrJobUncheckedCreateWithoutReadingInput>
+  connectOrCreate?: Prisma.OcrJobCreateOrConnectWithoutReadingInput
+  upsert?: Prisma.OcrJobUpsertWithoutReadingInput
+  disconnect?: Prisma.OcrJobWhereInput | boolean
+  delete?: Prisma.OcrJobWhereInput | boolean
+  connect?: Prisma.OcrJobWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OcrJobUpdateToOneWithWhereWithoutReadingInput, Prisma.OcrJobUpdateWithoutReadingInput>, Prisma.OcrJobUncheckedUpdateWithoutReadingInput>
+}
+
 export type EnumOcrJobStatusFieldUpdateOperationsInput = {
   set?: $Enums.OcrJobStatus
 }
 
 export type OcrJobCreateWithoutUploadedByUserInput = {
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -754,6 +835,7 @@ export type OcrJobCreateWithoutUploadedByUserInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutOcrJobsInput
   room: Prisma.RoomCreateNestedOneWithoutOcrJobsInput
   meter: Prisma.UtilityMeterCreateNestedOneWithoutOcrJobsInput
+  reading?: Prisma.MeterReadingCreateNestedOneWithoutOcrJobInput
 }
 
 export type OcrJobUncheckedCreateWithoutUploadedByUserInput = {
@@ -762,6 +844,8 @@ export type OcrJobUncheckedCreateWithoutUploadedByUserInput = {
   roomId: number
   meterId: number
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -769,6 +853,7 @@ export type OcrJobUncheckedCreateWithoutUploadedByUserInput = {
   errorMessage?: string | null
   createdAt?: Date | string
   processedAt?: Date | string | null
+  reading?: Prisma.MeterReadingUncheckedCreateNestedOneWithoutOcrJobInput
 }
 
 export type OcrJobCreateOrConnectWithoutUploadedByUserInput = {
@@ -807,6 +892,8 @@ export type OcrJobScalarWhereInput = {
   meterId?: Prisma.IntFilter<"OcrJob"> | number
   uploadedBy?: Prisma.IntFilter<"OcrJob"> | number
   imageUrl?: Prisma.StringFilter<"OcrJob"> | string
+  imagePublicId?: Prisma.StringNullableFilter<"OcrJob"> | string | null
+  fileHash?: Prisma.StringNullableFilter<"OcrJob"> | string | null
   recognizedValue?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.DecimalNullableFilter<"OcrJob"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.JsonNullableFilter<"OcrJob">
@@ -818,6 +905,8 @@ export type OcrJobScalarWhereInput = {
 
 export type OcrJobCreateWithoutTenantInput = {
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -828,6 +917,7 @@ export type OcrJobCreateWithoutTenantInput = {
   room: Prisma.RoomCreateNestedOneWithoutOcrJobsInput
   meter: Prisma.UtilityMeterCreateNestedOneWithoutOcrJobsInput
   uploadedByUser: Prisma.UserCreateNestedOneWithoutUploadedOcrJobsInput
+  reading?: Prisma.MeterReadingCreateNestedOneWithoutOcrJobInput
 }
 
 export type OcrJobUncheckedCreateWithoutTenantInput = {
@@ -836,6 +926,8 @@ export type OcrJobUncheckedCreateWithoutTenantInput = {
   meterId: number
   uploadedBy: number
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -843,6 +935,7 @@ export type OcrJobUncheckedCreateWithoutTenantInput = {
   errorMessage?: string | null
   createdAt?: Date | string
   processedAt?: Date | string | null
+  reading?: Prisma.MeterReadingUncheckedCreateNestedOneWithoutOcrJobInput
 }
 
 export type OcrJobCreateOrConnectWithoutTenantInput = {
@@ -873,6 +966,8 @@ export type OcrJobUpdateManyWithWhereWithoutTenantInput = {
 
 export type OcrJobCreateWithoutRoomInput = {
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -883,6 +978,7 @@ export type OcrJobCreateWithoutRoomInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutOcrJobsInput
   meter: Prisma.UtilityMeterCreateNestedOneWithoutOcrJobsInput
   uploadedByUser: Prisma.UserCreateNestedOneWithoutUploadedOcrJobsInput
+  reading?: Prisma.MeterReadingCreateNestedOneWithoutOcrJobInput
 }
 
 export type OcrJobUncheckedCreateWithoutRoomInput = {
@@ -891,6 +987,8 @@ export type OcrJobUncheckedCreateWithoutRoomInput = {
   meterId: number
   uploadedBy: number
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -898,6 +996,7 @@ export type OcrJobUncheckedCreateWithoutRoomInput = {
   errorMessage?: string | null
   createdAt?: Date | string
   processedAt?: Date | string | null
+  reading?: Prisma.MeterReadingUncheckedCreateNestedOneWithoutOcrJobInput
 }
 
 export type OcrJobCreateOrConnectWithoutRoomInput = {
@@ -928,6 +1027,8 @@ export type OcrJobUpdateManyWithWhereWithoutRoomInput = {
 
 export type OcrJobCreateWithoutMeterInput = {
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -938,6 +1039,7 @@ export type OcrJobCreateWithoutMeterInput = {
   tenant: Prisma.TenantCreateNestedOneWithoutOcrJobsInput
   room: Prisma.RoomCreateNestedOneWithoutOcrJobsInput
   uploadedByUser: Prisma.UserCreateNestedOneWithoutUploadedOcrJobsInput
+  reading?: Prisma.MeterReadingCreateNestedOneWithoutOcrJobInput
 }
 
 export type OcrJobUncheckedCreateWithoutMeterInput = {
@@ -946,6 +1048,8 @@ export type OcrJobUncheckedCreateWithoutMeterInput = {
   roomId: number
   uploadedBy: number
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -953,6 +1057,7 @@ export type OcrJobUncheckedCreateWithoutMeterInput = {
   errorMessage?: string | null
   createdAt?: Date | string
   processedAt?: Date | string | null
+  reading?: Prisma.MeterReadingUncheckedCreateNestedOneWithoutOcrJobInput
 }
 
 export type OcrJobCreateOrConnectWithoutMeterInput = {
@@ -981,12 +1086,100 @@ export type OcrJobUpdateManyWithWhereWithoutMeterInput = {
   data: Prisma.XOR<Prisma.OcrJobUpdateManyMutationInput, Prisma.OcrJobUncheckedUpdateManyWithoutMeterInput>
 }
 
+export type OcrJobCreateWithoutReadingInput = {
+  imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
+  recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.OcrJobStatus
+  errorMessage?: string | null
+  createdAt?: Date | string
+  processedAt?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutOcrJobsInput
+  room: Prisma.RoomCreateNestedOneWithoutOcrJobsInput
+  meter: Prisma.UtilityMeterCreateNestedOneWithoutOcrJobsInput
+  uploadedByUser: Prisma.UserCreateNestedOneWithoutUploadedOcrJobsInput
+}
+
+export type OcrJobUncheckedCreateWithoutReadingInput = {
+  id?: number
+  tenantId: number
+  roomId: number
+  meterId: number
+  uploadedBy: number
+  imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
+  recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.OcrJobStatus
+  errorMessage?: string | null
+  createdAt?: Date | string
+  processedAt?: Date | string | null
+}
+
+export type OcrJobCreateOrConnectWithoutReadingInput = {
+  where: Prisma.OcrJobWhereUniqueInput
+  create: Prisma.XOR<Prisma.OcrJobCreateWithoutReadingInput, Prisma.OcrJobUncheckedCreateWithoutReadingInput>
+}
+
+export type OcrJobUpsertWithoutReadingInput = {
+  update: Prisma.XOR<Prisma.OcrJobUpdateWithoutReadingInput, Prisma.OcrJobUncheckedUpdateWithoutReadingInput>
+  create: Prisma.XOR<Prisma.OcrJobCreateWithoutReadingInput, Prisma.OcrJobUncheckedCreateWithoutReadingInput>
+  where?: Prisma.OcrJobWhereInput
+}
+
+export type OcrJobUpdateToOneWithWhereWithoutReadingInput = {
+  where?: Prisma.OcrJobWhereInput
+  data: Prisma.XOR<Prisma.OcrJobUpdateWithoutReadingInput, Prisma.OcrJobUncheckedUpdateWithoutReadingInput>
+}
+
+export type OcrJobUpdateWithoutReadingInput = {
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumOcrJobStatusFieldUpdateOperationsInput | $Enums.OcrJobStatus
+  errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutOcrJobsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutOcrJobsNestedInput
+  meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutOcrJobsNestedInput
+  uploadedByUser?: Prisma.UserUpdateOneRequiredWithoutUploadedOcrJobsNestedInput
+}
+
+export type OcrJobUncheckedUpdateWithoutReadingInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  meterId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
+  imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.EnumOcrJobStatusFieldUpdateOperationsInput | $Enums.OcrJobStatus
+  errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
 export type OcrJobCreateManyUploadedByUserInput = {
   id?: number
   tenantId: number
   roomId: number
   meterId: number
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -998,6 +1191,8 @@ export type OcrJobCreateManyUploadedByUserInput = {
 
 export type OcrJobUpdateWithoutUploadedByUserInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1008,6 +1203,7 @@ export type OcrJobUpdateWithoutUploadedByUserInput = {
   tenant?: Prisma.TenantUpdateOneRequiredWithoutOcrJobsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutOcrJobsNestedInput
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutOcrJobsNestedInput
+  reading?: Prisma.MeterReadingUpdateOneWithoutOcrJobNestedInput
 }
 
 export type OcrJobUncheckedUpdateWithoutUploadedByUserInput = {
@@ -1016,6 +1212,8 @@ export type OcrJobUncheckedUpdateWithoutUploadedByUserInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   meterId?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1023,6 +1221,7 @@ export type OcrJobUncheckedUpdateWithoutUploadedByUserInput = {
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reading?: Prisma.MeterReadingUncheckedUpdateOneWithoutOcrJobNestedInput
 }
 
 export type OcrJobUncheckedUpdateManyWithoutUploadedByUserInput = {
@@ -1031,6 +1230,8 @@ export type OcrJobUncheckedUpdateManyWithoutUploadedByUserInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   meterId?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1046,6 +1247,8 @@ export type OcrJobCreateManyTenantInput = {
   meterId: number
   uploadedBy: number
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1057,6 +1260,8 @@ export type OcrJobCreateManyTenantInput = {
 
 export type OcrJobUpdateWithoutTenantInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1067,6 +1272,7 @@ export type OcrJobUpdateWithoutTenantInput = {
   room?: Prisma.RoomUpdateOneRequiredWithoutOcrJobsNestedInput
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutOcrJobsNestedInput
   uploadedByUser?: Prisma.UserUpdateOneRequiredWithoutUploadedOcrJobsNestedInput
+  reading?: Prisma.MeterReadingUpdateOneWithoutOcrJobNestedInput
 }
 
 export type OcrJobUncheckedUpdateWithoutTenantInput = {
@@ -1075,6 +1281,8 @@ export type OcrJobUncheckedUpdateWithoutTenantInput = {
   meterId?: Prisma.IntFieldUpdateOperationsInput | number
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1082,6 +1290,7 @@ export type OcrJobUncheckedUpdateWithoutTenantInput = {
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reading?: Prisma.MeterReadingUncheckedUpdateOneWithoutOcrJobNestedInput
 }
 
 export type OcrJobUncheckedUpdateManyWithoutTenantInput = {
@@ -1090,6 +1299,8 @@ export type OcrJobUncheckedUpdateManyWithoutTenantInput = {
   meterId?: Prisma.IntFieldUpdateOperationsInput | number
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1105,6 +1316,8 @@ export type OcrJobCreateManyRoomInput = {
   meterId: number
   uploadedBy: number
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1116,6 +1329,8 @@ export type OcrJobCreateManyRoomInput = {
 
 export type OcrJobUpdateWithoutRoomInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1126,6 +1341,7 @@ export type OcrJobUpdateWithoutRoomInput = {
   tenant?: Prisma.TenantUpdateOneRequiredWithoutOcrJobsNestedInput
   meter?: Prisma.UtilityMeterUpdateOneRequiredWithoutOcrJobsNestedInput
   uploadedByUser?: Prisma.UserUpdateOneRequiredWithoutUploadedOcrJobsNestedInput
+  reading?: Prisma.MeterReadingUpdateOneWithoutOcrJobNestedInput
 }
 
 export type OcrJobUncheckedUpdateWithoutRoomInput = {
@@ -1134,6 +1350,8 @@ export type OcrJobUncheckedUpdateWithoutRoomInput = {
   meterId?: Prisma.IntFieldUpdateOperationsInput | number
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1141,6 +1359,7 @@ export type OcrJobUncheckedUpdateWithoutRoomInput = {
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reading?: Prisma.MeterReadingUncheckedUpdateOneWithoutOcrJobNestedInput
 }
 
 export type OcrJobUncheckedUpdateManyWithoutRoomInput = {
@@ -1149,6 +1368,8 @@ export type OcrJobUncheckedUpdateManyWithoutRoomInput = {
   meterId?: Prisma.IntFieldUpdateOperationsInput | number
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1164,6 +1385,8 @@ export type OcrJobCreateManyMeterInput = {
   roomId: number
   uploadedBy: number
   imageUrl: string
+  imagePublicId?: string | null
+  fileHash?: string | null
   recognizedValue?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1175,6 +1398,8 @@ export type OcrJobCreateManyMeterInput = {
 
 export type OcrJobUpdateWithoutMeterInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1185,6 +1410,7 @@ export type OcrJobUpdateWithoutMeterInput = {
   tenant?: Prisma.TenantUpdateOneRequiredWithoutOcrJobsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutOcrJobsNestedInput
   uploadedByUser?: Prisma.UserUpdateOneRequiredWithoutUploadedOcrJobsNestedInput
+  reading?: Prisma.MeterReadingUpdateOneWithoutOcrJobNestedInput
 }
 
 export type OcrJobUncheckedUpdateWithoutMeterInput = {
@@ -1193,6 +1419,8 @@ export type OcrJobUncheckedUpdateWithoutMeterInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1200,6 +1428,7 @@ export type OcrJobUncheckedUpdateWithoutMeterInput = {
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reading?: Prisma.MeterReadingUncheckedUpdateOneWithoutOcrJobNestedInput
 }
 
 export type OcrJobUncheckedUpdateManyWithoutMeterInput = {
@@ -1208,6 +1437,8 @@ export type OcrJobUncheckedUpdateManyWithoutMeterInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  imagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   recognizedValue?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   confidence?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   rawResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -1226,6 +1457,8 @@ export type OcrJobSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   meterId?: boolean
   uploadedBy?: boolean
   imageUrl?: boolean
+  imagePublicId?: boolean
+  fileHash?: boolean
   recognizedValue?: boolean
   confidence?: boolean
   rawResult?: boolean
@@ -1237,6 +1470,7 @@ export type OcrJobSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   meter?: boolean | Prisma.UtilityMeterDefaultArgs<ExtArgs>
   uploadedByUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  reading?: boolean | Prisma.OcrJob$readingArgs<ExtArgs>
 }, ExtArgs["result"]["ocrJob"]>
 
 export type OcrJobSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1246,6 +1480,8 @@ export type OcrJobSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   meterId?: boolean
   uploadedBy?: boolean
   imageUrl?: boolean
+  imagePublicId?: boolean
+  fileHash?: boolean
   recognizedValue?: boolean
   confidence?: boolean
   rawResult?: boolean
@@ -1266,6 +1502,8 @@ export type OcrJobSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   meterId?: boolean
   uploadedBy?: boolean
   imageUrl?: boolean
+  imagePublicId?: boolean
+  fileHash?: boolean
   recognizedValue?: boolean
   confidence?: boolean
   rawResult?: boolean
@@ -1286,6 +1524,8 @@ export type OcrJobSelectScalar = {
   meterId?: boolean
   uploadedBy?: boolean
   imageUrl?: boolean
+  imagePublicId?: boolean
+  fileHash?: boolean
   recognizedValue?: boolean
   confidence?: boolean
   rawResult?: boolean
@@ -1295,12 +1535,13 @@ export type OcrJobSelectScalar = {
   processedAt?: boolean
 }
 
-export type OcrJobOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "meterId" | "uploadedBy" | "imageUrl" | "recognizedValue" | "confidence" | "rawResult" | "status" | "errorMessage" | "createdAt" | "processedAt", ExtArgs["result"]["ocrJob"]>
+export type OcrJobOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "meterId" | "uploadedBy" | "imageUrl" | "imagePublicId" | "fileHash" | "recognizedValue" | "confidence" | "rawResult" | "status" | "errorMessage" | "createdAt" | "processedAt", ExtArgs["result"]["ocrJob"]>
 export type OcrJobInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   meter?: boolean | Prisma.UtilityMeterDefaultArgs<ExtArgs>
   uploadedByUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  reading?: boolean | Prisma.OcrJob$readingArgs<ExtArgs>
 }
 export type OcrJobIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
@@ -1334,6 +1575,10 @@ export type $OcrJobPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
      * Người dùng tải ảnh lên (chặn xóa người dùng này nếu có job OCR)
      */
     uploadedByUser: Prisma.$UserPayload<ExtArgs>
+    /**
+     * Chỉ số điện nước được tạo sau khi người dùng duyệt kết quả
+     */
+    reading: Prisma.$MeterReadingPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
@@ -1360,6 +1605,14 @@ export type $OcrJobPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
      * Đường dẫn hình ảnh đầu vào tải lên để OCR nhận diện
      */
     imageUrl: string
+    /**
+     * Public ID của ảnh trên Cloudinary để quản lý vòng đời asset
+     */
+    imagePublicId: string | null
+    /**
+     * SHA-256 nội dung ảnh để chống tạo tác vụ trùng
+     */
+    fileHash: string | null
     /**
      * Giá trị số chỉ số đồng hồ mà AI nhận diện được (null nếu xử lý thất bại)
      */
@@ -1786,6 +2039,7 @@ export interface Prisma__OcrJobClient<T, Null = never, ExtArgs extends runtime.T
   room<T extends Prisma.RoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomDefaultArgs<ExtArgs>>): Prisma.Prisma__RoomClient<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   meter<T extends Prisma.UtilityMeterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilityMeterDefaultArgs<ExtArgs>>): Prisma.Prisma__UtilityMeterClient<runtime.Types.Result.GetResult<Prisma.$UtilityMeterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   uploadedByUser<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  reading<T extends Prisma.OcrJob$readingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OcrJob$readingArgs<ExtArgs>>): Prisma.Prisma__MeterReadingClient<runtime.Types.Result.GetResult<Prisma.$MeterReadingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1821,6 +2075,8 @@ export interface OcrJobFieldRefs {
   readonly meterId: Prisma.FieldRef<"OcrJob", 'Int'>
   readonly uploadedBy: Prisma.FieldRef<"OcrJob", 'Int'>
   readonly imageUrl: Prisma.FieldRef<"OcrJob", 'String'>
+  readonly imagePublicId: Prisma.FieldRef<"OcrJob", 'String'>
+  readonly fileHash: Prisma.FieldRef<"OcrJob", 'String'>
   readonly recognizedValue: Prisma.FieldRef<"OcrJob", 'Decimal'>
   readonly confidence: Prisma.FieldRef<"OcrJob", 'Decimal'>
   readonly rawResult: Prisma.FieldRef<"OcrJob", 'Json'>
@@ -2226,6 +2482,25 @@ export type OcrJobDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Limit how many OcrJobs to delete.
    */
   limit?: number
+}
+
+/**
+ * OcrJob.reading
+ */
+export type OcrJob$readingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MeterReading
+   */
+  select?: Prisma.MeterReadingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MeterReading
+   */
+  omit?: Prisma.MeterReadingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MeterReadingInclude<ExtArgs> | null
+  where?: Prisma.MeterReadingWhereInput
 }
 
 /**

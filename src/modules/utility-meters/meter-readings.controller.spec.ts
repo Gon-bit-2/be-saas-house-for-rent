@@ -2,7 +2,8 @@ import roleName from '@src/common/constants/role.constant'
 import { ROLES_KEY } from '@src/common/decorators/decorators/roles.decorator'
 
 jest.mock('./meter-readings.service', () => ({ MeterReadingsService: class MeterReadingsService {} }))
-const { MeterReadingsController } = require('./meter-readings.controller') as typeof import('./meter-readings.controller')
+const { MeterReadingsController } =
+  require('./meter-readings.controller') as typeof import('./meter-readings.controller')
 
 describe('MeterReadingsController', () => {
   let controller: import('./meter-readings.controller').MeterReadingsController
@@ -29,7 +30,12 @@ describe('MeterReadingsController', () => {
   })
 
   it('delegates reading operations with active user id', async () => {
-    const body = { meterId: 1, billingMonth: new Date('2026-07-01T00:00:00.000Z'), currentValue: 130, status: 'DRAFT' as const }
+    const body = {
+      meterId: 1,
+      billingMonth: new Date('2026-07-01T00:00:00.000Z'),
+      currentValue: 130,
+      status: 'DRAFT' as const,
+    }
 
     await controller.list(user, { page: 1, limit: 20, status: 'DRAFT' })
     await controller.getById(user, 1)

@@ -2,7 +2,11 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import roleName from '@src/common/constants/role.constant'
 import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
 import type { Prisma } from 'generated/prisma/client'
-import type { TCreateAmenityBodySchema, TListAmenitiesQuerySchema, TUpdateAmenityBodySchema } from './model/amenities.model'
+import type {
+  TCreateAmenityBodySchema,
+  TListAmenitiesQuerySchema,
+  TUpdateAmenityBodySchema,
+} from './model/amenities.model'
 import { AmenitiesRepository } from './repositories/amenities.repo'
 
 /**

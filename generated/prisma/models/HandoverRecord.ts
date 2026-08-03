@@ -31,6 +31,11 @@ export type HandoverRecordAvgAggregateOutputType = {
   tenantId: number | null
   contractId: number | null
   roomId: number | null
+  signedByLandlordId: number | null
+  signedByRenterId: number | null
+  version: number | null
+  disputedById: number | null
+  resolvedById: number | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -41,6 +46,11 @@ export type HandoverRecordSumAggregateOutputType = {
   tenantId: number | null
   contractId: number | null
   roomId: number | null
+  signedByLandlordId: number | null
+  signedByRenterId: number | null
+  version: number | null
+  disputedById: number | null
+  resolvedById: number | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -55,8 +65,20 @@ export type HandoverRecordMinAggregateOutputType = {
   note: string | null
   signedByLandlordAt: Date | null
   signedByRenterAt: Date | null
+  signedByLandlordId: number | null
+  signedByRenterId: number | null
   status: $Enums.HandoverStatus | null
+  version: number | null
+  contentHash: string | null
+  confirmedAt: Date | null
+  disputedById: number | null
+  disputeReason: string | null
+  disputedAt: Date | null
+  resolvedById: number | null
+  resolutionNote: string | null
+  resolvedAt: Date | null
   createdAt: Date | null
+  updatedAt: Date | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -71,8 +93,20 @@ export type HandoverRecordMaxAggregateOutputType = {
   note: string | null
   signedByLandlordAt: Date | null
   signedByRenterAt: Date | null
+  signedByLandlordId: number | null
+  signedByRenterId: number | null
   status: $Enums.HandoverStatus | null
+  version: number | null
+  contentHash: string | null
+  confirmedAt: Date | null
+  disputedById: number | null
+  disputeReason: string | null
+  disputedAt: Date | null
+  resolvedById: number | null
+  resolutionNote: string | null
+  resolvedAt: Date | null
   createdAt: Date | null
+  updatedAt: Date | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -87,8 +121,20 @@ export type HandoverRecordCountAggregateOutputType = {
   note: number
   signedByLandlordAt: number
   signedByRenterAt: number
+  signedByLandlordId: number
+  signedByRenterId: number
   status: number
+  version: number
+  contentHash: number
+  confirmedAt: number
+  disputedById: number
+  disputeReason: number
+  disputedAt: number
+  resolvedById: number
+  resolutionNote: number
+  resolvedAt: number
   createdAt: number
+  updatedAt: number
   createdById: number
   updatedById: number
   deletedById: number
@@ -101,6 +147,11 @@ export type HandoverRecordAvgAggregateInputType = {
   tenantId?: true
   contractId?: true
   roomId?: true
+  signedByLandlordId?: true
+  signedByRenterId?: true
+  version?: true
+  disputedById?: true
+  resolvedById?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -111,6 +162,11 @@ export type HandoverRecordSumAggregateInputType = {
   tenantId?: true
   contractId?: true
   roomId?: true
+  signedByLandlordId?: true
+  signedByRenterId?: true
+  version?: true
+  disputedById?: true
+  resolvedById?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -125,8 +181,20 @@ export type HandoverRecordMinAggregateInputType = {
   note?: true
   signedByLandlordAt?: true
   signedByRenterAt?: true
+  signedByLandlordId?: true
+  signedByRenterId?: true
   status?: true
+  version?: true
+  contentHash?: true
+  confirmedAt?: true
+  disputedById?: true
+  disputeReason?: true
+  disputedAt?: true
+  resolvedById?: true
+  resolutionNote?: true
+  resolvedAt?: true
   createdAt?: true
+  updatedAt?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -141,8 +209,20 @@ export type HandoverRecordMaxAggregateInputType = {
   note?: true
   signedByLandlordAt?: true
   signedByRenterAt?: true
+  signedByLandlordId?: true
+  signedByRenterId?: true
   status?: true
+  version?: true
+  contentHash?: true
+  confirmedAt?: true
+  disputedById?: true
+  disputeReason?: true
+  disputedAt?: true
+  resolvedById?: true
+  resolutionNote?: true
+  resolvedAt?: true
   createdAt?: true
+  updatedAt?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -157,8 +237,20 @@ export type HandoverRecordCountAggregateInputType = {
   note?: true
   signedByLandlordAt?: true
   signedByRenterAt?: true
+  signedByLandlordId?: true
+  signedByRenterId?: true
   status?: true
+  version?: true
+  contentHash?: true
+  confirmedAt?: true
+  disputedById?: true
+  disputeReason?: true
+  disputedAt?: true
+  resolvedById?: true
+  resolutionNote?: true
+  resolvedAt?: true
   createdAt?: true
+  updatedAt?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -260,8 +352,20 @@ export type HandoverRecordGroupByOutputType = {
   note: string | null
   signedByLandlordAt: Date | null
   signedByRenterAt: Date | null
+  signedByLandlordId: number | null
+  signedByRenterId: number | null
   status: $Enums.HandoverStatus
+  version: number
+  contentHash: string
+  confirmedAt: Date | null
+  disputedById: number | null
+  disputeReason: string | null
+  disputedAt: Date | null
+  resolvedById: number | null
+  resolutionNote: string | null
+  resolvedAt: Date | null
   createdAt: Date
+  updatedAt: Date
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -299,8 +403,20 @@ export type HandoverRecordWhereInput = {
   note?: Prisma.StringNullableFilter<"HandoverRecord"> | string | null
   signedByLandlordAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
   signedByRenterAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
+  signedByLandlordId?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
+  signedByRenterId?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
   status?: Prisma.EnumHandoverStatusFilter<"HandoverRecord"> | $Enums.HandoverStatus
+  version?: Prisma.IntFilter<"HandoverRecord"> | number
+  contentHash?: Prisma.StringFilter<"HandoverRecord"> | string
+  confirmedAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
+  disputedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
+  disputeReason?: Prisma.StringNullableFilter<"HandoverRecord"> | string | null
+  disputedAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
+  resolvedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
+  resolutionNote?: Prisma.StringNullableFilter<"HandoverRecord"> | string | null
+  resolvedAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"HandoverRecord"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"HandoverRecord"> | Date | string
   createdById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
   updatedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
   deletedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
@@ -308,6 +424,10 @@ export type HandoverRecordWhereInput = {
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   assetItems?: Prisma.HandoverAssetItemListRelationFilter
+  signedByLandlord?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  signedByRenter?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  disputedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  resolvedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -322,8 +442,20 @@ export type HandoverRecordOrderByWithRelationInput = {
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   signedByLandlordAt?: Prisma.SortOrderInput | Prisma.SortOrder
   signedByRenterAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  signedByLandlordId?: Prisma.SortOrderInput | Prisma.SortOrder
+  signedByRenterId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
+  confirmedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  disputedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  disputeReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  disputedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  resolvedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  resolutionNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  resolvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -331,6 +463,10 @@ export type HandoverRecordOrderByWithRelationInput = {
   contract?: Prisma.ContractOrderByWithRelationInput
   room?: Prisma.RoomOrderByWithRelationInput
   assetItems?: Prisma.HandoverAssetItemOrderByRelationAggregateInput
+  signedByLandlord?: Prisma.UserOrderByWithRelationInput
+  signedByRenter?: Prisma.UserOrderByWithRelationInput
+  disputedBy?: Prisma.UserOrderByWithRelationInput
+  resolvedBy?: Prisma.UserOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
   deletedBy?: Prisma.UserOrderByWithRelationInput
@@ -338,6 +474,7 @@ export type HandoverRecordOrderByWithRelationInput = {
 
 export type HandoverRecordWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  contractId_type?: Prisma.HandoverRecordContractIdTypeCompoundUniqueInput
   AND?: Prisma.HandoverRecordWhereInput | Prisma.HandoverRecordWhereInput[]
   OR?: Prisma.HandoverRecordWhereInput[]
   NOT?: Prisma.HandoverRecordWhereInput | Prisma.HandoverRecordWhereInput[]
@@ -348,8 +485,20 @@ export type HandoverRecordWhereUniqueInput = Prisma.AtLeast<{
   note?: Prisma.StringNullableFilter<"HandoverRecord"> | string | null
   signedByLandlordAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
   signedByRenterAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
+  signedByLandlordId?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
+  signedByRenterId?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
   status?: Prisma.EnumHandoverStatusFilter<"HandoverRecord"> | $Enums.HandoverStatus
+  version?: Prisma.IntFilter<"HandoverRecord"> | number
+  contentHash?: Prisma.StringFilter<"HandoverRecord"> | string
+  confirmedAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
+  disputedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
+  disputeReason?: Prisma.StringNullableFilter<"HandoverRecord"> | string | null
+  disputedAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
+  resolvedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
+  resolutionNote?: Prisma.StringNullableFilter<"HandoverRecord"> | string | null
+  resolvedAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"HandoverRecord"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"HandoverRecord"> | Date | string
   createdById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
   updatedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
   deletedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
@@ -357,10 +506,14 @@ export type HandoverRecordWhereUniqueInput = Prisma.AtLeast<{
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   assetItems?: Prisma.HandoverAssetItemListRelationFilter
+  signedByLandlord?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  signedByRenter?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  disputedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  resolvedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-}, "id">
+}, "id" | "contractId_type">
 
 export type HandoverRecordOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -371,8 +524,20 @@ export type HandoverRecordOrderByWithAggregationInput = {
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   signedByLandlordAt?: Prisma.SortOrderInput | Prisma.SortOrder
   signedByRenterAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  signedByLandlordId?: Prisma.SortOrderInput | Prisma.SortOrder
+  signedByRenterId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
+  confirmedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  disputedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  disputeReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  disputedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  resolvedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  resolutionNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  resolvedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -395,8 +560,20 @@ export type HandoverRecordScalarWhereWithAggregatesInput = {
   note?: Prisma.StringNullableWithAggregatesFilter<"HandoverRecord"> | string | null
   signedByLandlordAt?: Prisma.DateTimeNullableWithAggregatesFilter<"HandoverRecord"> | Date | string | null
   signedByRenterAt?: Prisma.DateTimeNullableWithAggregatesFilter<"HandoverRecord"> | Date | string | null
+  signedByLandlordId?: Prisma.IntNullableWithAggregatesFilter<"HandoverRecord"> | number | null
+  signedByRenterId?: Prisma.IntNullableWithAggregatesFilter<"HandoverRecord"> | number | null
   status?: Prisma.EnumHandoverStatusWithAggregatesFilter<"HandoverRecord"> | $Enums.HandoverStatus
+  version?: Prisma.IntWithAggregatesFilter<"HandoverRecord"> | number
+  contentHash?: Prisma.StringWithAggregatesFilter<"HandoverRecord"> | string
+  confirmedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"HandoverRecord"> | Date | string | null
+  disputedById?: Prisma.IntNullableWithAggregatesFilter<"HandoverRecord"> | number | null
+  disputeReason?: Prisma.StringNullableWithAggregatesFilter<"HandoverRecord"> | string | null
+  disputedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"HandoverRecord"> | Date | string | null
+  resolvedById?: Prisma.IntNullableWithAggregatesFilter<"HandoverRecord"> | number | null
+  resolutionNote?: Prisma.StringNullableWithAggregatesFilter<"HandoverRecord"> | string | null
+  resolvedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"HandoverRecord"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"HandoverRecord"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"HandoverRecord"> | Date | string
   createdById?: Prisma.IntNullableWithAggregatesFilter<"HandoverRecord"> | number | null
   updatedById?: Prisma.IntNullableWithAggregatesFilter<"HandoverRecord"> | number | null
   deletedById?: Prisma.IntNullableWithAggregatesFilter<"HandoverRecord"> | number | null
@@ -408,11 +585,23 @@ export type HandoverRecordCreateInput = {
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutHandoverRecordsInput
   contract: Prisma.ContractCreateNestedOneWithoutHandoverRecordsInput
   room: Prisma.RoomCreateNestedOneWithoutHandoverRecordsInput
   assetItems?: Prisma.HandoverAssetItemCreateNestedManyWithoutHandoverRecordInput
+  signedByLandlord?: Prisma.UserCreateNestedOneWithoutSignedLandlordHandoversInput
+  signedByRenter?: Prisma.UserCreateNestedOneWithoutSignedRenterHandoversInput
+  disputedBy?: Prisma.UserCreateNestedOneWithoutDisputedHandoversInput
+  resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedHandoversInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHandoverRecordsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHandoverRecordsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedHandoverRecordsInput
@@ -427,8 +616,20 @@ export type HandoverRecordUncheckedCreateInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -441,11 +642,23 @@ export type HandoverRecordUpdateInput = {
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutHandoverRecordsNestedInput
   contract?: Prisma.ContractUpdateOneRequiredWithoutHandoverRecordsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutHandoverRecordsNestedInput
   assetItems?: Prisma.HandoverAssetItemUpdateManyWithoutHandoverRecordNestedInput
+  signedByLandlord?: Prisma.UserUpdateOneWithoutSignedLandlordHandoversNestedInput
+  signedByRenter?: Prisma.UserUpdateOneWithoutSignedRenterHandoversNestedInput
+  disputedBy?: Prisma.UserUpdateOneWithoutDisputedHandoversNestedInput
+  resolvedBy?: Prisma.UserUpdateOneWithoutResolvedHandoversNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedHandoverRecordsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHandoverRecordsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedHandoverRecordsNestedInput
@@ -460,8 +673,20 @@ export type HandoverRecordUncheckedUpdateInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -477,8 +702,20 @@ export type HandoverRecordCreateManyInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -490,7 +727,15 @@ export type HandoverRecordUpdateManyMutationInput = {
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type HandoverRecordUncheckedUpdateManyInput = {
@@ -502,8 +747,20 @@ export type HandoverRecordUncheckedUpdateManyInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -519,6 +776,11 @@ export type HandoverRecordOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type HandoverRecordContractIdTypeCompoundUniqueInput = {
+  contractId: number
+  type: $Enums.HandoverType
+}
+
 export type HandoverRecordCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -528,8 +790,20 @@ export type HandoverRecordCountOrderByAggregateInput = {
   note?: Prisma.SortOrder
   signedByLandlordAt?: Prisma.SortOrder
   signedByRenterAt?: Prisma.SortOrder
+  signedByLandlordId?: Prisma.SortOrder
+  signedByRenterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
+  confirmedAt?: Prisma.SortOrder
+  disputedById?: Prisma.SortOrder
+  disputeReason?: Prisma.SortOrder
+  disputedAt?: Prisma.SortOrder
+  resolvedById?: Prisma.SortOrder
+  resolutionNote?: Prisma.SortOrder
+  resolvedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -540,6 +814,11 @@ export type HandoverRecordAvgOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
+  signedByLandlordId?: Prisma.SortOrder
+  signedByRenterId?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  disputedById?: Prisma.SortOrder
+  resolvedById?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -554,8 +833,20 @@ export type HandoverRecordMaxOrderByAggregateInput = {
   note?: Prisma.SortOrder
   signedByLandlordAt?: Prisma.SortOrder
   signedByRenterAt?: Prisma.SortOrder
+  signedByLandlordId?: Prisma.SortOrder
+  signedByRenterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
+  confirmedAt?: Prisma.SortOrder
+  disputedById?: Prisma.SortOrder
+  disputeReason?: Prisma.SortOrder
+  disputedAt?: Prisma.SortOrder
+  resolvedById?: Prisma.SortOrder
+  resolutionNote?: Prisma.SortOrder
+  resolvedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -570,8 +861,20 @@ export type HandoverRecordMinOrderByAggregateInput = {
   note?: Prisma.SortOrder
   signedByLandlordAt?: Prisma.SortOrder
   signedByRenterAt?: Prisma.SortOrder
+  signedByLandlordId?: Prisma.SortOrder
+  signedByRenterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
+  confirmedAt?: Prisma.SortOrder
+  disputedById?: Prisma.SortOrder
+  disputeReason?: Prisma.SortOrder
+  disputedAt?: Prisma.SortOrder
+  resolvedById?: Prisma.SortOrder
+  resolutionNote?: Prisma.SortOrder
+  resolvedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -582,6 +885,11 @@ export type HandoverRecordSumOrderByAggregateInput = {
   tenantId?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
+  signedByLandlordId?: Prisma.SortOrder
+  signedByRenterId?: Prisma.SortOrder
+  version?: Prisma.SortOrder
+  disputedById?: Prisma.SortOrder
+  resolvedById?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -613,6 +921,34 @@ export type HandoverRecordCreateNestedManyWithoutDeletedByInput = {
   connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
 }
 
+export type HandoverRecordCreateNestedManyWithoutSignedByLandlordInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByLandlordInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByLandlordInput> | Prisma.HandoverRecordCreateWithoutSignedByLandlordInput[] | Prisma.HandoverRecordUncheckedCreateWithoutSignedByLandlordInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutSignedByLandlordInput | Prisma.HandoverRecordCreateOrConnectWithoutSignedByLandlordInput[]
+  createMany?: Prisma.HandoverRecordCreateManySignedByLandlordInputEnvelope
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+}
+
+export type HandoverRecordCreateNestedManyWithoutSignedByRenterInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByRenterInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByRenterInput> | Prisma.HandoverRecordCreateWithoutSignedByRenterInput[] | Prisma.HandoverRecordUncheckedCreateWithoutSignedByRenterInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutSignedByRenterInput | Prisma.HandoverRecordCreateOrConnectWithoutSignedByRenterInput[]
+  createMany?: Prisma.HandoverRecordCreateManySignedByRenterInputEnvelope
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+}
+
+export type HandoverRecordCreateNestedManyWithoutDisputedByInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutDisputedByInput, Prisma.HandoverRecordUncheckedCreateWithoutDisputedByInput> | Prisma.HandoverRecordCreateWithoutDisputedByInput[] | Prisma.HandoverRecordUncheckedCreateWithoutDisputedByInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutDisputedByInput | Prisma.HandoverRecordCreateOrConnectWithoutDisputedByInput[]
+  createMany?: Prisma.HandoverRecordCreateManyDisputedByInputEnvelope
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+}
+
+export type HandoverRecordCreateNestedManyWithoutResolvedByInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutResolvedByInput, Prisma.HandoverRecordUncheckedCreateWithoutResolvedByInput> | Prisma.HandoverRecordCreateWithoutResolvedByInput[] | Prisma.HandoverRecordUncheckedCreateWithoutResolvedByInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutResolvedByInput | Prisma.HandoverRecordCreateOrConnectWithoutResolvedByInput[]
+  createMany?: Prisma.HandoverRecordCreateManyResolvedByInputEnvelope
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+}
+
 export type HandoverRecordUncheckedCreateNestedManyWithoutCreatedByInput = {
   create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutCreatedByInput, Prisma.HandoverRecordUncheckedCreateWithoutCreatedByInput> | Prisma.HandoverRecordCreateWithoutCreatedByInput[] | Prisma.HandoverRecordUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutCreatedByInput | Prisma.HandoverRecordCreateOrConnectWithoutCreatedByInput[]
@@ -631,6 +967,34 @@ export type HandoverRecordUncheckedCreateNestedManyWithoutDeletedByInput = {
   create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutDeletedByInput, Prisma.HandoverRecordUncheckedCreateWithoutDeletedByInput> | Prisma.HandoverRecordCreateWithoutDeletedByInput[] | Prisma.HandoverRecordUncheckedCreateWithoutDeletedByInput[]
   connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutDeletedByInput | Prisma.HandoverRecordCreateOrConnectWithoutDeletedByInput[]
   createMany?: Prisma.HandoverRecordCreateManyDeletedByInputEnvelope
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+}
+
+export type HandoverRecordUncheckedCreateNestedManyWithoutSignedByLandlordInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByLandlordInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByLandlordInput> | Prisma.HandoverRecordCreateWithoutSignedByLandlordInput[] | Prisma.HandoverRecordUncheckedCreateWithoutSignedByLandlordInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutSignedByLandlordInput | Prisma.HandoverRecordCreateOrConnectWithoutSignedByLandlordInput[]
+  createMany?: Prisma.HandoverRecordCreateManySignedByLandlordInputEnvelope
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+}
+
+export type HandoverRecordUncheckedCreateNestedManyWithoutSignedByRenterInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByRenterInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByRenterInput> | Prisma.HandoverRecordCreateWithoutSignedByRenterInput[] | Prisma.HandoverRecordUncheckedCreateWithoutSignedByRenterInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutSignedByRenterInput | Prisma.HandoverRecordCreateOrConnectWithoutSignedByRenterInput[]
+  createMany?: Prisma.HandoverRecordCreateManySignedByRenterInputEnvelope
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+}
+
+export type HandoverRecordUncheckedCreateNestedManyWithoutDisputedByInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutDisputedByInput, Prisma.HandoverRecordUncheckedCreateWithoutDisputedByInput> | Prisma.HandoverRecordCreateWithoutDisputedByInput[] | Prisma.HandoverRecordUncheckedCreateWithoutDisputedByInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutDisputedByInput | Prisma.HandoverRecordCreateOrConnectWithoutDisputedByInput[]
+  createMany?: Prisma.HandoverRecordCreateManyDisputedByInputEnvelope
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+}
+
+export type HandoverRecordUncheckedCreateNestedManyWithoutResolvedByInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutResolvedByInput, Prisma.HandoverRecordUncheckedCreateWithoutResolvedByInput> | Prisma.HandoverRecordCreateWithoutResolvedByInput[] | Prisma.HandoverRecordUncheckedCreateWithoutResolvedByInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutResolvedByInput | Prisma.HandoverRecordCreateOrConnectWithoutResolvedByInput[]
+  createMany?: Prisma.HandoverRecordCreateManyResolvedByInputEnvelope
   connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
 }
 
@@ -676,6 +1040,62 @@ export type HandoverRecordUpdateManyWithoutDeletedByNestedInput = {
   deleteMany?: Prisma.HandoverRecordScalarWhereInput | Prisma.HandoverRecordScalarWhereInput[]
 }
 
+export type HandoverRecordUpdateManyWithoutSignedByLandlordNestedInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByLandlordInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByLandlordInput> | Prisma.HandoverRecordCreateWithoutSignedByLandlordInput[] | Prisma.HandoverRecordUncheckedCreateWithoutSignedByLandlordInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutSignedByLandlordInput | Prisma.HandoverRecordCreateOrConnectWithoutSignedByLandlordInput[]
+  upsert?: Prisma.HandoverRecordUpsertWithWhereUniqueWithoutSignedByLandlordInput | Prisma.HandoverRecordUpsertWithWhereUniqueWithoutSignedByLandlordInput[]
+  createMany?: Prisma.HandoverRecordCreateManySignedByLandlordInputEnvelope
+  set?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  disconnect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  delete?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  update?: Prisma.HandoverRecordUpdateWithWhereUniqueWithoutSignedByLandlordInput | Prisma.HandoverRecordUpdateWithWhereUniqueWithoutSignedByLandlordInput[]
+  updateMany?: Prisma.HandoverRecordUpdateManyWithWhereWithoutSignedByLandlordInput | Prisma.HandoverRecordUpdateManyWithWhereWithoutSignedByLandlordInput[]
+  deleteMany?: Prisma.HandoverRecordScalarWhereInput | Prisma.HandoverRecordScalarWhereInput[]
+}
+
+export type HandoverRecordUpdateManyWithoutSignedByRenterNestedInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByRenterInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByRenterInput> | Prisma.HandoverRecordCreateWithoutSignedByRenterInput[] | Prisma.HandoverRecordUncheckedCreateWithoutSignedByRenterInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutSignedByRenterInput | Prisma.HandoverRecordCreateOrConnectWithoutSignedByRenterInput[]
+  upsert?: Prisma.HandoverRecordUpsertWithWhereUniqueWithoutSignedByRenterInput | Prisma.HandoverRecordUpsertWithWhereUniqueWithoutSignedByRenterInput[]
+  createMany?: Prisma.HandoverRecordCreateManySignedByRenterInputEnvelope
+  set?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  disconnect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  delete?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  update?: Prisma.HandoverRecordUpdateWithWhereUniqueWithoutSignedByRenterInput | Prisma.HandoverRecordUpdateWithWhereUniqueWithoutSignedByRenterInput[]
+  updateMany?: Prisma.HandoverRecordUpdateManyWithWhereWithoutSignedByRenterInput | Prisma.HandoverRecordUpdateManyWithWhereWithoutSignedByRenterInput[]
+  deleteMany?: Prisma.HandoverRecordScalarWhereInput | Prisma.HandoverRecordScalarWhereInput[]
+}
+
+export type HandoverRecordUpdateManyWithoutDisputedByNestedInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutDisputedByInput, Prisma.HandoverRecordUncheckedCreateWithoutDisputedByInput> | Prisma.HandoverRecordCreateWithoutDisputedByInput[] | Prisma.HandoverRecordUncheckedCreateWithoutDisputedByInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutDisputedByInput | Prisma.HandoverRecordCreateOrConnectWithoutDisputedByInput[]
+  upsert?: Prisma.HandoverRecordUpsertWithWhereUniqueWithoutDisputedByInput | Prisma.HandoverRecordUpsertWithWhereUniqueWithoutDisputedByInput[]
+  createMany?: Prisma.HandoverRecordCreateManyDisputedByInputEnvelope
+  set?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  disconnect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  delete?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  update?: Prisma.HandoverRecordUpdateWithWhereUniqueWithoutDisputedByInput | Prisma.HandoverRecordUpdateWithWhereUniqueWithoutDisputedByInput[]
+  updateMany?: Prisma.HandoverRecordUpdateManyWithWhereWithoutDisputedByInput | Prisma.HandoverRecordUpdateManyWithWhereWithoutDisputedByInput[]
+  deleteMany?: Prisma.HandoverRecordScalarWhereInput | Prisma.HandoverRecordScalarWhereInput[]
+}
+
+export type HandoverRecordUpdateManyWithoutResolvedByNestedInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutResolvedByInput, Prisma.HandoverRecordUncheckedCreateWithoutResolvedByInput> | Prisma.HandoverRecordCreateWithoutResolvedByInput[] | Prisma.HandoverRecordUncheckedCreateWithoutResolvedByInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutResolvedByInput | Prisma.HandoverRecordCreateOrConnectWithoutResolvedByInput[]
+  upsert?: Prisma.HandoverRecordUpsertWithWhereUniqueWithoutResolvedByInput | Prisma.HandoverRecordUpsertWithWhereUniqueWithoutResolvedByInput[]
+  createMany?: Prisma.HandoverRecordCreateManyResolvedByInputEnvelope
+  set?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  disconnect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  delete?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  update?: Prisma.HandoverRecordUpdateWithWhereUniqueWithoutResolvedByInput | Prisma.HandoverRecordUpdateWithWhereUniqueWithoutResolvedByInput[]
+  updateMany?: Prisma.HandoverRecordUpdateManyWithWhereWithoutResolvedByInput | Prisma.HandoverRecordUpdateManyWithWhereWithoutResolvedByInput[]
+  deleteMany?: Prisma.HandoverRecordScalarWhereInput | Prisma.HandoverRecordScalarWhereInput[]
+}
+
 export type HandoverRecordUncheckedUpdateManyWithoutCreatedByNestedInput = {
   create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutCreatedByInput, Prisma.HandoverRecordUncheckedCreateWithoutCreatedByInput> | Prisma.HandoverRecordCreateWithoutCreatedByInput[] | Prisma.HandoverRecordUncheckedCreateWithoutCreatedByInput[]
   connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutCreatedByInput | Prisma.HandoverRecordCreateOrConnectWithoutCreatedByInput[]
@@ -715,6 +1135,62 @@ export type HandoverRecordUncheckedUpdateManyWithoutDeletedByNestedInput = {
   connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
   update?: Prisma.HandoverRecordUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.HandoverRecordUpdateWithWhereUniqueWithoutDeletedByInput[]
   updateMany?: Prisma.HandoverRecordUpdateManyWithWhereWithoutDeletedByInput | Prisma.HandoverRecordUpdateManyWithWhereWithoutDeletedByInput[]
+  deleteMany?: Prisma.HandoverRecordScalarWhereInput | Prisma.HandoverRecordScalarWhereInput[]
+}
+
+export type HandoverRecordUncheckedUpdateManyWithoutSignedByLandlordNestedInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByLandlordInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByLandlordInput> | Prisma.HandoverRecordCreateWithoutSignedByLandlordInput[] | Prisma.HandoverRecordUncheckedCreateWithoutSignedByLandlordInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutSignedByLandlordInput | Prisma.HandoverRecordCreateOrConnectWithoutSignedByLandlordInput[]
+  upsert?: Prisma.HandoverRecordUpsertWithWhereUniqueWithoutSignedByLandlordInput | Prisma.HandoverRecordUpsertWithWhereUniqueWithoutSignedByLandlordInput[]
+  createMany?: Prisma.HandoverRecordCreateManySignedByLandlordInputEnvelope
+  set?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  disconnect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  delete?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  update?: Prisma.HandoverRecordUpdateWithWhereUniqueWithoutSignedByLandlordInput | Prisma.HandoverRecordUpdateWithWhereUniqueWithoutSignedByLandlordInput[]
+  updateMany?: Prisma.HandoverRecordUpdateManyWithWhereWithoutSignedByLandlordInput | Prisma.HandoverRecordUpdateManyWithWhereWithoutSignedByLandlordInput[]
+  deleteMany?: Prisma.HandoverRecordScalarWhereInput | Prisma.HandoverRecordScalarWhereInput[]
+}
+
+export type HandoverRecordUncheckedUpdateManyWithoutSignedByRenterNestedInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByRenterInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByRenterInput> | Prisma.HandoverRecordCreateWithoutSignedByRenterInput[] | Prisma.HandoverRecordUncheckedCreateWithoutSignedByRenterInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutSignedByRenterInput | Prisma.HandoverRecordCreateOrConnectWithoutSignedByRenterInput[]
+  upsert?: Prisma.HandoverRecordUpsertWithWhereUniqueWithoutSignedByRenterInput | Prisma.HandoverRecordUpsertWithWhereUniqueWithoutSignedByRenterInput[]
+  createMany?: Prisma.HandoverRecordCreateManySignedByRenterInputEnvelope
+  set?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  disconnect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  delete?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  update?: Prisma.HandoverRecordUpdateWithWhereUniqueWithoutSignedByRenterInput | Prisma.HandoverRecordUpdateWithWhereUniqueWithoutSignedByRenterInput[]
+  updateMany?: Prisma.HandoverRecordUpdateManyWithWhereWithoutSignedByRenterInput | Prisma.HandoverRecordUpdateManyWithWhereWithoutSignedByRenterInput[]
+  deleteMany?: Prisma.HandoverRecordScalarWhereInput | Prisma.HandoverRecordScalarWhereInput[]
+}
+
+export type HandoverRecordUncheckedUpdateManyWithoutDisputedByNestedInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutDisputedByInput, Prisma.HandoverRecordUncheckedCreateWithoutDisputedByInput> | Prisma.HandoverRecordCreateWithoutDisputedByInput[] | Prisma.HandoverRecordUncheckedCreateWithoutDisputedByInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutDisputedByInput | Prisma.HandoverRecordCreateOrConnectWithoutDisputedByInput[]
+  upsert?: Prisma.HandoverRecordUpsertWithWhereUniqueWithoutDisputedByInput | Prisma.HandoverRecordUpsertWithWhereUniqueWithoutDisputedByInput[]
+  createMany?: Prisma.HandoverRecordCreateManyDisputedByInputEnvelope
+  set?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  disconnect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  delete?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  update?: Prisma.HandoverRecordUpdateWithWhereUniqueWithoutDisputedByInput | Prisma.HandoverRecordUpdateWithWhereUniqueWithoutDisputedByInput[]
+  updateMany?: Prisma.HandoverRecordUpdateManyWithWhereWithoutDisputedByInput | Prisma.HandoverRecordUpdateManyWithWhereWithoutDisputedByInput[]
+  deleteMany?: Prisma.HandoverRecordScalarWhereInput | Prisma.HandoverRecordScalarWhereInput[]
+}
+
+export type HandoverRecordUncheckedUpdateManyWithoutResolvedByNestedInput = {
+  create?: Prisma.XOR<Prisma.HandoverRecordCreateWithoutResolvedByInput, Prisma.HandoverRecordUncheckedCreateWithoutResolvedByInput> | Prisma.HandoverRecordCreateWithoutResolvedByInput[] | Prisma.HandoverRecordUncheckedCreateWithoutResolvedByInput[]
+  connectOrCreate?: Prisma.HandoverRecordCreateOrConnectWithoutResolvedByInput | Prisma.HandoverRecordCreateOrConnectWithoutResolvedByInput[]
+  upsert?: Prisma.HandoverRecordUpsertWithWhereUniqueWithoutResolvedByInput | Prisma.HandoverRecordUpsertWithWhereUniqueWithoutResolvedByInput[]
+  createMany?: Prisma.HandoverRecordCreateManyResolvedByInputEnvelope
+  set?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  disconnect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  delete?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  connect?: Prisma.HandoverRecordWhereUniqueInput | Prisma.HandoverRecordWhereUniqueInput[]
+  update?: Prisma.HandoverRecordUpdateWithWhereUniqueWithoutResolvedByInput | Prisma.HandoverRecordUpdateWithWhereUniqueWithoutResolvedByInput[]
+  updateMany?: Prisma.HandoverRecordUpdateManyWithWhereWithoutResolvedByInput | Prisma.HandoverRecordUpdateManyWithWhereWithoutResolvedByInput[]
   deleteMany?: Prisma.HandoverRecordScalarWhereInput | Prisma.HandoverRecordScalarWhereInput[]
 }
 
@@ -872,11 +1348,23 @@ export type HandoverRecordCreateWithoutCreatedByInput = {
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutHandoverRecordsInput
   contract: Prisma.ContractCreateNestedOneWithoutHandoverRecordsInput
   room: Prisma.RoomCreateNestedOneWithoutHandoverRecordsInput
   assetItems?: Prisma.HandoverAssetItemCreateNestedManyWithoutHandoverRecordInput
+  signedByLandlord?: Prisma.UserCreateNestedOneWithoutSignedLandlordHandoversInput
+  signedByRenter?: Prisma.UserCreateNestedOneWithoutSignedRenterHandoversInput
+  disputedBy?: Prisma.UserCreateNestedOneWithoutDisputedHandoversInput
+  resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedHandoversInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHandoverRecordsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedHandoverRecordsInput
 }
@@ -890,8 +1378,20 @@ export type HandoverRecordUncheckedCreateWithoutCreatedByInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   updatedById?: number | null
   deletedById?: number | null
   assetItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutHandoverRecordInput
@@ -913,11 +1413,23 @@ export type HandoverRecordCreateWithoutUpdatedByInput = {
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutHandoverRecordsInput
   contract: Prisma.ContractCreateNestedOneWithoutHandoverRecordsInput
   room: Prisma.RoomCreateNestedOneWithoutHandoverRecordsInput
   assetItems?: Prisma.HandoverAssetItemCreateNestedManyWithoutHandoverRecordInput
+  signedByLandlord?: Prisma.UserCreateNestedOneWithoutSignedLandlordHandoversInput
+  signedByRenter?: Prisma.UserCreateNestedOneWithoutSignedRenterHandoversInput
+  disputedBy?: Prisma.UserCreateNestedOneWithoutDisputedHandoversInput
+  resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedHandoversInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHandoverRecordsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedHandoverRecordsInput
 }
@@ -931,8 +1443,20 @@ export type HandoverRecordUncheckedCreateWithoutUpdatedByInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   deletedById?: number | null
   assetItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutHandoverRecordInput
@@ -954,11 +1478,23 @@ export type HandoverRecordCreateWithoutDeletedByInput = {
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutHandoverRecordsInput
   contract: Prisma.ContractCreateNestedOneWithoutHandoverRecordsInput
   room: Prisma.RoomCreateNestedOneWithoutHandoverRecordsInput
   assetItems?: Prisma.HandoverAssetItemCreateNestedManyWithoutHandoverRecordInput
+  signedByLandlord?: Prisma.UserCreateNestedOneWithoutSignedLandlordHandoversInput
+  signedByRenter?: Prisma.UserCreateNestedOneWithoutSignedRenterHandoversInput
+  disputedBy?: Prisma.UserCreateNestedOneWithoutDisputedHandoversInput
+  resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedHandoversInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHandoverRecordsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHandoverRecordsInput
 }
@@ -972,8 +1508,20 @@ export type HandoverRecordUncheckedCreateWithoutDeletedByInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   assetItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutHandoverRecordInput
@@ -986,6 +1534,266 @@ export type HandoverRecordCreateOrConnectWithoutDeletedByInput = {
 
 export type HandoverRecordCreateManyDeletedByInputEnvelope = {
   data: Prisma.HandoverRecordCreateManyDeletedByInput | Prisma.HandoverRecordCreateManyDeletedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type HandoverRecordCreateWithoutSignedByLandlordInput = {
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutHandoverRecordsInput
+  contract: Prisma.ContractCreateNestedOneWithoutHandoverRecordsInput
+  room: Prisma.RoomCreateNestedOneWithoutHandoverRecordsInput
+  assetItems?: Prisma.HandoverAssetItemCreateNestedManyWithoutHandoverRecordInput
+  signedByRenter?: Prisma.UserCreateNestedOneWithoutSignedRenterHandoversInput
+  disputedBy?: Prisma.UserCreateNestedOneWithoutDisputedHandoversInput
+  resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedHandoversInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHandoverRecordsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHandoverRecordsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedHandoverRecordsInput
+}
+
+export type HandoverRecordUncheckedCreateWithoutSignedByLandlordInput = {
+  id?: number
+  tenantId: number
+  contractId: number
+  roomId: number
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  signedByRenterId?: number | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  assetItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutHandoverRecordInput
+}
+
+export type HandoverRecordCreateOrConnectWithoutSignedByLandlordInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  create: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByLandlordInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByLandlordInput>
+}
+
+export type HandoverRecordCreateManySignedByLandlordInputEnvelope = {
+  data: Prisma.HandoverRecordCreateManySignedByLandlordInput | Prisma.HandoverRecordCreateManySignedByLandlordInput[]
+  skipDuplicates?: boolean
+}
+
+export type HandoverRecordCreateWithoutSignedByRenterInput = {
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutHandoverRecordsInput
+  contract: Prisma.ContractCreateNestedOneWithoutHandoverRecordsInput
+  room: Prisma.RoomCreateNestedOneWithoutHandoverRecordsInput
+  assetItems?: Prisma.HandoverAssetItemCreateNestedManyWithoutHandoverRecordInput
+  signedByLandlord?: Prisma.UserCreateNestedOneWithoutSignedLandlordHandoversInput
+  disputedBy?: Prisma.UserCreateNestedOneWithoutDisputedHandoversInput
+  resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedHandoversInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHandoverRecordsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHandoverRecordsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedHandoverRecordsInput
+}
+
+export type HandoverRecordUncheckedCreateWithoutSignedByRenterInput = {
+  id?: number
+  tenantId: number
+  contractId: number
+  roomId: number
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  assetItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutHandoverRecordInput
+}
+
+export type HandoverRecordCreateOrConnectWithoutSignedByRenterInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  create: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByRenterInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByRenterInput>
+}
+
+export type HandoverRecordCreateManySignedByRenterInputEnvelope = {
+  data: Prisma.HandoverRecordCreateManySignedByRenterInput | Prisma.HandoverRecordCreateManySignedByRenterInput[]
+  skipDuplicates?: boolean
+}
+
+export type HandoverRecordCreateWithoutDisputedByInput = {
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutHandoverRecordsInput
+  contract: Prisma.ContractCreateNestedOneWithoutHandoverRecordsInput
+  room: Prisma.RoomCreateNestedOneWithoutHandoverRecordsInput
+  assetItems?: Prisma.HandoverAssetItemCreateNestedManyWithoutHandoverRecordInput
+  signedByLandlord?: Prisma.UserCreateNestedOneWithoutSignedLandlordHandoversInput
+  signedByRenter?: Prisma.UserCreateNestedOneWithoutSignedRenterHandoversInput
+  resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedHandoversInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHandoverRecordsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHandoverRecordsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedHandoverRecordsInput
+}
+
+export type HandoverRecordUncheckedCreateWithoutDisputedByInput = {
+  id?: number
+  tenantId: number
+  contractId: number
+  roomId: number
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  assetItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutHandoverRecordInput
+}
+
+export type HandoverRecordCreateOrConnectWithoutDisputedByInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  create: Prisma.XOR<Prisma.HandoverRecordCreateWithoutDisputedByInput, Prisma.HandoverRecordUncheckedCreateWithoutDisputedByInput>
+}
+
+export type HandoverRecordCreateManyDisputedByInputEnvelope = {
+  data: Prisma.HandoverRecordCreateManyDisputedByInput | Prisma.HandoverRecordCreateManyDisputedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type HandoverRecordCreateWithoutResolvedByInput = {
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tenant: Prisma.TenantCreateNestedOneWithoutHandoverRecordsInput
+  contract: Prisma.ContractCreateNestedOneWithoutHandoverRecordsInput
+  room: Prisma.RoomCreateNestedOneWithoutHandoverRecordsInput
+  assetItems?: Prisma.HandoverAssetItemCreateNestedManyWithoutHandoverRecordInput
+  signedByLandlord?: Prisma.UserCreateNestedOneWithoutSignedLandlordHandoversInput
+  signedByRenter?: Prisma.UserCreateNestedOneWithoutSignedRenterHandoversInput
+  disputedBy?: Prisma.UserCreateNestedOneWithoutDisputedHandoversInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHandoverRecordsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHandoverRecordsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedHandoverRecordsInput
+}
+
+export type HandoverRecordUncheckedCreateWithoutResolvedByInput = {
+  id?: number
+  tenantId: number
+  contractId: number
+  roomId: number
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  assetItems?: Prisma.HandoverAssetItemUncheckedCreateNestedManyWithoutHandoverRecordInput
+}
+
+export type HandoverRecordCreateOrConnectWithoutResolvedByInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  create: Prisma.XOR<Prisma.HandoverRecordCreateWithoutResolvedByInput, Prisma.HandoverRecordUncheckedCreateWithoutResolvedByInput>
+}
+
+export type HandoverRecordCreateManyResolvedByInputEnvelope = {
+  data: Prisma.HandoverRecordCreateManyResolvedByInput | Prisma.HandoverRecordCreateManyResolvedByInput[]
   skipDuplicates?: boolean
 }
 
@@ -1017,8 +1825,20 @@ export type HandoverRecordScalarWhereInput = {
   note?: Prisma.StringNullableFilter<"HandoverRecord"> | string | null
   signedByLandlordAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
   signedByRenterAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
+  signedByLandlordId?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
+  signedByRenterId?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
   status?: Prisma.EnumHandoverStatusFilter<"HandoverRecord"> | $Enums.HandoverStatus
+  version?: Prisma.IntFilter<"HandoverRecord"> | number
+  contentHash?: Prisma.StringFilter<"HandoverRecord"> | string
+  confirmedAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
+  disputedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
+  disputeReason?: Prisma.StringNullableFilter<"HandoverRecord"> | string | null
+  disputedAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
+  resolvedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
+  resolutionNote?: Prisma.StringNullableFilter<"HandoverRecord"> | string | null
+  resolvedAt?: Prisma.DateTimeNullableFilter<"HandoverRecord"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"HandoverRecord"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"HandoverRecord"> | Date | string
   createdById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
   updatedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
   deletedById?: Prisma.IntNullableFilter<"HandoverRecord"> | number | null
@@ -1056,16 +1876,92 @@ export type HandoverRecordUpdateManyWithWhereWithoutDeletedByInput = {
   data: Prisma.XOR<Prisma.HandoverRecordUpdateManyMutationInput, Prisma.HandoverRecordUncheckedUpdateManyWithoutDeletedByInput>
 }
 
+export type HandoverRecordUpsertWithWhereUniqueWithoutSignedByLandlordInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  update: Prisma.XOR<Prisma.HandoverRecordUpdateWithoutSignedByLandlordInput, Prisma.HandoverRecordUncheckedUpdateWithoutSignedByLandlordInput>
+  create: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByLandlordInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByLandlordInput>
+}
+
+export type HandoverRecordUpdateWithWhereUniqueWithoutSignedByLandlordInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  data: Prisma.XOR<Prisma.HandoverRecordUpdateWithoutSignedByLandlordInput, Prisma.HandoverRecordUncheckedUpdateWithoutSignedByLandlordInput>
+}
+
+export type HandoverRecordUpdateManyWithWhereWithoutSignedByLandlordInput = {
+  where: Prisma.HandoverRecordScalarWhereInput
+  data: Prisma.XOR<Prisma.HandoverRecordUpdateManyMutationInput, Prisma.HandoverRecordUncheckedUpdateManyWithoutSignedByLandlordInput>
+}
+
+export type HandoverRecordUpsertWithWhereUniqueWithoutSignedByRenterInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  update: Prisma.XOR<Prisma.HandoverRecordUpdateWithoutSignedByRenterInput, Prisma.HandoverRecordUncheckedUpdateWithoutSignedByRenterInput>
+  create: Prisma.XOR<Prisma.HandoverRecordCreateWithoutSignedByRenterInput, Prisma.HandoverRecordUncheckedCreateWithoutSignedByRenterInput>
+}
+
+export type HandoverRecordUpdateWithWhereUniqueWithoutSignedByRenterInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  data: Prisma.XOR<Prisma.HandoverRecordUpdateWithoutSignedByRenterInput, Prisma.HandoverRecordUncheckedUpdateWithoutSignedByRenterInput>
+}
+
+export type HandoverRecordUpdateManyWithWhereWithoutSignedByRenterInput = {
+  where: Prisma.HandoverRecordScalarWhereInput
+  data: Prisma.XOR<Prisma.HandoverRecordUpdateManyMutationInput, Prisma.HandoverRecordUncheckedUpdateManyWithoutSignedByRenterInput>
+}
+
+export type HandoverRecordUpsertWithWhereUniqueWithoutDisputedByInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  update: Prisma.XOR<Prisma.HandoverRecordUpdateWithoutDisputedByInput, Prisma.HandoverRecordUncheckedUpdateWithoutDisputedByInput>
+  create: Prisma.XOR<Prisma.HandoverRecordCreateWithoutDisputedByInput, Prisma.HandoverRecordUncheckedCreateWithoutDisputedByInput>
+}
+
+export type HandoverRecordUpdateWithWhereUniqueWithoutDisputedByInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  data: Prisma.XOR<Prisma.HandoverRecordUpdateWithoutDisputedByInput, Prisma.HandoverRecordUncheckedUpdateWithoutDisputedByInput>
+}
+
+export type HandoverRecordUpdateManyWithWhereWithoutDisputedByInput = {
+  where: Prisma.HandoverRecordScalarWhereInput
+  data: Prisma.XOR<Prisma.HandoverRecordUpdateManyMutationInput, Prisma.HandoverRecordUncheckedUpdateManyWithoutDisputedByInput>
+}
+
+export type HandoverRecordUpsertWithWhereUniqueWithoutResolvedByInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  update: Prisma.XOR<Prisma.HandoverRecordUpdateWithoutResolvedByInput, Prisma.HandoverRecordUncheckedUpdateWithoutResolvedByInput>
+  create: Prisma.XOR<Prisma.HandoverRecordCreateWithoutResolvedByInput, Prisma.HandoverRecordUncheckedCreateWithoutResolvedByInput>
+}
+
+export type HandoverRecordUpdateWithWhereUniqueWithoutResolvedByInput = {
+  where: Prisma.HandoverRecordWhereUniqueInput
+  data: Prisma.XOR<Prisma.HandoverRecordUpdateWithoutResolvedByInput, Prisma.HandoverRecordUncheckedUpdateWithoutResolvedByInput>
+}
+
+export type HandoverRecordUpdateManyWithWhereWithoutResolvedByInput = {
+  where: Prisma.HandoverRecordScalarWhereInput
+  data: Prisma.XOR<Prisma.HandoverRecordUpdateManyMutationInput, Prisma.HandoverRecordUncheckedUpdateManyWithoutResolvedByInput>
+}
+
 export type HandoverRecordCreateWithoutTenantInput = {
   type: $Enums.HandoverType
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   contract: Prisma.ContractCreateNestedOneWithoutHandoverRecordsInput
   room: Prisma.RoomCreateNestedOneWithoutHandoverRecordsInput
   assetItems?: Prisma.HandoverAssetItemCreateNestedManyWithoutHandoverRecordInput
+  signedByLandlord?: Prisma.UserCreateNestedOneWithoutSignedLandlordHandoversInput
+  signedByRenter?: Prisma.UserCreateNestedOneWithoutSignedRenterHandoversInput
+  disputedBy?: Prisma.UserCreateNestedOneWithoutDisputedHandoversInput
+  resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedHandoversInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHandoverRecordsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHandoverRecordsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedHandoverRecordsInput
@@ -1079,8 +1975,20 @@ export type HandoverRecordUncheckedCreateWithoutTenantInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1119,10 +2027,22 @@ export type HandoverRecordCreateWithoutRoomInput = {
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutHandoverRecordsInput
   contract: Prisma.ContractCreateNestedOneWithoutHandoverRecordsInput
   assetItems?: Prisma.HandoverAssetItemCreateNestedManyWithoutHandoverRecordInput
+  signedByLandlord?: Prisma.UserCreateNestedOneWithoutSignedLandlordHandoversInput
+  signedByRenter?: Prisma.UserCreateNestedOneWithoutSignedRenterHandoversInput
+  disputedBy?: Prisma.UserCreateNestedOneWithoutDisputedHandoversInput
+  resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedHandoversInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHandoverRecordsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHandoverRecordsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedHandoverRecordsInput
@@ -1136,8 +2056,20 @@ export type HandoverRecordUncheckedCreateWithoutRoomInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1176,10 +2108,22 @@ export type HandoverRecordCreateWithoutContractInput = {
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutHandoverRecordsInput
   room: Prisma.RoomCreateNestedOneWithoutHandoverRecordsInput
   assetItems?: Prisma.HandoverAssetItemCreateNestedManyWithoutHandoverRecordInput
+  signedByLandlord?: Prisma.UserCreateNestedOneWithoutSignedLandlordHandoversInput
+  signedByRenter?: Prisma.UserCreateNestedOneWithoutSignedRenterHandoversInput
+  disputedBy?: Prisma.UserCreateNestedOneWithoutDisputedHandoversInput
+  resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedHandoversInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHandoverRecordsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHandoverRecordsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedHandoverRecordsInput
@@ -1193,8 +2137,20 @@ export type HandoverRecordUncheckedCreateWithoutContractInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1233,10 +2189,22 @@ export type HandoverRecordCreateWithoutAssetItemsInput = {
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   tenant: Prisma.TenantCreateNestedOneWithoutHandoverRecordsInput
   contract: Prisma.ContractCreateNestedOneWithoutHandoverRecordsInput
   room: Prisma.RoomCreateNestedOneWithoutHandoverRecordsInput
+  signedByLandlord?: Prisma.UserCreateNestedOneWithoutSignedLandlordHandoversInput
+  signedByRenter?: Prisma.UserCreateNestedOneWithoutSignedRenterHandoversInput
+  disputedBy?: Prisma.UserCreateNestedOneWithoutDisputedHandoversInput
+  resolvedBy?: Prisma.UserCreateNestedOneWithoutResolvedHandoversInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHandoverRecordsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHandoverRecordsInput
   deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedHandoverRecordsInput
@@ -1251,8 +2219,20 @@ export type HandoverRecordUncheckedCreateWithoutAssetItemsInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1280,10 +2260,22 @@ export type HandoverRecordUpdateWithoutAssetItemsInput = {
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutHandoverRecordsNestedInput
   contract?: Prisma.ContractUpdateOneRequiredWithoutHandoverRecordsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  signedByLandlord?: Prisma.UserUpdateOneWithoutSignedLandlordHandoversNestedInput
+  signedByRenter?: Prisma.UserUpdateOneWithoutSignedRenterHandoversNestedInput
+  disputedBy?: Prisma.UserUpdateOneWithoutDisputedHandoversNestedInput
+  resolvedBy?: Prisma.UserUpdateOneWithoutResolvedHandoversNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedHandoverRecordsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHandoverRecordsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedHandoverRecordsNestedInput
@@ -1298,8 +2290,20 @@ export type HandoverRecordUncheckedUpdateWithoutAssetItemsInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1314,8 +2318,20 @@ export type HandoverRecordCreateManyCreatedByInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   updatedById?: number | null
   deletedById?: number | null
 }
@@ -1329,8 +2345,20 @@ export type HandoverRecordCreateManyUpdatedByInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   deletedById?: number | null
 }
@@ -1344,10 +2372,130 @@ export type HandoverRecordCreateManyDeletedByInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
+}
+
+export type HandoverRecordCreateManySignedByLandlordInput = {
+  id?: number
+  tenantId: number
+  contractId: number
+  roomId: number
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  signedByRenterId?: number | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+}
+
+export type HandoverRecordCreateManySignedByRenterInput = {
+  id?: number
+  tenantId: number
+  contractId: number
+  roomId: number
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+}
+
+export type HandoverRecordCreateManyDisputedByInput = {
+  id?: number
+  tenantId: number
+  contractId: number
+  roomId: number
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+}
+
+export type HandoverRecordCreateManyResolvedByInput = {
+  id?: number
+  tenantId: number
+  contractId: number
+  roomId: number
+  type: $Enums.HandoverType
+  note?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
+  status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
 }
 
 export type HandoverRecordUpdateWithoutCreatedByInput = {
@@ -1356,11 +2504,23 @@ export type HandoverRecordUpdateWithoutCreatedByInput = {
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutHandoverRecordsNestedInput
   contract?: Prisma.ContractUpdateOneRequiredWithoutHandoverRecordsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutHandoverRecordsNestedInput
   assetItems?: Prisma.HandoverAssetItemUpdateManyWithoutHandoverRecordNestedInput
+  signedByLandlord?: Prisma.UserUpdateOneWithoutSignedLandlordHandoversNestedInput
+  signedByRenter?: Prisma.UserUpdateOneWithoutSignedRenterHandoversNestedInput
+  disputedBy?: Prisma.UserUpdateOneWithoutDisputedHandoversNestedInput
+  resolvedBy?: Prisma.UserUpdateOneWithoutResolvedHandoversNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHandoverRecordsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedHandoverRecordsNestedInput
 }
@@ -1374,8 +2534,20 @@ export type HandoverRecordUncheckedUpdateWithoutCreatedByInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assetItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutHandoverRecordNestedInput
@@ -1390,8 +2562,20 @@ export type HandoverRecordUncheckedUpdateManyWithoutCreatedByInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1402,11 +2586,23 @@ export type HandoverRecordUpdateWithoutUpdatedByInput = {
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutHandoverRecordsNestedInput
   contract?: Prisma.ContractUpdateOneRequiredWithoutHandoverRecordsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutHandoverRecordsNestedInput
   assetItems?: Prisma.HandoverAssetItemUpdateManyWithoutHandoverRecordNestedInput
+  signedByLandlord?: Prisma.UserUpdateOneWithoutSignedLandlordHandoversNestedInput
+  signedByRenter?: Prisma.UserUpdateOneWithoutSignedRenterHandoversNestedInput
+  disputedBy?: Prisma.UserUpdateOneWithoutDisputedHandoversNestedInput
+  resolvedBy?: Prisma.UserUpdateOneWithoutResolvedHandoversNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedHandoverRecordsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedHandoverRecordsNestedInput
 }
@@ -1420,8 +2616,20 @@ export type HandoverRecordUncheckedUpdateWithoutUpdatedByInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assetItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutHandoverRecordNestedInput
@@ -1436,8 +2644,20 @@ export type HandoverRecordUncheckedUpdateManyWithoutUpdatedByInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -1448,11 +2668,23 @@ export type HandoverRecordUpdateWithoutDeletedByInput = {
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutHandoverRecordsNestedInput
   contract?: Prisma.ContractUpdateOneRequiredWithoutHandoverRecordsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutHandoverRecordsNestedInput
   assetItems?: Prisma.HandoverAssetItemUpdateManyWithoutHandoverRecordNestedInput
+  signedByLandlord?: Prisma.UserUpdateOneWithoutSignedLandlordHandoversNestedInput
+  signedByRenter?: Prisma.UserUpdateOneWithoutSignedRenterHandoversNestedInput
+  disputedBy?: Prisma.UserUpdateOneWithoutDisputedHandoversNestedInput
+  resolvedBy?: Prisma.UserUpdateOneWithoutResolvedHandoversNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedHandoverRecordsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHandoverRecordsNestedInput
 }
@@ -1466,8 +2698,20 @@ export type HandoverRecordUncheckedUpdateWithoutDeletedByInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assetItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutHandoverRecordNestedInput
@@ -1482,10 +2726,350 @@ export type HandoverRecordUncheckedUpdateManyWithoutDeletedByInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type HandoverRecordUpdateWithoutSignedByLandlordInput = {
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  contract?: Prisma.ContractUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  assetItems?: Prisma.HandoverAssetItemUpdateManyWithoutHandoverRecordNestedInput
+  signedByRenter?: Prisma.UserUpdateOneWithoutSignedRenterHandoversNestedInput
+  disputedBy?: Prisma.UserUpdateOneWithoutDisputedHandoversNestedInput
+  resolvedBy?: Prisma.UserUpdateOneWithoutResolvedHandoversNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedHandoverRecordsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHandoverRecordsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedHandoverRecordsNestedInput
+}
+
+export type HandoverRecordUncheckedUpdateWithoutSignedByLandlordInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assetItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutHandoverRecordNestedInput
+}
+
+export type HandoverRecordUncheckedUpdateManyWithoutSignedByLandlordInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type HandoverRecordUpdateWithoutSignedByRenterInput = {
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  contract?: Prisma.ContractUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  assetItems?: Prisma.HandoverAssetItemUpdateManyWithoutHandoverRecordNestedInput
+  signedByLandlord?: Prisma.UserUpdateOneWithoutSignedLandlordHandoversNestedInput
+  disputedBy?: Prisma.UserUpdateOneWithoutDisputedHandoversNestedInput
+  resolvedBy?: Prisma.UserUpdateOneWithoutResolvedHandoversNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedHandoverRecordsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHandoverRecordsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedHandoverRecordsNestedInput
+}
+
+export type HandoverRecordUncheckedUpdateWithoutSignedByRenterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assetItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutHandoverRecordNestedInput
+}
+
+export type HandoverRecordUncheckedUpdateManyWithoutSignedByRenterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type HandoverRecordUpdateWithoutDisputedByInput = {
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  contract?: Prisma.ContractUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  assetItems?: Prisma.HandoverAssetItemUpdateManyWithoutHandoverRecordNestedInput
+  signedByLandlord?: Prisma.UserUpdateOneWithoutSignedLandlordHandoversNestedInput
+  signedByRenter?: Prisma.UserUpdateOneWithoutSignedRenterHandoversNestedInput
+  resolvedBy?: Prisma.UserUpdateOneWithoutResolvedHandoversNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedHandoverRecordsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHandoverRecordsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedHandoverRecordsNestedInput
+}
+
+export type HandoverRecordUncheckedUpdateWithoutDisputedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assetItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutHandoverRecordNestedInput
+}
+
+export type HandoverRecordUncheckedUpdateManyWithoutDisputedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type HandoverRecordUpdateWithoutResolvedByInput = {
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  contract?: Prisma.ContractUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutHandoverRecordsNestedInput
+  assetItems?: Prisma.HandoverAssetItemUpdateManyWithoutHandoverRecordNestedInput
+  signedByLandlord?: Prisma.UserUpdateOneWithoutSignedLandlordHandoversNestedInput
+  signedByRenter?: Prisma.UserUpdateOneWithoutSignedRenterHandoversNestedInput
+  disputedBy?: Prisma.UserUpdateOneWithoutDisputedHandoversNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedHandoverRecordsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHandoverRecordsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedHandoverRecordsNestedInput
+}
+
+export type HandoverRecordUncheckedUpdateWithoutResolvedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assetItems?: Prisma.HandoverAssetItemUncheckedUpdateManyWithoutHandoverRecordNestedInput
+}
+
+export type HandoverRecordUncheckedUpdateManyWithoutResolvedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumHandoverTypeFieldUpdateOperationsInput | $Enums.HandoverType
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type HandoverRecordCreateManyTenantInput = {
@@ -1496,8 +3080,20 @@ export type HandoverRecordCreateManyTenantInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1509,10 +3105,22 @@ export type HandoverRecordUpdateWithoutTenantInput = {
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contract?: Prisma.ContractUpdateOneRequiredWithoutHandoverRecordsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutHandoverRecordsNestedInput
   assetItems?: Prisma.HandoverAssetItemUpdateManyWithoutHandoverRecordNestedInput
+  signedByLandlord?: Prisma.UserUpdateOneWithoutSignedLandlordHandoversNestedInput
+  signedByRenter?: Prisma.UserUpdateOneWithoutSignedRenterHandoversNestedInput
+  disputedBy?: Prisma.UserUpdateOneWithoutDisputedHandoversNestedInput
+  resolvedBy?: Prisma.UserUpdateOneWithoutResolvedHandoversNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedHandoverRecordsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHandoverRecordsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedHandoverRecordsNestedInput
@@ -1526,8 +3134,20 @@ export type HandoverRecordUncheckedUpdateWithoutTenantInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1542,8 +3162,20 @@ export type HandoverRecordUncheckedUpdateManyWithoutTenantInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1557,8 +3189,20 @@ export type HandoverRecordCreateManyRoomInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1570,10 +3214,22 @@ export type HandoverRecordUpdateWithoutRoomInput = {
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutHandoverRecordsNestedInput
   contract?: Prisma.ContractUpdateOneRequiredWithoutHandoverRecordsNestedInput
   assetItems?: Prisma.HandoverAssetItemUpdateManyWithoutHandoverRecordNestedInput
+  signedByLandlord?: Prisma.UserUpdateOneWithoutSignedLandlordHandoversNestedInput
+  signedByRenter?: Prisma.UserUpdateOneWithoutSignedRenterHandoversNestedInput
+  disputedBy?: Prisma.UserUpdateOneWithoutDisputedHandoversNestedInput
+  resolvedBy?: Prisma.UserUpdateOneWithoutResolvedHandoversNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedHandoverRecordsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHandoverRecordsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedHandoverRecordsNestedInput
@@ -1587,8 +3243,20 @@ export type HandoverRecordUncheckedUpdateWithoutRoomInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1603,8 +3271,20 @@ export type HandoverRecordUncheckedUpdateManyWithoutRoomInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1618,8 +3298,20 @@ export type HandoverRecordCreateManyContractInput = {
   note?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
+  signedByLandlordId?: number | null
+  signedByRenterId?: number | null
   status?: $Enums.HandoverStatus
+  version?: number
+  contentHash: string
+  confirmedAt?: Date | string | null
+  disputedById?: number | null
+  disputeReason?: string | null
+  disputedAt?: Date | string | null
+  resolvedById?: number | null
+  resolutionNote?: string | null
+  resolvedAt?: Date | string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
   deletedById?: number | null
@@ -1631,10 +3323,22 @@ export type HandoverRecordUpdateWithoutContractInput = {
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneRequiredWithoutHandoverRecordsNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutHandoverRecordsNestedInput
   assetItems?: Prisma.HandoverAssetItemUpdateManyWithoutHandoverRecordNestedInput
+  signedByLandlord?: Prisma.UserUpdateOneWithoutSignedLandlordHandoversNestedInput
+  signedByRenter?: Prisma.UserUpdateOneWithoutSignedRenterHandoversNestedInput
+  disputedBy?: Prisma.UserUpdateOneWithoutDisputedHandoversNestedInput
+  resolvedBy?: Prisma.UserUpdateOneWithoutResolvedHandoversNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedHandoverRecordsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHandoverRecordsNestedInput
   deletedBy?: Prisma.UserUpdateOneWithoutDeletedHandoverRecordsNestedInput
@@ -1648,8 +3352,20 @@ export type HandoverRecordUncheckedUpdateWithoutContractInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1664,8 +3380,20 @@ export type HandoverRecordUncheckedUpdateManyWithoutContractInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByLandlordId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signedByRenterId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumHandoverStatusFieldUpdateOperationsInput | $Enums.HandoverStatus
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  confirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  disputedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  disputeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  disputedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resolvedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  resolutionNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resolvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1711,8 +3439,20 @@ export type HandoverRecordSelect<ExtArgs extends runtime.Types.Extensions.Intern
   note?: boolean
   signedByLandlordAt?: boolean
   signedByRenterAt?: boolean
+  signedByLandlordId?: boolean
+  signedByRenterId?: boolean
   status?: boolean
+  version?: boolean
+  contentHash?: boolean
+  confirmedAt?: boolean
+  disputedById?: boolean
+  disputeReason?: boolean
+  disputedAt?: boolean
+  resolvedById?: boolean
+  resolutionNote?: boolean
+  resolvedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
@@ -1720,6 +3460,10 @@ export type HandoverRecordSelect<ExtArgs extends runtime.Types.Extensions.Intern
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   assetItems?: boolean | Prisma.HandoverRecord$assetItemsArgs<ExtArgs>
+  signedByLandlord?: boolean | Prisma.HandoverRecord$signedByLandlordArgs<ExtArgs>
+  signedByRenter?: boolean | Prisma.HandoverRecord$signedByRenterArgs<ExtArgs>
+  disputedBy?: boolean | Prisma.HandoverRecord$disputedByArgs<ExtArgs>
+  resolvedBy?: boolean | Prisma.HandoverRecord$resolvedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HandoverRecord$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HandoverRecord$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.HandoverRecord$deletedByArgs<ExtArgs>
@@ -1735,14 +3479,30 @@ export type HandoverRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   note?: boolean
   signedByLandlordAt?: boolean
   signedByRenterAt?: boolean
+  signedByLandlordId?: boolean
+  signedByRenterId?: boolean
   status?: boolean
+  version?: boolean
+  contentHash?: boolean
+  confirmedAt?: boolean
+  disputedById?: boolean
+  disputeReason?: boolean
+  disputedAt?: boolean
+  resolvedById?: boolean
+  resolutionNote?: boolean
+  resolvedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
+  signedByLandlord?: boolean | Prisma.HandoverRecord$signedByLandlordArgs<ExtArgs>
+  signedByRenter?: boolean | Prisma.HandoverRecord$signedByRenterArgs<ExtArgs>
+  disputedBy?: boolean | Prisma.HandoverRecord$disputedByArgs<ExtArgs>
+  resolvedBy?: boolean | Prisma.HandoverRecord$resolvedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HandoverRecord$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HandoverRecord$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.HandoverRecord$deletedByArgs<ExtArgs>
@@ -1757,14 +3517,30 @@ export type HandoverRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   note?: boolean
   signedByLandlordAt?: boolean
   signedByRenterAt?: boolean
+  signedByLandlordId?: boolean
+  signedByRenterId?: boolean
   status?: boolean
+  version?: boolean
+  contentHash?: boolean
+  confirmedAt?: boolean
+  disputedById?: boolean
+  disputeReason?: boolean
+  disputedAt?: boolean
+  resolvedById?: boolean
+  resolutionNote?: boolean
+  resolvedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
+  signedByLandlord?: boolean | Prisma.HandoverRecord$signedByLandlordArgs<ExtArgs>
+  signedByRenter?: boolean | Prisma.HandoverRecord$signedByRenterArgs<ExtArgs>
+  disputedBy?: boolean | Prisma.HandoverRecord$disputedByArgs<ExtArgs>
+  resolvedBy?: boolean | Prisma.HandoverRecord$resolvedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HandoverRecord$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HandoverRecord$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.HandoverRecord$deletedByArgs<ExtArgs>
@@ -1779,19 +3555,35 @@ export type HandoverRecordSelectScalar = {
   note?: boolean
   signedByLandlordAt?: boolean
   signedByRenterAt?: boolean
+  signedByLandlordId?: boolean
+  signedByRenterId?: boolean
   status?: boolean
+  version?: boolean
+  contentHash?: boolean
+  confirmedAt?: boolean
+  disputedById?: boolean
+  disputeReason?: boolean
+  disputedAt?: boolean
+  resolvedById?: boolean
+  resolutionNote?: boolean
+  resolvedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
 }
 
-export type HandoverRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "contractId" | "roomId" | "type" | "note" | "signedByLandlordAt" | "signedByRenterAt" | "status" | "createdAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["handoverRecord"]>
+export type HandoverRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "contractId" | "roomId" | "type" | "note" | "signedByLandlordAt" | "signedByRenterAt" | "signedByLandlordId" | "signedByRenterId" | "status" | "version" | "contentHash" | "confirmedAt" | "disputedById" | "disputeReason" | "disputedAt" | "resolvedById" | "resolutionNote" | "resolvedAt" | "createdAt" | "updatedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["handoverRecord"]>
 export type HandoverRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   assetItems?: boolean | Prisma.HandoverRecord$assetItemsArgs<ExtArgs>
+  signedByLandlord?: boolean | Prisma.HandoverRecord$signedByLandlordArgs<ExtArgs>
+  signedByRenter?: boolean | Prisma.HandoverRecord$signedByRenterArgs<ExtArgs>
+  disputedBy?: boolean | Prisma.HandoverRecord$disputedByArgs<ExtArgs>
+  resolvedBy?: boolean | Prisma.HandoverRecord$resolvedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HandoverRecord$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HandoverRecord$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.HandoverRecord$deletedByArgs<ExtArgs>
@@ -1801,6 +3593,10 @@ export type HandoverRecordIncludeCreateManyAndReturn<ExtArgs extends runtime.Typ
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
+  signedByLandlord?: boolean | Prisma.HandoverRecord$signedByLandlordArgs<ExtArgs>
+  signedByRenter?: boolean | Prisma.HandoverRecord$signedByRenterArgs<ExtArgs>
+  disputedBy?: boolean | Prisma.HandoverRecord$disputedByArgs<ExtArgs>
+  resolvedBy?: boolean | Prisma.HandoverRecord$resolvedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HandoverRecord$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HandoverRecord$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.HandoverRecord$deletedByArgs<ExtArgs>
@@ -1809,6 +3605,10 @@ export type HandoverRecordIncludeUpdateManyAndReturn<ExtArgs extends runtime.Typ
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
+  signedByLandlord?: boolean | Prisma.HandoverRecord$signedByLandlordArgs<ExtArgs>
+  signedByRenter?: boolean | Prisma.HandoverRecord$signedByRenterArgs<ExtArgs>
+  disputedBy?: boolean | Prisma.HandoverRecord$disputedByArgs<ExtArgs>
+  resolvedBy?: boolean | Prisma.HandoverRecord$resolvedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HandoverRecord$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HandoverRecord$updatedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.HandoverRecord$deletedByArgs<ExtArgs>
@@ -1833,6 +3633,10 @@ export type $HandoverRecordPayload<ExtArgs extends runtime.Types.Extensions.Inte
      * Chi tiết tình trạng các tài sản được ghi nhận trong biên bản này
      */
     assetItems: Prisma.$HandoverAssetItemPayload<ExtArgs>[]
+    signedByLandlord: Prisma.$UserPayload<ExtArgs> | null
+    signedByRenter: Prisma.$UserPayload<ExtArgs> | null
+    disputedBy: Prisma.$UserPayload<ExtArgs> | null
+    resolvedBy: Prisma.$UserPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     deletedBy: Prisma.$UserPayload<ExtArgs> | null
@@ -1871,13 +3675,49 @@ export type $HandoverRecordPayload<ExtArgs extends runtime.Types.Extensions.Inte
      */
     signedByRenterAt: Date | null
     /**
+     * Người đại diện chủ trọ đã xác nhận
+     */
+    signedByLandlordId: number | null
+    /**
+     * Người thuê chính đã xác nhận
+     */
+    signedByRenterId: number | null
+    /**
      * Trạng thái xác nhận của biên bản bàn giao
      */
     status: $Enums.HandoverStatus
     /**
+     * Phiên bản nội dung; tăng khi xử lý tranh chấp
+     */
+    version: number
+    /**
+     * SHA-256 của nội dung và snapshot tài sản
+     */
+    contentHash: string
+    /**
+     * Thời điểm đủ xác nhận từ hai phía
+     */
+    confirmedAt: Date | null
+    /**
+     * Thông tin tranh chấp
+     */
+    disputedById: number | null
+    disputeReason: string | null
+    disputedAt: Date | null
+    /**
+     * Thông tin xử lý tranh chấp
+     */
+    resolvedById: number | null
+    resolutionNote: string | null
+    resolvedAt: Date | null
+    /**
      * Thời điểm lập biên bản bàn giao
      */
     createdAt: Date
+    /**
+     * Thời điểm cập nhật biên bản
+     */
+    updatedAt: Date
     /**
      * ID người dùng tạo bản ghi
      */
@@ -2288,6 +4128,10 @@ export interface Prisma__HandoverRecordClient<T, Null = never, ExtArgs extends r
   contract<T extends Prisma.ContractDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContractDefaultArgs<ExtArgs>>): Prisma.Prisma__ContractClient<runtime.Types.Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   room<T extends Prisma.RoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomDefaultArgs<ExtArgs>>): Prisma.Prisma__RoomClient<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   assetItems<T extends Prisma.HandoverRecord$assetItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HandoverRecord$assetItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HandoverAssetItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  signedByLandlord<T extends Prisma.HandoverRecord$signedByLandlordArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HandoverRecord$signedByLandlordArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  signedByRenter<T extends Prisma.HandoverRecord$signedByRenterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HandoverRecord$signedByRenterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  disputedBy<T extends Prisma.HandoverRecord$disputedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HandoverRecord$disputedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  resolvedBy<T extends Prisma.HandoverRecord$resolvedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HandoverRecord$resolvedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.HandoverRecord$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HandoverRecord$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.HandoverRecord$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HandoverRecord$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.HandoverRecord$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HandoverRecord$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2328,8 +4172,20 @@ export interface HandoverRecordFieldRefs {
   readonly note: Prisma.FieldRef<"HandoverRecord", 'String'>
   readonly signedByLandlordAt: Prisma.FieldRef<"HandoverRecord", 'DateTime'>
   readonly signedByRenterAt: Prisma.FieldRef<"HandoverRecord", 'DateTime'>
+  readonly signedByLandlordId: Prisma.FieldRef<"HandoverRecord", 'Int'>
+  readonly signedByRenterId: Prisma.FieldRef<"HandoverRecord", 'Int'>
   readonly status: Prisma.FieldRef<"HandoverRecord", 'HandoverStatus'>
+  readonly version: Prisma.FieldRef<"HandoverRecord", 'Int'>
+  readonly contentHash: Prisma.FieldRef<"HandoverRecord", 'String'>
+  readonly confirmedAt: Prisma.FieldRef<"HandoverRecord", 'DateTime'>
+  readonly disputedById: Prisma.FieldRef<"HandoverRecord", 'Int'>
+  readonly disputeReason: Prisma.FieldRef<"HandoverRecord", 'String'>
+  readonly disputedAt: Prisma.FieldRef<"HandoverRecord", 'DateTime'>
+  readonly resolvedById: Prisma.FieldRef<"HandoverRecord", 'Int'>
+  readonly resolutionNote: Prisma.FieldRef<"HandoverRecord", 'String'>
+  readonly resolvedAt: Prisma.FieldRef<"HandoverRecord", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"HandoverRecord", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"HandoverRecord", 'DateTime'>
   readonly createdById: Prisma.FieldRef<"HandoverRecord", 'Int'>
   readonly updatedById: Prisma.FieldRef<"HandoverRecord", 'Int'>
   readonly deletedById: Prisma.FieldRef<"HandoverRecord", 'Int'>
@@ -2755,6 +4611,82 @@ export type HandoverRecord$assetItemsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.HandoverAssetItemScalarFieldEnum | Prisma.HandoverAssetItemScalarFieldEnum[]
+}
+
+/**
+ * HandoverRecord.signedByLandlord
+ */
+export type HandoverRecord$signedByLandlordArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * HandoverRecord.signedByRenter
+ */
+export type HandoverRecord$signedByRenterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * HandoverRecord.disputedBy
+ */
+export type HandoverRecord$disputedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * HandoverRecord.resolvedBy
+ */
+export type HandoverRecord$resolvedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

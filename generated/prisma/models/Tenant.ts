@@ -331,9 +331,13 @@ export type TenantWhereInput = {
   rentalHistories?: Prisma.RentalHistoryListRelationFilter
   viewingAppointments?: Prisma.RoomViewingAppointmentListRelationFilter
   rentalRequests?: Prisma.RentalRequestListRelationFilter
+  renterInvitations?: Prisma.RenterInvitationListRelationFilter
   contractTemplates?: Prisma.ContractTemplateListRelationFilter
   contracts?: Prisma.ContractListRelationFilter
+  serviceCatalogItems?: Prisma.ServiceCatalogItemListRelationFilter
+  serviceAssignments?: Prisma.ServiceAssignmentListRelationFilter
   terminationRequests?: Prisma.ContractTerminationRequestListRelationFilter
+  assetCategories?: Prisma.AssetCategoryListRelationFilter
   roomAssets?: Prisma.RoomAssetListRelationFilter
   handoverRecords?: Prisma.HandoverRecordListRelationFilter
   utilityMeters?: Prisma.UtilityMeterListRelationFilter
@@ -385,9 +389,13 @@ export type TenantOrderByWithRelationInput = {
   rentalHistories?: Prisma.RentalHistoryOrderByRelationAggregateInput
   viewingAppointments?: Prisma.RoomViewingAppointmentOrderByRelationAggregateInput
   rentalRequests?: Prisma.RentalRequestOrderByRelationAggregateInput
+  renterInvitations?: Prisma.RenterInvitationOrderByRelationAggregateInput
   contractTemplates?: Prisma.ContractTemplateOrderByRelationAggregateInput
   contracts?: Prisma.ContractOrderByRelationAggregateInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemOrderByRelationAggregateInput
+  serviceAssignments?: Prisma.ServiceAssignmentOrderByRelationAggregateInput
   terminationRequests?: Prisma.ContractTerminationRequestOrderByRelationAggregateInput
+  assetCategories?: Prisma.AssetCategoryOrderByRelationAggregateInput
   roomAssets?: Prisma.RoomAssetOrderByRelationAggregateInput
   handoverRecords?: Prisma.HandoverRecordOrderByRelationAggregateInput
   utilityMeters?: Prisma.UtilityMeterOrderByRelationAggregateInput
@@ -442,9 +450,13 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   rentalHistories?: Prisma.RentalHistoryListRelationFilter
   viewingAppointments?: Prisma.RoomViewingAppointmentListRelationFilter
   rentalRequests?: Prisma.RentalRequestListRelationFilter
+  renterInvitations?: Prisma.RenterInvitationListRelationFilter
   contractTemplates?: Prisma.ContractTemplateListRelationFilter
   contracts?: Prisma.ContractListRelationFilter
+  serviceCatalogItems?: Prisma.ServiceCatalogItemListRelationFilter
+  serviceAssignments?: Prisma.ServiceAssignmentListRelationFilter
   terminationRequests?: Prisma.ContractTerminationRequestListRelationFilter
+  assetCategories?: Prisma.AssetCategoryListRelationFilter
   roomAssets?: Prisma.RoomAssetListRelationFilter
   handoverRecords?: Prisma.HandoverRecordListRelationFilter
   utilityMeters?: Prisma.UtilityMeterListRelationFilter
@@ -537,9 +549,13 @@ export type TenantCreateInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -590,9 +606,13 @@ export type TenantUncheckedCreateInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -636,9 +656,13 @@ export type TenantUpdateInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -689,9 +713,13 @@ export type TenantUncheckedUpdateInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -1131,6 +1159,20 @@ export type TenantUpdateOneRequiredWithoutMarketplaceModerationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutMarketplaceModerationsInput, Prisma.TenantUpdateWithoutMarketplaceModerationsInput>, Prisma.TenantUncheckedUpdateWithoutMarketplaceModerationsInput>
 }
 
+export type TenantCreateNestedOneWithoutRenterInvitationsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutRenterInvitationsInput, Prisma.TenantUncheckedCreateWithoutRenterInvitationsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRenterInvitationsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutRenterInvitationsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutRenterInvitationsInput, Prisma.TenantUncheckedCreateWithoutRenterInvitationsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRenterInvitationsInput
+  upsert?: Prisma.TenantUpsertWithoutRenterInvitationsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutRenterInvitationsInput, Prisma.TenantUpdateWithoutRenterInvitationsInput>, Prisma.TenantUncheckedUpdateWithoutRenterInvitationsInput>
+}
+
 export type TenantCreateNestedOneWithoutRentalHistoriesInput = {
   create?: Prisma.XOR<Prisma.TenantCreateWithoutRentalHistoriesInput, Prisma.TenantUncheckedCreateWithoutRentalHistoriesInput>
   connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRentalHistoriesInput
@@ -1215,6 +1257,20 @@ export type TenantUpdateOneRequiredWithoutTerminationRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutTerminationRequestsInput, Prisma.TenantUpdateWithoutTerminationRequestsInput>, Prisma.TenantUncheckedUpdateWithoutTerminationRequestsInput>
 }
 
+export type TenantCreateNestedOneWithoutAssetCategoriesInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutAssetCategoriesInput, Prisma.TenantUncheckedCreateWithoutAssetCategoriesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutAssetCategoriesInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutAssetCategoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutAssetCategoriesInput, Prisma.TenantUncheckedCreateWithoutAssetCategoriesInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutAssetCategoriesInput
+  upsert?: Prisma.TenantUpsertWithoutAssetCategoriesInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutAssetCategoriesInput, Prisma.TenantUpdateWithoutAssetCategoriesInput>, Prisma.TenantUncheckedUpdateWithoutAssetCategoriesInput>
+}
+
 export type TenantCreateNestedOneWithoutRoomAssetsInput = {
   create?: Prisma.XOR<Prisma.TenantCreateWithoutRoomAssetsInput, Prisma.TenantUncheckedCreateWithoutRoomAssetsInput>
   connectOrCreate?: Prisma.TenantCreateOrConnectWithoutRoomAssetsInput
@@ -1297,6 +1353,34 @@ export type TenantUpdateOneRequiredWithoutInvoiceBatchesNestedInput = {
   upsert?: Prisma.TenantUpsertWithoutInvoiceBatchesInput
   connect?: Prisma.TenantWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutInvoiceBatchesInput, Prisma.TenantUpdateWithoutInvoiceBatchesInput>, Prisma.TenantUncheckedUpdateWithoutInvoiceBatchesInput>
+}
+
+export type TenantCreateNestedOneWithoutServiceCatalogItemsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutServiceCatalogItemsInput, Prisma.TenantUncheckedCreateWithoutServiceCatalogItemsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutServiceCatalogItemsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutServiceCatalogItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutServiceCatalogItemsInput, Prisma.TenantUncheckedCreateWithoutServiceCatalogItemsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutServiceCatalogItemsInput
+  upsert?: Prisma.TenantUpsertWithoutServiceCatalogItemsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutServiceCatalogItemsInput, Prisma.TenantUpdateWithoutServiceCatalogItemsInput>, Prisma.TenantUncheckedUpdateWithoutServiceCatalogItemsInput>
+}
+
+export type TenantCreateNestedOneWithoutServiceAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutServiceAssignmentsInput, Prisma.TenantUncheckedCreateWithoutServiceAssignmentsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutServiceAssignmentsInput
+  connect?: Prisma.TenantWhereUniqueInput
+}
+
+export type TenantUpdateOneRequiredWithoutServiceAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.TenantCreateWithoutServiceAssignmentsInput, Prisma.TenantUncheckedCreateWithoutServiceAssignmentsInput>
+  connectOrCreate?: Prisma.TenantCreateOrConnectWithoutServiceAssignmentsInput
+  upsert?: Prisma.TenantUpsertWithoutServiceAssignmentsInput
+  connect?: Prisma.TenantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenantUpdateToOneWithWhereWithoutServiceAssignmentsInput, Prisma.TenantUpdateWithoutServiceAssignmentsInput>, Prisma.TenantUncheckedUpdateWithoutServiceAssignmentsInput>
 }
 
 export type TenantCreateNestedOneWithoutInvoicesInput = {
@@ -1497,9 +1581,13 @@ export type TenantCreateWithoutOwnerInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -1549,9 +1637,13 @@ export type TenantUncheckedCreateWithoutOwnerInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -1605,9 +1697,13 @@ export type TenantCreateWithoutCreatedByInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -1656,9 +1752,13 @@ export type TenantUncheckedCreateWithoutCreatedByInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -1712,9 +1812,13 @@ export type TenantCreateWithoutUpdatedByInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -1763,9 +1867,13 @@ export type TenantUncheckedCreateWithoutUpdatedByInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -1819,9 +1927,13 @@ export type TenantCreateWithoutDeletedByInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -1870,9 +1982,13 @@ export type TenantUncheckedCreateWithoutDeletedByInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -2011,9 +2127,13 @@ export type TenantCreateWithoutMembersInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -2063,9 +2183,13 @@ export type TenantUncheckedCreateWithoutMembersInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -2124,9 +2248,13 @@ export type TenantUpdateWithoutMembersInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -2176,9 +2304,13 @@ export type TenantUncheckedUpdateWithoutMembersInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -2221,9 +2353,13 @@ export type TenantCreateWithoutSubscriptionsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -2273,9 +2409,13 @@ export type TenantUncheckedCreateWithoutSubscriptionsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -2334,9 +2474,13 @@ export type TenantUpdateWithoutSubscriptionsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -2386,9 +2530,13 @@ export type TenantUncheckedUpdateWithoutSubscriptionsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -2431,9 +2579,13 @@ export type TenantCreateWithoutSubscriptionPaymentsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -2483,9 +2635,13 @@ export type TenantUncheckedCreateWithoutSubscriptionPaymentsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -2544,9 +2700,13 @@ export type TenantUpdateWithoutSubscriptionPaymentsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -2596,9 +2756,13 @@ export type TenantUncheckedUpdateWithoutSubscriptionPaymentsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -2641,9 +2805,13 @@ export type TenantCreateWithoutPropertiesInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -2693,9 +2861,13 @@ export type TenantUncheckedCreateWithoutPropertiesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -2754,9 +2926,13 @@ export type TenantUpdateWithoutPropertiesInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -2806,9 +2982,13 @@ export type TenantUncheckedUpdateWithoutPropertiesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -2851,9 +3031,13 @@ export type TenantCreateWithoutFloorsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -2903,9 +3087,13 @@ export type TenantUncheckedCreateWithoutFloorsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -2964,9 +3152,13 @@ export type TenantUpdateWithoutFloorsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -3016,9 +3208,13 @@ export type TenantUncheckedUpdateWithoutFloorsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -3061,9 +3257,13 @@ export type TenantCreateWithoutRoomsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -3113,9 +3313,13 @@ export type TenantUncheckedCreateWithoutRoomsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -3174,9 +3378,13 @@ export type TenantUpdateWithoutRoomsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -3226,9 +3434,13 @@ export type TenantUncheckedUpdateWithoutRoomsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -3271,9 +3483,13 @@ export type TenantCreateWithoutMarketplaceModerationsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -3323,9 +3539,13 @@ export type TenantUncheckedCreateWithoutMarketplaceModerationsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -3384,9 +3604,13 @@ export type TenantUpdateWithoutMarketplaceModerationsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -3436,9 +3660,239 @@ export type TenantUncheckedUpdateWithoutMarketplaceModerationsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutRenterInvitationsInput = {
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  owner: Prisma.UserCreateNestedOneWithoutOwnedTenantsInput
+  members?: Prisma.TenantMemberCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedTenantsInput
+}
+
+export type TenantUncheckedCreateWithoutRenterInvitationsInput = {
+  id?: number
+  ownerUserId: number
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutRenterInvitationsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutRenterInvitationsInput, Prisma.TenantUncheckedCreateWithoutRenterInvitationsInput>
+}
+
+export type TenantUpsertWithoutRenterInvitationsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutRenterInvitationsInput, Prisma.TenantUncheckedUpdateWithoutRenterInvitationsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutRenterInvitationsInput, Prisma.TenantUncheckedCreateWithoutRenterInvitationsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutRenterInvitationsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutRenterInvitationsInput, Prisma.TenantUncheckedUpdateWithoutRenterInvitationsInput>
+}
+
+export type TenantUpdateWithoutRenterInvitationsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTenantsNestedInput
+  members?: Prisma.TenantMemberUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedTenantsNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutRenterInvitationsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -3481,9 +3935,13 @@ export type TenantCreateWithoutRentalHistoriesInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -3533,9 +3991,13 @@ export type TenantUncheckedCreateWithoutRentalHistoriesInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -3594,9 +4056,13 @@ export type TenantUpdateWithoutRentalHistoriesInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -3646,9 +4112,13 @@ export type TenantUncheckedUpdateWithoutRentalHistoriesInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -3691,9 +4161,13 @@ export type TenantCreateWithoutViewingAppointmentsInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -3743,9 +4217,13 @@ export type TenantUncheckedCreateWithoutViewingAppointmentsInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -3804,9 +4282,13 @@ export type TenantUpdateWithoutViewingAppointmentsInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -3856,9 +4338,13 @@ export type TenantUncheckedUpdateWithoutViewingAppointmentsInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -3901,9 +4387,13 @@ export type TenantCreateWithoutRentalRequestsInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -3953,9 +4443,13 @@ export type TenantUncheckedCreateWithoutRentalRequestsInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -4014,9 +4508,13 @@ export type TenantUpdateWithoutRentalRequestsInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -4066,9 +4564,13 @@ export type TenantUncheckedUpdateWithoutRentalRequestsInput = {
   marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -4112,8 +4614,12 @@ export type TenantCreateWithoutContractTemplatesInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -4164,8 +4670,12 @@ export type TenantUncheckedCreateWithoutContractTemplatesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -4225,8 +4735,12 @@ export type TenantUpdateWithoutContractTemplatesInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -4277,8 +4791,12 @@ export type TenantUncheckedUpdateWithoutContractTemplatesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -4322,8 +4840,12 @@ export type TenantCreateWithoutContractsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -4374,8 +4896,12 @@ export type TenantUncheckedCreateWithoutContractsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -4435,8 +4961,12 @@ export type TenantUpdateWithoutContractsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -4487,8 +5017,12 @@ export type TenantUncheckedUpdateWithoutContractsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -4532,8 +5066,12 @@ export type TenantCreateWithoutTerminationRequestsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -4584,8 +5122,12 @@ export type TenantUncheckedCreateWithoutTerminationRequestsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -4645,8 +5187,12 @@ export type TenantUpdateWithoutTerminationRequestsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -4697,8 +5243,238 @@ export type TenantUncheckedUpdateWithoutTerminationRequestsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutAssetCategoriesInput = {
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  owner: Prisma.UserCreateNestedOneWithoutOwnedTenantsInput
+  members?: Prisma.TenantMemberCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedTenantsInput
+}
+
+export type TenantUncheckedCreateWithoutAssetCategoriesInput = {
+  id?: number
+  ownerUserId: number
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutAssetCategoriesInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutAssetCategoriesInput, Prisma.TenantUncheckedCreateWithoutAssetCategoriesInput>
+}
+
+export type TenantUpsertWithoutAssetCategoriesInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutAssetCategoriesInput, Prisma.TenantUncheckedUpdateWithoutAssetCategoriesInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutAssetCategoriesInput, Prisma.TenantUncheckedCreateWithoutAssetCategoriesInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutAssetCategoriesInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutAssetCategoriesInput, Prisma.TenantUncheckedUpdateWithoutAssetCategoriesInput>
+}
+
+export type TenantUpdateWithoutAssetCategoriesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTenantsNestedInput
+  members?: Prisma.TenantMemberUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedTenantsNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutAssetCategoriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -4742,9 +5518,13 @@ export type TenantCreateWithoutRoomAssetsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
@@ -4794,9 +5574,13 @@ export type TenantUncheckedCreateWithoutRoomAssetsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
@@ -4855,9 +5639,13 @@ export type TenantUpdateWithoutRoomAssetsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
@@ -4907,9 +5695,13 @@ export type TenantUncheckedUpdateWithoutRoomAssetsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
@@ -4952,9 +5744,13 @@ export type TenantCreateWithoutHandoverRecordsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
@@ -5004,9 +5800,13 @@ export type TenantUncheckedCreateWithoutHandoverRecordsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
@@ -5065,9 +5865,13 @@ export type TenantUpdateWithoutHandoverRecordsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
@@ -5117,9 +5921,13 @@ export type TenantUncheckedUpdateWithoutHandoverRecordsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
@@ -5162,9 +5970,13 @@ export type TenantCreateWithoutUtilityMetersInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
@@ -5214,9 +6026,13 @@ export type TenantUncheckedCreateWithoutUtilityMetersInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
@@ -5275,9 +6091,13 @@ export type TenantUpdateWithoutUtilityMetersInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
@@ -5327,9 +6147,13 @@ export type TenantUncheckedUpdateWithoutUtilityMetersInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
@@ -5372,9 +6196,13 @@ export type TenantCreateWithoutMeterReadingsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -5424,9 +6252,13 @@ export type TenantUncheckedCreateWithoutMeterReadingsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -5485,9 +6317,13 @@ export type TenantUpdateWithoutMeterReadingsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -5537,9 +6373,13 @@ export type TenantUncheckedUpdateWithoutMeterReadingsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -5582,9 +6422,13 @@ export type TenantCreateWithoutOcrJobsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -5634,9 +6478,13 @@ export type TenantUncheckedCreateWithoutOcrJobsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -5695,9 +6543,13 @@ export type TenantUpdateWithoutOcrJobsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -5747,9 +6599,13 @@ export type TenantUncheckedUpdateWithoutOcrJobsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -5792,9 +6648,13 @@ export type TenantCreateWithoutInvoiceBatchesInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -5844,9 +6704,13 @@ export type TenantUncheckedCreateWithoutInvoiceBatchesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -5905,9 +6769,13 @@ export type TenantUpdateWithoutInvoiceBatchesInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -5957,14 +6825,470 @@ export type TenantUncheckedUpdateWithoutInvoiceBatchesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
   meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
   ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutServiceCatalogItemsInput = {
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  owner: Prisma.UserCreateNestedOneWithoutOwnedTenantsInput
+  members?: Prisma.TenantMemberCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedTenantsInput
+}
+
+export type TenantUncheckedCreateWithoutServiceCatalogItemsInput = {
+  id?: number
+  ownerUserId: number
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutServiceCatalogItemsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutServiceCatalogItemsInput, Prisma.TenantUncheckedCreateWithoutServiceCatalogItemsInput>
+}
+
+export type TenantUpsertWithoutServiceCatalogItemsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutServiceCatalogItemsInput, Prisma.TenantUncheckedUpdateWithoutServiceCatalogItemsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutServiceCatalogItemsInput, Prisma.TenantUncheckedCreateWithoutServiceCatalogItemsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutServiceCatalogItemsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutServiceCatalogItemsInput, Prisma.TenantUncheckedUpdateWithoutServiceCatalogItemsInput>
+}
+
+export type TenantUpdateWithoutServiceCatalogItemsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTenantsNestedInput
+  members?: Prisma.TenantMemberUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedTenantsNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutServiceCatalogItemsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUncheckedUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+}
+
+export type TenantCreateWithoutServiceAssignmentsInput = {
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  owner: Prisma.UserCreateNestedOneWithoutOwnedTenantsInput
+  members?: Prisma.TenantMemberCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutTenantInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedTenantsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedTenantsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedTenantsInput
+}
+
+export type TenantUncheckedCreateWithoutServiceAssignmentsInput = {
+  id?: number
+  ownerUserId: number
+  name: string
+  slug: string
+  taxCode?: string | null
+  phone?: string | null
+  email?: string | null
+  address?: string | null
+  verificationStatus?: $Enums.VerificationStatus
+  status?: $Enums.TenantStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  members?: Prisma.TenantMemberUncheckedCreateNestedManyWithoutTenantInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedCreateNestedManyWithoutTenantInput
+  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutTenantInput
+  floors?: Prisma.FloorUncheckedCreateNestedManyWithoutTenantInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutTenantInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedCreateNestedManyWithoutTenantInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
+  rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
+  roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutTenantInput
+  ocrJobs?: Prisma.OcrJobUncheckedCreateNestedManyWithoutTenantInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedCreateNestedManyWithoutTenantInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutTenantInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutTenantInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUncheckedCreateNestedManyWithoutTenantInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUncheckedCreateNestedManyWithoutTenantInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutTenantInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutTenantInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutTenantInput
+  reputationScores?: Prisma.ReputationScoreUncheckedCreateNestedManyWithoutTenantInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutTenantInput
+  backgroundJobs?: Prisma.BackgroundJobUncheckedCreateNestedManyWithoutTenantInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutTenantInput
+}
+
+export type TenantCreateOrConnectWithoutServiceAssignmentsInput = {
+  where: Prisma.TenantWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenantCreateWithoutServiceAssignmentsInput, Prisma.TenantUncheckedCreateWithoutServiceAssignmentsInput>
+}
+
+export type TenantUpsertWithoutServiceAssignmentsInput = {
+  update: Prisma.XOR<Prisma.TenantUpdateWithoutServiceAssignmentsInput, Prisma.TenantUncheckedUpdateWithoutServiceAssignmentsInput>
+  create: Prisma.XOR<Prisma.TenantCreateWithoutServiceAssignmentsInput, Prisma.TenantUncheckedCreateWithoutServiceAssignmentsInput>
+  where?: Prisma.TenantWhereInput
+}
+
+export type TenantUpdateToOneWithWhereWithoutServiceAssignmentsInput = {
+  where?: Prisma.TenantWhereInput
+  data: Prisma.XOR<Prisma.TenantUpdateWithoutServiceAssignmentsInput, Prisma.TenantUncheckedUpdateWithoutServiceAssignmentsInput>
+}
+
+export type TenantUpdateWithoutServiceAssignmentsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTenantsNestedInput
+  members?: Prisma.TenantMemberUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUpdateManyWithoutTenantNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutTenantNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutTenantNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutTenantNestedInput
+  paymentQrCodes?: Prisma.PaymentQrCodeUpdateManyWithoutTenantNestedInput
+  paymentWebhookLogs?: Prisma.PaymentWebhookLogUpdateManyWithoutTenantNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutTenantNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutTenantNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutTenantNestedInput
+  reputationScores?: Prisma.ReputationScoreUpdateManyWithoutTenantNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutTenantNestedInput
+  backgroundJobs?: Prisma.BackgroundJobUpdateManyWithoutTenantNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutTenantNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedTenantsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedTenantsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedTenantsNestedInput
+}
+
+export type TenantUncheckedUpdateWithoutServiceAssignmentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  ownerUserId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  taxCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+  status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  members?: Prisma.TenantMemberUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+  subscriptionPayments?: Prisma.SubscriptionPaymentUncheckedUpdateManyWithoutTenantNestedInput
+  properties?: Prisma.PropertyUncheckedUpdateManyWithoutTenantNestedInput
+  floors?: Prisma.FloorUncheckedUpdateManyWithoutTenantNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutTenantNestedInput
+  marketplaceModerations?: Prisma.MarketplaceModerationUncheckedUpdateManyWithoutTenantNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
+  viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+  rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
+  contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
+  roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
+  utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutTenantNestedInput
+  ocrJobs?: Prisma.OcrJobUncheckedUpdateManyWithoutTenantNestedInput
+  invoiceBatches?: Prisma.InvoiceBatchUncheckedUpdateManyWithoutTenantNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutTenantNestedInput
   debts?: Prisma.DebtUncheckedUpdateManyWithoutTenantNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutTenantNestedInput
@@ -6002,9 +7326,13 @@ export type TenantCreateWithoutInvoicesInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -6054,9 +7382,13 @@ export type TenantUncheckedCreateWithoutInvoicesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -6115,9 +7447,13 @@ export type TenantUpdateWithoutInvoicesInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -6167,9 +7503,13 @@ export type TenantUncheckedUpdateWithoutInvoicesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -6212,9 +7552,13 @@ export type TenantCreateWithoutDebtsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -6264,9 +7608,13 @@ export type TenantUncheckedCreateWithoutDebtsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -6325,9 +7673,13 @@ export type TenantUpdateWithoutDebtsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -6377,9 +7729,13 @@ export type TenantUncheckedUpdateWithoutDebtsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -6422,9 +7778,13 @@ export type TenantCreateWithoutPaymentsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -6474,9 +7834,13 @@ export type TenantUncheckedCreateWithoutPaymentsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -6535,9 +7899,13 @@ export type TenantUpdateWithoutPaymentsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -6587,9 +7955,13 @@ export type TenantUncheckedUpdateWithoutPaymentsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -6632,9 +8004,13 @@ export type TenantCreateWithoutPaymentQrCodesInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -6684,9 +8060,13 @@ export type TenantUncheckedCreateWithoutPaymentQrCodesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -6745,9 +8125,13 @@ export type TenantUpdateWithoutPaymentQrCodesInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -6797,9 +8181,13 @@ export type TenantUncheckedUpdateWithoutPaymentQrCodesInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -6842,9 +8230,13 @@ export type TenantCreateWithoutPaymentWebhookLogsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -6894,9 +8286,13 @@ export type TenantUncheckedCreateWithoutPaymentWebhookLogsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -6955,9 +8351,13 @@ export type TenantUpdateWithoutPaymentWebhookLogsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -7007,9 +8407,13 @@ export type TenantUncheckedUpdateWithoutPaymentWebhookLogsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -7052,9 +8456,13 @@ export type TenantCreateWithoutTicketsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -7104,9 +8512,13 @@ export type TenantUncheckedCreateWithoutTicketsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -7165,9 +8577,13 @@ export type TenantUpdateWithoutTicketsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -7217,9 +8633,13 @@ export type TenantUncheckedUpdateWithoutTicketsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -7262,9 +8682,13 @@ export type TenantCreateWithoutConversationsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -7314,9 +8738,13 @@ export type TenantUncheckedCreateWithoutConversationsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -7375,9 +8803,13 @@ export type TenantUpdateWithoutConversationsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -7427,9 +8859,13 @@ export type TenantUncheckedUpdateWithoutConversationsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -7472,9 +8908,13 @@ export type TenantCreateWithoutReviewsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -7524,9 +8964,13 @@ export type TenantUncheckedCreateWithoutReviewsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -7585,9 +9029,13 @@ export type TenantUpdateWithoutReviewsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -7637,9 +9085,13 @@ export type TenantUncheckedUpdateWithoutReviewsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -7682,9 +9134,13 @@ export type TenantCreateWithoutReputationScoresInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -7734,9 +9190,13 @@ export type TenantUncheckedCreateWithoutReputationScoresInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -7795,9 +9255,13 @@ export type TenantUpdateWithoutReputationScoresInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -7847,9 +9311,13 @@ export type TenantUncheckedUpdateWithoutReputationScoresInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -7892,9 +9360,13 @@ export type TenantCreateWithoutNotificationsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -7944,9 +9416,13 @@ export type TenantUncheckedCreateWithoutNotificationsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -8005,9 +9481,13 @@ export type TenantUpdateWithoutNotificationsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -8057,9 +9537,13 @@ export type TenantUncheckedUpdateWithoutNotificationsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -8102,9 +9586,13 @@ export type TenantCreateWithoutBackgroundJobsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -8154,9 +9642,13 @@ export type TenantUncheckedCreateWithoutBackgroundJobsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -8215,9 +9707,13 @@ export type TenantUpdateWithoutBackgroundJobsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -8267,9 +9763,13 @@ export type TenantUncheckedUpdateWithoutBackgroundJobsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -8312,9 +9812,13 @@ export type TenantCreateWithoutAuditLogsInput = {
   rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterCreateNestedManyWithoutTenantInput
@@ -8364,9 +9868,13 @@ export type TenantUncheckedCreateWithoutAuditLogsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutTenantInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedCreateNestedManyWithoutTenantInput
   rentalRequests?: Prisma.RentalRequestUncheckedCreateNestedManyWithoutTenantInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedCreateNestedManyWithoutTenantInput
   contractTemplates?: Prisma.ContractTemplateUncheckedCreateNestedManyWithoutTenantInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutTenantInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedCreateNestedManyWithoutTenantInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutTenantInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutTenantInput
+  assetCategories?: Prisma.AssetCategoryUncheckedCreateNestedManyWithoutTenantInput
   roomAssets?: Prisma.RoomAssetUncheckedCreateNestedManyWithoutTenantInput
   handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutTenantInput
   utilityMeters?: Prisma.UtilityMeterUncheckedCreateNestedManyWithoutTenantInput
@@ -8425,9 +9933,13 @@ export type TenantUpdateWithoutAuditLogsInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -8477,9 +9989,13 @@ export type TenantUncheckedUpdateWithoutAuditLogsInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -8593,9 +10109,13 @@ export type TenantUpdateWithoutOwnerInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -8645,9 +10165,13 @@ export type TenantUncheckedUpdateWithoutOwnerInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -8709,9 +10233,13 @@ export type TenantUpdateWithoutCreatedByInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -8760,9 +10288,13 @@ export type TenantUncheckedUpdateWithoutCreatedByInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -8824,9 +10356,13 @@ export type TenantUpdateWithoutUpdatedByInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -8875,9 +10411,13 @@ export type TenantUncheckedUpdateWithoutUpdatedByInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -8939,9 +10479,13 @@ export type TenantUpdateWithoutDeletedByInput = {
   rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUpdateManyWithoutTenantNestedInput
@@ -8990,9 +10534,13 @@ export type TenantUncheckedUpdateWithoutDeletedByInput = {
   rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutTenantNestedInput
   viewingAppointments?: Prisma.RoomViewingAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   rentalRequests?: Prisma.RentalRequestUncheckedUpdateManyWithoutTenantNestedInput
+  renterInvitations?: Prisma.RenterInvitationUncheckedUpdateManyWithoutTenantNestedInput
   contractTemplates?: Prisma.ContractTemplateUncheckedUpdateManyWithoutTenantNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutTenantNestedInput
+  serviceCatalogItems?: Prisma.ServiceCatalogItemUncheckedUpdateManyWithoutTenantNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutTenantNestedInput
   terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutTenantNestedInput
+  assetCategories?: Prisma.AssetCategoryUncheckedUpdateManyWithoutTenantNestedInput
   roomAssets?: Prisma.RoomAssetUncheckedUpdateManyWithoutTenantNestedInput
   handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutTenantNestedInput
   utilityMeters?: Prisma.UtilityMeterUncheckedUpdateManyWithoutTenantNestedInput
@@ -9047,9 +10595,13 @@ export type TenantCountOutputType = {
   rentalHistories: number
   viewingAppointments: number
   rentalRequests: number
+  renterInvitations: number
   contractTemplates: number
   contracts: number
+  serviceCatalogItems: number
+  serviceAssignments: number
   terminationRequests: number
+  assetCategories: number
   roomAssets: number
   handoverRecords: number
   utilityMeters: number
@@ -9081,9 +10633,13 @@ export type TenantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   rentalHistories?: boolean | TenantCountOutputTypeCountRentalHistoriesArgs
   viewingAppointments?: boolean | TenantCountOutputTypeCountViewingAppointmentsArgs
   rentalRequests?: boolean | TenantCountOutputTypeCountRentalRequestsArgs
+  renterInvitations?: boolean | TenantCountOutputTypeCountRenterInvitationsArgs
   contractTemplates?: boolean | TenantCountOutputTypeCountContractTemplatesArgs
   contracts?: boolean | TenantCountOutputTypeCountContractsArgs
+  serviceCatalogItems?: boolean | TenantCountOutputTypeCountServiceCatalogItemsArgs
+  serviceAssignments?: boolean | TenantCountOutputTypeCountServiceAssignmentsArgs
   terminationRequests?: boolean | TenantCountOutputTypeCountTerminationRequestsArgs
+  assetCategories?: boolean | TenantCountOutputTypeCountAssetCategoriesArgs
   roomAssets?: boolean | TenantCountOutputTypeCountRoomAssetsArgs
   handoverRecords?: boolean | TenantCountOutputTypeCountHandoverRecordsArgs
   utilityMeters?: boolean | TenantCountOutputTypeCountUtilityMetersArgs
@@ -9187,6 +10743,13 @@ export type TenantCountOutputTypeCountRentalRequestsArgs<ExtArgs extends runtime
 /**
  * TenantCountOutputType without action
  */
+export type TenantCountOutputTypeCountRenterInvitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RenterInvitationWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
 export type TenantCountOutputTypeCountContractTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ContractTemplateWhereInput
 }
@@ -9201,8 +10764,29 @@ export type TenantCountOutputTypeCountContractsArgs<ExtArgs extends runtime.Type
 /**
  * TenantCountOutputType without action
  */
+export type TenantCountOutputTypeCountServiceCatalogItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ServiceCatalogItemWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountServiceAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ServiceAssignmentWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
 export type TenantCountOutputTypeCountTerminationRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ContractTerminationRequestWhereInput
+}
+
+/**
+ * TenantCountOutputType without action
+ */
+export type TenantCountOutputTypeCountAssetCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AssetCategoryWhereInput
 }
 
 /**
@@ -9360,9 +10944,13 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   rentalHistories?: boolean | Prisma.Tenant$rentalHistoriesArgs<ExtArgs>
   viewingAppointments?: boolean | Prisma.Tenant$viewingAppointmentsArgs<ExtArgs>
   rentalRequests?: boolean | Prisma.Tenant$rentalRequestsArgs<ExtArgs>
+  renterInvitations?: boolean | Prisma.Tenant$renterInvitationsArgs<ExtArgs>
   contractTemplates?: boolean | Prisma.Tenant$contractTemplatesArgs<ExtArgs>
   contracts?: boolean | Prisma.Tenant$contractsArgs<ExtArgs>
+  serviceCatalogItems?: boolean | Prisma.Tenant$serviceCatalogItemsArgs<ExtArgs>
+  serviceAssignments?: boolean | Prisma.Tenant$serviceAssignmentsArgs<ExtArgs>
   terminationRequests?: boolean | Prisma.Tenant$terminationRequestsArgs<ExtArgs>
+  assetCategories?: boolean | Prisma.Tenant$assetCategoriesArgs<ExtArgs>
   roomAssets?: boolean | Prisma.Tenant$roomAssetsArgs<ExtArgs>
   handoverRecords?: boolean | Prisma.Tenant$handoverRecordsArgs<ExtArgs>
   utilityMeters?: boolean | Prisma.Tenant$utilityMetersArgs<ExtArgs>
@@ -9465,9 +11053,13 @@ export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   rentalHistories?: boolean | Prisma.Tenant$rentalHistoriesArgs<ExtArgs>
   viewingAppointments?: boolean | Prisma.Tenant$viewingAppointmentsArgs<ExtArgs>
   rentalRequests?: boolean | Prisma.Tenant$rentalRequestsArgs<ExtArgs>
+  renterInvitations?: boolean | Prisma.Tenant$renterInvitationsArgs<ExtArgs>
   contractTemplates?: boolean | Prisma.Tenant$contractTemplatesArgs<ExtArgs>
   contracts?: boolean | Prisma.Tenant$contractsArgs<ExtArgs>
+  serviceCatalogItems?: boolean | Prisma.Tenant$serviceCatalogItemsArgs<ExtArgs>
+  serviceAssignments?: boolean | Prisma.Tenant$serviceAssignmentsArgs<ExtArgs>
   terminationRequests?: boolean | Prisma.Tenant$terminationRequestsArgs<ExtArgs>
+  assetCategories?: boolean | Prisma.Tenant$assetCategoriesArgs<ExtArgs>
   roomAssets?: boolean | Prisma.Tenant$roomAssetsArgs<ExtArgs>
   handoverRecords?: boolean | Prisma.Tenant$handoverRecordsArgs<ExtArgs>
   utilityMeters?: boolean | Prisma.Tenant$utilityMetersArgs<ExtArgs>
@@ -9551,6 +11143,7 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
      * Yêu cầu thuê phòng được gửi đến tenant này
      */
     rentalRequests: Prisma.$RentalRequestPayload<ExtArgs>[]
+    renterInvitations: Prisma.$RenterInvitationPayload<ExtArgs>[]
     /**
      * Danh sách các mẫu hợp đồng do tenant định nghĩa
      */
@@ -9559,10 +11152,13 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
      * Danh sách các hợp đồng thuê phòng thuộc tenant quản lý
      */
     contracts: Prisma.$ContractPayload<ExtArgs>[]
+    serviceCatalogItems: Prisma.$ServiceCatalogItemPayload<ExtArgs>[]
+    serviceAssignments: Prisma.$ServiceAssignmentPayload<ExtArgs>[]
     /**
      * Danh sách các yêu cầu trả phòng gửi đến tenant này
      */
     terminationRequests: Prisma.$ContractTerminationRequestPayload<ExtArgs>[]
+    assetCategories: Prisma.$AssetCategoryPayload<ExtArgs>[]
     /**
      * Danh sách tài sản thuộc quản lý của tenant
      */
@@ -10109,9 +11705,13 @@ export interface Prisma__TenantClient<T, Null = never, ExtArgs extends runtime.T
   rentalHistories<T extends Prisma.Tenant$rentalHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$rentalHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   viewingAppointments<T extends Prisma.Tenant$viewingAppointmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$viewingAppointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomViewingAppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rentalRequests<T extends Prisma.Tenant$rentalRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$rentalRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  renterInvitations<T extends Prisma.Tenant$renterInvitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$renterInvitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RenterInvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contractTemplates<T extends Prisma.Tenant$contractTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$contractTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContractTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contracts<T extends Prisma.Tenant$contractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$contractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  serviceCatalogItems<T extends Prisma.Tenant$serviceCatalogItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$serviceCatalogItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceCatalogItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  serviceAssignments<T extends Prisma.Tenant$serviceAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$serviceAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServiceAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   terminationRequests<T extends Prisma.Tenant$terminationRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$terminationRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContractTerminationRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assetCategories<T extends Prisma.Tenant$assetCategoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$assetCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssetCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roomAssets<T extends Prisma.Tenant$roomAssetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$roomAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   handoverRecords<T extends Prisma.Tenant$handoverRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$handoverRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HandoverRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   utilityMeters<T extends Prisma.Tenant$utilityMetersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenant$utilityMetersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UtilityMeterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -10819,6 +12419,30 @@ export type Tenant$rentalRequestsArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * Tenant.renterInvitations
+ */
+export type Tenant$renterInvitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RenterInvitation
+   */
+  select?: Prisma.RenterInvitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RenterInvitation
+   */
+  omit?: Prisma.RenterInvitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RenterInvitationInclude<ExtArgs> | null
+  where?: Prisma.RenterInvitationWhereInput
+  orderBy?: Prisma.RenterInvitationOrderByWithRelationInput | Prisma.RenterInvitationOrderByWithRelationInput[]
+  cursor?: Prisma.RenterInvitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RenterInvitationScalarFieldEnum | Prisma.RenterInvitationScalarFieldEnum[]
+}
+
+/**
  * Tenant.contractTemplates
  */
 export type Tenant$contractTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -10867,6 +12491,54 @@ export type Tenant$contractsArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * Tenant.serviceCatalogItems
+ */
+export type Tenant$serviceCatalogItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ServiceCatalogItem
+   */
+  select?: Prisma.ServiceCatalogItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ServiceCatalogItem
+   */
+  omit?: Prisma.ServiceCatalogItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ServiceCatalogItemInclude<ExtArgs> | null
+  where?: Prisma.ServiceCatalogItemWhereInput
+  orderBy?: Prisma.ServiceCatalogItemOrderByWithRelationInput | Prisma.ServiceCatalogItemOrderByWithRelationInput[]
+  cursor?: Prisma.ServiceCatalogItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ServiceCatalogItemScalarFieldEnum | Prisma.ServiceCatalogItemScalarFieldEnum[]
+}
+
+/**
+ * Tenant.serviceAssignments
+ */
+export type Tenant$serviceAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ServiceAssignment
+   */
+  select?: Prisma.ServiceAssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ServiceAssignment
+   */
+  omit?: Prisma.ServiceAssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ServiceAssignmentInclude<ExtArgs> | null
+  where?: Prisma.ServiceAssignmentWhereInput
+  orderBy?: Prisma.ServiceAssignmentOrderByWithRelationInput | Prisma.ServiceAssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.ServiceAssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ServiceAssignmentScalarFieldEnum | Prisma.ServiceAssignmentScalarFieldEnum[]
+}
+
+/**
  * Tenant.terminationRequests
  */
 export type Tenant$terminationRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -10888,6 +12560,30 @@ export type Tenant$terminationRequestsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.ContractTerminationRequestScalarFieldEnum | Prisma.ContractTerminationRequestScalarFieldEnum[]
+}
+
+/**
+ * Tenant.assetCategories
+ */
+export type Tenant$assetCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AssetCategory
+   */
+  select?: Prisma.AssetCategorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AssetCategory
+   */
+  omit?: Prisma.AssetCategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AssetCategoryInclude<ExtArgs> | null
+  where?: Prisma.AssetCategoryWhereInput
+  orderBy?: Prisma.AssetCategoryOrderByWithRelationInput | Prisma.AssetCategoryOrderByWithRelationInput[]
+  cursor?: Prisma.AssetCategoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AssetCategoryScalarFieldEnum | Prisma.AssetCategoryScalarFieldEnum[]
 }
 
 /**

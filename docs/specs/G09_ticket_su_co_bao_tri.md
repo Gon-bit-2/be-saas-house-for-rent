@@ -1,5 +1,7 @@
 # G09 - Đặc tả ticket sự cố và bảo trì
 
+> **Snapshot 31/07/2026:** Ticket create/list/detail/assign/status, comment/attachment phân trang, internal-comment isolation, hard cap và resource rate limit đã có API. Conversation/chat riêng mới có schema, chưa phải interface hoàn chỉnh.
+
 ## 1. Tổng quan
 
 G09 mô tả toàn bộ luồng tiếp nhận và xử lý sự cố trong thời gian thuê phòng, từ lúc người thuê báo lỗi đến khi chủ trọ hoặc nhân viên bảo trì phân công, trao đổi và cập nhật kết quả.

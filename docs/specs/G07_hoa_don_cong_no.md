@@ -1,5 +1,7 @@
 # G07 - Đặc tả hóa đơn và công nợ
 
+> **Snapshot 31/07/2026:** Invoice/debt self-service và staff CRUD/action đã có API; G08 cập nhật payment–invoice–debt bằng transaction. InvoiceBatch có schema nhưng orchestration/scheduler hàng tháng chưa hoàn chỉnh; concurrency cần E2E PostgreSQL.
+
 ## 1. Tổng quan
 
 Tài liệu này mô tả nhóm tính năng G07 của backend: lập hóa đơn tiền thuê theo tháng, tạo các dòng tiền phòng/điện/nước/phí khác, phát hành hóa đơn, theo dõi trạng thái và duy trì bản ghi công nợ tương ứng.

@@ -2,7 +2,8 @@ import { ROLES_KEY } from '@src/common/decorators/decorators/roles.decorator'
 import roleName from '@src/common/constants/role.constant'
 
 jest.mock('./rental-requests.service', () => ({ RentalRequestsService: class RentalRequestsService {} }))
-const { RentalRequestsController } = require('./rental-requests.controller') as typeof import('./rental-requests.controller')
+const { RentalRequestsController } =
+  require('./rental-requests.controller') as typeof import('./rental-requests.controller')
 
 describe('RentalRequestsController', () => {
   let controller: import('./rental-requests.controller').RentalRequestsController

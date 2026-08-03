@@ -12,25 +12,33 @@ import { PaymentApiKeyGuard } from './common/guard/payment-api-key.guard'
 import { RolesGuard } from './common/guard/roles.guard'
 import envConfig from './config/env.config'
 import { AmenitiesModule } from './modules/amenities/amenities.module'
+import { AssetsModule } from './modules/assets/assets.module'
 import { AuthModule } from './modules/auth/auth.module'
 import { ContractsModule } from './modules/contracts/contracts.module'
+import { ContractTerminationsModule } from './modules/contract-terminations/contract-terminations.module'
 import { DashboardModule } from './modules/dashboard/dashboard.module'
 import { InvoicesModule } from './modules/invoices/invoices.module'
+import { HandoversModule } from './modules/handovers/handovers.module'
 import { MarketplaceModule } from './modules/marketplace/marketplace.module'
 import { NotificationsModule } from './modules/notifications/notifications.module'
+import { OcrModule } from './modules/ocr/ocr.module'
 import { PaymentsModule } from './modules/payments/payments.module'
 import { PlansModule } from './modules/plans/plans.module'
 import { PropertiesModule } from './modules/properties/properties.module'
+import { SubscriptionPaymentsModule } from './modules/subscription-payments/subscription-payments.module'
 import { RentalRequestsModule } from './modules/rental-requests/rental-requests.module'
+import { ReportsModule } from './modules/reports/reports.module'
 import { RentersModule } from './modules/renters/renters.module'
+import { ServiceChargesModule } from './modules/service-charges/service-charges.module'
 import { RoomsModule } from './modules/rooms/rooms.module'
+import { ReviewsModule } from './modules/reviews/reviews.module'
 import { TenantsModule } from './modules/tenants/tenants.module'
 import { TicketsModule } from './modules/tickets/tickets.module'
 import { UtilityMetersModule } from './modules/utility-meters/utility-meters.module'
 import { UsersModule } from './modules/users/users.module'
 import { DatabaseModule } from './shared/modules/database/prisma.module'
 import { SharedServiceModule } from './shared/modules/services/shared-service.module'
-import { redisThrottlerStorage } from './common/rate-limit/redis-throttler.storage'
+import { RedisThrottlerStorage, redisThrottlerStorage } from './common/rate-limit/redis-throttler.storage'
 
 function buildRedisConnection() {
   if (envConfig.REDIS_URL) {
@@ -83,12 +91,20 @@ function buildRedisConnection() {
     PropertiesModule,
     RoomsModule,
     AmenitiesModule,
+    AssetsModule,
     MarketplaceModule,
     NotificationsModule,
+    OcrModule,
     PaymentsModule,
+    SubscriptionPaymentsModule,
     RentersModule,
+    ServiceChargesModule,
     RentalRequestsModule,
+    ReviewsModule,
+    ReportsModule,
     ContractsModule,
+    HandoversModule,
+    ContractTerminationsModule,
     DashboardModule,
     UtilityMetersModule,
     InvoicesModule,
@@ -96,6 +112,7 @@ function buildRedisConnection() {
   ],
   controllers: [AppController],
   providers: [
+    { provide: RedisThrottlerStorage, useValue: redisThrottlerStorage },
     AppService,
     AccessTokenGuard,
     ApiKeyGuard,

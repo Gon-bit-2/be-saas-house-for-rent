@@ -110,36 +110,43 @@ export class RentalRequestsRepository {
    * Approves a rental request and reserves the room in the same transaction.
    */
   async approveRequestAndReserveRoom(tenantId: number, id: number, actorId: number) {
-    return this.prismaService.$transaction(async (tx) => {
-      await tx.rentalRequest.update({
-        where: { id, tenantId },
-        data: { status: 'APPROVED', updatedById: actorId },
-      })
-
-      const request = await tx.rentalRequest.findUniqueOrThrow({ where: { id }, select: { roomId: true } })
-      const room = await tx.room.findUniqueOrThrow({
-        where: { id: request.roomId },
-        select: { marketplaceStatus: true },
-      })
-      await tx.room.update({
-        where: { id: request.roomId, tenantId },
-        data: { status: 'RESERVED', marketplaceStatus: 'HIDDEN', updatedById: actorId },
-      })
-      if (room.marketplaceStatus !== 'HIDDEN') {
-        await tx.marketplaceModeration.create({
-          data: {
-            roomId: request.roomId,
-            tenantId,
-            actorId,
-            fromStatus: room.marketplaceStatus,
-            toStatus: 'HIDDEN',
-            reason: 'AUTO_RENTAL_REQUEST_APPROVED',
-          },
+    return this.prismaService.$transaction(
+      async (tx) => {
+        const request = await tx.rentalRequest.findFirstOrThrow({
+          where: { id, tenantId },
+          select: { roomId: true },
         })
-      }
+        const room = await tx.room.findFirstOrThrow({
+          where: { id: request.roomId, tenantId },
+          select: { marketplaceStatus: true },
+        })
+        const reserved = await tx.room.updateMany({
+          where: { id: request.roomId, tenantId, status: 'AVAILABLE', deletedAt: null },
+          data: { status: 'RESERVED', marketplaceStatus: 'HIDDEN', updatedById: actorId },
+        })
+        if (reserved.count !== 1) throw new Error('ROOM_RESERVATION_CONFLICT')
+        const approved = await tx.rentalRequest.updateMany({
+          where: { id, tenantId, status: { in: ['PENDING', 'NEED_MORE_INFO'] } },
+          data: { status: 'APPROVED', updatedById: actorId },
+        })
+        if (approved.count !== 1) throw new Error('RENTAL_REQUEST_DECISION_CONFLICT')
+        if (room.marketplaceStatus !== 'HIDDEN') {
+          await tx.marketplaceModeration.create({
+            data: {
+              roomId: request.roomId,
+              tenantId,
+              actorId,
+              fromStatus: room.marketplaceStatus,
+              toStatus: 'HIDDEN',
+              reason: 'AUTO_RENTAL_REQUEST_APPROVED',
+            },
+          })
+        }
 
-      return tx.rentalRequest.findUniqueOrThrow({ where: { id }, select: rentalRequestSelect })
-    })
+        return tx.rentalRequest.findUniqueOrThrow({ where: { id }, select: rentalRequestSelect })
+      },
+      { isolationLevel: 'Serializable' },
+    )
   }
 
   async updateRequestStatus(tenantId: number, id: number, status: 'REJECTED' | 'NEED_MORE_INFO', actorId: number) {

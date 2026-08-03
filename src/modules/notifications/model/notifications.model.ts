@@ -1,6 +1,15 @@
 import z from 'zod'
 
-const NotificationTypeSchema = z.enum(['INVOICE', 'PAYMENT', 'CONTRACT', 'TICKET', 'APPOINTMENT', 'SYSTEM'])
+const NotificationTypeSchema = z.enum([
+  'INVOICE',
+  'PAYMENT',
+  'CONTRACT',
+  'TICKET',
+  'APPOINTMENT',
+  'REVIEW',
+  'REPORT',
+  'SYSTEM',
+])
 const DevicePlatformSchema = z.enum(['IOS', 'ANDROID', 'WEB'])
 
 export const ListNotificationsQuerySchema = z

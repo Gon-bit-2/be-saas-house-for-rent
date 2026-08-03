@@ -10,6 +10,7 @@
 */
 
 export const SubscriptionStatus = {
+  PENDING: 'PENDING',
   TRIALING: 'TRIALING',
   ACTIVE: 'ACTIVE',
   PAST_DUE: 'PAST_DUE',
@@ -32,10 +33,20 @@ export const SubscriptionPaymentStatus = {
   PENDING: 'PENDING',
   PAID: 'PAID',
   FAILED: 'FAILED',
-  REFUNDED: 'REFUNDED'
+  REFUNDED: 'REFUNDED',
+  CANCELED: 'CANCELED',
+  EXPIRED: 'EXPIRED'
 } as const
 
 export type SubscriptionPaymentStatus = (typeof SubscriptionPaymentStatus)[keyof typeof SubscriptionPaymentStatus]
+
+
+export const SubscriptionPaymentPurpose = {
+  RENEWAL: 'RENEWAL',
+  PLAN_CHANGE: 'PLAN_CHANGE'
+} as const
+
+export type SubscriptionPaymentPurpose = (typeof SubscriptionPaymentPurpose)[keyof typeof SubscriptionPaymentPurpose]
 
 
 export const PropertyType = {
@@ -470,6 +481,8 @@ export const NotificationType = {
   CONTRACT: 'CONTRACT',
   TICKET: 'TICKET',
   APPOINTMENT: 'APPOINTMENT',
+  REVIEW: 'REVIEW',
+  REPORT: 'REPORT',
   SYSTEM: 'SYSTEM'
 } as const
 

@@ -1,7 +1,11 @@
-import { BadRequestException, NotFoundException } from '@nestjs/common'
+import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common'
 
-jest.mock('@src/shared/modules/services/tenant-access.service', () => ({ TenantAccessService: class TenantAccessService {} }))
-jest.mock('./repositories/rental-requests.repo', () => ({ RentalRequestsRepository: class RentalRequestsRepository {} }))
+jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
+  TenantAccessService: class TenantAccessService {},
+}))
+jest.mock('./repositories/rental-requests.repo', () => ({
+  RentalRequestsRepository: class RentalRequestsRepository {},
+}))
 const { RentalRequestsService } = require('./rental-requests.service') as typeof import('./rental-requests.service')
 
 describe('RentalRequestsService', () => {
@@ -20,13 +24,19 @@ describe('RentalRequestsService', () => {
       cancelRenterRequest: jest.fn(),
     }
     tenantAccessService = {
-      getActiveTenantContext: jest.fn().mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
+      getActiveTenantContext: jest
+        .fn()
+        .mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
     }
     service = new RentalRequestsService(rentalRequestsRepository as never, tenantAccessService as never)
   })
 
   it('approves a pending request through transaction that reserves the room', async () => {
-    rentalRequestsRepository.findTenantRequest.mockResolvedValue({ id: 7, status: 'PENDING', room: { status: 'AVAILABLE' } })
+    rentalRequestsRepository.findTenantRequest.mockResolvedValue({
+      id: 7,
+      status: 'PENDING',
+      room: { status: 'AVAILABLE' },
+    })
     rentalRequestsRepository.approveRequestAndReserveRoom.mockResolvedValue({ id: 7, status: 'APPROVED' })
 
     await service.decide(50, 7, { status: 'APPROVED' })
@@ -35,15 +45,34 @@ describe('RentalRequestsService', () => {
     expect(rentalRequestsRepository.updateRequestStatus).not.toHaveBeenCalled()
   })
 
+  it('maps concurrent room reservation to a conflict response', async () => {
+    rentalRequestsRepository.findTenantRequest.mockResolvedValue({
+      id: 7,
+      status: 'PENDING',
+      room: { status: 'AVAILABLE' },
+    })
+    rentalRequestsRepository.approveRequestAndReserveRoom.mockRejectedValue(new Error('ROOM_RESERVATION_CONFLICT'))
+
+    await expect(service.decide(50, 7, { status: 'APPROVED' })).rejects.toBeInstanceOf(ConflictException)
+  })
+
   it('rejects approval when room is not available', async () => {
-    rentalRequestsRepository.findTenantRequest.mockResolvedValue({ id: 7, status: 'PENDING', room: { status: 'RESERVED' } })
+    rentalRequestsRepository.findTenantRequest.mockResolvedValue({
+      id: 7,
+      status: 'PENDING',
+      room: { status: 'RESERVED' },
+    })
 
     await expect(service.decide(50, 7, { status: 'APPROVED' })).rejects.toBeInstanceOf(BadRequestException)
     expect(rentalRequestsRepository.approveRequestAndReserveRoom).not.toHaveBeenCalled()
   })
 
   it('updates request only for rejected or need-more-info decisions', async () => {
-    rentalRequestsRepository.findTenantRequest.mockResolvedValue({ id: 7, status: 'PENDING', room: { status: 'AVAILABLE' } })
+    rentalRequestsRepository.findTenantRequest.mockResolvedValue({
+      id: 7,
+      status: 'PENDING',
+      room: { status: 'AVAILABLE' },
+    })
     rentalRequestsRepository.updateRequestStatus.mockResolvedValue({ id: 7, status: 'REJECTED' })
 
     await service.decide(50, 7, { status: 'REJECTED' })

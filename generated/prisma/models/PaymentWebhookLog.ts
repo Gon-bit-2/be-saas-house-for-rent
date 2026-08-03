@@ -30,6 +30,7 @@ export type PaymentWebhookLogAvgAggregateOutputType = {
   id: number | null
   tenantId: number | null
   invoiceId: number | null
+  subscriptionPaymentId: number | null
   orderCode: number | null
   amount: runtime.Decimal | null
   digestKeyVersion: number | null
@@ -39,6 +40,7 @@ export type PaymentWebhookLogSumAggregateOutputType = {
   id: number | null
   tenantId: number | null
   invoiceId: number | null
+  subscriptionPaymentId: number | null
   orderCode: number | null
   amount: runtime.Decimal | null
   digestKeyVersion: number | null
@@ -49,6 +51,7 @@ export type PaymentWebhookLogMinAggregateOutputType = {
   provider: string | null
   tenantId: number | null
   invoiceId: number | null
+  subscriptionPaymentId: number | null
   orderCode: number | null
   paymentLinkId: string | null
   reference: string | null
@@ -72,6 +75,7 @@ export type PaymentWebhookLogMaxAggregateOutputType = {
   provider: string | null
   tenantId: number | null
   invoiceId: number | null
+  subscriptionPaymentId: number | null
   orderCode: number | null
   paymentLinkId: string | null
   reference: string | null
@@ -95,6 +99,7 @@ export type PaymentWebhookLogCountAggregateOutputType = {
   provider: number
   tenantId: number
   invoiceId: number
+  subscriptionPaymentId: number
   orderCode: number
   paymentLinkId: number
   reference: number
@@ -120,6 +125,7 @@ export type PaymentWebhookLogAvgAggregateInputType = {
   id?: true
   tenantId?: true
   invoiceId?: true
+  subscriptionPaymentId?: true
   orderCode?: true
   amount?: true
   digestKeyVersion?: true
@@ -129,6 +135,7 @@ export type PaymentWebhookLogSumAggregateInputType = {
   id?: true
   tenantId?: true
   invoiceId?: true
+  subscriptionPaymentId?: true
   orderCode?: true
   amount?: true
   digestKeyVersion?: true
@@ -139,6 +146,7 @@ export type PaymentWebhookLogMinAggregateInputType = {
   provider?: true
   tenantId?: true
   invoiceId?: true
+  subscriptionPaymentId?: true
   orderCode?: true
   paymentLinkId?: true
   reference?: true
@@ -162,6 +170,7 @@ export type PaymentWebhookLogMaxAggregateInputType = {
   provider?: true
   tenantId?: true
   invoiceId?: true
+  subscriptionPaymentId?: true
   orderCode?: true
   paymentLinkId?: true
   reference?: true
@@ -185,6 +194,7 @@ export type PaymentWebhookLogCountAggregateInputType = {
   provider?: true
   tenantId?: true
   invoiceId?: true
+  subscriptionPaymentId?: true
   orderCode?: true
   paymentLinkId?: true
   reference?: true
@@ -296,6 +306,7 @@ export type PaymentWebhookLogGroupByOutputType = {
   provider: string
   tenantId: number | null
   invoiceId: number | null
+  subscriptionPaymentId: number | null
   orderCode: number | null
   paymentLinkId: string | null
   reference: string | null
@@ -343,6 +354,7 @@ export type PaymentWebhookLogWhereInput = {
   provider?: Prisma.StringFilter<"PaymentWebhookLog"> | string
   tenantId?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
   invoiceId?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
+  subscriptionPaymentId?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
   orderCode?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
   paymentLinkId?: Prisma.StringNullableFilter<"PaymentWebhookLog"> | string | null
   reference?: Prisma.StringNullableFilter<"PaymentWebhookLog"> | string | null
@@ -362,6 +374,7 @@ export type PaymentWebhookLogWhereInput = {
   receivedAt?: Prisma.DateTimeFilter<"PaymentWebhookLog"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantNullableScalarRelationFilter, Prisma.TenantWhereInput> | null
   invoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
+  subscriptionPayment?: Prisma.XOR<Prisma.SubscriptionPaymentNullableScalarRelationFilter, Prisma.SubscriptionPaymentWhereInput> | null
 }
 
 export type PaymentWebhookLogOrderByWithRelationInput = {
@@ -369,6 +382,7 @@ export type PaymentWebhookLogOrderByWithRelationInput = {
   provider?: Prisma.SortOrder
   tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
   invoiceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionPaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   orderCode?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentLinkId?: Prisma.SortOrderInput | Prisma.SortOrder
   reference?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -388,6 +402,7 @@ export type PaymentWebhookLogOrderByWithRelationInput = {
   receivedAt?: Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
   invoice?: Prisma.InvoiceOrderByWithRelationInput
+  subscriptionPayment?: Prisma.SubscriptionPaymentOrderByWithRelationInput
 }
 
 export type PaymentWebhookLogWhereUniqueInput = Prisma.AtLeast<{
@@ -398,6 +413,7 @@ export type PaymentWebhookLogWhereUniqueInput = Prisma.AtLeast<{
   provider?: Prisma.StringFilter<"PaymentWebhookLog"> | string
   tenantId?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
   invoiceId?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
+  subscriptionPaymentId?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
   orderCode?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
   paymentLinkId?: Prisma.StringNullableFilter<"PaymentWebhookLog"> | string | null
   reference?: Prisma.StringNullableFilter<"PaymentWebhookLog"> | string | null
@@ -417,6 +433,7 @@ export type PaymentWebhookLogWhereUniqueInput = Prisma.AtLeast<{
   receivedAt?: Prisma.DateTimeFilter<"PaymentWebhookLog"> | Date | string
   tenant?: Prisma.XOR<Prisma.TenantNullableScalarRelationFilter, Prisma.TenantWhereInput> | null
   invoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
+  subscriptionPayment?: Prisma.XOR<Prisma.SubscriptionPaymentNullableScalarRelationFilter, Prisma.SubscriptionPaymentWhereInput> | null
 }, "id">
 
 export type PaymentWebhookLogOrderByWithAggregationInput = {
@@ -424,6 +441,7 @@ export type PaymentWebhookLogOrderByWithAggregationInput = {
   provider?: Prisma.SortOrder
   tenantId?: Prisma.SortOrderInput | Prisma.SortOrder
   invoiceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionPaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   orderCode?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentLinkId?: Prisma.SortOrderInput | Prisma.SortOrder
   reference?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -456,6 +474,7 @@ export type PaymentWebhookLogScalarWhereWithAggregatesInput = {
   provider?: Prisma.StringWithAggregatesFilter<"PaymentWebhookLog"> | string
   tenantId?: Prisma.IntNullableWithAggregatesFilter<"PaymentWebhookLog"> | number | null
   invoiceId?: Prisma.IntNullableWithAggregatesFilter<"PaymentWebhookLog"> | number | null
+  subscriptionPaymentId?: Prisma.IntNullableWithAggregatesFilter<"PaymentWebhookLog"> | number | null
   orderCode?: Prisma.IntNullableWithAggregatesFilter<"PaymentWebhookLog"> | number | null
   paymentLinkId?: Prisma.StringNullableWithAggregatesFilter<"PaymentWebhookLog"> | string | null
   reference?: Prisma.StringNullableWithAggregatesFilter<"PaymentWebhookLog"> | string | null
@@ -496,6 +515,7 @@ export type PaymentWebhookLogCreateInput = {
   receivedAt?: Date | string
   tenant?: Prisma.TenantCreateNestedOneWithoutPaymentWebhookLogsInput
   invoice?: Prisma.InvoiceCreateNestedOneWithoutWebhookLogsInput
+  subscriptionPayment?: Prisma.SubscriptionPaymentCreateNestedOneWithoutWebhookLogsInput
 }
 
 export type PaymentWebhookLogUncheckedCreateInput = {
@@ -503,6 +523,7 @@ export type PaymentWebhookLogUncheckedCreateInput = {
   provider: string
   tenantId?: number | null
   invoiceId?: number | null
+  subscriptionPaymentId?: number | null
   orderCode?: number | null
   paymentLinkId?: string | null
   reference?: string | null
@@ -543,6 +564,7 @@ export type PaymentWebhookLogUpdateInput = {
   receivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneWithoutPaymentWebhookLogsNestedInput
   invoice?: Prisma.InvoiceUpdateOneWithoutWebhookLogsNestedInput
+  subscriptionPayment?: Prisma.SubscriptionPaymentUpdateOneWithoutWebhookLogsNestedInput
 }
 
 export type PaymentWebhookLogUncheckedUpdateInput = {
@@ -550,6 +572,7 @@ export type PaymentWebhookLogUncheckedUpdateInput = {
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionPaymentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -574,6 +597,7 @@ export type PaymentWebhookLogCreateManyInput = {
   provider: string
   tenantId?: number | null
   invoiceId?: number | null
+  subscriptionPaymentId?: number | null
   orderCode?: number | null
   paymentLinkId?: string | null
   reference?: string | null
@@ -619,6 +643,7 @@ export type PaymentWebhookLogUncheckedUpdateManyInput = {
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionPaymentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -653,6 +678,7 @@ export type PaymentWebhookLogCountOrderByAggregateInput = {
   provider?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  subscriptionPaymentId?: Prisma.SortOrder
   orderCode?: Prisma.SortOrder
   paymentLinkId?: Prisma.SortOrder
   reference?: Prisma.SortOrder
@@ -676,6 +702,7 @@ export type PaymentWebhookLogAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  subscriptionPaymentId?: Prisma.SortOrder
   orderCode?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   digestKeyVersion?: Prisma.SortOrder
@@ -686,6 +713,7 @@ export type PaymentWebhookLogMaxOrderByAggregateInput = {
   provider?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  subscriptionPaymentId?: Prisma.SortOrder
   orderCode?: Prisma.SortOrder
   paymentLinkId?: Prisma.SortOrder
   reference?: Prisma.SortOrder
@@ -709,6 +737,7 @@ export type PaymentWebhookLogMinOrderByAggregateInput = {
   provider?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  subscriptionPaymentId?: Prisma.SortOrder
   orderCode?: Prisma.SortOrder
   paymentLinkId?: Prisma.SortOrder
   reference?: Prisma.SortOrder
@@ -731,6 +760,7 @@ export type PaymentWebhookLogSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   invoiceId?: Prisma.SortOrder
+  subscriptionPaymentId?: Prisma.SortOrder
   orderCode?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   digestKeyVersion?: Prisma.SortOrder
@@ -775,6 +805,48 @@ export type PaymentWebhookLogUncheckedUpdateManyWithoutTenantNestedInput = {
   connect?: Prisma.PaymentWebhookLogWhereUniqueInput | Prisma.PaymentWebhookLogWhereUniqueInput[]
   update?: Prisma.PaymentWebhookLogUpdateWithWhereUniqueWithoutTenantInput | Prisma.PaymentWebhookLogUpdateWithWhereUniqueWithoutTenantInput[]
   updateMany?: Prisma.PaymentWebhookLogUpdateManyWithWhereWithoutTenantInput | Prisma.PaymentWebhookLogUpdateManyWithWhereWithoutTenantInput[]
+  deleteMany?: Prisma.PaymentWebhookLogScalarWhereInput | Prisma.PaymentWebhookLogScalarWhereInput[]
+}
+
+export type PaymentWebhookLogCreateNestedManyWithoutSubscriptionPaymentInput = {
+  create?: Prisma.XOR<Prisma.PaymentWebhookLogCreateWithoutSubscriptionPaymentInput, Prisma.PaymentWebhookLogUncheckedCreateWithoutSubscriptionPaymentInput> | Prisma.PaymentWebhookLogCreateWithoutSubscriptionPaymentInput[] | Prisma.PaymentWebhookLogUncheckedCreateWithoutSubscriptionPaymentInput[]
+  connectOrCreate?: Prisma.PaymentWebhookLogCreateOrConnectWithoutSubscriptionPaymentInput | Prisma.PaymentWebhookLogCreateOrConnectWithoutSubscriptionPaymentInput[]
+  createMany?: Prisma.PaymentWebhookLogCreateManySubscriptionPaymentInputEnvelope
+  connect?: Prisma.PaymentWebhookLogWhereUniqueInput | Prisma.PaymentWebhookLogWhereUniqueInput[]
+}
+
+export type PaymentWebhookLogUncheckedCreateNestedManyWithoutSubscriptionPaymentInput = {
+  create?: Prisma.XOR<Prisma.PaymentWebhookLogCreateWithoutSubscriptionPaymentInput, Prisma.PaymentWebhookLogUncheckedCreateWithoutSubscriptionPaymentInput> | Prisma.PaymentWebhookLogCreateWithoutSubscriptionPaymentInput[] | Prisma.PaymentWebhookLogUncheckedCreateWithoutSubscriptionPaymentInput[]
+  connectOrCreate?: Prisma.PaymentWebhookLogCreateOrConnectWithoutSubscriptionPaymentInput | Prisma.PaymentWebhookLogCreateOrConnectWithoutSubscriptionPaymentInput[]
+  createMany?: Prisma.PaymentWebhookLogCreateManySubscriptionPaymentInputEnvelope
+  connect?: Prisma.PaymentWebhookLogWhereUniqueInput | Prisma.PaymentWebhookLogWhereUniqueInput[]
+}
+
+export type PaymentWebhookLogUpdateManyWithoutSubscriptionPaymentNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentWebhookLogCreateWithoutSubscriptionPaymentInput, Prisma.PaymentWebhookLogUncheckedCreateWithoutSubscriptionPaymentInput> | Prisma.PaymentWebhookLogCreateWithoutSubscriptionPaymentInput[] | Prisma.PaymentWebhookLogUncheckedCreateWithoutSubscriptionPaymentInput[]
+  connectOrCreate?: Prisma.PaymentWebhookLogCreateOrConnectWithoutSubscriptionPaymentInput | Prisma.PaymentWebhookLogCreateOrConnectWithoutSubscriptionPaymentInput[]
+  upsert?: Prisma.PaymentWebhookLogUpsertWithWhereUniqueWithoutSubscriptionPaymentInput | Prisma.PaymentWebhookLogUpsertWithWhereUniqueWithoutSubscriptionPaymentInput[]
+  createMany?: Prisma.PaymentWebhookLogCreateManySubscriptionPaymentInputEnvelope
+  set?: Prisma.PaymentWebhookLogWhereUniqueInput | Prisma.PaymentWebhookLogWhereUniqueInput[]
+  disconnect?: Prisma.PaymentWebhookLogWhereUniqueInput | Prisma.PaymentWebhookLogWhereUniqueInput[]
+  delete?: Prisma.PaymentWebhookLogWhereUniqueInput | Prisma.PaymentWebhookLogWhereUniqueInput[]
+  connect?: Prisma.PaymentWebhookLogWhereUniqueInput | Prisma.PaymentWebhookLogWhereUniqueInput[]
+  update?: Prisma.PaymentWebhookLogUpdateWithWhereUniqueWithoutSubscriptionPaymentInput | Prisma.PaymentWebhookLogUpdateWithWhereUniqueWithoutSubscriptionPaymentInput[]
+  updateMany?: Prisma.PaymentWebhookLogUpdateManyWithWhereWithoutSubscriptionPaymentInput | Prisma.PaymentWebhookLogUpdateManyWithWhereWithoutSubscriptionPaymentInput[]
+  deleteMany?: Prisma.PaymentWebhookLogScalarWhereInput | Prisma.PaymentWebhookLogScalarWhereInput[]
+}
+
+export type PaymentWebhookLogUncheckedUpdateManyWithoutSubscriptionPaymentNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentWebhookLogCreateWithoutSubscriptionPaymentInput, Prisma.PaymentWebhookLogUncheckedCreateWithoutSubscriptionPaymentInput> | Prisma.PaymentWebhookLogCreateWithoutSubscriptionPaymentInput[] | Prisma.PaymentWebhookLogUncheckedCreateWithoutSubscriptionPaymentInput[]
+  connectOrCreate?: Prisma.PaymentWebhookLogCreateOrConnectWithoutSubscriptionPaymentInput | Prisma.PaymentWebhookLogCreateOrConnectWithoutSubscriptionPaymentInput[]
+  upsert?: Prisma.PaymentWebhookLogUpsertWithWhereUniqueWithoutSubscriptionPaymentInput | Prisma.PaymentWebhookLogUpsertWithWhereUniqueWithoutSubscriptionPaymentInput[]
+  createMany?: Prisma.PaymentWebhookLogCreateManySubscriptionPaymentInputEnvelope
+  set?: Prisma.PaymentWebhookLogWhereUniqueInput | Prisma.PaymentWebhookLogWhereUniqueInput[]
+  disconnect?: Prisma.PaymentWebhookLogWhereUniqueInput | Prisma.PaymentWebhookLogWhereUniqueInput[]
+  delete?: Prisma.PaymentWebhookLogWhereUniqueInput | Prisma.PaymentWebhookLogWhereUniqueInput[]
+  connect?: Prisma.PaymentWebhookLogWhereUniqueInput | Prisma.PaymentWebhookLogWhereUniqueInput[]
+  update?: Prisma.PaymentWebhookLogUpdateWithWhereUniqueWithoutSubscriptionPaymentInput | Prisma.PaymentWebhookLogUpdateWithWhereUniqueWithoutSubscriptionPaymentInput[]
+  updateMany?: Prisma.PaymentWebhookLogUpdateManyWithWhereWithoutSubscriptionPaymentInput | Prisma.PaymentWebhookLogUpdateManyWithWhereWithoutSubscriptionPaymentInput[]
   deleteMany?: Prisma.PaymentWebhookLogScalarWhereInput | Prisma.PaymentWebhookLogScalarWhereInput[]
 }
 
@@ -848,12 +920,14 @@ export type PaymentWebhookLogCreateWithoutTenantInput = {
   errorMessage?: string | null
   receivedAt?: Date | string
   invoice?: Prisma.InvoiceCreateNestedOneWithoutWebhookLogsInput
+  subscriptionPayment?: Prisma.SubscriptionPaymentCreateNestedOneWithoutWebhookLogsInput
 }
 
 export type PaymentWebhookLogUncheckedCreateWithoutTenantInput = {
   id?: number
   provider: string
   invoiceId?: number | null
+  subscriptionPaymentId?: number | null
   orderCode?: number | null
   paymentLinkId?: string | null
   reference?: string | null
@@ -907,6 +981,7 @@ export type PaymentWebhookLogScalarWhereInput = {
   provider?: Prisma.StringFilter<"PaymentWebhookLog"> | string
   tenantId?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
   invoiceId?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
+  subscriptionPaymentId?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
   orderCode?: Prisma.IntNullableFilter<"PaymentWebhookLog"> | number | null
   paymentLinkId?: Prisma.StringNullableFilter<"PaymentWebhookLog"> | string | null
   reference?: Prisma.StringNullableFilter<"PaymentWebhookLog"> | string | null
@@ -924,6 +999,79 @@ export type PaymentWebhookLogScalarWhereInput = {
   status?: Prisma.EnumWebhookLogStatusFilter<"PaymentWebhookLog"> | $Enums.WebhookLogStatus
   errorMessage?: Prisma.StringNullableFilter<"PaymentWebhookLog"> | string | null
   receivedAt?: Prisma.DateTimeFilter<"PaymentWebhookLog"> | Date | string
+}
+
+export type PaymentWebhookLogCreateWithoutSubscriptionPaymentInput = {
+  provider: string
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  reference?: string | null
+  transactionCode?: string | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: string | null
+  providerCode?: string | null
+  providerDesc?: string | null
+  success?: boolean | null
+  transactionDateTime?: Date | string | null
+  payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  payloadDigest?: string | null
+  digestKeyVersion?: number | null
+  signatureValid?: boolean
+  status?: $Enums.WebhookLogStatus
+  errorMessage?: string | null
+  receivedAt?: Date | string
+  tenant?: Prisma.TenantCreateNestedOneWithoutPaymentWebhookLogsInput
+  invoice?: Prisma.InvoiceCreateNestedOneWithoutWebhookLogsInput
+}
+
+export type PaymentWebhookLogUncheckedCreateWithoutSubscriptionPaymentInput = {
+  id?: number
+  provider: string
+  tenantId?: number | null
+  invoiceId?: number | null
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  reference?: string | null
+  transactionCode?: string | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: string | null
+  providerCode?: string | null
+  providerDesc?: string | null
+  success?: boolean | null
+  transactionDateTime?: Date | string | null
+  payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  payloadDigest?: string | null
+  digestKeyVersion?: number | null
+  signatureValid?: boolean
+  status?: $Enums.WebhookLogStatus
+  errorMessage?: string | null
+  receivedAt?: Date | string
+}
+
+export type PaymentWebhookLogCreateOrConnectWithoutSubscriptionPaymentInput = {
+  where: Prisma.PaymentWebhookLogWhereUniqueInput
+  create: Prisma.XOR<Prisma.PaymentWebhookLogCreateWithoutSubscriptionPaymentInput, Prisma.PaymentWebhookLogUncheckedCreateWithoutSubscriptionPaymentInput>
+}
+
+export type PaymentWebhookLogCreateManySubscriptionPaymentInputEnvelope = {
+  data: Prisma.PaymentWebhookLogCreateManySubscriptionPaymentInput | Prisma.PaymentWebhookLogCreateManySubscriptionPaymentInput[]
+  skipDuplicates?: boolean
+}
+
+export type PaymentWebhookLogUpsertWithWhereUniqueWithoutSubscriptionPaymentInput = {
+  where: Prisma.PaymentWebhookLogWhereUniqueInput
+  update: Prisma.XOR<Prisma.PaymentWebhookLogUpdateWithoutSubscriptionPaymentInput, Prisma.PaymentWebhookLogUncheckedUpdateWithoutSubscriptionPaymentInput>
+  create: Prisma.XOR<Prisma.PaymentWebhookLogCreateWithoutSubscriptionPaymentInput, Prisma.PaymentWebhookLogUncheckedCreateWithoutSubscriptionPaymentInput>
+}
+
+export type PaymentWebhookLogUpdateWithWhereUniqueWithoutSubscriptionPaymentInput = {
+  where: Prisma.PaymentWebhookLogWhereUniqueInput
+  data: Prisma.XOR<Prisma.PaymentWebhookLogUpdateWithoutSubscriptionPaymentInput, Prisma.PaymentWebhookLogUncheckedUpdateWithoutSubscriptionPaymentInput>
+}
+
+export type PaymentWebhookLogUpdateManyWithWhereWithoutSubscriptionPaymentInput = {
+  where: Prisma.PaymentWebhookLogScalarWhereInput
+  data: Prisma.XOR<Prisma.PaymentWebhookLogUpdateManyMutationInput, Prisma.PaymentWebhookLogUncheckedUpdateManyWithoutSubscriptionPaymentInput>
 }
 
 export type PaymentWebhookLogCreateWithoutInvoiceInput = {
@@ -946,12 +1094,14 @@ export type PaymentWebhookLogCreateWithoutInvoiceInput = {
   errorMessage?: string | null
   receivedAt?: Date | string
   tenant?: Prisma.TenantCreateNestedOneWithoutPaymentWebhookLogsInput
+  subscriptionPayment?: Prisma.SubscriptionPaymentCreateNestedOneWithoutWebhookLogsInput
 }
 
 export type PaymentWebhookLogUncheckedCreateWithoutInvoiceInput = {
   id?: number
   provider: string
   tenantId?: number | null
+  subscriptionPaymentId?: number | null
   orderCode?: number | null
   paymentLinkId?: string | null
   reference?: string | null
@@ -1001,6 +1151,7 @@ export type PaymentWebhookLogCreateManyTenantInput = {
   id?: number
   provider: string
   invoiceId?: number | null
+  subscriptionPaymentId?: number | null
   orderCode?: number | null
   paymentLinkId?: string | null
   reference?: string | null
@@ -1040,12 +1191,14 @@ export type PaymentWebhookLogUpdateWithoutTenantInput = {
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   receivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   invoice?: Prisma.InvoiceUpdateOneWithoutWebhookLogsNestedInput
+  subscriptionPayment?: Prisma.SubscriptionPaymentUpdateOneWithoutWebhookLogsNestedInput
 }
 
 export type PaymentWebhookLogUncheckedUpdateWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   invoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionPaymentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1068,6 +1221,102 @@ export type PaymentWebhookLogUncheckedUpdateWithoutTenantInput = {
 export type PaymentWebhookLogUncheckedUpdateManyWithoutTenantInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
+  invoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionPaymentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  success?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  transactionDateTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  payloadDigest?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  digestKeyVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signatureValid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumWebhookLogStatusFieldUpdateOperationsInput | $Enums.WebhookLogStatus
+  errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PaymentWebhookLogCreateManySubscriptionPaymentInput = {
+  id?: number
+  provider: string
+  tenantId?: number | null
+  invoiceId?: number | null
+  orderCode?: number | null
+  paymentLinkId?: string | null
+  reference?: string | null
+  transactionCode?: string | null
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: string | null
+  providerCode?: string | null
+  providerDesc?: string | null
+  success?: boolean | null
+  transactionDateTime?: Date | string | null
+  payload: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  payloadDigest?: string | null
+  digestKeyVersion?: number | null
+  signatureValid?: boolean
+  status?: $Enums.WebhookLogStatus
+  errorMessage?: string | null
+  receivedAt?: Date | string
+}
+
+export type PaymentWebhookLogUpdateWithoutSubscriptionPaymentInput = {
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  success?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  transactionDateTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  payloadDigest?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  digestKeyVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signatureValid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumWebhookLogStatusFieldUpdateOperationsInput | $Enums.WebhookLogStatus
+  errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenant?: Prisma.TenantUpdateOneWithoutPaymentWebhookLogsNestedInput
+  invoice?: Prisma.InvoiceUpdateOneWithoutWebhookLogsNestedInput
+}
+
+export type PaymentWebhookLogUncheckedUpdateWithoutSubscriptionPaymentInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  invoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  transactionCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  currency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerDesc?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  success?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  transactionDateTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  payload?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  payloadDigest?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  digestKeyVersion?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  signatureValid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumWebhookLogStatusFieldUpdateOperationsInput | $Enums.WebhookLogStatus
+  errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PaymentWebhookLogUncheckedUpdateManyWithoutSubscriptionPaymentInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   invoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1092,6 +1341,7 @@ export type PaymentWebhookLogCreateManyInvoiceInput = {
   id?: number
   provider: string
   tenantId?: number | null
+  subscriptionPaymentId?: number | null
   orderCode?: number | null
   paymentLinkId?: string | null
   reference?: string | null
@@ -1131,12 +1381,14 @@ export type PaymentWebhookLogUpdateWithoutInvoiceInput = {
   errorMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   receivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tenant?: Prisma.TenantUpdateOneWithoutPaymentWebhookLogsNestedInput
+  subscriptionPayment?: Prisma.SubscriptionPaymentUpdateOneWithoutWebhookLogsNestedInput
 }
 
 export type PaymentWebhookLogUncheckedUpdateWithoutInvoiceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionPaymentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1160,6 +1412,7 @@ export type PaymentWebhookLogUncheckedUpdateManyWithoutInvoiceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   tenantId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subscriptionPaymentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentLinkId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1186,6 +1439,7 @@ export type PaymentWebhookLogSelect<ExtArgs extends runtime.Types.Extensions.Int
   provider?: boolean
   tenantId?: boolean
   invoiceId?: boolean
+  subscriptionPaymentId?: boolean
   orderCode?: boolean
   paymentLinkId?: boolean
   reference?: boolean
@@ -1205,6 +1459,7 @@ export type PaymentWebhookLogSelect<ExtArgs extends runtime.Types.Extensions.Int
   receivedAt?: boolean
   tenant?: boolean | Prisma.PaymentWebhookLog$tenantArgs<ExtArgs>
   invoice?: boolean | Prisma.PaymentWebhookLog$invoiceArgs<ExtArgs>
+  subscriptionPayment?: boolean | Prisma.PaymentWebhookLog$subscriptionPaymentArgs<ExtArgs>
 }, ExtArgs["result"]["paymentWebhookLog"]>
 
 export type PaymentWebhookLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1212,6 +1467,7 @@ export type PaymentWebhookLogSelectCreateManyAndReturn<ExtArgs extends runtime.T
   provider?: boolean
   tenantId?: boolean
   invoiceId?: boolean
+  subscriptionPaymentId?: boolean
   orderCode?: boolean
   paymentLinkId?: boolean
   reference?: boolean
@@ -1231,6 +1487,7 @@ export type PaymentWebhookLogSelectCreateManyAndReturn<ExtArgs extends runtime.T
   receivedAt?: boolean
   tenant?: boolean | Prisma.PaymentWebhookLog$tenantArgs<ExtArgs>
   invoice?: boolean | Prisma.PaymentWebhookLog$invoiceArgs<ExtArgs>
+  subscriptionPayment?: boolean | Prisma.PaymentWebhookLog$subscriptionPaymentArgs<ExtArgs>
 }, ExtArgs["result"]["paymentWebhookLog"]>
 
 export type PaymentWebhookLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1238,6 +1495,7 @@ export type PaymentWebhookLogSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   provider?: boolean
   tenantId?: boolean
   invoiceId?: boolean
+  subscriptionPaymentId?: boolean
   orderCode?: boolean
   paymentLinkId?: boolean
   reference?: boolean
@@ -1257,6 +1515,7 @@ export type PaymentWebhookLogSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   receivedAt?: boolean
   tenant?: boolean | Prisma.PaymentWebhookLog$tenantArgs<ExtArgs>
   invoice?: boolean | Prisma.PaymentWebhookLog$invoiceArgs<ExtArgs>
+  subscriptionPayment?: boolean | Prisma.PaymentWebhookLog$subscriptionPaymentArgs<ExtArgs>
 }, ExtArgs["result"]["paymentWebhookLog"]>
 
 export type PaymentWebhookLogSelectScalar = {
@@ -1264,6 +1523,7 @@ export type PaymentWebhookLogSelectScalar = {
   provider?: boolean
   tenantId?: boolean
   invoiceId?: boolean
+  subscriptionPaymentId?: boolean
   orderCode?: boolean
   paymentLinkId?: boolean
   reference?: boolean
@@ -1283,18 +1543,21 @@ export type PaymentWebhookLogSelectScalar = {
   receivedAt?: boolean
 }
 
-export type PaymentWebhookLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "provider" | "tenantId" | "invoiceId" | "orderCode" | "paymentLinkId" | "reference" | "transactionCode" | "amount" | "currency" | "providerCode" | "providerDesc" | "success" | "transactionDateTime" | "payload" | "payloadDigest" | "digestKeyVersion" | "signatureValid" | "status" | "errorMessage" | "receivedAt", ExtArgs["result"]["paymentWebhookLog"]>
+export type PaymentWebhookLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "provider" | "tenantId" | "invoiceId" | "subscriptionPaymentId" | "orderCode" | "paymentLinkId" | "reference" | "transactionCode" | "amount" | "currency" | "providerCode" | "providerDesc" | "success" | "transactionDateTime" | "payload" | "payloadDigest" | "digestKeyVersion" | "signatureValid" | "status" | "errorMessage" | "receivedAt", ExtArgs["result"]["paymentWebhookLog"]>
 export type PaymentWebhookLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.PaymentWebhookLog$tenantArgs<ExtArgs>
   invoice?: boolean | Prisma.PaymentWebhookLog$invoiceArgs<ExtArgs>
+  subscriptionPayment?: boolean | Prisma.PaymentWebhookLog$subscriptionPaymentArgs<ExtArgs>
 }
 export type PaymentWebhookLogIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.PaymentWebhookLog$tenantArgs<ExtArgs>
   invoice?: boolean | Prisma.PaymentWebhookLog$invoiceArgs<ExtArgs>
+  subscriptionPayment?: boolean | Prisma.PaymentWebhookLog$subscriptionPaymentArgs<ExtArgs>
 }
 export type PaymentWebhookLogIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.PaymentWebhookLog$tenantArgs<ExtArgs>
   invoice?: boolean | Prisma.PaymentWebhookLog$invoiceArgs<ExtArgs>
+  subscriptionPayment?: boolean | Prisma.PaymentWebhookLog$subscriptionPaymentArgs<ExtArgs>
 }
 
 export type $PaymentWebhookLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1308,6 +1571,10 @@ export type $PaymentWebhookLogPayload<ExtArgs extends runtime.Types.Extensions.I
      * Hóa đơn liên quan (nếu có, xóa hóa đơn thì gỡ liên kết trong webhook log này để đối soát độc lập)
      */
     invoice: Prisma.$InvoicePayload<ExtArgs> | null
+    /**
+     * Subscription payment liên quan (nếu có)
+     */
+    subscriptionPayment: Prisma.$SubscriptionPaymentPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
@@ -1326,6 +1593,10 @@ export type $PaymentWebhookLogPayload<ExtArgs extends runtime.Types.Extensions.I
      * ID hóa đơn liên quan (mới nhận có thể null, sau đó phân tích payload để ánh xạ)
      */
     invoiceId: number | null
+    /**
+     * ID giao dịch subscription payment liên quan
+     */
+    subscriptionPaymentId: number | null
     /**
      * Mã đơn hàng PayOS trong payload webhook
      */
@@ -1790,6 +2061,7 @@ export interface Prisma__PaymentWebhookLogClient<T, Null = never, ExtArgs extend
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tenant<T extends Prisma.PaymentWebhookLog$tenantArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentWebhookLog$tenantArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   invoice<T extends Prisma.PaymentWebhookLog$invoiceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentWebhookLog$invoiceArgs<ExtArgs>>): Prisma.Prisma__InvoiceClient<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  subscriptionPayment<T extends Prisma.PaymentWebhookLog$subscriptionPaymentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentWebhookLog$subscriptionPaymentArgs<ExtArgs>>): Prisma.Prisma__SubscriptionPaymentClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1823,6 +2095,7 @@ export interface PaymentWebhookLogFieldRefs {
   readonly provider: Prisma.FieldRef<"PaymentWebhookLog", 'String'>
   readonly tenantId: Prisma.FieldRef<"PaymentWebhookLog", 'Int'>
   readonly invoiceId: Prisma.FieldRef<"PaymentWebhookLog", 'Int'>
+  readonly subscriptionPaymentId: Prisma.FieldRef<"PaymentWebhookLog", 'Int'>
   readonly orderCode: Prisma.FieldRef<"PaymentWebhookLog", 'Int'>
   readonly paymentLinkId: Prisma.FieldRef<"PaymentWebhookLog", 'String'>
   readonly reference: Prisma.FieldRef<"PaymentWebhookLog", 'String'>
@@ -2276,6 +2549,25 @@ export type PaymentWebhookLog$invoiceArgs<ExtArgs extends runtime.Types.Extensio
    */
   include?: Prisma.InvoiceInclude<ExtArgs> | null
   where?: Prisma.InvoiceWhereInput
+}
+
+/**
+ * PaymentWebhookLog.subscriptionPayment
+ */
+export type PaymentWebhookLog$subscriptionPaymentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubscriptionPayment
+   */
+  select?: Prisma.SubscriptionPaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SubscriptionPayment
+   */
+  omit?: Prisma.SubscriptionPaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionPaymentInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionPaymentWhereInput
 }
 
 /**

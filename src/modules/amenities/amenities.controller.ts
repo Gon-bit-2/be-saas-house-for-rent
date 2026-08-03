@@ -27,7 +27,11 @@ export class AmenitiesController {
 
   @IsAdmin()
   @Patch(':id')
-  update(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number, @Body() body: UpdateAmenityBodyDTO) {
+  update(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateAmenityBodyDTO,
+  ) {
     return this.amenitiesService.update(id, body, user.userId)
   }
 }

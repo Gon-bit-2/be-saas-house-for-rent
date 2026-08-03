@@ -7,6 +7,8 @@ import { resolvePrismaLogLevels } from '@src/common/utils/prismaLog'
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+  private readonly pool: Pool
+
   constructor() {
     const pool = new Pool({
       connectionString: envConfig.DATABASE_URL,
@@ -18,6 +20,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
       adapter,
       log: resolvePrismaLogLevels(),
     })
+    this.pool = pool
   }
   /**
    * Tự động kết nối tới cơ sở dữ liệu khi module được khởi tạo
@@ -32,5 +35,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
    */
   async onModuleDestroy() {
     await this.$disconnect()
+    await this.pool.end()
   }
 }

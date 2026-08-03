@@ -1,4 +1,5 @@
 import z from 'zod'
+import { IsoDateInputCodec } from '@src/common/utils/date-codec.util'
 
 const InvoiceStatusSchema = z.enum(['DRAFT', 'UNPAID', 'PARTIALLY_PAID', 'PAID', 'OVERDUE', 'CANCELED'])
 const CreatableInvoiceStatusSchema = z.enum(['DRAFT', 'UNPAID'])
@@ -9,9 +10,9 @@ const ListBaseSchema = z
   .object({
     page: z.coerce.number().int().positive().default(1),
     limit: z.coerce.number().int().positive().max(100).default(20),
-    billingMonth: z.coerce.date().optional(),
-    from: z.coerce.date().optional(),
-    to: z.coerce.date().optional(),
+    billingMonth: IsoDateInputCodec.optional(),
+    from: IsoDateInputCodec.optional(),
+    to: IsoDateInputCodec.optional(),
     roomId: z.coerce.number().int().positive().optional(),
     contractId: z.coerce.number().int().positive().optional(),
     renterId: z.coerce.number().int().positive().optional(),
@@ -40,9 +41,9 @@ export const ListDebtsQuerySchema = ListBaseSchema.extend({
 export const CreateInvoiceBodySchema = z
   .object({
     contractId: z.coerce.number().int().positive(),
-    billingMonth: z.coerce.date(),
-    issueDate: z.coerce.date().optional(),
-    dueDate: z.coerce.date().optional(),
+    billingMonth: IsoDateInputCodec,
+    issueDate: IsoDateInputCodec.optional(),
+    dueDate: IsoDateInputCodec.optional(),
     note: z.string().trim().max(5000).nullable().optional(),
     status: CreatableInvoiceStatusSchema.default('DRAFT'),
     extraItems: z.array(ExtraInvoiceItemSchema).max(100).default([]),
@@ -51,8 +52,8 @@ export const CreateInvoiceBodySchema = z
 
 export const UpdateInvoiceBodySchema = z
   .object({
-    issueDate: z.coerce.date().optional(),
-    dueDate: z.coerce.date().optional(),
+    issueDate: IsoDateInputCodec.optional(),
+    dueDate: IsoDateInputCodec.optional(),
     note: z.string().trim().max(5000).nullable().optional(),
     extraItems: z.array(ExtraInvoiceItemSchema).max(100).optional(),
   })

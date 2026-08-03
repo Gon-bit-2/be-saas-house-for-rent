@@ -1,5 +1,7 @@
 # G02 - Đặc tả quản trị SaaS, tenant và gói dịch vụ
 
+> **Snapshot 31/07/2026:** Tenant/landlord/plan/subscription và PayOS subscription payment đã có API runtime, gồm checkout, cancel, list/detail và webhook completion idempotent. Provider/reconciliation/refund production vẫn cần staging; mọi nhãn cũ “subscription payment chỉ có dữ liệu” đã hết hiệu lực.
+
 ## 1. Tổng quan
 
 Tài liệu này mô tả nhóm tính năng G02 của backend: quản lý tài khoản chủ trọ, đơn vị chủ trọ (`Tenant`), gói dịch vụ SaaS (`Plan`) và đăng ký sử dụng gói (`Subscription`). Tài liệu đồng thời ghi rõ những phần mới có nền tảng dữ liệu hoặc mới hoàn thiện một phần để đội phát triển không hiểu nhầm đó là chức năng đã sẵn sàng sử dụng.
@@ -41,7 +43,7 @@ G02 không mô tả lại cách đăng nhập, JWT, permission key hoặc guard 
 | Xác minh tenant | Super Admin cập nhật `verificationStatus` |
 | Plan | Danh sách, chi tiết, tạo, cập nhật và bật/tắt khả năng đăng ký mới |
 | Subscription | Tạo subscription ban đầu và đổi plan cho tenant |
-| Subscription payment | Giải thích model hiện có và giới hạn vì chưa có module nghiệp vụ |
+| Subscription payment | Checkout PayOS, cancel, list/detail, webhook hoàn tất và idempotency |
 
 ### 1.3. Ngoài phạm vi
 
@@ -63,10 +65,10 @@ G02 không mô tả lại cách đăng nhập, JWT, permission key hoặc guard 
 | Quản lý tenant | Đã có backend | Có list, detail, create, update, status và verification |
 | Quản lý plan | Đã có backend | Có list, detail, create và update |
 | Tạo subscription ban đầu | Đã có backend | Được tạo trong transaction tạo tenant |
-| Đổi plan | Hoàn thiện một phần | Hủy active subscription cũ và tạo mới, nhưng không có thanh toán/proration |
-| Subscription lifecycle | Hoàn thiện một phần | Có schema trạng thái nhưng chưa có gia hạn, quá hạn và hết hạn tự động |
-| Subscription payment | Chỉ có schema | Chưa có controller, service, repository nghiệp vụ hoặc API |
-| Plan quota và feature flag | Chỉ lưu cấu hình | Chưa được cưỡng chế trong các module sử dụng |
+| Đổi plan | Đã có billing flow | Tạo pending subscription/payment; provider hoàn tất mới activate |
+| Subscription lifecycle | Đã có core | Pending/active/cancel/expire; scheduler/proration nâng cao còn backlog |
+| Subscription payment | Đã có API | PayOS checkout/cancel/list/detail/webhook idempotent |
+| Plan quota và feature flag | Một phần | Một số flag như OCR đã được enforce; quota khác cần rà soát |
 
 ## 2. Thuật ngữ và mô hình dữ liệu
 
@@ -906,37 +908,11 @@ Với xung đột đồng thời, database unique constraint có thể phát sin
 
 ### 11.1. Thanh toán gói SaaS
 
-**Hiện trạng**
+**Hiện trạng:** `SubscriptionPaymentsModule` đã có API self-service/admin, PayOS checkout/cancel, unique provider transaction, conditional transition và webhook completion kích hoạt subscription đúng một lần.
 
-- Có model `SubscriptionPayment`.
-- Có field `subscriptionId`, `tenantId`, `amount`, `paymentMethod`, `transactionCode`, `status`, `paidAt`, `createdAt`.
-- Chưa có module, controller, service, repository nghiệp vụ hoặc API.
+**Phần còn lại:** integration test với PayOS/PostgreSQL thật, refund/proration, reconciliation định kỳ, xử lý callback trễ và monitoring/alert.
 
-**Ảnh hưởng**
-
-- Không thể tạo yêu cầu thanh toán gói.
-- Không thể xác nhận, từ chối hoặc hoàn tiền.
-- Không có lịch sử giao dịch SaaS sử dụng được từ client.
-
-**Hướng triển khai**
-
-- Xây module subscription billing riêng.
-- Thiết kế API tạo/list/detail payment và state transition.
-- Tích hợp provider hoặc quy trình xác nhận thủ công.
-- Bảo đảm transaction/idempotency khi cập nhật payment và subscription.
-
-**Dependency**
-
-- Chính sách giá, chu kỳ, invoice SaaS.
-- Payment provider và webhook.
-- Audit log, notification và background job.
-
-**Tiêu chí hoàn thành**
-
-- Có API, validation, authorization và integration test.
-- Giao dịch trùng không làm gia hạn hai lần.
-- `PAID` cập nhật subscription đúng một lần.
-- Lịch sử thanh toán xem được theo tenant/subscription.
+**Tiêu chí tiếp theo:** webhook retry không gia hạn hai lần; callback sai reference không đổi subscription; lịch sử tenant/admin phân trang đúng; refund/proration có policy và audit.
 
 ### 11.2. Lịch sử subscription
 

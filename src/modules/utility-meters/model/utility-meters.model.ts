@@ -1,4 +1,5 @@
 import z from 'zod'
+import { IsoDateInputCodec } from '@src/common/utils/date-codec.util'
 
 const MeterTypeSchema = z.enum(['ELECTRICITY', 'WATER'])
 const MeterStatusSchema = z.enum(['ACTIVE', 'INACTIVE', 'BROKEN'])
@@ -39,9 +40,9 @@ export const ListMeterReadingsQuerySchema = z
   .object({
     page: z.coerce.number().int().positive().default(1),
     limit: z.coerce.number().int().positive().max(100).default(20),
-    billingMonth: z.coerce.date().optional(),
-    from: z.coerce.date().optional(),
-    to: z.coerce.date().optional(),
+    billingMonth: IsoDateInputCodec.optional(),
+    from: IsoDateInputCodec.optional(),
+    to: IsoDateInputCodec.optional(),
     roomId: z.coerce.number().int().positive().optional(),
     meterId: z.coerce.number().int().positive().optional(),
     type: MeterTypeSchema.optional(),
@@ -52,7 +53,7 @@ export const ListMeterReadingsQuerySchema = z
 export const CreateMeterReadingBodySchema = z
   .object({
     meterId: z.coerce.number().int().positive(),
-    billingMonth: z.coerce.date(),
+    billingMonth: IsoDateInputCodec,
     currentValue: z.coerce.number().nonnegative(),
     previousValue: z.coerce.number().nonnegative().optional(),
     unitPrice: z.coerce.number().nonnegative().optional(),

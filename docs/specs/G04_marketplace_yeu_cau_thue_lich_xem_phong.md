@@ -1,5 +1,7 @@
 # G04 - Đặc tả marketplace, yêu cầu thuê và lịch xem phòng
 
+> **Snapshot 31/07/2026:** Public search/detail, rental request, viewing appointment và ADMIN marketplace moderation/history đã có API. Approval dùng transaction/CAS để reserve room; một số filter/state-transition edge case vẫn là backlog và phải được ghi riêng, không coi toàn bộ G04 đã nghiệm thu end-to-end.
+
 ## 1. Tổng quan
 
 Tài liệu này mô tả nhóm tính năng G04 của backend: hiển thị phòng công khai, tìm kiếm phòng, xem chi tiết, đặt lịch xem phòng, gửi yêu cầu thuê và xử lý lead từ phía chủ trọ.

@@ -22,7 +22,11 @@ describe('AmenitiesService', () => {
 
     await service.list({ page: 1, limit: 10, isActive: false }, 'LANDLORD')
 
-    expect(amenitiesRepository.findManyAndCount).toHaveBeenCalledWith(expect.objectContaining({ isActive: true }), 0, 10)
+    expect(amenitiesRepository.findManyAndCount).toHaveBeenCalledWith(
+      expect.objectContaining({ isActive: true }),
+      0,
+      10,
+    )
   })
 
   it('allows admin to filter inactive amenities', async () => {
@@ -30,7 +34,11 @@ describe('AmenitiesService', () => {
 
     await service.list({ page: 1, limit: 10, isActive: false }, 'ADMIN')
 
-    expect(amenitiesRepository.findManyAndCount).toHaveBeenCalledWith(expect.objectContaining({ isActive: false }), 0, 10)
+    expect(amenitiesRepository.findManyAndCount).toHaveBeenCalledWith(
+      expect.objectContaining({ isActive: false }),
+      0,
+      10,
+    )
   })
 
   it('creates and updates amenities with audit fields', async () => {
@@ -42,7 +50,10 @@ describe('AmenitiesService', () => {
     await service.update(1, { isActive: false }, 99)
 
     expect(amenitiesRepository.create).toHaveBeenCalledWith(expect.objectContaining({ name: 'Wifi', createdById: 99 }))
-    expect(amenitiesRepository.update).toHaveBeenCalledWith(1, expect.objectContaining({ isActive: false, updatedById: 99 }))
+    expect(amenitiesRepository.update).toHaveBeenCalledWith(
+      1,
+      expect.objectContaining({ isActive: false, updatedById: 99 }),
+    )
   })
 
   it('throws when updating a missing amenity', async () => {

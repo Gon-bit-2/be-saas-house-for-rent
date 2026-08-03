@@ -7,4 +7,6 @@ import {
 
 export class ListMarketplaceRoomsQueryDTO extends createZodDto(ListMarketplaceRoomsQuerySchema) {}
 export class CreateMarketplaceRentalRequestBodyDTO extends createZodDto(CreateMarketplaceRentalRequestBodySchema) {}
-export class CreateMarketplaceViewingAppointmentBodyDTO extends createZodDto(CreateMarketplaceViewingAppointmentBodySchema) {}
+export class CreateMarketplaceViewingAppointmentBodyDTO extends createZodDto(
+  CreateMarketplaceViewingAppointmentBodySchema,
+) {}

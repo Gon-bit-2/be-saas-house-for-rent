@@ -5,6 +5,7 @@ export default defineConfig({
   schema: 'prisma/schema.prisma',
   migrations: {
     path: 'prisma/migrations',
+    seed: 'npm run build && node dist/prisma/seed.js && node dist/inittalScripts/create-permission.js',
   },
   datasource: {
     url: env('DATABASE_URL'),

@@ -33,7 +33,7 @@ export class CloudinaryService {
         },
         (error, uploadResult) => {
           if (error || !uploadResult) {
-            reject(error ?? new Error('Cloudinary upload failed'))
+            reject(new Error(error?.message ?? 'Cloudinary upload failed'))
             return
           }
           resolve(uploadResult)
@@ -60,4 +60,3 @@ export class CloudinaryService {
     await cloudinary.uploader.destroy(publicId, { resource_type: 'image' })
   }
 }
-

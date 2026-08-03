@@ -24,6 +24,7 @@ const ConfigSchema = z
     ADMIN_PHONE_NUMBER: z.string(),
     OTP_EXPIRES_IN: z.string(),
     OTP_MAX_ATTEMPTS: z.coerce.number().int().positive().default(5),
+    RENTER_INVITATION_EXPIRE_MINUTES: z.coerce.number().int().positive().max(1440).default(30),
     RESEND_API_KEY: z.string(),
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
@@ -74,8 +75,19 @@ const ConfigSchema = z
     TICKET_COMMENT_RATE_LIMIT: z.coerce.number().int().positive().default(60),
     TICKET_ATTACHMENT_RATE_LIMIT: z.coerce.number().int().positive().default(30),
     TICKET_WRITE_RATE_TTL_MS: z.coerce.number().int().positive().default(3_600_000),
+    TRUST_WRITE_RATE_LIMIT: z.coerce.number().int().positive().default(10),
+    TRUST_WRITE_RATE_TTL_MS: z.coerce.number().int().positive().default(60_000),
     TICKET_COMMENT_HARD_CAP: z.coerce.number().int().positive().default(500),
     TICKET_ATTACHMENT_HARD_CAP: z.coerce.number().int().positive().default(50),
+    OCR_CONFIDENCE_THRESHOLD: z.coerce.number().min(0).max(1).default(0.8),
+    OCR_CREATE_RATE_LIMIT: z.coerce.number().int().positive().default(30),
+    OCR_RATE_TTL_MS: z.coerce.number().int().positive().default(3_600_000),
+    OCR_UPLOAD_MAX_BYTES: z.coerce
+      .number()
+      .int()
+      .positive()
+      .max(20 * 1024 * 1024)
+      .default(5 * 1024 * 1024),
     PRISMA_QUERY_LOG: z
       .enum(['0', '1'])
       .default('0')
@@ -88,6 +100,9 @@ const ConfigSchema = z
     PAYOS_RETURN_URL: z.string().url().default('http://localhost:3000/payments/payos/return'),
     PAYOS_CANCEL_URL: z.string().url().default('http://localhost:3000/payments/payos/cancel'),
     PAYOS_QR_EXPIRE_MINUTES: z.coerce.number().int().positive().default(15),
+    PAYOS_SUBSCRIPTION_RETURN_URL: z.string().url().default('http://localhost:3000/subscriptions/payos/return'),
+    PAYOS_SUBSCRIPTION_CANCEL_URL: z.string().url().default('http://localhost:3000/subscriptions/payos/cancel'),
+    PAYOS_SUBSCRIPTION_EXPIRE_MINUTES: z.coerce.number().int().positive().default(15),
     PAYMENT_WEBHOOK_LOG_HMAC_SECRET: z.preprocess(
       (value) => (value === '' ? undefined : value),
       z.string().min(32).default('development-only-webhook-log-secret'),

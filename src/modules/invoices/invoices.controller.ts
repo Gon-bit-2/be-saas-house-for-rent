@@ -3,12 +3,7 @@ import roleName from '@src/common/constants/role.constant'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
 import { IsTenant, Roles } from '@src/common/decorators/decorators/roles.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
-import {
-  CreateInvoiceBodyDTO,
-  ListDebtsQueryDTO,
-  ListInvoicesQueryDTO,
-  UpdateInvoiceBodyDTO,
-} from './dto/invoices.dto'
+import { CreateInvoiceBodyDTO, ListDebtsQueryDTO, ListInvoicesQueryDTO, UpdateInvoiceBodyDTO } from './dto/invoices.dto'
 import { InvoicesService } from './invoices.service'
 
 /**
@@ -28,6 +23,12 @@ export class InvoicesController {
   @Get('me/:id')
   getMine(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
     return this.invoicesService.getMine(user.userId, id)
+  }
+
+  @IsTenant()
+  @Get('debts/me')
+  listMyDebts(@ActiveUser() user: AccessTokenPayload, @Query() query: ListDebtsQueryDTO) {
+    return this.invoicesService.listMyDebts(user.userId, query)
   }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER, roleName.ACCOUNTANT)

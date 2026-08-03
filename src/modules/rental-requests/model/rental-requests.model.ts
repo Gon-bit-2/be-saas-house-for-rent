@@ -1,6 +1,14 @@
 import z from 'zod'
+import { IsoDateInputCodec } from '@src/common/utils/date-codec.util'
 
-const RentalRequestStatusSchema = z.enum(['PENDING', 'APPROVED', 'REJECTED', 'NEED_MORE_INFO', 'CANCELED', 'CONVERTED_TO_CONTRACT'])
+const RentalRequestStatusSchema = z.enum([
+  'PENDING',
+  'APPROVED',
+  'REJECTED',
+  'NEED_MORE_INFO',
+  'CANCELED',
+  'CONVERTED_TO_CONTRACT',
+])
 const RentalRequestDecisionSchema = z.enum(['APPROVED', 'REJECTED', 'NEED_MORE_INFO'])
 const AppointmentStatusSchema = z.enum(['PENDING', 'CONFIRMED', 'REJECTED', 'RESCHEDULED', 'CANCELED', 'COMPLETED'])
 const AppointmentLandlordStatusSchema = z.enum(['CONFIRMED', 'REJECTED', 'RESCHEDULED', 'CANCELED', 'COMPLETED'])
@@ -31,15 +39,15 @@ export const ListViewingAppointmentsQuerySchema = z
     status: AppointmentStatusSchema.optional(),
     roomId: z.coerce.number().int().positive().optional(),
     propertyId: z.coerce.number().int().positive().optional(),
-    from: z.coerce.date().optional(),
-    to: z.coerce.date().optional(),
+    from: IsoDateInputCodec.optional(),
+    to: IsoDateInputCodec.optional(),
   })
   .strict()
 
 export const UpdateViewingAppointmentStatusBodySchema = z
   .object({
     status: AppointmentLandlordStatusSchema,
-    scheduledAt: z.coerce.date().optional(),
+    scheduledAt: IsoDateInputCodec.optional(),
     assignedStaffId: z.coerce.number().int().positive().nullable().optional(),
     landlordNote: z.string().trim().max(2000).nullable().optional(),
   })
