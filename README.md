@@ -67,6 +67,15 @@ REDIS_PORT=6379
 CORS_ORIGINS=http://localhost:3000
 ```
 
+Redis dùng cho development và staging phải đặt `maxmemory-policy noeviction` để BullMQ không mất queue key:
+
+```bash
+redis-cli CONFIG SET maxmemory-policy noeviction
+redis-cli CONFIG GET maxmemory-policy
+```
+
+Nếu Redis được quản lý bởi cloud provider, cấu hình policy tương đương trong parameter group và kiểm tra lại sau mỗi lần provision/deploy.
+
 Không commit `.env`, service-account JSON, private key hoặc token thật. Danh sách biến đầy đủ và mô tả nhóm nằm trong `exemple.env`.
 
 ## Database
@@ -127,13 +136,13 @@ node node_modules/eslint/bin/eslint.js "{src,apps,libs,test}/**/*.ts"
 npm run docs:check
 ```
 
-Baseline 31/07/2026:
+Baseline 03/08/2026:
 
 | Kiểm tra | Kết quả |
 |---|---|
 | Build | Đạt |
 | ESLint không sửa file | Đạt |
-| Unit test | 74/74 suite, 281/281 test |
+| Unit test | 75/75 suite, 294/294 test |
 | Prisma validate | Đạt |
 | E2E | Có 5 scenario; cần PostgreSQL đã migrate và seed |
 

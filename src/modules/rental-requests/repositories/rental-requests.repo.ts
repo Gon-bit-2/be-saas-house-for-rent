@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
-import type { Prisma } from 'generated/prisma/client'
+import { Prisma, type AppointmentStatus } from 'generated/prisma/client'
 
 export const rentalRequestSelect = {
   id: true,
@@ -93,17 +93,35 @@ export class RentalRequestsRepository {
     return this.prismaService.rentalRequest.findFirst({ where: { id, renterId }, select: rentalRequestSelect })
   }
 
-  async findMyRequestsAndCount(renterId: number, skip: number, take: number) {
+  async findMyRequestsAndCount(where: Prisma.RentalRequestWhereInput, skip: number, take: number) {
     return this.prismaService.$transaction([
       this.prismaService.rentalRequest.findMany({
-        where: { renterId },
+        where,
         skip,
         take,
         orderBy: [{ createdAt: 'desc' }],
         select: rentalRequestSelect,
       }),
-      this.prismaService.rentalRequest.count({ where: { renterId } }),
+      this.prismaService.rentalRequest.count({ where }),
     ])
+  }
+
+  async findAppointmentForRenterRoom(appointmentId: number, renterId: number, roomId: number) {
+    return this.prismaService.roomViewingAppointment.findFirst({
+      where: { id: appointmentId, renterId, roomId, status: { in: ['CONFIRMED', 'COMPLETED'] } },
+      select: { id: true },
+    })
+  }
+
+  async updateRenterRequest(renterId: number, id: number, data: Prisma.RentalRequestUncheckedUpdateInput) {
+    return this.prismaService.$transaction(async (tx) => {
+      const updated = await tx.rentalRequest.updateMany({
+        where: { id, renterId, status: 'NEED_MORE_INFO' },
+        data: { ...data, status: 'PENDING' },
+      })
+      if (updated.count !== 1) throw new Error('RENTAL_REQUEST_TRANSITION_CONFLICT')
+      return tx.rentalRequest.findUniqueOrThrow({ where: { id }, select: rentalRequestSelect })
+    })
   }
 
   /**
@@ -149,19 +167,31 @@ export class RentalRequestsRepository {
     )
   }
 
-  async updateRequestStatus(tenantId: number, id: number, status: 'REJECTED' | 'NEED_MORE_INFO', actorId: number) {
-    return this.prismaService.rentalRequest.update({
-      where: { id, tenantId },
-      data: { status, updatedById: actorId },
-      select: rentalRequestSelect,
+  async updateRequestStatus(
+    tenantId: number,
+    id: number,
+    expectedStatus: 'PENDING' | 'NEED_MORE_INFO',
+    status: 'REJECTED' | 'NEED_MORE_INFO',
+    actorId: number,
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      const updated = await tx.rentalRequest.updateMany({
+        where: { id, tenantId, status: expectedStatus },
+        data: { status, updatedById: actorId },
+      })
+      if (updated.count !== 1) throw new Error('RENTAL_REQUEST_DECISION_CONFLICT')
+      return tx.rentalRequest.findUniqueOrThrow({ where: { id }, select: rentalRequestSelect })
     })
   }
 
   async cancelRenterRequest(id: number, renterId: number) {
-    return this.prismaService.rentalRequest.update({
-      where: { id, renterId },
-      data: { status: 'CANCELED', updatedById: renterId },
-      select: rentalRequestSelect,
+    return this.prismaService.$transaction(async (tx) => {
+      const updated = await tx.rentalRequest.updateMany({
+        where: { id, renterId, status: { in: ['PENDING', 'NEED_MORE_INFO'] } },
+        data: { status: 'CANCELED', updatedById: renterId },
+      })
+      if (updated.count !== 1) throw new Error('RENTAL_REQUEST_TRANSITION_CONFLICT')
+      return tx.rentalRequest.findUniqueOrThrow({ where: { id }, select: rentalRequestSelect })
     })
   }
 
@@ -192,39 +222,88 @@ export class RentalRequestsRepository {
     })
   }
 
-  async findMyAppointmentsAndCount(renterId: number, skip: number, take: number) {
+  async findMyAppointmentsAndCount(where: Prisma.RoomViewingAppointmentWhereInput, skip: number, take: number) {
     return this.prismaService.$transaction([
       this.prismaService.roomViewingAppointment.findMany({
-        where: { renterId },
+        where,
         skip,
         take,
         orderBy: [{ scheduledAt: 'desc' }],
         select: viewingAppointmentSelect,
       }),
-      this.prismaService.roomViewingAppointment.count({ where: { renterId } }),
+      this.prismaService.roomViewingAppointment.count({ where }),
     ])
   }
 
-  async findActiveTenantMember(tenantId: number, userId: number) {
+  async findActiveTenantMember(tenantId: number, userId: number, roleIds?: string[]) {
     return this.prismaService.tenantMember.findFirst({
-      where: { tenantId, userId, status: 'ACTIVE' },
+      where: { tenantId, userId, status: 'ACTIVE', ...(roleIds ? { roleId: { in: roleIds } } : {}) },
       select: { id: true },
     })
   }
 
-  async updateAppointment(tenantId: number, id: number, data: Prisma.RoomViewingAppointmentUncheckedUpdateInput) {
-    return this.prismaService.roomViewingAppointment.update({
-      where: { id, tenantId },
-      data,
-      select: viewingAppointmentSelect,
-    })
+  async updateAppointmentWithConflictCheck(
+    tenantId: number,
+    id: number,
+    expectedStatus: AppointmentStatus,
+    data: {
+      status: AppointmentStatus
+      scheduledAt?: Date
+      assignedStaffId?: number | null
+      landlordNote?: string | null
+      updatedById: number
+    },
+    durationMinutes: number,
+  ) {
+    return this.prismaService.$transaction(
+      async (tx) => {
+        const appointment = await tx.roomViewingAppointment.findFirstOrThrow({
+          where: { id, tenantId },
+          select: { roomId: true, scheduledAt: true, assignedStaffId: true },
+        })
+        const scheduledAt = data.scheduledAt ?? appointment.scheduledAt
+        const assignedStaffId = data.assignedStaffId === undefined ? appointment.assignedStaffId : data.assignedStaffId
+
+        if (['PENDING', 'CONFIRMED', 'RESCHEDULED'].includes(data.status)) {
+          await tx.$queryRaw(Prisma.sql`SELECT 1 FROM pg_advisory_xact_lock(41004, ${appointment.roomId})`)
+          if (assignedStaffId) {
+            await tx.$queryRaw(Prisma.sql`SELECT 1 FROM pg_advisory_xact_lock(41005, ${assignedStaffId})`)
+          }
+
+          const before = new Date(scheduledAt.getTime() - durationMinutes * 60_000)
+          const after = new Date(scheduledAt.getTime() + durationMinutes * 60_000)
+          const conflict = await tx.roomViewingAppointment.findFirst({
+            where: {
+              id: { not: id },
+              tenantId,
+              status: { in: ['PENDING', 'CONFIRMED', 'RESCHEDULED'] },
+              scheduledAt: { gt: before, lt: after },
+              OR: [{ roomId: appointment.roomId }, ...(assignedStaffId ? [{ assignedStaffId }] : [])],
+            },
+            select: { id: true },
+          })
+          if (conflict) throw new Error('APPOINTMENT_CONFLICT')
+        }
+
+        const transitioned = await tx.roomViewingAppointment.updateMany({
+          where: { id, tenantId, status: expectedStatus },
+          data,
+        })
+        if (transitioned.count !== 1) throw new Error('APPOINTMENT_TRANSITION_CONFLICT')
+        return tx.roomViewingAppointment.findUniqueOrThrow({ where: { id }, select: viewingAppointmentSelect })
+      },
+      { isolationLevel: 'Serializable' },
+    )
   }
 
   async cancelRenterAppointment(id: number, renterId: number) {
-    return this.prismaService.roomViewingAppointment.update({
-      where: { id, renterId },
-      data: { status: 'CANCELED', updatedById: renterId },
-      select: viewingAppointmentSelect,
+    return this.prismaService.$transaction(async (tx) => {
+      const updated = await tx.roomViewingAppointment.updateMany({
+        where: { id, renterId, status: { in: ['PENDING', 'CONFIRMED', 'RESCHEDULED'] } },
+        data: { status: 'CANCELED', updatedById: renterId },
+      })
+      if (updated.count !== 1) throw new Error('APPOINTMENT_TRANSITION_CONFLICT')
+      return tx.roomViewingAppointment.findUniqueOrThrow({ where: { id }, select: viewingAppointmentSelect })
     })
   }
 }

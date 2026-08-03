@@ -1,3 +1,4 @@
+import { BooleanInputCodec } from '@src/common/utils/boolean-codec.util'
 import z from 'zod'
 
 const TicketCategorySchema = z.enum(['ELECTRICITY', 'WATER', 'INTERNET', 'FURNITURE', 'SECURITY', 'CLEANING', 'OTHER'])
@@ -59,11 +60,19 @@ export const AssignTicketBodySchema = z
 export const CreateTicketCommentBodySchema = z
   .object({
     message: z.string().trim().min(1).max(5000),
-    isInternal: z.coerce.boolean().default(false),
+    isInternal: BooleanInputCodec.default(false),
   })
   .strict()
 
 export const CreateTicketAttachmentBodySchema = TicketAttachmentInputSchema
+
+export const CloseTicketBodySchema = z
+  .object({
+    reason: z.string().trim().min(1).max(1000),
+  })
+  .strict()
+
+export const EmptyTicketActionBodySchema = z.object({}).strict()
 
 export type TCreateTicketBodySchema = z.infer<typeof CreateTicketBodySchema>
 export type TListTicketsQuerySchema = z.infer<typeof ListTicketsQuerySchema>
@@ -72,3 +81,4 @@ export type TUpdateTicketStatusBodySchema = z.infer<typeof UpdateTicketStatusBod
 export type TAssignTicketBodySchema = z.infer<typeof AssignTicketBodySchema>
 export type TCreateTicketCommentBodySchema = z.infer<typeof CreateTicketCommentBodySchema>
 export type TCreateTicketAttachmentBodySchema = z.infer<typeof CreateTicketAttachmentBodySchema>
+export type TCloseTicketBodySchema = z.infer<typeof CloseTicketBodySchema>

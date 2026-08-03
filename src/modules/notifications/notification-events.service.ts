@@ -1,12 +1,24 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import roleName from '@src/common/constants/role.constant'
 import type { Prisma } from 'generated/prisma/client'
 import { NotificationsGateway } from './notifications.gateway'
 import { NotificationsRepository } from './repositories/notifications.repo'
 import { NotificationsService } from './notifications.service'
 
+type TicketEventSource = {
+  id: number
+  tenantId: number
+  title: string
+  createdById: number | null
+  assignedTo: number | null
+  status: string
+  contract: { renterId: number } | null
+}
+
 @Injectable()
 export class NotificationEventsService {
+  private readonly logger = new Logger(NotificationEventsService.name)
+
   constructor(
     private readonly notificationsService: NotificationsService,
     private readonly notificationsRepository: NotificationsRepository,
@@ -105,19 +117,173 @@ export class NotificationEventsService {
   }
 
   async notifyTicketCreated(ticket: { id: number; tenantId: number; title: string; createdById: number | null }) {
-    const recipients = await this.notificationsRepository.findTenantNotificationRecipients(ticket.tenantId, [
-      roleName.LANDLORD,
-      roleName.MANAGER,
-      roleName.MAINTENANCE_STAFF,
-    ])
-    return this.notificationsService.createAndDispatch({
-      userIds: recipients.filter((userId) => userId !== ticket.createdById),
-      tenantId: ticket.tenantId,
-      title: 'Ticket mới',
-      content: `Người thuê vừa gửi sự cố: ${ticket.title}.`,
-      type: 'TICKET',
-      data: this.data('TICKET', ticket.id),
+    return this.bestEffort('TICKET_CREATED', async () => {
+      const recipients = await this.notificationsRepository.findTenantNotificationRecipients(ticket.tenantId, [
+        roleName.LANDLORD,
+        roleName.MANAGER,
+      ])
+      return this.notificationsService.createAndDispatch({
+        userIds: recipients.filter((userId) => userId !== ticket.createdById),
+        tenantId: ticket.tenantId,
+        title: 'Ticket mới',
+        content: `Người thuê vừa gửi sự cố: ${ticket.title}.`,
+        type: 'TICKET',
+        data: this.data('TICKET', ticket.id, { event: 'TICKET_CREATED', ticketId: ticket.id }),
+      })
     })
+  }
+
+  async notifyMarketplaceSubmitted(room: { id: number; tenantId: number; roomCode: string; title: string }) {
+    return this.bestEffort('MARKETPLACE_SUBMITTED', async () => {
+      const recipients = await this.notificationsRepository.findSystemAdminRecipients()
+      return this.notificationsService.createAndDispatch({
+        userIds: recipients,
+        tenantId: room.tenantId,
+        title: 'Tin đăng chờ kiểm duyệt',
+        content: `Phòng ${room.roomCode} - ${room.title} vừa được gửi duyệt.`,
+        type: 'MARKETPLACE',
+        data: this.data('ROOM', room.id, {
+          event: 'MARKETPLACE_SUBMITTED',
+          roomId: room.id,
+        }),
+      })
+    })
+  }
+
+  async notifyMarketplaceModerated(room: {
+    id: number
+    tenantId: number
+    roomCode: string
+    title: string
+    marketplaceStatus: string
+  }) {
+    return this.bestEffort('MARKETPLACE_MODERATED', async () => {
+      const recipients = await this.notificationsRepository.findTenantNotificationRecipients(room.tenantId, [
+        roleName.LANDLORD,
+        roleName.MANAGER,
+      ])
+      return this.notificationsService.createAndDispatch({
+        userIds: recipients,
+        tenantId: room.tenantId,
+        title: 'Trạng thái tin đăng đã thay đổi',
+        content: `Tin phòng ${room.roomCode} đã chuyển sang ${room.marketplaceStatus}.`,
+        type: 'MARKETPLACE',
+        data: this.data('ROOM', room.id, {
+          event: 'MARKETPLACE_STATUS_CHANGED',
+          roomId: room.id,
+          status: room.marketplaceStatus,
+        }),
+      })
+    })
+  }
+
+  async notifyRentalRequestCreated(request: {
+    id: number
+    tenantId: number
+    roomId: number
+    renterId: number
+    room: { roomCode: string; title: string }
+  }) {
+    return this.bestEffort('RENTAL_REQUEST_CREATED', async () => {
+      const recipients = await this.notificationsRepository.findTenantNotificationRecipients(request.tenantId, [
+        roleName.LANDLORD,
+        roleName.MANAGER,
+      ])
+      return this.notificationsService.createAndDispatch({
+        userIds: recipients.filter((userId) => userId !== request.renterId),
+        tenantId: request.tenantId,
+        title: 'Yêu cầu thuê mới',
+        content: `Phòng ${request.room.roomCode} vừa nhận một yêu cầu thuê.`,
+        type: 'RENTAL_REQUEST',
+        data: this.data('RENTAL_REQUEST', request.id, {
+          event: 'RENTAL_REQUEST_CREATED',
+          roomId: request.roomId,
+          requestId: request.id,
+        }),
+      })
+    })
+  }
+
+  async notifyRentalRequestChanged(request: {
+    id: number
+    tenantId: number
+    roomId: number
+    renterId: number
+    status: string
+    room: { roomCode: string }
+  }) {
+    return this.bestEffort('RENTAL_REQUEST_STATUS_CHANGED', () =>
+      this.notificationsService.createAndDispatch({
+        userIds: [request.renterId],
+        tenantId: request.tenantId,
+        title: 'Yêu cầu thuê đã được cập nhật',
+        content: `Yêu cầu thuê phòng ${request.room.roomCode} đã chuyển sang ${request.status}.`,
+        type: 'RENTAL_REQUEST',
+        data: this.data('RENTAL_REQUEST', request.id, {
+          event: 'RENTAL_REQUEST_STATUS_CHANGED',
+          roomId: request.roomId,
+          requestId: request.id,
+          status: request.status,
+        }),
+      }),
+    )
+  }
+
+  async notifyViewingAppointmentCreated(appointment: {
+    id: number
+    tenantId: number
+    roomId: number
+    renterId: number
+    room: { roomCode: string }
+  }) {
+    return this.bestEffort('APPOINTMENT_CREATED', async () => {
+      const recipients = await this.notificationsRepository.findTenantNotificationRecipients(appointment.tenantId, [
+        roleName.LANDLORD,
+        roleName.MANAGER,
+      ])
+      return this.notificationsService.createAndDispatch({
+        userIds: recipients.filter((userId) => userId !== appointment.renterId),
+        tenantId: appointment.tenantId,
+        title: 'Lịch xem phòng mới',
+        content: `Phòng ${appointment.room.roomCode} vừa nhận một lịch hẹn xem phòng.`,
+        type: 'APPOINTMENT',
+        data: this.data('APPOINTMENT', appointment.id, {
+          event: 'APPOINTMENT_CREATED',
+          roomId: appointment.roomId,
+          appointmentId: appointment.id,
+        }),
+      })
+    })
+  }
+
+  async notifyViewingAppointmentChanged(appointment: {
+    id: number
+    tenantId: number
+    roomId: number
+    renterId: number
+    assignedStaffId: number | null
+    status: string
+    room: { roomCode: string }
+  }) {
+    return this.bestEffort('APPOINTMENT_STATUS_CHANGED', () =>
+      this.notificationsService.createAndDispatch({
+        userIds: Array.from(
+          new Set(
+            [appointment.renterId, appointment.assignedStaffId].filter((value): value is number => value !== null),
+          ),
+        ),
+        tenantId: appointment.tenantId,
+        title: 'Lịch xem phòng đã được cập nhật',
+        content: `Lịch xem phòng ${appointment.room.roomCode} đã chuyển sang ${appointment.status}.`,
+        type: 'APPOINTMENT',
+        data: this.data('APPOINTMENT', appointment.id, {
+          event: 'APPOINTMENT_STATUS_CHANGED',
+          roomId: appointment.roomId,
+          appointmentId: appointment.id,
+          status: appointment.status,
+        }),
+      }),
+    )
   }
 
   async notifyTicketUpdated(ticket: {
@@ -139,6 +305,80 @@ export class NotificationEventsService {
       content: `Ticket ${ticket.title} đã chuyển sang trạng thái ${ticket.status}.`,
       type: 'TICKET',
       data: this.data('TICKET', ticket.id, { status: ticket.status }),
+    })
+  }
+
+  async notifyTicketAssigned(ticket: TicketEventSource) {
+    return this.bestEffort('TICKET_ASSIGNED', () =>
+      this.dispatchTicketNotification(
+        ticket,
+        [ticket.assignedTo, ticket.createdById, ticket.contract?.renterId ?? null],
+        'Ticket đã được phân công',
+        `Ticket ${ticket.title} đã được phân công xử lý.`,
+        'TICKET_ASSIGNED',
+      ),
+    )
+  }
+
+  async notifyTicketStatusChanged(ticket: TicketEventSource) {
+    return this.bestEffort('TICKET_STATUS_CHANGED', () =>
+      this.dispatchTicketNotification(
+        ticket,
+        [ticket.createdById, ticket.contract?.renterId ?? null, ticket.assignedTo],
+        'Trạng thái ticket đã thay đổi',
+        `Ticket ${ticket.title} đã chuyển sang ${ticket.status}.`,
+        'TICKET_STATUS_CHANGED',
+      ),
+    )
+  }
+
+  async notifyTicketCommented(ticket: TicketEventSource, actorId: number, isStaff: boolean, isInternal: boolean) {
+    return this.bestEffort('TICKET_COMMENTED', async () => {
+      let recipients: Array<number | null>
+      if (isInternal) {
+        const staff = await this.notificationsRepository.findTenantNotificationRecipients(ticket.tenantId, [
+          roleName.LANDLORD,
+          roleName.MANAGER,
+        ])
+        recipients = [...staff, ticket.assignedTo]
+      } else if (isStaff) {
+        recipients = [ticket.createdById, ticket.contract?.renterId ?? null]
+      } else {
+        const staff = await this.notificationsRepository.findTenantNotificationRecipients(ticket.tenantId, [
+          roleName.LANDLORD,
+          roleName.MANAGER,
+        ])
+        recipients = [ticket.assignedTo, ...staff]
+      }
+      return this.dispatchTicketNotification(
+        ticket,
+        recipients.filter((userId) => userId !== actorId),
+        isInternal ? 'Bình luận nội bộ mới' : 'Bình luận ticket mới',
+        `Ticket ${ticket.title} vừa có bình luận mới.`,
+        isInternal ? 'TICKET_INTERNAL_COMMENT_ADDED' : 'TICKET_COMMENT_ADDED',
+      )
+    })
+  }
+
+  async notifyTicketAttachmentAdded(ticket: TicketEventSource, actorId: number, isStaff: boolean) {
+    return this.bestEffort('TICKET_ATTACHMENT_ADDED', async () => {
+      let recipients: Array<number | null>
+      if (isStaff) {
+        recipients = [ticket.createdById, ticket.contract?.renterId ?? null]
+      } else {
+        const staff = await this.notificationsRepository.findTenantNotificationRecipients(ticket.tenantId, [
+          roleName.LANDLORD,
+          roleName.MANAGER,
+        ])
+        recipients = [ticket.assignedTo, ...staff]
+      }
+      return this.dispatchTicketNotification(
+        ticket,
+        recipients.filter((userId) => userId !== actorId),
+        'Tệp đính kèm ticket mới',
+        `Ticket ${ticket.title} vừa có tệp đính kèm mới.`,
+        'TICKET_ATTACHMENT_ADDED',
+      )
     })
   }
 
@@ -218,7 +458,41 @@ export class NotificationEventsService {
       data: this.data('REPORT', report.id, { status: report.status }),
     })
   }
+  private async bestEffort<T>(event: string, action: () => Promise<T>): Promise<T | null> {
+    try {
+      return await action()
+    } catch (error) {
+      this.logger.error(
+        `Notification ${event} failed after business commit`,
+        error instanceof Error ? error.stack : undefined,
+      )
+      return null
+    }
+  }
+
+  private dispatchTicketNotification(
+    ticket: TicketEventSource,
+    recipients: Array<number | null>,
+    title: string,
+    content: string,
+    event: string,
+  ) {
+    const userIds = Array.from(new Set(recipients.filter((value): value is number => value !== null)))
+    for (const userId of userIds) {
+      this.notificationsGateway.emitTicketUpdated(userId, { ticketId: ticket.id, status: ticket.status })
+    }
+    return this.notificationsService.createAndDispatch({
+      userIds,
+      tenantId: ticket.tenantId,
+      title,
+      content,
+      type: 'TICKET',
+      data: this.data('TICKET', ticket.id, { event, ticketId: ticket.id, status: ticket.status }),
+    })
+  }
+
   private data(sourceType: string, sourceId: number, extra: Record<string, unknown> = {}): Prisma.InputJsonValue {
-    return { sourceType, sourceId, ...extra }
+    const event = typeof extra.event === 'string' ? extra.event : `${sourceType}_UPDATED`
+    return { event, sourceType, sourceId, ...extra }
   }
 }

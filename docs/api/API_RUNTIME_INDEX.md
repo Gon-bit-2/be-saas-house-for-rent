@@ -1,8 +1,8 @@
 # Runtime API Index
 
-> Sinh tự động từ NestJS runtime ngày 2026-07-31T02:12:46.031Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-03T10:23:02.466Z. Không chỉnh sửa thủ công.
 
-- Tổng số operation: **206**
+- Tổng số operation: **214**
 - Swagger UI: `GET /docs`
 - OpenAPI JSON: `GET /docs-json`
 - Route protected dùng Bearer JWT; route staff theo tenant có thể yêu cầu `x-tenant-id`.
@@ -219,6 +219,7 @@
 | GET | `/rental-requests/{id}` | Bearer JWT | `RentalRequestsController_getForLandlord` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/rental-requests/{id}/decision` | Bearer JWT | `RentalRequestsController_decide` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/rental-requests/me` | Bearer JWT | `RentalRequestsController_listMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| PATCH | `/rental-requests/me/{id}` | Bearer JWT | `RentalRequestsController_updateMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/rental-requests/me/{id}/cancel` | Bearer JWT | `RentalRequestsController_cancelMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
 
 ## renters
@@ -353,13 +354,20 @@
 | PATCH | `/tickets/{id}/assign` | Bearer JWT | `TicketsController_assign` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/tickets/{id}/attachments` | Bearer JWT | `TicketsController_listStaffAttachments` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/tickets/{id}/attachments` | Bearer JWT | `TicketsController_addAttachment` | 201, 400, 401, 403, 404, 409, 429, 500 |
+| POST | `/tickets/{id}/attachments/upload` | Bearer JWT | `TicketsController_uploadAttachment` | 201, 400, 401, 403, 404, 409, 429, 500 |
+| PATCH | `/tickets/{id}/close` | Bearer JWT | `TicketsController_closeForStaff` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/tickets/{id}/comments` | Bearer JWT | `TicketsController_listStaffComments` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/tickets/{id}/comments` | Bearer JWT | `TicketsController_addComment` | 201, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/tickets/{id}/history` | Bearer JWT | `TicketsController_listStaffHistory` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/tickets/{id}/status` | Bearer JWT | `TicketsController_updateStatus` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/tickets/me` | Bearer JWT | `TicketsController_listMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/tickets/me/{id}` | Bearer JWT | `TicketsController_getMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/tickets/me/{id}/attachments` | Bearer JWT | `TicketsController_listMyAttachments` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| PATCH | `/tickets/me/{id}/cancel` | Bearer JWT | `TicketsController_cancelMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| PATCH | `/tickets/me/{id}/close` | Bearer JWT | `TicketsController_closeMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/tickets/me/{id}/comments` | Bearer JWT | `TicketsController_listMyComments` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/tickets/me/{id}/history` | Bearer JWT | `TicketsController_listMyHistory` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| PATCH | `/tickets/me/{id}/reopen` | Bearer JWT | `TicketsController_reopenMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
 
 ## users
 

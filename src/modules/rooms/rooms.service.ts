@@ -1,5 +1,6 @@
 import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common'
 import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
+import { NotificationEventsService } from '@src/modules/notifications/notification-events.service'
 import { TenantAccessService } from '@src/shared/modules/services/tenant-access.service'
 import type { Prisma } from 'generated/prisma/client'
 import type {
@@ -20,6 +21,7 @@ export class RoomsService {
   constructor(
     private readonly roomsRepository: RoomsRepository,
     private readonly tenantAccessService: TenantAccessService,
+    private readonly notificationEventsService: NotificationEventsService,
   ) {}
 
   async list(userId: number, query: TListRoomsQuerySchema) {
@@ -87,7 +89,11 @@ export class RoomsService {
   async updateStatus(userId: number, id: number, body: TUpdateRoomStatusBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const room = await this.getTenantRoomOrThrow(tenant.tenantId, id)
-    return this.roomsRepository.updateStatus(id, body.status, userId, room.marketplaceStatus)
+    const updated = await this.roomsRepository.updateStatus(id, body.status, userId, room.marketplaceStatus)
+    if (room.marketplaceStatus === 'PUBLISHED' && updated.marketplaceStatus === 'HIDDEN') {
+      await this.notificationEventsService.notifyMarketplaceModerated(updated)
+    }
+    return updated
   }
 
   async updateMarketplace(userId: number, id: number, body: TUpdateRoomMarketplaceBodySchema) {
@@ -116,6 +122,11 @@ export class RoomsService {
     )
     if (!updated) {
       throw new ConflictException('Trạng thái marketplace đã thay đổi, vui lòng tải lại dữ liệu')
+    }
+    if (updated.marketplaceStatus === 'PENDING_REVIEW') {
+      await this.notificationEventsService.notifyMarketplaceSubmitted(updated)
+    } else if (updated.marketplaceStatus === 'HIDDEN') {
+      await this.notificationEventsService.notifyMarketplaceModerated(updated)
     }
     return updated
   }

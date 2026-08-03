@@ -23,6 +23,7 @@ describe('NotificationsService', () => {
       disableDeviceToken: jest.fn(),
       createBackgroundJob: jest.fn(),
       setBackgroundJobExternalId: jest.fn(),
+      updateBackgroundJobStatus: jest.fn(),
     }
     gateway = {
       emitNotificationCreated: jest.fn(),
@@ -73,6 +74,24 @@ describe('NotificationsService', () => {
 
     expect(repository.markRead).toHaveBeenCalledWith(10, 1)
     expect(gateway.emitNotificationRead).toHaveBeenCalledWith(10, expect.objectContaining({ id: 1, isRead: true }))
+  })
+
+  it('keeps the database notification and marks the background job failed when enqueue fails', async () => {
+    repository.createNotifications.mockResolvedValue([
+      { id: 1, userId: 10, tenantId: 2, title: 'T', content: 'C', type: 'SYSTEM' },
+    ])
+    repository.createBackgroundJob.mockResolvedValue({ id: 99 })
+    queue.add.mockRejectedValue(new Error('redis://user:secret@localhost:6379 unavailable'))
+
+    await expect(
+      service.createAndDispatch({ userIds: [10], tenantId: 2, title: 'T', content: 'C', type: 'SYSTEM' }),
+    ).resolves.toHaveLength(1)
+
+    expect(repository.updateBackgroundJobStatus).toHaveBeenCalledWith(
+      99,
+      'FAILED',
+      expect.objectContaining({ errorMessage: expect.not.stringContaining('secret') }),
+    )
   })
 
   it('throws when marking a missing notification read', async () => {

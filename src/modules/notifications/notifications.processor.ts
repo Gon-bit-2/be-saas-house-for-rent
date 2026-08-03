@@ -35,6 +35,7 @@ export class NotificationsProcessor extends WorkerHost {
 
       const tokens = await this.notificationsRepository.findActiveDeviceTokens(notification.userId)
       const results = await this.firebasePushService.sendToTokens(notification, tokens)
+      let hasTemporaryFailure = false
       for (const result of results) {
         if (result.success) {
           await this.notificationsRepository.markTokenSuccess(result.tokenId)
@@ -44,7 +45,12 @@ export class NotificationsProcessor extends WorkerHost {
             result.errorCode ?? 'messaging/unknown',
             result.disableToken,
           )
+          hasTemporaryFailure ||= !result.disableToken
         }
+      }
+
+      if (hasTemporaryFailure) {
+        throw new Error('FCM_TEMPORARY_FAILURE')
       }
 
       await this.notificationsRepository.updateBackgroundJobStatus(job.data.backgroundJobId, 'COMPLETED', {
@@ -57,10 +63,15 @@ export class NotificationsProcessor extends WorkerHost {
         job.attemptsMade + 1 >= maxAttempts ? 'FAILED' : 'RETRYING',
         {
           attempts: job.attemptsMade + 1,
-          errorMessage: error instanceof Error ? error.message : 'Push notification failed',
+          errorMessage: this.sanitizeError(error),
         },
       )
       throw error
     }
+  }
+
+  private sanitizeError(error: unknown) {
+    const raw = error instanceof Error ? error.message : 'Push notification failed'
+    return raw.replace(/\b(?:redis|rediss|https?):\/\/[^\s]+/gi, '[url-redacted]').slice(0, 1000)
   }
 }

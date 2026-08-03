@@ -1,6 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
-import type { Prisma } from 'generated/prisma/client'
+import type { Prisma, TicketStatus } from 'generated/prisma/client'
 
 export const staffTicketAttachmentSelect = {
   id: true,
@@ -144,7 +144,8 @@ export class TicketsRepository {
         status: 'ACTIVE',
         deletedAt: null,
         OR: [{ renterId: userId }, { members: { some: { userId } } }],
-        room: { deletedAt: null },
+        room: { deletedAt: null, property: { deletedAt: null, status: 'ACTIVE' } },
+        tenant: { deletedAt: null, status: 'ACTIVE' },
       },
       orderBy: { startDate: 'desc' },
       select: { id: true, tenantId: true, roomId: true, renterId: true },
@@ -210,6 +211,97 @@ export class TicketsRepository {
 
   async updateTicket(id: number, data: Prisma.TicketUncheckedUpdateInput) {
     return this.prismaService.ticket.update({ where: { id }, data, select: staffTicketDetailSelect })
+  }
+
+  async transitionTicket(input: {
+    tenantId: number
+    id: number
+    expectedStatus: TicketStatus
+    status: TicketStatus
+    actorId: number
+    action: string
+    reason?: string
+  }) {
+    return this.prismaService.$transaction(async (tx) => {
+      const result = await tx.ticket.updateMany({
+        where: { id: input.id, tenantId: input.tenantId, status: input.expectedStatus },
+        data: {
+          status: input.status,
+          resolvedAt: ['RESOLVED', 'CLOSED'].includes(input.status) ? new Date() : null,
+          updatedById: input.actorId,
+        },
+      })
+      if (result.count !== 1) return null
+      await tx.auditLog.create({
+        data: {
+          tenantId: input.tenantId,
+          actorId: input.actorId,
+          action: input.action,
+          entityType: 'TICKET',
+          entityId: String(input.id),
+          oldValues: { status: input.expectedStatus },
+          newValues: { status: input.status, reason: input.reason ?? null },
+        },
+      })
+      return tx.ticket.findUniqueOrThrow({ where: { id: input.id }, select: staffTicketDetailSelect })
+    })
+  }
+
+  async assignTicket(input: {
+    tenantId: number
+    id: number
+    expectedStatus: TicketStatus
+    expectedAssignee: number | null
+    assignedTo: number | null
+    actorId: number
+  }) {
+    const status: TicketStatus =
+      input.expectedStatus === 'OPEN' && input.assignedTo ? 'IN_PROGRESS' : input.expectedStatus
+    return this.prismaService.$transaction(async (tx) => {
+      const result = await tx.ticket.updateMany({
+        where: {
+          id: input.id,
+          tenantId: input.tenantId,
+          status: input.expectedStatus,
+          assignedTo: input.expectedAssignee,
+        },
+        data: { assignedTo: input.assignedTo, status, updatedById: input.actorId },
+      })
+      if (result.count !== 1) return null
+      await tx.auditLog.create({
+        data: {
+          tenantId: input.tenantId,
+          actorId: input.actorId,
+          action: 'ASSIGN_TICKET',
+          entityType: 'TICKET',
+          entityId: String(input.id),
+          oldValues: { status: input.expectedStatus, assignedTo: input.expectedAssignee },
+          newValues: { status, assignedTo: input.assignedTo },
+        },
+      })
+      return tx.ticket.findUniqueOrThrow({ where: { id: input.id }, select: staffTicketDetailSelect })
+    })
+  }
+
+  async findTicketHistoryAndCount(ticketId: number, skip: number, take: number) {
+    const where: Prisma.AuditLogWhereInput = { entityType: 'TICKET', entityId: String(ticketId) }
+    return this.prismaService.$transaction([
+      this.prismaService.auditLog.findMany({
+        where,
+        skip,
+        take,
+        orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+        select: {
+          id: true,
+          action: true,
+          oldValues: true,
+          newValues: true,
+          createdAt: true,
+          actor: { select: { id: true, fullName: true } },
+        },
+      }),
+      this.prismaService.auditLog.count({ where }),
+    ])
   }
 
   async findStaffCommentsAndCount(ticketId: number, skip: number, take: number) {
@@ -287,7 +379,7 @@ export class TicketsRepository {
   }
 
   async createAttachment(
-    input: { ticketId: number; userId: number; fileUrl: string; fileType: string },
+    input: { ticketId: number; userId: number; fileUrl: string; fileType: string; publicId?: string | null },
     audience: 'RENTER' | 'STAFF',
     hardCap: number,
   ) {
@@ -303,6 +395,7 @@ export class TicketsRepository {
           fileUrl: input.fileUrl,
           fileType: input.fileType,
           uploadedBy: input.userId,
+          publicId: input.publicId ?? null,
         },
         select: audience === 'RENTER' ? renterTicketAttachmentSelect : staffTicketAttachmentSelect,
       })

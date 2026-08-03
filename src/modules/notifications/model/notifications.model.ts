@@ -1,3 +1,4 @@
+import { BooleanInputCodec } from '@src/common/utils/boolean-codec.util'
 import z from 'zod'
 
 const NotificationTypeSchema = z.enum([
@@ -8,6 +9,8 @@ const NotificationTypeSchema = z.enum([
   'APPOINTMENT',
   'REVIEW',
   'REPORT',
+  'MARKETPLACE',
+  'RENTAL_REQUEST',
   'SYSTEM',
 ])
 const DevicePlatformSchema = z.enum(['IOS', 'ANDROID', 'WEB'])
@@ -17,7 +20,7 @@ export const ListNotificationsQuerySchema = z
     page: z.coerce.number().int().positive().default(1),
     limit: z.coerce.number().int().positive().max(100).default(20),
     type: NotificationTypeSchema.optional(),
-    isRead: z.coerce.boolean().optional(),
+    isRead: BooleanInputCodec.optional(),
   })
   .strict()
 

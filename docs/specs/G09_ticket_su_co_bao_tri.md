@@ -1,6 +1,6 @@
 # G09 - Đặc tả ticket sự cố và bảo trì
 
-> **Snapshot 31/07/2026:** Ticket create/list/detail/assign/status, comment/attachment phân trang, internal-comment isolation, hard cap và resource rate limit đã có API. Conversation/chat riêng mới có schema, chưa phải interface hoàn chỉnh.
+> **Snapshot 03/08/2026:** Tenant isolation theo role, state machine/CAS, renter close/reopen/cancel, landlord close override, Cloudinary upload ảnh, audit/history và notification theo recipient đã được triển khai. Conversation/chat, work order, vật tư và chi phí vẫn ngoài phạm vi. Các nhận định “chưa có” ở snapshot 31/07 trong phần phân tích lịch sử được thay thế bởi snapshot này.
 
 ## 1. Tổng quan
 
@@ -35,7 +35,6 @@ G09 tương ứng chủ yếu với FR-23.
 | Nội dung                                    | Tài liệu/ghi chú           |
 | ------------------------------------------- | -------------------------- |
 | Hợp đồng và thành viên hợp đồng             | G05                        |
-| Upload file lên Cloudinary hoặc storage     | Chưa có trong G09 hiện tại |
 | Notification nội bộ, realtime và push       | G10                        |
 | Dashboard thống kê ticket                   | G11                        |
 | Chat realtime bằng `Conversation`/`Message` | Mới có schema, chưa có API |
@@ -47,15 +46,15 @@ G09 tương ứng chủ yếu với FR-23.
 | ----------------------------------------- | --------------------- | --------------------------------------------------------- |
 | Tạo/list/detail ticket                    | Đã hoạt động          | Có kiểm tra quyền renter và tenant                        |
 | Filter và phân trang ticket               | Đã hoạt động          | Filter được áp dụng tại service                           |
-| Phân công                                 | Đã hoạt động một phần | Chưa giới hạn maintenance staff chỉ thấy ticket được giao |
-| Cập nhật trạng thái                       | Đã hoạt động một phần | Mới khóa hai trạng thái terminal                          |
+| Phân công                                 | Đã triển khai         | Maintenance chỉ thấy ticket được giao; không tự assign    |
+| Cập nhật trạng thái                       | Đã triển khai         | Transition matrix và CAS, terminal được khóa              |
 | Bình luận công khai/nội bộ                | Đã hoạt động          | Renter không nhận internal comment                        |
 | Phân trang comment/attachment             | Đã hoạt động          | Không hydrate toàn bộ trong list/detail                   |
 | Rate limit và hard cap                    | Đã hoạt động          | Dùng Redis và row lock                                    |
-| Kiểm tra trạng thái tenant khi renter tạo | Chưa hoàn thiện       | Mới kiểm hợp đồng/room, chưa lọc tenant `ACTIVE`          |
-| Upload file vật lý                        | Chưa có               | API chỉ nhận URL và file type                             |
-| State machine đầy đủ                      | Chưa hoàn thiện       | Chưa có transition matrix                                 |
-| Lịch sử transition/audit                  | Chưa có               | Chỉ giữ trạng thái hiện tại                               |
+| Kiểm tra trạng thái tenant khi renter tạo | Đã triển khai         | Contract, room/property và tenant phải active/chưa xóa    |
+| Upload file vật lý                        | Đã triển khai         | JPEG/PNG/WebP, 5 MB, decode validation và Cloudinary      |
+| State machine đầy đủ                      | Đã triển khai         | Staff/renter action riêng, conflict đồng thời trả `409`   |
+| Lịch sử transition/audit                  | Đã triển khai         | Projection riêng cho staff và renter                      |
 | Ticket chat                               | Chỉ có schema         | Chưa có module/controller/service                         |
 
 ### 1.4. Cảnh báo cũ đã được xử lý
