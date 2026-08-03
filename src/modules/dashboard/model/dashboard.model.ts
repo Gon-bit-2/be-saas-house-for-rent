@@ -1,9 +1,10 @@
 import z from 'zod'
+import { IsoDateInputCodec } from '@src/common/utils/date-codec.util'
 
 const DateRangeQuerySchema = z
   .object({
-    from: z.coerce.date().optional(),
-    to: z.coerce.date().optional(),
+    from: IsoDateInputCodec.optional(),
+    to: IsoDateInputCodec.optional(),
   })
   .strict()
 

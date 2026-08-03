@@ -1,6 +1,11 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { TenantAccessService } from '@src/shared/modules/services/tenant-access.service'
-import type { DashboardTrendGroupBy, TDashboardSummaryQuerySchema, TRecentActivityQuerySchema, TRevenueTrendQuerySchema } from './model/dashboard.model'
+import type {
+  DashboardTrendGroupBy,
+  TDashboardSummaryQuerySchema,
+  TRecentActivityQuerySchema,
+  TRevenueTrendQuerySchema,
+} from './model/dashboard.model'
 import { DashboardRepository, StatusCountRow } from './repositories/dashboard.repo'
 
 const DAY_MS = 24 * 60 * 60 * 1000
@@ -72,7 +77,9 @@ export class DashboardService {
 
   normalizeRange(query: TDashboardSummaryQuerySchema) {
     const now = new Date()
-    const from = query.from ? this.startOfUtcDay(query.from) : new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1))
+    const from = query.from
+      ? this.startOfUtcDay(query.from)
+      : new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1))
     const to = query.to ? this.endOfUtcDay(query.to) : this.endOfUtcDay(now)
 
     if (from.getTime() > to.getTime()) {
