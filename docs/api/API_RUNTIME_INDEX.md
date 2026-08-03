@@ -1,6 +1,6 @@
 # Runtime API Index
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-03T10:23:02.466Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-03T13:24:05.605Z. Không chỉnh sửa thủ công.
 
 - Tổng số operation: **214**
 - Swagger UI: `GET /docs`

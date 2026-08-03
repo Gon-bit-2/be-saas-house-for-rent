@@ -2,6 +2,7 @@ import type { INestApplication } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { cleanupOpenApiDoc } from 'nestjs-zod'
 import type { OpenAPIObject } from '@nestjs/swagger'
+import { addFePrioritySchemas, feSuccessResponseSchema, isFePriorityOperation } from './openapi-contract.config'
 
 type PathItemObject = OpenAPIObject['paths'][string]
 type OperationObject = NonNullable<PathItemObject['get']>
@@ -26,6 +27,18 @@ const PUBLIC_OPERATIONS = new Set([
 
 const HTTP_METHODS = ['get', 'post', 'put', 'patch', 'delete', 'options', 'head'] as const
 const COMMON_ERRORS = ['400', '401', '403', '404', '409', '429', '500'] as const
+const TENANT_CONTEXT_OPERATIONS = [
+  /^(GET|POST|PATCH|DELETE) \/properties(?:\/|$)/,
+  /^(GET|POST|PATCH|DELETE) \/rooms(?:\/|$)/,
+  /^(GET|PATCH) \/rental-requests(?:$|\/\{id\})/,
+  /^(GET|PATCH) \/room-viewing-appointments(?:$|\/\{id\})/,
+  /^(GET|POST|PATCH) \/contracts(?:$|\/\{id\})/,
+  /^(GET|POST|PATCH) \/invoices(?:$|\/debts$|\/\{id\})/,
+  /^(GET|PATCH) \/payments(?:$|\/\{id\})/,
+  /^GET \/tickets$/,
+  /^GET \/tickets\/\{id\}(?:\/comments|\/attachments|\/history)?$/,
+  /^PATCH \/tickets\/\{id\}(?:\/status|\/assign|\/close)$/,
+] as const
 
 const successSchema = {
   type: 'object',
@@ -35,16 +48,28 @@ const successSchema = {
 
 export function enrichOpenApiDocument(document: OpenAPIObject): OpenAPIObject {
   const components = (document.components ??= {})
+  addFePrioritySchemas(document)
   components.schemas = {
     ...components.schemas,
     ApiErrorResponse: {
       type: 'object',
       required: ['statusCode', 'code', 'message', 'timestamp', 'path', 'requestId'],
+      additionalProperties: false,
       properties: {
         statusCode: { type: 'integer', example: 400 },
         code: { type: 'string', example: 'BAD_REQUEST' },
         message: { type: 'string', example: 'Request validation failed' },
-        details: { description: 'Optional structured validation or domain error details' },
+        details: {
+          description: 'Optional structured validation or domain error details',
+          oneOf: [
+            { type: 'object', additionalProperties: true },
+            { type: 'array', items: {} },
+            { type: 'string' },
+            { type: 'number' },
+            { type: 'boolean' },
+            { type: 'null' },
+          ],
+        },
         timestamp: { type: 'string', format: 'date-time' },
         path: { type: 'string', example: '/rooms?page=0' },
         requestId: { type: 'string', example: '9f5b7890-4be7-43ad-a347-359e9146600d' },
@@ -58,7 +83,7 @@ export function enrichOpenApiDocument(document: OpenAPIObject): OpenAPIObject {
     Forbidden: errorResponse('The current principal is not allowed to perform this operation'),
     NotFound: errorResponse('The resource does not exist in the caller scope'),
     Conflict: errorResponse('The request conflicts with current resource state'),
-    RateLimited: errorResponse('The configured request limit has been exceeded'),
+    RateLimited: errorResponse('The configured request limit has been exceeded', true),
     InternalError: errorResponse('Unexpected server error'),
   }
 
@@ -68,9 +93,19 @@ export function enrichOpenApiDocument(document: OpenAPIObject): OpenAPIObject {
   return document
 }
 
-function errorResponse(description: string): ResponseObject {
+function errorResponse(description: string, rateLimited = false): ResponseObject {
   return {
     description,
+    ...(rateLimited
+      ? {
+          headers: {
+            'Retry-After': {
+              description: 'Seconds until the caller may retry',
+              schema: { type: 'integer', minimum: 1 },
+            },
+          },
+        }
+      : {}),
     content: {
       'application/json': {
         schema: { $ref: '#/components/schemas/ApiErrorResponse' },
@@ -88,12 +123,28 @@ function addOperationContracts(path: string, pathItem: PathItemObject) {
     operation.security = PUBLIC_OPERATIONS.has(key) ? [] : [{ bearerAuth: [] }]
     operation.responses ??= {}
     for (const code of COMMON_ERRORS) {
+      if (TENANT_CONTEXT_OPERATIONS.some((pattern) => pattern.test(key))) {
+        operation.parameters ??= []
+        if (!operation.parameters.some((parameter) => !('$ref' in parameter) && parameter.name === 'x-tenant-id')) {
+          operation.parameters.push({
+            name: 'x-tenant-id',
+            in: 'header',
+            required: true,
+            description: 'Active tenant ID selected from the authenticated profile memberships',
+            schema: { type: 'integer', minimum: 1 },
+          })
+        }
+      }
       if (operation.responses[code]) continue
       operation.responses[code] = errorReference(code)
     }
     for (const [code, response] of Object.entries(operation.responses)) {
-      if (!response || code === '204' || '$ref' in response || response.content) continue
-      response.content = { 'application/json': { schema: successSchema } }
+      if (!response || code === '204' || '$ref' in response || !code.startsWith('2')) continue
+      if (isFePriorityOperation(path)) {
+        response.content = { 'application/json': { schema: feSuccessResponseSchema(method, path) } }
+      } else if (!response.content) {
+        response.content = { 'application/json': { schema: successSchema } }
+      }
     }
   }
 }

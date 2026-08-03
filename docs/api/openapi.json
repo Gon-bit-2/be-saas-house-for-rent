@@ -66,9 +66,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/UserProfile"
                 }
               }
             }
@@ -121,9 +119,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/MessageResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/TokenPair"
+                    }
+                  ]
                 }
               }
             }
@@ -176,9 +179,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/MessageResponse"
                 }
               }
             }
@@ -231,9 +232,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TokenPair"
                 }
               }
             }
@@ -286,9 +285,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/MessageResponse"
                 }
               }
             }
@@ -331,9 +328,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/UrlResponse"
                 }
               }
             }
@@ -376,9 +371,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "type": "string",
+                  "description": "OAuth redirect response"
                 }
               }
             }
@@ -431,9 +425,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TokenPair"
                 }
               }
             }
@@ -486,9 +478,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/MessageResponse"
                 }
               }
             }
@@ -535,9 +525,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/UserProfile"
                 }
               }
             }
@@ -592,9 +580,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/UserProfile"
                 }
               }
             }
@@ -2373,6 +2359,16 @@
               "maxLength": 100,
               "type": "string"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -2382,8 +2378,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Property"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -2421,7 +2431,18 @@
       },
       "post": {
         "operationId": "PropertiesController_create",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -2438,9 +2459,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Property"
                 }
               }
             }
@@ -2488,6 +2507,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -2496,9 +2525,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Property"
                 }
               }
             }
@@ -2544,6 +2571,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -2562,9 +2599,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Property"
                 }
               }
             }
@@ -2610,6 +2645,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -2618,9 +2663,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Property"
                 }
               }
             }
@@ -2668,6 +2711,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -2686,9 +2739,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Property"
                 }
               }
             }
@@ -2736,6 +2787,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -2744,9 +2805,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Floor"
+                  }
                 }
               }
             }
@@ -2792,6 +2854,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -2810,9 +2882,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Floor"
                 }
               }
             }
@@ -2868,6 +2938,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -2886,9 +2966,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Floor"
                 }
               }
             }
@@ -2942,6 +3020,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -2950,9 +3038,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Floor"
                 }
               }
             }
@@ -3109,6 +3195,16 @@
               "minimum": 0,
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -3118,8 +3214,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Room"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -3157,7 +3267,18 @@
       },
       "post": {
         "operationId": "RoomsController_create",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -3174,9 +3295,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Room"
                 }
               }
             }
@@ -3224,6 +3343,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -3232,9 +3361,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Room"
                 }
               }
             }
@@ -3280,6 +3407,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -3298,9 +3435,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Room"
                 }
               }
             }
@@ -3346,6 +3481,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -3354,9 +3499,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Room"
                 }
               }
             }
@@ -3404,6 +3547,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -3422,9 +3575,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Room"
                 }
               }
             }
@@ -3472,6 +3623,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -3490,9 +3651,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Room"
                 }
               }
             }
@@ -3540,6 +3699,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -3558,9 +3727,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Room"
                 }
               }
             }
@@ -3608,6 +3775,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -3616,9 +3793,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/RoomImage"
                 }
               }
             }
@@ -3674,6 +3849,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -3692,9 +3877,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Room"
                 }
               }
             }
@@ -3748,6 +3931,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -3756,9 +3949,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Room"
                 }
               }
             }
@@ -3868,8 +4059,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Notification"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -3916,9 +4121,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "type": "integer",
+                  "minimum": 0
                 }
               }
             }
@@ -3984,9 +4188,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Notification"
                 }
               }
             }
@@ -4043,9 +4245,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/UnreadCount"
                 }
               }
             }
@@ -4102,9 +4302,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Notification"
                 }
               }
             }
@@ -4161,9 +4359,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/DeviceToken"
                 }
               }
             }
@@ -4219,9 +4415,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/DeviceToken"
                 }
               }
             }
@@ -4880,6 +5074,16 @@
               "exclusiveMinimum": 0,
               "type": "integer"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -4888,9 +5092,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RoomAsset"
+                  }
                 }
               }
             }
@@ -4936,6 +5141,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -4954,9 +5169,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/RoomAsset"
                 }
               }
             }
@@ -5326,8 +5539,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MarketplaceRoom"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -5379,9 +5606,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/MarketplaceRoom"
                 }
               }
             }
@@ -5443,9 +5668,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/RentalRequest"
                 }
               }
             }
@@ -5511,9 +5734,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Appointment"
                 }
               }
             }
@@ -5691,8 +5912,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Room"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -5771,8 +6006,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MarketplaceModeration"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -5828,9 +6077,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Room"
                 }
               }
             }
@@ -5896,9 +6143,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Room"
                 }
               }
             }
@@ -7227,8 +7472,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Payment"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -7284,9 +7543,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Payment"
                 }
               }
             }
@@ -7342,9 +7599,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/PaymentQrCode"
                 }
               }
             }
@@ -7408,9 +7663,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/PaymentQrCode"
                 }
               }
             }
@@ -7476,9 +7729,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Payment"
                 }
               }
             }
@@ -7622,6 +7873,16 @@
               "minLength": 1,
               "type": "string"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -7631,8 +7892,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Payment"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -7680,6 +7955,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -7688,9 +7973,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Payment"
                 }
               }
             }
@@ -7738,6 +8021,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -7756,9 +8049,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Payment"
                 }
               }
             }
@@ -7806,6 +8097,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -7824,9 +8125,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Payment"
                 }
               }
             }
@@ -9067,8 +9366,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RentalRequest"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -9134,9 +9447,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/RentalRequest"
                 }
               }
             }
@@ -9202,9 +9513,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/RentalRequest"
                 }
               }
             }
@@ -9311,6 +9620,16 @@
               "minLength": 1,
               "type": "string"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -9319,9 +9638,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/RentalRequest"
                 }
               }
             }
@@ -9369,6 +9686,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -9377,9 +9704,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/RentalRequest"
                 }
               }
             }
@@ -9427,6 +9752,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -9445,9 +9780,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/RentalRequest"
                 }
               }
             }
@@ -9592,8 +9925,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Appointment"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -9659,9 +10006,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Appointment"
                 }
               }
             }
@@ -9797,6 +10142,16 @@
                 }
               ]
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -9806,8 +10161,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Appointment"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -9855,6 +10224,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -9873,9 +10252,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Appointment"
                 }
               }
             }
@@ -10167,8 +10544,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Review"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -10220,9 +10611,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/ReviewSummary"
                 }
               }
             }
@@ -11146,8 +11535,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Contract"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -11203,9 +11606,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Contract"
                 }
               }
             }
@@ -11323,6 +11724,16 @@
               "minLength": 1,
               "type": "string"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -11332,8 +11743,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Contract"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -11371,7 +11796,18 @@
       },
       "post": {
         "operationId": "ContractsController_createDraft",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -11388,9 +11824,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Contract"
                 }
               }
             }
@@ -11438,6 +11872,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -11446,9 +11890,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Contract"
                 }
               }
             }
@@ -11494,6 +11936,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -11512,9 +11964,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Contract"
                 }
               }
             }
@@ -11562,6 +12012,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -11570,9 +12030,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Contract"
                 }
               }
             }
@@ -11620,6 +12078,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -11628,9 +12096,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Contract"
                 }
               }
             }
@@ -11678,6 +12144,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -11686,9 +12162,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Contract"
                 }
               }
             }
@@ -13915,8 +14389,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Invoice"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -13972,9 +14460,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Invoice"
                 }
               }
             }
@@ -14166,8 +14652,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Debt"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -14350,6 +14850,16 @@
                 "CANCELED"
               ]
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -14359,8 +14869,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Debt"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -14544,6 +15068,16 @@
                 "CANCELED"
               ]
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -14553,8 +15087,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Invoice"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -14592,7 +15140,18 @@
       },
       "post": {
         "operationId": "InvoicesController_create",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -14609,9 +15168,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Invoice"
                 }
               }
             }
@@ -14659,6 +15216,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -14667,9 +15234,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Invoice"
                 }
               }
             }
@@ -14715,6 +15280,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -14733,9 +15308,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Invoice"
                 }
               }
             }
@@ -14783,6 +15356,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -14791,9 +15374,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Invoice"
                 }
               }
             }
@@ -14841,6 +15422,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -14849,9 +15440,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Invoice"
                 }
               }
             }
@@ -14899,6 +15488,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -14907,9 +15506,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/Invoice"
                 }
               }
             }
@@ -14966,9 +15563,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketDetail"
                 }
               }
             }
@@ -15114,6 +15709,16 @@
               "minLength": 1,
               "type": "string"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -15123,8 +15728,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TicketSummary"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -15281,8 +15900,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TicketSummary"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -15338,9 +15971,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketDetail"
                 }
               }
             }
@@ -15419,8 +16050,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TicketComment"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -15499,8 +16144,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TicketAttachment"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -15556,9 +16215,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketDetail"
                 }
               }
             }
@@ -15614,9 +16271,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketDetail"
                 }
               }
             }
@@ -15672,9 +16327,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketDetail"
                 }
               }
             }
@@ -15753,8 +16406,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TicketHistoryRenter"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -15802,6 +16469,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -15810,9 +16487,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketDetail"
                 }
               }
             }
@@ -15882,6 +16557,16 @@
               "default": 20,
               "type": "integer"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -15891,8 +16576,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TicketComment"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -15956,9 +16655,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketComment"
                 }
               }
             }
@@ -16028,6 +16725,16 @@
               "default": 20,
               "type": "integer"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -16037,8 +16744,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TicketAttachment"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -16103,9 +16824,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketAttachment"
                 }
               }
             }
@@ -16176,6 +16895,16 @@
               "default": 20,
               "type": "integer"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "responses": {
@@ -16185,8 +16914,22 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TicketHistoryStaff"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               }
             }
@@ -16234,6 +16977,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -16252,9 +17005,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketDetail"
                 }
               }
             }
@@ -16302,6 +17053,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -16320,9 +17081,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketDetail"
                 }
               }
             }
@@ -16370,6 +17129,16 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
           }
         ],
         "requestBody": {
@@ -16388,9 +17157,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketDetail"
                 }
               }
             }
@@ -16465,9 +17232,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "description": "Endpoint-specific response. See controller response DTO and examples."
+                  "$ref": "#/components/schemas/TicketAttachment"
                 }
               }
             }
@@ -20210,6 +20975,2799 @@
         ],
         "additionalProperties": false
       },
+      "PaginationMeta": {
+        "type": "object",
+        "required": [
+          "page",
+          "limit",
+          "total",
+          "totalPages"
+        ],
+        "properties": {
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 1
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalPages": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false
+      },
+      "MessageResponse": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TokenPair": {
+        "type": "object",
+        "required": [
+          "accessToken",
+          "refreshToken"
+        ],
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UrlResponse": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnreadCount": {
+        "type": "object",
+        "required": [
+          "unreadCount"
+        ],
+        "properties": {
+          "unreadCount": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false
+      },
+      "PermissionSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "code",
+          "name",
+          "module"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "module": {
+            "type": "string"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoleSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionSummary"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "TenantSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "slug",
+          "status",
+          "ownerUserId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "SUSPENDED",
+              "CLOSED"
+            ]
+          },
+          "ownerUserId": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "TenantMembership": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "roleId",
+          "status",
+          "tenant",
+          "role"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roleId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INVITED",
+              "DISABLED"
+            ]
+          },
+          "joinedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tenant": {
+            "$ref": "#/components/schemas/TenantSummary"
+          },
+          "role": {
+            "$ref": "#/components/schemas/RoleSummary"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "fullName",
+          "email"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "phone": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "avatarUrl": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "BANNED"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserProfile": {
+        "type": "object",
+        "required": [
+          "id",
+          "fullName",
+          "email",
+          "status",
+          "tenantMembers",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "phone": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "systemRole": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "avatarUrl": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "BANNED"
+            ]
+          },
+          "emailVerifiedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "phoneVerifiedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lastLoginAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tenantMembers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TenantMembership"
+            }
+          },
+          "renterProfile": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "id",
+                  "verificationStatus"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "verificationStatus": {
+                    "type": "string",
+                    "enum": [
+                      "UNVERIFIED",
+                      "PENDING",
+                      "VERIFIED",
+                      "REJECTED"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "Floor": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "propertyId",
+          "name",
+          "floorNumber"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "propertyId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "floorNumber": {
+            "type": "integer"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "Property": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "name",
+          "type",
+          "status",
+          "province",
+          "district",
+          "ward",
+          "addressDetail"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "HOUSE",
+              "MINI_APARTMENT",
+              "DORM",
+              "APARTMENT"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "MAINTENANCE"
+            ]
+          },
+          "province": {
+            "type": "string"
+          },
+          "district": {
+            "type": "string"
+          },
+          "ward": {
+            "type": "string"
+          },
+          "addressDetail": {
+            "type": "string"
+          },
+          "latitude": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "longitude": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "floors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Floor"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "PublicProperty": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "status",
+          "province",
+          "district",
+          "ward"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "HOUSE",
+              "MINI_APARTMENT",
+              "DORM",
+              "APARTMENT"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "MAINTENANCE"
+            ]
+          },
+          "province": {
+            "type": "string"
+          },
+          "district": {
+            "type": "string"
+          },
+          "ward": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomImage": {
+        "type": "object",
+        "required": [
+          "id",
+          "roomId",
+          "imageUrl",
+          "sortOrder",
+          "isThumbnail"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "imageUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "caption": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sortOrder": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "isThumbnail": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Room": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "propertyId",
+          "roomCode",
+          "title",
+          "status",
+          "marketplaceStatus",
+          "basePrice"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "propertyId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "floorId": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "roomCode": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "area": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "decimal",
+                "pattern": "^-?\\d+(?:\\.\\d+)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "basePrice": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "depositAmount": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "decimal",
+                "pattern": "^-?\\d+(?:\\.\\d+)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "maxOccupants": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "OCCUPIED",
+              "RESERVED",
+              "MAINTENANCE",
+              "INACTIVE"
+            ]
+          },
+          "marketplaceStatus": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PENDING_REVIEW",
+              "PUBLISHED",
+              "REJECTED",
+              "HIDDEN"
+            ]
+          },
+          "property": {
+            "$ref": "#/components/schemas/Property"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomImage"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "MarketplaceRoom": {
+        "type": "object",
+        "required": [
+          "id",
+          "propertyId",
+          "roomCode",
+          "title",
+          "status",
+          "marketplaceStatus",
+          "basePrice",
+          "property",
+          "images"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "propertyId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "floorId": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "roomCode": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "area": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "decimal",
+                "pattern": "^-?\\d+(?:\\.\\d+)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "basePrice": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "depositAmount": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "decimal",
+                "pattern": "^-?\\d+(?:\\.\\d+)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "maxOccupants": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE"
+            ]
+          },
+          "marketplaceStatus": {
+            "type": "string",
+            "enum": [
+              "PUBLISHED"
+            ]
+          },
+          "property": {
+            "$ref": "#/components/schemas/PublicProperty"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomImage"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MarketplaceModeration": {
+        "type": "object",
+        "required": [
+          "id",
+          "roomId",
+          "fromStatus",
+          "toStatus",
+          "moderatedById",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "fromStatus": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "DRAFT",
+                  "PENDING_REVIEW",
+                  "PUBLISHED",
+                  "REJECTED",
+                  "HIDDEN"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "toStatus": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "PENDING_REVIEW",
+              "PUBLISHED",
+              "REJECTED",
+              "HIDDEN"
+            ]
+          },
+          "reason": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "moderatedById": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Appointment": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "roomId",
+          "renterId",
+          "scheduledAt",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "renterId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "assignedStaffId": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "scheduledAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "CONFIRMED",
+              "REJECTED",
+              "RESCHEDULED",
+              "CANCELED",
+              "COMPLETED"
+            ]
+          },
+          "note": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "landlordNote": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "room": {
+            "$ref": "#/components/schemas/Room"
+          },
+          "renter": {
+            "$ref": "#/components/schemas/UserSummary"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "RentalRequest": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "roomId",
+          "renterId",
+          "expectedStartDate",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "renterId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "appointmentId": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expectedStartDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "message": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "APPROVED",
+              "REJECTED",
+              "NEED_MORE_INFO",
+              "CANCELED",
+              "CONVERTED_TO_CONTRACT"
+            ]
+          },
+          "room": {
+            "$ref": "#/components/schemas/Room"
+          },
+          "renter": {
+            "$ref": "#/components/schemas/UserSummary"
+          },
+          "appointment": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Appointment"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "Contract": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "roomId",
+          "renterId",
+          "contractCode",
+          "status",
+          "startDate",
+          "endDate",
+          "monthlyPrice"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "renterId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "rentalRequestId": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "templateId": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "contractCode": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "WAITING_LANDLORD_SIGN",
+              "WAITING_RENTER_SIGN",
+              "ACTIVE",
+              "EXPIRED",
+              "TERMINATED",
+              "CANCELED"
+            ]
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "monthlyPrice": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "depositAmount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "billingCycle": {
+            "type": "string",
+            "enum": [
+              "MONTHLY",
+              "QUARTERLY"
+            ]
+          },
+          "paymentDueDay": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 28
+          },
+          "contentSnapshot": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "room": {
+            "$ref": "#/components/schemas/Room"
+          },
+          "renter": {
+            "$ref": "#/components/schemas/UserSummary"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "InvoiceItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "invoiceId",
+          "type",
+          "description",
+          "amount"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "invoiceId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "RENT",
+              "ELECTRICITY",
+              "WATER",
+              "SERVICE",
+              "PARKING",
+              "INTERNET",
+              "PENALTY",
+              "DISCOUNT",
+              "OTHER"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "unitPrice": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "amount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Debt": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "invoiceId",
+          "renterId",
+          "originalAmount",
+          "remainingAmount",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "invoiceId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "renterId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "originalAmount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "paidAmount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "remainingAmount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "PARTIAL",
+              "PAID",
+              "OVERDUE",
+              "CANCELED"
+            ]
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "Invoice": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "contractId",
+          "renterId",
+          "invoiceCode",
+          "status",
+          "totalAmount",
+          "paidAmount",
+          "debtAmount"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "contractId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "renterId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "invoiceCode": {
+            "type": "string"
+          },
+          "billingMonth": {
+            "type": "string",
+            "format": "date"
+          },
+          "issueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "UNPAID",
+              "PARTIALLY_PAID",
+              "PAID",
+              "OVERDUE",
+              "CANCELED"
+            ]
+          },
+          "subtotal": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "discountAmount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "penaltyAmount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "totalAmount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "paidAmount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "debtAmount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "note": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceItem"
+            }
+          },
+          "debt": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Debt"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentQrCode": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "invoiceId",
+          "amount",
+          "status",
+          "expiresAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "invoiceId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "amount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "EXPIRED",
+              "PAID",
+              "CANCELED"
+            ]
+          },
+          "qrCode": {
+            "type": "string"
+          },
+          "checkoutUrl": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "providerReference": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "Payment": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "invoiceId",
+          "payerId",
+          "amount",
+          "method",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "invoiceId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "payerId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "amount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "CASH",
+              "BANK_TRANSFER",
+              "QR",
+              "WALLET"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "SUCCESS",
+              "FAILED",
+              "CANCELED",
+              "REFUNDED"
+            ]
+          },
+          "transactionCode": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "evidenceUrl": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "renterNote": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "landlordNote": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "paidAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "approvedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rejectedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "invoice": {
+            "$ref": "#/components/schemas/Invoice"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketUser": {
+        "type": "object",
+        "required": [
+          "id",
+          "fullName"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketRoom": {
+        "type": "object",
+        "required": [
+          "id",
+          "roomCode",
+          "title",
+          "property"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomCode": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "property": {
+            "type": "object",
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketContract": {
+        "type": "object",
+        "required": [
+          "id",
+          "contractCode",
+          "status",
+          "renterId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "contractCode": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "renterId": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketComment": {
+        "type": "object",
+        "required": [
+          "id",
+          "ticketId",
+          "userId",
+          "message",
+          "isInternal",
+          "createdAt",
+          "user"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "ticketId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "userId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "message": {
+            "type": "string"
+          },
+          "isInternal": {
+            "type": "boolean"
+          },
+          "user": {
+            "$ref": "#/components/schemas/TicketUser"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketAttachment": {
+        "type": "object",
+        "required": [
+          "id",
+          "ticketId",
+          "fileUrl",
+          "fileType",
+          "uploadedBy",
+          "createdAt",
+          "uploadedByUser"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "ticketId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "fileUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "fileType": {
+            "type": "string"
+          },
+          "uploadedBy": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uploadedByUser": {
+            "$ref": "#/components/schemas/TicketUser"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketHistoryStaff": {
+        "type": "object",
+        "required": [
+          "id",
+          "action",
+          "oldValues",
+          "newValues",
+          "createdAt",
+          "actor"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "action": {
+            "type": "string"
+          },
+          "oldValues": {
+            "oneOf": [
+              {
+                "description": "Arbitrary JSON business payload",
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  {
+                    "type": "array",
+                    "items": {}
+                  },
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "newValues": {
+            "oneOf": [
+              {
+                "description": "Arbitrary JSON business payload",
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  {
+                    "type": "array",
+                    "items": {}
+                  },
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actor": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TicketUser"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketHistoryRenter": {
+        "type": "object",
+        "required": [
+          "id",
+          "action",
+          "transition",
+          "actorDisplayName",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "action": {
+            "type": "string"
+          },
+          "transition": {
+            "type": "object",
+            "required": [
+              "oldValues",
+              "newValues"
+            ],
+            "properties": {
+              "oldValues": {
+                "oneOf": [
+                  {
+                    "description": "Arbitrary JSON business payload",
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      },
+                      {
+                        "type": "array",
+                        "items": {}
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "newValues": {
+                "oneOf": [
+                  {
+                    "description": "Arbitrary JSON business payload",
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": true
+                      },
+                      {
+                        "type": "array",
+                        "items": {}
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "actorDisplayName": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "roomId",
+          "contractId",
+          "assignedTo",
+          "title",
+          "category",
+          "priority",
+          "status",
+          "createdAt",
+          "updatedAt",
+          "resolvedAt",
+          "createdById",
+          "updatedById",
+          "room",
+          "contract",
+          "assignedToUser",
+          "createdBy",
+          "commentCount",
+          "attachmentCount"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "contractId": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdById": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "updatedById": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "assignedTo": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "ELECTRICITY",
+              "WATER",
+              "INTERNET",
+              "FURNITURE",
+              "SECURITY",
+              "CLEANING",
+              "OTHER"
+            ]
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "URGENT"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "IN_PROGRESS",
+              "WAITING_RENTER",
+              "RESOLVED",
+              "CLOSED",
+              "CANCELED"
+            ]
+          },
+          "resolvedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "room": {
+            "$ref": "#/components/schemas/TicketRoom"
+          },
+          "contract": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TicketContract"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "assignedToUser": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TicketUser"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdBy": {
+            "$ref": "#/components/schemas/TicketUser"
+          },
+          "commentCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "attachmentCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TicketSummary"
+          },
+          {
+            "type": "object",
+            "required": [
+              "description"
+            ],
+            "properties": {
+              "description": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Notification": {
+        "type": "object",
+        "required": [
+          "id",
+          "userId",
+          "title",
+          "content",
+          "type",
+          "data",
+          "isRead",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "userId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "INVOICE",
+              "PAYMENT",
+              "CONTRACT",
+              "TICKET",
+              "APPOINTMENT",
+              "REVIEW",
+              "REPORT",
+              "MARKETPLACE",
+              "RENTAL_REQUEST",
+              "SYSTEM"
+            ]
+          },
+          "data": {
+            "description": "Arbitrary JSON business payload",
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {}
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "isRead": {
+            "type": "boolean"
+          },
+          "readAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceToken": {
+        "type": "object",
+        "required": [
+          "id",
+          "userId",
+          "token",
+          "platform",
+          "isActive",
+          "lastSeenAt",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "userId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "token": {
+            "type": "string"
+          },
+          "fid": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "platform": {
+            "type": "string",
+            "enum": [
+              "IOS",
+              "ANDROID",
+              "WEB"
+            ]
+          },
+          "deviceName": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "failureCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "lastError": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "disabledAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lastSeenAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Review": {
+        "type": "object",
+        "required": [
+          "id",
+          "roomId",
+          "reviewerId",
+          "rating",
+          "comment",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "reviewerId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "comment": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReviewSummary": {
+        "type": "object",
+        "required": [
+          "roomId",
+          "averageRating",
+          "totalReviews"
+        ],
+        "properties": {
+          "roomId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "averageRating": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 5
+          },
+          "totalReviews": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomAsset": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "roomId",
+          "name",
+          "condition"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "condition": {
+            "type": "string",
+            "enum": [
+              "NEW",
+              "GOOD",
+              "NORMAL",
+              "DAMAGED",
+              "LOST"
+            ]
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
       "ApiErrorResponse": {
         "type": "object",
         "required": [
@@ -20220,6 +23778,7 @@
           "path",
           "requestId"
         ],
+        "additionalProperties": false,
         "properties": {
           "statusCode": {
             "type": "integer",
@@ -20234,7 +23793,29 @@
             "example": "Request validation failed"
           },
           "details": {
-            "description": "Optional structured validation or domain error details"
+            "description": "Optional structured validation or domain error details",
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {}
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "timestamp": {
             "type": "string",
@@ -20304,6 +23885,15 @@
       },
       "RateLimited": {
         "description": "The configured request limit has been exceeded",
+        "headers": {
+          "Retry-After": {
+            "description": "Seconds until the caller may retry",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
         "content": {
           "application/json": {
             "schema": {

@@ -24,7 +24,10 @@
     "security:sanitize-webhook-logs": "ts-node -r tsconfig-paths/register inittalScripts/sanitize-payment-webhook-logs.ts --apply",
     "permission:sync": "node dist/inittalScripts/create-permission.js",
     "openapi:export": "npm run build && node dist/inittalScripts/export-openapi.js",
-    "docs:check": "npm run build && node dist/inittalScripts/check-docs.js"
+    "docs:check": "npm run build && node dist/inittalScripts/check-docs.js",
+    "contract:generate": "npm run openapi:export",
+    "contract:check": "npm run build && node dist/inittalScripts/check-contract.js",
+    "contract:compat": "npm run build && node dist/inittalScripts/check-openapi-compatibility.js"
   },
   "dependencies": {
     "@google-cloud/vision": "^5.3.7",
