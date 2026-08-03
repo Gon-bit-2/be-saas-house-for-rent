@@ -2275,6 +2275,8 @@ model TicketAttachment {
   ticketId   Int      @map("ticket_id")
   /// Đường dẫn lưu trữ hình ảnh/video sự cố
   fileUrl    String   @map("file_url") @db.Text
+  /// Public identifier used to manage the uploaded Cloudinary asset
+  publicId   String?  @map("public_id") @db.VarChar(255)
   /// Loại file (ví dụ: image, video, document)
   fileType   String   @map("file_type") @db.VarChar(50)
   /// ID tài khoản người dùng tải file lên làm bằng chứng
@@ -3285,6 +3287,10 @@ enum NotificationType {
   REVIEW
   /// Thông báo liên quan đến báo cáo vi phạm
   REPORT
+  /// Thông báo kiểm duyệt tin đăng marketplace
+  MARKETPLACE
+  /// Thông báo liên quan đến yêu cầu thuê phòng
+  RENTAL_REQUEST
   /// Thông báo chung hoặc cập nhật từ hệ thống SaaS
   SYSTEM
 }

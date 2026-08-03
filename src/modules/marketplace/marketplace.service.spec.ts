@@ -1,11 +1,15 @@
 import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common'
 
 jest.mock('./repositories/marketplace.repo', () => ({ MarketplaceRepository: class MarketplaceRepository {} }))
+jest.mock('@src/modules/notifications/notification-events.service', () => ({
+  NotificationEventsService: class NotificationEventsService {},
+}))
 const { MarketplaceService } = require('./marketplace.service') as typeof import('./marketplace.service')
 
 describe('MarketplaceService', () => {
   let service: import('./marketplace.service').MarketplaceService
   let marketplaceRepository: Record<string, jest.Mock>
+  let notifications: Record<string, jest.Mock>
 
   beforeEach(() => {
     marketplaceRepository = {
@@ -15,9 +19,10 @@ describe('MarketplaceService', () => {
       findActiveRentalRequest: jest.fn(),
       findAppointmentForRenterRoom: jest.fn(),
       createRentalRequest: jest.fn(),
-      createViewingAppointment: jest.fn(),
+      createViewingAppointmentWithConflictCheck: jest.fn(),
     }
-    service = new MarketplaceService(marketplaceRepository as never)
+    notifications = { notifyRentalRequestCreated: jest.fn(), notifyViewingAppointmentCreated: jest.fn() }
+    service = new MarketplaceService(marketplaceRepository as never, notifications as never)
     jest.useFakeTimers().setSystemTime(new Date('2026-07-09T08:00:00.000Z'))
   })
 
@@ -111,7 +116,7 @@ describe('MarketplaceService', () => {
     await expect(
       service.createViewingAppointment(99, 5, { scheduledAt: new Date('2026-07-09T07:59:59.000Z') }),
     ).rejects.toBeInstanceOf(BadRequestException)
-    expect(marketplaceRepository.createViewingAppointment).not.toHaveBeenCalled()
+    expect(marketplaceRepository.createViewingAppointmentWithConflictCheck).not.toHaveBeenCalled()
   })
 
   it('throws not found for unpublished or unavailable room detail', async () => {

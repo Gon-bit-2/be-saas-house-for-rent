@@ -1,6 +1,6 @@
 # G04 - Đặc tả marketplace, yêu cầu thuê và lịch xem phòng
 
-> **Snapshot 31/07/2026:** Public search/detail, rental request, viewing appointment và ADMIN marketplace moderation/history đã có API. Approval dùng transaction/CAS để reserve room; một số filter/state-transition edge case vẫn là backlog và phải được ghi riêng, không coi toàn bộ G04 đã nghiệm thu end-to-end.
+> **Snapshot 03/08/2026:** Filter self-service, renter resubmit, state machine request/appointment, partial unique request, conflict lịch 60 phút bằng advisory lock và notification moderation/lead đã được triển khai. Favorite, view log, sort/radius và các mục ngoài phạm vi vẫn là backlog. Các nhận định “chưa có” ở snapshot 31/07 trong phần phân tích lịch sử được thay thế bởi snapshot này.
 
 ## 1. Tổng quan
 
@@ -47,12 +47,12 @@ Mục tiêu của tài liệu:
 | Danh sách/chi tiết marketplace | Đã hoạt động | Public, chỉ trả room đạt điều kiện hiện hành |
 | Tìm kiếm và lọc | Đã hoạt động một phần | Có nhiều filter nhưng chưa có sort/radius và validation chéo |
 | Tạo yêu cầu thuê/lịch xem | Đã hoạt động | Yêu cầu role `TENANT` và có `RenterProfile` |
-| Chủ trọ xử lý request | Đã hoạt động một phần | Có transaction giữ phòng nhưng còn race condition |
-| Chủ trọ xử lý appointment | Đã hoạt động một phần | Chưa có state machine và conflict detection |
-| Self-service người thuê | Đã hoạt động một phần | List/cancel có, nhưng các filter `/me` đang bị bỏ qua |
+| Chủ trọ xử lý request | Đã triển khai | State machine, CAS reserve và partial unique request active |
+| Chủ trọ xử lý appointment | Đã triển khai | State machine, role staff và conflict room/staff 60 phút |
+| Self-service người thuê | Đã triển khai | Filter `/me`, cancel và resubmit `NEED_MORE_INFO` |
 | Favorite | Chỉ có schema | Chưa có API/service |
 | View log | Chỉ có schema | Chưa ghi log khi xem phòng |
-| Notification marketplace | Chưa tích hợp | Không phát notification khi lead thay đổi |
+| Notification marketplace | Đã tích hợp | Moderation, request và appointment dùng delivery best-effort |
 | Admin moderation | Đã hoạt động | Có queue, detail, history và state machine duyệt/từ chối/ẩn |
 
 ## 2. Actor, quyền truy cập và mô hình dữ liệu

@@ -1,9 +1,14 @@
 import { Logger } from '@nestjs/common'
 import { OnGatewayConnection, WebSocketGateway, WebSocketServer } from '@nestjs/websockets'
 import { TokenService } from '@src/shared/modules/services/token.service'
+import envConfig from '@src/config/env.config'
 import { Server, Socket } from 'socket.io'
 
-@WebSocketGateway({ namespace: 'notifications', cors: true })
+const socketOrigins = envConfig.CORS_ORIGINS.split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+
+@WebSocketGateway({ namespace: 'notifications', cors: { origin: socketOrigins, credentials: true } })
 export class NotificationsGateway implements OnGatewayConnection {
   @WebSocketServer()
   private server!: Server

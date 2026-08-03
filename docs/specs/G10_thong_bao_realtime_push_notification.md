@@ -1,6 +1,6 @@
 # G10 - Đặc tả thông báo nội bộ, realtime và push notification
 
-> **Snapshot 31/07/2026:** Notification inbox/read, device token, Socket.IO gateway, Firebase push service và BullMQ processor đã có backend. Trạng thái vận hành vẫn phụ thuộc Redis/Firebase và client; không được mô tả là “chỉ giữ nền tảng dữ liệu”.
+> **Snapshot 03/08/2026:** Boolean filter tường minh, type/payload chuẩn hóa cho marketplace và rental request, Socket.IO CORS allowlist, enqueue failure bookkeeping, FCM retry/disable token và event coverage G04/G09 đã được triển khai. Redis/Firebase staging và Socket cross-user E2E vẫn cần môi trường ngoài. Các nhận định “chưa có” ở snapshot 31/07 trong phần phân tích lịch sử được thay thế bởi snapshot này.
 
 ## 1. Tổng quan
 
@@ -33,14 +33,13 @@ G10 tương ứng chủ yếu với FR-24.
 - Tạo background job và enqueue BullMQ.
 - Gửi push bằng Firebase Cloud Messaging.
 - Cập nhật trạng thái job và health của device token.
-- Event từ invoice, payment và ticket.
+- Event từ invoice, payment, ticket, marketplace, rental request và viewing appointment.
 
 ### 1.2. Ngoài phạm vi
 
 | Nội dung                               | Tài liệu/ghi chú          |
 | -------------------------------------- | ------------------------- |
 | Nghiệp vụ nguồn invoice/payment/ticket | G07–G09                   |
-| Rental request và viewing appointment  | G04; chưa nối G10         |
 | Contract event                         | G05; chưa nối G10         |
 | Email/SMS                              | Không phải kênh hiện hành |
 | Dashboard queue/notification           | G11 hoặc backlog          |
@@ -64,16 +63,16 @@ Notification trong database là nguồn dữ liệu để client đồng bộ l�
 
 | Thành phần                    | Trạng thái hiện tại   | Ghi chú                                           |
 | ----------------------------- | --------------------- | ------------------------------------------------- |
-| Notification nội bộ           | Đã hoạt động một phần | Query `isRead=false` đang bị boolean coercion sai |
-| Socket.IO theo user room      | Đã có code            | Chưa E2E môi trường thật                          |
+| Notification nội bộ           | Đã triển khai         | Boolean codec xử lý đúng `true/false`              |
+| Socket.IO theo user room      | Đã triển khai         | Token bắt buộc, CORS allowlist, chỉ room theo user |
 | Device token                  | Đã có API             | Register và disable                               |
-| BullMQ background job         | Đã có code            | Retry 5 lần                                       |
+| BullMQ background job         | Đã triển khai         | Retry 5 lần; enqueue lỗi ghi `FAILED` best-effort  |
 | Firebase push                 | Đã tích hợp code      | Chưa chứng minh credential/FCM thật               |
 | Invoice event                 | Đã tích hợp           | Issued và overdue                                 |
 | Payment event                 | Đã tích hợp           | Pending và reviewed                               |
-| Ticket event                  | Đã tích hợp           | Created và updated                                |
+| Ticket event                  | Đã tích hợp           | Created/assigned/status/comment/attachment        |
 | Contract event                | Chưa tích hợp         | Enum đã có                                        |
-| Appointment/rental request    | Chưa tích hợp         | Enum appointment đã có                            |
+| Appointment/rental request    | Đã tích hợp           | Type và payload điều hướng riêng                  |
 | Preference/template/retention | Chưa có               | Backlog                                           |
 
 ### 1.5. Không dùng nhãn trạng thái cũ

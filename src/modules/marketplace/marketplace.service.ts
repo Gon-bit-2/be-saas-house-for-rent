@@ -1,5 +1,6 @@
 import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common'
 import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
+import { NotificationEventsService } from '@src/modules/notifications/notification-events.service'
 import type { Prisma } from 'generated/prisma/client'
 import type {
   TCreateMarketplaceRentalRequestBodySchema,
@@ -15,7 +16,10 @@ type MarketplaceRoomRecord = NonNullable<Awaited<ReturnType<MarketplaceRepositor
  */
 @Injectable()
 export class MarketplaceService {
-  constructor(private readonly marketplaceRepository: MarketplaceRepository) {}
+  constructor(
+    private readonly marketplaceRepository: MarketplaceRepository,
+    private readonly notificationEventsService: NotificationEventsService,
+  ) {}
 
   async listRooms(query: TListMarketplaceRoomsQuerySchema) {
     const { page, limit, skip } = normalizePagination(query)
@@ -55,16 +59,23 @@ export class MarketplaceService {
       }
     }
 
-    return this.marketplaceRepository.createRentalRequest({
-      tenantId: room.tenantId,
-      roomId,
-      renterId: userId,
-      appointmentId: body.appointmentId ?? null,
-      message: body.message ?? null,
-      expectedStartDate: body.expectedStartDate,
-      status: 'PENDING',
-      createdById: userId,
-    })
+    try {
+      const request = await this.marketplaceRepository.createRentalRequest({
+        tenantId: room.tenantId,
+        roomId,
+        renterId: userId,
+        appointmentId: body.appointmentId ?? null,
+        message: body.message ?? null,
+        expectedStartDate: body.expectedStartDate,
+        status: 'PENDING',
+        createdById: userId,
+      })
+      await this.notificationEventsService.notifyRentalRequestCreated(request)
+      return request
+    } catch (error) {
+      if (this.isConflict(error)) throw new ConflictException('Bạn đã có yêu cầu thuê đang xử lý cho phòng này')
+      throw error
+    }
   }
 
   async createViewingAppointment(userId: number, roomId: number, body: TCreateMarketplaceViewingAppointmentBodySchema) {
@@ -72,15 +83,25 @@ export class MarketplaceService {
     await this.assertRenterProfile(userId)
     this.assertFutureDateTime(body.scheduledAt, 'Thời gian hẹn xem phòng phải ở tương lai')
 
-    return this.marketplaceRepository.createViewingAppointment({
-      tenantId: room.tenantId,
-      roomId,
-      renterId: userId,
-      scheduledAt: body.scheduledAt,
-      note: body.note ?? null,
-      status: 'PENDING',
-      createdById: userId,
-    })
+    try {
+      const appointment = await this.marketplaceRepository.createViewingAppointmentWithConflictCheck(
+        {
+          tenantId: room.tenantId,
+          roomId,
+          renterId: userId,
+          scheduledAt: body.scheduledAt,
+          note: body.note ?? null,
+          status: 'PENDING',
+          createdById: userId,
+        },
+        60,
+      )
+      await this.notificationEventsService.notifyViewingAppointmentCreated(appointment)
+      return appointment
+    } catch (error) {
+      if (this.isConflict(error)) throw new ConflictException('Khung giờ xem phòng đã có lịch hẹn khác')
+      throw error
+    }
   }
 
   private async getPublicRoomRecordOrThrow(id: number) {
@@ -122,6 +143,15 @@ export class MarketplaceService {
     if (date.getTime() <= Date.now()) {
       throw new BadRequestException(message)
     }
+  }
+
+  private isConflict(error: unknown) {
+    return Boolean(
+      error &&
+      typeof error === 'object' &&
+      (('code' in error && ['P2002', 'P2034'].includes(String(error.code))) ||
+        ('message' in error && String(error.message) === 'APPOINTMENT_CONFLICT')),
+    )
   }
 
   private buildPublicRoomWhere(query: TListMarketplaceRoomsQuerySchema): Prisma.RoomWhereInput {

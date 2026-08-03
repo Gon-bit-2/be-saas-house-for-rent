@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
-import type { Prisma } from 'generated/prisma/client'
+import { Prisma } from 'generated/prisma/client'
 
 const marketplaceRoomImageSelect = {
   id: true,
@@ -171,7 +171,36 @@ export class MarketplaceRepository {
     return this.prismaService.rentalRequest.create({ data, select: rentalRequestSelect })
   }
 
-  async createViewingAppointment(data: Prisma.RoomViewingAppointmentUncheckedCreateInput) {
-    return this.prismaService.roomViewingAppointment.create({ data, select: viewingAppointmentSelect })
+  async createViewingAppointmentWithConflictCheck(
+    data: {
+      tenantId: number
+      roomId: number
+      renterId: number
+      scheduledAt: Date
+      note: string | null
+      status: 'PENDING'
+      createdById: number
+    },
+    durationMinutes: number,
+  ) {
+    return this.prismaService.$transaction(
+      async (tx) => {
+        await tx.$queryRaw(Prisma.sql`SELECT 1 FROM pg_advisory_xact_lock(41004, ${data.roomId})`)
+        const before = new Date(data.scheduledAt.getTime() - durationMinutes * 60_000)
+        const after = new Date(data.scheduledAt.getTime() + durationMinutes * 60_000)
+        const conflict = await tx.roomViewingAppointment.findFirst({
+          where: {
+            tenantId: data.tenantId,
+            roomId: data.roomId,
+            status: { in: ['PENDING', 'CONFIRMED', 'RESCHEDULED'] },
+            scheduledAt: { gt: before, lt: after },
+          },
+          select: { id: true },
+        })
+        if (conflict) throw new Error('APPOINTMENT_CONFLICT')
+        return tx.roomViewingAppointment.create({ data, select: viewingAppointmentSelect })
+      },
+      { isolationLevel: 'Serializable' },
+    )
   }
 }

@@ -4,12 +4,16 @@ jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
   TenantAccessService: class TenantAccessService {},
 }))
 jest.mock('./repositories/rooms.repo', () => ({ RoomsRepository: class RoomsRepository {} }))
+jest.mock('@src/modules/notifications/notification-events.service', () => ({
+  NotificationEventsService: class NotificationEventsService {},
+}))
 const { RoomsService } = require('./rooms.service') as typeof import('./rooms.service')
 
 describe('RoomsService', () => {
   let service: import('./rooms.service').RoomsService
   let roomsRepository: Record<string, jest.Mock>
   let tenantAccessService: Record<string, jest.Mock>
+  let notifications: Record<string, jest.Mock>
 
   const createBody = {
     propertyId: 1,
@@ -47,7 +51,8 @@ describe('RoomsService', () => {
         .fn()
         .mockResolvedValue({ tenantId: 10, userId: 99, memberId: 1, roleId: 'LANDLORD' }),
     }
-    service = new RoomsService(roomsRepository as never, tenantAccessService as never)
+    notifications = { notifyMarketplaceSubmitted: jest.fn(), notifyMarketplaceModerated: jest.fn() }
+    service = new RoomsService(roomsRepository as never, tenantAccessService as never, notifications as never)
   })
 
   it('creates a room after validating property, floor, room code, and active amenities', async () => {

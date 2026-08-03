@@ -6,12 +6,16 @@ jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
 jest.mock('./repositories/rental-requests.repo', () => ({
   RentalRequestsRepository: class RentalRequestsRepository {},
 }))
+jest.mock('@src/modules/notifications/notification-events.service', () => ({
+  NotificationEventsService: class NotificationEventsService {},
+}))
 const { RentalRequestsService } = require('./rental-requests.service') as typeof import('./rental-requests.service')
 
 describe('RentalRequestsService', () => {
   let service: import('./rental-requests.service').RentalRequestsService
   let rentalRequestsRepository: Record<string, jest.Mock>
   let tenantAccessService: Record<string, jest.Mock>
+  let notifications: Record<string, jest.Mock>
 
   beforeEach(() => {
     rentalRequestsRepository = {
@@ -21,6 +25,8 @@ describe('RentalRequestsService', () => {
       updateRequestStatus: jest.fn(),
       findMyRequestsAndCount: jest.fn(),
       findRenterRequest: jest.fn(),
+      findAppointmentForRenterRoom: jest.fn(),
+      updateRenterRequest: jest.fn(),
       cancelRenterRequest: jest.fn(),
     }
     tenantAccessService = {
@@ -28,7 +34,16 @@ describe('RentalRequestsService', () => {
         .fn()
         .mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
     }
-    service = new RentalRequestsService(rentalRequestsRepository as never, tenantAccessService as never)
+    notifications = {
+      notifyRentalRequestChanged: jest.fn(),
+      notifyRentalRequestCreated: jest.fn(),
+      notifyMarketplaceModerated: jest.fn(),
+    }
+    service = new RentalRequestsService(
+      rentalRequestsRepository as never,
+      tenantAccessService as never,
+      notifications as never,
+    )
   })
 
   it('approves a pending request through transaction that reserves the room', async () => {
@@ -37,12 +52,43 @@ describe('RentalRequestsService', () => {
       status: 'PENDING',
       room: { status: 'AVAILABLE' },
     })
-    rentalRequestsRepository.approveRequestAndReserveRoom.mockResolvedValue({ id: 7, status: 'APPROVED' })
+    rentalRequestsRepository.approveRequestAndReserveRoom.mockResolvedValue({
+      id: 7,
+      tenantId: 10,
+      roomId: 3,
+      status: 'APPROVED',
+      room: { roomCode: 'P101', title: 'Phòng 101' },
+    })
 
     await service.decide(50, 7, { status: 'APPROVED' })
 
     expect(rentalRequestsRepository.approveRequestAndReserveRoom).toHaveBeenCalledWith(10, 7, 50)
     expect(rentalRequestsRepository.updateRequestStatus).not.toHaveBeenCalled()
+  })
+
+  it('applies all self-service filters to the Prisma where input', async () => {
+    rentalRequestsRepository.findMyRequestsAndCount.mockResolvedValue([[], 0])
+
+    await service.listMine(77, {
+      page: 1,
+      limit: 20,
+      status: 'PENDING',
+      roomId: 3,
+      propertyId: 4,
+      search: 'P101',
+    })
+
+    expect(rentalRequestsRepository.findMyRequestsAndCount).toHaveBeenCalledWith(
+      expect.objectContaining({
+        renterId: 77,
+        status: 'PENDING',
+        roomId: 3,
+        room: { propertyId: 4 },
+        OR: expect.any(Array),
+      }),
+      0,
+      20,
+    )
   })
 
   it('maps concurrent room reservation to a conflict response', async () => {
@@ -77,7 +123,7 @@ describe('RentalRequestsService', () => {
 
     await service.decide(50, 7, { status: 'REJECTED' })
 
-    expect(rentalRequestsRepository.updateRequestStatus).toHaveBeenCalledWith(10, 7, 'REJECTED', 50)
+    expect(rentalRequestsRepository.updateRequestStatus).toHaveBeenCalledWith(10, 7, 'PENDING', 'REJECTED', 50)
     expect(rentalRequestsRepository.approveRequestAndReserveRoom).not.toHaveBeenCalled()
   })
 

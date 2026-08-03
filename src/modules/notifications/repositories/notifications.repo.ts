@@ -223,4 +223,12 @@ export class NotificationsRepository {
     }
     return [...new Set([tenant.ownerUserId, ...tenant.members.map((member) => member.userId)])]
   }
+
+  async findSystemAdminRecipients() {
+    const users = await this.prismaService.user.findMany({
+      where: { systemRole: 'ADMIN', status: 'ACTIVE', deletedAt: null },
+      select: { id: true },
+    })
+    return users.map((user) => user.id)
+  }
 }

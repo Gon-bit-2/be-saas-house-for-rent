@@ -32,6 +32,15 @@ export const DecideRentalRequestBodySchema = z
 
 export const CancelMyRentalRequestBodySchema = z.object({}).strict()
 
+export const UpdateMyRentalRequestBodySchema = z
+  .object({
+    expectedStartDate: IsoDateInputCodec.optional(),
+    message: z.string().trim().max(2000).nullable().optional(),
+    appointmentId: z.coerce.number().int().positive().nullable().optional(),
+  })
+  .strict()
+  .refine((body) => Object.keys(body).length > 0, { message: 'Cần cung cấp ít nhất một trường để cập nhật' })
+
 export const ListViewingAppointmentsQuerySchema = z
   .object({
     page: z.coerce.number().int().positive().default(1),
@@ -58,6 +67,7 @@ export const CancelMyViewingAppointmentBodySchema = z.object({}).strict()
 export type TListRentalRequestsQuerySchema = z.infer<typeof ListRentalRequestsQuerySchema>
 export type TDecideRentalRequestBodySchema = z.infer<typeof DecideRentalRequestBodySchema>
 export type TCancelMyRentalRequestBodySchema = z.infer<typeof CancelMyRentalRequestBodySchema>
+export type TUpdateMyRentalRequestBodySchema = z.infer<typeof UpdateMyRentalRequestBodySchema>
 export type TListViewingAppointmentsQuerySchema = z.infer<typeof ListViewingAppointmentsQuerySchema>
 export type TUpdateViewingAppointmentStatusBodySchema = z.infer<typeof UpdateViewingAppointmentStatusBodySchema>
 export type TCancelMyViewingAppointmentBodySchema = z.infer<typeof CancelMyViewingAppointmentBodySchema>

@@ -1,6 +1,6 @@
 # Tài liệu tham chiếu API hiện tại
 
-> Sinh tự động từ NestJS runtime ngày 2026-07-31T02:12:46.035Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-03T10:23:02.471Z. Không chỉnh sửa thủ công.
 
 ## Quy ước chung
 
@@ -11,7 +11,7 @@
 - Request được kiểm tra bằng Zod strict; ngày giờ dùng ISO 8601.
 - Error chuẩn: `{ statusCode, code, message, details?, timestamp, path, requestId }`.
 - Mọi route chịu global rate limit; profile riêng được ghi ở từng operation.
-- Tổng cộng **206 operation** thuộc **34 controller**.
+- Tổng cộng **214 operation** thuộc **34 controller**.
 
 ## Mục lục
 
@@ -32,7 +32,7 @@
 - [Thanh toán hóa đơn (6)](#payments)
 - [Gói dịch vụ (5)](#plans)
 - [Nhà trọ và tầng (10)](#properties)
-- [Yêu cầu thuê (5)](#rental-requests)
+- [Yêu cầu thuê (6)](#rental-requests)
 - [Người thuê và lời mời (9)](#renters)
 - [Báo cáo vi phạm (6)](#reports)
 - [Đánh giá và uy tín (6)](#reviews)
@@ -45,7 +45,7 @@
 - [Thanh toán gói SaaS (6)](#subscription-payments)
 - [Subscription hiện hành (1)](#subscriptions)
 - [Đơn vị chủ trọ (7)](#tenants)
-- [Ticket sự cố (13)](#tickets)
+- [Ticket sự cố (20)](#tickets)
 - [Người dùng và chủ trọ (3)](#users)
 - [Đồng hồ điện nước (5)](#utility-meters)
 
@@ -1282,7 +1282,7 @@
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
 | `type` | query | Không | `string` |
-| `isRead` | query | Không | `boolean` |
+| `isRead` | query | Không | schema inline |
 
 ### PATCH `/notifications/{id}/read`
 
@@ -1779,6 +1779,21 @@
 | `roomId` | query | Không | `integer` |
 | `propertyId` | query | Không | `integer` |
 | `search` | query | Không | `string` |
+
+### PATCH `/rental-requests/me/{id}`
+
+- Operation ID: `RentalRequestsController_updateMine`.
+- Xác thực: Bearer JWT; role: `TENANT`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+
+**Request body**
+
+- `application/json`: `UpdateMyRentalRequestBodyDTO`; bắt buộc: có.
 
 ### PATCH `/rental-requests/me/{id}/cancel`
 
@@ -2745,7 +2760,7 @@
 ### PATCH `/tickets/{id}/assign`
 
 - Operation ID: `TicketsController_assign`.
-- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`, `MAINTENANCE_STAFF`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2785,6 +2800,36 @@
 
 - `application/json`: `CreateTicketAttachmentBodyDTO`; bắt buộc: có.
 
+### POST `/tickets/{id}/attachments/upload`
+
+- Operation ID: `TicketsController_uploadAttachment`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`, `MAINTENANCE_STAFF`, `TENANT`.
+- Rate limit: `ticket-attachment`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+
+**Request body**
+
+- `multipart/form-data`: `object`; bắt buộc: có.
+
+### PATCH `/tickets/{id}/close`
+
+- Operation ID: `TicketsController_closeForStaff`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+
+**Request body**
+
+- `application/json`: `CloseTicketBodyDTO`; bắt buộc: có.
+
 ### GET `/tickets/{id}/comments`
 
 - Operation ID: `TicketsController_listStaffComments`.
@@ -2812,6 +2857,19 @@
 **Request body**
 
 - `application/json`: `CreateTicketCommentBodyDTO`; bắt buộc: có.
+
+### GET `/tickets/{id}/history`
+
+- Operation ID: `TicketsController_listStaffHistory`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`, `MAINTENANCE_STAFF`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `page` | query | Không | `integer` |
+| `limit` | query | Không | `integer` |
 
 ### PATCH `/tickets/{id}/status`
 
@@ -2871,6 +2929,28 @@
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
 
+### PATCH `/tickets/me/{id}/cancel`
+
+- Operation ID: `TicketsController_cancelMine`.
+- Xác thực: Bearer JWT; role: `TENANT`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+
+### PATCH `/tickets/me/{id}/close`
+
+- Operation ID: `TicketsController_closeMine`.
+- Xác thực: Bearer JWT; role: `TENANT`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+
 ### GET `/tickets/me/{id}/comments`
 
 - Operation ID: `TicketsController_listMyComments`.
@@ -2883,6 +2963,30 @@
 | `id` | path | Có | `number` |
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
+
+### GET `/tickets/me/{id}/history`
+
+- Operation ID: `TicketsController_listMyHistory`.
+- Xác thực: Bearer JWT; role: `TENANT`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `page` | query | Không | `integer` |
+| `limit` | query | Không | `integer` |
+
+### PATCH `/tickets/me/{id}/reopen`
+
+- Operation ID: `TicketsController_reopenMine`.
+- Xác thực: Bearer JWT; role: `TENANT`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
 
 <a id="users"></a>
 

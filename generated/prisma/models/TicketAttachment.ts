@@ -42,6 +42,7 @@ export type TicketAttachmentMinAggregateOutputType = {
   id: number | null
   ticketId: number | null
   fileUrl: string | null
+  publicId: string | null
   fileType: string | null
   uploadedBy: number | null
   createdAt: Date | null
@@ -51,6 +52,7 @@ export type TicketAttachmentMaxAggregateOutputType = {
   id: number | null
   ticketId: number | null
   fileUrl: string | null
+  publicId: string | null
   fileType: string | null
   uploadedBy: number | null
   createdAt: Date | null
@@ -60,6 +62,7 @@ export type TicketAttachmentCountAggregateOutputType = {
   id: number
   ticketId: number
   fileUrl: number
+  publicId: number
   fileType: number
   uploadedBy: number
   createdAt: number
@@ -83,6 +86,7 @@ export type TicketAttachmentMinAggregateInputType = {
   id?: true
   ticketId?: true
   fileUrl?: true
+  publicId?: true
   fileType?: true
   uploadedBy?: true
   createdAt?: true
@@ -92,6 +96,7 @@ export type TicketAttachmentMaxAggregateInputType = {
   id?: true
   ticketId?: true
   fileUrl?: true
+  publicId?: true
   fileType?: true
   uploadedBy?: true
   createdAt?: true
@@ -101,6 +106,7 @@ export type TicketAttachmentCountAggregateInputType = {
   id?: true
   ticketId?: true
   fileUrl?: true
+  publicId?: true
   fileType?: true
   uploadedBy?: true
   createdAt?: true
@@ -197,6 +203,7 @@ export type TicketAttachmentGroupByOutputType = {
   id: number
   ticketId: number
   fileUrl: string
+  publicId: string | null
   fileType: string
   uploadedBy: number
   createdAt: Date
@@ -229,6 +236,7 @@ export type TicketAttachmentWhereInput = {
   id?: Prisma.IntFilter<"TicketAttachment"> | number
   ticketId?: Prisma.IntFilter<"TicketAttachment"> | number
   fileUrl?: Prisma.StringFilter<"TicketAttachment"> | string
+  publicId?: Prisma.StringNullableFilter<"TicketAttachment"> | string | null
   fileType?: Prisma.StringFilter<"TicketAttachment"> | string
   uploadedBy?: Prisma.IntFilter<"TicketAttachment"> | number
   createdAt?: Prisma.DateTimeFilter<"TicketAttachment"> | Date | string
@@ -240,6 +248,7 @@ export type TicketAttachmentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   ticketId?: Prisma.SortOrder
   fileUrl?: Prisma.SortOrder
+  publicId?: Prisma.SortOrderInput | Prisma.SortOrder
   fileType?: Prisma.SortOrder
   uploadedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -254,6 +263,7 @@ export type TicketAttachmentWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.TicketAttachmentWhereInput | Prisma.TicketAttachmentWhereInput[]
   ticketId?: Prisma.IntFilter<"TicketAttachment"> | number
   fileUrl?: Prisma.StringFilter<"TicketAttachment"> | string
+  publicId?: Prisma.StringNullableFilter<"TicketAttachment"> | string | null
   fileType?: Prisma.StringFilter<"TicketAttachment"> | string
   uploadedBy?: Prisma.IntFilter<"TicketAttachment"> | number
   createdAt?: Prisma.DateTimeFilter<"TicketAttachment"> | Date | string
@@ -265,6 +275,7 @@ export type TicketAttachmentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   ticketId?: Prisma.SortOrder
   fileUrl?: Prisma.SortOrder
+  publicId?: Prisma.SortOrderInput | Prisma.SortOrder
   fileType?: Prisma.SortOrder
   uploadedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -282,6 +293,7 @@ export type TicketAttachmentScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"TicketAttachment"> | number
   ticketId?: Prisma.IntWithAggregatesFilter<"TicketAttachment"> | number
   fileUrl?: Prisma.StringWithAggregatesFilter<"TicketAttachment"> | string
+  publicId?: Prisma.StringNullableWithAggregatesFilter<"TicketAttachment"> | string | null
   fileType?: Prisma.StringWithAggregatesFilter<"TicketAttachment"> | string
   uploadedBy?: Prisma.IntWithAggregatesFilter<"TicketAttachment"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"TicketAttachment"> | Date | string
@@ -289,6 +301,7 @@ export type TicketAttachmentScalarWhereWithAggregatesInput = {
 
 export type TicketAttachmentCreateInput = {
   fileUrl: string
+  publicId?: string | null
   fileType: string
   createdAt?: Date | string
   ticket: Prisma.TicketCreateNestedOneWithoutAttachmentsInput
@@ -299,6 +312,7 @@ export type TicketAttachmentUncheckedCreateInput = {
   id?: number
   ticketId: number
   fileUrl: string
+  publicId?: string | null
   fileType: string
   uploadedBy: number
   createdAt?: Date | string
@@ -306,6 +320,7 @@ export type TicketAttachmentUncheckedCreateInput = {
 
 export type TicketAttachmentUpdateInput = {
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ticket?: Prisma.TicketUpdateOneRequiredWithoutAttachmentsNestedInput
@@ -316,6 +331,7 @@ export type TicketAttachmentUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   ticketId?: Prisma.IntFieldUpdateOperationsInput | number
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -325,6 +341,7 @@ export type TicketAttachmentCreateManyInput = {
   id?: number
   ticketId: number
   fileUrl: string
+  publicId?: string | null
   fileType: string
   uploadedBy: number
   createdAt?: Date | string
@@ -332,6 +349,7 @@ export type TicketAttachmentCreateManyInput = {
 
 export type TicketAttachmentUpdateManyMutationInput = {
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -340,6 +358,7 @@ export type TicketAttachmentUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   ticketId?: Prisma.IntFieldUpdateOperationsInput | number
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -359,6 +378,7 @@ export type TicketAttachmentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   ticketId?: Prisma.SortOrder
   fileUrl?: Prisma.SortOrder
+  publicId?: Prisma.SortOrder
   fileType?: Prisma.SortOrder
   uploadedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -374,6 +394,7 @@ export type TicketAttachmentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   ticketId?: Prisma.SortOrder
   fileUrl?: Prisma.SortOrder
+  publicId?: Prisma.SortOrder
   fileType?: Prisma.SortOrder
   uploadedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -383,6 +404,7 @@ export type TicketAttachmentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   ticketId?: Prisma.SortOrder
   fileUrl?: Prisma.SortOrder
+  publicId?: Prisma.SortOrder
   fileType?: Prisma.SortOrder
   uploadedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -480,6 +502,7 @@ export type TicketAttachmentUncheckedUpdateManyWithoutTicketNestedInput = {
 
 export type TicketAttachmentCreateWithoutUploadedByUserInput = {
   fileUrl: string
+  publicId?: string | null
   fileType: string
   createdAt?: Date | string
   ticket: Prisma.TicketCreateNestedOneWithoutAttachmentsInput
@@ -489,6 +512,7 @@ export type TicketAttachmentUncheckedCreateWithoutUploadedByUserInput = {
   id?: number
   ticketId: number
   fileUrl: string
+  publicId?: string | null
   fileType: string
   createdAt?: Date | string
 }
@@ -526,6 +550,7 @@ export type TicketAttachmentScalarWhereInput = {
   id?: Prisma.IntFilter<"TicketAttachment"> | number
   ticketId?: Prisma.IntFilter<"TicketAttachment"> | number
   fileUrl?: Prisma.StringFilter<"TicketAttachment"> | string
+  publicId?: Prisma.StringNullableFilter<"TicketAttachment"> | string | null
   fileType?: Prisma.StringFilter<"TicketAttachment"> | string
   uploadedBy?: Prisma.IntFilter<"TicketAttachment"> | number
   createdAt?: Prisma.DateTimeFilter<"TicketAttachment"> | Date | string
@@ -533,6 +558,7 @@ export type TicketAttachmentScalarWhereInput = {
 
 export type TicketAttachmentCreateWithoutTicketInput = {
   fileUrl: string
+  publicId?: string | null
   fileType: string
   createdAt?: Date | string
   uploadedByUser: Prisma.UserCreateNestedOneWithoutTicketAttachmentsInput
@@ -541,6 +567,7 @@ export type TicketAttachmentCreateWithoutTicketInput = {
 export type TicketAttachmentUncheckedCreateWithoutTicketInput = {
   id?: number
   fileUrl: string
+  publicId?: string | null
   fileType: string
   uploadedBy: number
   createdAt?: Date | string
@@ -576,12 +603,14 @@ export type TicketAttachmentCreateManyUploadedByUserInput = {
   id?: number
   ticketId: number
   fileUrl: string
+  publicId?: string | null
   fileType: string
   createdAt?: Date | string
 }
 
 export type TicketAttachmentUpdateWithoutUploadedByUserInput = {
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ticket?: Prisma.TicketUpdateOneRequiredWithoutAttachmentsNestedInput
@@ -591,6 +620,7 @@ export type TicketAttachmentUncheckedUpdateWithoutUploadedByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   ticketId?: Prisma.IntFieldUpdateOperationsInput | number
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -599,6 +629,7 @@ export type TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   ticketId?: Prisma.IntFieldUpdateOperationsInput | number
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -606,6 +637,7 @@ export type TicketAttachmentUncheckedUpdateManyWithoutUploadedByUserInput = {
 export type TicketAttachmentCreateManyTicketInput = {
   id?: number
   fileUrl: string
+  publicId?: string | null
   fileType: string
   uploadedBy: number
   createdAt?: Date | string
@@ -613,6 +645,7 @@ export type TicketAttachmentCreateManyTicketInput = {
 
 export type TicketAttachmentUpdateWithoutTicketInput = {
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   uploadedByUser?: Prisma.UserUpdateOneRequiredWithoutTicketAttachmentsNestedInput
@@ -621,6 +654,7 @@ export type TicketAttachmentUpdateWithoutTicketInput = {
 export type TicketAttachmentUncheckedUpdateWithoutTicketInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -629,6 +663,7 @@ export type TicketAttachmentUncheckedUpdateWithoutTicketInput = {
 export type TicketAttachmentUncheckedUpdateManyWithoutTicketInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  publicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileType?: Prisma.StringFieldUpdateOperationsInput | string
   uploadedBy?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -640,6 +675,7 @@ export type TicketAttachmentSelect<ExtArgs extends runtime.Types.Extensions.Inte
   id?: boolean
   ticketId?: boolean
   fileUrl?: boolean
+  publicId?: boolean
   fileType?: boolean
   uploadedBy?: boolean
   createdAt?: boolean
@@ -651,6 +687,7 @@ export type TicketAttachmentSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   ticketId?: boolean
   fileUrl?: boolean
+  publicId?: boolean
   fileType?: boolean
   uploadedBy?: boolean
   createdAt?: boolean
@@ -662,6 +699,7 @@ export type TicketAttachmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   ticketId?: boolean
   fileUrl?: boolean
+  publicId?: boolean
   fileType?: boolean
   uploadedBy?: boolean
   createdAt?: boolean
@@ -673,12 +711,13 @@ export type TicketAttachmentSelectScalar = {
   id?: boolean
   ticketId?: boolean
   fileUrl?: boolean
+  publicId?: boolean
   fileType?: boolean
   uploadedBy?: boolean
   createdAt?: boolean
 }
 
-export type TicketAttachmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ticketId" | "fileUrl" | "fileType" | "uploadedBy" | "createdAt", ExtArgs["result"]["ticketAttachment"]>
+export type TicketAttachmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ticketId" | "fileUrl" | "publicId" | "fileType" | "uploadedBy" | "createdAt", ExtArgs["result"]["ticketAttachment"]>
 export type TicketAttachmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ticket?: boolean | Prisma.TicketDefaultArgs<ExtArgs>
   uploadedByUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -717,6 +756,10 @@ export type $TicketAttachmentPayload<ExtArgs extends runtime.Types.Extensions.In
      * Đường dẫn lưu trữ hình ảnh/video sự cố
      */
     fileUrl: string
+    /**
+     * Public identifier used to manage the uploaded Cloudinary asset
+     */
+    publicId: string | null
     /**
      * Loại file (ví dụ: image, video, document)
      */
@@ -1157,6 +1200,7 @@ export interface TicketAttachmentFieldRefs {
   readonly id: Prisma.FieldRef<"TicketAttachment", 'Int'>
   readonly ticketId: Prisma.FieldRef<"TicketAttachment", 'Int'>
   readonly fileUrl: Prisma.FieldRef<"TicketAttachment", 'String'>
+  readonly publicId: Prisma.FieldRef<"TicketAttachment", 'String'>
   readonly fileType: Prisma.FieldRef<"TicketAttachment", 'String'>
   readonly uploadedBy: Prisma.FieldRef<"TicketAttachment", 'Int'>
   readonly createdAt: Prisma.FieldRef<"TicketAttachment", 'DateTime'>

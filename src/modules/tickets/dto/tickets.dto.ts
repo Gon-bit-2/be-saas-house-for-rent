@@ -1,6 +1,7 @@
 import { createZodDto } from 'nestjs-zod'
 import {
   AssignTicketBodySchema,
+  CloseTicketBodySchema,
   CreateTicketAttachmentBodySchema,
   CreateTicketBodySchema,
   CreateTicketCommentBodySchema,
@@ -16,3 +17,4 @@ export class UpdateTicketStatusBodyDTO extends createZodDto(UpdateTicketStatusBo
 export class AssignTicketBodyDTO extends createZodDto(AssignTicketBodySchema) {}
 export class CreateTicketCommentBodyDTO extends createZodDto(CreateTicketCommentBodySchema) {}
 export class CreateTicketAttachmentBodyDTO extends createZodDto(CreateTicketAttachmentBodySchema) {}
+export class CloseTicketBodyDTO extends createZodDto(CloseTicketBodySchema) {}

@@ -6,6 +6,9 @@ jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
 jest.mock('./repositories/rental-requests.repo', () => ({
   RentalRequestsRepository: class RentalRequestsRepository {},
 }))
+jest.mock('@src/modules/notifications/notification-events.service', () => ({
+  NotificationEventsService: class NotificationEventsService {},
+}))
 const { ViewingAppointmentsService } =
   require('./viewing-appointments.service') as typeof import('./viewing-appointments.service')
 
@@ -13,13 +16,14 @@ describe('ViewingAppointmentsService', () => {
   let service: import('./viewing-appointments.service').ViewingAppointmentsService
   let rentalRequestsRepository: Record<string, jest.Mock>
   let tenantAccessService: Record<string, jest.Mock>
+  let notifications: Record<string, jest.Mock>
 
   beforeEach(() => {
     rentalRequestsRepository = {
       findAppointmentsAndCount: jest.fn(),
       findTenantAppointment: jest.fn(),
       findActiveTenantMember: jest.fn(),
-      updateAppointment: jest.fn(),
+      updateAppointmentWithConflictCheck: jest.fn(),
       findMyAppointmentsAndCount: jest.fn(),
       findRenterAppointment: jest.fn(),
       cancelRenterAppointment: jest.fn(),
@@ -29,7 +33,12 @@ describe('ViewingAppointmentsService', () => {
         .fn()
         .mockResolvedValue({ tenantId: 10, userId: 50, memberId: 1, roleId: 'LANDLORD' }),
     }
-    service = new ViewingAppointmentsService(rentalRequestsRepository as never, tenantAccessService as never)
+    notifications = { notifyViewingAppointmentChanged: jest.fn() }
+    service = new ViewingAppointmentsService(
+      rentalRequestsRepository as never,
+      tenantAccessService as never,
+      notifications as never,
+    )
     jest.useFakeTimers().setSystemTime(new Date('2026-07-09T08:00:00.000Z'))
   })
 
@@ -44,7 +53,7 @@ describe('ViewingAppointmentsService', () => {
     await expect(
       service.updateStatus(50, 3, { status: 'CONFIRMED', scheduledAt: new Date('2026-07-09T07:59:00.000Z') }),
     ).rejects.toBeInstanceOf(BadRequestException)
-    expect(rentalRequestsRepository.updateAppointment).not.toHaveBeenCalled()
+    expect(rentalRequestsRepository.updateAppointmentWithConflictCheck).not.toHaveBeenCalled()
   })
 
   it('rejects assigned staff outside the active tenant', async () => {
@@ -54,23 +63,29 @@ describe('ViewingAppointmentsService', () => {
     await expect(service.updateStatus(50, 3, { status: 'CONFIRMED', assignedStaffId: 12 })).rejects.toBeInstanceOf(
       BadRequestException,
     )
-    expect(rentalRequestsRepository.updateAppointment).not.toHaveBeenCalled()
+    expect(rentalRequestsRepository.updateAppointmentWithConflictCheck).not.toHaveBeenCalled()
   })
 
   it('updates appointment status for a valid tenant appointment', async () => {
     rentalRequestsRepository.findTenantAppointment.mockResolvedValue({ id: 3, status: 'PENDING' })
     rentalRequestsRepository.findActiveTenantMember.mockResolvedValue({ id: 12 })
-    rentalRequestsRepository.updateAppointment.mockResolvedValue({ id: 3, status: 'CONFIRMED' })
+    rentalRequestsRepository.updateAppointmentWithConflictCheck.mockResolvedValue({ id: 3, status: 'CONFIRMED' })
 
     await service.updateStatus(50, 3, { status: 'CONFIRMED', assignedStaffId: 12, landlordNote: 'OK' })
 
-    expect(rentalRequestsRepository.updateAppointment).toHaveBeenCalledWith(10, 3, {
-      status: 'CONFIRMED',
-      scheduledAt: undefined,
-      assignedStaffId: 12,
-      landlordNote: 'OK',
-      updatedById: 50,
-    })
+    expect(rentalRequestsRepository.updateAppointmentWithConflictCheck).toHaveBeenCalledWith(
+      10,
+      3,
+      'PENDING',
+      {
+        status: 'CONFIRMED',
+        scheduledAt: undefined,
+        assignedStaffId: 12,
+        landlordNote: 'OK',
+        updatedById: 50,
+      },
+      60,
+    )
   })
 
   it('lets renter cancel non-terminal appointments only', async () => {
@@ -80,6 +95,34 @@ describe('ViewingAppointmentsService', () => {
     await service.cancelMine(99, 3, {})
 
     expect(rentalRequestsRepository.cancelRenterAppointment).toHaveBeenCalledWith(3, 99)
+  })
+
+  it('applies status, room, property and date filters to renter appointments', async () => {
+    rentalRequestsRepository.findMyAppointmentsAndCount.mockResolvedValue([[], 0])
+    const from = new Date('2026-07-10T00:00:00.000Z')
+    const to = new Date('2026-07-12T00:00:00.000Z')
+
+    await service.listMine(99, {
+      page: 1,
+      limit: 20,
+      status: 'CONFIRMED',
+      roomId: 3,
+      propertyId: 4,
+      from,
+      to,
+    })
+
+    expect(rentalRequestsRepository.findMyAppointmentsAndCount).toHaveBeenCalledWith(
+      {
+        renterId: 99,
+        status: 'CONFIRMED',
+        roomId: 3,
+        room: { propertyId: 4 },
+        scheduledAt: { gte: from, lte: to },
+      },
+      0,
+      20,
+    )
   })
 
   it('throws not found when appointment does not belong to current tenant', async () => {

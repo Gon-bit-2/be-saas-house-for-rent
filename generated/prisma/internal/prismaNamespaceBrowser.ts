@@ -1015,6 +1015,7 @@ export const TicketAttachmentScalarFieldEnum = {
   id: 'id',
   ticketId: 'ticketId',
   fileUrl: 'fileUrl',
+  publicId: 'publicId',
   fileType: 'fileType',
   uploadedBy: 'uploadedBy',
   createdAt: 'createdAt'

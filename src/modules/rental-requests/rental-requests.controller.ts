@@ -7,6 +7,7 @@ import {
   CancelMyRentalRequestBodyDTO,
   DecideRentalRequestBodyDTO,
   ListRentalRequestsQueryDTO,
+  UpdateMyRentalRequestBodyDTO,
 } from './dto/rental-requests.dto'
 import { RentalRequestsService } from './rental-requests.service'
 
@@ -21,6 +22,16 @@ export class RentalRequestsController {
   @Get('me')
   listMine(@ActiveUser() user: AccessTokenPayload, @Query() query: ListRentalRequestsQueryDTO) {
     return this.rentalRequestsService.listMine(user.userId, query)
+  }
+
+  @IsTenant()
+  @Patch('me/:id')
+  updateMine(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateMyRentalRequestBodyDTO,
+  ) {
+    return this.rentalRequestsService.updateMine(user.userId, id, body)
   }
 
   @IsTenant()

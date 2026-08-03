@@ -4,12 +4,16 @@ import { UpdateAdminMarketplaceStatusBodySchema } from './model/marketplace-admi
 jest.mock('./repositories/marketplace-admin.repo', () => ({
   MarketplaceAdminRepository: class MarketplaceAdminRepository {},
 }))
+jest.mock('@src/modules/notifications/notification-events.service', () => ({
+  NotificationEventsService: class NotificationEventsService {},
+}))
 const { MarketplaceAdminService } =
   require('./marketplace-admin.service') as typeof import('./marketplace-admin.service')
 
 describe('MarketplaceAdminService', () => {
   let service: import('./marketplace-admin.service').MarketplaceAdminService
   let repository: Record<string, jest.Mock>
+  let notifications: Record<string, jest.Mock>
 
   const pendingRoom = {
     id: 5,
@@ -27,7 +31,8 @@ describe('MarketplaceAdminService', () => {
       findHistory: jest.fn(),
       update: jest.fn(),
     }
-    service = new MarketplaceAdminService(repository as never)
+    notifications = { notifyMarketplaceModerated: jest.fn() }
+    service = new MarketplaceAdminService(repository as never, notifications as never)
   })
 
   it('lists moderation rooms with pagination', async () => {

@@ -1,5 +1,6 @@
 import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common'
 import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
+import { NotificationEventsService } from '@src/modules/notifications/notification-events.service'
 import type { Prisma } from 'generated/prisma/client'
 import type {
   TListAdminMarketplaceRoomsQuerySchema,
@@ -10,7 +11,10 @@ import { MarketplaceAdminRepository } from './repositories/marketplace-admin.rep
 
 @Injectable()
 export class MarketplaceAdminService {
-  constructor(private readonly repository: MarketplaceAdminRepository) {}
+  constructor(
+    private readonly repository: MarketplaceAdminRepository,
+    private readonly notificationEventsService: NotificationEventsService,
+  ) {}
 
   async list(query: TListAdminMarketplaceRoomsQuerySchema) {
     const { page, limit, skip } = normalizePagination(query)
@@ -52,6 +56,7 @@ export class MarketplaceAdminService {
     if (!updated) {
       throw new ConflictException('Tin đăng đã thay đổi hoặc không còn đủ điều kiện kiểm duyệt')
     }
+    await this.notificationEventsService.notifyMarketplaceModerated(updated)
     return updated
   }
 

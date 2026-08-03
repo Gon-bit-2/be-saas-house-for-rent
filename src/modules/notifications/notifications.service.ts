@@ -101,12 +101,14 @@ export class NotificationsService {
   }
 
   private async enqueuePush(notificationId: number, tenantId: number | null, payload: Prisma.InputJsonValue) {
+    let backgroundJobId: number | null = null
     try {
       const backgroundJob = await this.notificationsRepository.createBackgroundJob({
         tenantId,
         jobType: SEND_PUSH_JOB,
         payload,
       })
+      backgroundJobId = backgroundJob.id
       const job = await this.notificationsQueue.add(
         SEND_PUSH_JOB,
         { backgroundJobId: backgroundJob.id, notificationId },
@@ -117,9 +119,28 @@ export class NotificationsService {
           removeOnFail: 5_000,
         },
       )
-      await this.notificationsRepository.setBackgroundJobExternalId(backgroundJob.id, String(job.id))
+      try {
+        await this.notificationsRepository.setBackgroundJobExternalId(backgroundJob.id, String(job.id))
+      } catch (error) {
+        this.logger.error(this.sanitizeQueueError(error))
+      }
     } catch (error) {
-      this.logger.error(error instanceof Error ? error.message : 'Không thể enqueue push notification')
+      const message = this.sanitizeQueueError(error)
+      if (backgroundJobId) {
+        try {
+          await this.notificationsRepository.updateBackgroundJobStatus(backgroundJobId, 'FAILED', {
+            errorMessage: message,
+          })
+        } catch {
+          // The inbox notification is already committed; a secondary bookkeeping failure remains non-blocking.
+        }
+      }
+      this.logger.error(message)
     }
+  }
+
+  private sanitizeQueueError(error: unknown) {
+    const raw = error instanceof Error ? error.message : 'Không thể enqueue push notification'
+    return raw.replace(/\b(?:redis|rediss):\/\/[^\s]+/gi, '[redis-url-redacted]').slice(0, 1000)
   }
 }
