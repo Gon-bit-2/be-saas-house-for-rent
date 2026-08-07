@@ -29,7 +29,7 @@ export class DashboardRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getRoomStats(tenantId: number) {
-    const [totalRooms, byStatus] = await this.prismaService.$transaction([
+    const [totalRooms, byStatus] = await Promise.all([
       this.prismaService.room.count({ where: { tenantId, deletedAt: null } }),
       this.prismaService.room.groupBy({
         by: ['status'],
@@ -46,7 +46,7 @@ export class DashboardRepository {
     const endingSoonTo = new Date(now)
     endingSoonTo.setUTCDate(endingSoonTo.getUTCDate() + 30)
 
-    const [activeContracts, endingSoonContracts] = await this.prismaService.$transaction([
+    const [activeContracts, endingSoonContracts] = await Promise.all([
       this.prismaService.contract.count({ where: { tenantId, status: 'ACTIVE', deletedAt: null } }),
       this.prismaService.contract.count({
         where: {
@@ -62,34 +62,33 @@ export class DashboardRepository {
   }
 
   async getFinanceStats(tenantId: number, from: Date, to: Date) {
-    const [invoiceTotal, paidAmount, pendingPaymentAmount, outstandingDebt, overdueDebt] =
-      await this.prismaService.$transaction([
-        this.prismaService.invoice.aggregate({
-          where: {
-            tenantId,
-            deletedAt: null,
-            status: { in: ['UNPAID', 'PARTIALLY_PAID', 'PAID', 'OVERDUE'] },
-            billingMonth: { gte: from, lte: to },
-          },
-          _sum: { totalAmount: true },
-        }),
-        this.prismaService.payment.aggregate({
-          where: { tenantId, status: 'SUCCESS', paidAt: { gte: from, lte: to } },
-          _sum: { amount: true },
-        }),
-        this.prismaService.payment.aggregate({
-          where: { tenantId, status: 'PENDING', createdAt: { gte: from, lte: to } },
-          _sum: { amount: true },
-        }),
-        this.prismaService.debt.aggregate({
-          where: { tenantId, status: { in: ['OPEN', 'PARTIAL', 'OVERDUE'] } },
-          _sum: { remainingAmount: true },
-        }),
-        this.prismaService.debt.aggregate({
-          where: { tenantId, status: 'OVERDUE' },
-          _sum: { remainingAmount: true },
-        }),
-      ])
+    const [invoiceTotal, paidAmount, pendingPaymentAmount, outstandingDebt, overdueDebt] = await Promise.all([
+      this.prismaService.invoice.aggregate({
+        where: {
+          tenantId,
+          deletedAt: null,
+          status: { in: ['UNPAID', 'PARTIALLY_PAID', 'PAID', 'OVERDUE'] },
+          billingMonth: { gte: from, lte: to },
+        },
+        _sum: { totalAmount: true },
+      }),
+      this.prismaService.payment.aggregate({
+        where: { tenantId, status: 'SUCCESS', paidAt: { gte: from, lte: to } },
+        _sum: { amount: true },
+      }),
+      this.prismaService.payment.aggregate({
+        where: { tenantId, status: 'PENDING', createdAt: { gte: from, lte: to } },
+        _sum: { amount: true },
+      }),
+      this.prismaService.debt.aggregate({
+        where: { tenantId, status: { in: ['OPEN', 'PARTIAL', 'OVERDUE'] } },
+        _sum: { remainingAmount: true },
+      }),
+      this.prismaService.debt.aggregate({
+        where: { tenantId, status: 'OVERDUE' },
+        _sum: { remainingAmount: true },
+      }),
+    ])
 
     return {
       invoiceTotal: invoiceTotal._sum.totalAmount,
@@ -101,7 +100,7 @@ export class DashboardRepository {
   }
 
   async getTicketStats(tenantId: number, from: Date, to: Date) {
-    const [byStatus, urgentOpenTickets] = await this.prismaService.$transaction([
+    const [byStatus, urgentOpenTickets] = await Promise.all([
       this.prismaService.ticket.groupBy({
         by: ['status'],
         where: { tenantId, createdAt: { gte: from, lte: to } },
@@ -153,7 +152,7 @@ export class DashboardRepository {
   }
 
   async getRecentActivities(tenantId: number, limit: number): Promise<DashboardActivity[]> {
-    const [invoices, payments, tickets] = await this.prismaService.$transaction([
+    const [invoices, payments, tickets] = await Promise.all([
       this.prismaService.invoice.findMany({
         where: { tenantId, deletedAt: null, status: { not: 'DRAFT' } },
         take: limit,

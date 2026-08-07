@@ -107,7 +107,9 @@ const verificationCodeSelect = {
 export class AuthRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async create(data: TRegisterBodySchema) {
+  async create(
+    data: Pick<TRegisterBodySchema, 'email' | 'fullName' | 'phone' | 'roleCode'> & { passwordHash: string },
+  ) {
     return await this.prismaService.$transaction(async (tx) => {
       await tx.role.findUniqueOrThrow({
         where: {

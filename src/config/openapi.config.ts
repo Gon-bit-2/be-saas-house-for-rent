@@ -169,7 +169,7 @@ export function configureOpenApi(app: INestApplication) {
       'Interactive contract for Super Admin, landlord/staff and renter Web MVP flows. Existing route URLs are kept stable.',
     )
     .setVersion('1.0.0')
-    .addServer('http://localhost:3000', 'Local development')
+    .addServer('http://localhost:1174', 'Local development')
     .addBearerAuth(
       {
         type: 'http',
@@ -184,6 +184,7 @@ export function configureOpenApi(app: INestApplication) {
     operationIdFactory: (controllerKey, methodKey) => `${controllerKey}_${methodKey}`,
   })
   const document = enrichOpenApiDocument(cleanupOpenApiDoc(generated, { version: '3.1' }))
+  document.openapi = '3.1.0'
   SwaggerModule.setup('docs', app, document, {
     jsonDocumentUrl: 'docs-json',
     swaggerOptions: { persistAuthorization: true, displayRequestDuration: true },

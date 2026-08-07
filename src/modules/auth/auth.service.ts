@@ -111,10 +111,12 @@ export class AuthService {
       throw new UnprocessableEntityException('Email đã được sử dụng')
     }
 
-    const passwordHash = await this.hashingService.hash(body.passwordHash)
+    const passwordHash = await this.hashingService.hash(body.password)
     const user = await this.authRepository.create({
-      ...body,
       email,
+      fullName: body.fullName,
+      phone: body.phone,
+      roleCode: body.roleCode,
       passwordHash,
     })
 
@@ -136,7 +138,7 @@ export class AuthService {
       throw new UnauthorizedException('Tài khoản đã bị vô hiệu hóa')
     }
 
-    const isPasswordValid = await this.hashingService.compare(body.passwordHash, user.passwordHash)
+    const isPasswordValid = await this.hashingService.compare(body.password, user.passwordHash)
     if (!isPasswordValid) {
       throw new UnauthorizedException('Email hoặc mật khẩu không đúng')
     }

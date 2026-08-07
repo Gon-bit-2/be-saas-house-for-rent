@@ -1,6 +1,6 @@
 # Tài liệu tham chiếu API hiện tại
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-03T13:24:05.610Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-06T08:51:02.382Z. Không chỉnh sửa thủ công.
 
 ## Quy ước chung
 
