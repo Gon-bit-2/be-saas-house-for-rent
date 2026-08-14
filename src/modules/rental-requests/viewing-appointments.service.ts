@@ -34,6 +34,15 @@ export class ViewingAppointmentsService {
     return buildPaginatedResult(appointments, total, page, limit)
   }
 
+  async getForLandlord(userId: number, id: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const appointment = await this.rentalRequestsRepository.findTenantAppointment(tenant.tenantId, id)
+    if (!appointment) {
+      throw new NotFoundException('Không tìm thấy lịch hẹn xem phòng')
+    }
+    return appointment
+  }
+
   async updateStatus(userId: number, id: number, body: TUpdateViewingAppointmentStatusBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const appointment = await this.rentalRequestsRepository.findTenantAppointment(tenant.tenantId, id)

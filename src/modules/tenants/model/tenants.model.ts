@@ -17,7 +17,7 @@ export const ListTenantsQuerySchema = z
   .object({
     page: z.coerce.number().int().positive().default(1),
     limit: z.coerce.number().int().positive().max(100).default(20),
-    search: z.string().trim().min(1).optional(),
+    search: z.string().trim().optional(),
     status: TenantStatusSchema.optional(),
     verificationStatus: VerificationStatusSchema.optional(),
     planId: z.coerce.number().int().positive().optional(),
@@ -64,9 +64,20 @@ export const AssignTenantPlanBodySchema = z
   })
   .strict()
 
+export const RegisterTenantBodySchema = z
+  .object({
+    tenantName: z.string().trim().min(2).max(255),
+    taxCode: z.string().trim().max(50).optional(),
+    tenantPhone: z.string().trim().min(6).max(50).optional(),
+    tenantEmail: z.string().trim().email().max(255).optional(),
+    address: z.string().trim().max(2000).optional(),
+  })
+  .strict()
+
 export type TListTenantsQuerySchema = z.infer<typeof ListTenantsQuerySchema>
 export type TCreateTenantBodySchema = z.infer<typeof CreateTenantBodySchema>
 export type TUpdateTenantBodySchema = z.infer<typeof UpdateTenantBodySchema>
 export type TUpdateTenantStatusBodySchema = z.infer<typeof UpdateTenantStatusBodySchema>
 export type TUpdateTenantVerificationBodySchema = z.infer<typeof UpdateTenantVerificationBodySchema>
 export type TAssignTenantPlanBodySchema = z.infer<typeof AssignTenantPlanBodySchema>
+export type TRegisterTenantBodySchema = z.infer<typeof RegisterTenantBodySchema>

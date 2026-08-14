@@ -30,10 +30,10 @@ for (const [path, pathItem] of Object.entries(document.paths)) {
 
 if (!document.openapi.startsWith('3.')) failures.push('Expected OpenAPI 3.x, received ' + document.openapi)
 if (document.info.version !== '1.0.0') failures.push('Expected implicit v1 contract, received ' + document.info.version)
-if (operations.length !== 214) failures.push('Expected 214 operations, received ' + operations.length)
+if (operations.length !== 217) failures.push('Expected 217 operations, received ' + operations.length)
 
 const priority = operations.filter(({ path }) => FE_PRIORITY_PATH.test(path))
-if (priority.length !== 110) failures.push('Expected 110 FE-priority operations, received ' + priority.length)
+if (priority.length !== 113) failures.push('Expected 113 FE-priority operations, received ' + priority.length)
 
 for (const { method, path, operation } of priority) {
   const success = Object.entries(operation.responses ?? {}).find(([code]) => /^2\d\d$/.test(code))
@@ -59,6 +59,9 @@ const expectedTenantHeaders = [
   ['get', '/rooms'],
   ['get', '/rental-requests'],
   ['patch', '/rental-requests/{id}/decision'],
+  ['get', '/room-viewing-appointments/{id}'],
+  ['get', '/renters/invitations/{id}'],
+  ['get', '/dashboard/action-center'],
   ['get', '/contracts'],
   ['get', '/invoices'],
   ['get', '/payments'],

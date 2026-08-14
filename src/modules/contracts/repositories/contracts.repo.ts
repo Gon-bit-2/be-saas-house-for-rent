@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
 import type { Prisma } from 'generated/prisma/client'
+import type { TRenterInfo } from '../model/contracts.model'
 
 export const contractSelect = {
   id: true,
@@ -39,7 +40,16 @@ export const contractSelect = {
       fullName: true,
       email: true,
       phone: true,
-      renterProfile: { select: { id: true, verificationStatus: true } },
+      renterProfile: {
+        select: {
+          id: true,
+          verificationStatus: true,
+          identityNumber: true,
+          identityFrontUrl: true,
+          identityBackUrl: true,
+          permanentAddress: true,
+        },
+      },
     },
   },
   rentalRequest: {
@@ -168,7 +178,7 @@ export class ContractsRepository {
   /**
    * Creates the draft contract and its main/co-renter member rows atomically.
    */
-  async create(data: Prisma.ContractUncheckedCreateInput, coRenterIds: number[]) {
+  async create(data: Prisma.ContractUncheckedCreateInput, coRenterIds: number[], renterInfo?: TRenterInfo) {
     return this.prismaService.$transaction(async (tx) => {
       const contract = await tx.contract.create({ data, select: { id: true, renterId: true } })
       await tx.contractMember.createMany({
@@ -178,6 +188,33 @@ export class ContractsRepository {
         ],
       })
 
+      if (renterInfo) {
+        if (renterInfo.phone !== undefined) {
+          await tx.user.update({
+            where: { id: contract.renterId },
+            data: { phone: renterInfo.phone },
+          })
+        }
+        if (
+          renterInfo.identityNumber !== undefined ||
+          renterInfo.permanentAddress !== undefined ||
+          renterInfo.identityFrontUrl !== undefined ||
+          renterInfo.identityBackUrl !== undefined
+        ) {
+          const profileData = {
+            identityNumber: renterInfo.identityNumber,
+            permanentAddress: renterInfo.permanentAddress,
+            identityFrontUrl: renterInfo.identityFrontUrl,
+            identityBackUrl: renterInfo.identityBackUrl,
+          }
+          await tx.renterProfile.upsert({
+            where: { userId: contract.renterId },
+            create: { userId: contract.renterId, ...profileData },
+            update: profileData,
+          })
+        }
+      }
+
       return tx.contract.findUniqueOrThrow({ where: { id: contract.id }, select: contractSelect })
     })
   }
@@ -185,7 +222,7 @@ export class ContractsRepository {
   /**
    * Updates editable contract fields and replaces co-renters only when provided.
    */
-  async update(id: number, data: Prisma.ContractUncheckedUpdateInput, coRenterIds?: number[]) {
+  async update(id: number, renterId: number, data: Prisma.ContractUncheckedUpdateInput, coRenterIds?: number[], renterInfo?: TRenterInfo) {
     return this.prismaService.$transaction(async (tx) => {
       await tx.contract.update({ where: { id }, data })
 
@@ -194,6 +231,33 @@ export class ContractsRepository {
         if (coRenterIds.length > 0) {
           await tx.contractMember.createMany({
             data: coRenterIds.map((userId) => ({ contractId: id, userId, role: 'CO_RENTER' })),
+          })
+        }
+      }
+
+      if (renterInfo) {
+        if (renterInfo.phone !== undefined) {
+          await tx.user.update({
+            where: { id: renterId },
+            data: { phone: renterInfo.phone },
+          })
+        }
+        if (
+          renterInfo.identityNumber !== undefined ||
+          renterInfo.permanentAddress !== undefined ||
+          renterInfo.identityFrontUrl !== undefined ||
+          renterInfo.identityBackUrl !== undefined
+        ) {
+          const profileData = {
+            identityNumber: renterInfo.identityNumber,
+            permanentAddress: renterInfo.permanentAddress,
+            identityFrontUrl: renterInfo.identityFrontUrl,
+            identityBackUrl: renterInfo.identityBackUrl,
+          }
+          await tx.renterProfile.upsert({
+            where: { userId: renterId },
+            create: { userId: renterId, ...profileData },
+            update: profileData,
           })
         }
       }

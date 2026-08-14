@@ -45,6 +45,28 @@ export class DashboardService {
     }
   }
 
+  async getActionCenter(userId: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const now = new Date()
+    const actionCenter = await this.dashboardRepository.getActionCenter(tenant.tenantId, now)
+    const today = this.startOfUtcDay(now)
+
+    return {
+      tenantId: tenant.tenantId,
+      pendingRequests: actionCenter.pendingRequests,
+      expiringContracts: actionCenter.expiringContracts,
+      unpaidInvoices: {
+        total: actionCenter.unpaidInvoices.total,
+        items: actionCenter.unpaidInvoices.items.map((invoice) => ({
+          ...invoice,
+          debtAmount: this.toNumber(invoice.debtAmount),
+          daysOverdue: this.daysOverdue(invoice.dueDate, today),
+        })),
+      },
+      openTickets: actionCenter.openTickets,
+    }
+  }
+
   async getRevenueTrend(userId: number, query: TRevenueTrendQuerySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const range = this.normalizeRange(query)
@@ -129,6 +151,10 @@ export class DashboardService {
       return 0
     }
     return Number(value)
+  }
+
+  private daysOverdue(dueDate: Date, today: Date) {
+    return Math.max(0, Math.floor((today.getTime() - dueDate.getTime()) / DAY_MS))
   }
 
   private startOfUtcDay(date: Date) {

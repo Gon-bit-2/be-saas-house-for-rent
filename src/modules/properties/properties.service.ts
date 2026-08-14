@@ -37,7 +37,7 @@ export class PropertiesService {
 
   async create(userId: number, body: TCreatePropertyBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
-    return this.propertiesRepository.create({
+    const property = await this.propertiesRepository.create({
       tenantId: tenant.tenantId,
       name: body.name,
       type: body.type,
@@ -51,17 +51,49 @@ export class PropertiesService {
       status: body.status,
       createdById: userId,
     })
+
+    if (body.floorsCount && body.floorsCount > 0) {
+      const floorsToCreate = Array.from({ length: body.floorsCount }).map((_, index) => ({
+        tenantId: tenant.tenantId,
+        propertyId: property.id,
+        name: `Tầng ${index + 1}`,
+        floorNumber: index + 1,
+      }))
+      await this.propertiesRepository.createManyFloors(floorsToCreate)
+    }
+
+    return property
   }
 
   async update(userId: number, id: number, body: TUpdatePropertyBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     await this.getTenantPropertyOrThrow(tenant.tenantId, id)
 
-    return this.propertiesRepository.update(id, {
-      ...body,
-      description: body.description === undefined ? undefined : (body.description ?? null),
+    const { floorsCount, ...updateData } = body
+
+    const updated = await this.propertiesRepository.update(id, {
+      ...updateData,
+      description: updateData.description === undefined ? undefined : (updateData.description ?? null),
       updatedById: userId,
     })
+
+    if (floorsCount !== undefined) {
+      const currentFloorsCount = await this.propertiesRepository.countFloorsForProperty(tenant.tenantId, id)
+      if (floorsCount > currentFloorsCount) {
+        const floorsToCreate: Prisma.FloorCreateManyInput[] = []
+        for (let i = currentFloorsCount + 1; i <= floorsCount; i++) {
+          floorsToCreate.push({
+            tenantId: tenant.tenantId,
+            propertyId: id,
+            name: `Tầng ${i}`,
+            floorNumber: i,
+          })
+        }
+        await this.propertiesRepository.createManyFloors(floorsToCreate)
+      }
+    }
+
+    return updated
   }
 
   async updateStatus(userId: number, id: number, body: TUpdatePropertyStatusBodySchema) {

@@ -15,6 +15,7 @@ describe('ViewingAppointmentsController', () => {
       listMine: jest.fn(),
       cancelMine: jest.fn(),
       listForLandlord: jest.fn(),
+      getForLandlord: jest.fn(),
       updateStatus: jest.fn(),
     }
     controller = new ViewingAppointmentsController(viewingAppointmentsService as never)
@@ -29,6 +30,10 @@ describe('ViewingAppointmentsController', () => {
       roleName.LANDLORD,
       roleName.MANAGER,
     ])
+    expect(Reflect.getMetadata(ROLES_KEY, ViewingAppointmentsController.prototype.getForLandlord)).toEqual([
+      roleName.LANDLORD,
+      roleName.MANAGER,
+    ])
     expect(Reflect.getMetadata(ROLES_KEY, ViewingAppointmentsController.prototype.updateStatus)).toEqual([
       roleName.LANDLORD,
       roleName.MANAGER,
@@ -39,6 +44,7 @@ describe('ViewingAppointmentsController', () => {
     await controller.listMine(user, { page: 1, limit: 20 })
     await controller.cancelMine(user, 3, {})
     await controller.listForLandlord(user, { page: 1, limit: 20, status: 'PENDING' })
+    await controller.getForLandlord(user, 3)
     await controller.updateStatus(user, 3, { status: 'CONFIRMED' })
 
     expect(viewingAppointmentsService.listMine).toHaveBeenCalledWith(99, { page: 1, limit: 20 })
@@ -48,6 +54,7 @@ describe('ViewingAppointmentsController', () => {
       limit: 20,
       status: 'PENDING',
     })
+    expect(viewingAppointmentsService.getForLandlord).toHaveBeenCalledWith(99, 3)
     expect(viewingAppointmentsService.updateStatus).toHaveBeenCalledWith(99, 3, { status: 'CONFIRMED' })
   })
 })

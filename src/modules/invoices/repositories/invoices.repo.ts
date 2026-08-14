@@ -142,6 +142,35 @@ export class InvoicesRepository {
     ])
   }
 
+  async getDebtStats(where: Prisma.DebtWhereInput, today: Date) {
+    const thirtyDaysAgo = new Date(today)
+    thirtyDaysAgo.setUTCDate(thirtyDaysAgo.getUTCDate() - 30)
+    const activeDebtWhere: Prisma.DebtWhereInput = {
+      ...where,
+      status: { notIn: ['PAID', 'CANCELED'] },
+      remainingAmount: { gt: 0 },
+    }
+    const sumRemaining = (extraWhere: Prisma.DebtWhereInput = {}) =>
+      this.prismaService.debt.aggregate({
+        where: { AND: [activeDebtWhere, extraWhere] },
+        _sum: { remainingAmount: true },
+      })
+
+    const [total, overdueMoreThan30Days, overdueWithin30Days, currentNotDue] = await Promise.all([
+      sumRemaining(),
+      sumRemaining({ dueDate: { lt: thirtyDaysAgo } }),
+      sumRemaining({ dueDate: { gte: thirtyDaysAgo, lt: today } }),
+      sumRemaining({ dueDate: { gte: today } }),
+    ])
+
+    return {
+      totalOutstanding: total._sum.remainingAmount,
+      overdueMoreThan30Days: overdueMoreThan30Days._sum.remainingAmount,
+      overdueWithin30Days: overdueWithin30Days._sum.remainingAmount,
+      currentNotDue: currentNotDue._sum.remainingAmount,
+    }
+  }
+
   async findTenantInvoice(tenantId: number, id: number) {
     return this.prismaService.invoice.findFirst({ where: { id, tenantId, deletedAt: null }, select: invoiceSelect })
   }

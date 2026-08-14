@@ -1,8 +1,8 @@
 # Runtime API Index
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-06T08:51:02.377Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-12T15:23:21.335Z. Không chỉnh sửa thủ công.
 
-- Tổng số operation: **214**
+- Tổng số operation: **217**
 - Swagger UI: `GET /docs`
 - OpenAPI JSON: `GET /docs-json`
 - Route protected dùng Bearer JWT; route staff theo tenant có thể yêu cầu `x-tenant-id`.
@@ -76,6 +76,7 @@
 
 | Method | Path | Access | Operation ID | Responses |
 |---|---|---|---|---|
+| GET | `/dashboard/action-center` | Bearer JWT | `DashboardController_getActionCenter` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/dashboard/platform/summary` | Bearer JWT | `PlatformDashboardController_getSummary` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/dashboard/platform/trends` | Bearer JWT | `PlatformDashboardController_getTrends` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/dashboard/recent-activity` | Bearer JWT | `DashboardController_getRecentActivities` | 200, 400, 401, 403, 404, 409, 429, 500 |
@@ -231,6 +232,7 @@
 | PATCH | `/renters/{id}` | Bearer JWT | `RentersController_updateForLandlord` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/renters/{id}/history` | Bearer JWT | `RentersController_listHistory` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/renters/invitations` | Bearer JWT | `RentersController_invite` | 201, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/renters/invitations/{id}` | Bearer JWT | `RentersController_getInvitation` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/renters/invitations/accept` | Bearer JWT | `RentersController_acceptInvitation` | 201, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/renters/me` | Bearer JWT | `RentersController_getMe` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/renters/me` | Bearer JWT | `RentersController_updateMe` | 200, 400, 401, 403, 404, 409, 429, 500 |
@@ -271,6 +273,7 @@
 | Method | Path | Access | Operation ID | Responses |
 |---|---|---|---|---|
 | GET | `/room-viewing-appointments` | Bearer JWT | `ViewingAppointmentsController_listForLandlord` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/room-viewing-appointments/{id}` | Bearer JWT | `ViewingAppointmentsController_getForLandlord` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/room-viewing-appointments/{id}/status` | Bearer JWT | `ViewingAppointmentsController_updateStatus` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/room-viewing-appointments/me` | Bearer JWT | `ViewingAppointmentsController_listMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/room-viewing-appointments/me/{id}/cancel` | Bearer JWT | `ViewingAppointmentsController_cancelMine` | 200, 400, 401, 403, 404, 409, 429, 500 |

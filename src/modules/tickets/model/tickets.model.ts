@@ -34,7 +34,7 @@ export const ListTicketsQuerySchema = z
     roomId: z.coerce.number().int().positive().optional(),
     contractId: z.coerce.number().int().positive().optional(),
     assignedTo: z.coerce.number().int().positive().optional(),
-    search: z.string().trim().min(1).optional(),
+    search: z.string().trim().optional(),
   })
   .strict()
 

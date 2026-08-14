@@ -18,6 +18,16 @@ const CoRenterIdsSchema = z
   .optional()
   .transform((value) => (value ? Array.from(new Set(value)) : undefined))
 
+export const RenterInfoSchema = z
+  .object({
+    phone: z.string().trim().max(50).optional().nullable(),
+    identityNumber: z.string().trim().max(50).optional().nullable(),
+    permanentAddress: z.string().trim().optional().nullable(),
+    identityFrontUrl: z.string().trim().optional().nullable(),
+    identityBackUrl: z.string().trim().optional().nullable(),
+  })
+  .strict()
+
 export const ListContractsQuerySchema = z
   .object({
     page: z.coerce.number().int().positive().default(1),
@@ -26,7 +36,7 @@ export const ListContractsQuerySchema = z
     roomId: z.coerce.number().int().positive().optional(),
     renterId: z.coerce.number().int().positive().optional(),
     propertyId: z.coerce.number().int().positive().optional(),
-    search: z.string().trim().min(1).optional(),
+    search: z.string().trim().optional(),
   })
   .strict()
 
@@ -45,6 +55,7 @@ export const CreateContractBodySchema = z
     paymentDueDay: z.coerce.number().int().min(1).max(28),
     contentSnapshot: z.string().trim().min(1),
     coRenterIds: CoRenterIdsSchema,
+    renterInfo: RenterInfoSchema.optional(),
   })
   .strict()
 
@@ -58,6 +69,7 @@ export const UpdateContractBodySchema = z
     paymentDueDay: z.coerce.number().int().min(1).max(28).optional(),
     contentSnapshot: z.string().trim().min(1).optional(),
     coRenterIds: CoRenterIdsSchema,
+    renterInfo: RenterInfoSchema.optional(),
   })
   .strict()
   .refine((body) => Object.keys(body).length > 0, { message: 'Cần cung cấp ít nhất một trường để cập nhật' })
@@ -68,3 +80,4 @@ export type TListContractsQuerySchema = z.infer<typeof ListContractsQuerySchema>
 export type TCreateContractBodySchema = z.infer<typeof CreateContractBodySchema>
 export type TUpdateContractBodySchema = z.infer<typeof UpdateContractBodySchema>
 export type TEmptyContractBodySchema = z.infer<typeof EmptyContractBodySchema>
+export type TRenterInfo = z.infer<typeof RenterInfoSchema>

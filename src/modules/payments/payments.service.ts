@@ -297,6 +297,7 @@ export class PaymentsService {
     return {
       tenantId,
       ...(query.status ? { status: query.status } : {}),
+      ...(query.method ? { method: query.method } : {}),
       ...(query.invoiceId ? { invoiceId: query.invoiceId } : {}),
       ...(query.renterId ? { payerId: query.renterId } : {}),
       ...(query.from || query.to
@@ -319,6 +320,7 @@ export class PaymentsService {
     return {
       payerId: userId,
       ...(query.status ? { status: query.status } : {}),
+      ...(query.method ? { method: query.method } : {}),
       ...(query.invoiceId ? { invoiceId: query.invoiceId } : {}),
       ...(query.from || query.to
         ? { createdAt: { ...(query.from ? { gte: query.from } : {}), ...(query.to ? { lte: query.to } : {}) } }

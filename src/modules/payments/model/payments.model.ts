@@ -2,17 +2,19 @@ import z from 'zod'
 import { IsoDateInputCodec } from '@src/common/utils/date-codec.util'
 
 const PaymentStatusSchema = z.enum(['PENDING', 'SUCCESS', 'FAILED', 'CANCELED', 'REFUNDED'])
+const PaymentMethodSchema = z.enum(['BANK_TRANSFER', 'QR', 'CASH', 'WALLET'])
 
 export const ListPaymentsQuerySchema = z
   .object({
     page: z.coerce.number().int().positive().default(1),
     limit: z.coerce.number().int().positive().max(100).default(20),
     status: PaymentStatusSchema.optional(),
+    method: PaymentMethodSchema.optional(),
     invoiceId: z.coerce.number().int().positive().optional(),
     renterId: z.coerce.number().int().positive().optional(),
     from: IsoDateInputCodec.optional(),
     to: IsoDateInputCodec.optional(),
-    search: z.string().trim().min(1).optional(),
+    search: z.string().trim().optional(),
   })
   .strict()
 

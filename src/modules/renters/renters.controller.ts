@@ -1,5 +1,16 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Query } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Query,
+  UploadedFiles,
+  UseInterceptors,
+} from '@nestjs/common'
 import { Post } from '@nestjs/common'
+import { FilesInterceptor } from '@nestjs/platform-express'
 import { AuthType } from '@src/common/constants/auth.constant'
 import { Auth } from '@src/common/decorators/decorators/auth.decorator'
 import { AcceptRenterInvitationBodyDTO, InviteRenterBodyDTO, UpdateRenterForLandlordBodyDTO } from './dto/renters.dto'
@@ -9,13 +20,17 @@ import { IsTenant, Roles } from '@src/common/decorators/decorators/roles.decorat
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
 import { ListRentalHistoryQueryDTO, ListRentersQueryDTO, UpdateRenterProfileBodyDTO } from './dto/renters.dto'
 import { RentersService } from './renters.service'
+import { CloudinaryService } from '@src/shared/modules/services/cloudinary.service'
 
 /**
  * Controller for renter self-service profile and landlord renter lookup.
  */
 @Controller('renters')
 export class RentersController {
-  constructor(private readonly rentersService: RentersService) {}
+  constructor(
+    private readonly rentersService: RentersService,
+    private readonly cloudinaryService: CloudinaryService,
+  ) {}
 
   @IsTenant()
   @Get('me')
@@ -54,6 +69,12 @@ export class RentersController {
   }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Get('invitations/:id')
+  getInvitation(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
+    return this.rentersService.getInvitation(user.userId, id)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
   @Patch(':id')
   updateForLandlord(
     @ActiveUser() user: AccessTokenPayload,
@@ -77,5 +98,26 @@ export class RentersController {
   @Get(':id')
   getForLandlord(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
     return this.rentersService.getForLandlord(user.userId, id)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER, roleName.TENANT)
+  @Post(':id/images')
+  @UseInterceptors(
+    FilesInterceptor('files', 2, {
+      fileFilter: (req, file, cb) => {
+        if (!file.mimetype.match(/\/(jpg|jpeg|png|webp)$/)) return cb(new Error('Only image files are allowed'), false)
+        cb(null, true)
+      },
+      limits: { fileSize: 5 * 1024 * 1024 },
+    }),
+  )
+  async uploadImages(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @UploadedFiles() files: Express.Multer.File[],
+  ) {
+    const uploadPromises = files.map((file) => this.cloudinaryService.uploadImage(file, 'renters'))
+    const results = await Promise.all(uploadPromises)
+    return results.map((r) => ({ url: r.url, publicId: r.publicId }))
   }
 }

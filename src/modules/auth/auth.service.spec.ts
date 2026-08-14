@@ -1,4 +1,4 @@
-import { BadRequestException, UnauthorizedException } from '@nestjs/common'
+import { BadRequestException, ConflictException, UnauthorizedException } from '@nestjs/common'
 
 const mockGetToken = jest.fn()
 const mockAddRequestInterceptor = jest.fn()
@@ -85,15 +85,18 @@ describe('AuthService Google OAuth2', () => {
 
     authRepository = {
       findByEmail: jest.fn(),
+      findByPhone: jest.fn(),
       findByEmailForCredentials: jest.fn(),
       findById: jest.fn(),
       markEmailVerified: jest.fn(),
+      create: jest.fn(),
       createOAuthTenantUser: jest.fn(),
       createRefreshToken: jest.fn(),
       rotateRefreshToken: jest.fn(),
       findLatestValidVerificationCode: jest.fn(),
       consumeVerificationCode: jest.fn(),
       recordVerificationFailure: jest.fn(),
+      updateProfile: jest.fn(),
       updateLastLoginAt: jest.fn(),
     }
     hashingService = {
@@ -120,6 +123,58 @@ describe('AuthService Google OAuth2', () => {
 
   afterEach(() => {
     fetchMock.mockRestore()
+  })
+
+  it('rejects a duplicate registration phone before consuming the OTP', async () => {
+    authRepository.findByEmail.mockResolvedValue(null)
+    authRepository.findByPhone.mockResolvedValue(makeUser({ phone: '0900000000' }))
+
+    const error = await service
+      .register({
+        email: 'NEW@example.com',
+        fullName: 'New User',
+        phone: '0900000000',
+        password: 'Password1!',
+        confirmPassword: 'Password1!',
+        code: '123456',
+        roleCode: 'TENANT',
+      })
+      .catch((reason) => reason)
+
+    expect(error).toBeInstanceOf(ConflictException)
+    expect(error.message).toBe('Số điện thoại này đã được sử dụng')
+    expect(authRepository.findLatestValidVerificationCode).not.toHaveBeenCalled()
+    expect(authRepository.create).not.toHaveBeenCalled()
+  })
+
+  it('returns a conflict when registration loses a unique-constraint race', async () => {
+    authRepository.findByEmail.mockResolvedValue(null)
+    authRepository.findByPhone.mockResolvedValue(null)
+    authRepository.findLatestValidVerificationCode.mockResolvedValue({
+      id: 7,
+      email: 'new@example.com',
+      type: 'REGISTER',
+      codeHash: 'otp-hash',
+      attempts: 0,
+    })
+    hashingService.compare.mockResolvedValue(true)
+    authRepository.consumeVerificationCode.mockResolvedValue(true)
+    authRepository.create.mockRejectedValue({ code: 'P2002' })
+
+    const error = await service
+      .register({
+        email: 'NEW@example.com',
+        fullName: 'New User',
+        phone: '0900000000',
+        password: 'Password1!',
+        confirmPassword: 'Password1!',
+        code: '123456',
+        roleCode: 'TENANT',
+      })
+      .catch((reason) => reason)
+
+    expect(error).toBeInstanceOf(ConflictException)
+    expect(error.message).toBe('Email hoặc số điện thoại đã được sử dụng')
   })
 
   it('creates a Google authorization URL with expected OAuth params and signed state', () => {
@@ -271,5 +326,23 @@ describe('AuthService Google OAuth2', () => {
       'sha256:old-refresh',
       expect.objectContaining({ userId: 1, tokenHash: 'sha256:refresh-token' }),
     )
+  })
+
+  it('returns a conflict when profile phone violates its unique constraint without target metadata', async () => {
+    authRepository.findById.mockResolvedValue(makeUser())
+    authRepository.updateProfile.mockRejectedValue({ code: 'P2002', meta: { modelName: 'User' } })
+
+    const error = await service.updateProfile(1, { phone: '0900000000' }).catch((reason) => reason)
+
+    expect(error).toBeInstanceOf(ConflictException)
+    expect(error.message).toBe('Số điện thoại này đã được sử dụng')
+  })
+
+  it('does not hide non-unique profile update errors', async () => {
+    const databaseError = { code: 'P2025' }
+    authRepository.findById.mockResolvedValue(makeUser())
+    authRepository.updateProfile.mockRejectedValue(databaseError)
+
+    await expect(service.updateProfile(1, { fullName: 'Updated User' })).rejects.toBe(databaseError)
   })
 })

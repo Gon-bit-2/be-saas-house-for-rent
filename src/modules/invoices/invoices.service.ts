@@ -35,15 +35,15 @@ export class InvoicesService {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const { page, limit, skip } = normalizePagination(query)
     const where = this.buildDebtWhere(tenant.tenantId, query)
-    const [debts, total] = await this.invoicesRepository.findDebtsAndCount(where, skip, limit)
-    return buildPaginatedResult(debts, total, page, limit)
+    const statsWhere = this.buildDebtWhere(tenant.tenantId, { ...query, status: undefined })
+    return this.listDebtsWithStats(where, statsWhere, page, limit, skip)
   }
 
   async listMyDebts(userId: number, query: TListDebtsQuerySchema) {
     const { page, limit, skip } = normalizePagination(query)
     const where = this.buildDebtWhereForRenter(userId, query)
-    const [debts, total] = await this.invoicesRepository.findDebtsAndCount(where, skip, limit)
-    return buildPaginatedResult(debts, total, page, limit)
+    const statsWhere = this.buildDebtWhereForRenter(userId, { ...query, status: undefined })
+    return this.listDebtsWithStats(where, statsWhere, page, limit, skip)
   }
 
   async getForLandlord(userId: number, id: number) {
@@ -213,6 +213,29 @@ export class InvoicesService {
       throw new NotFoundException('Không tìm thấy hóa đơn trong tenant hiện tại')
     }
     return invoice
+  }
+
+  private async listDebtsWithStats(
+    where: Prisma.DebtWhereInput,
+    statsWhere: Prisma.DebtWhereInput,
+    page: number,
+    limit: number,
+    skip: number,
+  ) {
+    const today = this.todayDateOnly()
+    const [[debts, total], stats] = await Promise.all([
+      this.invoicesRepository.findDebtsAndCount(where, skip, limit),
+      this.invoicesRepository.getDebtStats(statsWhere, today),
+    ])
+    return {
+      ...buildPaginatedResult(debts, total, page, limit),
+      stats: {
+        totalOutstanding: this.toNumber(stats.totalOutstanding),
+        overdueMoreThan30Days: this.toNumber(stats.overdueMoreThan30Days),
+        overdueWithin30Days: this.toNumber(stats.overdueWithin30Days),
+        currentNotDue: this.toNumber(stats.currentNotDue),
+      },
+    }
   }
 
   /**

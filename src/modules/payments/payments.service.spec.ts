@@ -313,11 +313,12 @@ describe('PaymentsService', () => {
       limit: 20,
       renterId: 999,
       status: 'SUCCESS',
+      method: 'BANK_TRANSFER',
       search: 'INV-001',
     })
 
     expect(paymentsRepository.findPaymentsAndCount).toHaveBeenCalledWith(
-      expect.objectContaining({ payerId: 50, status: 'SUCCESS' }),
+      expect.objectContaining({ payerId: 50, status: 'SUCCESS', method: 'BANK_TRANSFER' }),
       0,
       20,
     )

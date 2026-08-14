@@ -111,6 +111,7 @@ const ConfigSchema = z
     PAYMENT_WEBHOOK_RETENTION_DAYS: z.coerce.number().int().positive().default(90),
     PAYMENT_WEBHOOK_RETENTION_BATCH_SIZE: z.coerce.number().int().positive().max(10_000).default(1_000),
     GOOGLE_APPLICATION_CREDENTIALS: z.string().default('./src/secrets/firebase-service-account.json'),
+    TEST_ACCOUNT_EMAILS: z.string().default(''),
   })
   .superRefine((config, ctx) => {
     const origins = config.CORS_ORIGINS.split(',')

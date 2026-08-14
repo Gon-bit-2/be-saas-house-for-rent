@@ -20,6 +20,8 @@
     "test:e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./test/jest-e2e.json",
     "db:seed": "prisma db seed",
     "db:status": "prisma migrate status --schema prisma/schema.prisma",
+    "test-accounts:create": "npm run build && node dist/inittalScripts/create-test-users.js",
+    "test-accounts:prepare-api": "npm run build && node dist/inittalScripts/prepare-api-test-accounts.js",
     "security:preflight-webhook-logs": "ts-node -r tsconfig-paths/register inittalScripts/sanitize-payment-webhook-logs.ts",
     "security:sanitize-webhook-logs": "ts-node -r tsconfig-paths/register inittalScripts/sanitize-payment-webhook-logs.ts --apply",
     "permission:sync": "node dist/inittalScripts/create-permission.js",

@@ -32,6 +32,8 @@ const TENANT_CONTEXT_OPERATIONS = [
   /^(GET|POST|PATCH|DELETE) \/rooms(?:\/|$)/,
   /^(GET|PATCH) \/rental-requests(?:$|\/\{id\})/,
   /^(GET|PATCH) \/room-viewing-appointments(?:$|\/\{id\})/,
+  /^GET \/renters\/invitations\/\{id\}$/,
+  /^GET \/dashboard\/action-center$/,
   /^(GET|POST|PATCH) \/contracts(?:$|\/\{id\})/,
   /^(GET|POST|PATCH) \/invoices(?:$|\/debts$|\/\{id\})/,
   /^(GET|PATCH) \/payments(?:$|\/\{id\})/,

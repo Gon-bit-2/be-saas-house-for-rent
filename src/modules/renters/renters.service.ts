@@ -59,6 +59,15 @@ export class RentersService {
     return invitation
   }
 
+  async getInvitation(userId: number, id: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const invitation = await this.rentersRepository.findInvitation(tenant.tenantId, id)
+    if (!invitation) {
+      throw new NotFoundException('Không tìm thấy lời mời trong tenant hiện tại')
+    }
+    return { ...invitation, status: this.getInvitationStatus(invitation) }
+  }
+
   async acceptInvitation(body: TAcceptRenterInvitationBodySchema) {
     const email = body.email.trim().toLowerCase()
     if (await this.rentersRepository.findRegisteredUser(email)) {
@@ -206,5 +215,12 @@ export class RentersService {
         ...searchFilter,
       ],
     }
+  }
+
+  private getInvitationStatus(invitation: { acceptedAt: Date | null; revokedAt: Date | null; expiresAt: Date }) {
+    if (invitation.acceptedAt) return 'ACCEPTED' as const
+    if (invitation.revokedAt) return 'CANCELED' as const
+    if (invitation.expiresAt.getTime() <= Date.now()) return 'EXPIRED' as const
+    return 'PENDING' as const
   }
 }

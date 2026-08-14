@@ -24,6 +24,8 @@ type RevenueTrendRow = {
   count: number
 }
 
+const ACTION_CENTER_LIMIT = 5
+
 @Injectable()
 export class DashboardRepository {
   constructor(private readonly prismaService: PrismaService) {}
@@ -40,6 +42,115 @@ export class DashboardRepository {
     ])
 
     return { totalRooms, byStatus: this.normalizeStatusCounts(byStatus) }
+  }
+
+  async getActionCenter(tenantId: number, now: Date) {
+    const today = this.startOfUtcDay(now)
+    const endingSoonTo = new Date(today)
+    endingSoonTo.setUTCDate(endingSoonTo.getUTCDate() + 30)
+
+    const pendingRequestWhere: Prisma.RentalRequestWhereInput = { tenantId, status: 'PENDING' }
+    const expiringContractWhere: Prisma.ContractWhereInput = {
+      tenantId,
+      status: 'ACTIVE',
+      deletedAt: null,
+      endDate: { gte: today, lte: this.endOfUtcDay(endingSoonTo) },
+    }
+    const unpaidInvoiceWhere: Prisma.InvoiceWhereInput = {
+      tenantId,
+      deletedAt: null,
+      status: { in: ['UNPAID', 'PARTIALLY_PAID', 'OVERDUE'] },
+      debtAmount: { gt: 0 },
+    }
+    const openTicketWhere: Prisma.TicketWhereInput = {
+      tenantId,
+      status: { in: ['OPEN', 'IN_PROGRESS', 'WAITING_RENTER'] },
+    }
+
+    const [
+      pendingRequestTotal,
+      pendingRequests,
+      expiringContractTotal,
+      expiringContracts,
+      unpaidInvoiceTotal,
+      unpaidInvoices,
+      openTicketTotal,
+      openTickets,
+    ] = await Promise.all([
+      this.prismaService.rentalRequest.count({ where: pendingRequestWhere }),
+      this.prismaService.rentalRequest.findMany({
+        where: pendingRequestWhere,
+        take: ACTION_CENTER_LIMIT,
+        orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+        select: {
+          id: true,
+          status: true,
+          expectedStartDate: true,
+          createdAt: true,
+          renter: { select: { id: true, fullName: true } },
+          room: {
+            select: { id: true, roomCode: true, title: true, property: { select: { id: true, name: true } } },
+          },
+        },
+      }),
+      this.prismaService.contract.count({ where: expiringContractWhere }),
+      this.prismaService.contract.findMany({
+        where: expiringContractWhere,
+        take: ACTION_CENTER_LIMIT,
+        orderBy: [{ endDate: 'asc' }, { id: 'asc' }],
+        select: {
+          id: true,
+          contractCode: true,
+          status: true,
+          endDate: true,
+          renter: { select: { id: true, fullName: true } },
+          room: {
+            select: { id: true, roomCode: true, title: true, property: { select: { id: true, name: true } } },
+          },
+        },
+      }),
+      this.prismaService.invoice.count({ where: unpaidInvoiceWhere }),
+      this.prismaService.invoice.findMany({
+        where: unpaidInvoiceWhere,
+        take: ACTION_CENTER_LIMIT,
+        orderBy: [{ dueDate: 'asc' }, { id: 'asc' }],
+        select: {
+          id: true,
+          invoiceCode: true,
+          status: true,
+          dueDate: true,
+          debtAmount: true,
+          renter: { select: { id: true, fullName: true } },
+          room: {
+            select: { id: true, roomCode: true, title: true, property: { select: { id: true, name: true } } },
+          },
+        },
+      }),
+      this.prismaService.ticket.count({ where: openTicketWhere }),
+      this.prismaService.ticket.findMany({
+        where: openTicketWhere,
+        take: ACTION_CENTER_LIMIT,
+        orderBy: [{ priority: 'desc' }, { createdAt: 'asc' }, { id: 'asc' }],
+        select: {
+          id: true,
+          title: true,
+          priority: true,
+          status: true,
+          createdAt: true,
+          createdBy: { select: { id: true, fullName: true } },
+          room: {
+            select: { id: true, roomCode: true, title: true, property: { select: { id: true, name: true } } },
+          },
+        },
+      }),
+    ])
+
+    return {
+      pendingRequests: { total: pendingRequestTotal, items: pendingRequests },
+      expiringContracts: { total: expiringContractTotal, items: expiringContracts },
+      unpaidInvoices: { total: unpaidInvoiceTotal, items: unpaidInvoices },
+      openTickets: { total: openTicketTotal, items: openTickets },
+    }
   }
 
   async getContractStats(tenantId: number, now: Date) {

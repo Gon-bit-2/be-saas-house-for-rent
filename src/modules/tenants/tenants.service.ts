@@ -9,6 +9,7 @@ import type {
   TUpdateTenantBodySchema,
   TUpdateTenantStatusBodySchema,
   TUpdateTenantVerificationBodySchema,
+  TRegisterTenantBodySchema,
 } from './model/tenants.model'
 import { SubscriptionPaymentsService } from '../subscription-payments/subscription-payments.service'
 import { TenantsRepository } from './repositories/tenants.repo'
@@ -67,6 +68,35 @@ export class TenantsService {
       startedAt,
       expiredAt,
       actorId,
+    })
+  }
+
+  /**
+   * Registers a new landlord tenant for an existing user.
+   */
+  async registerMyTenant(actorId: number, body: TRegisterTenantBodySchema) {
+    const defaultPlan = await this.tenantsRepository.findFirstActivePlan()
+    if (!defaultPlan) {
+      throw new NotFoundException('Không tìm thấy gói dịch vụ nào đang hoạt động để đăng ký')
+    }
+    const planId = defaultPlan.id
+
+    const slug = await this.generateUniqueSlug(body.tenantName)
+    const { startedAt, expiredAt } = this.calculateSubscriptionPeriod('MONTHLY')
+
+    return this.tenantsRepository.registerTenant({
+      userId: actorId,
+      tenantName: body.tenantName,
+      slug,
+      taxCode: body.taxCode,
+      tenantPhone: body.tenantPhone,
+      tenantEmail: body.tenantEmail,
+      address: body.address,
+      planId: planId,
+      billingCycle: 'MONTHLY',
+      autoRenew: true,
+      startedAt,
+      expiredAt,
     })
   }
 

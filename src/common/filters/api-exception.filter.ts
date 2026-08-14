@@ -24,6 +24,11 @@ const statusCodeName = (status: number) => {
 export class ApiExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(ApiExceptionFilter.name)
 
+  /**
+   * Bắt và xử lý tất cả các ngoại lệ (Exception) xảy ra trong ứng dụng API, ghi log chi tiết ra terminal và chuẩn hóa response gửi về client
+   * @param exception Ngoại lệ được ném ra
+   * @param host Context của arguments host (chứa request và response HTTP)
+   */
   catch(exception: unknown, host: ArgumentsHost) {
     const http = host.switchToHttp()
     const request = http.getRequest<Request>()
@@ -39,9 +44,16 @@ export class ApiExceptionFilter implements ExceptionFilter {
         ? requestIdHeader.trim().slice(0, 128)
         : randomUUID()
 
-    if (!(exception instanceof HttpException)) {
+    const method = request.method
+    const url = request.originalUrl || request.url
+    const detailsStr = normalized.details ? ` | Details: ${JSON.stringify(normalized.details)}` : ''
+    const logSummary = `[${method}] ${url} -> Status: ${status} (${normalized.code}) | Message: "${normalized.message}"${detailsStr} | request_id=${requestId}`
+
+    if (status >= 500 || !(exception instanceof HttpException)) {
       const stack = exception instanceof Error ? exception.stack : String(exception)
-      this.logger.error(`request_id=${requestId} path=${request.originalUrl}`, stack)
+      this.logger.error(logSummary, stack)
+    } else {
+      this.logger.warn(logSummary)
     }
 
     const body: ApiErrorResponse = {
@@ -57,6 +69,12 @@ export class ApiExceptionFilter implements ExceptionFilter {
     response.status(status).json(body)
   }
 
+  /**
+   * Chuẩn hóa cấu trúc phản hồi lỗi dạng ApiErrorResponse từ các loại dữ liệu raw exception
+   * @param raw Dữ liệu nhận được từ exception.getResponse()
+   * @param status Mã HTTP Status Code
+   * @returns Cấu trúc code, message, details đã được chuẩn hóa
+   */
   private normalize(raw: string | object | undefined, status: number) {
     const fallbackCode = statusCodeName(status)
     const fallbackMessage = status === 500 ? 'Internal server error' : fallbackCode.replaceAll('_', ' ').toLowerCase()

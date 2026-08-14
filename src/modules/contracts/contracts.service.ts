@@ -88,6 +88,7 @@ export class ContractsService {
         updatedById: userId,
       },
       coRenterIds,
+      body.renterInfo,
     )
   }
 
@@ -117,7 +118,7 @@ export class ContractsService {
       updatedById: userId,
     }
 
-    return this.contractsRepository.update(id, data, body.coRenterIds)
+    return this.contractsRepository.update(id, contract.renterId, data, body.coRenterIds, body.renterInfo)
   }
 
   async activate(userId: number, id: number) {

@@ -184,4 +184,24 @@ describe('ContractsService', () => {
 
     await expect(service.getMine(99, 1)).rejects.toBeInstanceOf(NotFoundException)
   })
+
+  it('returns populated members for landlord and renter contract details', async () => {
+    const contract = {
+      id: 1,
+      members: [
+        {
+          id: 11,
+          userId: 99,
+          role: 'MAIN_RENTER',
+          createdAt: new Date('2026-07-01T00:00:00.000Z'),
+          user: { id: 99, fullName: 'Nguyen Van A', email: 'a@example.com', phone: '0900000000' },
+        },
+      ],
+    }
+    contractsRepository.findById.mockResolvedValue(contract)
+    contractsRepository.getMine.mockResolvedValue(contract)
+
+    await expect(service.getForLandlord(50, 1)).resolves.toEqual(contract)
+    await expect(service.getMine(99, 1)).resolves.toEqual(contract)
+  })
 })

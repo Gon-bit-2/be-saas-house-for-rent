@@ -40,6 +40,12 @@ export class ViewingAppointmentsController {
   }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Get(':id')
+  getForLandlord(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
+    return this.viewingAppointmentsService.getForLandlord(user.userId, id)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
   @Patch(':id/status')
   updateStatus(
     @ActiveUser() user: AccessTokenPayload,

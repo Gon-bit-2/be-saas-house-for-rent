@@ -15,8 +15,9 @@ describe('DashboardRepository', () => {
       $transaction: jest.fn((operations: Promise<unknown>[]) => Promise.all(operations)),
       $queryRaw: jest.fn(),
       room: { count: jest.fn(), groupBy: jest.fn() },
-      contract: { count: jest.fn() },
-      invoice: { aggregate: jest.fn(), findMany: jest.fn() },
+      rentalRequest: { count: jest.fn(), findMany: jest.fn() },
+      contract: { count: jest.fn(), findMany: jest.fn() },
+      invoice: { count: jest.fn(), aggregate: jest.fn(), findMany: jest.fn() },
       payment: { aggregate: jest.fn(), findMany: jest.fn() },
       debt: { aggregate: jest.fn() },
       ticket: { count: jest.fn(), groupBy: jest.fn(), findMany: jest.fn() },
@@ -93,5 +94,52 @@ describe('DashboardRepository', () => {
       }),
     )
     expect(result.urgentOpenTickets).toBe(2)
+  })
+
+  it('loads tenant-scoped action-center totals and limits each preview to five items', async () => {
+    prismaService.rentalRequest.count.mockResolvedValue(7)
+    prismaService.rentalRequest.findMany.mockResolvedValue([{ id: 1 }])
+    prismaService.contract.count.mockResolvedValue(2)
+    prismaService.contract.findMany.mockResolvedValue([{ id: 2 }])
+    prismaService.invoice.count.mockResolvedValue(3)
+    prismaService.invoice.findMany.mockResolvedValue([{ id: 3 }])
+    prismaService.ticket.count.mockResolvedValue(4)
+    prismaService.ticket.findMany.mockResolvedValue([{ id: 4 }])
+
+    const result = await repository.getActionCenter(2, new Date('2026-07-16T10:30:00.000Z'))
+
+    expect(prismaService.rentalRequest.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { tenantId: 2, status: 'PENDING' }, take: 5 }),
+    )
+    expect(prismaService.contract.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: expect.objectContaining({ tenantId: 2, status: 'ACTIVE', deletedAt: null }),
+        take: 5,
+        orderBy: [{ endDate: 'asc' }, { id: 'asc' }],
+      }),
+    )
+    expect(prismaService.invoice.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: expect.objectContaining({
+          tenantId: 2,
+          status: { in: ['UNPAID', 'PARTIALLY_PAID', 'OVERDUE'] },
+          debtAmount: { gt: 0 },
+        }),
+        take: 5,
+      }),
+    )
+    expect(prismaService.ticket.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: { tenantId: 2, status: { in: ['OPEN', 'IN_PROGRESS', 'WAITING_RENTER'] } },
+        take: 5,
+        orderBy: [{ priority: 'desc' }, { createdAt: 'asc' }, { id: 'asc' }],
+      }),
+    )
+    expect(result).toEqual({
+      pendingRequests: { total: 7, items: [{ id: 1 }] },
+      expiringContracts: { total: 2, items: [{ id: 2 }] },
+      unpaidInvoices: { total: 3, items: [{ id: 3 }] },
+      openTickets: { total: 4, items: [{ id: 4 }] },
+    })
   })
 })

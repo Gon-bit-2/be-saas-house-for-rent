@@ -1,6 +1,6 @@
 # Tài liệu tham chiếu API hiện tại
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-06T08:51:02.382Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-12T15:23:21.340Z. Không chỉnh sửa thủ công.
 
 ## Quy ước chung
 
@@ -11,7 +11,7 @@
 - Request được kiểm tra bằng Zod strict; ngày giờ dùng ISO 8601.
 - Error chuẩn: `{ statusCode, code, message, details?, timestamp, path, requestId }`.
 - Mọi route chịu global rate limit; profile riêng được ghi ở từng operation.
-- Tổng cộng **214 operation** thuộc **34 controller**.
+- Tổng cộng **217 operation** thuộc **34 controller**.
 
 ## Mục lục
 
@@ -20,7 +20,7 @@
 - [Xác thực và hồ sơ (11)](#auth)
 - [Thanh lý hợp đồng (11)](#contract-terminations)
 - [Hợp đồng (9)](#contracts)
-- [Dashboard (5)](#dashboard)
+- [Dashboard (6)](#dashboard)
 - [Thiết bị nhận push (2)](#device-tokens)
 - [Bàn giao phòng (11)](#handovers)
 - [Hóa đơn và công nợ (14)](#invoices)
@@ -33,11 +33,11 @@
 - [Gói dịch vụ (5)](#plans)
 - [Nhà trọ và tầng (10)](#properties)
 - [Yêu cầu thuê (6)](#rental-requests)
-- [Người thuê và lời mời (9)](#renters)
+- [Người thuê và lời mời (10)](#renters)
 - [Báo cáo vi phạm (6)](#reports)
 - [Đánh giá và uy tín (6)](#reviews)
 - [Tài sản trong phòng (3)](#room-assets)
-- [Lịch xem phòng (4)](#room-viewing-appointments)
+- [Lịch xem phòng (5)](#room-viewing-appointments)
 - [Phòng, tiện ích và ảnh (13)](#rooms)
 - [Trạng thái dịch vụ (1)](#root)
 - [Gán dịch vụ (3)](#service-assignments)
@@ -577,6 +577,17 @@
 ## Dashboard
 
 Đặc tả nghiệp vụ: [G11_dashboard_bao_cao_audit_cau_hinh_he_thong.md](../specs/G11_dashboard_bao_cao_audit_cau_hinh_he_thong.md).
+
+### GET `/dashboard/action-center`
+
+- Operation ID: `DashboardController_getActionCenter`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`, `ACCOUNTANT`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `x-tenant-id` | header | Có | `integer` |
 
 ### GET `/dashboard/platform/summary`
 
@@ -1456,6 +1467,7 @@
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
 | `status` | query | Không | `string` |
+| `method` | query | Không | `string` |
 | `invoiceId` | query | Không | `integer` |
 | `renterId` | query | Không | `integer` |
 | `from` | query | Không | schema inline |
@@ -1519,6 +1531,7 @@
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
 | `status` | query | Không | `string` |
+| `method` | query | Không | `string` |
 | `invoiceId` | query | Không | `integer` |
 | `renterId` | query | Không | `integer` |
 | `from` | query | Không | schema inline |
@@ -1922,6 +1935,18 @@
 
 - `application/json`: `InviteRenterBodyDTO`; bắt buộc: có.
 
+### GET `/renters/invitations/{id}`
+
+- Operation ID: `RentersController_getInvitation`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
+
 ### POST `/renters/invitations/accept`
 
 - Operation ID: `RentersController_acceptInvitation`.
@@ -2204,6 +2229,18 @@
 | `propertyId` | query | Không | `integer` |
 | `from` | query | Không | schema inline |
 | `to` | query | Không | schema inline |
+| `x-tenant-id` | header | Có | `integer` |
+
+### GET `/room-viewing-appointments/{id}`
+
+- Operation ID: `ViewingAppointmentsController_getForLandlord`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
 | `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/room-viewing-appointments/{id}/status`

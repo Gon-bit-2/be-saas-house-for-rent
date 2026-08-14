@@ -20,6 +20,7 @@ describe('RentersService', () => {
       updateProfile: jest.fn(),
       findManyAndCount: jest.fn(),
       findTenantRenter: jest.fn(),
+      findInvitation: jest.fn(),
     }
     tenantAccessService = {
       getActiveTenantContext: jest
@@ -110,6 +111,51 @@ describe('RentersService', () => {
       expect.objectContaining({ email: 'renter@example.com', code: expect.stringMatching(/^\d{6}$/) }),
     )
     expect(result).toEqual(expect.objectContaining({ id: 7 }))
+  })
+
+  it.each([
+    [
+      {
+        acceptedAt: new Date('2026-07-01T00:00:00.000Z'),
+        revokedAt: new Date('2026-06-30T00:00:00.000Z'),
+        expiresAt: new Date('2026-07-02T00:00:00.000Z'),
+      },
+      'ACCEPTED',
+    ],
+    [
+      {
+        acceptedAt: null,
+        revokedAt: new Date('2026-07-01T00:00:00.000Z'),
+        expiresAt: new Date('2026-07-02T00:00:00.000Z'),
+      },
+      'CANCELED',
+    ],
+    [{ acceptedAt: null, revokedAt: null, expiresAt: new Date('2026-07-01T00:00:00.000Z') }, 'EXPIRED'],
+    [{ acceptedAt: null, revokedAt: null, expiresAt: new Date('2026-07-20T00:00:00.000Z') }, 'PENDING'],
+  ])('returns invitation status %s as %s without secret fields', async (dates, status) => {
+    jest.useFakeTimers().setSystemTime(new Date('2026-07-10T00:00:00.000Z'))
+    rentersRepository.findInvitation.mockResolvedValue({
+      id: 7,
+      tenantId: 10,
+      email: 'renter@example.com',
+      ...dates,
+      tenant: { id: 10, name: 'Nha Tro A' },
+      createdBy: { id: 50, fullName: 'Landlord', email: 'owner@example.com' },
+    })
+
+    const result = await service.getInvitation(50, 7)
+
+    expect(rentersRepository.findInvitation).toHaveBeenCalledWith(10, 7)
+    expect(result).toEqual(expect.objectContaining({ id: 7, status }))
+    expect(result).not.toHaveProperty('codeHash')
+    expect(result).not.toHaveProperty('attempts')
+    jest.useRealTimers()
+  })
+
+  it('throws when invitation does not belong to the active tenant', async () => {
+    rentersRepository.findInvitation.mockResolvedValue(null)
+
+    await expect(service.getInvitation(50, 7)).rejects.toBeInstanceOf(NotFoundException)
   })
 
   it('records a failed invitation code attempt', async () => {

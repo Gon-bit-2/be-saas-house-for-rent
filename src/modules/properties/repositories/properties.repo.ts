@@ -114,8 +114,18 @@ export class PropertiesRepository {
     })
   }
 
+  async countFloorsForProperty(tenantId: number, propertyId: number) {
+    return this.prismaService.floor.count({
+      where: { tenantId, propertyId, property: { deletedAt: null } },
+    })
+  }
+
   async createFloor(data: Prisma.FloorUncheckedCreateInput) {
     return this.prismaService.floor.create({ data, select: floorSelect })
+  }
+
+  async createManyFloors(data: Prisma.FloorCreateManyInput[]) {
+    return this.prismaService.floor.createMany({ data })
   }
 
   async updateFloor(id: number, data: Prisma.FloorUncheckedUpdateInput) {

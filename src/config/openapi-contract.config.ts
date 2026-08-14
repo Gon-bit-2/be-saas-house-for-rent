@@ -33,7 +33,7 @@ const jsonValue = {
 const timestamps = { createdAt: dateTime, updatedAt: dateTime, deletedAt: nullable(dateTime) }
 
 export const FE_PRIORITY_PATH =
-  /^\/(?:auth|properties|rooms|marketplace|rental-requests|room-viewing-appointments|contracts|invoices|payments|tickets|notifications|device-tokens)(?:\/|$)/
+  /^(?:\/(?:auth|properties|rooms|marketplace|rental-requests|room-viewing-appointments|contracts|invoices|payments|tickets|notifications|device-tokens)(?:\/|$)|\/renters\/invitations\/\{id\}$|\/dashboard\/action-center$)/
 
 export const FE_PRIORITY_COMPONENTS: Record<string, Schema> = {
   PaginationMeta: object(['page', 'limit', 'total', 'totalPages'], {
@@ -194,20 +194,77 @@ export const FE_PRIORITY_COMPONENTS: Record<string, Schema> = {
     moderatedById: id,
     createdAt: dateTime,
   }),
-  Appointment: object(['id', 'tenantId', 'roomId', 'renterId', 'scheduledAt', 'status', 'createdAt', 'updatedAt'], {
+  AppointmentProperty: object(['id', 'name', 'addressDetail', 'ward', 'district', 'province'], {
     id,
-    tenantId: id,
-    roomId: id,
-    renterId: id,
-    assignedStaffId: nullable(id),
-    scheduledAt: dateTime,
-    status: enumOf('PENDING', 'CONFIRMED', 'REJECTED', 'RESCHEDULED', 'CANCELED', 'COMPLETED'),
-    note: nullable(text),
-    landlordNote: nullable(text),
-    room: ref('Room'),
-    renter: ref('UserSummary'),
-    ...timestamps,
+    name: text,
+    addressDetail: text,
+    ward: text,
+    district: text,
+    province: text,
   }),
+  AppointmentRoom: object(['id', 'roomCode', 'title', 'basePrice', 'depositAmount', 'property'], {
+    id,
+    roomCode: text,
+    title: text,
+    basePrice: decimal,
+    depositAmount: decimal,
+    property: ref('AppointmentProperty'),
+  }),
+  Appointment: object(
+    ['id', 'tenantId', 'roomId', 'renterId', 'scheduledAt', 'status', 'room', 'renter', 'createdAt', 'updatedAt'],
+    {
+      id,
+      tenantId: id,
+      roomId: id,
+      renterId: id,
+      assignedStaffId: nullable(id),
+      scheduledAt: dateTime,
+      status: enumOf('PENDING', 'CONFIRMED', 'REJECTED', 'RESCHEDULED', 'CANCELED', 'COMPLETED'),
+      note: nullable(text),
+      landlordNote: nullable(text),
+      room: ref('Room'),
+      renter: ref('UserSummary'),
+      assignedStaff: nullable(ref('UserSummary')),
+      ...timestamps,
+    },
+  ),
+  AppointmentDetail: object(
+    ['id', 'tenantId', 'roomId', 'renterId', 'scheduledAt', 'status', 'room', 'renter', 'createdAt', 'updatedAt'],
+    {
+      id,
+      tenantId: id,
+      roomId: id,
+      renterId: id,
+      assignedStaffId: nullable(id),
+      scheduledAt: dateTime,
+      status: enumOf('PENDING', 'CONFIRMED', 'REJECTED', 'RESCHEDULED', 'CANCELED', 'COMPLETED'),
+      note: nullable(text),
+      landlordNote: nullable(text),
+      room: ref('AppointmentRoom'),
+      renter: ref('UserSummary'),
+      assignedStaff: nullable(ref('UserSummary')),
+      ...timestamps,
+    },
+  ),
+  RenterInvitation: object(
+    ['id', 'tenantId', 'email', 'fullName', 'expiresAt', 'status', 'tenant', 'createdBy', 'createdAt', 'updatedAt'],
+    {
+      id,
+      tenantId: id,
+      email: { type: 'string', format: 'email' },
+      fullName: text,
+      phone: nullable(text),
+      expiresAt: dateTime,
+      acceptedAt: nullable(dateTime),
+      acceptedUserId: nullable(id),
+      revokedAt: nullable(dateTime),
+      status: enumOf('ACCEPTED', 'CANCELED', 'EXPIRED', 'PENDING'),
+      tenant: object(['id', 'name'], { id, name: text }),
+      createdBy: ref('UserSummary'),
+      createdAt: dateTime,
+      updatedAt: dateTime,
+    },
+  ),
   RentalRequest: object(
     ['id', 'tenantId', 'roomId', 'renterId', 'expectedStartDate', 'status', 'createdAt', 'updatedAt'],
     {
@@ -225,8 +282,26 @@ export const FE_PRIORITY_COMPONENTS: Record<string, Schema> = {
       ...timestamps,
     },
   ),
+  ContractMember: object(['id', 'userId', 'role', 'createdAt', 'user'], {
+    id,
+    userId: id,
+    role: enumOf('MAIN_RENTER', 'CO_RENTER'),
+    createdAt: dateTime,
+    user: ref('UserSummary'),
+  }),
   Contract: object(
-    ['id', 'tenantId', 'roomId', 'renterId', 'contractCode', 'status', 'startDate', 'endDate', 'monthlyPrice'],
+    [
+      'id',
+      'tenantId',
+      'roomId',
+      'renterId',
+      'contractCode',
+      'status',
+      'startDate',
+      'endDate',
+      'monthlyPrice',
+      'members',
+    ],
     {
       id,
       tenantId: id,
@@ -253,6 +328,7 @@ export const FE_PRIORITY_COMPONENTS: Record<string, Schema> = {
       contentSnapshot: nullable(text),
       room: ref('Room'),
       renter: ref('UserSummary'),
+      members: arrayOf('ContractMember'),
       ...timestamps,
     },
   ),
@@ -277,6 +353,80 @@ export const FE_PRIORITY_COMPONENTS: Record<string, Schema> = {
     status: enumOf('OPEN', 'PARTIAL', 'PAID', 'OVERDUE', 'CANCELED'),
     dueDate: date,
     ...timestamps,
+  }),
+  DebtStats: object(['totalOutstanding', 'overdueMoreThan30Days', 'overdueWithin30Days', 'currentNotDue'], {
+    totalOutstanding: { type: 'number', minimum: 0 },
+    overdueMoreThan30Days: { type: 'number', minimum: 0 },
+    overdueWithin30Days: { type: 'number', minimum: 0 },
+    currentNotDue: { type: 'number', minimum: 0 },
+  }),
+  DebtListResponse: object(['data', 'meta', 'stats'], {
+    data: arrayOf('Debt'),
+    meta: ref('PaginationMeta'),
+    stats: ref('DebtStats'),
+  }),
+  ActionCenterRoom: object(['id', 'roomCode', 'title', 'property'], {
+    id,
+    roomCode: text,
+    title: text,
+    property: object(['id', 'name'], { id, name: text }),
+  }),
+  ActionCenterRentalRequest: object(['id', 'status', 'expectedStartDate', 'createdAt', 'renter', 'room'], {
+    id,
+    status: enumOf('PENDING'),
+    expectedStartDate: date,
+    createdAt: dateTime,
+    renter: object(['id', 'fullName'], { id, fullName: text }),
+    room: ref('ActionCenterRoom'),
+  }),
+  ActionCenterContract: object(['id', 'contractCode', 'status', 'endDate', 'renter', 'room'], {
+    id,
+    contractCode: text,
+    status: enumOf('ACTIVE'),
+    endDate: date,
+    renter: object(['id', 'fullName'], { id, fullName: text }),
+    room: ref('ActionCenterRoom'),
+  }),
+  ActionCenterInvoice: object(
+    ['id', 'invoiceCode', 'status', 'dueDate', 'debtAmount', 'daysOverdue', 'renter', 'room'],
+    {
+      id,
+      invoiceCode: text,
+      status: enumOf('UNPAID', 'PARTIALLY_PAID', 'OVERDUE'),
+      dueDate: date,
+      debtAmount: { type: 'number', minimum: 0 },
+      daysOverdue: count,
+      renter: object(['id', 'fullName'], { id, fullName: text }),
+      room: ref('ActionCenterRoom'),
+    },
+  ),
+  ActionCenterTicket: object(['id', 'title', 'priority', 'status', 'createdAt', 'room'], {
+    id,
+    title: text,
+    priority: enumOf('LOW', 'MEDIUM', 'HIGH', 'URGENT'),
+    status: enumOf('OPEN', 'IN_PROGRESS', 'WAITING_RENTER'),
+    createdAt: dateTime,
+    createdBy: nullable(object(['id', 'fullName'], { id, fullName: text })),
+    room: ref('ActionCenterRoom'),
+  }),
+  ActionCenterResponse: object(['tenantId', 'pendingRequests', 'expiringContracts', 'unpaidInvoices', 'openTickets'], {
+    tenantId: id,
+    pendingRequests: object(['total', 'items'], {
+      total: count,
+      items: arrayOf('ActionCenterRentalRequest'),
+    }),
+    expiringContracts: object(['total', 'items'], {
+      total: count,
+      items: arrayOf('ActionCenterContract'),
+    }),
+    unpaidInvoices: object(['total', 'items'], {
+      total: count,
+      items: arrayOf('ActionCenterInvoice'),
+    }),
+    openTickets: object(['total', 'items'], {
+      total: count,
+      items: arrayOf('ActionCenterTicket'),
+    }),
   }),
   Invoice: object(
     ['id', 'tenantId', 'contractId', 'renterId', 'invoiceCode', 'status', 'totalAmount', 'paidAmount', 'debtAmount'],
@@ -523,6 +673,8 @@ export function feSuccessResponseSchema(method: string, path: string): Schema {
   if (path.startsWith('/marketplace/admin/')) return ref('Room')
   if (path.endsWith('/reviews')) return paginated('Review')
   if (path.endsWith('/review-summary')) return ref('ReviewSummary')
+  if (path === '/renters/invitations/{id}') return ref('RenterInvitation')
+  if (path === '/dashboard/action-center') return ref('ActionCenterResponse')
 
   if (path.startsWith('/rental-requests')) {
     return method === 'get' && (path === '/rental-requests' || path === '/rental-requests/me')
@@ -530,6 +682,7 @@ export function feSuccessResponseSchema(method: string, path: string): Schema {
       : ref('RentalRequest')
   }
   if (path.startsWith('/room-viewing-appointments')) {
+    if (path === '/room-viewing-appointments/{id}' && method === 'get') return ref('AppointmentDetail')
     return method === 'get' && ['/room-viewing-appointments', '/room-viewing-appointments/me'].includes(path)
       ? paginated('Appointment')
       : ref('Appointment')
@@ -554,7 +707,7 @@ export function feSuccessResponseSchema(method: string, path: string): Schema {
     if (path.includes('/payment-qr')) return ref('PaymentQrCode')
     if (path.includes('/payment-confirmations')) return ref('Payment')
     if (method === 'get' && ['/invoices', '/invoices/me'].includes(path)) return paginated('Invoice')
-    if (method === 'get' && ['/invoices/debts', '/invoices/debts/me'].includes(path)) return paginated('Debt')
+    if (method === 'get' && ['/invoices/debts', '/invoices/debts/me'].includes(path)) return ref('DebtListResponse')
     return ref('Invoice')
   }
   if (path.startsWith('/payments')) {
@@ -581,7 +734,7 @@ export function addFePrioritySchemas(document: OpenAPIObject) {
   document.components.schemas = {
     ...document.components.schemas,
     ...FE_PRIORITY_COMPONENTS,
-  } as NonNullable<OpenAPIObject['components']>['schemas']
+  }
 }
 
 function paginated(itemName: string): Schema {

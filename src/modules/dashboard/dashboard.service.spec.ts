@@ -18,6 +18,7 @@ describe('DashboardService', () => {
       getTicketStats: jest.fn(),
       getRevenueTrend: jest.fn(),
       getRecentActivities: jest.fn(),
+      getActionCenter: jest.fn(),
     }
     tenantAccessService = {
       getActiveTenantContext: jest.fn().mockResolvedValue({ tenantId: 2, userId: 99, memberId: 1, roleId: 'LANDLORD' }),
@@ -105,6 +106,33 @@ describe('DashboardService', () => {
       new Date('2026-07-01T00:00:00.000Z'),
       new Date('2026-07-16T23:59:59.999Z'),
     )
+  })
+
+  it('formats action-center debt amounts and UTC overdue days', async () => {
+    jest.useFakeTimers().setSystemTime(new Date('2026-07-16T10:30:00.000Z'))
+    dashboardRepository.getActionCenter.mockResolvedValue({
+      pendingRequests: { total: 8, items: [{ id: 1 }] },
+      expiringContracts: { total: 2, items: [{ id: 2 }] },
+      unpaidInvoices: {
+        total: 3,
+        items: [
+          { id: 3, debtAmount: '1500000', dueDate: new Date('2026-07-10T00:00:00.000Z') },
+          { id: 4, debtAmount: null, dueDate: new Date('2026-07-17T00:00:00.000Z') },
+        ],
+      },
+      openTickets: { total: 4, items: [{ id: 5 }] },
+    })
+
+    const result = await service.getActionCenter(99)
+
+    expect(dashboardRepository.getActionCenter).toHaveBeenCalledWith(2, new Date('2026-07-16T10:30:00.000Z'))
+    expect(result.unpaidInvoices).toEqual({
+      total: 3,
+      items: [
+        expect.objectContaining({ id: 3, debtAmount: 1500000, daysOverdue: 6 }),
+        expect.objectContaining({ id: 4, debtAmount: 0, daysOverdue: 0 }),
+      ],
+    })
   })
 
   it('rejects an invalid date range', () => {

@@ -6,6 +6,7 @@ import {
   UpdateTenantBodySchema,
   UpdateTenantStatusBodySchema,
   UpdateTenantVerificationBodySchema,
+  RegisterTenantBodySchema,
 } from '../model/tenants.model'
 
 export class ListTenantsQueryDTO extends createZodDto(ListTenantsQuerySchema) {}
@@ -14,3 +15,4 @@ export class UpdateTenantBodyDTO extends createZodDto(UpdateTenantBodySchema) {}
 export class UpdateTenantStatusBodyDTO extends createZodDto(UpdateTenantStatusBodySchema) {}
 export class UpdateTenantVerificationBodyDTO extends createZodDto(UpdateTenantVerificationBodySchema) {}
 export class AssignTenantPlanBodyDTO extends createZodDto(AssignTenantPlanBodySchema) {}
+export class RegisterTenantBodyDTO extends createZodDto(RegisterTenantBodySchema) {}

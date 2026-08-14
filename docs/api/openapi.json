@@ -7398,6 +7398,20 @@
             }
           },
           {
+            "name": "method",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BANK_TRANSFER",
+                "QR",
+                "CASH",
+                "WALLET"
+              ]
+            }
+          },
+          {
             "name": "invoiceId",
             "required": false,
             "in": "query",
@@ -7804,6 +7818,20 @@
                 "FAILED",
                 "CANCELED",
                 "REFUNDED"
+              ]
+            }
+          },
+          {
+            "name": "method",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BANK_TRANSFER",
+                "QR",
+                "CASH",
+                "WALLET"
               ]
             }
           },
@@ -8585,6 +8613,72 @@
                   "type": "object",
                   "additionalProperties": true,
                   "description": "Endpoint-specific response. See controller response DTO and examples."
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "Renters"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/renters/invitations/{id}": {
+      "get": {
+        "operationId": "RentersController_getInvitation",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RenterInvitation"
                 }
               }
             }
@@ -10177,6 +10271,72 @@
                     }
                   },
                   "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "ViewingAppointments"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/room-viewing-appointments/{id}": {
+      "get": {
+        "operationId": "ViewingAppointmentsController_getForLandlord",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentDetail"
                 }
               }
             }
@@ -13884,6 +14044,64 @@
         ]
       }
     },
+    "/dashboard/action-center": {
+      "get": {
+        "operationId": "DashboardController_getActionCenter",
+        "parameters": [
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "required": true,
+            "description": "Active tenant ID selected from the authenticated profile memberships",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionCenterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "Dashboard"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/dashboard/revenue-trend": {
       "get": {
         "operationId": "DashboardController_getRevenueTrend",
@@ -14651,23 +14869,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "data",
-                    "meta"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Debt"
-                      }
-                    },
-                    "meta": {
-                      "$ref": "#/components/schemas/PaginationMeta"
-                    }
-                  },
-                  "additionalProperties": false
+                  "$ref": "#/components/schemas/DebtListResponse"
                 }
               }
             }
@@ -14868,23 +15070,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "data",
-                    "meta"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Debt"
-                      }
-                    },
-                    "meta": {
-                      "$ref": "#/components/schemas/PaginationMeta"
-                    }
-                  },
-                  "additionalProperties": false
+                  "$ref": "#/components/schemas/DebtListResponse"
                 }
               }
             }
@@ -17301,7 +17487,13 @@
             "format": "email",
             "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
           },
-          "passwordHash": {
+          "fullName": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "password": {
             "minLength": 8,
             "maxLength": 100,
             "allOf": [
@@ -17318,12 +17510,6 @@
                 "pattern": "[^A-Za-z0-9]"
               }
             ]
-          },
-          "fullName": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
           },
           "confirmPassword": {
             "minLength": 8,
@@ -17358,8 +17544,8 @@
         },
         "required": [
           "email",
-          "passwordHash",
           "fullName",
+          "password",
           "confirmPassword",
           "code",
           "roleCode"
@@ -17374,23 +17560,9 @@
             "format": "email",
             "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
           },
-          "passwordHash": {
-            "minLength": 8,
-            "maxLength": 100,
-            "allOf": [
-              {
-                "pattern": "[A-Z]"
-              },
-              {
-                "pattern": "[a-z]"
-              },
-              {
-                "pattern": "[0-9]"
-              },
-              {
-                "pattern": "[^A-Za-z0-9]"
-              }
-            ]
+          "password": {
+            "type": "string",
+            "minLength": 1
           },
           "code": {
             "type": "string",
@@ -17400,7 +17572,7 @@
         },
         "required": [
           "email",
-          "passwordHash"
+          "password"
         ],
         "additionalProperties": false
       },
@@ -22003,6 +22175,76 @@
         },
         "additionalProperties": false
       },
+      "AppointmentProperty": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "addressDetail",
+          "ward",
+          "district",
+          "province"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "addressDetail": {
+            "type": "string"
+          },
+          "ward": {
+            "type": "string"
+          },
+          "district": {
+            "type": "string"
+          },
+          "province": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppointmentRoom": {
+        "type": "object",
+        "required": [
+          "id",
+          "roomCode",
+          "title",
+          "basePrice",
+          "depositAmount",
+          "property"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomCode": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "basePrice": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "depositAmount": {
+            "type": "string",
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "property": {
+            "$ref": "#/components/schemas/AppointmentProperty"
+          }
+        },
+        "additionalProperties": false
+      },
       "Appointment": {
         "type": "object",
         "required": [
@@ -22012,6 +22254,8 @@
           "renterId",
           "scheduledAt",
           "status",
+          "room",
+          "renter",
           "createdAt",
           "updatedAt"
         ],
@@ -22084,6 +22328,16 @@
           "renter": {
             "$ref": "#/components/schemas/UserSummary"
           },
+          "assignedStaff": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UserSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -22102,6 +22356,238 @@
                 "type": "null"
               }
             ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppointmentDetail": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "roomId",
+          "renterId",
+          "scheduledAt",
+          "status",
+          "room",
+          "renter",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "renterId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "assignedStaffId": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "scheduledAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "CONFIRMED",
+              "REJECTED",
+              "RESCHEDULED",
+              "CANCELED",
+              "COMPLETED"
+            ]
+          },
+          "note": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "landlordNote": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "room": {
+            "$ref": "#/components/schemas/AppointmentRoom"
+          },
+          "renter": {
+            "$ref": "#/components/schemas/UserSummary"
+          },
+          "assignedStaff": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UserSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "RenterInvitation": {
+        "type": "object",
+        "required": [
+          "id",
+          "tenantId",
+          "email",
+          "fullName",
+          "expiresAt",
+          "status",
+          "tenant",
+          "createdBy",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "phone": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "acceptedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "acceptedUserId": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "revokedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACCEPTED",
+              "CANCELED",
+              "EXPIRED",
+              "PENDING"
+            ]
+          },
+          "tenant": {
+            "type": "object",
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "createdBy": {
+            "$ref": "#/components/schemas/UserSummary"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -22209,6 +22695,41 @@
         },
         "additionalProperties": false
       },
+      "ContractMember": {
+        "type": "object",
+        "required": [
+          "id",
+          "userId",
+          "role",
+          "createdAt",
+          "user"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "userId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "MAIN_RENTER",
+              "CO_RENTER"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserSummary"
+          }
+        },
+        "additionalProperties": false
+      },
       "Contract": {
         "type": "object",
         "required": [
@@ -22220,7 +22741,8 @@
           "status",
           "startDate",
           "endDate",
-          "monthlyPrice"
+          "monthlyPrice",
+          "members"
         ],
         "properties": {
           "id": {
@@ -22321,6 +22843,12 @@
           },
           "renter": {
             "$ref": "#/components/schemas/UserSummary"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContractMember"
+            }
           },
           "createdAt": {
             "type": "string",
@@ -22476,6 +23004,428 @@
                 "type": "null"
               }
             ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "DebtStats": {
+        "type": "object",
+        "required": [
+          "totalOutstanding",
+          "overdueMoreThan30Days",
+          "overdueWithin30Days",
+          "currentNotDue"
+        ],
+        "properties": {
+          "totalOutstanding": {
+            "type": "number",
+            "minimum": 0
+          },
+          "overdueMoreThan30Days": {
+            "type": "number",
+            "minimum": 0
+          },
+          "overdueWithin30Days": {
+            "type": "number",
+            "minimum": 0
+          },
+          "currentNotDue": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false
+      },
+      "DebtListResponse": {
+        "type": "object",
+        "required": [
+          "data",
+          "meta",
+          "stats"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Debt"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PaginationMeta"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/DebtStats"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActionCenterRoom": {
+        "type": "object",
+        "required": [
+          "id",
+          "roomCode",
+          "title",
+          "property"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "roomCode": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "property": {
+            "type": "object",
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActionCenterRentalRequest": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "expectedStartDate",
+          "createdAt",
+          "renter",
+          "room"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING"
+            ]
+          },
+          "expectedStartDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "renter": {
+            "type": "object",
+            "required": [
+              "id",
+              "fullName"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "fullName": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "room": {
+            "$ref": "#/components/schemas/ActionCenterRoom"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActionCenterContract": {
+        "type": "object",
+        "required": [
+          "id",
+          "contractCode",
+          "status",
+          "endDate",
+          "renter",
+          "room"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "contractCode": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE"
+            ]
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "renter": {
+            "type": "object",
+            "required": [
+              "id",
+              "fullName"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "fullName": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "room": {
+            "$ref": "#/components/schemas/ActionCenterRoom"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActionCenterInvoice": {
+        "type": "object",
+        "required": [
+          "id",
+          "invoiceCode",
+          "status",
+          "dueDate",
+          "debtAmount",
+          "daysOverdue",
+          "renter",
+          "room"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "invoiceCode": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "UNPAID",
+              "PARTIALLY_PAID",
+              "OVERDUE"
+            ]
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "debtAmount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "daysOverdue": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "renter": {
+            "type": "object",
+            "required": [
+              "id",
+              "fullName"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "fullName": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "room": {
+            "$ref": "#/components/schemas/ActionCenterRoom"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActionCenterTicket": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "priority",
+          "status",
+          "createdAt",
+          "room"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "URGENT"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "IN_PROGRESS",
+              "WAITING_RENTER"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "id",
+                  "fullName"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "fullName": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "room": {
+            "$ref": "#/components/schemas/ActionCenterRoom"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActionCenterResponse": {
+        "type": "object",
+        "required": [
+          "tenantId",
+          "pendingRequests",
+          "expiringContracts",
+          "unpaidInvoices",
+          "openTickets"
+        ],
+        "properties": {
+          "tenantId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "pendingRequests": {
+            "type": "object",
+            "required": [
+              "total",
+              "items"
+            ],
+            "properties": {
+              "total": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ActionCenterRentalRequest"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "expiringContracts": {
+            "type": "object",
+            "required": [
+              "total",
+              "items"
+            ],
+            "properties": {
+              "total": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ActionCenterContract"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "unpaidInvoices": {
+            "type": "object",
+            "required": [
+              "total",
+              "items"
+            ],
+            "properties": {
+              "total": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ActionCenterInvoice"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "openTickets": {
+            "type": "object",
+            "required": [
+              "total",
+              "items"
+            ],
+            "properties": {
+              "total": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ActionCenterTicket"
+                }
+              }
+            },
+            "additionalProperties": false
           }
         },
         "additionalProperties": false

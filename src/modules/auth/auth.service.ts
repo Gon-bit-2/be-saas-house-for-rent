@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   Logger,
   NotFoundException,
@@ -104,21 +105,37 @@ export class AuthService {
 
   async register(body: TRegisterBodySchema) {
     const email = this.normalizeEmail(body.email)
-    await this.verifyAndConsumeOTP(email, body.code, TypeOfVerificationCode.REGISTER)
-
-    const existingUser = await this.authRepository.findByEmail(email)
+    const [existingUser, existingPhoneUser] = await Promise.all([
+      this.authRepository.findByEmail(email),
+      body.phone ? this.authRepository.findByPhone(body.phone) : Promise.resolve(null),
+    ])
     if (existingUser) {
       throw new UnprocessableEntityException('Email đã được sử dụng')
     }
+    if (existingPhoneUser) {
+      throw new ConflictException('Số điện thoại này đã được sử dụng')
+    }
+
+    await this.verifyAndConsumeOTP(email, body.code, TypeOfVerificationCode.REGISTER)
 
     const passwordHash = await this.hashingService.hash(body.password)
-    const user = await this.authRepository.create({
-      email,
-      fullName: body.fullName,
-      phone: body.phone,
-      roleCode: body.roleCode,
-      passwordHash,
-    })
+    let user: Awaited<ReturnType<AuthRepository['create']>>
+    try {
+      user = await this.authRepository.create({
+        email,
+        fullName: body.fullName,
+        phone: body.phone,
+        roleCode: body.roleCode,
+        passwordHash,
+      })
+    } catch (error: unknown) {
+      // The database constraint remains the source of truth if another request
+      // creates the same email or phone after the checks above.
+      if (this.isPrismaError(error, 'P2002')) {
+        throw new ConflictException('Email hoặc số điện thoại đã được sử dụng')
+      }
+      throw error
+    }
 
     await this.authRepository.markEmailVerified(user.id)
 
@@ -141,6 +158,19 @@ export class AuthService {
     const isPasswordValid = await this.hashingService.compare(body.password, user.passwordHash)
     if (!isPasswordValid) {
       throw new UnauthorizedException('Email hoặc mật khẩu không đúng')
+    }
+
+    if (user.systemRole === 'ADMIN') {
+      return this.issueTokenPair(user, ip, userAgent)
+    }
+
+    // Bỏ qua bước kiểm tra OTP đối với các tài khoản test (nằm trong danh sách TEST_ACCOUNT_EMAILS)
+    const testAccounts = envConfig.TEST_ACCOUNT_EMAILS.split(',')
+      .map((e) => e.trim().toLowerCase())
+      .filter(Boolean)
+
+    if (testAccounts.includes(email)) {
+      return this.issueTokenPair(user, ip, userAgent)
     }
 
     if (body.code) {
@@ -296,10 +326,24 @@ export class AuthService {
     if (!user) {
       throw new NotFoundException('Không tìm thấy người dùng')
     }
-    return this.authRepository.updateProfile(userId, body)
+
+    try {
+      return await this.authRepository.updateProfile(userId, body)
+    } catch (error: unknown) {
+      // `phone` is the only unique field accepted by this update. Prisma's
+      // driver adapter does not always include the constraint in meta.target.
+      if (this.isPrismaError(error, 'P2002')) {
+        throw new ConflictException('Số điện thoại này đã được sử dụng')
+      }
+      throw error
+    }
   }
 
   // ==================== PRIVATE HELPERS ====================
+
+  private isPrismaError(error: unknown, code: string) {
+    return Boolean(error && typeof error === 'object' && 'code' in error && String(error.code) === code)
+  }
 
   private async issueTokenPair(user: AuthUser, ip?: string, userAgent?: string) {
     const tokenPair = await this.buildTokenPair(user)

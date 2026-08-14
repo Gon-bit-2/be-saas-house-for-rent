@@ -60,7 +60,18 @@ export const viewingAppointmentSelect = {
       id: true,
       roomCode: true,
       title: true,
-      property: { select: { id: true, name: true } },
+      basePrice: true,
+      depositAmount: true,
+      property: {
+        select: {
+          id: true,
+          name: true,
+          addressDetail: true,
+          ward: true,
+          district: true,
+          province: true,
+        },
+      },
     },
   },
 } satisfies Prisma.RoomViewingAppointmentSelect

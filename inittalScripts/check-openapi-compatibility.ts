@@ -51,6 +51,37 @@ function normalizeSchema(value: unknown, document: JsonObject, refs = new Set<st
   )
 }
 
+function isResponseSchemaCompatible(before: unknown, after: unknown): boolean {
+  if (Object.is(before, after)) return true
+  if (Array.isArray(before) || Array.isArray(after)) {
+    if (!Array.isArray(before) || !Array.isArray(after) || before.length !== after.length) return false
+    return before.every((item, index) => isResponseSchemaCompatible(item, after[index]))
+  }
+  if (!before || !after || typeof before !== 'object' || typeof after !== 'object') return false
+
+  const beforeObject = before as JsonObject
+  const afterObject = after as JsonObject
+  const structuralKeys = new Set(['properties', 'required'])
+  const beforeKeys = Object.keys(beforeObject).filter((key) => !structuralKeys.has(key))
+  const afterKeys = Object.keys(afterObject).filter((key) => !structuralKeys.has(key))
+  if (beforeKeys.length !== afterKeys.length || beforeKeys.some((key) => !afterKeys.includes(key))) return false
+  if (beforeKeys.some((key) => !isResponseSchemaCompatible(beforeObject[key], afterObject[key]))) return false
+
+  const beforeProperties = object(beforeObject.properties)
+  const afterProperties = object(afterObject.properties)
+  if (
+    Object.entries(beforeProperties).some(
+      ([key, schema]) => !(key in afterProperties) || !isResponseSchemaCompatible(schema, afterProperties[key]),
+    )
+  ) {
+    return false
+  }
+
+  const beforeRequired = Array.isArray(beforeObject.required) ? beforeObject.required : []
+  const afterRequired = new Set(Array.isArray(afterObject.required) ? afterObject.required : [])
+  return beforeRequired.every((key) => afterRequired.has(key))
+}
+
 function successSchemas(operation: JsonObject) {
   const responses = object(operation.responses)
   return Object.entries(responses)
@@ -83,9 +114,11 @@ for (const [url, baselinePathValue] of Object.entries(baselinePaths)) {
         errors.push(`Removed ${status} response: ${method.toUpperCase()} ${url}`)
         continue
       }
-      const before = JSON.stringify(normalizeSchema(baselineSchema, baseline))
-      const after = JSON.stringify(normalizeSchema(currentByStatus.get(status), current))
-      if (before !== after) errors.push(`Changed ${status} response schema: ${method.toUpperCase()} ${url}`)
+      const before = normalizeSchema(baselineSchema, baseline)
+      const after = normalizeSchema(currentByStatus.get(status), current)
+      if (!isResponseSchemaCompatible(before, after)) {
+        errors.push(`Changed ${status} response schema: ${method.toUpperCase()} ${url}`)
+      }
     }
   }
 }
