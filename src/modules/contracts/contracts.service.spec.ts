@@ -82,6 +82,7 @@ describe('ContractsService', () => {
         updatedById: 50,
       }),
       [100],
+      undefined,
     )
   })
 

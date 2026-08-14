@@ -1,8 +1,8 @@
 # Runtime API Index
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-12T15:23:21.335Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-14T12:37:56.531Z. Không chỉnh sửa thủ công.
 
-- Tổng số operation: **217**
+- Tổng số operation: **224**
 - Swagger UI: `GET /docs`
 - OpenAPI JSON: `GET /docs-json`
 - Route protected dùng Bearer JWT; route staff theo tenant có thể yêu cầu `x-tenant-id`.
@@ -125,6 +125,16 @@
 | GET | `/invoices/me/{id}/payment-qr` | Bearer JWT | `PaymentsController_getMyPaymentQr` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/invoices/me/{id}/payment-qr` | Bearer JWT | `PaymentsController_createMyPaymentQr` | 201, 400, 401, 403, 404, 409, 429, 500 |
 
+## locations
+
+| Method | Path | Access | Operation ID | Responses |
+|---|---|---|---|---|
+| GET | `/locations/autocomplete` | Bearer JWT | `LocationsController_autocomplete` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/locations/place-detail` | Bearer JWT | `LocationsController_placeDetail` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/locations/provinces` | Bearer JWT | `LocationsController_listProvinces` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/locations/reverse-geocode` | Bearer JWT | `LocationsController_reverseGeocode` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/locations/wards` | Bearer JWT | `LocationsController_listWards` | 200, 400, 401, 403, 404, 409, 429, 500 |
+
 ## marketplace
 
 | Method | Path | Access | Operation ID | Responses |
@@ -231,6 +241,7 @@
 | GET | `/renters/{id}` | Bearer JWT | `RentersController_getForLandlord` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/renters/{id}` | Bearer JWT | `RentersController_updateForLandlord` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/renters/{id}/history` | Bearer JWT | `RentersController_listHistory` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| POST | `/renters/{id}/images` | Bearer JWT | `RentersController_uploadImages` | 201, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/renters/invitations` | Bearer JWT | `RentersController_invite` | 201, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/renters/invitations/{id}` | Bearer JWT | `RentersController_getInvitation` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/renters/invitations/accept` | Bearer JWT | `RentersController_acceptInvitation` | 201, 400, 401, 403, 404, 409, 429, 500 |
@@ -346,6 +357,7 @@
 | PATCH | `/tenants/{id}/plan` | Bearer JWT | `TenantsController_assignPlan` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/tenants/{id}/status` | Bearer JWT | `TenantsController_updateStatus` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/tenants/{id}/verification` | Bearer JWT | `TenantsController_updateVerification` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| POST | `/tenants/register` | Bearer JWT | `TenantsController_register` | 201, 400, 401, 403, 404, 409, 429, 500 |
 
 ## tickets
 

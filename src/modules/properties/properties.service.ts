@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
 import { TenantAccessService } from '@src/shared/modules/services/tenant-access.service'
+import { LocationsService } from '@src/modules/locations/locations.service'
 import type { Prisma } from 'generated/prisma/client'
 import type {
   TCreateFloorBodySchema,
@@ -20,6 +21,7 @@ export class PropertiesService {
   constructor(
     private readonly propertiesRepository: PropertiesRepository,
     private readonly tenantAccessService: TenantAccessService,
+    private readonly locationsService: LocationsService,
   ) {}
 
   async list(userId: number, query: TListPropertiesQuerySchema) {
@@ -37,16 +39,21 @@ export class PropertiesService {
 
   async create(userId: number, body: TCreatePropertyBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const location = body.location
+      ? await this.locationsService.resolvePropertyLocation(body.location)
+      : {
+          province: body.province!,
+          district: body.district!,
+          ward: body.ward!,
+          addressDetail: body.addressDetail,
+          latitude: body.latitude,
+          longitude: body.longitude,
+        }
     const property = await this.propertiesRepository.create({
       tenantId: tenant.tenantId,
       name: body.name,
       type: body.type,
-      province: body.province,
-      district: body.district,
-      ward: body.ward,
-      addressDetail: body.addressDetail,
-      latitude: body.latitude,
-      longitude: body.longitude,
+      ...location,
       description: body.description ?? null,
       status: body.status,
       createdById: userId,
@@ -69,10 +76,12 @@ export class PropertiesService {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     await this.getTenantPropertyOrThrow(tenant.tenantId, id)
 
-    const { floorsCount, ...updateData } = body
+    const { floorsCount, location, ...updateData } = body
+    const resolvedLocation = location ? await this.locationsService.resolvePropertyLocation(location) : {}
 
     const updated = await this.propertiesRepository.update(id, {
       ...updateData,
+      ...resolvedLocation,
       description: updateData.description === undefined ? undefined : (updateData.description ?? null),
       updatedById: userId,
     })
@@ -171,8 +180,10 @@ export class PropertiesService {
       ...(query.status ? { status: query.status } : {}),
       ...(query.type ? { type: query.type } : {}),
       ...(query.province ? { province: { contains: query.province, mode: 'insensitive' } } : {}),
+      ...(query.provinceCode ? { provinceCode: query.provinceCode } : {}),
       ...(query.district ? { district: { contains: query.district, mode: 'insensitive' } } : {}),
       ...(query.ward ? { ward: { contains: query.ward, mode: 'insensitive' } } : {}),
+      ...(query.wardCode ? { wardCode: query.wardCode } : {}),
       ...(query.search
         ? {
             OR: [

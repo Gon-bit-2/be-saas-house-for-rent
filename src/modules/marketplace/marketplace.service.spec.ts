@@ -59,7 +59,7 @@ describe('MarketplaceService', () => {
     )
   })
 
-  it('removes tenant identity and precise location from public room responses', async () => {
+  it('returns exact location on public room detail while removing tenant identity', async () => {
     marketplaceRepository.findById.mockResolvedValue({
       id: 5,
       tenantId: 10,
@@ -78,7 +78,15 @@ describe('MarketplaceService', () => {
 
     expect(result).toEqual({
       id: 5,
-      property: { id: 2, province: 'Ho Chi Minh City', district: 'Thu Duc', ward: 'Linh Trung' },
+      property: {
+        id: 2,
+        province: 'Ho Chi Minh City',
+        district: 'Thu Duc',
+        ward: 'Linh Trung',
+        addressDetail: '123 Internal Street',
+        latitude: 10.123,
+        longitude: 106.456,
+      },
     })
   })
 

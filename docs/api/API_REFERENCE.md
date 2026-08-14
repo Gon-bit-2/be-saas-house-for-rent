@@ -1,6 +1,6 @@
 # Tài liệu tham chiếu API hiện tại
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-12T15:23:21.340Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-14T12:37:56.535Z. Không chỉnh sửa thủ công.
 
 ## Quy ước chung
 
@@ -11,7 +11,7 @@
 - Request được kiểm tra bằng Zod strict; ngày giờ dùng ISO 8601.
 - Error chuẩn: `{ statusCode, code, message, details?, timestamp, path, requestId }`.
 - Mọi route chịu global rate limit; profile riêng được ghi ở từng operation.
-- Tổng cộng **217 operation** thuộc **34 controller**.
+- Tổng cộng **224 operation** thuộc **35 controller**.
 
 ## Mục lục
 
@@ -24,6 +24,7 @@
 - [Thiết bị nhận push (2)](#device-tokens)
 - [Bàn giao phòng (11)](#handovers)
 - [Hóa đơn và công nợ (14)](#invoices)
+- [locations (5)](#locations)
 - [Marketplace và kiểm duyệt (10)](#marketplace)
 - [Chỉ số điện nước (5)](#meter-readings)
 - [Thông báo (5)](#notifications)
@@ -33,7 +34,7 @@
 - [Gói dịch vụ (5)](#plans)
 - [Nhà trọ và tầng (10)](#properties)
 - [Yêu cầu thuê (6)](#rental-requests)
-- [Người thuê và lời mời (10)](#renters)
+- [Người thuê và lời mời (11)](#renters)
 - [Báo cáo vi phạm (6)](#reports)
 - [Đánh giá và uy tín (6)](#reviews)
 - [Tài sản trong phòng (3)](#room-assets)
@@ -44,7 +45,7 @@
 - [Danh mục dịch vụ (3)](#service-catalog)
 - [Thanh toán gói SaaS (6)](#subscription-payments)
 - [Subscription hiện hành (1)](#subscriptions)
-- [Đơn vị chủ trọ (7)](#tenants)
+- [Đơn vị chủ trọ (8)](#tenants)
 - [Ticket sự cố (20)](#tickets)
 - [Người dùng và chủ trọ (3)](#users)
 - [Đồng hồ điện nước (5)](#utility-meters)
@@ -1062,6 +1063,73 @@
 
 - `application/json`: `CreatePaymentQrBodyDTO`; bắt buộc: có.
 
+<a id="locations"></a>
+
+## locations
+
+### GET `/locations/autocomplete`
+
+- Operation ID: `LocationsController_autocomplete`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `input` | query | Có | `string` |
+| `sessionToken` | query | Có | `string` |
+| `provinceCode` | query | Có | `string` |
+| `wardCode` | query | Có | `string` |
+
+### GET `/locations/place-detail`
+
+- Operation ID: `LocationsController_placeDetail`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `placeId` | query | Có | `string` |
+| `sessionToken` | query | Có | `string` |
+| `provinceCode` | query | Không | `string` |
+| `wardCode` | query | Không | `string` |
+
+### GET `/locations/provinces`
+
+- Operation ID: `LocationsController_listProvinces`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+### GET `/locations/reverse-geocode`
+
+- Operation ID: `LocationsController_reverseGeocode`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `latitude` | query | Có | `number` |
+| `longitude` | query | Có | `number` |
+
+### GET `/locations/wards`
+
+- Operation ID: `LocationsController_listWards`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `provinceCode` | query | Có | `string` |
+
 <a id="marketplace"></a>
 
 ## Marketplace và kiểm duyệt
@@ -1143,6 +1211,8 @@
 | `province` | query | Không | `string` |
 | `district` | query | Không | `string` |
 | `ward` | query | Không | `string` |
+| `provinceCode` | query | Không | `string` |
+| `wardCode` | query | Không | `string` |
 | `propertyType` | query | Không | `string` |
 | `minPrice` | query | Không | `number` |
 | `maxPrice` | query | Không | `number` |
@@ -1636,6 +1706,8 @@
 | `province` | query | Không | `string` |
 | `district` | query | Không | `string` |
 | `ward` | query | Không | `string` |
+| `provinceCode` | query | Không | `string` |
+| `wardCode` | query | Không | `string` |
 | `x-tenant-id` | header | Có | `integer` |
 
 ### POST `/properties`
@@ -1923,6 +1995,17 @@
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
 | `status` | query | Không | `string` |
+
+### POST `/renters/{id}/images`
+
+- Operation ID: `RentersController_uploadImages`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`, `TENANT`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
 
 ### POST `/renters/invitations`
 
@@ -2805,6 +2888,17 @@
 **Request body**
 
 - `application/json`: `UpdateTenantVerificationBodyDTO`; bắt buộc: có.
+
+### POST `/tenants/register`
+
+- Operation ID: `TenantsController_register`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+**Request body**
+
+- `application/json`: `RegisterTenantBodyDTO`; bắt buộc: có.
 
 <a id="tickets"></a>
 

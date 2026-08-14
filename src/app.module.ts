@@ -19,6 +19,7 @@ import { ContractsModule } from './modules/contracts/contracts.module'
 import { ContractTerminationsModule } from './modules/contract-terminations/contract-terminations.module'
 import { DashboardModule } from './modules/dashboard/dashboard.module'
 import { InvoicesModule } from './modules/invoices/invoices.module'
+import { LocationsModule } from './modules/locations/locations.module'
 import { HandoversModule } from './modules/handovers/handovers.module'
 import { MarketplaceModule } from './modules/marketplace/marketplace.module'
 import { NotificationsModule } from './modules/notifications/notifications.module'
@@ -109,6 +110,7 @@ function buildRedisConnection() {
     DashboardModule,
     UtilityMetersModule,
     InvoicesModule,
+    LocationsModule,
     TicketsModule,
   ],
   controllers: [AppController],

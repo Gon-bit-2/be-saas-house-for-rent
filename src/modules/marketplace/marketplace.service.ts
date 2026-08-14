@@ -26,7 +26,7 @@ export class MarketplaceService {
     const where = this.buildPublicRoomWhere(query)
     const [rooms, total] = await this.marketplaceRepository.findMany(where, skip, limit)
     return buildPaginatedResult(
-      rooms.map((room) => this.toPublicRoom(room)),
+      rooms.map((room) => this.toPublicRoom(room, false)),
       total,
       page,
       limit,
@@ -35,7 +35,7 @@ export class MarketplaceService {
 
   async getRoomById(id: number) {
     const room = await this.getPublicRoomRecordOrThrow(id)
-    return this.toPublicRoom(room)
+    return this.toPublicRoom(room, true)
   }
 
   async createRentalRequest(userId: number, roomId: number, body: TCreateMarketplaceRentalRequestBodySchema) {
@@ -112,10 +112,11 @@ export class MarketplaceService {
     return room
   }
 
-  private toPublicRoom(room: MarketplaceRoomRecord) {
+  private toPublicRoom(room: MarketplaceRoomRecord, includeExactLocation: boolean) {
     const { tenantId, property, ...publicRoom } = room
-    const { addressDetail, latitude, longitude, ...publicProperty } = property
     void tenantId
+    if (includeExactLocation) return { ...publicRoom, property }
+    const { addressDetail, latitude, longitude, ...publicProperty } = property
     void addressDetail
     void latitude
     void longitude
@@ -170,8 +171,10 @@ export class MarketplaceService {
         status: 'ACTIVE',
         ...(query.propertyType ? { type: query.propertyType } : {}),
         ...(query.province ? { province: { contains: query.province, mode: 'insensitive' } } : {}),
+        ...(query.provinceCode ? { provinceCode: query.provinceCode } : {}),
         ...(query.district ? { district: { contains: query.district, mode: 'insensitive' } } : {}),
         ...(query.ward ? { ward: { contains: query.ward, mode: 'insensitive' } } : {}),
+        ...(query.wardCode ? { wardCode: query.wardCode } : {}),
       },
       ...(query.maxOccupants ? { maxOccupants: { gte: query.maxOccupants } } : {}),
       ...(query.minPrice !== undefined || query.maxPrice !== undefined

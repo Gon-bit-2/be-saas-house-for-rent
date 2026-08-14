@@ -23,8 +23,11 @@ describe('TenantsController', () => {
     controller = new TenantsController(tenantsService as never)
   })
 
-  it('is restricted to Super Admin and is not public', () => {
-    expect(Reflect.getMetadata(ROLES_KEY, TenantsController)).toEqual([roleName.ADMIN])
+  it('restricts admin operations while allowing authenticated self-registration', () => {
+    for (const method of ['list', 'getById', 'createLandlordTenant', 'update', 'updateStatus', 'updateVerification', 'assignPlan'] as const) {
+      expect(Reflect.getMetadata(ROLES_KEY, TenantsController.prototype[method])).toEqual([roleName.ADMIN])
+    }
+    expect(Reflect.getMetadata(ROLES_KEY, TenantsController.prototype.register)).toBeUndefined()
     expect(Reflect.getMetadata(AUTH_TYPE_KEY, TenantsController)).toBeUndefined()
   })
 

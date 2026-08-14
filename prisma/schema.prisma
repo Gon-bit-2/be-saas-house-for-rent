@@ -656,10 +656,14 @@ model Property {
   type          PropertyType
   /// Tên tỉnh / thành phố của nhà trọ
   province      String         @db.VarChar(100)
+  /// Mã tỉnh/thành theo Quyết định 19/2025/QĐ-TTg
+  provinceCode  String?        @map("province_code") @db.VarChar(2)
   /// Tên quận / huyện của nhà trọ
-  district      String         @db.VarChar(100)
+  district      String?        @db.VarChar(100)
   /// Tên phường / xã của nhà trọ
   ward          String         @db.VarChar(100)
+  /// Mã xã/phường/đặc khu theo Quyết định 19/2025/QĐ-TTg
+  wardCode      String?        @map("ward_code") @db.VarChar(5)
   /// Số nhà, tên đường chi tiết
   addressDetail String         @map("address_detail") @db.Text
   /// Vĩ độ địa lý phục vụ định vị bản đồ và tìm kiếm thông minh
@@ -696,6 +700,7 @@ model Property {
   deletedBy User? @relation("PropertyDeleter", fields: [deletedById], references: [id])
 
   @@index([province, district, ward])
+  @@index([provinceCode, wardCode])
   @@index([tenantId])
   @@map("properties")
 }

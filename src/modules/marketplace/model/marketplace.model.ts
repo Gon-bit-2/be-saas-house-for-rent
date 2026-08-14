@@ -11,6 +11,8 @@ export const ListMarketplaceRoomsQuerySchema = z
     province: z.string().trim().min(1).max(100).optional(),
     district: z.string().trim().min(1).max(100).optional(),
     ward: z.string().trim().min(1).max(100).optional(),
+    provinceCode: z.string().regex(/^\d{2}$/).optional(),
+    wardCode: z.string().regex(/^\d{5}$/).optional(),
     propertyType: PropertyTypeSchema.optional(),
     minPrice: z.coerce.number().nonnegative().optional(),
     maxPrice: z.coerce.number().nonnegative().optional(),
