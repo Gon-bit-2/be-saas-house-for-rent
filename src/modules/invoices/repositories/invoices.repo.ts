@@ -219,6 +219,33 @@ export class InvoicesRepository {
     })
   }
 
+  async findActiveContractsForInvoiceGeneration(monthStart: Date, monthEnd: Date) {
+    return this.prismaService.contract.findMany({
+      where: {
+        status: 'ACTIVE',
+        deletedAt: null,
+        startDate: { lte: monthEnd },
+        endDate: { gte: monthStart },
+        invoices: {
+          none: {
+            billingMonth: monthStart,
+            deletedAt: null,
+          },
+        },
+      },
+      select: {
+        id: true,
+        tenantId: true,
+        roomId: true,
+        renterId: true,
+        contractCode: true,
+        monthlyPrice: true,
+        paymentDueDay: true,
+        room: { select: { id: true, roomCode: true, title: true, deletedAt: true } },
+      },
+    })
+  }
+
   async findExistingInvoiceForContractMonth(contractId: number, billingMonth: Date, excludedInvoiceId?: number) {
     return this.prismaService.invoice.findFirst({
       where: {

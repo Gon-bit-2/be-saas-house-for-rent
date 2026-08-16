@@ -3,7 +3,13 @@ import roleName from '@src/common/constants/role.constant'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
 import { IsTenant, Roles } from '@src/common/decorators/decorators/roles.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
-import { CreateContractBodyDTO, ListContractsQueryDTO, UpdateContractBodyDTO, AddContractMemberBodyDTO } from './dto/contracts.dto'
+import {
+  CreateContractBodyDTO,
+  ListContractsQueryDTO,
+  UpdateContractBodyDTO,
+  AddContractMemberBodyDTO,
+  SignContractBodyDTO,
+} from './dto/contracts.dto'
 import { ContractsService } from './contracts.service'
 
 /**
@@ -23,6 +29,16 @@ export class ContractsController {
   @Get('me/:id')
   getMine(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
     return this.contractsService.getMine(user.userId, id)
+  }
+
+  @IsTenant()
+  @Post('me/:id/sign')
+  signRenter(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: SignContractBodyDTO,
+  ) {
+    return this.contractsService.signRenter(user.userId, id, body.signature)
   }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER)
@@ -51,6 +67,16 @@ export class ContractsController {
     @Body() body: UpdateContractBodyDTO,
   ) {
     return this.contractsService.updateDraft(user.userId, id, body)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Post(':id/sign-landlord')
+  signLandlord(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: SignContractBodyDTO,
+  ) {
+    return this.contractsService.signLandlord(user.userId, id, body.signature)
   }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER)

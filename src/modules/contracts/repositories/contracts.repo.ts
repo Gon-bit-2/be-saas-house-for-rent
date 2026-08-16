@@ -431,4 +431,56 @@ export class ContractsRepository {
       return tx.contract.findUniqueOrThrow({ where: { id: contractId }, select: contractSelect })
     })
   }
+
+  async signLandlord(id: number, actorId: number, signature: string) {
+    return this.prismaService.$transaction(async (tx) => {
+      const updated = await tx.contract.update({
+        where: { id },
+        data: {
+          landlordSignature: signature,
+          signedByLandlordAt: new Date(),
+          status: 'WAITING_RENTER_SIGN',
+          updatedById: actorId,
+        },
+        select: contractSelect,
+      })
+      await tx.auditLog.create({
+        data: {
+          tenantId: updated.tenantId,
+          actorId,
+          action: 'SIGN_CONTRACT_LANDLORD',
+          entityType: 'CONTRACT',
+          entityId: String(id),
+          newValues: { status: 'WAITING_RENTER_SIGN', signedByLandlordAt: new Date() },
+        },
+      })
+      return updated
+    })
+  }
+
+  async signRenter(id: number, actorId: number, signature: string) {
+    return this.prismaService.$transaction(async (tx) => {
+      const updated = await tx.contract.update({
+        where: { id },
+        data: {
+          renterSignature: signature,
+          signedByRenterAt: new Date(),
+          status: 'ACTIVE',
+          updatedById: actorId,
+        },
+        select: contractSelect,
+      })
+      await tx.auditLog.create({
+        data: {
+          tenantId: updated.tenantId,
+          actorId,
+          action: 'SIGN_CONTRACT_RENTER',
+          entityType: 'CONTRACT',
+          entityId: String(id),
+          newValues: { status: 'ACTIVE', signedByRenterAt: new Date() },
+        },
+      })
+      return updated
+    })
+  }
 }

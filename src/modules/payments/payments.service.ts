@@ -261,7 +261,13 @@ export class PaymentsService {
         return { code: '00', desc: 'success', success: true }
       }
 
-      await this.notificationEventsService.notifyPaymentPending(result.payment)
+      const approvedPayment = await this.paymentsRepository.approvePayment(
+        qr.tenantId,
+        result.payment.id,
+        qr.invoice.renterId, // Dùng renterId như actorId hệ thống để lưu vết
+        'Hệ thống tự động xác nhận qua PayOS Webhook',
+      )
+      await this.notificationEventsService.notifyPaymentReviewed(approvedPayment)
       await this.logWebhook(payload, data, true, 'PROCESSED', null, transactionDateTime, qr.tenantId, qr.invoiceId)
       return { code: '00', desc: 'success', success: true }
     } catch (error) {

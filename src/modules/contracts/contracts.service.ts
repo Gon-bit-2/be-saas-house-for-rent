@@ -243,6 +243,23 @@ export class ContractsService {
     return contract
   }
 
+  async signLandlord(userId: number, id: number, signature: string) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const contract = await this.getTenantContractOrThrow(tenant.tenantId, id)
+    if (contract.status !== 'DRAFT') {
+      throw new BadRequestException('Chỉ có thể ký khi hợp đồng ở trạng thái Nháp')
+    }
+    return this.contractsRepository.signLandlord(id, userId, signature)
+  }
+
+  async signRenter(userId: number, id: number, signature: string) {
+    const contract = await this.getMine(userId, id)
+    if (contract.status !== 'WAITING_RENTER_SIGN') {
+      throw new BadRequestException('Chỉ có thể ký khi hợp đồng đang chờ khách thuê ký')
+    }
+    return this.contractsRepository.signRenter(id, userId, signature)
+  }
+
   private async getTenantContractOrThrow(tenantId: number, id: number) {
     const contract = await this.contractsRepository.findById(tenantId, id)
     if (!contract) {

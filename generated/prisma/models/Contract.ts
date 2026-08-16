@@ -72,6 +72,8 @@ export type ContractMinAggregateOutputType = {
   paymentDueDay: number | null
   contentSnapshot: string | null
   status: $Enums.ContractStatus | null
+  landlordSignature: string | null
+  renterSignature: string | null
   signedByLandlordAt: Date | null
   signedByRenterAt: Date | null
   createdAt: Date | null
@@ -98,6 +100,8 @@ export type ContractMaxAggregateOutputType = {
   paymentDueDay: number | null
   contentSnapshot: string | null
   status: $Enums.ContractStatus | null
+  landlordSignature: string | null
+  renterSignature: string | null
   signedByLandlordAt: Date | null
   signedByRenterAt: Date | null
   createdAt: Date | null
@@ -124,6 +128,8 @@ export type ContractCountAggregateOutputType = {
   paymentDueDay: number
   contentSnapshot: number
   status: number
+  landlordSignature: number
+  renterSignature: number
   signedByLandlordAt: number
   signedByRenterAt: number
   createdAt: number
@@ -182,6 +188,8 @@ export type ContractMinAggregateInputType = {
   paymentDueDay?: true
   contentSnapshot?: true
   status?: true
+  landlordSignature?: true
+  renterSignature?: true
   signedByLandlordAt?: true
   signedByRenterAt?: true
   createdAt?: true
@@ -208,6 +216,8 @@ export type ContractMaxAggregateInputType = {
   paymentDueDay?: true
   contentSnapshot?: true
   status?: true
+  landlordSignature?: true
+  renterSignature?: true
   signedByLandlordAt?: true
   signedByRenterAt?: true
   createdAt?: true
@@ -234,6 +244,8 @@ export type ContractCountAggregateInputType = {
   paymentDueDay?: true
   contentSnapshot?: true
   status?: true
+  landlordSignature?: true
+  renterSignature?: true
   signedByLandlordAt?: true
   signedByRenterAt?: true
   createdAt?: true
@@ -347,6 +359,8 @@ export type ContractGroupByOutputType = {
   paymentDueDay: number
   contentSnapshot: string
   status: $Enums.ContractStatus
+  landlordSignature: string | null
+  renterSignature: string | null
   signedByLandlordAt: Date | null
   signedByRenterAt: Date | null
   createdAt: Date
@@ -396,6 +410,8 @@ export type ContractWhereInput = {
   paymentDueDay?: Prisma.IntFilter<"Contract"> | number
   contentSnapshot?: Prisma.StringFilter<"Contract"> | string
   status?: Prisma.EnumContractStatusFilter<"Contract"> | $Enums.ContractStatus
+  landlordSignature?: Prisma.StringNullableFilter<"Contract"> | string | null
+  renterSignature?: Prisma.StringNullableFilter<"Contract"> | string | null
   signedByLandlordAt?: Prisma.DateTimeNullableFilter<"Contract"> | Date | string | null
   signedByRenterAt?: Prisma.DateTimeNullableFilter<"Contract"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Contract"> | Date | string
@@ -442,6 +458,8 @@ export type ContractOrderByWithRelationInput = {
   paymentDueDay?: Prisma.SortOrder
   contentSnapshot?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  landlordSignature?: Prisma.SortOrderInput | Prisma.SortOrder
+  renterSignature?: Prisma.SortOrderInput | Prisma.SortOrder
   signedByLandlordAt?: Prisma.SortOrderInput | Prisma.SortOrder
   signedByRenterAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -491,6 +509,8 @@ export type ContractWhereUniqueInput = Prisma.AtLeast<{
   paymentDueDay?: Prisma.IntFilter<"Contract"> | number
   contentSnapshot?: Prisma.StringFilter<"Contract"> | string
   status?: Prisma.EnumContractStatusFilter<"Contract"> | $Enums.ContractStatus
+  landlordSignature?: Prisma.StringNullableFilter<"Contract"> | string | null
+  renterSignature?: Prisma.StringNullableFilter<"Contract"> | string | null
   signedByLandlordAt?: Prisma.DateTimeNullableFilter<"Contract"> | Date | string | null
   signedByRenterAt?: Prisma.DateTimeNullableFilter<"Contract"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Contract"> | Date | string
@@ -537,6 +557,8 @@ export type ContractOrderByWithAggregationInput = {
   paymentDueDay?: Prisma.SortOrder
   contentSnapshot?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  landlordSignature?: Prisma.SortOrderInput | Prisma.SortOrder
+  renterSignature?: Prisma.SortOrderInput | Prisma.SortOrder
   signedByLandlordAt?: Prisma.SortOrderInput | Prisma.SortOrder
   signedByRenterAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -571,6 +593,8 @@ export type ContractScalarWhereWithAggregatesInput = {
   paymentDueDay?: Prisma.IntWithAggregatesFilter<"Contract"> | number
   contentSnapshot?: Prisma.StringWithAggregatesFilter<"Contract"> | string
   status?: Prisma.EnumContractStatusWithAggregatesFilter<"Contract"> | $Enums.ContractStatus
+  landlordSignature?: Prisma.StringNullableWithAggregatesFilter<"Contract"> | string | null
+  renterSignature?: Prisma.StringNullableWithAggregatesFilter<"Contract"> | string | null
   signedByLandlordAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Contract"> | Date | string | null
   signedByRenterAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Contract"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Contract"> | Date | string
@@ -591,6 +615,8 @@ export type ContractCreateInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -634,6 +660,8 @@ export type ContractUncheckedCreateInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -666,6 +694,8 @@ export type ContractUpdateInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -709,6 +739,8 @@ export type ContractUncheckedUpdateInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -747,6 +779,8 @@ export type ContractCreateManyInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -767,6 +801,8 @@ export type ContractUpdateManyMutationInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -790,6 +826,8 @@ export type ContractUncheckedUpdateManyInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -831,6 +869,8 @@ export type ContractCountOrderByAggregateInput = {
   paymentDueDay?: Prisma.SortOrder
   contentSnapshot?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  landlordSignature?: Prisma.SortOrder
+  renterSignature?: Prisma.SortOrder
   signedByLandlordAt?: Prisma.SortOrder
   signedByRenterAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -872,6 +912,8 @@ export type ContractMaxOrderByAggregateInput = {
   paymentDueDay?: Prisma.SortOrder
   contentSnapshot?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  landlordSignature?: Prisma.SortOrder
+  renterSignature?: Prisma.SortOrder
   signedByLandlordAt?: Prisma.SortOrder
   signedByRenterAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -898,6 +940,8 @@ export type ContractMinOrderByAggregateInput = {
   paymentDueDay?: Prisma.SortOrder
   contentSnapshot?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  landlordSignature?: Prisma.SortOrder
+  renterSignature?: Prisma.SortOrder
   signedByLandlordAt?: Prisma.SortOrder
   signedByRenterAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1458,6 +1502,8 @@ export type ContractCreateWithoutRenterInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -1499,6 +1545,8 @@ export type ContractUncheckedCreateWithoutRenterInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -1541,6 +1589,8 @@ export type ContractCreateWithoutCreatedByInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -1583,6 +1633,8 @@ export type ContractUncheckedCreateWithoutCreatedByInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -1624,6 +1676,8 @@ export type ContractCreateWithoutUpdatedByInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -1666,6 +1720,8 @@ export type ContractUncheckedCreateWithoutUpdatedByInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -1707,6 +1763,8 @@ export type ContractCreateWithoutDeletedByInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -1749,6 +1807,8 @@ export type ContractUncheckedCreateWithoutDeletedByInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -1815,6 +1875,8 @@ export type ContractScalarWhereInput = {
   paymentDueDay?: Prisma.IntFilter<"Contract"> | number
   contentSnapshot?: Prisma.StringFilter<"Contract"> | string
   status?: Prisma.EnumContractStatusFilter<"Contract"> | $Enums.ContractStatus
+  landlordSignature?: Prisma.StringNullableFilter<"Contract"> | string | null
+  renterSignature?: Prisma.StringNullableFilter<"Contract"> | string | null
   signedByLandlordAt?: Prisma.DateTimeNullableFilter<"Contract"> | Date | string | null
   signedByRenterAt?: Prisma.DateTimeNullableFilter<"Contract"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Contract"> | Date | string
@@ -1883,6 +1945,8 @@ export type ContractCreateWithoutTenantInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -1924,6 +1988,8 @@ export type ContractUncheckedCreateWithoutTenantInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -1982,6 +2048,8 @@ export type ContractCreateWithoutRoomInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2023,6 +2091,8 @@ export type ContractUncheckedCreateWithoutRoomInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2081,6 +2151,8 @@ export type ContractCreateWithoutRentalHistoriesInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2123,6 +2195,8 @@ export type ContractUncheckedCreateWithoutRentalHistoriesInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2170,6 +2244,8 @@ export type ContractUpdateWithoutRentalHistoriesInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2212,6 +2288,8 @@ export type ContractUncheckedUpdateWithoutRentalHistoriesInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2243,6 +2321,8 @@ export type ContractCreateWithoutRentalRequestInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2284,6 +2364,8 @@ export type ContractUncheckedCreateWithoutRentalRequestInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2342,6 +2424,8 @@ export type ContractCreateWithoutTemplateInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2383,6 +2467,8 @@ export type ContractUncheckedCreateWithoutTemplateInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2441,6 +2527,8 @@ export type ContractCreateWithoutMembersInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2483,6 +2571,8 @@ export type ContractUncheckedCreateWithoutMembersInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2530,6 +2620,8 @@ export type ContractUpdateWithoutMembersInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2572,6 +2664,8 @@ export type ContractUncheckedUpdateWithoutMembersInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2603,6 +2697,8 @@ export type ContractCreateWithoutFilesInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2645,6 +2741,8 @@ export type ContractUncheckedCreateWithoutFilesInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2692,6 +2790,8 @@ export type ContractUpdateWithoutFilesInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2734,6 +2834,8 @@ export type ContractUncheckedUpdateWithoutFilesInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2765,6 +2867,8 @@ export type ContractCreateWithoutTerminationRequestsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2807,6 +2911,8 @@ export type ContractUncheckedCreateWithoutTerminationRequestsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2854,6 +2960,8 @@ export type ContractUpdateWithoutTerminationRequestsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2896,6 +3004,8 @@ export type ContractUncheckedUpdateWithoutTerminationRequestsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2927,6 +3037,8 @@ export type ContractCreateWithoutHandoverRecordsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -2969,6 +3081,8 @@ export type ContractUncheckedCreateWithoutHandoverRecordsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3016,6 +3130,8 @@ export type ContractUpdateWithoutHandoverRecordsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3058,6 +3174,8 @@ export type ContractUncheckedUpdateWithoutHandoverRecordsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3089,6 +3207,8 @@ export type ContractCreateWithoutMeterReadingsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3131,6 +3251,8 @@ export type ContractUncheckedCreateWithoutMeterReadingsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3178,6 +3300,8 @@ export type ContractUpdateWithoutMeterReadingsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3220,6 +3344,8 @@ export type ContractUncheckedUpdateWithoutMeterReadingsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3251,6 +3377,8 @@ export type ContractCreateWithoutServiceAssignmentsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3293,6 +3421,8 @@ export type ContractUncheckedCreateWithoutServiceAssignmentsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3340,6 +3470,8 @@ export type ContractUpdateWithoutServiceAssignmentsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3382,6 +3514,8 @@ export type ContractUncheckedUpdateWithoutServiceAssignmentsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3413,6 +3547,8 @@ export type ContractCreateWithoutInvoicesInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3455,6 +3591,8 @@ export type ContractUncheckedCreateWithoutInvoicesInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3502,6 +3640,8 @@ export type ContractUpdateWithoutInvoicesInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3544,6 +3684,8 @@ export type ContractUncheckedUpdateWithoutInvoicesInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3575,6 +3717,8 @@ export type ContractCreateWithoutDebtsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3617,6 +3761,8 @@ export type ContractUncheckedCreateWithoutDebtsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3664,6 +3810,8 @@ export type ContractUpdateWithoutDebtsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3706,6 +3854,8 @@ export type ContractUncheckedUpdateWithoutDebtsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3737,6 +3887,8 @@ export type ContractCreateWithoutTicketsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3779,6 +3931,8 @@ export type ContractUncheckedCreateWithoutTicketsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3826,6 +3980,8 @@ export type ContractUpdateWithoutTicketsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3868,6 +4024,8 @@ export type ContractUncheckedUpdateWithoutTicketsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3899,6 +4057,8 @@ export type ContractCreateWithoutConversationsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3941,6 +4101,8 @@ export type ContractUncheckedCreateWithoutConversationsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -3988,6 +4150,8 @@ export type ContractUpdateWithoutConversationsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4030,6 +4194,8 @@ export type ContractUncheckedUpdateWithoutConversationsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4061,6 +4227,8 @@ export type ContractCreateWithoutReviewsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -4103,6 +4271,8 @@ export type ContractUncheckedCreateWithoutReviewsInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -4150,6 +4320,8 @@ export type ContractUpdateWithoutReviewsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4192,6 +4364,8 @@ export type ContractUncheckedUpdateWithoutReviewsInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4228,6 +4402,8 @@ export type ContractCreateManyRenterInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -4254,6 +4430,8 @@ export type ContractCreateManyCreatedByInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -4279,6 +4457,8 @@ export type ContractCreateManyUpdatedByInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -4304,6 +4484,8 @@ export type ContractCreateManyDeletedByInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -4323,6 +4505,8 @@ export type ContractUpdateWithoutRenterInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4364,6 +4548,8 @@ export type ContractUncheckedUpdateWithoutRenterInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4401,6 +4587,8 @@ export type ContractUncheckedUpdateManyWithoutRenterInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4421,6 +4609,8 @@ export type ContractUpdateWithoutCreatedByInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4463,6 +4653,8 @@ export type ContractUncheckedUpdateWithoutCreatedByInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4500,6 +4692,8 @@ export type ContractUncheckedUpdateManyWithoutCreatedByInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4519,6 +4713,8 @@ export type ContractUpdateWithoutUpdatedByInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4561,6 +4757,8 @@ export type ContractUncheckedUpdateWithoutUpdatedByInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4598,6 +4796,8 @@ export type ContractUncheckedUpdateManyWithoutUpdatedByInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4617,6 +4817,8 @@ export type ContractUpdateWithoutDeletedByInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4659,6 +4861,8 @@ export type ContractUncheckedUpdateWithoutDeletedByInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4696,6 +4900,8 @@ export type ContractUncheckedUpdateManyWithoutDeletedByInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4720,6 +4926,8 @@ export type ContractCreateManyTenantInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -4740,6 +4948,8 @@ export type ContractUpdateWithoutTenantInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4781,6 +4991,8 @@ export type ContractUncheckedUpdateWithoutTenantInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4818,6 +5030,8 @@ export type ContractUncheckedUpdateManyWithoutTenantInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4843,6 +5057,8 @@ export type ContractCreateManyRoomInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -4863,6 +5079,8 @@ export type ContractUpdateWithoutRoomInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4904,6 +5122,8 @@ export type ContractUncheckedUpdateWithoutRoomInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4941,6 +5161,8 @@ export type ContractUncheckedUpdateManyWithoutRoomInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4966,6 +5188,8 @@ export type ContractCreateManyRentalRequestInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -4986,6 +5210,8 @@ export type ContractUpdateWithoutRentalRequestInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5027,6 +5253,8 @@ export type ContractUncheckedUpdateWithoutRentalRequestInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5064,6 +5292,8 @@ export type ContractUncheckedUpdateManyWithoutRentalRequestInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5089,6 +5319,8 @@ export type ContractCreateManyTemplateInput = {
   paymentDueDay: number
   contentSnapshot: string
   status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
   signedByLandlordAt?: Date | string | null
   signedByRenterAt?: Date | string | null
   createdAt?: Date | string
@@ -5109,6 +5341,8 @@ export type ContractUpdateWithoutTemplateInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5150,6 +5384,8 @@ export type ContractUncheckedUpdateWithoutTemplateInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5187,6 +5423,8 @@ export type ContractUncheckedUpdateManyWithoutTemplateInput = {
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5343,6 +5581,8 @@ export type ContractSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   paymentDueDay?: boolean
   contentSnapshot?: boolean
   status?: boolean
+  landlordSignature?: boolean
+  renterSignature?: boolean
   signedByLandlordAt?: boolean
   signedByRenterAt?: boolean
   createdAt?: boolean
@@ -5390,6 +5630,8 @@ export type ContractSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   paymentDueDay?: boolean
   contentSnapshot?: boolean
   status?: boolean
+  landlordSignature?: boolean
+  renterSignature?: boolean
   signedByLandlordAt?: boolean
   signedByRenterAt?: boolean
   createdAt?: boolean
@@ -5424,6 +5666,8 @@ export type ContractSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   paymentDueDay?: boolean
   contentSnapshot?: boolean
   status?: boolean
+  landlordSignature?: boolean
+  renterSignature?: boolean
   signedByLandlordAt?: boolean
   signedByRenterAt?: boolean
   createdAt?: boolean
@@ -5458,6 +5702,8 @@ export type ContractSelectScalar = {
   paymentDueDay?: boolean
   contentSnapshot?: boolean
   status?: boolean
+  landlordSignature?: boolean
+  renterSignature?: boolean
   signedByLandlordAt?: boolean
   signedByRenterAt?: boolean
   createdAt?: boolean
@@ -5468,7 +5714,7 @@ export type ContractSelectScalar = {
   deletedById?: boolean
 }
 
-export type ContractOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "renterId" | "rentalRequestId" | "templateId" | "contractCode" | "startDate" | "endDate" | "monthlyPrice" | "depositAmount" | "billingCycle" | "paymentDueDay" | "contentSnapshot" | "status" | "signedByLandlordAt" | "signedByRenterAt" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["contract"]>
+export type ContractOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "renterId" | "rentalRequestId" | "templateId" | "contractCode" | "startDate" | "endDate" | "monthlyPrice" | "depositAmount" | "billingCycle" | "paymentDueDay" | "contentSnapshot" | "status" | "landlordSignature" | "renterSignature" | "signedByLandlordAt" | "signedByRenterAt" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["contract"]>
 export type ContractInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
@@ -5646,6 +5892,14 @@ export type $ContractPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
      * Trạng thái pháp lý của hợp đồng
      */
     status: $Enums.ContractStatus
+    /**
+     * Chữ ký điện tử của chủ trọ (Base64)
+     */
+    landlordSignature: string | null
+    /**
+     * Chữ ký điện tử của khách thuê chính (Base64)
+     */
+    renterSignature: string | null
     /**
      * Thời điểm chủ trọ ký xác nhận online (null nếu chưa ký)
      */
@@ -6136,6 +6390,8 @@ export interface ContractFieldRefs {
   readonly paymentDueDay: Prisma.FieldRef<"Contract", 'Int'>
   readonly contentSnapshot: Prisma.FieldRef<"Contract", 'String'>
   readonly status: Prisma.FieldRef<"Contract", 'ContractStatus'>
+  readonly landlordSignature: Prisma.FieldRef<"Contract", 'String'>
+  readonly renterSignature: Prisma.FieldRef<"Contract", 'String'>
   readonly signedByLandlordAt: Prisma.FieldRef<"Contract", 'DateTime'>
   readonly signedByRenterAt: Prisma.FieldRef<"Contract", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Contract", 'DateTime'>

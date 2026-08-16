@@ -1254,6 +1254,10 @@ model Contract {
   contentSnapshot    String               @map("content_snapshot") @db.Text
   /// Trạng thái pháp lý của hợp đồng
   status             ContractStatus       @default(DRAFT)
+  /// Chữ ký điện tử của chủ trọ (Base64)
+  landlordSignature  String?              @map("landlord_signature") @db.Text
+  /// Chữ ký điện tử của khách thuê chính (Base64)
+  renterSignature    String?              @map("renter_signature") @db.Text
   /// Thời điểm chủ trọ ký xác nhận online (null nếu chưa ký)
   signedByLandlordAt DateTime?            @map("signed_by_landlord_at") @db.Timestamptz
   /// Thời điểm khách thuê ký xác nhận online (null nếu chưa ký)

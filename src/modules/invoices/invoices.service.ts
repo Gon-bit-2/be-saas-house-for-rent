@@ -137,6 +137,76 @@ export class InvoicesService {
     return invoice
   }
 
+  async generateMonthlyInvoices() {
+    const today = new Date()
+    // Define the billing month as the current month
+    const billingMonth = this.normalizeBillingMonth(today)
+    const monthEnd = this.endOfBillingMonth(billingMonth)
+
+    const contracts = await this.invoicesRepository.findActiveContractsForInvoiceGeneration(billingMonth, monthEnd)
+    let successCount = 0
+    let errorCount = 0
+
+    for (const contract of contracts) {
+      if (contract.room.deletedAt) continue
+
+      try {
+        const readings = await this.invoicesRepository.findConfirmedReadingsForInvoice(
+          contract.tenantId,
+          contract.id,
+          contract.roomId,
+          billingMonth,
+        )
+        const serviceAssignments = await this.invoicesRepository.findServiceAssignmentsForInvoice(
+          contract.tenantId,
+          contract.id,
+          contract.roomId,
+          billingMonth,
+          monthEnd,
+        )
+
+        const items = this.buildInvoiceItems(contract, billingMonth, readings, serviceAssignments, [])
+        const totals = this.calculateTotals(items)
+        const issueDate = this.todayDateOnly()
+        const dueDate = this.defaultDueDate(billingMonth, contract.paymentDueDay, issueDate)
+        const invoiceCode = await this.generateInvoiceCode(contract.tenantId, billingMonth)
+
+        // For automated invoice generation, we set it as DRAFT and let landlord issue it,
+        // or we could issue it directly. Typically, monthly invoices are generated as DRAFT for review.
+        await this.invoicesRepository.createInvoiceWithItemsAndDebt(
+          {
+            tenantId: contract.tenantId,
+            contractId: contract.id,
+            roomId: contract.roomId,
+            renterId: contract.renterId,
+            invoiceCode,
+            billingMonth,
+            issueDate,
+            dueDate,
+            subtotal: totals.subtotal,
+            discountAmount: totals.discountAmount,
+            penaltyAmount: totals.penaltyAmount,
+            totalAmount: totals.totalAmount,
+            paidAmount: 0,
+            debtAmount: totals.totalAmount,
+            status: 'DRAFT',
+            note: 'Hóa đơn tự động sinh bởi hệ thống',
+            createdById: 1, // Assuming user 1 is system admin
+            updatedById: 1,
+          },
+          items,
+          this.toDebtStatus('DRAFT', totals.totalAmount),
+        )
+        successCount++
+      } catch (error) {
+        errorCount++
+        console.error(`Failed to generate invoice for contract ${contract.id}`, error)
+      }
+    }
+
+    return { successCount, errorCount }
+  }
+
   async updateDraft(userId: number, id: number, body: TUpdateInvoiceBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const invoice = await this.getTenantInvoiceOrThrow(tenant.tenantId, id)

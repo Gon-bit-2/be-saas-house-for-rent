@@ -32,6 +32,7 @@ export type PlanAvgAggregateOutputType = {
   priceYearly: runtime.Decimal | null
   maxRooms: number | null
   maxStaff: number | null
+  maxProperties: number | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -43,6 +44,7 @@ export type PlanSumAggregateOutputType = {
   priceYearly: runtime.Decimal | null
   maxRooms: number | null
   maxStaff: number | null
+  maxProperties: number | null
   createdById: number | null
   updatedById: number | null
   deletedById: number | null
@@ -60,6 +62,7 @@ export type PlanMinAggregateOutputType = {
   allowAiOcr: boolean | null
   allowWebhookPayment: boolean | null
   isActive: boolean | null
+  maxProperties: number | null
   createdAt: Date | null
   createdById: number | null
   updatedById: number | null
@@ -78,6 +81,7 @@ export type PlanMaxAggregateOutputType = {
   allowAiOcr: boolean | null
   allowWebhookPayment: boolean | null
   isActive: boolean | null
+  maxProperties: number | null
   createdAt: Date | null
   createdById: number | null
   updatedById: number | null
@@ -96,6 +100,7 @@ export type PlanCountAggregateOutputType = {
   allowAiOcr: number
   allowWebhookPayment: number
   isActive: number
+  maxProperties: number
   createdAt: number
   createdById: number
   updatedById: number
@@ -110,6 +115,7 @@ export type PlanAvgAggregateInputType = {
   priceYearly?: true
   maxRooms?: true
   maxStaff?: true
+  maxProperties?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -121,6 +127,7 @@ export type PlanSumAggregateInputType = {
   priceYearly?: true
   maxRooms?: true
   maxStaff?: true
+  maxProperties?: true
   createdById?: true
   updatedById?: true
   deletedById?: true
@@ -138,6 +145,7 @@ export type PlanMinAggregateInputType = {
   allowAiOcr?: true
   allowWebhookPayment?: true
   isActive?: true
+  maxProperties?: true
   createdAt?: true
   createdById?: true
   updatedById?: true
@@ -156,6 +164,7 @@ export type PlanMaxAggregateInputType = {
   allowAiOcr?: true
   allowWebhookPayment?: true
   isActive?: true
+  maxProperties?: true
   createdAt?: true
   createdById?: true
   updatedById?: true
@@ -174,6 +183,7 @@ export type PlanCountAggregateInputType = {
   allowAiOcr?: true
   allowWebhookPayment?: true
   isActive?: true
+  maxProperties?: true
   createdAt?: true
   createdById?: true
   updatedById?: true
@@ -279,6 +289,7 @@ export type PlanGroupByOutputType = {
   allowAiOcr: boolean
   allowWebhookPayment: boolean
   isActive: boolean
+  maxProperties: number
   createdAt: Date
   createdById: number | null
   updatedById: number | null
@@ -320,6 +331,7 @@ export type PlanWhereInput = {
   allowAiOcr?: Prisma.BoolFilter<"Plan"> | boolean
   allowWebhookPayment?: Prisma.BoolFilter<"Plan"> | boolean
   isActive?: Prisma.BoolFilter<"Plan"> | boolean
+  maxProperties?: Prisma.IntFilter<"Plan"> | number
   createdAt?: Prisma.DateTimeFilter<"Plan"> | Date | string
   createdById?: Prisma.IntNullableFilter<"Plan"> | number | null
   updatedById?: Prisma.IntNullableFilter<"Plan"> | number | null
@@ -342,6 +354,7 @@ export type PlanOrderByWithRelationInput = {
   allowAiOcr?: Prisma.SortOrder
   allowWebhookPayment?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  maxProperties?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -367,6 +380,7 @@ export type PlanWhereUniqueInput = Prisma.AtLeast<{
   allowAiOcr?: Prisma.BoolFilter<"Plan"> | boolean
   allowWebhookPayment?: Prisma.BoolFilter<"Plan"> | boolean
   isActive?: Prisma.BoolFilter<"Plan"> | boolean
+  maxProperties?: Prisma.IntFilter<"Plan"> | number
   createdAt?: Prisma.DateTimeFilter<"Plan"> | Date | string
   createdById?: Prisma.IntNullableFilter<"Plan"> | number | null
   updatedById?: Prisma.IntNullableFilter<"Plan"> | number | null
@@ -389,6 +403,7 @@ export type PlanOrderByWithAggregationInput = {
   allowAiOcr?: Prisma.SortOrder
   allowWebhookPayment?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  maxProperties?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -415,6 +430,7 @@ export type PlanScalarWhereWithAggregatesInput = {
   allowAiOcr?: Prisma.BoolWithAggregatesFilter<"Plan"> | boolean
   allowWebhookPayment?: Prisma.BoolWithAggregatesFilter<"Plan"> | boolean
   isActive?: Prisma.BoolWithAggregatesFilter<"Plan"> | boolean
+  maxProperties?: Prisma.IntWithAggregatesFilter<"Plan"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Plan"> | Date | string
   createdById?: Prisma.IntNullableWithAggregatesFilter<"Plan"> | number | null
   updatedById?: Prisma.IntNullableWithAggregatesFilter<"Plan"> | number | null
@@ -432,6 +448,7 @@ export type PlanCreateInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutPlanInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPlansInput
@@ -451,6 +468,7 @@ export type PlanUncheckedCreateInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
@@ -469,6 +487,7 @@ export type PlanUpdateInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutPlanNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPlansNestedInput
@@ -488,6 +507,7 @@ export type PlanUncheckedUpdateInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -507,6 +527,7 @@ export type PlanCreateManyInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
@@ -524,6 +545,7 @@ export type PlanUpdateManyMutationInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -539,6 +561,7 @@ export type PlanUncheckedUpdateManyInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -567,6 +590,7 @@ export type PlanCountOrderByAggregateInput = {
   allowAiOcr?: Prisma.SortOrder
   allowWebhookPayment?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  maxProperties?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
@@ -579,6 +603,7 @@ export type PlanAvgOrderByAggregateInput = {
   priceYearly?: Prisma.SortOrder
   maxRooms?: Prisma.SortOrder
   maxStaff?: Prisma.SortOrder
+  maxProperties?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -596,6 +621,7 @@ export type PlanMaxOrderByAggregateInput = {
   allowAiOcr?: Prisma.SortOrder
   allowWebhookPayment?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  maxProperties?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
@@ -614,6 +640,7 @@ export type PlanMinOrderByAggregateInput = {
   allowAiOcr?: Prisma.SortOrder
   allowWebhookPayment?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  maxProperties?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
@@ -626,6 +653,7 @@ export type PlanSumOrderByAggregateInput = {
   priceYearly?: Prisma.SortOrder
   maxRooms?: Prisma.SortOrder
   maxStaff?: Prisma.SortOrder
+  maxProperties?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
   deletedById?: Prisma.SortOrder
@@ -795,6 +823,7 @@ export type PlanCreateWithoutCreatedByInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutPlanInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPlansInput
@@ -813,6 +842,7 @@ export type PlanUncheckedCreateWithoutCreatedByInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   updatedById?: number | null
   deletedById?: number | null
@@ -840,6 +870,7 @@ export type PlanCreateWithoutUpdatedByInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutPlanInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPlansInput
@@ -858,6 +889,7 @@ export type PlanUncheckedCreateWithoutUpdatedByInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   createdById?: number | null
   deletedById?: number | null
@@ -885,6 +917,7 @@ export type PlanCreateWithoutDeletedByInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutPlanInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPlansInput
@@ -903,6 +936,7 @@ export type PlanUncheckedCreateWithoutDeletedByInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
@@ -950,6 +984,7 @@ export type PlanScalarWhereInput = {
   allowAiOcr?: Prisma.BoolFilter<"Plan"> | boolean
   allowWebhookPayment?: Prisma.BoolFilter<"Plan"> | boolean
   isActive?: Prisma.BoolFilter<"Plan"> | boolean
+  maxProperties?: Prisma.IntFilter<"Plan"> | number
   createdAt?: Prisma.DateTimeFilter<"Plan"> | Date | string
   createdById?: Prisma.IntNullableFilter<"Plan"> | number | null
   updatedById?: Prisma.IntNullableFilter<"Plan"> | number | null
@@ -999,6 +1034,7 @@ export type PlanCreateWithoutSubscriptionsInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedPlansInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedPlansInput
@@ -1017,6 +1053,7 @@ export type PlanUncheckedCreateWithoutSubscriptionsInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
@@ -1050,6 +1087,7 @@ export type PlanUpdateWithoutSubscriptionsInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPlansNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPlansNestedInput
@@ -1068,6 +1106,7 @@ export type PlanUncheckedUpdateWithoutSubscriptionsInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1086,6 +1125,7 @@ export type PlanCreateManyCreatedByInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   updatedById?: number | null
   deletedById?: number | null
@@ -1103,6 +1143,7 @@ export type PlanCreateManyUpdatedByInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   createdById?: number | null
   deletedById?: number | null
@@ -1120,6 +1161,7 @@ export type PlanCreateManyDeletedByInput = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: number
   createdAt?: Date | string
   createdById?: number | null
   updatedById?: number | null
@@ -1136,6 +1178,7 @@ export type PlanUpdateWithoutCreatedByInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutPlanNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedPlansNestedInput
@@ -1154,6 +1197,7 @@ export type PlanUncheckedUpdateWithoutCreatedByInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1172,6 +1216,7 @@ export type PlanUncheckedUpdateManyWithoutCreatedByInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1188,6 +1233,7 @@ export type PlanUpdateWithoutUpdatedByInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutPlanNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPlansNestedInput
@@ -1206,6 +1252,7 @@ export type PlanUncheckedUpdateWithoutUpdatedByInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1224,6 +1271,7 @@ export type PlanUncheckedUpdateManyWithoutUpdatedByInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1240,6 +1288,7 @@ export type PlanUpdateWithoutDeletedByInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutPlanNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedPlansNestedInput
@@ -1258,6 +1307,7 @@ export type PlanUncheckedUpdateWithoutDeletedByInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1276,6 +1326,7 @@ export type PlanUncheckedUpdateManyWithoutDeletedByInput = {
   allowAiOcr?: Prisma.BoolFieldUpdateOperationsInput | boolean
   allowWebhookPayment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  maxProperties?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1324,6 +1375,7 @@ export type PlanSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: boolean
   createdAt?: boolean
   createdById?: boolean
   updatedById?: boolean
@@ -1347,6 +1399,7 @@ export type PlanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: boolean
   createdAt?: boolean
   createdById?: boolean
   updatedById?: boolean
@@ -1368,6 +1421,7 @@ export type PlanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: boolean
   createdAt?: boolean
   createdById?: boolean
   updatedById?: boolean
@@ -1389,13 +1443,14 @@ export type PlanSelectScalar = {
   allowAiOcr?: boolean
   allowWebhookPayment?: boolean
   isActive?: boolean
+  maxProperties?: boolean
   createdAt?: boolean
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
 }
 
-export type PlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "description" | "priceMonthly" | "priceYearly" | "maxRooms" | "maxStaff" | "allowAiOcr" | "allowWebhookPayment" | "isActive" | "createdAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["plan"]>
+export type PlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "description" | "priceMonthly" | "priceYearly" | "maxRooms" | "maxStaff" | "allowAiOcr" | "allowWebhookPayment" | "isActive" | "maxProperties" | "createdAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["plan"]>
 export type PlanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscriptions?: boolean | Prisma.Plan$subscriptionsArgs<ExtArgs>
   createdBy?: boolean | Prisma.Plan$createdByArgs<ExtArgs>
@@ -1470,6 +1525,10 @@ export type $PlanPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
      * Trạng thái gói cước có đang mở bán hay không
      */
     isActive: boolean
+    /**
+     * Số lượng nhà trọ tối đa được phép tạo và quản lý
+     */
+    maxProperties: number
     /**
      * Thời điểm tạo gói cước
      */
@@ -1924,6 +1983,7 @@ export interface PlanFieldRefs {
   readonly allowAiOcr: Prisma.FieldRef<"Plan", 'Boolean'>
   readonly allowWebhookPayment: Prisma.FieldRef<"Plan", 'Boolean'>
   readonly isActive: Prisma.FieldRef<"Plan", 'Boolean'>
+  readonly maxProperties: Prisma.FieldRef<"Plan", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Plan", 'DateTime'>
   readonly createdById: Prisma.FieldRef<"Plan", 'Int'>
   readonly updatedById: Prisma.FieldRef<"Plan", 'Int'>
