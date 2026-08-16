@@ -11,8 +11,14 @@ export const ListMarketplaceRoomsQuerySchema = z
     province: z.string().trim().min(1).max(100).optional(),
     district: z.string().trim().min(1).max(100).optional(),
     ward: z.string().trim().min(1).max(100).optional(),
-    provinceCode: z.string().regex(/^\d{2}$/).optional(),
-    wardCode: z.string().regex(/^\d{5}$/).optional(),
+    provinceCode: z
+      .string()
+      .regex(/^\d{2}$/)
+      .optional(),
+    wardCode: z
+      .string()
+      .regex(/^\d{5}$/)
+      .optional(),
     propertyType: PropertyTypeSchema.optional(),
     minPrice: z.coerce.number().nonnegative().optional(),
     maxPrice: z.coerce.number().nonnegative().optional(),
@@ -38,6 +44,9 @@ export const ListMarketplaceRoomsQuerySchema = z
           ),
         )
       }),
+    lat: z.coerce.number().min(-90).max(90).optional(),
+    lng: z.coerce.number().min(-180).max(180).optional(),
+    radius: z.coerce.number().positive().max(100).optional(),
   })
   .strict()
 

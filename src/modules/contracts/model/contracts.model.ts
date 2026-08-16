@@ -76,8 +76,15 @@ export const UpdateContractBodySchema = z
 
 export const EmptyContractBodySchema = z.object({}).strict()
 
+export const AddContractMemberBodySchema = z
+  .object({
+    userId: z.coerce.number().int().positive(),
+  })
+  .strict()
+
 export type TListContractsQuerySchema = z.infer<typeof ListContractsQuerySchema>
 export type TCreateContractBodySchema = z.infer<typeof CreateContractBodySchema>
 export type TUpdateContractBodySchema = z.infer<typeof UpdateContractBodySchema>
 export type TEmptyContractBodySchema = z.infer<typeof EmptyContractBodySchema>
+export type TAddContractMemberBodySchema = z.infer<typeof AddContractMemberBodySchema>
 export type TRenterInfo = z.infer<typeof RenterInfoSchema>

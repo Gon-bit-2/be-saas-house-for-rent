@@ -525,6 +525,8 @@ model Plan {
   allowWebhookPayment Boolean  @default(false) @map("allow_webhook_payment")
   /// Trạng thái gói cước có đang mở bán hay không
   isActive            Boolean  @default(true) @map("is_active")
+  /// Số lượng nhà trọ tối đa được phép tạo và quản lý
+  maxProperties       Int      @default(0) @map("max_properties")
   /// Thời điểm tạo gói cước
   createdAt           DateTime @default(now()) @map("created_at") @db.Timestamptz
 

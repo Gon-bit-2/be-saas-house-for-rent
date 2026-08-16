@@ -412,4 +412,23 @@ export class ContractsRepository {
       return updated
     })
   }
+  async removeMember(contractId: number, userId: number) {
+    return this.prismaService.$transaction(async (tx) => {
+      await tx.contractMember.delete({
+        where: {
+          contractId_userId: { contractId, userId },
+        },
+      })
+      return tx.contract.findUniqueOrThrow({ where: { id: contractId }, select: contractSelect })
+    })
+  }
+
+  async addMember(contractId: number, userId: number) {
+    return this.prismaService.$transaction(async (tx) => {
+      await tx.contractMember.create({
+        data: { contractId, userId, role: 'CO_RENTER' },
+      })
+      return tx.contract.findUniqueOrThrow({ where: { id: contractId }, select: contractSelect })
+    })
+  }
 }

@@ -52,6 +52,8 @@ export class ApiExceptionFilter implements ExceptionFilter {
     if (status >= 500 || !(exception instanceof HttpException)) {
       const stack = exception instanceof Error ? exception.stack : String(exception)
       this.logger.error(logSummary, stack)
+      // Log trực tiếp ra console để đảm bảo terminal luôn hiển thị chi tiết lỗi 500, tránh trường hợp config Logger của NestJS nuốt log
+      console.error(exception)
     } else {
       this.logger.warn(logSummary)
     }

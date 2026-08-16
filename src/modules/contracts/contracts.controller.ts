@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common'
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query, Delete } from '@nestjs/common'
 import roleName from '@src/common/constants/role.constant'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
 import { IsTenant, Roles } from '@src/common/decorators/decorators/roles.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
-import { CreateContractBodyDTO, ListContractsQueryDTO, UpdateContractBodyDTO } from './dto/contracts.dto'
+import { CreateContractBodyDTO, ListContractsQueryDTO, UpdateContractBodyDTO, AddContractMemberBodyDTO } from './dto/contracts.dto'
 import { ContractsService } from './contracts.service'
 
 /**
@@ -69,5 +69,25 @@ export class ContractsController {
   @Patch(':id/cancel')
   cancel(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
     return this.contractsService.cancel(user.userId, id)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Post(':id/members')
+  addMember(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: AddContractMemberBodyDTO,
+  ) {
+    return this.contractsService.addMember(user.userId, id, body)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Delete(':id/members/:userId')
+  removeMember(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Param('userId', ParseIntPipe) memberUserId: number,
+  ) {
+    return this.contractsService.removeMember(user.userId, id, memberUserId)
   }
 }

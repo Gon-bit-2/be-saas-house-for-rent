@@ -1,8 +1,8 @@
 # Runtime API Index
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-14T12:37:56.531Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-14T14:33:43.082Z. Không chỉnh sửa thủ công.
 
-- Tổng số operation: **224**
+- Tổng số operation: **226**
 - Swagger UI: `GET /docs`
 - OpenAPI JSON: `GET /docs-json`
 - Route protected dùng Bearer JWT; route staff theo tenant có thể yêu cầu `x-tenant-id`.
@@ -69,6 +69,8 @@
 | PATCH | `/contracts/{id}/activate` | Bearer JWT | `ContractsController_activate` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/contracts/{id}/cancel` | Bearer JWT | `ContractsController_cancel` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/contracts/{id}/expire` | Bearer JWT | `ContractsController_expire` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| POST | `/contracts/{id}/members` | Bearer JWT | `ContractsController_addMember` | 201, 400, 401, 403, 404, 409, 429, 500 |
+| DELETE | `/contracts/{id}/members/{userId}` | Bearer JWT | `ContractsController_removeMember` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/contracts/me` | Bearer JWT | `ContractsController_listMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/contracts/me/{id}` | Bearer JWT | `ContractsController_getMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
 

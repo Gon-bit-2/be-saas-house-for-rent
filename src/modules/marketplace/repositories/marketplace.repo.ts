@@ -205,4 +205,17 @@ export class MarketplaceRepository {
       { isolationLevel: 'Serializable' },
     )
   }
+
+  async findPropertyIdsWithinRadius(lat: number, lng: number, radiusKm: number): Promise<number[]> {
+    const properties = await this.prismaService.$queryRaw<{ id: number }[]>`
+      SELECT id FROM properties
+      WHERE latitude IS NOT NULL AND longitude IS NOT NULL AND (
+        6371 * acos(
+          cos(radians(${lat})) * cos(radians(latitude)) * cos(radians(longitude) - radians(${lng})) +
+          sin(radians(${lat})) * sin(radians(latitude))
+        )
+      ) <= ${radiusKm}
+    `
+    return properties.map((p) => p.id)
+  }
 }

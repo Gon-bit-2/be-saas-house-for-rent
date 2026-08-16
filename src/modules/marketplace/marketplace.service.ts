@@ -24,6 +24,16 @@ export class MarketplaceService {
   async listRooms(query: TListMarketplaceRoomsQuerySchema) {
     const { page, limit, skip } = normalizePagination(query)
     const where = this.buildPublicRoomWhere(query)
+
+    if (query.lat && query.lng && query.radius) {
+      const propertyIds = await this.marketplaceRepository.findPropertyIdsWithinRadius(
+        query.lat,
+        query.lng,
+        query.radius,
+      )
+      where.propertyId = { in: propertyIds }
+    }
+
     const [rooms, total] = await this.marketplaceRepository.findMany(where, skip, limit)
     return buildPaginatedResult(
       rooms.map((room) => this.toPublicRoom(room, false)),

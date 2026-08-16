@@ -36,4 +36,5 @@ function run(command, args) {
 
 run('npx', ['prisma', 'migrate', 'reset', '--force', '--schema', 'prisma/schema.prisma'])
 run('npm', ['run', 'db:seed'])
+run('npx', ['ts-node', '-r', 'tsconfig-paths/register', 'inittalScripts/create-permission.ts'])
 run('npm', ['run', 'test:e2e', '--', '--runInBand', 'p0-acceptance.e2e-spec.ts'])

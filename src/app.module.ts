@@ -1,6 +1,6 @@
 import { BullModule } from '@nestjs/bullmq'
 import { CacheModule } from '@nestjs/cache-manager'
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
+import { Module } from '@nestjs/common'
 import { APP_GUARD } from '@nestjs/core'
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler'
 import { AppController } from './app.controller'
@@ -10,7 +10,6 @@ import { ApiKeyGuard } from './common/guard/api-key.guard'
 import { AuthenticationGuard } from './common/guard/authentication.guard'
 import { PaymentApiKeyGuard } from './common/guard/payment-api-key.guard'
 import { RolesGuard } from './common/guard/roles.guard'
-import { HttpLoggerMiddleware } from './common/middleware/http-logger.middleware'
 import envConfig from './config/env.config'
 import { AmenitiesModule } from './modules/amenities/amenities.module'
 import { AssetsModule } from './modules/assets/assets.module'
@@ -134,12 +133,4 @@ function buildRedisConnection() {
     },
   ],
 })
-export class AppModule implements NestModule {
-  /**
-   * Cấu hình middleware áp dụng cho tất cả các đường dẫn trong ứng dụng
-   * @param consumer Quản lý middleware của NestJS
-   */
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(HttpLoggerMiddleware).forRoutes('*')
-  }
-}
+export class AppModule {}

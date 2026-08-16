@@ -1,6 +1,6 @@
 # Tài liệu tham chiếu API hiện tại
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-14T12:37:56.535Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-14T14:33:43.087Z. Không chỉnh sửa thủ công.
 
 ## Quy ước chung
 
@@ -11,7 +11,7 @@
 - Request được kiểm tra bằng Zod strict; ngày giờ dùng ISO 8601.
 - Error chuẩn: `{ statusCode, code, message, details?, timestamp, path, requestId }`.
 - Mọi route chịu global rate limit; profile riêng được ghi ở từng operation.
-- Tổng cộng **224 operation** thuộc **35 controller**.
+- Tổng cộng **226 operation** thuộc **35 controller**.
 
 ## Mục lục
 
@@ -19,7 +19,7 @@
 - [Danh mục tài sản (5)](#asset-categories)
 - [Xác thực và hồ sơ (11)](#auth)
 - [Thanh lý hợp đồng (11)](#contract-terminations)
-- [Hợp đồng (9)](#contracts)
+- [Hợp đồng (11)](#contracts)
 - [Dashboard (6)](#dashboard)
 - [Thiết bị nhận push (2)](#device-tokens)
 - [Bàn giao phòng (11)](#handovers)
@@ -544,6 +544,34 @@
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
 | `x-tenant-id` | header | Có | `integer` |
+
+### POST `/contracts/{id}/members`
+
+- Operation ID: `ContractsController_addMember`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
+
+**Request body**
+
+- `application/json`: `AddContractMemberBodyDTO`; bắt buộc: có.
+
+### DELETE `/contracts/{id}/members/{userId}`
+
+- Operation ID: `ContractsController_removeMember`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `userId` | path | Có | `number` |
 
 ### GET `/contracts/me`
 

@@ -3,6 +3,7 @@ import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pag
 import { TenantAccessService } from '@src/shared/modules/services/tenant-access.service'
 import type { Prisma } from 'generated/prisma/client'
 import type {
+  TAddContractMemberBodySchema,
   TCreateContractBodySchema,
   TListContractsQuerySchema,
   TUpdateContractBodySchema,
@@ -183,6 +184,49 @@ export class ContractsService {
       throw new BadRequestException('Không thể hủy hợp đồng ở trạng thái hiện tại')
     }
     return this.contractsRepository.cancel(id, userId)
+  }
+
+  async addMember(actorId: number, id: number, body: TAddContractMemberBodySchema) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(actorId)
+    const contract = await this.getTenantContractOrThrow(tenant.tenantId, id)
+    
+    if (['CANCELED', 'TERMINATED', 'EXPIRED'].includes(contract.status)) {
+      throw new BadRequestException('Không thể thêm thành viên vào hợp đồng đã kết thúc hoặc bị hủy')
+    }
+
+    const currentMemberIds = contract.members.map((m) => m.userId)
+    if (currentMemberIds.includes(body.userId)) {
+      throw new BadRequestException('Người dùng này đã là thành viên của hợp đồng')
+    }
+
+    const newCoRenterIds = contract.members
+      .filter(m => m.role === 'CO_RENTER')
+      .map(m => m.userId)
+    newCoRenterIds.push(body.userId)
+
+    await this.assertRentersCanJoinContract(contract.renterId, newCoRenterIds, contract.room.maxOccupants)
+
+    return this.contractsRepository.addMember(id, body.userId)
+  }
+
+  async removeMember(actorId: number, id: number, memberUserId: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(actorId)
+    const contract = await this.getTenantContractOrThrow(tenant.tenantId, id)
+    
+    if (['CANCELED', 'TERMINATED', 'EXPIRED'].includes(contract.status)) {
+      throw new BadRequestException('Không thể xóa thành viên khỏi hợp đồng đã kết thúc hoặc bị hủy')
+    }
+
+    if (memberUserId === contract.renterId) {
+      throw new BadRequestException('Không thể xóa người thuê chính khỏi hợp đồng')
+    }
+
+    const isMember = contract.members.some((m) => m.userId === memberUserId)
+    if (!isMember) {
+      throw new NotFoundException('Không tìm thấy thành viên này trong hợp đồng')
+    }
+
+    return this.contractsRepository.removeMember(id, memberUserId)
   }
 
   async listMine(userId: number, query: TListContractsQuerySchema) {
