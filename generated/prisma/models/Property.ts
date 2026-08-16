@@ -60,6 +60,8 @@ export type PropertyMinAggregateOutputType = {
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   description: string | null
+  coverImageUrl: string | null
+  coverImagePublicId: string | null
   status: $Enums.PropertyStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -83,6 +85,8 @@ export type PropertyMaxAggregateOutputType = {
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   description: string | null
+  coverImageUrl: string | null
+  coverImagePublicId: string | null
   status: $Enums.PropertyStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -106,6 +110,8 @@ export type PropertyCountAggregateOutputType = {
   latitude: number
   longitude: number
   description: number
+  coverImageUrl: number
+  coverImagePublicId: number
   status: number
   createdAt: number
   updatedAt: number
@@ -151,6 +157,8 @@ export type PropertyMinAggregateInputType = {
   latitude?: true
   longitude?: true
   description?: true
+  coverImageUrl?: true
+  coverImagePublicId?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -174,6 +182,8 @@ export type PropertyMaxAggregateInputType = {
   latitude?: true
   longitude?: true
   description?: true
+  coverImageUrl?: true
+  coverImagePublicId?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -197,6 +207,8 @@ export type PropertyCountAggregateInputType = {
   latitude?: true
   longitude?: true
   description?: true
+  coverImageUrl?: true
+  coverImagePublicId?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -307,6 +319,8 @@ export type PropertyGroupByOutputType = {
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   description: string | null
+  coverImageUrl: string | null
+  coverImagePublicId: string | null
   status: $Enums.PropertyStatus
   createdAt: Date
   updatedAt: Date
@@ -353,6 +367,8 @@ export type PropertyWhereInput = {
   latitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImageUrl?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImagePublicId?: Prisma.StringNullableFilter<"Property"> | string | null
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
@@ -382,6 +398,8 @@ export type PropertyOrderByWithRelationInput = {
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImagePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -414,6 +432,8 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   latitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImageUrl?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImagePublicId?: Prisma.StringNullableFilter<"Property"> | string | null
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
@@ -443,6 +463,8 @@ export type PropertyOrderByWithAggregationInput = {
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImagePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -474,6 +496,8 @@ export type PropertyScalarWhereWithAggregatesInput = {
   latitude?: Prisma.DecimalNullableWithAggregatesFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableWithAggregatesFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  coverImageUrl?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  coverImagePublicId?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   status?: Prisma.EnumPropertyStatusWithAggregatesFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Property"> | Date | string
@@ -495,6 +519,8 @@ export type PropertyCreateInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -521,6 +547,8 @@ export type PropertyUncheckedCreateInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -544,6 +572,8 @@ export type PropertyUpdateInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -570,6 +600,8 @@ export type PropertyUncheckedUpdateInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -595,6 +627,8 @@ export type PropertyCreateManyInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -616,6 +650,8 @@ export type PropertyUpdateManyMutationInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -636,6 +672,8 @@ export type PropertyUncheckedUpdateManyInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -669,6 +707,8 @@ export type PropertyCountOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
+  coverImagePublicId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -702,6 +742,8 @@ export type PropertyMaxOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
+  coverImagePublicId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -725,6 +767,8 @@ export type PropertyMinOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
+  coverImagePublicId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -973,6 +1017,8 @@ export type PropertyCreateWithoutCreatedByInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -998,6 +1044,8 @@ export type PropertyUncheckedCreateWithoutCreatedByInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1030,6 +1078,8 @@ export type PropertyCreateWithoutUpdatedByInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1055,6 +1105,8 @@ export type PropertyUncheckedCreateWithoutUpdatedByInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1087,6 +1139,8 @@ export type PropertyCreateWithoutDeletedByInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1112,6 +1166,8 @@ export type PropertyUncheckedCreateWithoutDeletedByInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1165,6 +1221,8 @@ export type PropertyScalarWhereInput = {
   latitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImageUrl?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImagePublicId?: Prisma.StringNullableFilter<"Property"> | string | null
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
@@ -1218,6 +1276,8 @@ export type PropertyCreateWithoutTenantInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1242,6 +1302,8 @@ export type PropertyUncheckedCreateWithoutTenantInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1291,6 +1353,8 @@ export type PropertyCreateWithoutFloorsInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1316,6 +1380,8 @@ export type PropertyUncheckedCreateWithoutFloorsInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1354,6 +1420,8 @@ export type PropertyUpdateWithoutFloorsInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1379,6 +1447,8 @@ export type PropertyUncheckedUpdateWithoutFloorsInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1401,6 +1471,8 @@ export type PropertyCreateWithoutRoomsInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1426,6 +1498,8 @@ export type PropertyUncheckedCreateWithoutRoomsInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1464,6 +1538,8 @@ export type PropertyUpdateWithoutRoomsInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1489,6 +1565,8 @@ export type PropertyUncheckedUpdateWithoutRoomsInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1513,6 +1591,8 @@ export type PropertyCreateManyCreatedByInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1535,6 +1615,8 @@ export type PropertyCreateManyUpdatedByInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1557,6 +1639,8 @@ export type PropertyCreateManyDeletedByInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1577,6 +1661,8 @@ export type PropertyUpdateWithoutCreatedByInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1602,6 +1688,8 @@ export type PropertyUncheckedUpdateWithoutCreatedByInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1626,6 +1714,8 @@ export type PropertyUncheckedUpdateManyWithoutCreatedByInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1646,6 +1736,8 @@ export type PropertyUpdateWithoutUpdatedByInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1671,6 +1763,8 @@ export type PropertyUncheckedUpdateWithoutUpdatedByInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1695,6 +1789,8 @@ export type PropertyUncheckedUpdateManyWithoutUpdatedByInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1715,6 +1811,8 @@ export type PropertyUpdateWithoutDeletedByInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1740,6 +1838,8 @@ export type PropertyUncheckedUpdateWithoutDeletedByInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1764,6 +1864,8 @@ export type PropertyUncheckedUpdateManyWithoutDeletedByInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1785,6 +1887,8 @@ export type PropertyCreateManyTenantInput = {
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1806,6 +1910,8 @@ export type PropertyUpdateWithoutTenantInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1830,6 +1936,8 @@ export type PropertyUncheckedUpdateWithoutTenantInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1854,6 +1962,8 @@ export type PropertyUncheckedUpdateManyWithoutTenantInput = {
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1917,6 +2027,8 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   latitude?: boolean
   longitude?: boolean
   description?: boolean
+  coverImageUrl?: boolean
+  coverImagePublicId?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1947,6 +2059,8 @@ export type PropertySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   latitude?: boolean
   longitude?: boolean
   description?: boolean
+  coverImageUrl?: boolean
+  coverImagePublicId?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1974,6 +2088,8 @@ export type PropertySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   latitude?: boolean
   longitude?: boolean
   description?: boolean
+  coverImageUrl?: boolean
+  coverImagePublicId?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2001,6 +2117,8 @@ export type PropertySelectScalar = {
   latitude?: boolean
   longitude?: boolean
   description?: boolean
+  coverImageUrl?: boolean
+  coverImagePublicId?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2010,7 +2128,7 @@ export type PropertySelectScalar = {
   deletedById?: boolean
 }
 
-export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "type" | "province" | "provinceCode" | "district" | "ward" | "wardCode" | "addressDetail" | "latitude" | "longitude" | "description" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["property"]>
+export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "type" | "province" | "provinceCode" | "district" | "ward" | "wardCode" | "addressDetail" | "latitude" | "longitude" | "description" | "coverImageUrl" | "coverImagePublicId" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["property"]>
 export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   floors?: boolean | Prisma.Property$floorsArgs<ExtArgs>
@@ -2105,6 +2223,14 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
      * Mô tả chi tiết về nhà trọ (tiện ích chung, quy định chung...)
      */
     description: string | null
+    /**
+     * URL ảnh bìa của nhà trọ trên Cloudinary
+     */
+    coverImageUrl: string | null
+    /**
+     * Public ID của ảnh bìa trên Cloudinary để xóa/thay thế
+     */
+    coverImagePublicId: string | null
     /**
      * Trạng thái hoạt động của tòa nhà
      */
@@ -2575,6 +2701,8 @@ export interface PropertyFieldRefs {
   readonly latitude: Prisma.FieldRef<"Property", 'Decimal'>
   readonly longitude: Prisma.FieldRef<"Property", 'Decimal'>
   readonly description: Prisma.FieldRef<"Property", 'String'>
+  readonly coverImageUrl: Prisma.FieldRef<"Property", 'String'>
+  readonly coverImagePublicId: Prisma.FieldRef<"Property", 'String'>
   readonly status: Prisma.FieldRef<"Property", 'PropertyStatus'>
   readonly createdAt: Prisma.FieldRef<"Property", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Property", 'DateTime'>

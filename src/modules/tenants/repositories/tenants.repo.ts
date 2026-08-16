@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import roleName from '@src/common/constants/role.constant'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
+import { seedTenantDefaults } from '../utils/seed-tenant-defaults.util'
 import type { Prisma } from 'generated/prisma/client'
 
 type CreateLandlordTenantInput = {
@@ -203,6 +204,8 @@ export class TenantsRepository {
         select: { id: true },
       })
 
+      await seedTenantDefaults(tx as any, tenant.id, input.actorId)
+
       await tx.tenantMember.create({
         data: {
           tenantId: tenant.id,
@@ -239,10 +242,10 @@ export class TenantsRepository {
     return this.prismaService.$transaction(async (tx) => {
       await tx.role.findUniqueOrThrow({ where: { id: roleName.LANDLORD }, select: { id: true } })
       await tx.plan.findFirstOrThrow({ where: { id: input.planId, isActive: true }, select: { id: true } })
-      
+
       const user = await tx.user.findUniqueOrThrow({
         where: { id: input.userId },
-        select: { id: true, email: true, phone: true }
+        select: { id: true, email: true, phone: true },
       })
 
       const tenant = await tx.tenant.create({
@@ -258,6 +261,8 @@ export class TenantsRepository {
         },
         select: { id: true },
       })
+
+      await seedTenantDefaults(tx as any, tenant.id, user.id)
 
       await tx.tenantMember.create({
         data: {

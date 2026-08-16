@@ -9,6 +9,7 @@ export const planSelect = {
   description: true,
   priceMonthly: true,
   priceYearly: true,
+  maxProperties: true,
   maxRooms: true,
   maxStaff: true,
   allowAiOcr: true,

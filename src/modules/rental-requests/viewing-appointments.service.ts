@@ -109,6 +109,14 @@ export class ViewingAppointmentsService {
     return buildPaginatedResult(appointments, total, page, limit)
   }
 
+  async getMine(userId: number, id: number) {
+    const appointment = await this.rentalRequestsRepository.findRenterAppointment(userId, id)
+    if (!appointment) {
+      throw new NotFoundException('Không tìm thấy lịch hẹn của bạn')
+    }
+    return appointment
+  }
+
   async cancelMine(userId: number, id: number, _body: TCancelMyViewingAppointmentBodySchema) {
     void _body
     const appointment = await this.rentalRequestsRepository.findRenterAppointment(userId, id)

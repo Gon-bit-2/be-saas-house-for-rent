@@ -1,8 +1,23 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Query,
+  UploadedFile,
+  UseInterceptors,
+  BadRequestException,
+} from '@nestjs/common'
+import { FileInterceptor } from '@nestjs/platform-express'
 import roleName from '@src/common/constants/role.constant'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
 import { Roles } from '@src/common/decorators/decorators/roles.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
+import { memoryStorage } from 'multer'
 import {
   CreateFloorBodyDTO,
   CreatePropertyBodyDTO,
@@ -12,6 +27,19 @@ import {
   UpdatePropertyStatusBodyDTO,
 } from './dto/properties.dto'
 import { PropertiesService } from './properties.service'
+
+const imageFileInterceptor = FileInterceptor('file', {
+  storage: memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (_request, file, callback) => {
+    if (/^image\/(jpeg|jpg|png|webp)$/.test(file.mimetype)) {
+      callback(null, true)
+      return
+    }
+
+    callback(new BadRequestException('Chỉ hỗ trợ ảnh jpg, jpeg, png hoặc webp'), false)
+  },
+})
 
 /**
  * Tenant-scoped controller for managing properties and their floors.
@@ -90,5 +118,15 @@ export class PropertiesController {
     @Param('floorId', ParseIntPipe) floorId: number,
   ) {
     return this.propertiesService.deleteFloor(user.userId, propertyId, floorId)
+  }
+
+  @Post(':id/cover-image')
+  @UseInterceptors(imageFileInterceptor)
+  uploadCoverImage(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.propertiesService.uploadCoverImage(user.userId, id, file)
   }
 }

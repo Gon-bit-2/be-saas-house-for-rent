@@ -343,6 +343,8 @@ export const PropertyScalarFieldEnum = {
   latitude: 'latitude',
   longitude: 'longitude',
   description: 'description',
+  coverImageUrl: 'coverImageUrl',
+  coverImagePublicId: 'coverImagePublicId',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',

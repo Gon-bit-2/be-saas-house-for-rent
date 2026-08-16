@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
 import { TenantAccessService } from '@src/shared/modules/services/tenant-access.service'
+import { CloudinaryService } from '@src/shared/modules/services/cloudinary.service'
 import { LocationsService } from '@src/modules/locations/locations.service'
 import type { Prisma } from 'generated/prisma/client'
 import type {
@@ -22,6 +23,7 @@ export class PropertiesService {
     private readonly propertiesRepository: PropertiesRepository,
     private readonly tenantAccessService: TenantAccessService,
     private readonly locationsService: LocationsService,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   async list(userId: number, query: TListPropertiesQuerySchema) {
@@ -155,6 +157,30 @@ export class PropertiesService {
       throw new BadRequestException('Không thể xóa tầng đang có phòng')
     }
     return this.propertiesRepository.deleteFloor(floorId)
+  }
+
+  async uploadCoverImage(userId: number, propertyId: number, file: Express.Multer.File) {
+    if (!file) {
+      throw new BadRequestException('Vui lòng chọn ảnh bìa')
+    }
+
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const property = await this.getTenantPropertyOrThrow(tenant.tenantId, propertyId)
+
+    // Nếu đã có ảnh bìa cũ, xóa khỏi Cloudinary để dọn dẹp
+    if (property.coverImagePublicId) {
+      await this.cloudinaryService.deleteImage(property.coverImagePublicId).catch(() => undefined)
+    }
+
+    // Upload ảnh mới
+    const uploadResult = await this.cloudinaryService.uploadImage(file, `properties/${tenant.tenantId}/${propertyId}`)
+
+    // Cập nhật record Property
+    return this.propertiesRepository.update(propertyId, {
+      coverImageUrl: uploadResult.url,
+      coverImagePublicId: uploadResult.publicId,
+      updatedById: userId,
+    })
   }
 
   private async getTenantPropertyOrThrow(tenantId: number, id: number) {

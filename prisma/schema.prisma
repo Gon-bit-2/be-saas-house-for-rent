@@ -674,6 +674,10 @@ model Property {
   longitude     Decimal?       @db.Decimal(11, 8)
   /// Mô tả chi tiết về nhà trọ (tiện ích chung, quy định chung...)
   description   String?        @db.Text
+  /// URL ảnh bìa của nhà trọ trên Cloudinary
+  coverImageUrl String?        @map("cover_image_url") @db.Text
+  /// Public ID của ảnh bìa trên Cloudinary để xóa/thay thế
+  coverImagePublicId String?   @map("cover_image_public_id") @db.VarChar(100)
   /// Trạng thái hoạt động của tòa nhà
   status        PropertyStatus @default(ACTIVE)
   /// Thời điểm tạo nhà trọ

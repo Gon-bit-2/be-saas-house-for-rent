@@ -124,6 +124,14 @@ export class RentalRequestsService {
     }
   }
 
+  async getMine(userId: number, id: number) {
+    const request = await this.rentalRequestsRepository.findRenterRequest(userId, id)
+    if (!request) {
+      throw new NotFoundException('Không tìm thấy yêu cầu thuê của bạn')
+    }
+    return request
+  }
+
   async cancelMine(userId: number, id: number, _body: TCancelMyRentalRequestBodySchema) {
     void _body
     const request = await this.rentalRequestsRepository.findRenterRequest(userId, id)

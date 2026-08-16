@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import roleName from '@src/common/constants/role.constant'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
+import { seedTenantDefaults } from '../../tenants/utils/seed-tenant-defaults.util'
 import type { Prisma } from 'generated/prisma/client'
 import type {
   TRefreshTokenSchema,
@@ -140,6 +141,8 @@ export class AuthRepository {
             phone: user.phone,
           },
         })
+
+        await seedTenantDefaults(tx as any, tenant.id)
 
         await tx.tenantMember.create({
           data: {

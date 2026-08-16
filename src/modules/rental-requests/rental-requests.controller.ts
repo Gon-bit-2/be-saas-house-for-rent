@@ -25,6 +25,12 @@ export class RentalRequestsController {
   }
 
   @IsTenant()
+  @Get('me/:id')
+  getMine(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
+    return this.rentalRequestsService.getMine(user.userId, id)
+  }
+
+  @IsTenant()
   @Patch('me/:id')
   updateMine(
     @ActiveUser() user: AccessTokenPayload,

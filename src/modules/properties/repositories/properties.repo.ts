@@ -26,6 +26,8 @@ export const propertySelect = {
   latitude: true,
   longitude: true,
   description: true,
+  coverImageUrl: true,
+  coverImagePublicId: true,
   status: true,
   createdAt: true,
   updatedAt: true,
