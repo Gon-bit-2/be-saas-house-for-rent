@@ -48,6 +48,11 @@ export class InvoicesController {
   getForLandlord(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
     return this.invoicesService.getForLandlord(user.userId, id)
   }
+  @Roles(roleName.LANDLORD, roleName.MANAGER, roleName.ACCOUNTANT)
+  @Post('preview')
+  preview(@ActiveUser() user: AccessTokenPayload, @Body() body: CreateInvoiceBodyDTO) {
+    return this.invoicesService.preview(user.userId, body)
+  }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER, roleName.ACCOUNTANT)
   @Post()

@@ -252,6 +252,7 @@ export class InvoicesRepository {
         contractId,
         billingMonth,
         deletedAt: null,
+        status: { not: 'CANCELED' },
         ...(excludedInvoiceId ? { id: { not: excludedInvoiceId } } : {}),
       },
       select: { id: true, invoiceCode: true },

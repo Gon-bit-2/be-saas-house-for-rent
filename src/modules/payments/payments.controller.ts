@@ -11,6 +11,7 @@ import {
   PayosWebhookBodyDTO,
   ReviewPaymentBodyDTO,
   SubmitPaymentConfirmationBodyDTO,
+  RecordManualPaymentBodyDTO,
 } from './dto/payments.dto'
 import { PaymentsService } from './payments.service'
 
@@ -45,6 +46,17 @@ export class PaymentsController {
   ) {
     void _body
     return this.paymentsService.createMyPaymentQr(user.userId, id)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER, roleName.ACCOUNTANT)
+  @Post('invoices/:id/payment-qr')
+  createPaymentQr(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() _body: CreatePaymentQrBodyDTO,
+  ) {
+    void _body
+    return this.paymentsService.createPaymentQr(user.userId, id)
   }
 
   @IsTenant()
@@ -87,6 +99,16 @@ export class PaymentsController {
     @Body() body: ReviewPaymentBodyDTO,
   ) {
     return this.paymentsService.reject(user.userId, id, body)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER, roleName.ACCOUNTANT)
+  @Post('invoices/:id/manual-payments')
+  recordManualPayment(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: RecordManualPaymentBodyDTO,
+  ) {
+    return this.paymentsService.recordManualPayment(user.userId, id, body)
   }
 
   @Auth(AuthType.None)

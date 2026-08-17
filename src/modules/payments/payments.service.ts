@@ -12,6 +12,7 @@ import type {
   TPayosWebhookDataSchema,
   TReviewPaymentBodySchema,
   TSubmitPaymentConfirmationBodySchema,
+  TRecordManualPaymentBodySchema,
 } from './model/payments.model'
 import { PaymentsRepository, type PayableInvoice } from './repositories/payments.repo'
 import { digestWebhookPayload, sanitizePayosWebhookPayload, sanitizeWebhookText } from './webhook-log.security'
@@ -73,6 +74,15 @@ export class PaymentsService {
 
   async createMyPaymentQr(userId: number, invoiceId: number) {
     const invoice = await this.getMyPayableInvoiceOrThrow(userId, invoiceId)
+    return this.generatePaymentQrForInvoice(invoice)
+  }
+
+  async createPaymentQr(userId: number, invoiceId: number) {
+    const invoice = await this.getTenantPayableInvoiceOrThrow(userId, invoiceId)
+    return this.generatePaymentQrForInvoice(invoice)
+  }
+
+  private async generatePaymentQrForInvoice(invoice: PayableInvoice) {
     const amount = this.toMoneyNumber(invoice.debtAmount)
     this.assertPositiveDebt(amount)
 
@@ -152,6 +162,22 @@ export class PaymentsService {
     const updated = await this.paymentsRepository.rejectPayment(tenant.tenantId, id, userId, body.landlordNote)
     await this.notificationEventsService.notifyPaymentReviewed(updated)
     return updated
+  }
+
+  async recordManualPayment(userId: number, invoiceId: number, body: TRecordManualPaymentBodySchema) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const payment = await this.paymentsRepository.recordManualPayment(
+      tenant.tenantId,
+      invoiceId,
+      userId,
+      body.amount,
+      body.method,
+      body.paidAt ? new Date(body.paidAt) : new Date(),
+      body.note
+    )
+    // You could potentially fire a notification to renter that a payment was successfully recorded
+    await this.notificationEventsService.notifyPaymentReviewed(payment)
+    return payment
   }
 
   async handlePayosWebhook(payload: TPayosWebhookBodySchema) {
@@ -285,6 +311,18 @@ export class PaymentsService {
     const invoice = await this.paymentsRepository.findMyPayableInvoice(userId, invoiceId)
     if (!invoice) {
       throw new NotFoundException('Không tìm thấy hóa đơn của bạn')
+    }
+    if (!PAYABLE_INVOICE_STATUSES.includes(invoice.status)) {
+      throw new BadRequestException('Hóa đơn không ở trạng thái có thể thanh toán')
+    }
+    return invoice as PayableInvoice
+  }
+
+  private async getTenantPayableInvoiceOrThrow(userId: number, invoiceId: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const invoice = await this.paymentsRepository.findTenantPayableInvoice(tenant.tenantId, invoiceId)
+    if (!invoice) {
+      throw new NotFoundException('Không tìm thấy hóa đơn trong tenant hiện tại')
     }
     if (!PAYABLE_INVOICE_STATUSES.includes(invoice.status)) {
       throw new BadRequestException('Hóa đơn không ở trạng thái có thể thanh toán')

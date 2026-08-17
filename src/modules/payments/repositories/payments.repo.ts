@@ -1,7 +1,7 @@
 import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
 import { Prisma } from 'generated/prisma/client'
-import type { DebtStatus, InvoiceStatus } from 'generated/prisma/client'
+import type { DebtStatus, InvoiceStatus, PaymentMethod } from 'generated/prisma/client'
 
 const PAYABLE_INVOICE_STATUSES: InvoiceStatus[] = ['UNPAID', 'PARTIALLY_PAID', 'OVERDUE']
 
@@ -128,6 +128,25 @@ export class PaymentsRepository {
   async findMyPayableInvoice(userId: number, invoiceId: number) {
     return this.prismaService.invoice.findFirst({
       where: { id: invoiceId, renterId: userId, deletedAt: null },
+      select: {
+        id: true,
+        tenantId: true,
+        renterId: true,
+        invoiceCode: true,
+        status: true,
+        totalAmount: true,
+        paidAmount: true,
+        debtAmount: true,
+        dueDate: true,
+        renter: { select: { id: true, fullName: true, email: true, phone: true } },
+        room: { select: { id: true, roomCode: true, title: true } },
+      },
+    })
+  }
+
+  async findTenantPayableInvoice(tenantId: number, invoiceId: number) {
+    return this.prismaService.invoice.findFirst({
+      where: { id: invoiceId, tenantId, deletedAt: null },
       select: {
         id: true,
         tenantId: true,
@@ -449,6 +468,97 @@ export class PaymentsRepository {
       throw new ConflictException('Thanh toán đã được xử lý')
     }
     return this.prismaService.payment.findUniqueOrThrow({ where: { id: paymentId }, select: paymentSelect })
+  }
+
+  async recordManualPayment(
+    tenantId: number,
+    invoiceId: number,
+    actorId: number,
+    amount: number,
+    method: PaymentMethod,
+    paidAt: Date,
+    landlordNote?: string,
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      const lockedInvoices = await tx.$queryRaw<Array<{ id: number }>>(
+        Prisma.sql`SELECT id FROM invoices WHERE id = ${invoiceId} AND tenant_id = ${tenantId} FOR UPDATE`,
+      )
+      if (lockedInvoices.length !== 1) {
+        throw new NotFoundException('Không tìm thấy hóa đơn trong tenant hiện tại')
+      }
+
+      const invoice = await tx.invoice.findFirstOrThrow({
+        where: { id: invoiceId, tenantId },
+        select: { id: true, status: true, totalAmount: true, debtAmount: true, dueDate: true, renterId: true },
+      })
+
+      if (!PAYABLE_INVOICE_STATUSES.includes(invoice.status)) {
+        throw new BadRequestException('Hóa đơn không còn ở trạng thái có thể ghi nhận thanh toán')
+      }
+      if (new Prisma.Decimal(amount).greaterThan(new Prisma.Decimal(invoice.debtAmount))) {
+        throw new BadRequestException('Số tiền thanh toán lớn hơn công nợ còn lại')
+      }
+
+      const payment = await tx.payment.create({
+        data: {
+          tenantId,
+          invoiceId,
+          payerId: invoice.renterId,
+          amount,
+          method,
+          status: 'SUCCESS',
+          paidAt,
+          approvedById: actorId,
+          approvedAt: new Date(),
+          landlordNote,
+        },
+      })
+
+      const successfulPayments = await tx.payment.aggregate({
+        where: { invoiceId, status: 'SUCCESS' },
+        _sum: { amount: true },
+      })
+      const newPaidAmount = successfulPayments._sum.amount ?? new Prisma.Decimal(0)
+      const totalAmount = new Prisma.Decimal(invoice.totalAmount)
+      
+      // Should not happen, but safe check
+      if (newPaidAmount.greaterThan(totalAmount)) {
+        throw new ConflictException('Tổng thanh toán vượt quá giá trị hóa đơn')
+      }
+
+      const remainingAmount = totalAmount.minus(newPaidAmount)
+      const invoiceStatus = this.resolveInvoiceStatus(remainingAmount, invoice.dueDate)
+      const debtStatus = this.resolveDebtStatus(remainingAmount, invoice.dueDate)
+      const resolvedAt = debtStatus === 'PAID' ? new Date() : null
+
+      await tx.invoice.update({
+        where: { id: invoiceId },
+        data: {
+          paidAmount: newPaidAmount,
+          debtAmount: remainingAmount,
+          status: invoiceStatus,
+          updatedById: actorId,
+        },
+      })
+      await tx.debt.update({
+        where: { invoiceId },
+        data: {
+          paidAmount: newPaidAmount,
+          remainingAmount,
+          status: debtStatus,
+          resolvedAt,
+        },
+      })
+
+      if (remainingAmount.isZero()) {
+        await tx.paymentQrCode.updateMany({
+          where: { invoiceId, status: 'ACTIVE' },
+          data: { status: 'PAID' },
+        })
+      }
+
+      return tx.payment.findUniqueOrThrow({ where: { id: payment.id }, select: paymentSelect })
+    })
   }
 
   private resolveInvoiceStatus(remainingAmount: Prisma.Decimal, dueDate: Date): InvoiceStatus {

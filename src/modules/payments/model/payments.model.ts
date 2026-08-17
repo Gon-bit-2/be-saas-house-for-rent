@@ -30,6 +30,15 @@ export const SubmitPaymentConfirmationBodySchema = z
   })
   .strict()
 
+export const RecordManualPaymentBodySchema = z
+  .object({
+    amount: z.coerce.number().positive(),
+    method: PaymentMethodSchema,
+    paidAt: IsoDateInputCodec.optional(),
+    note: z.string().trim().max(5000).optional(),
+  })
+  .strict()
+
 export const ReviewPaymentBodySchema = z
   .object({
     landlordNote: z.string().trim().min(1).max(5000).optional(),
@@ -67,5 +76,6 @@ export type TListPaymentsQuerySchema = z.infer<typeof ListPaymentsQuerySchema>
 export type TCreatePaymentQrBodySchema = z.infer<typeof CreatePaymentQrBodySchema>
 export type TSubmitPaymentConfirmationBodySchema = z.infer<typeof SubmitPaymentConfirmationBodySchema>
 export type TReviewPaymentBodySchema = z.infer<typeof ReviewPaymentBodySchema>
+export type TRecordManualPaymentBodySchema = z.infer<typeof RecordManualPaymentBodySchema>
 export type TPayosWebhookBodySchema = z.infer<typeof PayosWebhookBodySchema>
 export type TPayosWebhookDataSchema = z.infer<typeof PayosWebhookDataSchema>

@@ -66,6 +66,47 @@ export class InvoicesService {
     return invoice
   }
 
+  async preview(userId: number, body: TCreateInvoiceBodySchema) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const billingMonth = this.normalizeBillingMonth(body.billingMonth)
+    const monthEnd = this.endOfBillingMonth(billingMonth)
+    const contract = await this.invoicesRepository.findActiveContractForInvoice(
+      tenant.tenantId,
+      body.contractId,
+      billingMonth,
+      monthEnd,
+    )
+    if (!contract || contract.room.deletedAt) {
+      throw new NotFoundException('Không tìm thấy hợp đồng active thuộc tenant trong kỳ hóa đơn')
+    }
+
+    const readings = await this.invoicesRepository.findConfirmedReadingsForInvoice(
+      tenant.tenantId,
+      contract.id,
+      contract.roomId,
+      billingMonth,
+    )
+    const serviceAssignments = await this.invoicesRepository.findServiceAssignmentsForInvoice(
+      tenant.tenantId,
+      contract.id,
+      contract.roomId,
+      billingMonth,
+      monthEnd,
+    )
+    const items = this.buildInvoiceItems(contract, billingMonth, readings, serviceAssignments, body.extraItems)
+    const totals = this.calculateTotals(items)
+    
+    return {
+      items,
+      totals,
+      contract: {
+        id: contract.id,
+        roomCode: contract.room.roomCode
+      },
+      billingMonth
+    }
+  }
+
   async create(userId: number, body: TCreateInvoiceBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const billingMonth = this.normalizeBillingMonth(body.billingMonth)
@@ -345,7 +386,17 @@ export class InvoicesService {
       meterReadingId: null,
     }
     const utilityItems = readings.map((reading) => this.utilityReadingToItem(reading, monthLabel))
-    const serviceItems: InvoiceItemDraft[] = serviceAssignments.map((assignment) => {
+    
+    const hasElectricityReading = utilityItems.some((item) => item.itemType === 'ELECTRICITY')
+    const hasWaterReading = utilityItems.some((item) => item.itemType === 'WATER')
+
+    const filteredServiceAssignments = serviceAssignments.filter((assignment) => {
+      if (assignment.serviceItem.itemType === 'ELECTRICITY' && hasElectricityReading) return false
+      if (assignment.serviceItem.itemType === 'WATER' && hasWaterReading) return false
+      return true
+    })
+
+    const serviceItems: InvoiceItemDraft[] = filteredServiceAssignments.map((assignment) => {
       const quantity = this.toNumber(assignment.quantity)
       const unitPrice = this.toNumber(assignment.unitPrice ?? assignment.serviceItem.defaultUnitPrice)
       return {
