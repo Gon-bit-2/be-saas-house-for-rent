@@ -156,6 +156,10 @@ export class PaymentsService {
 
   async handlePayosWebhook(payload: TPayosWebhookBodySchema) {
     try {
+      if (!payload || !payload.data) {
+        return { code: '00', desc: 'success', success: true }
+      }
+
       const verifiedData = await this.payosService.verifyWebhook(payload)
       const data = verifiedData
       const transactionDateTime = this.parsePayosDateTime(data.transactionDateTime)
@@ -271,14 +275,9 @@ export class PaymentsService {
       await this.logWebhook(payload, data, true, 'PROCESSED', null, transactionDateTime, qr.tenantId, qr.invoiceId)
       return { code: '00', desc: 'success', success: true }
     } catch (error) {
-      await this.logWebhook(
-        payload,
-        payload.data,
-        false,
-        'FAILED',
-        error instanceof Error ? error.message : 'Webhook PayOS không hợp lệ',
-      )
-      throw new BadRequestException('Webhook PayOS không hợp lệ')
+      this.logger.error('Webhook PayOS lỗi hoặc request test: ', error)
+      // Return 200 OK anyways so PayOS Dashboard can save the Webhook URL successfully
+      return { code: '00', desc: 'success', success: true }
     }
   }
 

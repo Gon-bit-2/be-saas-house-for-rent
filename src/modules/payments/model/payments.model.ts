@@ -36,36 +36,32 @@ export const ReviewPaymentBodySchema = z
   })
   .strict()
 
-const PayosWebhookDataSchema = z
-  .object({
-    orderCode: z.coerce.number().int().positive(),
-    amount: z.coerce.number().positive(),
-    description: z.string(),
-    accountNumber: z.string(),
-    reference: z.string(),
-    transactionDateTime: z.string(),
-    currency: z.string(),
-    paymentLinkId: z.string(),
-    code: z.string(),
-    desc: z.string(),
-    counterAccountBankId: z.string().nullable().optional(),
-    counterAccountBankName: z.string().nullable().optional(),
-    counterAccountName: z.string().nullable().optional(),
-    counterAccountNumber: z.string().nullable().optional(),
-    virtualAccountName: z.string().nullable().optional(),
-    virtualAccountNumber: z.string().nullable().optional(),
-  })
-  .strict()
+const PayosWebhookDataSchema = z.object({
+  orderCode: z.coerce.number().int().positive(),
+  amount: z.coerce.number().positive(),
+  description: z.string(),
+  accountNumber: z.string(),
+  reference: z.string(),
+  transactionDateTime: z.string(),
+  currency: z.string(),
+  paymentLinkId: z.string(),
+  code: z.string(),
+  desc: z.string(),
+  counterAccountBankId: z.string().nullable().optional(),
+  counterAccountBankName: z.string().nullable().optional(),
+  counterAccountName: z.string().nullable().optional(),
+  counterAccountNumber: z.string().nullable().optional(),
+  virtualAccountName: z.string().nullable().optional(),
+  virtualAccountNumber: z.string().nullable().optional(),
+})
 
-export const PayosWebhookBodySchema = z
-  .object({
-    code: z.string(),
-    desc: z.string(),
-    success: z.boolean(),
-    data: PayosWebhookDataSchema,
-    signature: z.string(),
-  })
-  .strict()
+export const PayosWebhookBodySchema = z.object({
+  code: z.string(),
+  desc: z.string(),
+  success: z.boolean(),
+  data: PayosWebhookDataSchema,
+  signature: z.string(),
+})
 
 export type TListPaymentsQuerySchema = z.infer<typeof ListPaymentsQuerySchema>
 export type TCreatePaymentQrBodySchema = z.infer<typeof CreatePaymentQrBodySchema>

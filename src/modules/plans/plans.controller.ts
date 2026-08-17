@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query } from '
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
 import roleName from '@src/common/constants/role.constant'
 import { IsAdmin, Roles } from '@src/common/decorators/decorators/roles.decorator'
+import { SkipPermission } from '@src/common/decorators/decorators/skip-permission.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
 import { CreatePlanBodyDTO, ListPlansQueryDTO, UpdatePlanBodyDTO } from './dto/plans.dto'
 import { PlansService } from './plans.service'
@@ -20,6 +21,7 @@ export class PlansController {
   }
 
   @Roles(roleName.LANDLORD)
+  @SkipPermission()
   @Get('available')
   listAvailable() {
     return this.plansService.listAvailable()
