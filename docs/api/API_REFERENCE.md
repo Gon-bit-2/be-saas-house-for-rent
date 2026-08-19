@@ -1,6 +1,6 @@
 # Tài liệu tham chiếu API hiện tại
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-17T17:38:10.580Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-18T16:22:22.790Z. Không chỉnh sửa thủ công.
 
 ## Quy ước chung
 
@@ -11,7 +11,7 @@
 - Request được kiểm tra bằng Zod strict; ngày giờ dùng ISO 8601.
 - Error chuẩn: `{ statusCode, code, message, details?, timestamp, path, requestId }`.
 - Mọi route chịu global rate limit; profile riêng được ghi ở từng operation.
-- Tổng cộng **239 operation** thuộc **37 controller**.
+- Tổng cộng **240 operation** thuộc **37 controller**.
 
 ## Mục lục
 
@@ -25,7 +25,7 @@
 - [Bàn giao phòng (11)](#handovers)
 - [Hóa đơn và công nợ (17)](#invoices)
 - [locations (5)](#locations)
-- [Marketplace và kiểm duyệt (15)](#marketplace)
+- [Marketplace và kiểm duyệt (16)](#marketplace)
 - [Chỉ số điện nước (5)](#meter-readings)
 - [Thông báo (5)](#notifications)
 - [OCR công tơ (5)](#ocr)
@@ -209,6 +209,10 @@
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 - Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `client` | query | Không | `string` |
 
 ### POST `/auth/login`
 
@@ -1296,6 +1300,21 @@
 **Request body**
 
 - `application/json`: `UpdateAdminMarketplaceStatusBodyDTO`; bắt buộc: có.
+
+### GET `/marketplace/amenities`
+
+- Operation ID: `MarketplaceController_listAmenities`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `page` | query | Không | `integer` |
+| `limit` | query | Không | `integer` |
+| `search` | query | Không | `string` |
+| `category` | query | Không | `string` |
 
 ### GET `/marketplace/favorites`
 

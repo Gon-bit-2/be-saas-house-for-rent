@@ -88,6 +88,12 @@ export const LoginResSchema = z.object({
   accessToken: z.string(),
   refreshToken: z.string(),
 })
+export const OTPRequiredResSchema = z.object({
+  message: z.string(),
+  otpRequired: z.literal(true),
+  resendAfterSeconds: z.number().int().positive(),
+})
+export const AuthLoginResSchema = z.union([LoginResSchema, OTPRequiredResSchema])
 //refresh token
 export const RefreshTokenSchema = z.object({
   id: z.number().int(),
@@ -140,9 +146,17 @@ export const DeviceSchema = z.object({
 //logout
 export const LogoutBodySchema = RefreshTokenBodySchema
 //oauth2
+export const GoogleClientSchema = z.enum(['android', 'web'])
+export const GoogleAuthorizationQuerySchema = z
+  .object({
+    client: GoogleClientSchema.default('web'),
+  })
+  .strict()
 export const GoogleAuthStateSchema = DeviceSchema.pick({
   userAgent: true,
   ip: true,
+}).extend({
+  client: GoogleClientSchema.default('web'),
 })
 export const GetAuthorizationUrlResSchema = z.object({
   url: z.string().url(),
@@ -205,12 +219,14 @@ export type TVerificationCodeSchema = z.infer<typeof VerificationCodeSchema>
 export type TSendOTPBodySchema = z.infer<typeof SendOTPBodySchema>
 export type TLoginBodySchema = z.infer<typeof LoginBodySchema>
 export type TLoginResSchema = z.infer<typeof LoginResSchema>
+export type TAuthLoginResSchema = z.infer<typeof AuthLoginResSchema>
 export type TRefreshTokenSchema = z.infer<typeof RefreshTokenSchema>
 export type TRefreshTokenBodySchema = z.infer<typeof RefreshTokenBodySchema>
 export type TRefreshTokenResSchema = z.infer<typeof RefreshTokenResSchema>
 // export type TGetUsserProfileResSchema = z.infer<typeof GetUsserProfileResSchema>
 export type TLogoutBodySchema = z.infer<typeof LogoutBodySchema>
 export type TGoogleAuthStateSchema = z.infer<typeof GoogleAuthStateSchema>
+export type TGoogleAuthorizationQuerySchema = z.infer<typeof GoogleAuthorizationQuerySchema>
 export type TGetAuthorizationUrlResSchema = z.infer<typeof GetAuthorizationUrlResSchema>
 export type TGoogleSessionBodySchema = z.infer<typeof GoogleSessionBodySchema>
 export type TGoogleSessionResSchema = z.infer<typeof GoogleSessionResSchema>

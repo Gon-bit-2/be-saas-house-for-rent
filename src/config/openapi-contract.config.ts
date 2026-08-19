@@ -43,6 +43,11 @@ export const FE_PRIORITY_COMPONENTS: Record<string, Schema> = {
     totalPages: count,
   }),
   MessageResponse: object(['message'], { message: text }),
+  OTPRequiredResponse: object(['message', 'otpRequired', 'resendAfterSeconds'], {
+    message: text,
+    otpRequired: { type: 'boolean', const: true },
+    resendAfterSeconds: { type: 'integer', minimum: 1 },
+  }),
   TokenPair: object(['accessToken', 'refreshToken'], { accessToken: text, refreshToken: text }),
   UrlResponse: object(['url'], { url: { type: 'string', format: 'uri' } }),
   UnreadCount: object(['unreadCount'], { unreadCount: count }),
@@ -134,8 +139,43 @@ export const FE_PRIORITY_COMPONENTS: Record<string, Schema> = {
     type: enumOf('HOUSE', 'MINI_APARTMENT', 'DORM', 'APARTMENT'),
     status: enumOf('ACTIVE', 'INACTIVE', 'MAINTENANCE'),
     province: text,
+    provinceCode: nullable(text),
     district: text,
     ward: text,
+    wardCode: nullable(text),
+  }),
+  MarketplacePropertyDetail: object(['id', 'name', 'type', 'status', 'province', 'district', 'ward'], {
+    id,
+    name: text,
+    type: enumOf('HOUSE', 'MINI_APARTMENT', 'DORM', 'APARTMENT'),
+    status: enumOf('ACTIVE', 'INACTIVE', 'MAINTENANCE'),
+    province: text,
+    provinceCode: nullable(text),
+    district: text,
+    ward: text,
+    wardCode: nullable(text),
+    addressDetail: nullable(text),
+    latitude: nullable({ type: 'number', minimum: -90, maximum: 90 }),
+    longitude: nullable({ type: 'number', minimum: -180, maximum: 180 }),
+  }),
+  MarketplaceRoomImage: object(['id', 'url', 'sortOrder', 'isThumbnail'], {
+    id,
+    url: { type: 'string', format: 'uri' },
+    caption: nullable(text),
+    sortOrder: { type: 'integer', minimum: 0 },
+    isThumbnail: { type: 'boolean' },
+  }),
+  AmenitySummary: object(['id', 'name', 'category'], {
+    id,
+    name: text,
+    icon: nullable(text),
+    category: text,
+  }),
+  MarketplaceRoomAmenity: object(['amenity'], { amenity: ref('AmenitySummary') }),
+  MarketplaceFloor: object(['id', 'name', 'floorNumber'], {
+    id,
+    name: text,
+    floorNumber: { type: 'integer' },
   }),
   RoomImage: object(['id', 'roomId', 'imageUrl', 'sortOrder', 'isThumbnail'], {
     id,
@@ -165,7 +205,7 @@ export const FE_PRIORITY_COMPONENTS: Record<string, Schema> = {
     ...timestamps,
   }),
   MarketplaceRoom: object(
-    ['id', 'propertyId', 'roomCode', 'title', 'status', 'marketplaceStatus', 'basePrice', 'property', 'images'],
+    ['id', 'propertyId', 'roomCode', 'title', 'status', 'marketplaceStatus', 'basePrice', 'maxOccupants', 'property', 'images', 'amenities'],
     {
       id,
       propertyId: id,
@@ -176,13 +216,40 @@ export const FE_PRIORITY_COMPONENTS: Record<string, Schema> = {
       area: nullable(decimal),
       basePrice: decimal,
       depositAmount: nullable(decimal),
+      electricityPrice: nullable(decimal),
+      waterPrice: nullable(decimal),
       maxOccupants: { type: 'integer', minimum: 1 },
       status: enumOf('AVAILABLE'),
       marketplaceStatus: enumOf('PUBLISHED'),
       property: ref('PublicProperty'),
-      images: arrayOf('RoomImage'),
-      createdAt: dateTime,
-      updatedAt: dateTime,
+      floor: nullable(ref('MarketplaceFloor')),
+      images: arrayOf('MarketplaceRoomImage'),
+      amenities: arrayOf('MarketplaceRoomAmenity'),
+      publishedAt: nullable(dateTime),
+    },
+  ),
+  MarketplaceRoomDetail: object(
+    ['id', 'propertyId', 'roomCode', 'title', 'status', 'marketplaceStatus', 'basePrice', 'maxOccupants', 'property', 'images', 'amenities'],
+    {
+      id,
+      propertyId: id,
+      floorId: nullable(id),
+      roomCode: text,
+      title: text,
+      description: nullable(text),
+      area: nullable(decimal),
+      basePrice: decimal,
+      depositAmount: nullable(decimal),
+      electricityPrice: nullable(decimal),
+      waterPrice: nullable(decimal),
+      maxOccupants: { type: 'integer', minimum: 1 },
+      status: enumOf('AVAILABLE'),
+      marketplaceStatus: enumOf('PUBLISHED'),
+      property: ref('MarketplacePropertyDetail'),
+      floor: nullable(ref('MarketplaceFloor')),
+      images: arrayOf('MarketplaceRoomImage'),
+      amenities: arrayOf('MarketplaceRoomAmenity'),
+      publishedAt: nullable(dateTime),
     },
   ),
   MarketplaceModeration: object(['id', 'roomId', 'fromStatus', 'toStatus', 'moderatedById', 'createdAt'], {
@@ -653,15 +720,17 @@ export function isFePriorityOperation(path: string) {
 }
 
 export function feSuccessResponseSchema(method: string, path: string): Schema {
-  if (path === '/auth/login') return { oneOf: [ref('MessageResponse'), ref('TokenPair')] }
+  if (path === '/auth/login') return { oneOf: [ref('OTPRequiredResponse'), ref('TokenPair')] }
   if (['/auth/refresh-token', '/auth/google/session'].includes(path)) return ref('TokenPair')
   if (path === '/auth/google/url') return ref('UrlResponse')
   if (path === '/auth/profile') return ref('UserProfile')
   if (path === '/auth/google/callback') return { type: 'string', description: 'OAuth redirect response' }
+  if (path === '/auth/send-otp') return ref('OTPRequiredResponse')
   if (path.startsWith('/auth/')) return path === '/auth/register' ? ref('UserProfile') : ref('MessageResponse')
 
   if (path === '/marketplace/rooms' && method === 'get') return paginated('MarketplaceRoom')
-  if (/^\/marketplace\/rooms\/\{id\}$/.test(path)) return ref('MarketplaceRoom')
+  if (path === '/marketplace/amenities' && method === 'get') return paginated('AmenitySummary')
+  if (/^\/marketplace\/rooms\/\{id\}$/.test(path)) return ref('MarketplaceRoomDetail')
   if (path.endsWith('/rental-requests')) return ref('RentalRequest')
   if (path.endsWith('/viewing-appointments')) return ref('Appointment')
   if (path === '/marketplace/admin/rooms' && method === 'get') return paginated('Room')

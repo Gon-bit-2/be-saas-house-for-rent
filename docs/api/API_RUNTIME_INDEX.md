@@ -1,8 +1,8 @@
 # Runtime API Index
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-17T17:38:10.574Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-18T16:22:22.785Z. Không chỉnh sửa thủ công.
 
-- Tổng số operation: **239**
+- Tổng số operation: **240**
 - Swagger UI: `GET /docs`
 - OpenAPI JSON: `GET /docs-json`
 - Route protected dùng Bearer JWT; route staff theo tenant có thể yêu cầu `x-tenant-id`.
@@ -150,6 +150,7 @@
 | GET | `/marketplace/admin/rooms/{id}` | Bearer JWT | `MarketplaceAdminController_getById` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/marketplace/admin/rooms/{id}/history` | Bearer JWT | `MarketplaceAdminController_getHistory` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/marketplace/admin/rooms/{id}/status` | Bearer JWT | `MarketplaceAdminController_updateStatus` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/marketplace/amenities` | Bearer JWT | `MarketplaceController_listAmenities` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/marketplace/favorites` | Bearer JWT | `FavoriteController_getFavorites` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | DELETE | `/marketplace/favorites/{roomId}` | Bearer JWT | `FavoriteController_removeFavorite` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/marketplace/favorites/{roomId}` | Bearer JWT | `FavoriteController_addFavorite` | 201, 400, 401, 403, 404, 409, 429, 500 |

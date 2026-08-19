@@ -6,6 +6,7 @@ import type { AccessTokenPayload } from '@src/common/types/jwt.type'
 import {
   CreateMarketplaceRentalRequestBodyDTO,
   CreateMarketplaceViewingAppointmentBodyDTO,
+  ListMarketplaceAmenitiesQueryDTO,
   ListMarketplaceRoomsQueryDTO,
 } from './dto/marketplace.dto'
 import { MarketplaceService } from './marketplace.service'
@@ -16,6 +17,12 @@ import { MarketplaceService } from './marketplace.service'
 @Controller('marketplace')
 export class MarketplaceController {
   constructor(private readonly marketplaceService: MarketplaceService) {}
+
+  @isPublic()
+  @Get('amenities')
+  listAmenities(@Query() query: ListMarketplaceAmenitiesQueryDTO) {
+    return this.marketplaceService.listAmenities(query)
+  }
 
   @isPublic()
   @Get('rooms')

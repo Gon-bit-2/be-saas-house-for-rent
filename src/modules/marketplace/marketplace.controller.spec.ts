@@ -13,6 +13,7 @@ describe('MarketplaceController', () => {
   beforeEach(() => {
     marketplaceService = {
       listRooms: jest.fn(),
+      listAmenities: jest.fn(),
       getRoomById: jest.fn(),
       createRentalRequest: jest.fn(),
       createViewingAppointment: jest.fn(),
@@ -20,9 +21,16 @@ describe('MarketplaceController', () => {
     controller = new MarketplaceController(marketplaceService as never)
   })
 
-  it('marks marketplace list and detail as public', () => {
+  it('marks marketplace catalog, list and detail as public', () => {
+    expect(Reflect.getMetadata(AUTH_TYPE_KEY, MarketplaceController.prototype.listAmenities)).toBeDefined()
     expect(Reflect.getMetadata(AUTH_TYPE_KEY, MarketplaceController.prototype.listRooms)).toBeDefined()
     expect(Reflect.getMetadata(AUTH_TYPE_KEY, MarketplaceController.prototype.getRoomById)).toBeDefined()
+  })
+
+  it('delegates the public amenity catalog query', async () => {
+    const query = { page: 1, limit: 50, search: 'wifi' }
+    await controller.listAmenities(query)
+    expect(marketplaceService.listAmenities).toHaveBeenCalledWith(query)
   })
 
   it('restricts request and appointment submission to tenants', () => {

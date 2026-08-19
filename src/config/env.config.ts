@@ -30,6 +30,7 @@ const ConfigSchema = z
     GOOGLE_CLIENT_SECRET: z.string(),
     GOOGLE_REDIRECT_URI: z.string(),
     GOOGLE_CLIENT_REDIRECT_URI: z.string(),
+    GOOGLE_ANDROID_CLIENT_REDIRECT_URI: z.string().default('chuyende2://oauth/google'),
     GOOGLE_OAUTH_SCOPES: z
       .string()
       .default('https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'),

@@ -5,6 +5,7 @@ import type { Prisma } from 'generated/prisma/client'
 import type {
   TCreateMarketplaceRentalRequestBodySchema,
   TCreateMarketplaceViewingAppointmentBodySchema,
+  TListMarketplaceAmenitiesQuerySchema,
   TListMarketplaceRoomsQuerySchema,
 } from './model/marketplace.model'
 import { MarketplaceRepository } from './repositories/marketplace.repo'
@@ -41,6 +42,23 @@ export class MarketplaceService {
       page,
       limit,
     )
+  }
+
+  async listAmenities(query: TListMarketplaceAmenitiesQuerySchema) {
+    const { page, limit, skip } = normalizePagination(query)
+    const where: Prisma.AmenityWhereInput = {
+      ...(query.category ? { category: { contains: query.category, mode: 'insensitive' } } : {}),
+      ...(query.search
+        ? {
+            OR: [
+              { name: { contains: query.search, mode: 'insensitive' } },
+              { category: { contains: query.search, mode: 'insensitive' } },
+            ],
+          }
+        : {}),
+    }
+    const [amenities, total] = await this.marketplaceRepository.findActiveAmenities(where, skip, limit)
+    return buildPaginatedResult(amenities, total, page, limit)
   }
 
   async getRoomById(id: number) {

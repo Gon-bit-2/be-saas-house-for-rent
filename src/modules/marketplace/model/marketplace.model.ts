@@ -3,6 +3,15 @@ import { IsoDateInputCodec } from '@src/common/utils/date-codec.util'
 
 const PropertyTypeSchema = z.enum(['HOUSE', 'MINI_APARTMENT', 'DORM', 'APARTMENT'])
 
+export const ListMarketplaceAmenitiesQuerySchema = z
+  .object({
+    page: z.coerce.number().int().positive().default(1),
+    limit: z.coerce.number().int().positive().max(100).default(50),
+    search: z.string().trim().optional(),
+    category: z.string().trim().min(1).max(100).optional(),
+  })
+  .strict()
+
 export const ListMarketplaceRoomsQuerySchema = z
   .object({
     page: z.coerce.number().int().positive().default(1),
@@ -66,6 +75,7 @@ export const CreateMarketplaceViewingAppointmentBodySchema = z
   .strict()
 
 export type TListMarketplaceRoomsQuerySchema = z.infer<typeof ListMarketplaceRoomsQuerySchema>
+export type TListMarketplaceAmenitiesQuerySchema = z.infer<typeof ListMarketplaceAmenitiesQuerySchema>
 export type TCreateMarketplaceRentalRequestBodySchema = z.infer<typeof CreateMarketplaceRentalRequestBodySchema>
 export type TCreateMarketplaceViewingAppointmentBodySchema = z.infer<
   typeof CreateMarketplaceViewingAppointmentBodySchema

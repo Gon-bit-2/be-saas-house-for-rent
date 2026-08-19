@@ -14,6 +14,7 @@ describe('MarketplaceService', () => {
   beforeEach(() => {
     marketplaceRepository = {
       findMany: jest.fn(),
+      findActiveAmenities: jest.fn(),
       findById: jest.fn(),
       findRenterProfile: jest.fn(),
       findActiveRentalRequest: jest.fn(),
@@ -56,6 +57,24 @@ describe('MarketplaceService', () => {
       }),
       0,
       20,
+    )
+  })
+
+  it('lists only active public amenities through the repository contract', async () => {
+    marketplaceRepository.findActiveAmenities.mockResolvedValue([[{ id: 1, name: 'Wifi', category: 'Tiện nghi' }], 1])
+
+    const result = await service.listAmenities({ page: 1, limit: 50, search: 'wifi' })
+
+    expect(result.data).toEqual([{ id: 1, name: 'Wifi', category: 'Tiện nghi' }])
+    expect(marketplaceRepository.findActiveAmenities).toHaveBeenCalledWith(
+      expect.objectContaining({
+        OR: [
+          { name: { contains: 'wifi', mode: 'insensitive' } },
+          { category: { contains: 'wifi', mode: 'insensitive' } },
+        ],
+      }),
+      0,
+      50,
     )
   })
 

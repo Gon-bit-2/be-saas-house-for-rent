@@ -21,10 +21,10 @@ describe('AuthController Google OAuth2', () => {
   })
 
   it('delegates Google authorization URL creation to AuthService', () => {
-    const result = controller.getGoogleAuthorizationUrl('127.0.0.1', 'jest-agent')
+    const result = controller.getGoogleAuthorizationUrl({ client: 'web' }, '127.0.0.1', 'jest-agent')
 
     expect(result).toEqual({ url: 'https://accounts.google.com/o/oauth2/v2/auth' })
-    expect(authService.getGoogleAuthorizationUrl).toHaveBeenCalledWith('127.0.0.1', 'jest-agent')
+    expect(authService.getGoogleAuthorizationUrl).toHaveBeenCalledWith('web', '127.0.0.1', 'jest-agent')
   })
 
   it('redirects Google callback to client redirect URL returned by AuthService', async () => {

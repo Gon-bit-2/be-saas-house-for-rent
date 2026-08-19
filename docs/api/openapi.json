@@ -121,7 +121,7 @@
                 "schema": {
                   "oneOf": [
                     {
-                      "$ref": "#/components/schemas/MessageResponse"
+                      "$ref": "#/components/schemas/OTPRequiredResponse"
                     },
                     {
                       "$ref": "#/components/schemas/TokenPair"
@@ -179,7 +179,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MessageResponse"
+                  "$ref": "#/components/schemas/OTPRequiredResponse"
                 }
               }
             }
@@ -321,7 +321,21 @@
     "/auth/google/url": {
       "get": {
         "operationId": "AuthController_getGoogleAuthorizationUrl",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "client",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "web",
+              "type": "string",
+              "enum": [
+                "android",
+                "web"
+              ]
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -5877,6 +5891,110 @@
         ]
       }
     },
+    "/marketplace/amenities": {
+      "get": {
+        "operationId": "MarketplaceController_listAmenities",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maximum": 9007199254740991,
+              "exclusiveMinimum": 0,
+              "default": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "maximum": 100,
+              "exclusiveMinimum": 0,
+              "default": 50,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minLength": 1,
+              "maxLength": 100,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/AmenitySummary"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/PaginationMeta"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "Marketplace"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/marketplace/rooms": {
       "get": {
         "operationId": "MarketplaceController_listRooms",
@@ -6144,7 +6262,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketplaceRoom"
+                  "$ref": "#/components/schemas/MarketplaceRoomDetail"
                 }
               }
             }
@@ -22951,6 +23069,28 @@
         },
         "additionalProperties": false
       },
+      "OTPRequiredResponse": {
+        "type": "object",
+        "required": [
+          "message",
+          "otpRequired",
+          "resendAfterSeconds"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "otpRequired": {
+            "type": "boolean",
+            "const": true
+          },
+          "resendAfterSeconds": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      },
       "TokenPair": {
         "type": "object",
         "required": [
@@ -23564,11 +23704,234 @@
           "province": {
             "type": "string"
           },
+          "provinceCode": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "district": {
             "type": "string"
           },
           "ward": {
             "type": "string"
+          },
+          "wardCode": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "MarketplacePropertyDetail": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "status",
+          "province",
+          "district",
+          "ward"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "HOUSE",
+              "MINI_APARTMENT",
+              "DORM",
+              "APARTMENT"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "MAINTENANCE"
+            ]
+          },
+          "province": {
+            "type": "string"
+          },
+          "provinceCode": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "district": {
+            "type": "string"
+          },
+          "ward": {
+            "type": "string"
+          },
+          "wardCode": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "addressDetail": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "latitude": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "longitude": {
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "MarketplaceRoomImage": {
+        "type": "object",
+        "required": [
+          "id",
+          "url",
+          "sortOrder",
+          "isThumbnail"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "caption": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sortOrder": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "isThumbnail": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AmenitySummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "category"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "icon": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "category": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MarketplaceRoomAmenity": {
+        "type": "object",
+        "required": [
+          "amenity"
+        ],
+        "properties": {
+          "amenity": {
+            "$ref": "#/components/schemas/AmenitySummary"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MarketplaceFloor": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "floorNumber"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "floorNumber": {
+            "type": "integer"
           }
         },
         "additionalProperties": false
@@ -23765,8 +24128,10 @@
           "status",
           "marketplaceStatus",
           "basePrice",
+          "maxOccupants",
           "property",
-          "images"
+          "images",
+          "amenities"
         ],
         "properties": {
           "id": {
@@ -23833,6 +24198,30 @@
               }
             ]
           },
+          "electricityPrice": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "decimal",
+                "pattern": "^-?\\d+(?:\\.\\d+)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "waterPrice": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "decimal",
+                "pattern": "^-?\\d+(?:\\.\\d+)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "maxOccupants": {
             "type": "integer",
             "minimum": 1
@@ -23852,19 +24241,197 @@
           "property": {
             "$ref": "#/components/schemas/PublicProperty"
           },
+          "floor": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MarketplaceFloor"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "images": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/RoomImage"
+              "$ref": "#/components/schemas/MarketplaceRoomImage"
             }
           },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
+          "amenities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MarketplaceRoomAmenity"
+            }
           },
-          "updatedAt": {
+          "publishedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "MarketplaceRoomDetail": {
+        "type": "object",
+        "required": [
+          "id",
+          "propertyId",
+          "roomCode",
+          "title",
+          "status",
+          "marketplaceStatus",
+          "basePrice",
+          "maxOccupants",
+          "property",
+          "images",
+          "amenities"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "propertyId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "floorId": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "roomCode": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "area": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "decimal",
+                "pattern": "^-?\\d+(?:\\.\\d+)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "basePrice": {
             "type": "string",
-            "format": "date-time"
+            "format": "decimal",
+            "pattern": "^-?\\d+(?:\\.\\d+)?$"
+          },
+          "depositAmount": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "decimal",
+                "pattern": "^-?\\d+(?:\\.\\d+)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "electricityPrice": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "decimal",
+                "pattern": "^-?\\d+(?:\\.\\d+)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "waterPrice": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "decimal",
+                "pattern": "^-?\\d+(?:\\.\\d+)?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "maxOccupants": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE"
+            ]
+          },
+          "marketplaceStatus": {
+            "type": "string",
+            "enum": [
+              "PUBLISHED"
+            ]
+          },
+          "property": {
+            "$ref": "#/components/schemas/MarketplacePropertyDetail"
+          },
+          "floor": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MarketplaceFloor"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MarketplaceRoomImage"
+            }
+          },
+          "amenities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MarketplaceRoomAmenity"
+            }
+          },
+          "publishedAt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false

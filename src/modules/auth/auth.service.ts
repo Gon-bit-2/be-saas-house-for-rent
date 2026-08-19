@@ -179,7 +179,11 @@ export class AuthService {
 
     await this.generateAndSendOTP(email, TypeOfVerificationCode.LOGIN)
 
-    return { message: 'OTP đã được gửi đến email của bạn. Vui lòng nhập mã OTP để hoàn tất đăng nhập.' }
+    return {
+      message: 'OTP đã được gửi đến email của bạn. Vui lòng nhập mã OTP để hoàn tất đăng nhập.',
+      otpRequired: true as const,
+      resendAfterSeconds: this.otpResendAfterSeconds(),
+    }
   }
 
   private async completeLoginWith2FA(
@@ -194,20 +198,21 @@ export class AuthService {
 
   // ==================== GOOGLE OAUTH2 ====================
 
-  getGoogleAuthorizationUrl(ip?: string, userAgent?: string) {
+  getGoogleAuthorizationUrl(client: 'android' | 'web' = 'web', ip?: string, userAgent?: string) {
     return this.getAuthorizationUrl({
-      ip: ip ?? '',
-      userAgent: userAgent ?? '',
+      ip: client === 'web' ? (ip ?? '') : '',
+      userAgent: client === 'web' ? (userAgent ?? '') : '',
+      client,
     })
   }
 
-  getAuthorizationUrl({ userAgent, ip }: TGoogleAuthStateSchema) {
+  getAuthorizationUrl({ userAgent, ip, client }: TGoogleAuthStateSchema) {
     const url = this.oauth2Client.generateAuthUrl({
       access_type: 'offline',
       include_granted_scopes: true,
       prompt: 'select_account',
       scope: parseGoogleOAuthScopes(envConfig.GOOGLE_OAUTH_SCOPES),
-      state: this.signGoogleState({ ip, userAgent }),
+      state: this.signGoogleState({ ip, userAgent, client }),
     })
 
     return { url }
@@ -222,14 +227,14 @@ export class AuthService {
       throw new BadRequestException('Thiếu thông tin Google OAuth callback')
     }
 
-    const user = await this.resolveGoogleUser(query.code, query.state, ip, userAgent)
+    const { user, client } = await this.resolveGoogleUser(query.code, query.state, ip, userAgent)
     const sessionToken = this.createGoogleSession(user.id, ip, userAgent)
 
-    return this.buildGoogleClientRedirectUrl(sessionToken)
+    return this.buildGoogleClientRedirectUrl(sessionToken, client)
   }
 
   async googleCallback({ state, code }: { state: string; code: string }, ip?: string, userAgent?: string) {
-    const user = await this.resolveGoogleUser(code, state, ip, userAgent)
+    const { user } = await this.resolveGoogleUser(code, state, ip, userAgent)
     return this.issueTokenPair(user, ip, userAgent)
   }
 
@@ -290,7 +295,11 @@ export class AuthService {
 
   async sendOTP(body: TSendOTPBodySchema) {
     await this.generateAndSendOTP(this.normalizeEmail(body.email), body.type)
-    return { message: 'Mã OTP đã được gửi đến email của bạn' }
+    return {
+      message: 'Mã OTP đã được gửi đến email của bạn',
+      otpRequired: true as const,
+      resendAfterSeconds: this.otpResendAfterSeconds(),
+    }
   }
 
   // ==================== FORGOT PASSWORD ====================
@@ -377,9 +386,10 @@ export class AuthService {
   }
 
   private async resolveGoogleUser(code: string, state: string, ip?: string, userAgent?: string) {
-    this.verifyGoogleState(state, ip, userAgent)
+    const statePayload = this.verifyGoogleState(state, ip, userAgent)
     const googleUser = await this.getGoogleUserInfoFromCode(code)
-    return this.findOrCreateGoogleUser(googleUser)
+    const user = await this.findOrCreateGoogleUser(googleUser)
+    return { user, client: statePayload.client }
   }
 
   private async getGoogleUserInfoFromCode(code: string) {
@@ -503,9 +513,15 @@ export class AuthService {
       throw new BadRequestException('Google OAuth state đã hết hạn')
     }
 
-    if ((ip ?? '') !== payload.ip || (userAgent ?? '') !== payload.userAgent) {
+    if (payload.client === 'web' && ((ip ?? '') !== payload.ip || (userAgent ?? '') !== payload.userAgent)) {
       throw new BadRequestException('Google OAuth state không khớp thiết bị')
     }
+
+    if (payload.client !== 'android' && payload.client !== 'web') {
+      throw new BadRequestException('Google OAuth state không hợp lệ')
+    }
+
+    return payload
   }
 
   private signStatePayload(encodedPayload: string) {
@@ -557,15 +573,21 @@ export class AuthService {
     }
   }
 
-  private buildGoogleClientRedirectUrl(sessionToken: string) {
+  private buildGoogleClientRedirectUrl(sessionToken: string, client: 'android' | 'web') {
+    const redirectTarget =
+      client === 'android' ? envConfig.GOOGLE_ANDROID_CLIENT_REDIRECT_URI : envConfig.GOOGLE_CLIENT_REDIRECT_URI
     try {
-      const url = new URL(envConfig.GOOGLE_CLIENT_REDIRECT_URI)
+      const url = new URL(redirectTarget)
       url.searchParams.set('sessionToken', sessionToken)
       return url.toString()
     } catch {
-      const separator = envConfig.GOOGLE_CLIENT_REDIRECT_URI.includes('?') ? '&' : '?'
-      return `${envConfig.GOOGLE_CLIENT_REDIRECT_URI}${separator}sessionToken=${encodeURIComponent(sessionToken)}`
+      const separator = redirectTarget.includes('?') ? '&' : '?'
+      return `${redirectTarget}${separator}sessionToken=${encodeURIComponent(sessionToken)}`
     }
+  }
+
+  private otpResendAfterSeconds() {
+    return Math.max(1, Math.ceil(envConfig.AUTH_OTP_COOLDOWN_MS / 1_000))
   }
 
   private async generateAndSendOTP(email: string, type: string) {

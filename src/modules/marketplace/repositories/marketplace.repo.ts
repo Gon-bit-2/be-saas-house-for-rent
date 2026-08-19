@@ -133,6 +133,20 @@ export class MarketplaceRepository {
     ])
   }
 
+  async findActiveAmenities(where: Prisma.AmenityWhereInput, skip: number, take: number) {
+    const select = { id: true, name: true, icon: true, category: true } satisfies Prisma.AmenitySelect
+    return this.prismaService.$transaction([
+      this.prismaService.amenity.findMany({
+        where: { ...where, isActive: true },
+        skip,
+        take,
+        orderBy: [{ category: 'asc' }, { name: 'asc' }],
+        select,
+      }),
+      this.prismaService.amenity.count({ where: { ...where, isActive: true } }),
+    ])
+  }
+
   async findById(id: number) {
     return this.prismaService.room.findFirst({
       where: {

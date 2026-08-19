@@ -2,6 +2,7 @@ import { Body, Controller, Get, Ip, Patch, Post, Query, Res, UseGuards } from '@
 import { AuthService } from './auth.service'
 import {
   ForgotPasswordBodyDTO,
+  GoogleAuthorizationQueryDTO,
   GoogleSessionBodyDTO,
   LoginBodyDTO,
   LogoutBodyDTO,
@@ -102,8 +103,12 @@ export class AuthController {
    */
   @isPublic()
   @Get('google/url')
-  getGoogleAuthorizationUrl(@Ip() ip: string, @UserAgent() userAgent: string) {
-    return this.authService.getGoogleAuthorizationUrl(ip, userAgent)
+  getGoogleAuthorizationUrl(
+    @Query() query: GoogleAuthorizationQueryDTO,
+    @Ip() ip: string,
+    @UserAgent() userAgent: string,
+  ) {
+    return this.authService.getGoogleAuthorizationUrl(query.client, ip, userAgent)
   }
 
   /**
