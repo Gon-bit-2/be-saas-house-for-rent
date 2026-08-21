@@ -12,7 +12,7 @@ describe('InvoicesRepository', () => {
     const repository = new InvoicesRepository({ debt: { aggregate } } as never)
     const today = new Date('2026-07-16T00:00:00.000Z')
 
-    const result = await repository.getDebtStats({ tenantId: 10, propertyId: undefined }, today)
+    const result = await repository.getDebtStats({ tenantId: 10 }, today)
 
     const activeDebtWhere = {
       tenantId: 10,

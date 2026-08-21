@@ -112,6 +112,7 @@ export type PropertyCountAggregateOutputType = {
   description: number
   coverImageUrl: number
   coverImagePublicId: number
+  verificationDocuments: number
   status: number
   createdAt: number
   updatedAt: number
@@ -209,6 +210,7 @@ export type PropertyCountAggregateInputType = {
   description?: true
   coverImageUrl?: true
   coverImagePublicId?: true
+  verificationDocuments?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -321,6 +323,7 @@ export type PropertyGroupByOutputType = {
   description: string | null
   coverImageUrl: string | null
   coverImagePublicId: string | null
+  verificationDocuments: string[]
   status: $Enums.PropertyStatus
   createdAt: Date
   updatedAt: Date
@@ -369,6 +372,7 @@ export type PropertyWhereInput = {
   description?: Prisma.StringNullableFilter<"Property"> | string | null
   coverImageUrl?: Prisma.StringNullableFilter<"Property"> | string | null
   coverImagePublicId?: Prisma.StringNullableFilter<"Property"> | string | null
+  verificationDocuments?: Prisma.StringNullableListFilter<"Property">
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
@@ -400,6 +404,7 @@ export type PropertyOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImagePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
+  verificationDocuments?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -434,6 +439,7 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Property"> | string | null
   coverImageUrl?: Prisma.StringNullableFilter<"Property"> | string | null
   coverImagePublicId?: Prisma.StringNullableFilter<"Property"> | string | null
+  verificationDocuments?: Prisma.StringNullableListFilter<"Property">
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
@@ -465,6 +471,7 @@ export type PropertyOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImagePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
+  verificationDocuments?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -498,6 +505,7 @@ export type PropertyScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   coverImageUrl?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   coverImagePublicId?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  verificationDocuments?: Prisma.StringNullableListFilter<"Property">
   status?: Prisma.EnumPropertyStatusWithAggregatesFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Property"> | Date | string
@@ -521,6 +529,7 @@ export type PropertyCreateInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -549,6 +558,7 @@ export type PropertyUncheckedCreateInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -574,6 +584,7 @@ export type PropertyUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -602,6 +613,7 @@ export type PropertyUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -629,6 +641,7 @@ export type PropertyCreateManyInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -652,6 +665,7 @@ export type PropertyUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -674,6 +688,7 @@ export type PropertyUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -693,6 +708,14 @@ export type PropertyOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
 export type PropertyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
@@ -709,6 +732,7 @@ export type PropertyCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   coverImageUrl?: Prisma.SortOrder
   coverImagePublicId?: Prisma.SortOrder
+  verificationDocuments?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -961,6 +985,10 @@ export type PropertyUncheckedUpdateManyWithoutTenantNestedInput = {
   deleteMany?: Prisma.PropertyScalarWhereInput | Prisma.PropertyScalarWhereInput[]
 }
 
+export type PropertyCreateverificationDocumentsInput = {
+  set: string[]
+}
+
 export type EnumPropertyTypeFieldUpdateOperationsInput = {
   set?: $Enums.PropertyType
 }
@@ -971,6 +999,11 @@ export type NullableDecimalFieldUpdateOperationsInput = {
   decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
   multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type PropertyUpdateverificationDocumentsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type EnumPropertyStatusFieldUpdateOperationsInput = {
@@ -1019,6 +1052,7 @@ export type PropertyCreateWithoutCreatedByInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1046,6 +1080,7 @@ export type PropertyUncheckedCreateWithoutCreatedByInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1080,6 +1115,7 @@ export type PropertyCreateWithoutUpdatedByInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1107,6 +1143,7 @@ export type PropertyUncheckedCreateWithoutUpdatedByInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1141,6 +1178,7 @@ export type PropertyCreateWithoutDeletedByInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1168,6 +1206,7 @@ export type PropertyUncheckedCreateWithoutDeletedByInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1223,6 +1262,7 @@ export type PropertyScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Property"> | string | null
   coverImageUrl?: Prisma.StringNullableFilter<"Property"> | string | null
   coverImagePublicId?: Prisma.StringNullableFilter<"Property"> | string | null
+  verificationDocuments?: Prisma.StringNullableListFilter<"Property">
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
@@ -1278,6 +1318,7 @@ export type PropertyCreateWithoutTenantInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1304,6 +1345,7 @@ export type PropertyUncheckedCreateWithoutTenantInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1355,6 +1397,7 @@ export type PropertyCreateWithoutFloorsInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1382,6 +1425,7 @@ export type PropertyUncheckedCreateWithoutFloorsInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1422,6 +1466,7 @@ export type PropertyUpdateWithoutFloorsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1449,6 +1494,7 @@ export type PropertyUncheckedUpdateWithoutFloorsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1473,6 +1519,7 @@ export type PropertyCreateWithoutRoomsInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1500,6 +1547,7 @@ export type PropertyUncheckedCreateWithoutRoomsInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1540,6 +1588,7 @@ export type PropertyUpdateWithoutRoomsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1567,6 +1616,7 @@ export type PropertyUncheckedUpdateWithoutRoomsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1593,6 +1643,7 @@ export type PropertyCreateManyCreatedByInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1617,6 +1668,7 @@ export type PropertyCreateManyUpdatedByInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1641,6 +1693,7 @@ export type PropertyCreateManyDeletedByInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1663,6 +1716,7 @@ export type PropertyUpdateWithoutCreatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1690,6 +1744,7 @@ export type PropertyUncheckedUpdateWithoutCreatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1716,6 +1771,7 @@ export type PropertyUncheckedUpdateManyWithoutCreatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1738,6 +1794,7 @@ export type PropertyUpdateWithoutUpdatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1765,6 +1822,7 @@ export type PropertyUncheckedUpdateWithoutUpdatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1791,6 +1849,7 @@ export type PropertyUncheckedUpdateManyWithoutUpdatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1813,6 +1872,7 @@ export type PropertyUpdateWithoutDeletedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1840,6 +1900,7 @@ export type PropertyUncheckedUpdateWithoutDeletedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1866,6 +1927,7 @@ export type PropertyUncheckedUpdateManyWithoutDeletedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1889,6 +1951,7 @@ export type PropertyCreateManyTenantInput = {
   description?: string | null
   coverImageUrl?: string | null
   coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1912,6 +1975,7 @@ export type PropertyUpdateWithoutTenantInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1938,6 +2002,7 @@ export type PropertyUncheckedUpdateWithoutTenantInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1964,6 +2029,7 @@ export type PropertyUncheckedUpdateManyWithoutTenantInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2029,6 +2095,7 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   description?: boolean
   coverImageUrl?: boolean
   coverImagePublicId?: boolean
+  verificationDocuments?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2061,6 +2128,7 @@ export type PropertySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   description?: boolean
   coverImageUrl?: boolean
   coverImagePublicId?: boolean
+  verificationDocuments?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2090,6 +2158,7 @@ export type PropertySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   description?: boolean
   coverImageUrl?: boolean
   coverImagePublicId?: boolean
+  verificationDocuments?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2119,6 +2188,7 @@ export type PropertySelectScalar = {
   description?: boolean
   coverImageUrl?: boolean
   coverImagePublicId?: boolean
+  verificationDocuments?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2128,7 +2198,7 @@ export type PropertySelectScalar = {
   deletedById?: boolean
 }
 
-export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "type" | "province" | "provinceCode" | "district" | "ward" | "wardCode" | "addressDetail" | "latitude" | "longitude" | "description" | "coverImageUrl" | "coverImagePublicId" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["property"]>
+export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "type" | "province" | "provinceCode" | "district" | "ward" | "wardCode" | "addressDetail" | "latitude" | "longitude" | "description" | "coverImageUrl" | "coverImagePublicId" | "verificationDocuments" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["property"]>
 export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   floors?: boolean | Prisma.Property$floorsArgs<ExtArgs>
@@ -2231,6 +2301,10 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
      * Public ID của ảnh bìa trên Cloudinary để xóa/thay thế
      */
     coverImagePublicId: string | null
+    /**
+     * Giấy tờ chứng minh quyền sở hữu hoặc kinh doanh (mảng URL)
+     */
+    verificationDocuments: string[]
     /**
      * Trạng thái hoạt động của tòa nhà
      */
@@ -2703,6 +2777,7 @@ export interface PropertyFieldRefs {
   readonly description: Prisma.FieldRef<"Property", 'String'>
   readonly coverImageUrl: Prisma.FieldRef<"Property", 'String'>
   readonly coverImagePublicId: Prisma.FieldRef<"Property", 'String'>
+  readonly verificationDocuments: Prisma.FieldRef<"Property", 'String[]'>
   readonly status: Prisma.FieldRef<"Property", 'PropertyStatus'>
   readonly createdAt: Prisma.FieldRef<"Property", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Property", 'DateTime'>

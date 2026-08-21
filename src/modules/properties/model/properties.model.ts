@@ -41,6 +41,11 @@ const PropertyBodyFieldsSchema = z
     status: PropertyStatusSchema.default('ACTIVE'),
     floorsCount: z.coerce.number().int().min(1).max(50).optional(),
     location: PropertyLocationSchema.optional(),
+    // Giấy tờ tùy thân chủ trọ (dành cho bước xác minh)
+    idCardFrontUrl: z.string().url().max(1000).optional(),
+    idCardBackUrl: z.string().url().max(1000).optional(),
+    // Giấy tờ chứng minh sở hữu khu trọ
+    verificationDocuments: z.array(z.string().url().max(1000)).max(10).optional(),
   })
   .strict()
 

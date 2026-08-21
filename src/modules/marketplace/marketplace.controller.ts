@@ -36,6 +36,12 @@ export class MarketplaceController {
     return this.marketplaceService.getRoomById(id)
   }
 
+  @isPublic()
+  @Get('rooms/:id/similar')
+  getSimilarRooms(@Param('id', ParseIntPipe) id: number) {
+    return this.marketplaceService.getSimilarRooms(id)
+  }
+
   @IsTenant()
   @Post('rooms/:id/rental-requests')
   createRentalRequest(

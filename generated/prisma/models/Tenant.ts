@@ -51,6 +51,9 @@ export type TenantMinAggregateOutputType = {
   phone: string | null
   email: string | null
   address: string | null
+  idCardFrontUrl: string | null
+  idCardBackUrl: string | null
+  portraitUrl: string | null
   verificationStatus: $Enums.VerificationStatus | null
   status: $Enums.TenantStatus | null
   createdAt: Date | null
@@ -70,6 +73,9 @@ export type TenantMaxAggregateOutputType = {
   phone: string | null
   email: string | null
   address: string | null
+  idCardFrontUrl: string | null
+  idCardBackUrl: string | null
+  portraitUrl: string | null
   verificationStatus: $Enums.VerificationStatus | null
   status: $Enums.TenantStatus | null
   createdAt: Date | null
@@ -89,6 +95,9 @@ export type TenantCountAggregateOutputType = {
   phone: number
   email: number
   address: number
+  idCardFrontUrl: number
+  idCardBackUrl: number
+  portraitUrl: number
   verificationStatus: number
   status: number
   createdAt: number
@@ -126,6 +135,9 @@ export type TenantMinAggregateInputType = {
   phone?: true
   email?: true
   address?: true
+  idCardFrontUrl?: true
+  idCardBackUrl?: true
+  portraitUrl?: true
   verificationStatus?: true
   status?: true
   createdAt?: true
@@ -145,6 +157,9 @@ export type TenantMaxAggregateInputType = {
   phone?: true
   email?: true
   address?: true
+  idCardFrontUrl?: true
+  idCardBackUrl?: true
+  portraitUrl?: true
   verificationStatus?: true
   status?: true
   createdAt?: true
@@ -164,6 +179,9 @@ export type TenantCountAggregateInputType = {
   phone?: true
   email?: true
   address?: true
+  idCardFrontUrl?: true
+  idCardBackUrl?: true
+  portraitUrl?: true
   verificationStatus?: true
   status?: true
   createdAt?: true
@@ -270,6 +288,9 @@ export type TenantGroupByOutputType = {
   phone: string | null
   email: string | null
   address: string | null
+  idCardFrontUrl: string | null
+  idCardBackUrl: string | null
+  portraitUrl: string | null
   verificationStatus: $Enums.VerificationStatus
   status: $Enums.TenantStatus
   createdAt: Date
@@ -312,6 +333,9 @@ export type TenantWhereInput = {
   phone?: Prisma.StringNullableFilter<"Tenant"> | string | null
   email?: Prisma.StringNullableFilter<"Tenant"> | string | null
   address?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  idCardFrontUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  idCardBackUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  portraitUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFilter<"Tenant"> | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFilter<"Tenant"> | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
@@ -370,6 +394,9 @@ export type TenantOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  idCardFrontUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  idCardBackUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -431,6 +458,9 @@ export type TenantWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"Tenant"> | string | null
   email?: Prisma.StringNullableFilter<"Tenant"> | string | null
   address?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  idCardFrontUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  idCardBackUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  portraitUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFilter<"Tenant"> | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFilter<"Tenant"> | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
@@ -489,6 +519,9 @@ export type TenantOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  idCardFrontUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  idCardBackUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -516,6 +549,9 @@ export type TenantScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  idCardFrontUrl?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  idCardBackUrl?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
+  portraitUrl?: Prisma.StringNullableWithAggregatesFilter<"Tenant"> | string | null
   verificationStatus?: Prisma.EnumVerificationStatusWithAggregatesFilter<"Tenant"> | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusWithAggregatesFilter<"Tenant"> | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Tenant"> | Date | string
@@ -533,6 +569,9 @@ export type TenantCreateInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -588,6 +627,9 @@ export type TenantUncheckedCreateInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -640,6 +682,9 @@ export type TenantUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -695,6 +740,9 @@ export type TenantUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -749,6 +797,9 @@ export type TenantCreateManyInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -766,6 +817,9 @@ export type TenantUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -782,6 +836,9 @@ export type TenantUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -811,6 +868,9 @@ export type TenantCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  idCardFrontUrl?: Prisma.SortOrder
+  idCardBackUrl?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -838,6 +898,9 @@ export type TenantMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  idCardFrontUrl?: Prisma.SortOrder
+  idCardBackUrl?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -857,6 +920,9 @@ export type TenantMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  idCardFrontUrl?: Prisma.SortOrder
+  idCardBackUrl?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1566,6 +1632,9 @@ export type TenantCreateWithoutOwnerInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -1619,6 +1688,9 @@ export type TenantUncheckedCreateWithoutOwnerInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -1681,6 +1753,9 @@ export type TenantCreateWithoutCreatedByInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -1735,6 +1810,9 @@ export type TenantUncheckedCreateWithoutCreatedByInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -1796,6 +1874,9 @@ export type TenantCreateWithoutUpdatedByInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -1850,6 +1931,9 @@ export type TenantUncheckedCreateWithoutUpdatedByInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -1911,6 +1995,9 @@ export type TenantCreateWithoutDeletedByInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -1965,6 +2052,9 @@ export type TenantUncheckedCreateWithoutDeletedByInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -2047,6 +2137,9 @@ export type TenantScalarWhereInput = {
   phone?: Prisma.StringNullableFilter<"Tenant"> | string | null
   email?: Prisma.StringNullableFilter<"Tenant"> | string | null
   address?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  idCardFrontUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  idCardBackUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
+  portraitUrl?: Prisma.StringNullableFilter<"Tenant"> | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFilter<"Tenant"> | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFilter<"Tenant"> | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFilter<"Tenant"> | Date | string
@@ -2112,6 +2205,9 @@ export type TenantCreateWithoutMembersInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -2166,6 +2262,9 @@ export type TenantUncheckedCreateWithoutMembersInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -2233,6 +2332,9 @@ export type TenantUpdateWithoutMembersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2287,6 +2389,9 @@ export type TenantUncheckedUpdateWithoutMembersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2338,6 +2443,9 @@ export type TenantCreateWithoutSubscriptionsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -2392,6 +2500,9 @@ export type TenantUncheckedCreateWithoutSubscriptionsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -2459,6 +2570,9 @@ export type TenantUpdateWithoutSubscriptionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2513,6 +2627,9 @@ export type TenantUncheckedUpdateWithoutSubscriptionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2564,6 +2681,9 @@ export type TenantCreateWithoutSubscriptionPaymentsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -2618,6 +2738,9 @@ export type TenantUncheckedCreateWithoutSubscriptionPaymentsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -2685,6 +2808,9 @@ export type TenantUpdateWithoutSubscriptionPaymentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2739,6 +2865,9 @@ export type TenantUncheckedUpdateWithoutSubscriptionPaymentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2790,6 +2919,9 @@ export type TenantCreateWithoutPropertiesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -2844,6 +2976,9 @@ export type TenantUncheckedCreateWithoutPropertiesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -2911,6 +3046,9 @@ export type TenantUpdateWithoutPropertiesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2965,6 +3103,9 @@ export type TenantUncheckedUpdateWithoutPropertiesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3016,6 +3157,9 @@ export type TenantCreateWithoutFloorsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -3070,6 +3214,9 @@ export type TenantUncheckedCreateWithoutFloorsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -3137,6 +3284,9 @@ export type TenantUpdateWithoutFloorsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3191,6 +3341,9 @@ export type TenantUncheckedUpdateWithoutFloorsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3242,6 +3395,9 @@ export type TenantCreateWithoutRoomsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -3296,6 +3452,9 @@ export type TenantUncheckedCreateWithoutRoomsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -3363,6 +3522,9 @@ export type TenantUpdateWithoutRoomsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3417,6 +3579,9 @@ export type TenantUncheckedUpdateWithoutRoomsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3468,6 +3633,9 @@ export type TenantCreateWithoutMarketplaceModerationsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -3522,6 +3690,9 @@ export type TenantUncheckedCreateWithoutMarketplaceModerationsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -3589,6 +3760,9 @@ export type TenantUpdateWithoutMarketplaceModerationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3643,6 +3817,9 @@ export type TenantUncheckedUpdateWithoutMarketplaceModerationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3694,6 +3871,9 @@ export type TenantCreateWithoutRenterInvitationsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -3748,6 +3928,9 @@ export type TenantUncheckedCreateWithoutRenterInvitationsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -3815,6 +3998,9 @@ export type TenantUpdateWithoutRenterInvitationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3869,6 +4055,9 @@ export type TenantUncheckedUpdateWithoutRenterInvitationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3920,6 +4109,9 @@ export type TenantCreateWithoutRentalHistoriesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -3974,6 +4166,9 @@ export type TenantUncheckedCreateWithoutRentalHistoriesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -4041,6 +4236,9 @@ export type TenantUpdateWithoutRentalHistoriesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4095,6 +4293,9 @@ export type TenantUncheckedUpdateWithoutRentalHistoriesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4146,6 +4347,9 @@ export type TenantCreateWithoutViewingAppointmentsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -4200,6 +4404,9 @@ export type TenantUncheckedCreateWithoutViewingAppointmentsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -4267,6 +4474,9 @@ export type TenantUpdateWithoutViewingAppointmentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4321,6 +4531,9 @@ export type TenantUncheckedUpdateWithoutViewingAppointmentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4372,6 +4585,9 @@ export type TenantCreateWithoutRentalRequestsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -4426,6 +4642,9 @@ export type TenantUncheckedCreateWithoutRentalRequestsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -4493,6 +4712,9 @@ export type TenantUpdateWithoutRentalRequestsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4547,6 +4769,9 @@ export type TenantUncheckedUpdateWithoutRentalRequestsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4598,6 +4823,9 @@ export type TenantCreateWithoutContractTemplatesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -4652,6 +4880,9 @@ export type TenantUncheckedCreateWithoutContractTemplatesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -4719,6 +4950,9 @@ export type TenantUpdateWithoutContractTemplatesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4773,6 +5007,9 @@ export type TenantUncheckedUpdateWithoutContractTemplatesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4824,6 +5061,9 @@ export type TenantCreateWithoutContractsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -4878,6 +5118,9 @@ export type TenantUncheckedCreateWithoutContractsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -4945,6 +5188,9 @@ export type TenantUpdateWithoutContractsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4999,6 +5245,9 @@ export type TenantUncheckedUpdateWithoutContractsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5050,6 +5299,9 @@ export type TenantCreateWithoutTerminationRequestsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -5104,6 +5356,9 @@ export type TenantUncheckedCreateWithoutTerminationRequestsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -5171,6 +5426,9 @@ export type TenantUpdateWithoutTerminationRequestsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5225,6 +5483,9 @@ export type TenantUncheckedUpdateWithoutTerminationRequestsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5276,6 +5537,9 @@ export type TenantCreateWithoutAssetCategoriesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -5330,6 +5594,9 @@ export type TenantUncheckedCreateWithoutAssetCategoriesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -5397,6 +5664,9 @@ export type TenantUpdateWithoutAssetCategoriesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5451,6 +5721,9 @@ export type TenantUncheckedUpdateWithoutAssetCategoriesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5502,6 +5775,9 @@ export type TenantCreateWithoutRoomAssetsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -5556,6 +5832,9 @@ export type TenantUncheckedCreateWithoutRoomAssetsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -5623,6 +5902,9 @@ export type TenantUpdateWithoutRoomAssetsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5677,6 +5959,9 @@ export type TenantUncheckedUpdateWithoutRoomAssetsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5728,6 +6013,9 @@ export type TenantCreateWithoutHandoverRecordsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -5782,6 +6070,9 @@ export type TenantUncheckedCreateWithoutHandoverRecordsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -5849,6 +6140,9 @@ export type TenantUpdateWithoutHandoverRecordsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5903,6 +6197,9 @@ export type TenantUncheckedUpdateWithoutHandoverRecordsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5954,6 +6251,9 @@ export type TenantCreateWithoutUtilityMetersInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -6008,6 +6308,9 @@ export type TenantUncheckedCreateWithoutUtilityMetersInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -6075,6 +6378,9 @@ export type TenantUpdateWithoutUtilityMetersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6129,6 +6435,9 @@ export type TenantUncheckedUpdateWithoutUtilityMetersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6180,6 +6489,9 @@ export type TenantCreateWithoutMeterReadingsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -6234,6 +6546,9 @@ export type TenantUncheckedCreateWithoutMeterReadingsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -6301,6 +6616,9 @@ export type TenantUpdateWithoutMeterReadingsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6355,6 +6673,9 @@ export type TenantUncheckedUpdateWithoutMeterReadingsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6406,6 +6727,9 @@ export type TenantCreateWithoutOcrJobsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -6460,6 +6784,9 @@ export type TenantUncheckedCreateWithoutOcrJobsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -6527,6 +6854,9 @@ export type TenantUpdateWithoutOcrJobsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6581,6 +6911,9 @@ export type TenantUncheckedUpdateWithoutOcrJobsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6632,6 +6965,9 @@ export type TenantCreateWithoutInvoiceBatchesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -6686,6 +7022,9 @@ export type TenantUncheckedCreateWithoutInvoiceBatchesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -6753,6 +7092,9 @@ export type TenantUpdateWithoutInvoiceBatchesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6807,6 +7149,9 @@ export type TenantUncheckedUpdateWithoutInvoiceBatchesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6858,6 +7203,9 @@ export type TenantCreateWithoutServiceCatalogItemsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -6912,6 +7260,9 @@ export type TenantUncheckedCreateWithoutServiceCatalogItemsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -6979,6 +7330,9 @@ export type TenantUpdateWithoutServiceCatalogItemsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7033,6 +7387,9 @@ export type TenantUncheckedUpdateWithoutServiceCatalogItemsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7084,6 +7441,9 @@ export type TenantCreateWithoutServiceAssignmentsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -7138,6 +7498,9 @@ export type TenantUncheckedCreateWithoutServiceAssignmentsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -7205,6 +7568,9 @@ export type TenantUpdateWithoutServiceAssignmentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7259,6 +7625,9 @@ export type TenantUncheckedUpdateWithoutServiceAssignmentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7310,6 +7679,9 @@ export type TenantCreateWithoutInvoicesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -7364,6 +7736,9 @@ export type TenantUncheckedCreateWithoutInvoicesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -7431,6 +7806,9 @@ export type TenantUpdateWithoutInvoicesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7485,6 +7863,9 @@ export type TenantUncheckedUpdateWithoutInvoicesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7536,6 +7917,9 @@ export type TenantCreateWithoutDebtsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -7590,6 +7974,9 @@ export type TenantUncheckedCreateWithoutDebtsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -7657,6 +8044,9 @@ export type TenantUpdateWithoutDebtsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7711,6 +8101,9 @@ export type TenantUncheckedUpdateWithoutDebtsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7762,6 +8155,9 @@ export type TenantCreateWithoutPaymentsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -7816,6 +8212,9 @@ export type TenantUncheckedCreateWithoutPaymentsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -7883,6 +8282,9 @@ export type TenantUpdateWithoutPaymentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7937,6 +8339,9 @@ export type TenantUncheckedUpdateWithoutPaymentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7988,6 +8393,9 @@ export type TenantCreateWithoutPaymentQrCodesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -8042,6 +8450,9 @@ export type TenantUncheckedCreateWithoutPaymentQrCodesInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -8109,6 +8520,9 @@ export type TenantUpdateWithoutPaymentQrCodesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8163,6 +8577,9 @@ export type TenantUncheckedUpdateWithoutPaymentQrCodesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8214,6 +8631,9 @@ export type TenantCreateWithoutPaymentWebhookLogsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -8268,6 +8688,9 @@ export type TenantUncheckedCreateWithoutPaymentWebhookLogsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -8335,6 +8758,9 @@ export type TenantUpdateWithoutPaymentWebhookLogsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8389,6 +8815,9 @@ export type TenantUncheckedUpdateWithoutPaymentWebhookLogsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8440,6 +8869,9 @@ export type TenantCreateWithoutTicketsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -8494,6 +8926,9 @@ export type TenantUncheckedCreateWithoutTicketsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -8561,6 +8996,9 @@ export type TenantUpdateWithoutTicketsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8615,6 +9053,9 @@ export type TenantUncheckedUpdateWithoutTicketsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8666,6 +9107,9 @@ export type TenantCreateWithoutConversationsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -8720,6 +9164,9 @@ export type TenantUncheckedCreateWithoutConversationsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -8787,6 +9234,9 @@ export type TenantUpdateWithoutConversationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8841,6 +9291,9 @@ export type TenantUncheckedUpdateWithoutConversationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8892,6 +9345,9 @@ export type TenantCreateWithoutReviewsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -8946,6 +9402,9 @@ export type TenantUncheckedCreateWithoutReviewsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -9013,6 +9472,9 @@ export type TenantUpdateWithoutReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9067,6 +9529,9 @@ export type TenantUncheckedUpdateWithoutReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9118,6 +9583,9 @@ export type TenantCreateWithoutReputationScoresInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -9172,6 +9640,9 @@ export type TenantUncheckedCreateWithoutReputationScoresInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -9239,6 +9710,9 @@ export type TenantUpdateWithoutReputationScoresInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9293,6 +9767,9 @@ export type TenantUncheckedUpdateWithoutReputationScoresInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9344,6 +9821,9 @@ export type TenantCreateWithoutNotificationsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -9398,6 +9878,9 @@ export type TenantUncheckedCreateWithoutNotificationsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -9465,6 +9948,9 @@ export type TenantUpdateWithoutNotificationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9519,6 +10005,9 @@ export type TenantUncheckedUpdateWithoutNotificationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9570,6 +10059,9 @@ export type TenantCreateWithoutBackgroundJobsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -9624,6 +10116,9 @@ export type TenantUncheckedCreateWithoutBackgroundJobsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -9691,6 +10186,9 @@ export type TenantUpdateWithoutBackgroundJobsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9745,6 +10243,9 @@ export type TenantUncheckedUpdateWithoutBackgroundJobsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9796,6 +10297,9 @@ export type TenantCreateWithoutAuditLogsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -9850,6 +10354,9 @@ export type TenantUncheckedCreateWithoutAuditLogsInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -9917,6 +10424,9 @@ export type TenantUpdateWithoutAuditLogsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9971,6 +10481,9 @@ export type TenantUncheckedUpdateWithoutAuditLogsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10023,6 +10536,9 @@ export type TenantCreateManyOwnerInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -10042,6 +10558,9 @@ export type TenantCreateManyCreatedByInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -10060,6 +10579,9 @@ export type TenantCreateManyUpdatedByInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -10078,6 +10600,9 @@ export type TenantCreateManyDeletedByInput = {
   phone?: string | null
   email?: string | null
   address?: string | null
+  idCardFrontUrl?: string | null
+  idCardBackUrl?: string | null
+  portraitUrl?: string | null
   verificationStatus?: $Enums.VerificationStatus
   status?: $Enums.TenantStatus
   createdAt?: Date | string
@@ -10094,6 +10619,9 @@ export type TenantUpdateWithoutOwnerInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10147,6 +10675,9 @@ export type TenantUncheckedUpdateWithoutOwnerInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10200,6 +10731,9 @@ export type TenantUncheckedUpdateManyWithoutOwnerInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10217,6 +10751,9 @@ export type TenantUpdateWithoutCreatedByInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10271,6 +10808,9 @@ export type TenantUncheckedUpdateWithoutCreatedByInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10324,6 +10864,9 @@ export type TenantUncheckedUpdateManyWithoutCreatedByInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10340,6 +10883,9 @@ export type TenantUpdateWithoutUpdatedByInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10394,6 +10940,9 @@ export type TenantUncheckedUpdateWithoutUpdatedByInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10447,6 +10996,9 @@ export type TenantUncheckedUpdateManyWithoutUpdatedByInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10463,6 +11015,9 @@ export type TenantUpdateWithoutDeletedByInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10517,6 +11072,9 @@ export type TenantUncheckedUpdateWithoutDeletedByInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10570,6 +11128,9 @@ export type TenantUncheckedUpdateManyWithoutDeletedByInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardFrontUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  idCardBackUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   verificationStatus?: Prisma.EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
   status?: Prisma.EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10925,6 +11486,9 @@ export type TenantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   phone?: boolean
   email?: boolean
   address?: boolean
+  idCardFrontUrl?: boolean
+  idCardBackUrl?: boolean
+  portraitUrl?: boolean
   verificationStatus?: boolean
   status?: boolean
   createdAt?: boolean
@@ -10984,6 +11548,9 @@ export type TenantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   phone?: boolean
   email?: boolean
   address?: boolean
+  idCardFrontUrl?: boolean
+  idCardBackUrl?: boolean
+  portraitUrl?: boolean
   verificationStatus?: boolean
   status?: boolean
   createdAt?: boolean
@@ -11007,6 +11574,9 @@ export type TenantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   phone?: boolean
   email?: boolean
   address?: boolean
+  idCardFrontUrl?: boolean
+  idCardBackUrl?: boolean
+  portraitUrl?: boolean
   verificationStatus?: boolean
   status?: boolean
   createdAt?: boolean
@@ -11030,6 +11600,9 @@ export type TenantSelectScalar = {
   phone?: boolean
   email?: boolean
   address?: boolean
+  idCardFrontUrl?: boolean
+  idCardBackUrl?: boolean
+  portraitUrl?: boolean
   verificationStatus?: boolean
   status?: boolean
   createdAt?: boolean
@@ -11040,7 +11613,7 @@ export type TenantSelectScalar = {
   deletedById?: boolean
 }
 
-export type TenantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ownerUserId" | "name" | "slug" | "taxCode" | "phone" | "email" | "address" | "verificationStatus" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["tenant"]>
+export type TenantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ownerUserId" | "name" | "slug" | "taxCode" | "phone" | "email" | "address" | "idCardFrontUrl" | "idCardBackUrl" | "portraitUrl" | "verificationStatus" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["tenant"]>
 export type TenantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   members?: boolean | Prisma.Tenant$membersArgs<ExtArgs>
@@ -11268,6 +11841,18 @@ export type $TenantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
      * Địa chỉ trụ sở/văn phòng giao dịch
      */
     address: string | null
+    /**
+     * URL ảnh CCCD mặt trước (nếu có)
+     */
+    idCardFrontUrl: string | null
+    /**
+     * URL ảnh CCCD mặt sau (nếu có)
+     */
+    idCardBackUrl: string | null
+    /**
+     * URL ảnh chân dung chủ trọ (nếu có)
+     */
+    portraitUrl: string | null
     /**
      * Trạng thái xác thực thông tin tenant bởi Super Admin
      */
@@ -11770,6 +12355,9 @@ export interface TenantFieldRefs {
   readonly phone: Prisma.FieldRef<"Tenant", 'String'>
   readonly email: Prisma.FieldRef<"Tenant", 'String'>
   readonly address: Prisma.FieldRef<"Tenant", 'String'>
+  readonly idCardFrontUrl: Prisma.FieldRef<"Tenant", 'String'>
+  readonly idCardBackUrl: Prisma.FieldRef<"Tenant", 'String'>
+  readonly portraitUrl: Prisma.FieldRef<"Tenant", 'String'>
   readonly verificationStatus: Prisma.FieldRef<"Tenant", 'VerificationStatus'>
   readonly status: Prisma.FieldRef<"Tenant", 'TenantStatus'>
   readonly createdAt: Prisma.FieldRef<"Tenant", 'DateTime'>

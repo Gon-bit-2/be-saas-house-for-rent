@@ -17,7 +17,8 @@ describe('RentersController', () => {
       getForLandlord: jest.fn(),
       getInvitation: jest.fn(),
     }
-    controller = new RentersController(rentersService as never)
+    const cloudinaryService = {}
+    controller = new RentersController(rentersService as never, cloudinaryService as never)
   })
 
   it('uses tenant role for self profile and landlord/manager roles for tenant lookup', () => {

@@ -23,7 +23,7 @@ describe('TesseractOcrProvider', () => {
   let worker: Record<string, jest.Mock>
   let provider: TesseractOcrProvider
 
-  const response = (body: Uint8Array = Uint8Array.from([1, 2, 3]), headers?: HeadersInit) =>
+  const response = (body: any = Buffer.from([1, 2, 3]), headers?: HeadersInit) =>
     new Response(body, { status: 200, headers })
 
   const result = (

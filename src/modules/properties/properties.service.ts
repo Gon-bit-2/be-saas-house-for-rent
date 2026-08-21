@@ -12,6 +12,7 @@ import type {
   TUpdatePropertyBodySchema,
   TUpdatePropertyStatusBodySchema,
 } from './model/properties.model'
+import { PrismaService } from '@src/shared/modules/database/prisma.service'
 import { PropertiesRepository } from './repositories/properties.repo'
 
 /**
@@ -24,6 +25,7 @@ export class PropertiesService {
     private readonly tenantAccessService: TenantAccessService,
     private readonly locationsService: LocationsService,
     private readonly cloudinaryService: CloudinaryService,
+    private readonly prismaService: PrismaService,
   ) {}
 
   async list(userId: number, query: TListPropertiesQuerySchema) {
@@ -57,9 +59,25 @@ export class PropertiesService {
       type: body.type,
       ...location,
       description: body.description ?? null,
+      verificationDocuments: body.verificationDocuments ?? [],
       status: body.status,
       createdById: userId,
     })
+
+    // Cập nhật thông tin giấy tờ tùy thân của Tenant nếu có truyền lên
+    if (body.idCardFrontUrl || body.idCardBackUrl) {
+      await this.prismaService.tenant.update({
+        where: { id: tenant.tenantId },
+        data: {
+          ...(body.idCardFrontUrl ? { idCardFrontUrl: body.idCardFrontUrl } : {}),
+          ...(body.idCardBackUrl ? { idCardBackUrl: body.idCardBackUrl } : {}),
+          // Chỉ cập nhật thành PENDING nếu họ chưa từng VERIFIED
+          verificationStatus: {
+            set: 'PENDING',
+          },
+        },
+      })
+    }
 
     if (body.floorsCount && body.floorsCount > 0) {
       const floorsToCreate = Array.from({ length: body.floorsCount }).map((_, index) => ({
@@ -181,6 +199,15 @@ export class PropertiesService {
       coverImagePublicId: uploadResult.publicId,
       updatedById: userId,
     })
+  }
+
+  async uploadVerificationImages(userId: number, files: Express.Multer.File[]) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const uploadPromises = files.map((file) => 
+      this.cloudinaryService.uploadImage(file, `properties/verification/${tenant.tenantId}`)
+    )
+    const results = await Promise.all(uploadPromises)
+    return results.map((r) => r.url)
   }
 
   private async getTenantPropertyOrThrow(tenantId: number, id: number) {

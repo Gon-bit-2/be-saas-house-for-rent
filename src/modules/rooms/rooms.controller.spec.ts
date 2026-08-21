@@ -38,7 +38,7 @@ describe('RoomsController', () => {
 
   it('delegates room status, marketplace, amenity, and image operations', async () => {
     await controller.updateStatus(user, 5, { status: 'MAINTENANCE' })
-    await controller.updateMarketplace(user, 5, { marketplaceStatus: 'PUBLISHED' })
+    await controller.updateMarketplace(user, 5, { marketplaceStatus: 'PENDING_REVIEW' })
     await controller.replaceAmenities(user, 5, { amenityIds: [1, 2] })
     await controller.uploadImages(user, 5, [{ buffer: Buffer.from('x') }] as Express.Multer.File[])
 

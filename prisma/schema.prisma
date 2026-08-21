@@ -376,6 +376,12 @@ model Tenant {
   email              String?            @db.VarChar(255)
   /// Địa chỉ trụ sở/văn phòng giao dịch
   address            String?            @db.Text
+  /// URL ảnh CCCD mặt trước (nếu có)
+  idCardFrontUrl     String?            @map("id_card_front_url") @db.Text
+  /// URL ảnh CCCD mặt sau (nếu có)
+  idCardBackUrl      String?            @map("id_card_back_url") @db.Text
+  /// URL ảnh chân dung chủ trọ (nếu có)
+  portraitUrl        String?            @map("portrait_url") @db.Text
   /// Trạng thái xác thực thông tin tenant bởi Super Admin
   verificationStatus VerificationStatus @default(UNVERIFIED) @map("verification_status")
   /// Trạng thái hoạt động của tenant
@@ -678,6 +684,8 @@ model Property {
   coverImageUrl String?        @map("cover_image_url") @db.Text
   /// Public ID của ảnh bìa trên Cloudinary để xóa/thay thế
   coverImagePublicId String?   @map("cover_image_public_id") @db.VarChar(100)
+  /// Giấy tờ chứng minh quyền sở hữu hoặc kinh doanh (mảng URL)
+  verificationDocuments String[] @map("verification_documents")
   /// Trạng thái hoạt động của tòa nhà
   status        PropertyStatus @default(ACTIVE)
   /// Thời điểm tạo nhà trọ

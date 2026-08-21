@@ -6,7 +6,7 @@ jest.mock('@src/shared/modules/services/tenant-access.service', () => ({
 jest.mock('./repositories/service-charges.repo', () => ({
   ServiceChargesRepository: class ServiceChargesRepository {},
 }))
-const { ServiceChargesService } = require('./service-charges.service') as typeof import('./service-charges.service')
+import { ServiceChargesService } from './service-charges.service'
 
 describe('ServiceChargesService', () => {
   let service: ServiceChargesService

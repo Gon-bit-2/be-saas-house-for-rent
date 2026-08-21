@@ -11,6 +11,8 @@ describe('PropertiesService', () => {
   let propertiesRepository: Record<string, jest.Mock>
   let tenantAccessService: Record<string, jest.Mock>
   let locationsService: Record<string, jest.Mock>
+  let cloudinaryService: Record<string, jest.Mock>
+  let prismaService: Record<string, jest.Mock>
 
   beforeEach(() => {
     propertiesRepository = {
@@ -33,10 +35,14 @@ describe('PropertiesService', () => {
         .mockResolvedValue({ tenantId: 10, userId: 99, memberId: 1, roleId: 'LANDLORD' }),
     }
     locationsService = { resolvePropertyLocation: jest.fn() }
+    cloudinaryService = {}
+    prismaService = {}
     service = new PropertiesService(
       propertiesRepository as never,
       tenantAccessService as never,
       locationsService as never,
+      cloudinaryService as never,
+      prismaService as never,
     )
   })
 

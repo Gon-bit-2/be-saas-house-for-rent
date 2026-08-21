@@ -40,6 +40,7 @@ const authUserSelect = {
           name: true,
           slug: true,
           status: true,
+          verificationStatus: true,
           ownerUserId: true,
         },
       },

@@ -66,6 +66,39 @@ export class MarketplaceService {
     return this.toPublicRoom(room, true)
   }
 
+  async getSimilarRooms(id: number) {
+    const targetRoom = await this.getPublicRoomRecordOrThrow(id)
+
+    const propertyOr: Prisma.PropertyWhereInput[] = [{ id: targetRoom.propertyId }]
+    if (targetRoom.property.wardCode) {
+      propertyOr.push({ wardCode: targetRoom.property.wardCode })
+    } else if (targetRoom.property.district) {
+      propertyOr.push({ district: targetRoom.property.district })
+    }
+
+    const where: Prisma.RoomWhereInput = {
+      id: { not: id },
+      deletedAt: null,
+      status: 'AVAILABLE',
+      marketplaceStatus: 'PUBLISHED',
+      tenant: { deletedAt: null, status: 'ACTIVE' },
+      property: {
+        deletedAt: null,
+        status: 'ACTIVE',
+        OR: propertyOr,
+      },
+      ...(targetRoom.basePrice ? {
+        basePrice: {
+          gte: Math.floor(targetRoom.basePrice.toNumber() * 0.7),
+          lte: Math.ceil(targetRoom.basePrice.toNumber() * 1.3),
+        }
+      } : {})
+    }
+
+    const [rooms] = await this.marketplaceRepository.findMany(where, 0, 5)
+    return rooms.map((room) => this.toPublicRoom(room, false))
+  }
+
   async createRentalRequest(userId: number, roomId: number, body: TCreateMarketplaceRentalRequestBodySchema) {
     const room = await this.getPublicRoomRecordOrThrow(roomId)
     await this.assertRenterProfile(userId)

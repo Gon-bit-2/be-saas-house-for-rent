@@ -13,6 +13,7 @@ describe('InvoicesService', () => {
   let service: import('./invoices.service').InvoicesService
   let invoicesRepository: Record<string, jest.Mock>
   let tenantAccessService: Record<string, jest.Mock>
+  let notificationEventsService: Record<string, jest.Mock>
 
   const activeContract = {
     id: 7,

@@ -9,10 +9,11 @@ import {
   Post,
   Query,
   UploadedFile,
+  UploadedFiles,
   UseInterceptors,
   BadRequestException,
 } from '@nestjs/common'
-import { FileInterceptor } from '@nestjs/platform-express'
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express'
 import roleName from '@src/common/constants/role.constant'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
 import { Roles } from '@src/common/decorators/decorators/roles.decorator'
@@ -128,5 +129,25 @@ export class PropertiesController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     return this.propertiesService.uploadCoverImage(user.userId, id, file)
+  }
+
+  @Post('upload-verification')
+  @UseInterceptors(FilesInterceptor('files', 10, {
+    storage: memoryStorage(),
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter: (_request, file, callback) => {
+      if (/^image\/(jpeg|jpg|png|webp)$/.test(file.mimetype)) {
+        callback(null, true)
+        return
+      }
+      callback(new BadRequestException('Chỉ hỗ trợ ảnh jpg, jpeg, png hoặc webp'), false)
+    },
+  }))
+  uploadVerificationImages(
+    @ActiveUser() user: AccessTokenPayload,
+    @UploadedFiles() files: Express.Multer.File[],
+  ) {
+    if (!files || files.length === 0) throw new BadRequestException('Vui lòng chọn ít nhất một ảnh')
+    return this.propertiesService.uploadVerificationImages(user.userId, files)
   }
 }

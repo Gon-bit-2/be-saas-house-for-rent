@@ -44,8 +44,8 @@ describe('enrichOpenApiDocument', () => {
     expect(protectedOperation?.responses['500']).toEqual({
       $ref: '#/components/responses/InternalError',
     })
-    expect(result.components.schemas?.ApiErrorResponse).toBeDefined()
-    expect(result.components.responses?.Unauthorized).toBeDefined()
+    expect(result.components!.schemas?.ApiErrorResponse).toBeDefined()
+    expect(result.components!.responses?.Unauthorized).toBeDefined()
     expect(protectedOperation?.responses['200']).toEqual(
       expect.objectContaining({
         content: expect.objectContaining({ 'application/json': expect.any(Object) }),
@@ -73,7 +73,7 @@ describe('enrichOpenApiDocument', () => {
       )
     }
 
-    const schemas = result.components.schemas as Record<string, any>
+    const schemas = result.components!.schemas as Record<string, any>
     expect(schemas.Contract.required).toContain('members')
     expect(schemas.Contract.properties.members.items).toEqual({ $ref: '#/components/schemas/ContractMember' })
     expect(schemas.AppointmentDetail.properties.room).toEqual({ $ref: '#/components/schemas/AppointmentRoom' })

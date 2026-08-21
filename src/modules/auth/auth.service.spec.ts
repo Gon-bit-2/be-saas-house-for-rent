@@ -313,7 +313,7 @@ describe('AuthService Google OAuth2', () => {
     authRepository.consumeVerificationCode.mockResolvedValue(false)
 
     await expect(
-      service.login({ email: 'USER@example.com', passwordHash: 'Password1!', code: '123456' }),
+      service.login({ email: 'USER@example.com', password: 'Password1!', code: '123456' }),
     ).rejects.toBeInstanceOf(BadRequestException)
     expect(authRepository.consumeVerificationCode).toHaveBeenCalledWith(
       7,
