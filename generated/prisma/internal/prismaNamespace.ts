@@ -5505,6 +5505,11 @@ export const ContractMemberScalarFieldEnum = {
   id: 'id',
   contractId: 'contractId',
   userId: 'userId',
+  fullName: 'fullName',
+  phone: 'phone',
+  age: 'age',
+  identityCard: 'identityCard',
+  identityCardImageUrl: 'identityCardImageUrl',
   role: 'role',
   createdAt: 'createdAt'
 } as const

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
 import type { Prisma } from 'generated/prisma/client'
-import type { TRenterInfo } from '../model/contracts.model'
+import type { TRenterInfo, TAddContractMemberBodySchema } from '../model/contracts.model'
 
 export const contractSelect = {
   id: true,
@@ -65,7 +65,13 @@ export const contractSelect = {
     orderBy: [{ role: 'asc' }, { id: 'asc' }],
     select: {
       id: true,
+      contractId: true,
       userId: true,
+      fullName: true,
+      phone: true,
+      age: true,
+      identityCard: true,
+      identityCardImageUrl: true,
       role: true,
       createdAt: true,
       user: { select: { id: true, fullName: true, email: true, phone: true } },
@@ -178,13 +184,22 @@ export class ContractsRepository {
   /**
    * Creates the draft contract and its main/co-renter member rows atomically.
    */
-  async create(data: Prisma.ContractUncheckedCreateInput, coRenterIds: number[], renterInfo?: TRenterInfo) {
+  async create(data: Prisma.ContractUncheckedCreateInput, coRenters: TAddContractMemberBodySchema[], renterInfo?: TRenterInfo) {
     return this.prismaService.$transaction(async (tx) => {
       const contract = await tx.contract.create({ data, select: { id: true, renterId: true } })
       await tx.contractMember.createMany({
         data: [
           { contractId: contract.id, userId: contract.renterId, role: 'MAIN_RENTER' },
-          ...coRenterIds.map((userId) => ({ contractId: contract.id, userId, role: 'CO_RENTER' as const })),
+          ...coRenters.map((renter) => ({ 
+             contractId: contract.id, 
+             userId: renter.userId || null, 
+             fullName: renter.fullName || null,
+             phone: renter.phone || null,
+             age: renter.age || null,
+             identityCard: renter.identityCard || null,
+             identityCardImageUrl: renter.identityCardImageUrl || null,
+             role: 'CO_RENTER' as const
+          })),
         ],
       })
 
@@ -222,15 +237,24 @@ export class ContractsRepository {
   /**
    * Updates editable contract fields and replaces co-renters only when provided.
    */
-  async update(id: number, renterId: number, data: Prisma.ContractUncheckedUpdateInput, coRenterIds?: number[], renterInfo?: TRenterInfo) {
+  async update(id: number, renterId: number, data: Prisma.ContractUncheckedUpdateInput, coRenters?: TAddContractMemberBodySchema[], renterInfo?: TRenterInfo) {
     return this.prismaService.$transaction(async (tx) => {
       await tx.contract.update({ where: { id }, data })
 
-      if (coRenterIds) {
+      if (coRenters) {
         await tx.contractMember.deleteMany({ where: { contractId: id, role: 'CO_RENTER' } })
-        if (coRenterIds.length > 0) {
+        if (coRenters.length > 0) {
           await tx.contractMember.createMany({
-            data: coRenterIds.map((userId) => ({ contractId: id, userId, role: 'CO_RENTER' })),
+            data: coRenters.map((renter) => ({ 
+             contractId: id, 
+             userId: renter.userId || null, 
+             fullName: renter.fullName || null,
+             phone: renter.phone || null,
+             age: renter.age || null,
+             identityCard: renter.identityCard || null,
+             identityCardImageUrl: renter.identityCardImageUrl || null,
+             role: 'CO_RENTER' as const
+          })),
           })
         }
       }
@@ -412,21 +436,28 @@ export class ContractsRepository {
       return updated
     })
   }
-  async removeMember(contractId: number, userId: number) {
+  async removeMember(contractId: number, memberId: number) {
     return this.prismaService.$transaction(async (tx) => {
       await tx.contractMember.delete({
-        where: {
-          contractId_userId: { contractId, userId },
-        },
+        where: { id: memberId },
       })
       return tx.contract.findUniqueOrThrow({ where: { id: contractId }, select: contractSelect })
     })
   }
 
-  async addMember(contractId: number, userId: number) {
+  async addMember(contractId: number, memberData: TAddContractMemberBodySchema) {
     return this.prismaService.$transaction(async (tx) => {
       await tx.contractMember.create({
-        data: { contractId, userId, role: 'CO_RENTER' },
+        data: { 
+          contractId, 
+          userId: memberData.userId || null,
+          fullName: memberData.fullName || null,
+          phone: memberData.phone || null,
+          age: memberData.age || null,
+          identityCard: memberData.identityCard || null,
+          identityCardImageUrl: memberData.identityCardImageUrl || null,
+          role: 'CO_RENTER' as const
+        },
       })
       return tx.contract.findUniqueOrThrow({ where: { id: contractId }, select: contractSelect })
     })

@@ -108,12 +108,12 @@ export class ContractsController {
   }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER)
-  @Delete(':id/members/:userId')
+  @Delete(':id/members/:memberId')
   removeMember(
     @ActiveUser() user: AccessTokenPayload,
     @Param('id', ParseIntPipe) id: number,
-    @Param('userId', ParseIntPipe) memberUserId: number,
+    @Param('memberId', ParseIntPipe) memberId: number,
   ) {
-    return this.contractsService.removeMember(user.userId, id, memberUserId)
+    return this.contractsService.removeMember(user.userId, id, memberId)
   }
 }

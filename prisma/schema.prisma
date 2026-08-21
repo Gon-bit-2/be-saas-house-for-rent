@@ -1336,23 +1336,34 @@ model Contract {
 /// Bảng lưu danh sách người ở cùng phòng trọ theo hợp đồng
 model ContractMember {
   /// ID bản ghi thành viên (UUID)
-  id         Int                @id @default(autoincrement())
+  id                   Int                @id @default(autoincrement())
   /// ID hợp đồng liên quan
-  contractId Int                @map("contract_id")
-  /// ID tài khoản người dùng của thành viên ở cùng
-  userId     Int                @map("user_id")
+  contractId           Int                @map("contract_id")
+  /// ID tài khoản người dùng của thành viên ở cùng (optional cho người không dùng app)
+  userId               Int?               @map("user_id")
+  /// Họ tên của người ở cùng (dùng cho người không dùng app hoặc override)
+  fullName             String?            @map("full_name") @db.VarChar(255)
+  /// Số điện thoại (dùng cho người không dùng app)
+  phone                String?            @db.VarChar(50)
+  /// Tuổi (dùng cho người không dùng app)
+  age                  Int?
+  /// Số CCCD/CMND (dùng cho người không dùng app)
+  identityCard         String?            @map("identity_card") @db.VarChar(50)
+  /// URL ảnh chụp CCCD (dùng cho người không dùng app)
+  identityCardImageUrl String?            @map("identity_card_image_url") @db.Text
   /// Vai trò của thành viên trong hợp đồng (Ví dụ: MAIN_RENTER hoặc CO_RENTER)
-  role       ContractMemberRole @default(CO_RENTER)
+  role                 ContractMemberRole @default(CO_RENTER)
   /// Thời điểm thêm thành viên vào hợp đồng
-  createdAt  DateTime           @default(now()) @map("created_at") @db.Timestamptz
+  createdAt            DateTime           @default(now()) @map("created_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Hợp đồng thuê liên quan (xóa hợp đồng thì tự động xóa liên kết các thành viên cùng phòng)
   contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
-  /// Tài khoản người dùng (xóa tài khoản thì tự động xóa liên kết thành viên này)
-  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /// Tài khoản người dùng (xóa tài khoản thì set null hoặc cascade)
+  user     User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([contractId, userId])
+  @@index([contractId])
+  @@index([userId])
   @@map("contract_members")
 }
 

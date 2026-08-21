@@ -40,6 +40,21 @@ export const ListContractsQuerySchema = z
   })
   .strict()
 
+export const AddContractMemberBodySchema = z
+  .object({
+    userId: z.coerce.number().int().positive().optional(),
+    fullName: z.string().trim().min(1).max(255).optional(),
+    phone: z.string().trim().max(50).optional(),
+    age: z.coerce.number().int().positive().optional(),
+    identityCard: z.string().trim().max(50).optional(),
+    identityCardImageUrl: z.string().trim().optional(),
+  })
+  .strict()
+  .refine((data) => data.userId || data.fullName, {
+    message: 'Phải chọn người dùng hoặc nhập họ tên',
+    path: ['fullName'],
+  })
+
 export const CreateContractBodySchema = z
   .object({
     roomId: z.coerce.number().int().positive(),
@@ -54,7 +69,7 @@ export const CreateContractBodySchema = z
     billingCycle: ContractBillingCycleSchema,
     paymentDueDay: z.coerce.number().int().min(1).max(28),
     contentSnapshot: z.string().trim().min(1),
-    coRenterIds: CoRenterIdsSchema,
+    coRenters: z.array(AddContractMemberBodySchema).optional(),
     renterInfo: RenterInfoSchema.optional(),
   })
   .strict()
@@ -68,7 +83,7 @@ export const UpdateContractBodySchema = z
     billingCycle: ContractBillingCycleSchema.optional(),
     paymentDueDay: z.coerce.number().int().min(1).max(28).optional(),
     contentSnapshot: z.string().trim().min(1).optional(),
-    coRenterIds: CoRenterIdsSchema,
+    coRenters: z.array(AddContractMemberBodySchema).optional(),
     renterInfo: RenterInfoSchema.optional(),
   })
   .strict()
@@ -82,11 +97,7 @@ export const SignContractBodySchema = z
   })
   .strict()
 
-export const AddContractMemberBodySchema = z
-  .object({
-    userId: z.coerce.number().int().positive(),
-  })
-  .strict()
+
 
 export type TListContractsQuerySchema = z.infer<typeof ListContractsQuerySchema>
 export type TCreateContractBodySchema = z.infer<typeof CreateContractBodySchema>

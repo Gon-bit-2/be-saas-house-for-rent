@@ -47,8 +47,9 @@ export class ContractsService {
       throw new BadRequestException('Chỉ có thể tạo hợp đồng cho phòng trống hoặc đang giữ chỗ')
     }
 
-    const coRenterIds = body.coRenterIds ?? []
-    await this.assertRentersCanJoinContract(body.renterId, coRenterIds, room.maxOccupants)
+    const coRenters = body.coRenters ?? []
+    const userIds = coRenters.map(r => r.userId).filter(Boolean) as number[]
+    await this.assertRentersCanJoinContract(body.renterId, userIds, room.maxOccupants, coRenters.length)
 
     if (body.rentalRequestId) {
       const request = await this.contractsRepository.findApprovedRentalRequest(tenant.tenantId, body.rentalRequestId)
@@ -88,7 +89,7 @@ export class ContractsService {
         createdById: userId,
         updatedById: userId,
       },
-      coRenterIds,
+      coRenters,
       body.renterInfo,
     )
   }
@@ -104,8 +105,9 @@ export class ContractsService {
     const endDate = body.endDate ?? contract.endDate
     this.assertDateRange(startDate, endDate)
 
-    if (body.coRenterIds) {
-      await this.assertRentersCanJoinContract(contract.renterId, body.coRenterIds, contract.room.maxOccupants)
+    if (body.coRenters) {
+      const userIds = body.coRenters.map(r => r.userId).filter(Boolean) as number[]
+      await this.assertRentersCanJoinContract(contract.renterId, userIds, contract.room.maxOccupants, body.coRenters.length)
     }
 
     const data: Prisma.ContractUncheckedUpdateInput = {
@@ -119,7 +121,7 @@ export class ContractsService {
       updatedById: userId,
     }
 
-    return this.contractsRepository.update(id, contract.renterId, data, body.coRenterIds, body.renterInfo)
+    return this.contractsRepository.update(id, contract.renterId, data, body.coRenters, body.renterInfo)
   }
 
   async activate(userId: number, id: number) {
@@ -195,21 +197,25 @@ export class ContractsService {
     }
 
     const currentMemberIds = contract.members.map((m) => m.userId)
-    if (currentMemberIds.includes(body.userId)) {
+    if (body.userId && currentMemberIds.includes(body.userId)) {
       throw new BadRequestException('Người dùng này đã là thành viên của hợp đồng')
     }
 
-    const newCoRenterIds = contract.members
-      .filter(m => m.role === 'CO_RENTER')
-      .map(m => m.userId)
-    newCoRenterIds.push(body.userId)
+    const existingCount = contract.members.filter(m => m.role === 'CO_RENTER').length
+    const userIds = contract.members
+      .filter(m => m.role === 'CO_RENTER' && m.userId)
+      .map(m => m.userId as number)
+    
+    if (body.userId) {
+      userIds.push(body.userId)
+    }
 
-    await this.assertRentersCanJoinContract(contract.renterId, newCoRenterIds, contract.room.maxOccupants)
+    await this.assertRentersCanJoinContract(contract.renterId, userIds, contract.room.maxOccupants, existingCount + 1)
 
-    return this.contractsRepository.addMember(id, body.userId)
+    return this.contractsRepository.addMember(id, body)
   }
 
-  async removeMember(actorId: number, id: number, memberUserId: number) {
+  async removeMember(actorId: number, id: number, memberId: number) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(actorId)
     const contract = await this.getTenantContractOrThrow(tenant.tenantId, id)
     
@@ -217,16 +223,15 @@ export class ContractsService {
       throw new BadRequestException('Không thể xóa thành viên khỏi hợp đồng đã kết thúc hoặc bị hủy')
     }
 
-    if (memberUserId === contract.renterId) {
-      throw new BadRequestException('Không thể xóa người thuê chính khỏi hợp đồng')
+    const targetMember = contract.members.find((m) => m.id === memberId)
+    if (!targetMember) {
+      throw new BadRequestException('Thành viên không tồn tại trong hợp đồng này')
+    }
+    if (targetMember.role === 'MAIN_RENTER') {
+      throw new BadRequestException('Không thể xóa người thuê chính. Bạn phải thanh lý hợp đồng thay vì xóa.')
     }
 
-    const isMember = contract.members.some((m) => m.userId === memberUserId)
-    if (!isMember) {
-      throw new NotFoundException('Không tìm thấy thành viên này trong hợp đồng')
-    }
-
-    return this.contractsRepository.removeMember(id, memberUserId)
+    return this.contractsRepository.removeMember(id, memberId)
   }
 
   async listMine(userId: number, query: TListContractsQuerySchema) {
@@ -274,15 +279,15 @@ export class ContractsService {
     }
   }
 
-  private async assertRentersCanJoinContract(mainRenterId: number, coRenterIds: number[], maxOccupants: number) {
-    if (coRenterIds.includes(mainRenterId)) {
+  private async assertRentersCanJoinContract(mainRenterId: number, coRenterUserIds: number[], maxOccupants: number, totalCoRenters: number) {
+    if (coRenterUserIds.includes(mainRenterId)) {
       throw new BadRequestException('Người thuê chính không được nằm trong danh sách người ở cùng')
     }
-    if (coRenterIds.length + 1 > maxOccupants) {
+    if (totalCoRenters + 1 > maxOccupants) {
       throw new BadRequestException('Số người trong hợp đồng vượt quá sức chứa tối đa của phòng')
     }
 
-    const uniqueUserIds = [mainRenterId, ...coRenterIds]
+    const uniqueUserIds = [mainRenterId, ...coRenterUserIds]
     const renters = await this.contractsRepository.findRentersWithProfiles(uniqueUserIds)
     if (renters.length !== uniqueUserIds.length) {
       throw new BadRequestException('Người thuê phải là tài khoản active và có hồ sơ người thuê')

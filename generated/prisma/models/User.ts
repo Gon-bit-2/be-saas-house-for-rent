@@ -2095,10 +2095,12 @@ export type UserCreateNestedOneWithoutContractMembersInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutContractMembersNestedInput = {
+export type UserUpdateOneWithoutContractMembersNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutContractMembersInput, Prisma.UserUncheckedCreateWithoutContractMembersInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutContractMembersInput
   upsert?: Prisma.UserUpsertWithoutContractMembersInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutContractMembersInput, Prisma.UserUpdateWithoutContractMembersInput>, Prisma.UserUncheckedUpdateWithoutContractMembersInput>
 }

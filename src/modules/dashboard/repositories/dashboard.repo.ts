@@ -263,6 +263,39 @@ export class DashboardRepository {
   }
 
   async getRecentActivities(tenantId: number, limit: number): Promise<DashboardActivity[]> {
+    const invoiceStatusMap: Record<string, string> = {
+      DRAFT: 'Bản nháp',
+      UNPAID: 'Chưa thanh toán',
+      PARTIALLY_PAID: 'Thanh toán 1 phần',
+      PAID: 'Đã thanh toán',
+      OVERDUE: 'Quá hạn',
+      CANCELED: 'Đã hủy',
+    }
+
+    const paymentStatusMap: Record<string, string> = {
+      PENDING: 'Đang chờ',
+      SUCCESS: 'Thành công',
+      FAILED: 'Thất bại',
+      CANCELED: 'Đã hủy',
+      REFUNDED: 'Đã hoàn tiền',
+    }
+
+    const ticketStatusMap: Record<string, string> = {
+      OPEN: 'Mới tạo',
+      IN_PROGRESS: 'Đang xử lý',
+      WAITING_RENTER: 'Chờ phản hồi',
+      RESOLVED: 'Đã giải quyết',
+      CLOSED: 'Đã đóng',
+      CANCELED: 'Đã hủy',
+    }
+
+    const ticketPriorityMap: Record<string, string> = {
+      URGENT: 'Khẩn cấp',
+      HIGH: 'Cao',
+      MEDIUM: 'Trung bình',
+      LOW: 'Thấp',
+    }
+
     const [invoices, payments, tickets] = await Promise.all([
       this.prismaService.invoice.findMany({
         where: { tenantId, deletedAt: null, status: { not: 'DRAFT' } },
@@ -310,7 +343,7 @@ export class DashboardRepository {
         type: 'INVOICE' as const,
         id: invoice.id,
         title: `Hóa đơn ${invoice.invoiceCode}`,
-        description: `Trạng thái hóa đơn: ${invoice.status}`,
+        description: `Trạng thái hóa đơn: ${invoiceStatusMap[invoice.status] || invoice.status}`,
         status: invoice.status,
         occurredAt: invoice.updatedAt,
         metadata: {
@@ -324,7 +357,7 @@ export class DashboardRepository {
         type: 'PAYMENT' as const,
         id: payment.id,
         title: `Thanh toán ${payment.invoice.invoiceCode}`,
-        description: `${payment.payer.fullName} - ${payment.status}`,
+        description: `${payment.payer.fullName} - ${paymentStatusMap[payment.status] || payment.status}`,
         status: payment.status,
         occurredAt: payment.updatedAt,
         metadata: {
@@ -338,7 +371,7 @@ export class DashboardRepository {
         type: 'TICKET' as const,
         id: ticket.id,
         title: ticket.title,
-        description: `Ticket ${ticket.status} - ${ticket.priority}`,
+        description: `Trạng thái: ${ticketStatusMap[ticket.status] || ticket.status} - Mức độ: ${ticketPriorityMap[ticket.priority] || ticket.priority}`,
         status: ticket.status,
         occurredAt: ticket.updatedAt,
         metadata: {
