@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  app-migration:
+    build:
+      context: .
+      target: runtime
+    container_name: backend-migration
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@db:5432/house_rental?schema=public}
+    command: >
+      sh -c "npx prisma migrate deploy && node dist/inittalScripts/create-permission.js"
+
+  app:
+    build:
+      context: .
+      target: runtime
+    container_name: backend-app
+    restart: unless-stopped
+    ports:
+      - '1174:1174'
+    depends_on:
+      app-migration:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    networks:
+      - app-network
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@db:5432/house_rental?schema=public}
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+    command: ['node', 'dist/main']
+
+  db:
+    image: postgres:17-alpine
+    container_name: backend-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-house_rental}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: backend-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
