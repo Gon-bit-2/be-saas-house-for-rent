@@ -1,5 +1,5 @@
 # Multi-stage build for NestJS application
-FROM node:20-bookworm-slim AS deps
+FROM node:22-bookworm-slim AS deps
 WORKDIR /app
 
 # Install openssl for Prisma
@@ -10,10 +10,14 @@ COPY package*.json ./
 COPY prisma ./prisma/
 RUN npm ci
 # Khắc phục lỗi Sharp v0.33+ không tìm thấy binary trên Linux do package-lock.json được tạo trên OS khác
-RUN npm install --no-save @img/sharp-linux-x64 @img/sharp-linux-arm64
+RUN if [ "$(uname -m)" = "aarch64" ]; then \
+      npm install --no-save @img/sharp-linux-arm64; \
+    else \
+      npm install --no-save @img/sharp-linux-x64; \
+    fi
 
 # --- Build Stage ---
-FROM node:20-bookworm-slim AS build
+FROM node:22-bookworm-slim AS build
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
@@ -28,7 +32,7 @@ RUN npm run build
 # Giữ lại devDependencies (không prune) để sử dụng npx prisma migrate deploy trong container migration
 
 # --- Production Stage ---
-FROM node:20-bookworm-slim AS runtime
+FROM node:22-bookworm-slim AS runtime
 WORKDIR /app
 
 # Install openssl for Prisma and curl for healthcheck
@@ -48,6 +52,7 @@ COPY --from=build --chown=nestjs:nodejs /app/package*.json ./
 COPY --from=build --chown=nestjs:nodejs /app/generated ./generated
 COPY --from=build --chown=nestjs:nodejs /app/inittalScripts ./inittalScripts
 COPY --from=build --chown=nestjs:nodejs /app/prisma.config.ts ./
+
 # Switch to non-root user
 USER nestjs
 
