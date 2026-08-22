@@ -9,12 +9,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -
 COPY package*.json ./
 COPY prisma ./prisma/
 RUN npm ci
-# Khắc phục lỗi Sharp v0.33+ không tìm thấy binary trên Linux do package-lock.json được tạo trên OS khác
-RUN if [ "$(uname -m)" = "aarch64" ]; then \
-      npm install --no-save @img/sharp-linux-arm64; \
-    else \
-      npm install --no-save @img/sharp-linux-x64; \
-    fi
+# Khắc phục triệt để lỗi Sharp v0.33+ (NPM bug: TypeError endsWith)
+# Xóa hoàn toàn bản cài lỗi từ npm ci và ép tải mới lại để nhận diện đúng OS/CPU
+RUN rm -rf node_modules/sharp && npm install sharp@0.35.3 --no-save
 
 # --- Build Stage ---
 FROM node:22-bookworm-slim AS build
