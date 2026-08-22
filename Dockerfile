@@ -9,8 +9,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -
 COPY package*.json ./
 COPY prisma ./prisma/
 RUN npm ci
-# Sau lệnh `npm ci` hoặc ở giai đoạn build, hãy thêm dòng:
-RUN npm rebuild sharp --platform=linux --libc=glibc
+# Khắc phục lỗi Sharp v0.33+ không tìm thấy binary trên Linux do package-lock.json được tạo trên OS khác
+RUN npm install --no-save @img/sharp-linux-x64 @img/sharp-linux-arm64
+
 # --- Build Stage ---
 FROM node:20-bookworm-slim AS build
 WORKDIR /app
@@ -25,7 +26,7 @@ COPY . .
 RUN npx prisma generate
 RUN npm run build
 # Giữ lại devDependencies (không prune) để sử dụng npx prisma migrate deploy trong container migration
-RUN npm rebuild sharp --platform=linux
+
 # --- Production Stage ---
 FROM node:20-bookworm-slim AS runtime
 WORKDIR /app
