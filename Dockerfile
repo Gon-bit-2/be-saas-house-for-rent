@@ -25,7 +25,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Generate Prisma Client and build the app
-RUN npx prisma generate
+# Cung cấp dummy DATABASE_URL vì Prisma 7 config sẽ văng lỗi nếu biến này bị thiếu (do ta không copy file .env vào image)
+RUN DATABASE_URL="postgresql://postgres:postgres@db:5432/house_rental?schema=public" npx prisma generate
 RUN npm run build
 # Giữ lại devDependencies (không prune) để sử dụng npx prisma migrate deploy trong container migration
 
