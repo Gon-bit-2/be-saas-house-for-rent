@@ -63,4 +63,4 @@ USER nestjs
 EXPOSE 1174
 
 # Start the application
-CMD ["node", "dist/main"]
+CMD ["node", "dist/src/main"]

@@ -40,7 +40,7 @@ services:
       - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@db:5432/house_rental?schema=public}
       - REDIS_HOST=${REDIS_HOST:-redis}
       - REDIS_PORT=${REDIS_PORT:-6379}
-    command: ['node', 'dist/main']
+    command: ['node', 'dist/src/main']
 
   db:
     image: postgres:17-alpine
