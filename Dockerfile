@@ -10,13 +10,12 @@ COPY package.json ./
 COPY package-lock.json* ./
 COPY prisma ./prisma/
 
-# Khắc phục triệt để lỗi Sharp v0.33+ (NPM bug: TypeError endsWith)
-# Xóa package-lock.json và dùng npm install để npm tự resolve
+# Xóa package-lock.json để build sạch
 RUN rm -f package-lock.json && npm install
-# Ép cài đặt các binary của Linux bằng cờ --force để đảm bảo chúng có mặt trên disk
-RUN npm install --no-save --force @img/sharp-linux-x64 @img/sharp-linux-arm64
-# Sửa file sharp.cjs để in ra lỗi gốc (real error) thay vì crash TypeError endsWith
-RUN sed -i 's/if (!err.code.endsWith("MODULE_NOT_FOUND")) {/if (!err || !err.code || !err.code.endsWith("MODULE_NOT_FOUND")) { console.error("SHARP REAL ERROR:", err);/g' node_modules/sharp/dist/sharp.cjs
+
+# Hạ cấp sharp xuống bản 0.32.6. Bản 0.33+ yêu cầu CPU kiến trúc x86-64-v2 (phải hỗ trợ SSE4.2/AVX) và Wasm SIMD.
+# VPS của bạn dùng CPU đời cũ nên không đáp ứng được yêu cầu của bản 0.33+, gây lỗi "Unsupported CPU"
+RUN npm install sharp@0.32.6
 
 # --- Build Stage ---
 FROM node:22-bookworm-slim AS build
