@@ -16,6 +16,11 @@ export class DashboardController {
     return this.dashboardService.getSummary(user.userId, query)
   }
 
+  @Get('action-center')
+  getActionCenter(@ActiveUser() user: AccessTokenPayload) {
+    return this.dashboardService.getActionCenter(user.userId)
+  }
+
   @Get('revenue-trend')
   getRevenueTrend(@ActiveUser() user: AccessTokenPayload, @Query() query: RevenueTrendQueryDTO) {
     return this.dashboardService.getRevenueTrend(user.userId, query)

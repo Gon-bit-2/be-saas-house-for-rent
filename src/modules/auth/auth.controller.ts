@@ -2,6 +2,7 @@ import { Body, Controller, Get, Ip, Patch, Post, Query, Res, UseGuards } from '@
 import { AuthService } from './auth.service'
 import {
   ForgotPasswordBodyDTO,
+  GoogleAuthorizationQueryDTO,
   GoogleSessionBodyDTO,
   LoginBodyDTO,
   LogoutBodyDTO,
@@ -12,6 +13,7 @@ import {
 } from './dto/auth.dto'
 import { isPublic } from '@src/common/decorators/decorators/auth.decorator'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
+import { SkipPermission } from '@src/common/decorators/decorators/skip-permission.decorator'
 import { UserAgent } from '@src/common/decorators/decorators/user-agent.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
 import type { Response } from 'express'
@@ -101,8 +103,12 @@ export class AuthController {
    */
   @isPublic()
   @Get('google/url')
-  getGoogleAuthorizationUrl(@Ip() ip: string, @UserAgent() userAgent: string) {
-    return this.authService.getGoogleAuthorizationUrl(ip, userAgent)
+  getGoogleAuthorizationUrl(
+    @Query() query: GoogleAuthorizationQueryDTO,
+    @Ip() ip: string,
+    @UserAgent() userAgent: string,
+  ) {
+    return this.authService.getGoogleAuthorizationUrl(query.client, ip, userAgent)
   }
 
   /**
@@ -144,6 +150,7 @@ export class AuthController {
    *
    * POST /auth/logout
    */
+  @SkipPermission()
   @Post('logout')
   logout(@Body() body: LogoutBodyDTO) {
     return this.authService.logout(body)
@@ -155,6 +162,7 @@ export class AuthController {
    *
    * GET /auth/profile
    */
+  @SkipPermission()
   @Get('profile')
   getProfile(@ActiveUser() user: AccessTokenPayload) {
     return this.authService.getProfile(user.userId)
@@ -166,6 +174,7 @@ export class AuthController {
    *
    * PATCH /auth/profile
    */
+  @SkipPermission()
   @Patch('profile')
   updateProfile(@ActiveUser() user: AccessTokenPayload, @Body() body: UpdateProfileBodyDTO) {
     return this.authService.updateProfile(user.userId, body)

@@ -14,6 +14,7 @@ describe('MarketplaceService', () => {
   beforeEach(() => {
     marketplaceRepository = {
       findMany: jest.fn(),
+      findActiveAmenities: jest.fn(),
       findById: jest.fn(),
       findRenterProfile: jest.fn(),
       findActiveRentalRequest: jest.fn(),
@@ -59,7 +60,25 @@ describe('MarketplaceService', () => {
     )
   })
 
-  it('removes tenant identity and precise location from public room responses', async () => {
+  it('lists only active public amenities through the repository contract', async () => {
+    marketplaceRepository.findActiveAmenities.mockResolvedValue([[{ id: 1, name: 'Wifi', category: 'Tiện nghi' }], 1])
+
+    const result = await service.listAmenities({ page: 1, limit: 50, search: 'wifi' })
+
+    expect(result.data).toEqual([{ id: 1, name: 'Wifi', category: 'Tiện nghi' }])
+    expect(marketplaceRepository.findActiveAmenities).toHaveBeenCalledWith(
+      expect.objectContaining({
+        OR: [
+          { name: { contains: 'wifi', mode: 'insensitive' } },
+          { category: { contains: 'wifi', mode: 'insensitive' } },
+        ],
+      }),
+      0,
+      50,
+    )
+  })
+
+  it('returns exact location on public room detail while removing tenant identity', async () => {
     marketplaceRepository.findById.mockResolvedValue({
       id: 5,
       tenantId: 10,
@@ -78,7 +97,15 @@ describe('MarketplaceService', () => {
 
     expect(result).toEqual({
       id: 5,
-      property: { id: 2, province: 'Ho Chi Minh City', district: 'Thu Duc', ward: 'Linh Trung' },
+      property: {
+        id: 2,
+        province: 'Ho Chi Minh City',
+        district: 'Thu Duc',
+        ward: 'Linh Trung',
+        addressDetail: '123 Internal Street',
+        latitude: 10.123,
+        longitude: 106.456,
+      },
     })
   })
 

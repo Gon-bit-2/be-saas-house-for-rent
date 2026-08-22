@@ -24,12 +24,14 @@ type RevenueTrendRow = {
   count: number
 }
 
+const ACTION_CENTER_LIMIT = 5
+
 @Injectable()
 export class DashboardRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getRoomStats(tenantId: number) {
-    const [totalRooms, byStatus] = await this.prismaService.$transaction([
+    const [totalRooms, byStatus] = await Promise.all([
       this.prismaService.room.count({ where: { tenantId, deletedAt: null } }),
       this.prismaService.room.groupBy({
         by: ['status'],
@@ -42,11 +44,120 @@ export class DashboardRepository {
     return { totalRooms, byStatus: this.normalizeStatusCounts(byStatus) }
   }
 
+  async getActionCenter(tenantId: number, now: Date) {
+    const today = this.startOfUtcDay(now)
+    const endingSoonTo = new Date(today)
+    endingSoonTo.setUTCDate(endingSoonTo.getUTCDate() + 30)
+
+    const pendingRequestWhere: Prisma.RentalRequestWhereInput = { tenantId, status: 'PENDING' }
+    const expiringContractWhere: Prisma.ContractWhereInput = {
+      tenantId,
+      status: 'ACTIVE',
+      deletedAt: null,
+      endDate: { gte: today, lte: this.endOfUtcDay(endingSoonTo) },
+    }
+    const unpaidInvoiceWhere: Prisma.InvoiceWhereInput = {
+      tenantId,
+      deletedAt: null,
+      status: { in: ['UNPAID', 'PARTIALLY_PAID', 'OVERDUE'] },
+      debtAmount: { gt: 0 },
+    }
+    const openTicketWhere: Prisma.TicketWhereInput = {
+      tenantId,
+      status: { in: ['OPEN', 'IN_PROGRESS', 'WAITING_RENTER'] },
+    }
+
+    const [
+      pendingRequestTotal,
+      pendingRequests,
+      expiringContractTotal,
+      expiringContracts,
+      unpaidInvoiceTotal,
+      unpaidInvoices,
+      openTicketTotal,
+      openTickets,
+    ] = await Promise.all([
+      this.prismaService.rentalRequest.count({ where: pendingRequestWhere }),
+      this.prismaService.rentalRequest.findMany({
+        where: pendingRequestWhere,
+        take: ACTION_CENTER_LIMIT,
+        orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+        select: {
+          id: true,
+          status: true,
+          expectedStartDate: true,
+          createdAt: true,
+          renter: { select: { id: true, fullName: true } },
+          room: {
+            select: { id: true, roomCode: true, title: true, property: { select: { id: true, name: true } } },
+          },
+        },
+      }),
+      this.prismaService.contract.count({ where: expiringContractWhere }),
+      this.prismaService.contract.findMany({
+        where: expiringContractWhere,
+        take: ACTION_CENTER_LIMIT,
+        orderBy: [{ endDate: 'asc' }, { id: 'asc' }],
+        select: {
+          id: true,
+          contractCode: true,
+          status: true,
+          endDate: true,
+          renter: { select: { id: true, fullName: true } },
+          room: {
+            select: { id: true, roomCode: true, title: true, property: { select: { id: true, name: true } } },
+          },
+        },
+      }),
+      this.prismaService.invoice.count({ where: unpaidInvoiceWhere }),
+      this.prismaService.invoice.findMany({
+        where: unpaidInvoiceWhere,
+        take: ACTION_CENTER_LIMIT,
+        orderBy: [{ dueDate: 'asc' }, { id: 'asc' }],
+        select: {
+          id: true,
+          invoiceCode: true,
+          status: true,
+          dueDate: true,
+          debtAmount: true,
+          renter: { select: { id: true, fullName: true } },
+          room: {
+            select: { id: true, roomCode: true, title: true, property: { select: { id: true, name: true } } },
+          },
+        },
+      }),
+      this.prismaService.ticket.count({ where: openTicketWhere }),
+      this.prismaService.ticket.findMany({
+        where: openTicketWhere,
+        take: ACTION_CENTER_LIMIT,
+        orderBy: [{ priority: 'desc' }, { createdAt: 'asc' }, { id: 'asc' }],
+        select: {
+          id: true,
+          title: true,
+          priority: true,
+          status: true,
+          createdAt: true,
+          createdBy: { select: { id: true, fullName: true } },
+          room: {
+            select: { id: true, roomCode: true, title: true, property: { select: { id: true, name: true } } },
+          },
+        },
+      }),
+    ])
+
+    return {
+      pendingRequests: { total: pendingRequestTotal, items: pendingRequests },
+      expiringContracts: { total: expiringContractTotal, items: expiringContracts },
+      unpaidInvoices: { total: unpaidInvoiceTotal, items: unpaidInvoices },
+      openTickets: { total: openTicketTotal, items: openTickets },
+    }
+  }
+
   async getContractStats(tenantId: number, now: Date) {
     const endingSoonTo = new Date(now)
     endingSoonTo.setUTCDate(endingSoonTo.getUTCDate() + 30)
 
-    const [activeContracts, endingSoonContracts] = await this.prismaService.$transaction([
+    const [activeContracts, endingSoonContracts] = await Promise.all([
       this.prismaService.contract.count({ where: { tenantId, status: 'ACTIVE', deletedAt: null } }),
       this.prismaService.contract.count({
         where: {
@@ -62,34 +173,33 @@ export class DashboardRepository {
   }
 
   async getFinanceStats(tenantId: number, from: Date, to: Date) {
-    const [invoiceTotal, paidAmount, pendingPaymentAmount, outstandingDebt, overdueDebt] =
-      await this.prismaService.$transaction([
-        this.prismaService.invoice.aggregate({
-          where: {
-            tenantId,
-            deletedAt: null,
-            status: { in: ['UNPAID', 'PARTIALLY_PAID', 'PAID', 'OVERDUE'] },
-            billingMonth: { gte: from, lte: to },
-          },
-          _sum: { totalAmount: true },
-        }),
-        this.prismaService.payment.aggregate({
-          where: { tenantId, status: 'SUCCESS', paidAt: { gte: from, lte: to } },
-          _sum: { amount: true },
-        }),
-        this.prismaService.payment.aggregate({
-          where: { tenantId, status: 'PENDING', createdAt: { gte: from, lte: to } },
-          _sum: { amount: true },
-        }),
-        this.prismaService.debt.aggregate({
-          where: { tenantId, status: { in: ['OPEN', 'PARTIAL', 'OVERDUE'] } },
-          _sum: { remainingAmount: true },
-        }),
-        this.prismaService.debt.aggregate({
-          where: { tenantId, status: 'OVERDUE' },
-          _sum: { remainingAmount: true },
-        }),
-      ])
+    const [invoiceTotal, paidAmount, pendingPaymentAmount, outstandingDebt, overdueDebt] = await Promise.all([
+      this.prismaService.invoice.aggregate({
+        where: {
+          tenantId,
+          deletedAt: null,
+          status: { in: ['UNPAID', 'PARTIALLY_PAID', 'PAID', 'OVERDUE'] },
+          billingMonth: { gte: from, lte: to },
+        },
+        _sum: { totalAmount: true },
+      }),
+      this.prismaService.payment.aggregate({
+        where: { tenantId, status: 'SUCCESS', paidAt: { gte: from, lte: to } },
+        _sum: { amount: true },
+      }),
+      this.prismaService.payment.aggregate({
+        where: { tenantId, status: 'PENDING', createdAt: { gte: from, lte: to } },
+        _sum: { amount: true },
+      }),
+      this.prismaService.debt.aggregate({
+        where: { tenantId, status: { in: ['OPEN', 'PARTIAL', 'OVERDUE'] } },
+        _sum: { remainingAmount: true },
+      }),
+      this.prismaService.debt.aggregate({
+        where: { tenantId, status: 'OVERDUE' },
+        _sum: { remainingAmount: true },
+      }),
+    ])
 
     return {
       invoiceTotal: invoiceTotal._sum.totalAmount,
@@ -101,7 +211,7 @@ export class DashboardRepository {
   }
 
   async getTicketStats(tenantId: number, from: Date, to: Date) {
-    const [byStatus, urgentOpenTickets] = await this.prismaService.$transaction([
+    const [byStatus, urgentOpenTickets] = await Promise.all([
       this.prismaService.ticket.groupBy({
         by: ['status'],
         where: { tenantId, createdAt: { gte: from, lte: to } },
@@ -153,7 +263,40 @@ export class DashboardRepository {
   }
 
   async getRecentActivities(tenantId: number, limit: number): Promise<DashboardActivity[]> {
-    const [invoices, payments, tickets] = await this.prismaService.$transaction([
+    const invoiceStatusMap: Record<string, string> = {
+      DRAFT: 'Bản nháp',
+      UNPAID: 'Chưa thanh toán',
+      PARTIALLY_PAID: 'Thanh toán 1 phần',
+      PAID: 'Đã thanh toán',
+      OVERDUE: 'Quá hạn',
+      CANCELED: 'Đã hủy',
+    }
+
+    const paymentStatusMap: Record<string, string> = {
+      PENDING: 'Đang chờ',
+      SUCCESS: 'Thành công',
+      FAILED: 'Thất bại',
+      CANCELED: 'Đã hủy',
+      REFUNDED: 'Đã hoàn tiền',
+    }
+
+    const ticketStatusMap: Record<string, string> = {
+      OPEN: 'Mới tạo',
+      IN_PROGRESS: 'Đang xử lý',
+      WAITING_RENTER: 'Chờ phản hồi',
+      RESOLVED: 'Đã giải quyết',
+      CLOSED: 'Đã đóng',
+      CANCELED: 'Đã hủy',
+    }
+
+    const ticketPriorityMap: Record<string, string> = {
+      URGENT: 'Khẩn cấp',
+      HIGH: 'Cao',
+      MEDIUM: 'Trung bình',
+      LOW: 'Thấp',
+    }
+
+    const [invoices, payments, tickets] = await Promise.all([
       this.prismaService.invoice.findMany({
         where: { tenantId, deletedAt: null, status: { not: 'DRAFT' } },
         take: limit,
@@ -200,7 +343,7 @@ export class DashboardRepository {
         type: 'INVOICE' as const,
         id: invoice.id,
         title: `Hóa đơn ${invoice.invoiceCode}`,
-        description: `Trạng thái hóa đơn: ${invoice.status}`,
+        description: `Trạng thái hóa đơn: ${invoiceStatusMap[invoice.status] || invoice.status}`,
         status: invoice.status,
         occurredAt: invoice.updatedAt,
         metadata: {
@@ -214,7 +357,7 @@ export class DashboardRepository {
         type: 'PAYMENT' as const,
         id: payment.id,
         title: `Thanh toán ${payment.invoice.invoiceCode}`,
-        description: `${payment.payer.fullName} - ${payment.status}`,
+        description: `${payment.payer.fullName} - ${paymentStatusMap[payment.status] || payment.status}`,
         status: payment.status,
         occurredAt: payment.updatedAt,
         metadata: {
@@ -228,7 +371,7 @@ export class DashboardRepository {
         type: 'TICKET' as const,
         id: ticket.id,
         title: ticket.title,
-        description: `Ticket ${ticket.status} - ${ticket.priority}`,
+        description: `Trạng thái: ${ticketStatusMap[ticket.status] || ticket.status} - Mức độ: ${ticketPriorityMap[ticket.priority] || ticket.priority}`,
         status: ticket.status,
         occurredAt: ticket.updatedAt,
         metadata: {

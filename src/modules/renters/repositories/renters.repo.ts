@@ -122,6 +122,8 @@ export const renterInvitationSelect = {
   revokedAt: true,
   createdAt: true,
   updatedAt: true,
+  tenant: { select: { id: true, name: true } },
+  createdBy: { select: { id: true, fullName: true, email: true } },
 } satisfies Prisma.RenterInvitationSelect
 
 /**
@@ -208,6 +210,13 @@ export class RentersRepository {
         },
         select: renterInvitationSelect,
       })
+    })
+  }
+
+  async findInvitation(tenantId: number, id: number) {
+    return this.prismaService.renterInvitation.findFirst({
+      where: { id, tenantId },
+      select: renterInvitationSelect,
     })
   }
 

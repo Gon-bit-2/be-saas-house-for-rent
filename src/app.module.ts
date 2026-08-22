@@ -2,6 +2,7 @@ import { BullModule } from '@nestjs/bullmq'
 import { CacheModule } from '@nestjs/cache-manager'
 import { Module } from '@nestjs/common'
 import { APP_GUARD } from '@nestjs/core'
+import { ScheduleModule } from '@nestjs/schedule'
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -18,6 +19,7 @@ import { ContractsModule } from './modules/contracts/contracts.module'
 import { ContractTerminationsModule } from './modules/contract-terminations/contract-terminations.module'
 import { DashboardModule } from './modules/dashboard/dashboard.module'
 import { InvoicesModule } from './modules/invoices/invoices.module'
+import { LocationsModule } from './modules/locations/locations.module'
 import { HandoversModule } from './modules/handovers/handovers.module'
 import { MarketplaceModule } from './modules/marketplace/marketplace.module'
 import { NotificationsModule } from './modules/notifications/notifications.module'
@@ -36,6 +38,7 @@ import { TenantsModule } from './modules/tenants/tenants.module'
 import { TicketsModule } from './modules/tickets/tickets.module'
 import { UtilityMetersModule } from './modules/utility-meters/utility-meters.module'
 import { UsersModule } from './modules/users/users.module'
+import { ConversationsModule } from './modules/conversations/conversations.module'
 import { DatabaseModule } from './shared/modules/database/prisma.module'
 import { SharedServiceModule } from './shared/modules/services/shared-service.module'
 import { RedisThrottlerStorage, redisThrottlerStorage } from './common/rate-limit/redis-throttler.storage'
@@ -73,6 +76,7 @@ function buildRedisConnection() {
         },
       ],
     }),
+    ScheduleModule.forRoot(),
     BullModule.forRoot({
       connection: buildRedisConnection(),
       defaultJobOptions: {
@@ -108,7 +112,9 @@ function buildRedisConnection() {
     DashboardModule,
     UtilityMetersModule,
     InvoicesModule,
+    LocationsModule,
     TicketsModule,
+    ConversationsModule,
   ],
   controllers: [AppController],
   providers: [

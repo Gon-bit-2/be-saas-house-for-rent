@@ -1,9 +1,15 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common'
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query, Delete } from '@nestjs/common'
 import roleName from '@src/common/constants/role.constant'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
 import { IsTenant, Roles } from '@src/common/decorators/decorators/roles.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
-import { CreateContractBodyDTO, ListContractsQueryDTO, UpdateContractBodyDTO } from './dto/contracts.dto'
+import {
+  CreateContractBodyDTO,
+  ListContractsQueryDTO,
+  UpdateContractBodyDTO,
+  AddContractMemberBodyDTO,
+  SignContractBodyDTO,
+} from './dto/contracts.dto'
 import { ContractsService } from './contracts.service'
 
 /**
@@ -23,6 +29,16 @@ export class ContractsController {
   @Get('me/:id')
   getMine(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
     return this.contractsService.getMine(user.userId, id)
+  }
+
+  @IsTenant()
+  @Post('me/:id/sign')
+  signRenter(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: SignContractBodyDTO,
+  ) {
+    return this.contractsService.signRenter(user.userId, id, body.signature)
   }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER)
@@ -54,6 +70,16 @@ export class ContractsController {
   }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Post(':id/sign-landlord')
+  signLandlord(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: SignContractBodyDTO,
+  ) {
+    return this.contractsService.signLandlord(user.userId, id, body.signature)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
   @Patch(':id/activate')
   activate(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
     return this.contractsService.activate(user.userId, id)
@@ -69,5 +95,25 @@ export class ContractsController {
   @Patch(':id/cancel')
   cancel(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
     return this.contractsService.cancel(user.userId, id)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Post(':id/members')
+  addMember(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: AddContractMemberBodyDTO,
+  ) {
+    return this.contractsService.addMember(user.userId, id, body)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Delete(':id/members/:memberId')
+  removeMember(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Param('memberId', ParseIntPipe) memberId: number,
+  ) {
+    return this.contractsService.removeMember(user.userId, id, memberId)
   }
 }

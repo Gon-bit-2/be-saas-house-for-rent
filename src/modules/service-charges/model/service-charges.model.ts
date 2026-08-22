@@ -9,7 +9,7 @@ const PaginationSchema = z.object({
 })
 
 export const ListServiceCatalogQuerySchema = PaginationSchema.extend({
-  search: z.string().trim().min(1).optional(),
+  search: z.string().trim().optional(),
 }).strict()
 
 export const CreateServiceCatalogItemBodySchema = z

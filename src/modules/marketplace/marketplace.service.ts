@@ -5,6 +5,7 @@ import type { Prisma } from 'generated/prisma/client'
 import type {
   TCreateMarketplaceRentalRequestBodySchema,
   TCreateMarketplaceViewingAppointmentBodySchema,
+  TListMarketplaceAmenitiesQuerySchema,
   TListMarketplaceRoomsQuerySchema,
 } from './model/marketplace.model'
 import { MarketplaceRepository } from './repositories/marketplace.repo'
@@ -24,18 +25,78 @@ export class MarketplaceService {
   async listRooms(query: TListMarketplaceRoomsQuerySchema) {
     const { page, limit, skip } = normalizePagination(query)
     const where = this.buildPublicRoomWhere(query)
+
+    if (query.lat && query.lng && query.radius) {
+      const propertyIds = await this.marketplaceRepository.findPropertyIdsWithinRadius(
+        query.lat,
+        query.lng,
+        query.radius,
+      )
+      where.propertyId = { in: propertyIds }
+    }
+
     const [rooms, total] = await this.marketplaceRepository.findMany(where, skip, limit)
     return buildPaginatedResult(
-      rooms.map((room) => this.toPublicRoom(room)),
+      rooms.map((room) => this.toPublicRoom(room, false)),
       total,
       page,
       limit,
     )
   }
 
+  async listAmenities(query: TListMarketplaceAmenitiesQuerySchema) {
+    const { page, limit, skip } = normalizePagination(query)
+    const where: Prisma.AmenityWhereInput = {
+      ...(query.category ? { category: { contains: query.category, mode: 'insensitive' } } : {}),
+      ...(query.search
+        ? {
+            OR: [
+              { name: { contains: query.search, mode: 'insensitive' } },
+              { category: { contains: query.search, mode: 'insensitive' } },
+            ],
+          }
+        : {}),
+    }
+    const [amenities, total] = await this.marketplaceRepository.findActiveAmenities(where, skip, limit)
+    return buildPaginatedResult(amenities, total, page, limit)
+  }
+
   async getRoomById(id: number) {
     const room = await this.getPublicRoomRecordOrThrow(id)
-    return this.toPublicRoom(room)
+    return this.toPublicRoom(room, true)
+  }
+
+  async getSimilarRooms(id: number) {
+    const targetRoom = await this.getPublicRoomRecordOrThrow(id)
+
+    const propertyOr: Prisma.PropertyWhereInput[] = [{ id: targetRoom.propertyId }]
+    if (targetRoom.property.wardCode) {
+      propertyOr.push({ wardCode: targetRoom.property.wardCode })
+    } else if (targetRoom.property.district) {
+      propertyOr.push({ district: targetRoom.property.district })
+    }
+
+    const where: Prisma.RoomWhereInput = {
+      id: { not: id },
+      deletedAt: null,
+      status: 'AVAILABLE',
+      marketplaceStatus: 'PUBLISHED',
+      tenant: { deletedAt: null, status: 'ACTIVE' },
+      property: {
+        deletedAt: null,
+        status: 'ACTIVE',
+        OR: propertyOr,
+      },
+      ...(targetRoom.basePrice ? {
+        basePrice: {
+          gte: Math.floor(targetRoom.basePrice.toNumber() * 0.7),
+          lte: Math.ceil(targetRoom.basePrice.toNumber() * 1.3),
+        }
+      } : {})
+    }
+
+    const [rooms] = await this.marketplaceRepository.findMany(where, 0, 5)
+    return rooms.map((room) => this.toPublicRoom(room, false))
   }
 
   async createRentalRequest(userId: number, roomId: number, body: TCreateMarketplaceRentalRequestBodySchema) {
@@ -112,10 +173,11 @@ export class MarketplaceService {
     return room
   }
 
-  private toPublicRoom(room: MarketplaceRoomRecord) {
+  private toPublicRoom(room: MarketplaceRoomRecord, includeExactLocation: boolean) {
     const { tenantId, property, ...publicRoom } = room
-    const { addressDetail, latitude, longitude, ...publicProperty } = property
     void tenantId
+    if (includeExactLocation) return { ...publicRoom, property }
+    const { addressDetail, latitude, longitude, ...publicProperty } = property
     void addressDetail
     void latitude
     void longitude
@@ -170,8 +232,10 @@ export class MarketplaceService {
         status: 'ACTIVE',
         ...(query.propertyType ? { type: query.propertyType } : {}),
         ...(query.province ? { province: { contains: query.province, mode: 'insensitive' } } : {}),
+        ...(query.provinceCode ? { provinceCode: query.provinceCode } : {}),
         ...(query.district ? { district: { contains: query.district, mode: 'insensitive' } } : {}),
         ...(query.ward ? { ward: { contains: query.ward, mode: 'insensitive' } } : {}),
+        ...(query.wardCode ? { wardCode: query.wardCode } : {}),
       },
       ...(query.maxOccupants ? { maxOccupants: { gte: query.maxOccupants } } : {}),
       ...(query.minPrice !== undefined || query.maxPrice !== undefined

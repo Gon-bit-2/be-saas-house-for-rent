@@ -29,6 +29,8 @@ const DOC_FILES = [
   'docs/api/G05_HANDOVER_TERMINATION.md',
   'docs/api/OCR.md',
   'docs/db/db.md',
+  'docs/api/FE_INTEGRATION.md',
+  'docs/api/ACCEPTANCE_E2E.md',
   'docs/task/task.md',
   'docs/systems/Bao_cao_danh_gia_tien_do_va_an_toan.md',
   'docs/systems/Mo_ta_kien_truc_he_thong_MVP.md',

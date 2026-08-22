@@ -15,8 +15,10 @@ describe('RentersController', () => {
       updateMe: jest.fn(),
       listForLandlord: jest.fn(),
       getForLandlord: jest.fn(),
+      getInvitation: jest.fn(),
     }
-    controller = new RentersController(rentersService as never)
+    const cloudinaryService = {}
+    controller = new RentersController(rentersService as never, cloudinaryService as never)
   })
 
   it('uses tenant role for self profile and landlord/manager roles for tenant lookup', () => {
@@ -26,17 +28,23 @@ describe('RentersController', () => {
       roleName.LANDLORD,
       roleName.MANAGER,
     ])
+    expect(Reflect.getMetadata(ROLES_KEY, RentersController.prototype.getInvitation)).toEqual([
+      roleName.LANDLORD,
+      roleName.MANAGER,
+    ])
   })
 
   it('delegates profile and landlord lookup operations', async () => {
     await controller.getMe(user)
     await controller.updateMe(user, { occupation: 'Developer' })
     await controller.listForLandlord(user, { page: 1, limit: 20 })
+    await controller.getInvitation(user, 7)
     await controller.getForLandlord(user, 5)
 
     expect(rentersService.getMe).toHaveBeenCalledWith(99)
     expect(rentersService.updateMe).toHaveBeenCalledWith(99, { occupation: 'Developer' })
     expect(rentersService.listForLandlord).toHaveBeenCalledWith(99, { page: 1, limit: 20 })
+    expect(rentersService.getInvitation).toHaveBeenCalledWith(99, 7)
     expect(rentersService.getForLandlord).toHaveBeenCalledWith(99, 5)
   })
 })

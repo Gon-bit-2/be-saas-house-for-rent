@@ -142,6 +142,35 @@ export class InvoicesRepository {
     ])
   }
 
+  async getDebtStats(where: Prisma.DebtWhereInput, today: Date) {
+    const thirtyDaysAgo = new Date(today)
+    thirtyDaysAgo.setUTCDate(thirtyDaysAgo.getUTCDate() - 30)
+    const activeDebtWhere: Prisma.DebtWhereInput = {
+      ...where,
+      status: { notIn: ['PAID', 'CANCELED'] },
+      remainingAmount: { gt: 0 },
+    }
+    const sumRemaining = (extraWhere: Prisma.DebtWhereInput = {}) =>
+      this.prismaService.debt.aggregate({
+        where: { AND: [activeDebtWhere, extraWhere] },
+        _sum: { remainingAmount: true },
+      })
+
+    const [total, overdueMoreThan30Days, overdueWithin30Days, currentNotDue] = await Promise.all([
+      sumRemaining(),
+      sumRemaining({ dueDate: { lt: thirtyDaysAgo } }),
+      sumRemaining({ dueDate: { gte: thirtyDaysAgo, lt: today } }),
+      sumRemaining({ dueDate: { gte: today } }),
+    ])
+
+    return {
+      totalOutstanding: total._sum.remainingAmount,
+      overdueMoreThan30Days: overdueMoreThan30Days._sum.remainingAmount,
+      overdueWithin30Days: overdueWithin30Days._sum.remainingAmount,
+      currentNotDue: currentNotDue._sum.remainingAmount,
+    }
+  }
+
   async findTenantInvoice(tenantId: number, id: number) {
     return this.prismaService.invoice.findFirst({ where: { id, tenantId, deletedAt: null }, select: invoiceSelect })
   }
@@ -190,12 +219,40 @@ export class InvoicesRepository {
     })
   }
 
+  async findActiveContractsForInvoiceGeneration(monthStart: Date, monthEnd: Date) {
+    return this.prismaService.contract.findMany({
+      where: {
+        status: 'ACTIVE',
+        deletedAt: null,
+        startDate: { lte: monthEnd },
+        endDate: { gte: monthStart },
+        invoices: {
+          none: {
+            billingMonth: monthStart,
+            deletedAt: null,
+          },
+        },
+      },
+      select: {
+        id: true,
+        tenantId: true,
+        roomId: true,
+        renterId: true,
+        contractCode: true,
+        monthlyPrice: true,
+        paymentDueDay: true,
+        room: { select: { id: true, roomCode: true, title: true, deletedAt: true } },
+      },
+    })
+  }
+
   async findExistingInvoiceForContractMonth(contractId: number, billingMonth: Date, excludedInvoiceId?: number) {
     return this.prismaService.invoice.findFirst({
       where: {
         contractId,
         billingMonth,
         deletedAt: null,
+        status: { not: 'CANCELED' },
         ...(excludedInvoiceId ? { id: { not: excludedInvoiceId } } : {}),
       },
       select: { id: true, invoiceCode: true },

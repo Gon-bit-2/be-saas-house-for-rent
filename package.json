@@ -12,6 +12,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "tunnel:payos": "ssh -R 80:localhost:1174 nokey@localhost.run",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -20,11 +21,19 @@
     "test:e2e": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config ./test/jest-e2e.json",
     "db:seed": "prisma db seed",
     "db:status": "prisma migrate status --schema prisma/schema.prisma",
+    "test-accounts:create": "npm run build && node dist/inittalScripts/create-test-users.js",
+    "test-accounts:prepare-api": "npm run build && node dist/inittalScripts/prepare-api-test-accounts.js",
     "security:preflight-webhook-logs": "ts-node -r tsconfig-paths/register inittalScripts/sanitize-payment-webhook-logs.ts",
     "security:sanitize-webhook-logs": "ts-node -r tsconfig-paths/register inittalScripts/sanitize-payment-webhook-logs.ts --apply",
     "permission:sync": "node dist/inittalScripts/create-permission.js",
     "openapi:export": "npm run build && node dist/inittalScripts/export-openapi.js",
-    "docs:check": "npm run build && node dist/inittalScripts/check-docs.js"
+    "docs:check": "npm run build && node dist/inittalScripts/check-docs.js",
+    "contract:generate": "npm run openapi:export",
+    "contract:check": "npm run build && node dist/inittalScripts/check-contract.js",
+    "contract:compat": "npm run build && node dist/inittalScripts/check-openapi-compatibility.js",
+    "e2e:up": "docker compose -f compose.e2e.yml up -d --wait",
+    "e2e:down": "docker compose -f compose.e2e.yml down -v",
+    "test:e2e:acceptance": "node inittalScripts/run-acceptance-e2e.cjs"
   },
   "dependencies": {
     "@google-cloud/vision": "^5.3.7",

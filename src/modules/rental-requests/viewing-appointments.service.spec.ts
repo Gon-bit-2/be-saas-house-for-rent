@@ -88,6 +88,31 @@ describe('ViewingAppointmentsService', () => {
     )
   })
 
+  it('returns a tenant-scoped appointment detail with room relations', async () => {
+    const appointment = {
+      id: 3,
+      room: {
+        id: 5,
+        basePrice: 3500000,
+        depositAmount: 3500000,
+        property: {
+          id: 2,
+          name: 'Cau Giay',
+          addressDetail: '123',
+          ward: 'Dich Vong',
+          district: 'Cau Giay',
+          province: 'Ha Noi',
+        },
+      },
+      renter: { id: 99, fullName: 'Nguyen Van A' },
+      assignedStaff: null,
+    }
+    rentalRequestsRepository.findTenantAppointment.mockResolvedValue(appointment)
+
+    await expect(service.getForLandlord(50, 3)).resolves.toEqual(appointment)
+    expect(rentalRequestsRepository.findTenantAppointment).toHaveBeenCalledWith(10, 3)
+  })
+
   it('lets renter cancel non-terminal appointments only', async () => {
     rentalRequestsRepository.findRenterAppointment.mockResolvedValue({ id: 3, status: 'PENDING' })
     rentalRequestsRepository.cancelRenterAppointment.mockResolvedValue({ id: 3, status: 'CANCELED' })
@@ -129,5 +154,6 @@ describe('ViewingAppointmentsService', () => {
     rentalRequestsRepository.findTenantAppointment.mockResolvedValue(null)
 
     await expect(service.updateStatus(50, 3, { status: 'CONFIRMED' })).rejects.toBeInstanceOf(NotFoundException)
+    await expect(service.getForLandlord(50, 3)).rejects.toBeInstanceOf(NotFoundException)
   })
 })

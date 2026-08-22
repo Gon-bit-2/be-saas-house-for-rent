@@ -34,6 +34,15 @@ export class ViewingAppointmentsService {
     return buildPaginatedResult(appointments, total, page, limit)
   }
 
+  async getForLandlord(userId: number, id: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const appointment = await this.rentalRequestsRepository.findTenantAppointment(tenant.tenantId, id)
+    if (!appointment) {
+      throw new NotFoundException('Không tìm thấy lịch hẹn xem phòng')
+    }
+    return appointment
+  }
+
   async updateStatus(userId: number, id: number, body: TUpdateViewingAppointmentStatusBodySchema) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const appointment = await this.rentalRequestsRepository.findTenantAppointment(tenant.tenantId, id)
@@ -98,6 +107,14 @@ export class ViewingAppointmentsService {
     const where = this.buildRenterAppointmentWhere(userId, query)
     const [appointments, total] = await this.rentalRequestsRepository.findMyAppointmentsAndCount(where, skip, limit)
     return buildPaginatedResult(appointments, total, page, limit)
+  }
+
+  async getMine(userId: number, id: number) {
+    const appointment = await this.rentalRequestsRepository.findRenterAppointment(userId, id)
+    if (!appointment) {
+      throw new NotFoundException('Không tìm thấy lịch hẹn của bạn')
+    }
+    return appointment
   }
 
   async cancelMine(userId: number, id: number, _body: TCancelMyViewingAppointmentBodySchema) {

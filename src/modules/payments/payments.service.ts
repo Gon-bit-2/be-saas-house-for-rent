@@ -12,6 +12,7 @@ import type {
   TPayosWebhookDataSchema,
   TReviewPaymentBodySchema,
   TSubmitPaymentConfirmationBodySchema,
+  TRecordManualPaymentBodySchema,
 } from './model/payments.model'
 import { PaymentsRepository, type PayableInvoice } from './repositories/payments.repo'
 import { digestWebhookPayload, sanitizePayosWebhookPayload, sanitizeWebhookText } from './webhook-log.security'
@@ -73,6 +74,15 @@ export class PaymentsService {
 
   async createMyPaymentQr(userId: number, invoiceId: number) {
     const invoice = await this.getMyPayableInvoiceOrThrow(userId, invoiceId)
+    return this.generatePaymentQrForInvoice(invoice)
+  }
+
+  async createPaymentQr(userId: number, invoiceId: number) {
+    const invoice = await this.getTenantPayableInvoiceOrThrow(userId, invoiceId)
+    return this.generatePaymentQrForInvoice(invoice)
+  }
+
+  private async generatePaymentQrForInvoice(invoice: PayableInvoice) {
     const amount = this.toMoneyNumber(invoice.debtAmount)
     this.assertPositiveDebt(amount)
 
@@ -154,8 +164,28 @@ export class PaymentsService {
     return updated
   }
 
+  async recordManualPayment(userId: number, invoiceId: number, body: TRecordManualPaymentBodySchema) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const payment = await this.paymentsRepository.recordManualPayment(
+      tenant.tenantId,
+      invoiceId,
+      userId,
+      body.amount,
+      body.method,
+      body.paidAt ? new Date(body.paidAt) : new Date(),
+      body.note
+    )
+    // You could potentially fire a notification to renter that a payment was successfully recorded
+    await this.notificationEventsService.notifyPaymentReviewed(payment)
+    return payment
+  }
+
   async handlePayosWebhook(payload: TPayosWebhookBodySchema) {
     try {
+      if (!payload || !payload.data) {
+        return { code: '00', desc: 'success', success: true }
+      }
+
       const verifiedData = await this.payosService.verifyWebhook(payload)
       const data = verifiedData
       const transactionDateTime = this.parsePayosDateTime(data.transactionDateTime)
@@ -261,18 +291,19 @@ export class PaymentsService {
         return { code: '00', desc: 'success', success: true }
       }
 
-      await this.notificationEventsService.notifyPaymentPending(result.payment)
+      const approvedPayment = await this.paymentsRepository.approvePayment(
+        qr.tenantId,
+        result.payment.id,
+        qr.invoice.renterId, // Dùng renterId như actorId hệ thống để lưu vết
+        'Hệ thống tự động xác nhận qua PayOS Webhook',
+      )
+      await this.notificationEventsService.notifyPaymentReviewed(approvedPayment)
       await this.logWebhook(payload, data, true, 'PROCESSED', null, transactionDateTime, qr.tenantId, qr.invoiceId)
       return { code: '00', desc: 'success', success: true }
     } catch (error) {
-      await this.logWebhook(
-        payload,
-        payload.data,
-        false,
-        'FAILED',
-        error instanceof Error ? error.message : 'Webhook PayOS không hợp lệ',
-      )
-      throw new BadRequestException('Webhook PayOS không hợp lệ')
+      this.logger.error('Webhook PayOS lỗi hoặc request test: ', error)
+      // Return 200 OK anyways so PayOS Dashboard can save the Webhook URL successfully
+      return { code: '00', desc: 'success', success: true }
     }
   }
 
@@ -280,6 +311,18 @@ export class PaymentsService {
     const invoice = await this.paymentsRepository.findMyPayableInvoice(userId, invoiceId)
     if (!invoice) {
       throw new NotFoundException('Không tìm thấy hóa đơn của bạn')
+    }
+    if (!PAYABLE_INVOICE_STATUSES.includes(invoice.status)) {
+      throw new BadRequestException('Hóa đơn không ở trạng thái có thể thanh toán')
+    }
+    return invoice as PayableInvoice
+  }
+
+  private async getTenantPayableInvoiceOrThrow(userId: number, invoiceId: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const invoice = await this.paymentsRepository.findTenantPayableInvoice(tenant.tenantId, invoiceId)
+    if (!invoice) {
+      throw new NotFoundException('Không tìm thấy hóa đơn trong tenant hiện tại')
     }
     if (!PAYABLE_INVOICE_STATUSES.includes(invoice.status)) {
       throw new BadRequestException('Hóa đơn không ở trạng thái có thể thanh toán')
@@ -297,6 +340,7 @@ export class PaymentsService {
     return {
       tenantId,
       ...(query.status ? { status: query.status } : {}),
+      ...(query.method ? { method: query.method } : {}),
       ...(query.invoiceId ? { invoiceId: query.invoiceId } : {}),
       ...(query.renterId ? { payerId: query.renterId } : {}),
       ...(query.from || query.to
@@ -319,6 +363,7 @@ export class PaymentsService {
     return {
       payerId: userId,
       ...(query.status ? { status: query.status } : {}),
+      ...(query.method ? { method: query.method } : {}),
       ...(query.invoiceId ? { invoiceId: query.invoiceId } : {}),
       ...(query.from || query.to
         ? { createdAt: { ...(query.from ? { gte: query.from } : {}), ...(query.to ? { lte: query.to } : {}) } }

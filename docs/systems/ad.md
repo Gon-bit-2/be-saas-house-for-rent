@@ -9,4 +9,4 @@ Trang này chỉ là điểm vào nhanh, không duy trì một roadmap độc l�
 - API: [API reference](../api/API_REFERENCE.md)
 - Toàn bộ tài liệu: [Mục lục](../README.md)
 
-Baseline 31/07/2026: backend build/lint/Prisma validate đạt, 74 suite và 281 unit test pass; 206 API operation; frontend/mobile chưa triển khai.
+Baseline 03/08/2026: backend build/lint/Prisma validate đạt, 75 suite và 294 unit test pass; 214 API operation; frontend/mobile chưa triển khai.

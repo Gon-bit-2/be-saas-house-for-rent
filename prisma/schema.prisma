@@ -376,6 +376,12 @@ model Tenant {
   email              String?            @db.VarChar(255)
   /// Địa chỉ trụ sở/văn phòng giao dịch
   address            String?            @db.Text
+  /// URL ảnh CCCD mặt trước (nếu có)
+  idCardFrontUrl     String?            @map("id_card_front_url") @db.Text
+  /// URL ảnh CCCD mặt sau (nếu có)
+  idCardBackUrl      String?            @map("id_card_back_url") @db.Text
+  /// URL ảnh chân dung chủ trọ (nếu có)
+  portraitUrl        String?            @map("portrait_url") @db.Text
   /// Trạng thái xác thực thông tin tenant bởi Super Admin
   verificationStatus VerificationStatus @default(UNVERIFIED) @map("verification_status")
   /// Trạng thái hoạt động của tenant
@@ -525,6 +531,8 @@ model Plan {
   allowWebhookPayment Boolean  @default(false) @map("allow_webhook_payment")
   /// Trạng thái gói cước có đang mở bán hay không
   isActive            Boolean  @default(true) @map("is_active")
+  /// Số lượng nhà trọ tối đa được phép tạo và quản lý
+  maxProperties       Int      @default(0) @map("max_properties")
   /// Thời điểm tạo gói cước
   createdAt           DateTime @default(now()) @map("created_at") @db.Timestamptz
 
@@ -656,10 +664,14 @@ model Property {
   type          PropertyType
   /// Tên tỉnh / thành phố của nhà trọ
   province      String         @db.VarChar(100)
+  /// Mã tỉnh/thành theo Quyết định 19/2025/QĐ-TTg
+  provinceCode  String?        @map("province_code") @db.VarChar(2)
   /// Tên quận / huyện của nhà trọ
-  district      String         @db.VarChar(100)
+  district      String?        @db.VarChar(100)
   /// Tên phường / xã của nhà trọ
   ward          String         @db.VarChar(100)
+  /// Mã xã/phường/đặc khu theo Quyết định 19/2025/QĐ-TTg
+  wardCode      String?        @map("ward_code") @db.VarChar(5)
   /// Số nhà, tên đường chi tiết
   addressDetail String         @map("address_detail") @db.Text
   /// Vĩ độ địa lý phục vụ định vị bản đồ và tìm kiếm thông minh
@@ -668,6 +680,12 @@ model Property {
   longitude     Decimal?       @db.Decimal(11, 8)
   /// Mô tả chi tiết về nhà trọ (tiện ích chung, quy định chung...)
   description   String?        @db.Text
+  /// URL ảnh bìa của nhà trọ trên Cloudinary
+  coverImageUrl String?        @map("cover_image_url") @db.Text
+  /// Public ID của ảnh bìa trên Cloudinary để xóa/thay thế
+  coverImagePublicId String?   @map("cover_image_public_id") @db.VarChar(100)
+  /// Giấy tờ chứng minh quyền sở hữu hoặc kinh doanh (mảng URL)
+  verificationDocuments String[] @map("verification_documents")
   /// Trạng thái hoạt động của tòa nhà
   status        PropertyStatus @default(ACTIVE)
   /// Thời điểm tạo nhà trọ
@@ -696,6 +714,7 @@ model Property {
   deletedBy User? @relation("PropertyDeleter", fields: [deletedById], references: [id])
 
   @@index([province, district, ward])
+  @@index([provinceCode, wardCode])
   @@index([tenantId])
   @@map("properties")
 }
@@ -1247,6 +1266,10 @@ model Contract {
   contentSnapshot    String               @map("content_snapshot") @db.Text
   /// Trạng thái pháp lý của hợp đồng
   status             ContractStatus       @default(DRAFT)
+  /// Chữ ký điện tử của chủ trọ (Base64)
+  landlordSignature  String?              @map("landlord_signature") @db.Text
+  /// Chữ ký điện tử của khách thuê chính (Base64)
+  renterSignature    String?              @map("renter_signature") @db.Text
   /// Thời điểm chủ trọ ký xác nhận online (null nếu chưa ký)
   signedByLandlordAt DateTime?            @map("signed_by_landlord_at") @db.Timestamptz
   /// Thời điểm khách thuê ký xác nhận online (null nếu chưa ký)
@@ -1313,23 +1336,34 @@ model Contract {
 /// Bảng lưu danh sách người ở cùng phòng trọ theo hợp đồng
 model ContractMember {
   /// ID bản ghi thành viên (UUID)
-  id         Int                @id @default(autoincrement())
+  id                   Int                @id @default(autoincrement())
   /// ID hợp đồng liên quan
-  contractId Int                @map("contract_id")
-  /// ID tài khoản người dùng của thành viên ở cùng
-  userId     Int                @map("user_id")
+  contractId           Int                @map("contract_id")
+  /// ID tài khoản người dùng của thành viên ở cùng (optional cho người không dùng app)
+  userId               Int?               @map("user_id")
+  /// Họ tên của người ở cùng (dùng cho người không dùng app hoặc override)
+  fullName             String?            @map("full_name") @db.VarChar(255)
+  /// Số điện thoại (dùng cho người không dùng app)
+  phone                String?            @db.VarChar(50)
+  /// Tuổi (dùng cho người không dùng app)
+  age                  Int?
+  /// Số CCCD/CMND (dùng cho người không dùng app)
+  identityCard         String?            @map("identity_card") @db.VarChar(50)
+  /// URL ảnh chụp CCCD (dùng cho người không dùng app)
+  identityCardImageUrl String?            @map("identity_card_image_url") @db.Text
   /// Vai trò của thành viên trong hợp đồng (Ví dụ: MAIN_RENTER hoặc CO_RENTER)
-  role       ContractMemberRole @default(CO_RENTER)
+  role                 ContractMemberRole @default(CO_RENTER)
   /// Thời điểm thêm thành viên vào hợp đồng
-  createdAt  DateTime           @default(now()) @map("created_at") @db.Timestamptz
+  createdAt            DateTime           @default(now()) @map("created_at") @db.Timestamptz
 
   // Các quan hệ (Relations)
   /// Hợp đồng thuê liên quan (xóa hợp đồng thì tự động xóa liên kết các thành viên cùng phòng)
   contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
-  /// Tài khoản người dùng (xóa tài khoản thì tự động xóa liên kết thành viên này)
-  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /// Tài khoản người dùng (xóa tài khoản thì set null hoặc cascade)
+  user     User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([contractId, userId])
+  @@index([contractId])
+  @@index([userId])
   @@map("contract_members")
 }
 

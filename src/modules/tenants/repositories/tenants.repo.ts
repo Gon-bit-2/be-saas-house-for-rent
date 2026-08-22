@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import roleName from '@src/common/constants/role.constant'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
+import { seedTenantDefaults } from '../utils/seed-tenant-defaults.util'
 import type { Prisma } from 'generated/prisma/client'
 
 type CreateLandlordTenantInput = {
@@ -20,6 +21,21 @@ type CreateLandlordTenantInput = {
   startedAt: Date
   expiredAt: Date
   actorId: number
+}
+
+type RegisterTenantInput = {
+  userId: number
+  tenantName: string
+  slug: string
+  taxCode?: string
+  tenantPhone?: string
+  tenantEmail?: string
+  address?: string
+  planId: number
+  billingCycle: 'MONTHLY' | 'YEARLY'
+  autoRenew: boolean
+  startedAt: Date
+  expiredAt: Date
 }
 
 type AssignPlanInput = {
@@ -140,6 +156,14 @@ export class TenantsRepository {
     })
   }
 
+  async findFirstActivePlan() {
+    return this.prismaService.plan.findFirst({
+      where: { isActive: true },
+      orderBy: { priceMonthly: 'asc' },
+      select: { id: true },
+    })
+  }
+
   async isSlugTaken(slug: string) {
     const tenant = await this.prismaService.tenant.findUnique({
       where: { slug },
@@ -179,6 +203,66 @@ export class TenantsRepository {
         },
         select: { id: true },
       })
+
+      await seedTenantDefaults(tx as any, tenant.id, input.actorId)
+
+      await tx.tenantMember.create({
+        data: {
+          tenantId: tenant.id,
+          userId: user.id,
+          roleId: roleName.LANDLORD,
+          status: 'ACTIVE',
+          joinedAt: input.startedAt,
+        },
+      })
+
+      await tx.subscription.create({
+        data: {
+          tenantId: tenant.id,
+          planId: input.planId,
+          status: 'ACTIVE',
+          startedAt: input.startedAt,
+          expiredAt: input.expiredAt,
+          billingCycle: input.billingCycle,
+          autoRenew: input.autoRenew,
+        },
+      })
+
+      return tx.tenant.findUniqueOrThrow({
+        where: { id: tenant.id },
+        select: tenantSelect,
+      })
+    })
+  }
+
+  /**
+   * Registers a new tenant for an existing user.
+   */
+  async registerTenant(input: RegisterTenantInput) {
+    return this.prismaService.$transaction(async (tx) => {
+      await tx.role.findUniqueOrThrow({ where: { id: roleName.LANDLORD }, select: { id: true } })
+      await tx.plan.findFirstOrThrow({ where: { id: input.planId, isActive: true }, select: { id: true } })
+
+      const user = await tx.user.findUniqueOrThrow({
+        where: { id: input.userId },
+        select: { id: true, email: true, phone: true },
+      })
+
+      const tenant = await tx.tenant.create({
+        data: {
+          ownerUserId: user.id,
+          name: input.tenantName,
+          slug: input.slug,
+          taxCode: input.taxCode ?? null,
+          phone: input.tenantPhone ?? user.phone ?? null,
+          email: input.tenantEmail ?? user.email,
+          address: input.address ?? null,
+          createdById: user.id,
+        },
+        select: { id: true },
+      })
+
+      await seedTenantDefaults(tx as any, tenant.id, user.id)
 
       await tx.tenantMember.create({
         data: {

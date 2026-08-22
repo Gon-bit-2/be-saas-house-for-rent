@@ -24,6 +24,12 @@ export class ViewingAppointmentsController {
   }
 
   @IsTenant()
+  @Get('me/:id')
+  getMine(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
+    return this.viewingAppointmentsService.getMine(user.userId, id)
+  }
+
+  @IsTenant()
   @Patch('me/:id/cancel')
   cancelMine(
     @ActiveUser() user: AccessTokenPayload,
@@ -37,6 +43,12 @@ export class ViewingAppointmentsController {
   @Get()
   listForLandlord(@ActiveUser() user: AccessTokenPayload, @Query() query: ListViewingAppointmentsQueryDTO) {
     return this.viewingAppointmentsService.listForLandlord(user.userId, query)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Get(':id')
+  getForLandlord(@ActiveUser() user: AccessTokenPayload, @Param('id', ParseIntPipe) id: number) {
+    return this.viewingAppointmentsService.getForLandlord(user.userId, id)
   }
 
   @Roles(roleName.LANDLORD, roleName.MANAGER)

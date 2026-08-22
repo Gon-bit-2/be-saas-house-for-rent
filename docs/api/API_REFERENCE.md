@@ -1,6 +1,6 @@
 # Tài liệu tham chiếu API hiện tại
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-03T10:23:02.471Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-18T16:22:22.790Z. Không chỉnh sửa thủ công.
 
 ## Quy ước chung
 
@@ -11,7 +11,7 @@
 - Request được kiểm tra bằng Zod strict; ngày giờ dùng ISO 8601.
 - Error chuẩn: `{ statusCode, code, message, details?, timestamp, path, requestId }`.
 - Mọi route chịu global rate limit; profile riêng được ghi ở từng operation.
-- Tổng cộng **214 operation** thuộc **34 controller**.
+- Tổng cộng **240 operation** thuộc **37 controller**.
 
 ## Mục lục
 
@@ -19,32 +19,33 @@
 - [Danh mục tài sản (5)](#asset-categories)
 - [Xác thực và hồ sơ (11)](#auth)
 - [Thanh lý hợp đồng (11)](#contract-terminations)
-- [Hợp đồng (9)](#contracts)
-- [Dashboard (5)](#dashboard)
+- [Hợp đồng (13)](#contracts)
+- [Dashboard (6)](#dashboard)
 - [Thiết bị nhận push (2)](#device-tokens)
 - [Bàn giao phòng (11)](#handovers)
-- [Hóa đơn và công nợ (14)](#invoices)
-- [Marketplace và kiểm duyệt (10)](#marketplace)
+- [Hóa đơn và công nợ (17)](#invoices)
+- [locations (5)](#locations)
+- [Marketplace và kiểm duyệt (16)](#marketplace)
 - [Chỉ số điện nước (5)](#meter-readings)
 - [Thông báo (5)](#notifications)
 - [OCR công tơ (5)](#ocr)
 - [Webhook thanh toán (1)](#payment-webhooks)
 - [Thanh toán hóa đơn (6)](#payments)
 - [Gói dịch vụ (5)](#plans)
-- [Nhà trọ và tầng (10)](#properties)
-- [Yêu cầu thuê (6)](#rental-requests)
-- [Người thuê và lời mời (9)](#renters)
+- [Nhà trọ và tầng (11)](#properties)
+- [Yêu cầu thuê (7)](#rental-requests)
+- [Người thuê và lời mời (11)](#renters)
 - [Báo cáo vi phạm (6)](#reports)
 - [Đánh giá và uy tín (6)](#reviews)
 - [Tài sản trong phòng (3)](#room-assets)
-- [Lịch xem phòng (4)](#room-viewing-appointments)
+- [Lịch xem phòng (6)](#room-viewing-appointments)
 - [Phòng, tiện ích và ảnh (13)](#rooms)
 - [Trạng thái dịch vụ (1)](#root)
 - [Gán dịch vụ (3)](#service-assignments)
 - [Danh mục dịch vụ (3)](#service-catalog)
 - [Thanh toán gói SaaS (6)](#subscription-payments)
 - [Subscription hiện hành (1)](#subscriptions)
-- [Đơn vị chủ trọ (7)](#tenants)
+- [Đơn vị chủ trọ (8)](#tenants)
 - [Ticket sự cố (20)](#tickets)
 - [Người dùng và chủ trọ (3)](#users)
 - [Đồng hồ điện nước (5)](#utility-meters)
@@ -208,6 +209,10 @@
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 - Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `client` | query | Không | `string` |
 
 ### POST `/auth/login`
 
@@ -463,6 +468,7 @@
 | `renterId` | query | Không | `integer` |
 | `propertyId` | query | Không | `integer` |
 | `search` | query | Không | `string` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### POST `/contracts`
 
@@ -470,6 +476,10 @@
 - Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
 - Rate limit: `global`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -485,6 +495,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/contracts/{id}`
 
@@ -496,6 +507,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -511,6 +523,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/contracts/{id}/cancel`
 
@@ -522,6 +535,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/contracts/{id}/expire`
 
@@ -533,6 +547,51 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
+
+### POST `/contracts/{id}/members`
+
+- Operation ID: `ContractsController_addMember`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
+
+**Request body**
+
+- `application/json`: `AddContractMemberBodyDTO`; bắt buộc: có.
+
+### DELETE `/contracts/{id}/members/{userId}`
+
+- Operation ID: `ContractsController_removeMember`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `userId` | path | Có | `number` |
+
+### POST `/contracts/{id}/sign-landlord`
+
+- Operation ID: `ContractsController_signLandlord`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
+
+**Request body**
+
+- `application/json`: `SignContractBodyDTO`; bắt buộc: có.
 
 ### GET `/contracts/me`
 
@@ -562,11 +621,37 @@
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
 
+### POST `/contracts/me/{id}/sign`
+
+- Operation ID: `ContractsController_signRenter`.
+- Xác thực: Bearer JWT; role: `TENANT`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+
+**Request body**
+
+- `application/json`: `SignContractBodyDTO`; bắt buộc: có.
+
 <a id="dashboard"></a>
 
 ## Dashboard
 
 Đặc tả nghiệp vụ: [G11_dashboard_bao_cao_audit_cau_hinh_he_thong.md](../specs/G11_dashboard_bao_cao_audit_cau_hinh_he_thong.md).
+
+### GET `/dashboard/action-center`
+
+- Operation ID: `DashboardController_getActionCenter`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`, `ACCOUNTANT`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `x-tenant-id` | header | Có | `integer` |
 
 ### GET `/dashboard/platform/summary`
 
@@ -844,6 +929,7 @@
 | `propertyId` | query | Không | `integer` |
 | `search` | query | Không | `string` |
 | `status` | query | Không | `string` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### POST `/invoices`
 
@@ -851,6 +937,10 @@
 - Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`, `ACCOUNTANT`.
 - Rate limit: `global`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -866,6 +956,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/invoices/{id}`
 
@@ -877,6 +968,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -892,6 +984,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/invoices/{id}/issue`
 
@@ -903,6 +996,23 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
+
+### POST `/invoices/{id}/manual-payments`
+
+- Operation ID: `PaymentsController_recordManualPayment`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`, `ACCOUNTANT`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
+
+**Request body**
+
+- `application/json`: `RecordManualPaymentBodyDTO`; bắt buộc: có.
 
 ### PATCH `/invoices/{id}/overdue`
 
@@ -914,6 +1024,23 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
+
+### POST `/invoices/{id}/payment-qr`
+
+- Operation ID: `PaymentsController_createPaymentQr`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`, `ACCOUNTANT`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
+
+**Request body**
+
+- `application/json`: `CreatePaymentQrBodyDTO`; bắt buộc: có.
 
 ### GET `/invoices/debts`
 
@@ -935,6 +1062,7 @@
 | `propertyId` | query | Không | `integer` |
 | `search` | query | Không | `string` |
 | `status` | query | Không | `string` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### GET `/invoices/debts/me`
 
@@ -1030,6 +1158,84 @@
 
 - `application/json`: `CreatePaymentQrBodyDTO`; bắt buộc: có.
 
+### POST `/invoices/preview`
+
+- Operation ID: `InvoicesController_preview`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`, `ACCOUNTANT`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+**Request body**
+
+- `application/json`: `CreateInvoiceBodyDTO`; bắt buộc: có.
+
+<a id="locations"></a>
+
+## locations
+
+### GET `/locations/autocomplete`
+
+- Operation ID: `LocationsController_autocomplete`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `input` | query | Có | `string` |
+| `sessionToken` | query | Có | `string` |
+| `provinceCode` | query | Có | `string` |
+| `wardCode` | query | Có | `string` |
+
+### GET `/locations/place-detail`
+
+- Operation ID: `LocationsController_placeDetail`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `placeId` | query | Có | `string` |
+| `sessionToken` | query | Có | `string` |
+| `provinceCode` | query | Không | `string` |
+| `wardCode` | query | Không | `string` |
+
+### GET `/locations/provinces`
+
+- Operation ID: `LocationsController_listProvinces`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+### GET `/locations/reverse-geocode`
+
+- Operation ID: `LocationsController_reverseGeocode`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `latitude` | query | Có | `number` |
+| `longitude` | query | Có | `number` |
+
+### GET `/locations/wards`
+
+- Operation ID: `LocationsController_listWards`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `provinceCode` | query | Có | `string` |
+
 <a id="marketplace"></a>
 
 ## Marketplace và kiểm duyệt
@@ -1095,6 +1301,50 @@
 
 - `application/json`: `UpdateAdminMarketplaceStatusBodyDTO`; bắt buộc: có.
 
+### GET `/marketplace/amenities`
+
+- Operation ID: `MarketplaceController_listAmenities`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `page` | query | Không | `integer` |
+| `limit` | query | Không | `integer` |
+| `search` | query | Không | `string` |
+| `category` | query | Không | `string` |
+
+### GET `/marketplace/favorites`
+
+- Operation ID: `FavoriteController_getFavorites`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+### DELETE `/marketplace/favorites/{roomId}`
+
+- Operation ID: `FavoriteController_removeFavorite`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `roomId` | path | Có | `number` |
+
+### POST `/marketplace/favorites/{roomId}`
+
+- Operation ID: `FavoriteController_addFavorite`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `roomId` | path | Có | `number` |
+
 ### GET `/marketplace/rooms`
 
 - Operation ID: `MarketplaceController_listRooms`.
@@ -1111,6 +1361,8 @@
 | `province` | query | Không | `string` |
 | `district` | query | Không | `string` |
 | `ward` | query | Không | `string` |
+| `provinceCode` | query | Không | `string` |
+| `wardCode` | query | Không | `string` |
 | `propertyType` | query | Không | `string` |
 | `minPrice` | query | Không | `number` |
 | `maxPrice` | query | Không | `number` |
@@ -1118,6 +1370,9 @@
 | `maxArea` | query | Không | `number` |
 | `maxOccupants` | query | Không | `integer` |
 | `amenityIds` | query | Không | schema inline |
+| `lat` | query | Không | `number` |
+| `lng` | query | Không | `number` |
+| `radius` | query | Không | `number` |
 
 ### GET `/marketplace/rooms/{id}`
 
@@ -1186,6 +1441,25 @@
 | `roomId` | path | Có | `number` |
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
+
+### POST `/marketplace/rooms/{roomId}/views`
+
+- Operation ID: `ViewLogController_recordView`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `roomId` | path | Có | `number` |
+
+### GET `/marketplace/view-history`
+
+- Operation ID: `ViewLogController_getViewHistory`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
 <a id="meter-readings"></a>
 
@@ -1435,11 +1709,13 @@
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
 | `status` | query | Không | `string` |
+| `method` | query | Không | `string` |
 | `invoiceId` | query | Không | `integer` |
 | `renterId` | query | Không | `integer` |
 | `from` | query | Không | schema inline |
 | `to` | query | Không | schema inline |
 | `search` | query | Không | `string` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### GET `/payments/{id}`
 
@@ -1451,6 +1727,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/payments/{id}/approve`
 
@@ -1462,6 +1739,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -1477,6 +1755,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -1494,6 +1773,7 @@
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
 | `status` | query | Không | `string` |
+| `method` | query | Không | `string` |
 | `invoiceId` | query | Không | `integer` |
 | `renterId` | query | Không | `integer` |
 | `from` | query | Không | schema inline |
@@ -1598,6 +1878,9 @@
 | `province` | query | Không | `string` |
 | `district` | query | Không | `string` |
 | `ward` | query | Không | `string` |
+| `provinceCode` | query | Không | `string` |
+| `wardCode` | query | Không | `string` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### POST `/properties`
 
@@ -1605,6 +1888,10 @@
 - Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
 - Rate limit: `global`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -1620,6 +1907,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### GET `/properties/{id}`
 
@@ -1631,6 +1919,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/properties/{id}`
 
@@ -1642,10 +1931,23 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
 - `application/json`: `UpdatePropertyBodyDTO`; bắt buộc: có.
+
+### POST `/properties/{id}/cover-image`
+
+- Operation ID: `PropertiesController_uploadCoverImage`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/properties/{id}/status`
 
@@ -1657,6 +1959,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -1672,6 +1975,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `propertyId` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### POST `/properties/{propertyId}/floors`
 
@@ -1683,6 +1987,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `propertyId` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -1699,6 +2004,7 @@
 |---|---|:---:|---|
 | `propertyId` | path | Có | `number` |
 | `floorId` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/properties/{propertyId}/floors/{floorId}`
 
@@ -1711,6 +2017,7 @@
 |---|---|:---:|---|
 | `propertyId` | path | Có | `number` |
 | `floorId` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -1737,6 +2044,7 @@
 | `roomId` | query | Không | `integer` |
 | `propertyId` | query | Không | `integer` |
 | `search` | query | Không | `string` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### GET `/rental-requests/{id}`
 
@@ -1748,6 +2056,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/rental-requests/{id}/decision`
 
@@ -1759,6 +2068,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -1779,6 +2089,17 @@
 | `roomId` | query | Không | `integer` |
 | `propertyId` | query | Không | `integer` |
 | `search` | query | Không | `string` |
+
+### GET `/rental-requests/me/{id}`
+
+- Operation ID: `RentalRequestsController_getMine`.
+- Xác thực: Bearer JWT; role: `TENANT`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
 
 ### PATCH `/rental-requests/me/{id}`
 
@@ -1870,6 +2191,17 @@
 | `limit` | query | Không | `integer` |
 | `status` | query | Không | `string` |
 
+### POST `/renters/{id}/images`
+
+- Operation ID: `RentersController_uploadImages`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`, `TENANT`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+
 ### POST `/renters/invitations`
 
 - Operation ID: `RentersController_invite`.
@@ -1880,6 +2212,18 @@
 **Request body**
 
 - `application/json`: `InviteRenterBodyDTO`; bắt buộc: có.
+
+### GET `/renters/invitations/{id}`
+
+- Operation ID: `RentersController_getInvitation`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### POST `/renters/invitations/accept`
 
@@ -2163,6 +2507,19 @@
 | `propertyId` | query | Không | `integer` |
 | `from` | query | Không | schema inline |
 | `to` | query | Không | schema inline |
+| `x-tenant-id` | header | Có | `integer` |
+
+### GET `/room-viewing-appointments/{id}`
+
+- Operation ID: `ViewingAppointmentsController_getForLandlord`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/room-viewing-appointments/{id}/status`
 
@@ -2174,6 +2531,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -2195,6 +2553,17 @@
 | `propertyId` | query | Không | `integer` |
 | `from` | query | Không | schema inline |
 | `to` | query | Không | schema inline |
+
+### GET `/room-viewing-appointments/me/{id}`
+
+- Operation ID: `ViewingAppointmentsController_getMine`.
+- Xác thực: Bearer JWT; role: `TENANT`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
 
 ### PATCH `/room-viewing-appointments/me/{id}/cancel`
 
@@ -2237,6 +2606,7 @@
 | `maxPrice` | query | Không | `number` |
 | `minArea` | query | Không | `number` |
 | `maxArea` | query | Không | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### POST `/rooms`
 
@@ -2244,6 +2614,10 @@
 - Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
 - Rate limit: `global`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -2259,6 +2633,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### GET `/rooms/{id}`
 
@@ -2270,6 +2645,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/rooms/{id}`
 
@@ -2281,6 +2657,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -2296,6 +2673,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -2311,6 +2689,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### DELETE `/rooms/{id}/images/{imageId}`
 
@@ -2323,6 +2702,7 @@
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
 | `imageId` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/rooms/{id}/images/{imageId}`
 
@@ -2335,6 +2715,7 @@
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
 | `imageId` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -2350,6 +2731,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -2365,6 +2747,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -2385,6 +2768,7 @@
 | `search` | query | Không | `string` |
 | `condition` | query | Không | `string` |
 | `categoryId` | query | Không | `integer` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### POST `/rooms/{roomId}/assets`
 
@@ -2396,6 +2780,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `roomId` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -2710,6 +3095,17 @@
 
 - `application/json`: `UpdateTenantVerificationBodyDTO`; bắt buộc: có.
 
+### POST `/tenants/register`
+
+- Operation ID: `TenantsController_register`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+**Request body**
+
+- `application/json`: `RegisterTenantBodyDTO`; bắt buộc: có.
+
 <a id="tickets"></a>
 
 ## Ticket sự cố
@@ -2734,6 +3130,7 @@
 | `contractId` | query | Không | `integer` |
 | `assignedTo` | query | Không | `integer` |
 | `search` | query | Không | `string` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### POST `/tickets`
 
@@ -2756,6 +3153,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/tickets/{id}/assign`
 
@@ -2767,6 +3165,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -2784,6 +3183,7 @@
 | `id` | path | Có | `number` |
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### POST `/tickets/{id}/attachments`
 
@@ -2825,6 +3225,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 
@@ -2842,6 +3243,7 @@
 | `id` | path | Có | `number` |
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### POST `/tickets/{id}/comments`
 
@@ -2870,6 +3272,7 @@
 | `id` | path | Có | `number` |
 | `page` | query | Không | `integer` |
 | `limit` | query | Không | `integer` |
+| `x-tenant-id` | header | Có | `integer` |
 
 ### PATCH `/tickets/{id}/status`
 
@@ -2881,6 +3284,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
 
 **Request body**
 

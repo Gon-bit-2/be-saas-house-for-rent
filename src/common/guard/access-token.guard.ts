@@ -15,6 +15,7 @@ import { HTTPMethod } from '@src/common/constants/role.constant'
 import roleName from '@src/common/constants/role.constant'
 import { REQUEST_ROLE_PERMISSIONS, REQUEST_USER_KEY } from '@src/common/constants/auth.constant'
 import { ROLES_KEY } from '@src/common/decorators/decorators/roles.decorator'
+import { SKIP_PERMISSION_KEY } from '@src/common/decorators/decorators/skip-permission.decorator'
 import type { AccessTokenPayload, DecodedAccessToken } from '@src/common/types/jwt.type'
 import { TokenService } from '@src/shared/modules/services/token.service'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
@@ -60,7 +61,16 @@ export class AccessTokenGuard implements CanActivate {
     const decoded = await this.extractAndValidateToken(request)
     const principal = await this.resolvePrincipal(decoded, request, context)
     request[REQUEST_USER_KEY] = principal
-    await this.validateUserPermission(principal, request)
+
+    const skipPermission = this.reflector.getAllAndOverride<boolean>(SKIP_PERMISSION_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ])
+
+    if (!skipPermission) {
+      await this.validateUserPermission(principal, request)
+    }
+
     return true
   }
 

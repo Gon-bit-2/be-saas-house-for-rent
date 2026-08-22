@@ -127,6 +127,18 @@ export class SubscriptionPaymentsRepository {
     })
   }
 
+  async getUsageLimits(tenantId: number) {
+    const [currentProperties, currentStaff] = await Promise.all([
+      this.prismaService.property.count({ where: { tenantId } }),
+      this.prismaService.tenantMember.count({ where: { tenantId, status: 'ACTIVE' } }),
+    ])
+    return {
+      currentProperties,
+      currentStorageGb: 0, // Storage is currently not tracked/mocked
+      currentStaff,
+    }
+  }
+
   async create(input: CreateInput): Promise<SubscriptionPaymentRecord> {
     return this.prismaService.$transaction(async (tx) => {
       const subscription =

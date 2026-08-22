@@ -263,11 +263,19 @@ async function main() {
         createdById: landlord.id,
       },
     })
-    await tx.contractMember.upsert({
-      where: { contractId_userId: { contractId: contract.id, userId: renter.id } },
-      update: { role: ContractMemberRole.MAIN_RENTER },
-      create: { contractId: contract.id, userId: renter.id, role: ContractMemberRole.MAIN_RENTER },
+    const existingMember = await tx.contractMember.findFirst({
+      where: { contractId: contract.id, userId: renter.id }
     })
+    if (existingMember) {
+      await tx.contractMember.update({
+        where: { id: existingMember.id },
+        data: { role: ContractMemberRole.MAIN_RENTER }
+      })
+    } else {
+      await tx.contractMember.create({
+        data: { contractId: contract.id, userId: renter.id, role: ContractMemberRole.MAIN_RENTER }
+      })
+    }
     const internetService = await tx.serviceCatalogItem.upsert({
       where: { tenantId_code: { tenantId: tenant.id, code: 'INTERNET' } },
       update: { name: 'Internet', itemType: InvoiceItemType.INTERNET, defaultUnitPrice: 150000, isActive: true },

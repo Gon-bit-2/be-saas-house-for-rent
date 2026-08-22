@@ -1,0 +1,115 @@
+name: Backend P0 gates
+
+on:
+  push:
+    branches: [develop, p0/fe-integration]
+  pull_request:
+    branches: [develop]
+
+concurrency:
+  group: backend-p0-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: house_rental_e2e
+          POSTGRES_USER: e2e
+          POSTGRES_PASSWORD: e2e
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U e2e -d house_rental_e2e"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://e2e:e2e@127.0.0.1:5432/house_rental_e2e
+      DATABASE_URL_E2E: postgresql://e2e:e2e@127.0.0.1:5432/house_rental_e2e
+      ACCESS_TOKEN_SECRET: ci-access-token-secret
+      ACCESS_TOKEN_EXPIRES_IN: 15m
+      REFRESH_TOKEN_SECRET: ci-refresh-token-secret
+      REFRESH_TOKEN_EXPIRES_IN: 7d
+      API_KEY_SECRET: ci-api-key-secret
+      PAYMENT_API_KEY: ci-payment-api-key
+      ADMIN_NAME: CI Admin
+      ADMIN_PASSWORD: Admin123!
+      ADMIN_EMAIL: admin@mvp.local
+      ADMIN_PHONE_NUMBER: '+84900000000'
+      OTP_EXPIRES_IN: 10m
+      RESEND_API_KEY: re_ci_dummy
+      GOOGLE_CLIENT_ID: ci-google-client
+      GOOGLE_CLIENT_SECRET: ci-google-secret
+      GOOGLE_REDIRECT_URI: http://localhost:3000/auth/google/callback
+      GOOGLE_CLIENT_REDIRECT_URI: http://localhost:5173/auth/google/callback
+      REDIS_USERNAME: ''
+      REDIS_PASSWORD: ''
+      REDIS_HOST: 127.0.0.1
+      REDIS_PORT: '6379'
+      STRIPE_SECRET_KEY: sk_test_ci_dummy
+      CLOUDINARY_CLOUD_NAME: ci-cloud
+      CLOUDINARY_API_KEY: ci-cloud-key
+      CLOUDINARY_API_SECRET: ci-cloud-secret
+      GOONG_MAPS_API_KEY: ci-goong-key
+      GOONG_BASE_URL: https://rsapi.goong.io
+      OSRM_BASE_URL: http://router.project-osrm.org
+      PAYOS_CLIENT_ID: ci-payos-client
+      PAYOS_API_KEY: ci-payos-key
+      PAYOS_CHECKSUM_KEY: ci-payos-checksum
+      PAYMENT_WEBHOOK_LOG_HMAC_SECRET: ci-only-webhook-log-secret-32-characters
+      CORS_ORIGINS: http://localhost:5173
+      SEED_ADMIN_EMAIL: admin@mvp.local
+      SEED_ADMIN_PASSWORD: Admin123!
+      SEED_LANDLORD_EMAIL: landlord@mvp.local
+      SEED_LANDLORD_PASSWORD: Landlord123!
+      SEED_RENTER_EMAIL: renter@mvp.local
+      SEED_RENTER_PASSWORD: Renter123!
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npx prisma generate
+      - run: npx prisma validate --schema prisma/schema.prisma
+      - run: npx prisma migrate deploy --schema prisma/schema.prisma
+      - run: npm run db:seed
+      - run: npm run build
+      - run: npm test -- --runInBand
+      - run: npm run contract:generate
+      - run: npm run contract:check
+      - run: npm run docs:check
+      - name: Generated contract is committed
+        run: git diff --exit-code -- docs/api
+      - name: Baseline compatibility
+        shell: bash
+        run: |
+          if git rev-parse --verify fe-baseline-v1 >/dev/null 2>&1; then
+            git show fe-baseline-v1:docs/api/openapi.json > /tmp/fe-baseline-openapi.json
+            npm run contract:compat -- --base /tmp/fe-baseline-openapi.json
+          else
+            echo "fe-baseline-v1 does not exist yet; compatibility gate activates after baseline tagging."
+          fi
+      - run: npm run test:e2e:acceptance

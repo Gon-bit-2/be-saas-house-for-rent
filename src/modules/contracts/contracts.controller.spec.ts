@@ -61,8 +61,8 @@ describe('ContractsController', () => {
 
     await controller.listForLandlord(user, query)
     await controller.getForLandlord(user, 1)
-    await controller.createDraft(user, body)
-    await controller.updateDraft(user, 1, { monthlyPrice: 2600000 })
+    await controller.createDraft(user, { ...body, coRenterIds: [] })
+    await controller.updateDraft(user, 1, { monthlyPrice: 2600000, coRenterIds: [] })
     await controller.activate(user, 1)
     await controller.expire(user, 1)
     await controller.cancel(user, 1)

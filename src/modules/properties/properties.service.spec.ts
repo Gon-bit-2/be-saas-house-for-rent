@@ -10,6 +10,9 @@ describe('PropertiesService', () => {
   let service: import('./properties.service').PropertiesService
   let propertiesRepository: Record<string, jest.Mock>
   let tenantAccessService: Record<string, jest.Mock>
+  let locationsService: Record<string, jest.Mock>
+  let cloudinaryService: Record<string, jest.Mock>
+  let prismaService: Record<string, jest.Mock>
 
   beforeEach(() => {
     propertiesRepository = {
@@ -31,7 +34,54 @@ describe('PropertiesService', () => {
         .fn()
         .mockResolvedValue({ tenantId: 10, userId: 99, memberId: 1, roleId: 'LANDLORD' }),
     }
-    service = new PropertiesService(propertiesRepository as never, tenantAccessService as never)
+    locationsService = { resolvePropertyLocation: jest.fn() }
+    cloudinaryService = {}
+    prismaService = {}
+    service = new PropertiesService(
+      propertiesRepository as never,
+      tenantAccessService as never,
+      locationsService as never,
+      cloudinaryService as never,
+      prismaService as never,
+    )
+  })
+
+  it('derives official names and coordinates for a coded location', async () => {
+    propertiesRepository.create.mockResolvedValue({ id: 1 })
+    locationsService.resolvePropertyLocation.mockResolvedValue({
+      provinceCode: '01',
+      province: 'Thành phố Hà Nội',
+      district: null,
+      wardCode: '00004',
+      ward: 'Phường Ba Đình',
+      addressDetail: '1 Phan Đình Phùng, Hà Nội',
+      latitude: 21.04,
+      longitude: 105.84,
+    })
+
+    await service.create(99, {
+      name: 'Nhà Ba Đình',
+      type: 'HOUSE',
+      addressDetail: 'ignored',
+      status: 'ACTIVE',
+      location: {
+        provinceCode: '01',
+        wardCode: '00004',
+        placeId: 'goong-place',
+        sessionToken: 'session-token',
+      },
+    })
+
+    expect(propertiesRepository.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        provinceCode: '01',
+        wardCode: '00004',
+        province: 'Thành phố Hà Nội',
+        district: null,
+        latitude: 21.04,
+        longitude: 105.84,
+      }),
+    )
   })
 
   it('creates a property under the active tenant context', async () => {

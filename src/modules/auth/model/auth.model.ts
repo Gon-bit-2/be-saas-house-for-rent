@@ -7,14 +7,7 @@ export const UserSchema = z.object({
   fullName: z.string(),
   email: z.string().email(),
   phone: z.string().optional(),
-  passwordHash: z
-    .string()
-    .min(8, 'Mật khẩu phải có ít nhất 8 ký tự')
-    .max(100, 'Mật khẩu không được vượt quá 100 ký tự')
-    .regex(/[A-Z]/, 'Mật khẩu phải chứa ít nhất một chữ cái in hoa')
-    .regex(/[a-z]/, 'Mật khẩu phải chứa ít nhất một chữ cái in thường')
-    .regex(/[0-9]/, 'Mật khẩu phải chứa ít nhất một chữ số')
-    .regex(/[^A-Za-z0-9]/, 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt'),
+  passwordHash: z.string(),
   avatarUrl: z.string().optional(),
   status: z.enum(UserStatus),
   totpSecret: z.string().optional(),
@@ -27,11 +20,18 @@ export const UserSchema = z.object({
 })
 export const RegisterBodySchema = UserSchema.pick({
   email: true,
-  passwordHash: true,
   fullName: true,
   phone: true,
 })
   .extend({
+    password: z
+      .string()
+      .min(8, 'Mật khẩu phải có ít nhất 8 ký tự')
+      .max(100, 'Mật khẩu không được vượt quá 100 ký tự')
+      .regex(/[A-Z]/, 'Mật khẩu phải chứa ít nhất một chữ cái in hoa')
+      .regex(/[a-z]/, 'Mật khẩu phải chứa ít nhất một chữ cái in thường')
+      .regex(/[0-9]/, 'Mật khẩu phải chứa ít nhất một chữ số')
+      .regex(/[^A-Za-z0-9]/, 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt'),
     confirmPassword: z
       .string()
       .min(8, 'Mật khẩu phải có ít nhất 8 ký tự')
@@ -46,8 +46,8 @@ export const RegisterBodySchema = UserSchema.pick({
     }),
   })
   .strict()
-  .superRefine(({ confirmPassword, passwordHash }, ctx) => {
-    if (confirmPassword !== passwordHash) {
+  .superRefine(({ confirmPassword, password }, ctx) => {
+    if (confirmPassword !== password) {
       ctx.addIssue({
         code: 'custom',
         message: 'Password anh Confirm Password must match',
@@ -78,9 +78,9 @@ export const SendOTPBodySchema = VerificationCodeSchema.pick({
 // login
 export const LoginBodySchema = UserSchema.pick({
   email: true,
-  passwordHash: true,
 })
   .extend({
+    password: z.string().min(1, 'Vui lòng nhập mật khẩu'),
     code: z.string().length(6).optional(), //otp code email
   })
   .strict()
@@ -88,6 +88,12 @@ export const LoginResSchema = z.object({
   accessToken: z.string(),
   refreshToken: z.string(),
 })
+export const OTPRequiredResSchema = z.object({
+  message: z.string(),
+  otpRequired: z.literal(true),
+  resendAfterSeconds: z.number().int().positive(),
+})
+export const AuthLoginResSchema = z.union([LoginResSchema, OTPRequiredResSchema])
 //refresh token
 export const RefreshTokenSchema = z.object({
   id: z.number().int(),
@@ -140,9 +146,17 @@ export const DeviceSchema = z.object({
 //logout
 export const LogoutBodySchema = RefreshTokenBodySchema
 //oauth2
+export const GoogleClientSchema = z.enum(['android', 'web'])
+export const GoogleAuthorizationQuerySchema = z
+  .object({
+    client: GoogleClientSchema.default('web'),
+  })
+  .strict()
 export const GoogleAuthStateSchema = DeviceSchema.pick({
   userAgent: true,
   ip: true,
+}).extend({
+  client: GoogleClientSchema.default('web'),
 })
 export const GetAuthorizationUrlResSchema = z.object({
   url: z.string().url(),
@@ -205,12 +219,14 @@ export type TVerificationCodeSchema = z.infer<typeof VerificationCodeSchema>
 export type TSendOTPBodySchema = z.infer<typeof SendOTPBodySchema>
 export type TLoginBodySchema = z.infer<typeof LoginBodySchema>
 export type TLoginResSchema = z.infer<typeof LoginResSchema>
+export type TAuthLoginResSchema = z.infer<typeof AuthLoginResSchema>
 export type TRefreshTokenSchema = z.infer<typeof RefreshTokenSchema>
 export type TRefreshTokenBodySchema = z.infer<typeof RefreshTokenBodySchema>
 export type TRefreshTokenResSchema = z.infer<typeof RefreshTokenResSchema>
 // export type TGetUsserProfileResSchema = z.infer<typeof GetUsserProfileResSchema>
 export type TLogoutBodySchema = z.infer<typeof LogoutBodySchema>
 export type TGoogleAuthStateSchema = z.infer<typeof GoogleAuthStateSchema>
+export type TGoogleAuthorizationQuerySchema = z.infer<typeof GoogleAuthorizationQuerySchema>
 export type TGetAuthorizationUrlResSchema = z.infer<typeof GetAuthorizationUrlResSchema>
 export type TGoogleSessionBodySchema = z.infer<typeof GoogleSessionBodySchema>
 export type TGoogleSessionResSchema = z.infer<typeof GoogleSessionResSchema>

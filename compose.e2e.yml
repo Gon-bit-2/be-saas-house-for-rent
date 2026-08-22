@@ -1,0 +1,26 @@
+services:
+  postgres-e2e:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: house_rental_e2e
+      POSTGRES_USER: e2e
+      POSTGRES_PASSWORD: e2e
+    ports:
+      - '55432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U e2e -d house_rental_e2e']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    tmpfs:
+      - /var/lib/postgresql/data
+
+  redis-e2e:
+    image: redis:7-alpine
+    ports:
+      - '56379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 2s
+      timeout: 3s
+      retries: 30

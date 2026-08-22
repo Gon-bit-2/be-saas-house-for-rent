@@ -1,4 +1,4 @@
-import { BadRequestException, UnauthorizedException } from '@nestjs/common'
+import { BadRequestException, ConflictException, UnauthorizedException } from '@nestjs/common'
 
 const mockGetToken = jest.fn()
 const mockAddRequestInterceptor = jest.fn()
@@ -72,6 +72,7 @@ describe('AuthService Google OAuth2', () => {
       GOOGLE_CLIENT_SECRET: 'google-client-secret',
       GOOGLE_REDIRECT_URI: 'http://localhost:3000/auth/google/callback',
       GOOGLE_CLIENT_REDIRECT_URI: 'http://localhost:5173/oauth/google',
+      GOOGLE_ANDROID_CLIENT_REDIRECT_URI: 'chuyende2://oauth/google',
       GOOGLE_OAUTH_SCOPES:
         'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
       GOOGLE_OAUTH_TOKEN_TIMEOUT_MS: 5_000,
@@ -85,15 +86,19 @@ describe('AuthService Google OAuth2', () => {
 
     authRepository = {
       findByEmail: jest.fn(),
+      findByPhone: jest.fn(),
       findByEmailForCredentials: jest.fn(),
       findById: jest.fn(),
       markEmailVerified: jest.fn(),
+      create: jest.fn(),
       createOAuthTenantUser: jest.fn(),
       createRefreshToken: jest.fn(),
       rotateRefreshToken: jest.fn(),
+      createVerificationCode: jest.fn(),
       findLatestValidVerificationCode: jest.fn(),
       consumeVerificationCode: jest.fn(),
       recordVerificationFailure: jest.fn(),
+      updateProfile: jest.fn(),
       updateLastLoginAt: jest.fn(),
     }
     hashingService = {
@@ -122,8 +127,60 @@ describe('AuthService Google OAuth2', () => {
     fetchMock.mockRestore()
   })
 
+  it('rejects a duplicate registration phone before consuming the OTP', async () => {
+    authRepository.findByEmail.mockResolvedValue(null)
+    authRepository.findByPhone.mockResolvedValue(makeUser({ phone: '0900000000' }))
+
+    const error = await service
+      .register({
+        email: 'NEW@example.com',
+        fullName: 'New User',
+        phone: '0900000000',
+        password: 'Password1!',
+        confirmPassword: 'Password1!',
+        code: '123456',
+        roleCode: 'TENANT',
+      })
+      .catch((reason) => reason)
+
+    expect(error).toBeInstanceOf(ConflictException)
+    expect(error.message).toBe('Số điện thoại này đã được sử dụng')
+    expect(authRepository.findLatestValidVerificationCode).not.toHaveBeenCalled()
+    expect(authRepository.create).not.toHaveBeenCalled()
+  })
+
+  it('returns a conflict when registration loses a unique-constraint race', async () => {
+    authRepository.findByEmail.mockResolvedValue(null)
+    authRepository.findByPhone.mockResolvedValue(null)
+    authRepository.findLatestValidVerificationCode.mockResolvedValue({
+      id: 7,
+      email: 'new@example.com',
+      type: 'REGISTER',
+      codeHash: 'otp-hash',
+      attempts: 0,
+    })
+    hashingService.compare.mockResolvedValue(true)
+    authRepository.consumeVerificationCode.mockResolvedValue(true)
+    authRepository.create.mockRejectedValue({ code: 'P2002' })
+
+    const error = await service
+      .register({
+        email: 'NEW@example.com',
+        fullName: 'New User',
+        phone: '0900000000',
+        password: 'Password1!',
+        confirmPassword: 'Password1!',
+        code: '123456',
+        roleCode: 'TENANT',
+      })
+      .catch((reason) => reason)
+
+    expect(error).toBeInstanceOf(ConflictException)
+    expect(error.message).toBe('Email hoặc số điện thoại đã được sử dụng')
+  })
+
   it('creates a Google authorization URL with expected OAuth params and signed state', () => {
-    const result = service.getGoogleAuthorizationUrl('127.0.0.1', 'jest-agent')
+    const result = service.getGoogleAuthorizationUrl('web', '127.0.0.1', 'jest-agent')
     const url = new URL(result.url)
 
     expect(url.origin + url.pathname).toBe('https://accounts.google.com/o/oauth2/v2/auth')
@@ -147,7 +204,9 @@ describe('AuthService Google OAuth2', () => {
 
   it('retries transient Google userinfo failure once', async () => {
     const user = makeUser()
-    const state = new URL(service.getGoogleAuthorizationUrl('127.0.0.1', 'jest-agent').url).searchParams.get('state')!
+    const state = new URL(service.getGoogleAuthorizationUrl('web', '127.0.0.1', 'jest-agent').url).searchParams.get(
+      'state',
+    )!
     fetchMock.mockResolvedValueOnce({ ok: false, status: 503 } as Response).mockResolvedValueOnce({
       ok: true,
       status: 200,
@@ -168,7 +227,9 @@ describe('AuthService Google OAuth2', () => {
 
   it('logs in an existing active Google user through one-time session exchange', async () => {
     const user = makeUser()
-    const state = new URL(service.getGoogleAuthorizationUrl('127.0.0.1', 'jest-agent').url).searchParams.get('state')!
+    const state = new URL(service.getGoogleAuthorizationUrl('web', '127.0.0.1', 'jest-agent').url).searchParams.get(
+      'state',
+    )!
     fetchMock.mockResolvedValueOnce({
       ok: true,
       json: async () => ({ email: 'USER@example.com', email_verified: true, name: 'User Example' }),
@@ -196,7 +257,9 @@ describe('AuthService Google OAuth2', () => {
       fullName: 'New User',
       avatarUrl: 'https://avatar.test/a.png',
     })
-    const state = new URL(service.getGoogleAuthorizationUrl('127.0.0.1', 'jest-agent').url).searchParams.get('state')!
+    const state = new URL(service.getGoogleAuthorizationUrl('web', '127.0.0.1', 'jest-agent').url).searchParams.get(
+      'state',
+    )!
     fetchMock.mockResolvedValueOnce({
       ok: true,
       json: async () => ({
@@ -223,7 +286,9 @@ describe('AuthService Google OAuth2', () => {
   })
 
   it('rejects Google userinfo when email is not verified', async () => {
-    const state = new URL(service.getGoogleAuthorizationUrl('127.0.0.1', 'jest-agent').url).searchParams.get('state')!
+    const state = new URL(service.getGoogleAuthorizationUrl('web', '127.0.0.1', 'jest-agent').url).searchParams.get(
+      'state',
+    )!
     fetchMock.mockResolvedValueOnce({
       ok: true,
       json: async () => ({ email: 'user@example.com', email_verified: false }),
@@ -248,7 +313,7 @@ describe('AuthService Google OAuth2', () => {
     authRepository.consumeVerificationCode.mockResolvedValue(false)
 
     await expect(
-      service.login({ email: 'USER@example.com', passwordHash: 'Password1!', code: '123456' }),
+      service.login({ email: 'USER@example.com', password: 'Password1!', code: '123456' }),
     ).rejects.toBeInstanceOf(BadRequestException)
     expect(authRepository.consumeVerificationCode).toHaveBeenCalledWith(
       7,
@@ -271,5 +336,55 @@ describe('AuthService Google OAuth2', () => {
       'sha256:old-refresh',
       expect.objectContaining({ userId: 1, tokenHash: 'sha256:refresh-token' }),
     )
+  })
+
+  it('redirects a signed Android OAuth flow only to the allowlisted app scheme', async () => {
+    const user = makeUser()
+    const state = new URL(service.getGoogleAuthorizationUrl('android', '10.0.2.2', 'mobile-app').url).searchParams.get(
+      'state',
+    )!
+    fetchMock.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ email: 'user@example.com', email_verified: true, name: 'User Example' }),
+    } as Response)
+    authRepository.findByEmail.mockResolvedValue(user)
+
+    const redirect = await service.handleGoogleCallback({ code: 'google-code', state }, '203.0.113.5', 'chrome-tab')
+
+    expect(redirect).toMatch(/^chuyende2:\/\/oauth\/google\?sessionToken=/)
+    expect(redirect).not.toContain(envConfig.GOOGLE_CLIENT_REDIRECT_URI)
+  })
+
+  it('returns an explicit OTP discriminator and server cooldown for login', async () => {
+    Object.assign(envConfig, { AUTH_OTP_COOLDOWN_MS: 45_000, TEST_ACCOUNT_EMAILS: '' })
+    authRepository.findByEmailForCredentials.mockResolvedValue(makeUser({ passwordHash: 'stored-hash' }))
+    hashingService.compare.mockResolvedValue(true)
+
+    const result = await service.login({ email: 'USER@example.com', password: 'Password1!' })
+
+    expect(result).toEqual(
+      expect.objectContaining({ otpRequired: true, resendAfterSeconds: 45 }),
+    )
+    expect(authRepository.createVerificationCode).toHaveBeenCalledWith(
+      expect.objectContaining({ email: 'user@example.com', type: 'LOGIN' }),
+    )
+  })
+
+  it('returns a conflict when profile phone violates its unique constraint without target metadata', async () => {
+    authRepository.findById.mockResolvedValue(makeUser())
+    authRepository.updateProfile.mockRejectedValue({ code: 'P2002', meta: { modelName: 'User' } })
+
+    const error = await service.updateProfile(1, { phone: '0900000000' }).catch((reason) => reason)
+
+    expect(error).toBeInstanceOf(ConflictException)
+    expect(error.message).toBe('Số điện thoại này đã được sử dụng')
+  })
+
+  it('does not hide non-unique profile update errors', async () => {
+    const databaseError = { code: 'P2025' }
+    authRepository.findById.mockResolvedValue(makeUser())
+    authRepository.updateProfile.mockRejectedValue(databaseError)
+
+    await expect(service.updateProfile(1, { fullName: 'Updated User' })).rejects.toBe(databaseError)
   })
 })

@@ -51,9 +51,14 @@ export class GoogleVisionOcrProvider implements OcrProvider {
   }
 
   private parseValue(text: string) {
-    const normalized = text.trim().replace(/\s+/g, '').replace(',', '.')
-    if (!/^\d{1,10}(?:\.\d{1,2})?$/.test(normalized)) return null
-
+    // Normalize: remove spaces, convert comma to dot, replace letter O with digit 0
+    let normalized = text.trim().replace(/\s+/g, '').replace(',', '.').replace(/[Oo]/g, '0')
+    
+    // Extract only the numeric part (e.g. from "00050kWh")
+    const match = normalized.match(/\d+(?:\.\d+)?/)
+    if (!match) return null
+    
+    normalized = match[0]
     const value = Number(normalized)
     if (!Number.isFinite(value) || value < 0 || value > 9_999_999_999.99) return null
     return normalized

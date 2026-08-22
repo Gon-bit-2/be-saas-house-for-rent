@@ -46,7 +46,7 @@ export class PlatformDashboardRepository {
       activeSubscriptions,
       expiringSubscriptions,
       subscriptionsByPlan,
-    ] = await this.prismaService.$transaction([
+    ] = await Promise.all([
       this.prismaService.user.count({ where: { deletedAt: null } }),
       this.prismaService.user.groupBy({
         by: ['status'],

@@ -13,6 +13,7 @@ describe('InvoicesService', () => {
   let service: import('./invoices.service').InvoicesService
   let invoicesRepository: Record<string, jest.Mock>
   let tenantAccessService: Record<string, jest.Mock>
+  let notificationEventsService: Record<string, jest.Mock>
 
   const activeContract = {
     id: 7,
@@ -29,6 +30,12 @@ describe('InvoicesService', () => {
     invoicesRepository = {
       findInvoicesAndCount: jest.fn(),
       findDebtsAndCount: jest.fn(),
+      getDebtStats: jest.fn().mockResolvedValue({
+        totalOutstanding: 0,
+        overdueMoreThan30Days: 0,
+        overdueWithin30Days: 0,
+        currentNotDue: 0,
+      }),
       findTenantInvoice: jest.fn(),
       findMyInvoicesAndCount: jest.fn(),
       findMyInvoice: jest.fn(),
@@ -161,6 +168,12 @@ describe('InvoicesService', () => {
 
   it('lists debt records from the real debt table', async () => {
     invoicesRepository.findDebtsAndCount.mockResolvedValue([[{ id: 1, status: 'OPEN' }], 1])
+    invoicesRepository.getDebtStats.mockResolvedValue({
+      totalOutstanding: '5000',
+      overdueMoreThan30Days: '2000',
+      overdueWithin30Days: '1000',
+      currentNotDue: '2000',
+    })
 
     const result = await service.listDebts(50, { page: 1, limit: 20, status: 'OPEN' })
 
@@ -170,6 +183,17 @@ describe('InvoicesService', () => {
       20,
     )
     expect(result.meta.total).toBe(1)
+    expect(invoicesRepository.getDebtStats).toHaveBeenCalledWith(
+      expect.not.objectContaining({ status: expect.anything() }),
+      expect.any(Date),
+    )
+    expect(invoicesRepository.getDebtStats.mock.calls[0][0]).toEqual(expect.objectContaining({ tenantId: 10 }))
+    expect(result.stats).toEqual({
+      totalOutstanding: 5000,
+      overdueMoreThan30Days: 2000,
+      overdueWithin30Days: 1000,
+      currentNotDue: 2000,
+    })
   })
 
   it('applies invoice filters while forcing the authenticated renter id', async () => {
@@ -200,6 +224,13 @@ describe('InvoicesService', () => {
       expect.objectContaining({ renterId: 99, tenantId: undefined, status: 'OPEN' }),
       0,
       20,
+    )
+    expect(invoicesRepository.getDebtStats).toHaveBeenCalledWith(
+      expect.not.objectContaining({ status: expect.anything() }),
+      expect.any(Date),
+    )
+    expect(invoicesRepository.getDebtStats.mock.calls[0][0]).toEqual(
+      expect.objectContaining({ renterId: 99, tenantId: undefined }),
     )
   })
 })

@@ -4,95 +4,6 @@ import { Prisma } from 'generated/prisma/client'
 
 const marketplaceRoomImageSelect = {
   id: true,
-  url: true,
-  caption: true,
-  sortOrder: true,
-  isThumbnail: true,
-} satisfies Prisma.RoomImageSelect
-
-export const marketplaceRoomSelect = {
-  id: true,
-  tenantId: true,
-  propertyId: true,
-  floorId: true,
-  roomCode: true,
-  title: true,
-  area: true,
-  maxOccupants: true,
-  basePrice: true,
-  depositAmount: true,
-  electricityPrice: true,
-  waterPrice: true,
-  description: true,
-  status: true,
-  marketplaceStatus: true,
-  publishedAt: true,
-  property: {
-    select: {
-      id: true,
-      name: true,
-      type: true,
-      province: true,
-      district: true,
-      ward: true,
-      addressDetail: true,
-      latitude: true,
-      longitude: true,
-      status: true,
-    },
-  },
-  floor: {
-    select: {
-      id: true,
-      name: true,
-      floorNumber: true,
-    },
-  },
-  images: {
-    orderBy: [{ isThumbnail: 'desc' }, { sortOrder: 'asc' }, { id: 'asc' }],
-    select: marketplaceRoomImageSelect,
-  },
-  amenities: {
-    select: {
-      amenity: {
-        select: {
-          id: true,
-          name: true,
-          icon: true,
-          category: true,
-        },
-      },
-    },
-  },
-} satisfies Prisma.RoomSelect
-
-const rentalRequestSelect = {
-  id: true,
-  tenantId: true,
-  roomId: true,
-  renterId: true,
-  appointmentId: true,
-  message: true,
-  expectedStartDate: true,
-  status: true,
-  createdAt: true,
-  updatedAt: true,
-  room: {
-    select: {
-      id: true,
-      roomCode: true,
-      title: true,
-      status: true,
-      marketplaceStatus: true,
-      property: { select: { id: true, name: true } },
-    },
-  },
-} satisfies Prisma.RentalRequestSelect
-
-const viewingAppointmentSelect = {
-  id: true,
-  tenantId: true,
-  roomId: true,
   renterId: true,
   assignedStaffId: true,
   scheduledAt: true,
@@ -107,6 +18,87 @@ const viewingAppointmentSelect = {
       roomCode: true,
       title: true,
       property: { select: { id: true, name: true } },
+    },
+  },
+} satisfies Prisma.RoomViewingAppointmentSelect
+
+export const marketplaceRoomSelect = {
+  id: true,
+  title: true,
+  description: true,
+  basePrice: true,
+  area: true,
+  floor: true,
+  roomCode: true,
+  status: true,
+  tenantId: true,
+  propertyId: true,
+  property: {
+    select: {
+      id: true,
+      name: true,
+      addressDetail: true,
+      latitude: true,
+      longitude: true,
+      wardCode: true,
+      ward: true,
+      district: true,
+      province: true,
+      provinceCode: true,
+    },
+  },
+  images: {
+    select: {
+      id: true,
+      url: true,
+    },
+    orderBy: { sortOrder: 'asc' },
+  },
+  amenities: {
+    select: {
+      amenity: {
+        select: {
+          id: true,
+          name: true,
+          icon: true,
+          category: true,
+        },
+      },
+    },
+  },
+  tenant: {
+    select: {
+      id: true,
+      name: true,
+      verificationStatus: true,
+      createdAt: true,
+    },
+  },
+} satisfies Prisma.RoomSelect
+
+const rentalRequestSelect = {
+  id: true,
+  status: true,
+  tenantId: true,
+  roomId: true,
+  renterId: true,
+  room: {
+    select: {
+      roomCode: true,
+      title: true,
+    },
+  },
+} satisfies Prisma.RentalRequestSelect
+
+const viewingAppointmentSelect = {
+  id: true,
+  status: true,
+  tenantId: true,
+  roomId: true,
+  renterId: true,
+  room: {
+    select: {
+      roomCode: true,
     },
   },
 } satisfies Prisma.RoomViewingAppointmentSelect
@@ -128,6 +120,20 @@ export class MarketplaceRepository {
         select: marketplaceRoomSelect,
       }),
       this.prismaService.room.count({ where }),
+    ])
+  }
+
+  async findActiveAmenities(where: Prisma.AmenityWhereInput, skip: number, take: number) {
+    const select = { id: true, name: true, icon: true, category: true } satisfies Prisma.AmenitySelect
+    return this.prismaService.$transaction([
+      this.prismaService.amenity.findMany({
+        where: { ...where, isActive: true },
+        skip,
+        take,
+        orderBy: [{ category: 'asc' }, { name: 'asc' }],
+        select,
+      }),
+      this.prismaService.amenity.count({ where: { ...where, isActive: true } }),
     ])
   }
 
@@ -202,5 +208,18 @@ export class MarketplaceRepository {
       },
       { isolationLevel: 'Serializable' },
     )
+  }
+
+  async findPropertyIdsWithinRadius(lat: number, lng: number, radiusKm: number): Promise<number[]> {
+    const properties = await this.prismaService.$queryRaw<{ id: number }[]>`
+      SELECT id FROM properties
+      WHERE latitude IS NOT NULL AND longitude IS NOT NULL AND (
+        6371 * acos(
+          cos(radians(${lat})) * cos(radians(latitude)) * cos(radians(longitude) - radians(${lng})) +
+          sin(radians(${lat})) * sin(radians(latitude))
+        )
+      ) <= ${radiusKm}
+    `
+    return properties.map((p) => p.id)
   }
 }

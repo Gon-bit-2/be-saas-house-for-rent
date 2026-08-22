@@ -52,12 +52,16 @@ export type PropertyMinAggregateOutputType = {
   name: string | null
   type: $Enums.PropertyType | null
   province: string | null
+  provinceCode: string | null
   district: string | null
   ward: string | null
+  wardCode: string | null
   addressDetail: string | null
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   description: string | null
+  coverImageUrl: string | null
+  coverImagePublicId: string | null
   status: $Enums.PropertyStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -73,12 +77,16 @@ export type PropertyMaxAggregateOutputType = {
   name: string | null
   type: $Enums.PropertyType | null
   province: string | null
+  provinceCode: string | null
   district: string | null
   ward: string | null
+  wardCode: string | null
   addressDetail: string | null
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   description: string | null
+  coverImageUrl: string | null
+  coverImagePublicId: string | null
   status: $Enums.PropertyStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -94,12 +102,17 @@ export type PropertyCountAggregateOutputType = {
   name: number
   type: number
   province: number
+  provinceCode: number
   district: number
   ward: number
+  wardCode: number
   addressDetail: number
   latitude: number
   longitude: number
   description: number
+  coverImageUrl: number
+  coverImagePublicId: number
+  verificationDocuments: number
   status: number
   createdAt: number
   updatedAt: number
@@ -137,12 +150,16 @@ export type PropertyMinAggregateInputType = {
   name?: true
   type?: true
   province?: true
+  provinceCode?: true
   district?: true
   ward?: true
+  wardCode?: true
   addressDetail?: true
   latitude?: true
   longitude?: true
   description?: true
+  coverImageUrl?: true
+  coverImagePublicId?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -158,12 +175,16 @@ export type PropertyMaxAggregateInputType = {
   name?: true
   type?: true
   province?: true
+  provinceCode?: true
   district?: true
   ward?: true
+  wardCode?: true
   addressDetail?: true
   latitude?: true
   longitude?: true
   description?: true
+  coverImageUrl?: true
+  coverImagePublicId?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -179,12 +200,17 @@ export type PropertyCountAggregateInputType = {
   name?: true
   type?: true
   province?: true
+  provinceCode?: true
   district?: true
   ward?: true
+  wardCode?: true
   addressDetail?: true
   latitude?: true
   longitude?: true
   description?: true
+  coverImageUrl?: true
+  coverImagePublicId?: true
+  verificationDocuments?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -287,12 +313,17 @@ export type PropertyGroupByOutputType = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode: string | null
+  district: string | null
   ward: string
+  wardCode: string | null
   addressDetail: string
   latitude: runtime.Decimal | null
   longitude: runtime.Decimal | null
   description: string | null
+  coverImageUrl: string | null
+  coverImagePublicId: string | null
+  verificationDocuments: string[]
   status: $Enums.PropertyStatus
   createdAt: Date
   updatedAt: Date
@@ -331,12 +362,17 @@ export type PropertyWhereInput = {
   name?: Prisma.StringFilter<"Property"> | string
   type?: Prisma.EnumPropertyTypeFilter<"Property"> | $Enums.PropertyType
   province?: Prisma.StringFilter<"Property"> | string
-  district?: Prisma.StringFilter<"Property"> | string
+  provinceCode?: Prisma.StringNullableFilter<"Property"> | string | null
+  district?: Prisma.StringNullableFilter<"Property"> | string | null
   ward?: Prisma.StringFilter<"Property"> | string
+  wardCode?: Prisma.StringNullableFilter<"Property"> | string | null
   addressDetail?: Prisma.StringFilter<"Property"> | string
   latitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImageUrl?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImagePublicId?: Prisma.StringNullableFilter<"Property"> | string | null
+  verificationDocuments?: Prisma.StringNullableListFilter<"Property">
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
@@ -358,12 +394,17 @@ export type PropertyOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   province?: Prisma.SortOrder
-  district?: Prisma.SortOrder
+  provinceCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  district?: Prisma.SortOrderInput | Prisma.SortOrder
   ward?: Prisma.SortOrder
+  wardCode?: Prisma.SortOrderInput | Prisma.SortOrder
   addressDetail?: Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImagePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
+  verificationDocuments?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -388,12 +429,17 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Property"> | string
   type?: Prisma.EnumPropertyTypeFilter<"Property"> | $Enums.PropertyType
   province?: Prisma.StringFilter<"Property"> | string
-  district?: Prisma.StringFilter<"Property"> | string
+  provinceCode?: Prisma.StringNullableFilter<"Property"> | string | null
+  district?: Prisma.StringNullableFilter<"Property"> | string | null
   ward?: Prisma.StringFilter<"Property"> | string
+  wardCode?: Prisma.StringNullableFilter<"Property"> | string | null
   addressDetail?: Prisma.StringFilter<"Property"> | string
   latitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImageUrl?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImagePublicId?: Prisma.StringNullableFilter<"Property"> | string | null
+  verificationDocuments?: Prisma.StringNullableListFilter<"Property">
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
@@ -415,12 +461,17 @@ export type PropertyOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   province?: Prisma.SortOrder
-  district?: Prisma.SortOrder
+  provinceCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  district?: Prisma.SortOrderInput | Prisma.SortOrder
   ward?: Prisma.SortOrder
+  wardCode?: Prisma.SortOrderInput | Prisma.SortOrder
   addressDetail?: Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  coverImagePublicId?: Prisma.SortOrderInput | Prisma.SortOrder
+  verificationDocuments?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -444,12 +495,17 @@ export type PropertyScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Property"> | string
   type?: Prisma.EnumPropertyTypeWithAggregatesFilter<"Property"> | $Enums.PropertyType
   province?: Prisma.StringWithAggregatesFilter<"Property"> | string
-  district?: Prisma.StringWithAggregatesFilter<"Property"> | string
+  provinceCode?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  district?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   ward?: Prisma.StringWithAggregatesFilter<"Property"> | string
+  wardCode?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   addressDetail?: Prisma.StringWithAggregatesFilter<"Property"> | string
   latitude?: Prisma.DecimalNullableWithAggregatesFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableWithAggregatesFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  coverImageUrl?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  coverImagePublicId?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  verificationDocuments?: Prisma.StringNullableListFilter<"Property">
   status?: Prisma.EnumPropertyStatusWithAggregatesFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Property"> | Date | string
@@ -463,12 +519,17 @@ export type PropertyCreateInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -487,12 +548,17 @@ export type PropertyUncheckedCreateInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -508,12 +574,17 @@ export type PropertyUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -532,12 +603,17 @@ export type PropertyUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -555,12 +631,17 @@ export type PropertyCreateManyInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -574,12 +655,17 @@ export type PropertyUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -592,12 +678,17 @@ export type PropertyUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -617,18 +708,31 @@ export type PropertyOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
 export type PropertyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   tenantId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   province?: Prisma.SortOrder
+  provinceCode?: Prisma.SortOrder
   district?: Prisma.SortOrder
   ward?: Prisma.SortOrder
+  wardCode?: Prisma.SortOrder
   addressDetail?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
+  coverImagePublicId?: Prisma.SortOrder
+  verificationDocuments?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -654,12 +758,16 @@ export type PropertyMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   province?: Prisma.SortOrder
+  provinceCode?: Prisma.SortOrder
   district?: Prisma.SortOrder
   ward?: Prisma.SortOrder
+  wardCode?: Prisma.SortOrder
   addressDetail?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
+  coverImagePublicId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -675,12 +783,16 @@ export type PropertyMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   province?: Prisma.SortOrder
+  provinceCode?: Prisma.SortOrder
   district?: Prisma.SortOrder
   ward?: Prisma.SortOrder
+  wardCode?: Prisma.SortOrder
   addressDetail?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  coverImageUrl?: Prisma.SortOrder
+  coverImagePublicId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -873,6 +985,10 @@ export type PropertyUncheckedUpdateManyWithoutTenantNestedInput = {
   deleteMany?: Prisma.PropertyScalarWhereInput | Prisma.PropertyScalarWhereInput[]
 }
 
+export type PropertyCreateverificationDocumentsInput = {
+  set: string[]
+}
+
 export type EnumPropertyTypeFieldUpdateOperationsInput = {
   set?: $Enums.PropertyType
 }
@@ -883,6 +999,11 @@ export type NullableDecimalFieldUpdateOperationsInput = {
   decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
   multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type PropertyUpdateverificationDocumentsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type EnumPropertyStatusFieldUpdateOperationsInput = {
@@ -921,12 +1042,17 @@ export type PropertyCreateWithoutCreatedByInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -944,12 +1070,17 @@ export type PropertyUncheckedCreateWithoutCreatedByInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -974,12 +1105,17 @@ export type PropertyCreateWithoutUpdatedByInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -997,12 +1133,17 @@ export type PropertyUncheckedCreateWithoutUpdatedByInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1027,12 +1168,17 @@ export type PropertyCreateWithoutDeletedByInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1050,12 +1196,17 @@ export type PropertyUncheckedCreateWithoutDeletedByInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1101,12 +1252,17 @@ export type PropertyScalarWhereInput = {
   name?: Prisma.StringFilter<"Property"> | string
   type?: Prisma.EnumPropertyTypeFilter<"Property"> | $Enums.PropertyType
   province?: Prisma.StringFilter<"Property"> | string
-  district?: Prisma.StringFilter<"Property"> | string
+  provinceCode?: Prisma.StringNullableFilter<"Property"> | string | null
+  district?: Prisma.StringNullableFilter<"Property"> | string | null
   ward?: Prisma.StringFilter<"Property"> | string
+  wardCode?: Prisma.StringNullableFilter<"Property"> | string | null
   addressDetail?: Prisma.StringFilter<"Property"> | string
   latitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImageUrl?: Prisma.StringNullableFilter<"Property"> | string | null
+  coverImagePublicId?: Prisma.StringNullableFilter<"Property"> | string | null
+  verificationDocuments?: Prisma.StringNullableListFilter<"Property">
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
@@ -1152,12 +1308,17 @@ export type PropertyCreateWithoutTenantInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1174,12 +1335,17 @@ export type PropertyUncheckedCreateWithoutTenantInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1221,12 +1387,17 @@ export type PropertyCreateWithoutFloorsInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1244,12 +1415,17 @@ export type PropertyUncheckedCreateWithoutFloorsInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1280,12 +1456,17 @@ export type PropertyUpdateWithoutFloorsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1303,12 +1484,17 @@ export type PropertyUncheckedUpdateWithoutFloorsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1323,12 +1509,17 @@ export type PropertyCreateWithoutRoomsInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1346,12 +1537,17 @@ export type PropertyUncheckedCreateWithoutRoomsInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1382,12 +1578,17 @@ export type PropertyUpdateWithoutRoomsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1405,12 +1606,17 @@ export type PropertyUncheckedUpdateWithoutRoomsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1427,12 +1633,17 @@ export type PropertyCreateManyCreatedByInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1447,12 +1658,17 @@ export type PropertyCreateManyUpdatedByInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1467,12 +1683,17 @@ export type PropertyCreateManyDeletedByInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1485,12 +1706,17 @@ export type PropertyUpdateWithoutCreatedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1508,12 +1734,17 @@ export type PropertyUncheckedUpdateWithoutCreatedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1530,12 +1761,17 @@ export type PropertyUncheckedUpdateManyWithoutCreatedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1548,12 +1784,17 @@ export type PropertyUpdateWithoutUpdatedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1571,12 +1812,17 @@ export type PropertyUncheckedUpdateWithoutUpdatedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1593,12 +1839,17 @@ export type PropertyUncheckedUpdateManyWithoutUpdatedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1611,12 +1862,17 @@ export type PropertyUpdateWithoutDeletedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1634,12 +1890,17 @@ export type PropertyUncheckedUpdateWithoutDeletedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1656,12 +1917,17 @@ export type PropertyUncheckedUpdateManyWithoutDeletedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1675,12 +1941,17 @@ export type PropertyCreateManyTenantInput = {
   name: string
   type: $Enums.PropertyType
   province: string
-  district: string
+  provinceCode?: string | null
+  district?: string | null
   ward: string
+  wardCode?: string | null
   addressDetail: string
   latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: string | null
+  coverImageUrl?: string | null
+  coverImagePublicId?: string | null
+  verificationDocuments?: Prisma.PropertyCreateverificationDocumentsInput | string[]
   status?: $Enums.PropertyStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1694,12 +1965,17 @@ export type PropertyUpdateWithoutTenantInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1716,12 +1992,17 @@ export type PropertyUncheckedUpdateWithoutTenantInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1738,12 +2019,17 @@ export type PropertyUncheckedUpdateManyWithoutTenantInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   province?: Prisma.StringFieldUpdateOperationsInput | string
-  district?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ward?: Prisma.StringFieldUpdateOperationsInput | string
+  wardCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   addressDetail?: Prisma.StringFieldUpdateOperationsInput | string
   latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImagePublicId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verificationDocuments?: Prisma.PropertyUpdateverificationDocumentsInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1799,12 +2085,17 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name?: boolean
   type?: boolean
   province?: boolean
+  provinceCode?: boolean
   district?: boolean
   ward?: boolean
+  wardCode?: boolean
   addressDetail?: boolean
   latitude?: boolean
   longitude?: boolean
   description?: boolean
+  coverImageUrl?: boolean
+  coverImagePublicId?: boolean
+  verificationDocuments?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1827,12 +2118,17 @@ export type PropertySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   name?: boolean
   type?: boolean
   province?: boolean
+  provinceCode?: boolean
   district?: boolean
   ward?: boolean
+  wardCode?: boolean
   addressDetail?: boolean
   latitude?: boolean
   longitude?: boolean
   description?: boolean
+  coverImageUrl?: boolean
+  coverImagePublicId?: boolean
+  verificationDocuments?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1852,12 +2148,17 @@ export type PropertySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   name?: boolean
   type?: boolean
   province?: boolean
+  provinceCode?: boolean
   district?: boolean
   ward?: boolean
+  wardCode?: boolean
   addressDetail?: boolean
   latitude?: boolean
   longitude?: boolean
   description?: boolean
+  coverImageUrl?: boolean
+  coverImagePublicId?: boolean
+  verificationDocuments?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1877,12 +2178,17 @@ export type PropertySelectScalar = {
   name?: boolean
   type?: boolean
   province?: boolean
+  provinceCode?: boolean
   district?: boolean
   ward?: boolean
+  wardCode?: boolean
   addressDetail?: boolean
   latitude?: boolean
   longitude?: boolean
   description?: boolean
+  coverImageUrl?: boolean
+  coverImagePublicId?: boolean
+  verificationDocuments?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1892,7 +2198,7 @@ export type PropertySelectScalar = {
   deletedById?: boolean
 }
 
-export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "type" | "province" | "district" | "ward" | "addressDetail" | "latitude" | "longitude" | "description" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["property"]>
+export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "name" | "type" | "province" | "provinceCode" | "district" | "ward" | "wardCode" | "addressDetail" | "latitude" | "longitude" | "description" | "coverImageUrl" | "coverImagePublicId" | "verificationDocuments" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["property"]>
 export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   floors?: boolean | Prisma.Property$floorsArgs<ExtArgs>
@@ -1956,13 +2262,21 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
      */
     province: string
     /**
+     * Mã tỉnh/thành theo Quyết định 19/2025/QĐ-TTg
+     */
+    provinceCode: string | null
+    /**
      * Tên quận / huyện của nhà trọ
      */
-    district: string
+    district: string | null
     /**
      * Tên phường / xã của nhà trọ
      */
     ward: string
+    /**
+     * Mã xã/phường/đặc khu theo Quyết định 19/2025/QĐ-TTg
+     */
+    wardCode: string | null
     /**
      * Số nhà, tên đường chi tiết
      */
@@ -1979,6 +2293,18 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
      * Mô tả chi tiết về nhà trọ (tiện ích chung, quy định chung...)
      */
     description: string | null
+    /**
+     * URL ảnh bìa của nhà trọ trên Cloudinary
+     */
+    coverImageUrl: string | null
+    /**
+     * Public ID của ảnh bìa trên Cloudinary để xóa/thay thế
+     */
+    coverImagePublicId: string | null
+    /**
+     * Giấy tờ chứng minh quyền sở hữu hoặc kinh doanh (mảng URL)
+     */
+    verificationDocuments: string[]
     /**
      * Trạng thái hoạt động của tòa nhà
      */
@@ -2441,12 +2767,17 @@ export interface PropertyFieldRefs {
   readonly name: Prisma.FieldRef<"Property", 'String'>
   readonly type: Prisma.FieldRef<"Property", 'PropertyType'>
   readonly province: Prisma.FieldRef<"Property", 'String'>
+  readonly provinceCode: Prisma.FieldRef<"Property", 'String'>
   readonly district: Prisma.FieldRef<"Property", 'String'>
   readonly ward: Prisma.FieldRef<"Property", 'String'>
+  readonly wardCode: Prisma.FieldRef<"Property", 'String'>
   readonly addressDetail: Prisma.FieldRef<"Property", 'String'>
   readonly latitude: Prisma.FieldRef<"Property", 'Decimal'>
   readonly longitude: Prisma.FieldRef<"Property", 'Decimal'>
   readonly description: Prisma.FieldRef<"Property", 'String'>
+  readonly coverImageUrl: Prisma.FieldRef<"Property", 'String'>
+  readonly coverImagePublicId: Prisma.FieldRef<"Property", 'String'>
+  readonly verificationDocuments: Prisma.FieldRef<"Property", 'String[]'>
   readonly status: Prisma.FieldRef<"Property", 'PropertyStatus'>
   readonly createdAt: Prisma.FieldRef<"Property", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Property", 'DateTime'>

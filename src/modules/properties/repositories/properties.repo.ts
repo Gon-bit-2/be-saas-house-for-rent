@@ -18,12 +18,16 @@ export const propertySelect = {
   name: true,
   type: true,
   province: true,
+  provinceCode: true,
   district: true,
   ward: true,
+  wardCode: true,
   addressDetail: true,
   latitude: true,
   longitude: true,
   description: true,
+  coverImageUrl: true,
+  coverImagePublicId: true,
   status: true,
   createdAt: true,
   updatedAt: true,
@@ -114,8 +118,18 @@ export class PropertiesRepository {
     })
   }
 
+  async countFloorsForProperty(tenantId: number, propertyId: number) {
+    return this.prismaService.floor.count({
+      where: { tenantId, propertyId, property: { deletedAt: null } },
+    })
+  }
+
   async createFloor(data: Prisma.FloorUncheckedCreateInput) {
     return this.prismaService.floor.create({ data, select: floorSelect })
+  }
+
+  async createManyFloors(data: Prisma.FloorCreateManyInput[]) {
+    return this.prismaService.floor.createMany({ data })
   }
 
   async updateFloor(id: number, data: Prisma.FloorUncheckedUpdateInput) {

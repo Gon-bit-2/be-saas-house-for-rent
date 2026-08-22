@@ -6,6 +6,7 @@ import type { AccessTokenPayload } from '@src/common/types/jwt.type'
 import {
   CreateMarketplaceRentalRequestBodyDTO,
   CreateMarketplaceViewingAppointmentBodyDTO,
+  ListMarketplaceAmenitiesQueryDTO,
   ListMarketplaceRoomsQueryDTO,
 } from './dto/marketplace.dto'
 import { MarketplaceService } from './marketplace.service'
@@ -18,6 +19,12 @@ export class MarketplaceController {
   constructor(private readonly marketplaceService: MarketplaceService) {}
 
   @isPublic()
+  @Get('amenities')
+  listAmenities(@Query() query: ListMarketplaceAmenitiesQueryDTO) {
+    return this.marketplaceService.listAmenities(query)
+  }
+
+  @isPublic()
   @Get('rooms')
   listRooms(@Query() query: ListMarketplaceRoomsQueryDTO) {
     return this.marketplaceService.listRooms(query)
@@ -27,6 +34,12 @@ export class MarketplaceController {
   @Get('rooms/:id')
   getRoomById(@Param('id', ParseIntPipe) id: number) {
     return this.marketplaceService.getRoomById(id)
+  }
+
+  @isPublic()
+  @Get('rooms/:id/similar')
+  getSimilarRooms(@Param('id', ParseIntPipe) id: number) {
+    return this.marketplaceService.getSimilarRooms(id)
   }
 
   @IsTenant()

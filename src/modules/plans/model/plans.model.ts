@@ -11,7 +11,7 @@ export const ListPlansQuerySchema = z
   .object({
     page: z.coerce.number().int().positive().default(1),
     limit: z.coerce.number().int().positive().max(100).default(20),
-    search: z.string().trim().min(1).optional(),
+    search: z.string().trim().optional(),
     isActive: booleanQueryValue.optional(),
   })
   .strict()
@@ -23,8 +23,9 @@ export const CreatePlanBodySchema = z
     description: z.string().trim().max(2000).optional(),
     priceMonthly: z.coerce.number().nonnegative(),
     priceYearly: z.coerce.number().nonnegative(),
-    maxRooms: z.coerce.number().int().positive(),
-    maxStaff: z.coerce.number().int().positive(),
+    maxProperties: z.coerce.number().int().nonnegative().optional(),
+    maxRooms: z.coerce.number().int().nonnegative(),
+    maxStaff: z.coerce.number().int().nonnegative(),
     allowAiOcr: z.boolean().default(false),
     allowWebhookPayment: z.boolean().default(false),
     isActive: z.boolean().default(true),

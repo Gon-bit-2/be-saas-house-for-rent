@@ -25,13 +25,14 @@ export class SubscriptionPaymentsService {
 
   async getMine(userId: number) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
-    const [subscription, openPayment] = await Promise.all([
+    const [subscription, openPayment, usageLimits] = await Promise.all([
       this.repository.findCurrent(tenant.tenantId),
       this.repository.findOpen(tenant.tenantId),
+      this.repository.getUsageLimits(tenant.tenantId),
     ])
     const isExpired = openPayment?.expiredAt && openPayment.expiredAt <= new Date()
     if (openPayment && isExpired) await this.repository.expire(openPayment.id, tenant.tenantId)
-    return { subscription, pendingPayment: isExpired ? null : openPayment }
+    return { subscription, pendingPayment: isExpired ? null : openPayment, usageLimits }
   }
 
   async listMine(userId: number, query: TListMySubscriptionPaymentsQuerySchema) {

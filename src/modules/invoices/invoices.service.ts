@@ -35,15 +35,15 @@ export class InvoicesService {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const { page, limit, skip } = normalizePagination(query)
     const where = this.buildDebtWhere(tenant.tenantId, query)
-    const [debts, total] = await this.invoicesRepository.findDebtsAndCount(where, skip, limit)
-    return buildPaginatedResult(debts, total, page, limit)
+    const statsWhere = this.buildDebtWhere(tenant.tenantId, { ...query, status: undefined })
+    return this.listDebtsWithStats(where, statsWhere, page, limit, skip)
   }
 
   async listMyDebts(userId: number, query: TListDebtsQuerySchema) {
     const { page, limit, skip } = normalizePagination(query)
     const where = this.buildDebtWhereForRenter(userId, query)
-    const [debts, total] = await this.invoicesRepository.findDebtsAndCount(where, skip, limit)
-    return buildPaginatedResult(debts, total, page, limit)
+    const statsWhere = this.buildDebtWhereForRenter(userId, { ...query, status: undefined })
+    return this.listDebtsWithStats(where, statsWhere, page, limit, skip)
   }
 
   async getForLandlord(userId: number, id: number) {
@@ -64,6 +64,47 @@ export class InvoicesService {
       throw new NotFoundException('Không tìm thấy hóa đơn của bạn')
     }
     return invoice
+  }
+
+  async preview(userId: number, body: TCreateInvoiceBodySchema) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const billingMonth = this.normalizeBillingMonth(body.billingMonth)
+    const monthEnd = this.endOfBillingMonth(billingMonth)
+    const contract = await this.invoicesRepository.findActiveContractForInvoice(
+      tenant.tenantId,
+      body.contractId,
+      billingMonth,
+      monthEnd,
+    )
+    if (!contract || contract.room.deletedAt) {
+      throw new NotFoundException('Không tìm thấy hợp đồng active thuộc tenant trong kỳ hóa đơn')
+    }
+
+    const readings = await this.invoicesRepository.findConfirmedReadingsForInvoice(
+      tenant.tenantId,
+      contract.id,
+      contract.roomId,
+      billingMonth,
+    )
+    const serviceAssignments = await this.invoicesRepository.findServiceAssignmentsForInvoice(
+      tenant.tenantId,
+      contract.id,
+      contract.roomId,
+      billingMonth,
+      monthEnd,
+    )
+    const items = this.buildInvoiceItems(contract, billingMonth, readings, serviceAssignments, body.extraItems)
+    const totals = this.calculateTotals(items)
+    
+    return {
+      items,
+      totals,
+      contract: {
+        id: contract.id,
+        roomCode: contract.room.roomCode
+      },
+      billingMonth
+    }
   }
 
   async create(userId: number, body: TCreateInvoiceBodySchema) {
@@ -135,6 +176,76 @@ export class InvoicesService {
       await this.notificationEventsService.notifyInvoiceIssued(invoice)
     }
     return invoice
+  }
+
+  async generateMonthlyInvoices() {
+    const today = new Date()
+    // Define the billing month as the current month
+    const billingMonth = this.normalizeBillingMonth(today)
+    const monthEnd = this.endOfBillingMonth(billingMonth)
+
+    const contracts = await this.invoicesRepository.findActiveContractsForInvoiceGeneration(billingMonth, monthEnd)
+    let successCount = 0
+    let errorCount = 0
+
+    for (const contract of contracts) {
+      if (contract.room.deletedAt) continue
+
+      try {
+        const readings = await this.invoicesRepository.findConfirmedReadingsForInvoice(
+          contract.tenantId,
+          contract.id,
+          contract.roomId,
+          billingMonth,
+        )
+        const serviceAssignments = await this.invoicesRepository.findServiceAssignmentsForInvoice(
+          contract.tenantId,
+          contract.id,
+          contract.roomId,
+          billingMonth,
+          monthEnd,
+        )
+
+        const items = this.buildInvoiceItems(contract, billingMonth, readings, serviceAssignments, [])
+        const totals = this.calculateTotals(items)
+        const issueDate = this.todayDateOnly()
+        const dueDate = this.defaultDueDate(billingMonth, contract.paymentDueDay, issueDate)
+        const invoiceCode = await this.generateInvoiceCode(contract.tenantId, billingMonth)
+
+        // For automated invoice generation, we set it as DRAFT and let landlord issue it,
+        // or we could issue it directly. Typically, monthly invoices are generated as DRAFT for review.
+        await this.invoicesRepository.createInvoiceWithItemsAndDebt(
+          {
+            tenantId: contract.tenantId,
+            contractId: contract.id,
+            roomId: contract.roomId,
+            renterId: contract.renterId,
+            invoiceCode,
+            billingMonth,
+            issueDate,
+            dueDate,
+            subtotal: totals.subtotal,
+            discountAmount: totals.discountAmount,
+            penaltyAmount: totals.penaltyAmount,
+            totalAmount: totals.totalAmount,
+            paidAmount: 0,
+            debtAmount: totals.totalAmount,
+            status: 'DRAFT',
+            note: 'Hóa đơn tự động sinh bởi hệ thống',
+            createdById: 1, // Assuming user 1 is system admin
+            updatedById: 1,
+          },
+          items,
+          this.toDebtStatus('DRAFT', totals.totalAmount),
+        )
+        successCount++
+      } catch (error) {
+        errorCount++
+        console.error(`Failed to generate invoice for contract ${contract.id}`, error)
+      }
+    }
+
+    return { successCount, errorCount }
   }
 
   async updateDraft(userId: number, id: number, body: TUpdateInvoiceBodySchema) {
@@ -215,6 +326,29 @@ export class InvoicesService {
     return invoice
   }
 
+  private async listDebtsWithStats(
+    where: Prisma.DebtWhereInput,
+    statsWhere: Prisma.DebtWhereInput,
+    page: number,
+    limit: number,
+    skip: number,
+  ) {
+    const today = this.todayDateOnly()
+    const [[debts, total], stats] = await Promise.all([
+      this.invoicesRepository.findDebtsAndCount(where, skip, limit),
+      this.invoicesRepository.getDebtStats(statsWhere, today),
+    ])
+    return {
+      ...buildPaginatedResult(debts, total, page, limit),
+      stats: {
+        totalOutstanding: this.toNumber(stats.totalOutstanding),
+        overdueMoreThan30Days: this.toNumber(stats.overdueMoreThan30Days),
+        overdueWithin30Days: this.toNumber(stats.overdueWithin30Days),
+        currentNotDue: this.toNumber(stats.currentNotDue),
+      },
+    }
+  }
+
   /**
    * Builds rent, confirmed utility readings and extra fee lines before totals are snapshotted.
    */
@@ -252,7 +386,17 @@ export class InvoicesService {
       meterReadingId: null,
     }
     const utilityItems = readings.map((reading) => this.utilityReadingToItem(reading, monthLabel))
-    const serviceItems: InvoiceItemDraft[] = serviceAssignments.map((assignment) => {
+    
+    const hasElectricityReading = utilityItems.some((item) => item.itemType === 'ELECTRICITY')
+    const hasWaterReading = utilityItems.some((item) => item.itemType === 'WATER')
+
+    const filteredServiceAssignments = serviceAssignments.filter((assignment) => {
+      if (assignment.serviceItem.itemType === 'ELECTRICITY' && hasElectricityReading) return false
+      if (assignment.serviceItem.itemType === 'WATER' && hasWaterReading) return false
+      return true
+    })
+
+    const serviceItems: InvoiceItemDraft[] = filteredServiceAssignments.map((assignment) => {
       const quantity = this.toNumber(assignment.quantity)
       const unitPrice = this.toNumber(assignment.unitPrice ?? assignment.serviceItem.defaultUnitPrice)
       return {

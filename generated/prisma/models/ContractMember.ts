@@ -30,18 +30,25 @@ export type ContractMemberAvgAggregateOutputType = {
   id: number | null
   contractId: number | null
   userId: number | null
+  age: number | null
 }
 
 export type ContractMemberSumAggregateOutputType = {
   id: number | null
   contractId: number | null
   userId: number | null
+  age: number | null
 }
 
 export type ContractMemberMinAggregateOutputType = {
   id: number | null
   contractId: number | null
   userId: number | null
+  fullName: string | null
+  phone: string | null
+  age: number | null
+  identityCard: string | null
+  identityCardImageUrl: string | null
   role: $Enums.ContractMemberRole | null
   createdAt: Date | null
 }
@@ -50,6 +57,11 @@ export type ContractMemberMaxAggregateOutputType = {
   id: number | null
   contractId: number | null
   userId: number | null
+  fullName: string | null
+  phone: string | null
+  age: number | null
+  identityCard: string | null
+  identityCardImageUrl: string | null
   role: $Enums.ContractMemberRole | null
   createdAt: Date | null
 }
@@ -58,6 +70,11 @@ export type ContractMemberCountAggregateOutputType = {
   id: number
   contractId: number
   userId: number
+  fullName: number
+  phone: number
+  age: number
+  identityCard: number
+  identityCardImageUrl: number
   role: number
   createdAt: number
   _all: number
@@ -68,18 +85,25 @@ export type ContractMemberAvgAggregateInputType = {
   id?: true
   contractId?: true
   userId?: true
+  age?: true
 }
 
 export type ContractMemberSumAggregateInputType = {
   id?: true
   contractId?: true
   userId?: true
+  age?: true
 }
 
 export type ContractMemberMinAggregateInputType = {
   id?: true
   contractId?: true
   userId?: true
+  fullName?: true
+  phone?: true
+  age?: true
+  identityCard?: true
+  identityCardImageUrl?: true
   role?: true
   createdAt?: true
 }
@@ -88,6 +112,11 @@ export type ContractMemberMaxAggregateInputType = {
   id?: true
   contractId?: true
   userId?: true
+  fullName?: true
+  phone?: true
+  age?: true
+  identityCard?: true
+  identityCardImageUrl?: true
   role?: true
   createdAt?: true
 }
@@ -96,6 +125,11 @@ export type ContractMemberCountAggregateInputType = {
   id?: true
   contractId?: true
   userId?: true
+  fullName?: true
+  phone?: true
+  age?: true
+  identityCard?: true
+  identityCardImageUrl?: true
   role?: true
   createdAt?: true
   _all?: true
@@ -190,7 +224,12 @@ export type ContractMemberGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 export type ContractMemberGroupByOutputType = {
   id: number
   contractId: number
-  userId: number
+  userId: number | null
+  fullName: string | null
+  phone: string | null
+  age: number | null
+  identityCard: string | null
+  identityCardImageUrl: string | null
   role: $Enums.ContractMemberRole
   createdAt: Date
   _count: ContractMemberCountAggregateOutputType | null
@@ -221,17 +260,27 @@ export type ContractMemberWhereInput = {
   NOT?: Prisma.ContractMemberWhereInput | Prisma.ContractMemberWhereInput[]
   id?: Prisma.IntFilter<"ContractMember"> | number
   contractId?: Prisma.IntFilter<"ContractMember"> | number
-  userId?: Prisma.IntFilter<"ContractMember"> | number
+  userId?: Prisma.IntNullableFilter<"ContractMember"> | number | null
+  fullName?: Prisma.StringNullableFilter<"ContractMember"> | string | null
+  phone?: Prisma.StringNullableFilter<"ContractMember"> | string | null
+  age?: Prisma.IntNullableFilter<"ContractMember"> | number | null
+  identityCard?: Prisma.StringNullableFilter<"ContractMember"> | string | null
+  identityCardImageUrl?: Prisma.StringNullableFilter<"ContractMember"> | string | null
   role?: Prisma.EnumContractMemberRoleFilter<"ContractMember"> | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFilter<"ContractMember"> | Date | string
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type ContractMemberOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  fullName?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  age?: Prisma.SortOrderInput | Prisma.SortOrder
+  identityCard?: Prisma.SortOrderInput | Prisma.SortOrder
+  identityCardImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   contract?: Prisma.ContractOrderByWithRelationInput
@@ -240,22 +289,31 @@ export type ContractMemberOrderByWithRelationInput = {
 
 export type ContractMemberWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  contractId_userId?: Prisma.ContractMemberContractIdUserIdCompoundUniqueInput
   AND?: Prisma.ContractMemberWhereInput | Prisma.ContractMemberWhereInput[]
   OR?: Prisma.ContractMemberWhereInput[]
   NOT?: Prisma.ContractMemberWhereInput | Prisma.ContractMemberWhereInput[]
   contractId?: Prisma.IntFilter<"ContractMember"> | number
-  userId?: Prisma.IntFilter<"ContractMember"> | number
+  userId?: Prisma.IntNullableFilter<"ContractMember"> | number | null
+  fullName?: Prisma.StringNullableFilter<"ContractMember"> | string | null
+  phone?: Prisma.StringNullableFilter<"ContractMember"> | string | null
+  age?: Prisma.IntNullableFilter<"ContractMember"> | number | null
+  identityCard?: Prisma.StringNullableFilter<"ContractMember"> | string | null
+  identityCardImageUrl?: Prisma.StringNullableFilter<"ContractMember"> | string | null
   role?: Prisma.EnumContractMemberRoleFilter<"ContractMember"> | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFilter<"ContractMember"> | Date | string
   contract?: Prisma.XOR<Prisma.ContractScalarRelationFilter, Prisma.ContractWhereInput>
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id" | "contractId_userId">
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+}, "id">
 
 export type ContractMemberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  fullName?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  age?: Prisma.SortOrderInput | Prisma.SortOrder
+  identityCard?: Prisma.SortOrderInput | Prisma.SortOrder
+  identityCardImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ContractMemberCountOrderByAggregateInput
@@ -271,37 +329,62 @@ export type ContractMemberScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ContractMemberScalarWhereWithAggregatesInput | Prisma.ContractMemberScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"ContractMember"> | number
   contractId?: Prisma.IntWithAggregatesFilter<"ContractMember"> | number
-  userId?: Prisma.IntWithAggregatesFilter<"ContractMember"> | number
+  userId?: Prisma.IntNullableWithAggregatesFilter<"ContractMember"> | number | null
+  fullName?: Prisma.StringNullableWithAggregatesFilter<"ContractMember"> | string | null
+  phone?: Prisma.StringNullableWithAggregatesFilter<"ContractMember"> | string | null
+  age?: Prisma.IntNullableWithAggregatesFilter<"ContractMember"> | number | null
+  identityCard?: Prisma.StringNullableWithAggregatesFilter<"ContractMember"> | string | null
+  identityCardImageUrl?: Prisma.StringNullableWithAggregatesFilter<"ContractMember"> | string | null
   role?: Prisma.EnumContractMemberRoleWithAggregatesFilter<"ContractMember"> | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ContractMember"> | Date | string
 }
 
 export type ContractMemberCreateInput = {
+  fullName?: string | null
+  phone?: string | null
+  age?: number | null
+  identityCard?: string | null
+  identityCardImageUrl?: string | null
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
   contract: Prisma.ContractCreateNestedOneWithoutMembersInput
-  user: Prisma.UserCreateNestedOneWithoutContractMembersInput
+  user?: Prisma.UserCreateNestedOneWithoutContractMembersInput
 }
 
 export type ContractMemberUncheckedCreateInput = {
   id?: number
   contractId: number
-  userId: number
+  userId?: number | null
+  fullName?: string | null
+  phone?: string | null
+  age?: number | null
+  identityCard?: string | null
+  identityCardImageUrl?: string | null
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
 
 export type ContractMemberUpdateInput = {
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identityCard?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityCardImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contract?: Prisma.ContractUpdateOneRequiredWithoutMembersNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutContractMembersNestedInput
+  user?: Prisma.UserUpdateOneWithoutContractMembersNestedInput
 }
 
 export type ContractMemberUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identityCard?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityCardImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -309,12 +392,22 @@ export type ContractMemberUncheckedUpdateInput = {
 export type ContractMemberCreateManyInput = {
   id?: number
   contractId: number
-  userId: number
+  userId?: number | null
+  fullName?: string | null
+  phone?: string | null
+  age?: number | null
+  identityCard?: string | null
+  identityCardImageUrl?: string | null
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
 
 export type ContractMemberUpdateManyMutationInput = {
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identityCard?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityCardImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -322,7 +415,12 @@ export type ContractMemberUpdateManyMutationInput = {
 export type ContractMemberUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identityCard?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityCardImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -337,15 +435,15 @@ export type ContractMemberOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type ContractMemberContractIdUserIdCompoundUniqueInput = {
-  contractId: number
-  userId: number
-}
-
 export type ContractMemberCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  identityCard?: Prisma.SortOrder
+  identityCardImageUrl?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -354,12 +452,18 @@ export type ContractMemberAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  age?: Prisma.SortOrder
 }
 
 export type ContractMemberMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  identityCard?: Prisma.SortOrder
+  identityCardImageUrl?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -368,6 +472,11 @@ export type ContractMemberMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  fullName?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  identityCard?: Prisma.SortOrder
+  identityCardImageUrl?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -376,6 +485,7 @@ export type ContractMemberSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  age?: Prisma.SortOrder
 }
 
 export type ContractMemberCreateNestedManyWithoutUserInput = {
@@ -467,6 +577,11 @@ export type EnumContractMemberRoleFieldUpdateOperationsInput = {
 }
 
 export type ContractMemberCreateWithoutUserInput = {
+  fullName?: string | null
+  phone?: string | null
+  age?: number | null
+  identityCard?: string | null
+  identityCardImageUrl?: string | null
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
   contract: Prisma.ContractCreateNestedOneWithoutMembersInput
@@ -475,6 +590,11 @@ export type ContractMemberCreateWithoutUserInput = {
 export type ContractMemberUncheckedCreateWithoutUserInput = {
   id?: number
   contractId: number
+  fullName?: string | null
+  phone?: string | null
+  age?: number | null
+  identityCard?: string | null
+  identityCardImageUrl?: string | null
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
@@ -511,20 +631,35 @@ export type ContractMemberScalarWhereInput = {
   NOT?: Prisma.ContractMemberScalarWhereInput | Prisma.ContractMemberScalarWhereInput[]
   id?: Prisma.IntFilter<"ContractMember"> | number
   contractId?: Prisma.IntFilter<"ContractMember"> | number
-  userId?: Prisma.IntFilter<"ContractMember"> | number
+  userId?: Prisma.IntNullableFilter<"ContractMember"> | number | null
+  fullName?: Prisma.StringNullableFilter<"ContractMember"> | string | null
+  phone?: Prisma.StringNullableFilter<"ContractMember"> | string | null
+  age?: Prisma.IntNullableFilter<"ContractMember"> | number | null
+  identityCard?: Prisma.StringNullableFilter<"ContractMember"> | string | null
+  identityCardImageUrl?: Prisma.StringNullableFilter<"ContractMember"> | string | null
   role?: Prisma.EnumContractMemberRoleFilter<"ContractMember"> | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFilter<"ContractMember"> | Date | string
 }
 
 export type ContractMemberCreateWithoutContractInput = {
+  fullName?: string | null
+  phone?: string | null
+  age?: number | null
+  identityCard?: string | null
+  identityCardImageUrl?: string | null
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutContractMembersInput
+  user?: Prisma.UserCreateNestedOneWithoutContractMembersInput
 }
 
 export type ContractMemberUncheckedCreateWithoutContractInput = {
   id?: number
-  userId: number
+  userId?: number | null
+  fullName?: string | null
+  phone?: string | null
+  age?: number | null
+  identityCard?: string | null
+  identityCardImageUrl?: string | null
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
@@ -558,11 +693,21 @@ export type ContractMemberUpdateManyWithWhereWithoutContractInput = {
 export type ContractMemberCreateManyUserInput = {
   id?: number
   contractId: number
+  fullName?: string | null
+  phone?: string | null
+  age?: number | null
+  identityCard?: string | null
+  identityCardImageUrl?: string | null
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
 
 export type ContractMemberUpdateWithoutUserInput = {
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identityCard?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityCardImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contract?: Prisma.ContractUpdateOneRequiredWithoutMembersNestedInput
@@ -571,6 +716,11 @@ export type ContractMemberUpdateWithoutUserInput = {
 export type ContractMemberUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identityCard?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityCardImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -578,33 +728,58 @@ export type ContractMemberUncheckedUpdateWithoutUserInput = {
 export type ContractMemberUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.IntFieldUpdateOperationsInput | number
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identityCard?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityCardImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ContractMemberCreateManyContractInput = {
   id?: number
-  userId: number
+  userId?: number | null
+  fullName?: string | null
+  phone?: string | null
+  age?: number | null
+  identityCard?: string | null
+  identityCardImageUrl?: string | null
   role?: $Enums.ContractMemberRole
   createdAt?: Date | string
 }
 
 export type ContractMemberUpdateWithoutContractInput = {
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identityCard?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityCardImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutContractMembersNestedInput
+  user?: Prisma.UserUpdateOneWithoutContractMembersNestedInput
 }
 
 export type ContractMemberUncheckedUpdateWithoutContractInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identityCard?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityCardImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ContractMemberUncheckedUpdateManyWithoutContractInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identityCard?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityCardImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumContractMemberRoleFieldUpdateOperationsInput | $Enums.ContractMemberRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -615,52 +790,72 @@ export type ContractMemberSelect<ExtArgs extends runtime.Types.Extensions.Intern
   id?: boolean
   contractId?: boolean
   userId?: boolean
+  fullName?: boolean
+  phone?: boolean
+  age?: boolean
+  identityCard?: boolean
+  identityCardImageUrl?: boolean
   role?: boolean
   createdAt?: boolean
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.ContractMember$userArgs<ExtArgs>
 }, ExtArgs["result"]["contractMember"]>
 
 export type ContractMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   contractId?: boolean
   userId?: boolean
+  fullName?: boolean
+  phone?: boolean
+  age?: boolean
+  identityCard?: boolean
+  identityCardImageUrl?: boolean
   role?: boolean
   createdAt?: boolean
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.ContractMember$userArgs<ExtArgs>
 }, ExtArgs["result"]["contractMember"]>
 
 export type ContractMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   contractId?: boolean
   userId?: boolean
+  fullName?: boolean
+  phone?: boolean
+  age?: boolean
+  identityCard?: boolean
+  identityCardImageUrl?: boolean
   role?: boolean
   createdAt?: boolean
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.ContractMember$userArgs<ExtArgs>
 }, ExtArgs["result"]["contractMember"]>
 
 export type ContractMemberSelectScalar = {
   id?: boolean
   contractId?: boolean
   userId?: boolean
+  fullName?: boolean
+  phone?: boolean
+  age?: boolean
+  identityCard?: boolean
+  identityCardImageUrl?: boolean
   role?: boolean
   createdAt?: boolean
 }
 
-export type ContractMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contractId" | "userId" | "role" | "createdAt", ExtArgs["result"]["contractMember"]>
+export type ContractMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contractId" | "userId" | "fullName" | "phone" | "age" | "identityCard" | "identityCardImageUrl" | "role" | "createdAt", ExtArgs["result"]["contractMember"]>
 export type ContractMemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.ContractMember$userArgs<ExtArgs>
 }
 export type ContractMemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.ContractMember$userArgs<ExtArgs>
 }
 export type ContractMemberIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   contract?: boolean | Prisma.ContractDefaultArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.ContractMember$userArgs<ExtArgs>
 }
 
 export type $ContractMemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -671,9 +866,9 @@ export type $ContractMemberPayload<ExtArgs extends runtime.Types.Extensions.Inte
      */
     contract: Prisma.$ContractPayload<ExtArgs>
     /**
-     * Tài khoản người dùng (xóa tài khoản thì tự động xóa liên kết thành viên này)
+     * Tài khoản người dùng (xóa tài khoản thì set null hoặc cascade)
      */
-    user: Prisma.$UserPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     /**
@@ -685,9 +880,29 @@ export type $ContractMemberPayload<ExtArgs extends runtime.Types.Extensions.Inte
      */
     contractId: number
     /**
-     * ID tài khoản người dùng của thành viên ở cùng
+     * ID tài khoản người dùng của thành viên ở cùng (optional cho người không dùng app)
      */
-    userId: number
+    userId: number | null
+    /**
+     * Họ tên của người ở cùng (dùng cho người không dùng app hoặc override)
+     */
+    fullName: string | null
+    /**
+     * Số điện thoại (dùng cho người không dùng app)
+     */
+    phone: string | null
+    /**
+     * Tuổi (dùng cho người không dùng app)
+     */
+    age: number | null
+    /**
+     * Số CCCD/CMND (dùng cho người không dùng app)
+     */
+    identityCard: string | null
+    /**
+     * URL ảnh chụp CCCD (dùng cho người không dùng app)
+     */
+    identityCardImageUrl: string | null
     /**
      * Vai trò của thành viên trong hợp đồng (Ví dụ: MAIN_RENTER hoặc CO_RENTER)
      */
@@ -1091,7 +1306,7 @@ readonly fields: ContractMemberFieldRefs;
 export interface Prisma__ContractMemberClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   contract<T extends Prisma.ContractDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContractDefaultArgs<ExtArgs>>): Prisma.Prisma__ContractClient<runtime.Types.Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.ContractMember$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContractMember$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1124,6 +1339,11 @@ export interface ContractMemberFieldRefs {
   readonly id: Prisma.FieldRef<"ContractMember", 'Int'>
   readonly contractId: Prisma.FieldRef<"ContractMember", 'Int'>
   readonly userId: Prisma.FieldRef<"ContractMember", 'Int'>
+  readonly fullName: Prisma.FieldRef<"ContractMember", 'String'>
+  readonly phone: Prisma.FieldRef<"ContractMember", 'String'>
+  readonly age: Prisma.FieldRef<"ContractMember", 'Int'>
+  readonly identityCard: Prisma.FieldRef<"ContractMember", 'String'>
+  readonly identityCardImageUrl: Prisma.FieldRef<"ContractMember", 'String'>
   readonly role: Prisma.FieldRef<"ContractMember", 'ContractMemberRole'>
   readonly createdAt: Prisma.FieldRef<"ContractMember", 'DateTime'>
 }
@@ -1524,6 +1744,25 @@ export type ContractMemberDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many ContractMembers to delete.
    */
   limit?: number
+}
+
+/**
+ * ContractMember.user
+ */
+export type ContractMember$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

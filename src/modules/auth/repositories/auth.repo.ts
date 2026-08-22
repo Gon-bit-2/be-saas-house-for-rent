@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import roleName from '@src/common/constants/role.constant'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
+import { seedTenantDefaults } from '../../tenants/utils/seed-tenant-defaults.util'
 import type { Prisma } from 'generated/prisma/client'
 import type {
   TRefreshTokenSchema,
@@ -39,6 +40,7 @@ const authUserSelect = {
           name: true,
           slug: true,
           status: true,
+          verificationStatus: true,
           ownerUserId: true,
         },
       },
@@ -107,7 +109,9 @@ const verificationCodeSelect = {
 export class AuthRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async create(data: TRegisterBodySchema) {
+  async create(
+    data: Pick<TRegisterBodySchema, 'email' | 'fullName' | 'phone' | 'roleCode'> & { passwordHash: string },
+  ) {
     return await this.prismaService.$transaction(async (tx) => {
       await tx.role.findUniqueOrThrow({
         where: {
@@ -138,6 +142,8 @@ export class AuthRepository {
             phone: user.phone,
           },
         })
+
+        await seedTenantDefaults(tx as any, tenant.id)
 
         await tx.tenantMember.create({
           data: {

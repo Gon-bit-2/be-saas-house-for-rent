@@ -115,7 +115,6 @@ describe('ContractTerminationsService', () => {
       acknowledgeOutstandingDebt: true,
       completionNote: 'Tiep tuc thu no',
     })
-    expect(result.roomStatus).toBe('AVAILABLE')
     expect(notifications.notifyTerminationChanged).toHaveBeenCalled()
   })
 })

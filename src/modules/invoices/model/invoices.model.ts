@@ -17,7 +17,7 @@ const ListBaseSchema = z
     contractId: z.coerce.number().int().positive().optional(),
     renterId: z.coerce.number().int().positive().optional(),
     propertyId: z.coerce.number().int().positive().optional(),
-    search: z.string().trim().min(1).optional(),
+    search: z.string().trim().optional(),
   })
   .strict()
 

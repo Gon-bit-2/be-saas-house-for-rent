@@ -3,14 +3,31 @@ import { IsoDateInputCodec } from '@src/common/utils/date-codec.util'
 
 const PropertyTypeSchema = z.enum(['HOUSE', 'MINI_APARTMENT', 'DORM', 'APARTMENT'])
 
+export const ListMarketplaceAmenitiesQuerySchema = z
+  .object({
+    page: z.coerce.number().int().positive().default(1),
+    limit: z.coerce.number().int().positive().max(100).default(50),
+    search: z.string().trim().optional(),
+    category: z.string().trim().min(1).max(100).optional(),
+  })
+  .strict()
+
 export const ListMarketplaceRoomsQuerySchema = z
   .object({
     page: z.coerce.number().int().positive().default(1),
     limit: z.coerce.number().int().positive().max(100).default(20),
-    search: z.string().trim().min(1).optional(),
+    search: z.string().trim().optional(),
     province: z.string().trim().min(1).max(100).optional(),
     district: z.string().trim().min(1).max(100).optional(),
     ward: z.string().trim().min(1).max(100).optional(),
+    provinceCode: z
+      .string()
+      .regex(/^\d{2}$/)
+      .optional(),
+    wardCode: z
+      .string()
+      .regex(/^\d{5}$/)
+      .optional(),
     propertyType: PropertyTypeSchema.optional(),
     minPrice: z.coerce.number().nonnegative().optional(),
     maxPrice: z.coerce.number().nonnegative().optional(),
@@ -36,6 +53,9 @@ export const ListMarketplaceRoomsQuerySchema = z
           ),
         )
       }),
+    lat: z.coerce.number().min(-90).max(90).optional(),
+    lng: z.coerce.number().min(-180).max(180).optional(),
+    radius: z.coerce.number().positive().max(100).optional(),
   })
   .strict()
 
@@ -55,6 +75,7 @@ export const CreateMarketplaceViewingAppointmentBodySchema = z
   .strict()
 
 export type TListMarketplaceRoomsQuerySchema = z.infer<typeof ListMarketplaceRoomsQuerySchema>
+export type TListMarketplaceAmenitiesQuerySchema = z.infer<typeof ListMarketplaceAmenitiesQuerySchema>
 export type TCreateMarketplaceRentalRequestBodySchema = z.infer<typeof CreateMarketplaceRentalRequestBodySchema>
 export type TCreateMarketplaceViewingAppointmentBodySchema = z.infer<
   typeof CreateMarketplaceViewingAppointmentBodySchema
