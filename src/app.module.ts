@@ -38,6 +38,7 @@ import { TenantsModule } from './modules/tenants/tenants.module'
 import { TicketsModule } from './modules/tickets/tickets.module'
 import { UtilityMetersModule } from './modules/utility-meters/utility-meters.module'
 import { UsersModule } from './modules/users/users.module'
+import { ConversationsModule } from './modules/conversations/conversations.module'
 import { DatabaseModule } from './shared/modules/database/prisma.module'
 import { SharedServiceModule } from './shared/modules/services/shared-service.module'
 import { RedisThrottlerStorage, redisThrottlerStorage } from './common/rate-limit/redis-throttler.storage'
@@ -113,6 +114,7 @@ function buildRedisConnection() {
     InvoicesModule,
     LocationsModule,
     TicketsModule,
+    ConversationsModule,
   ],
   controllers: [AppController],
   providers: [
