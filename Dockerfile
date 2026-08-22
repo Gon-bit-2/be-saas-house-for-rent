@@ -6,12 +6,13 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
 
 # Copy package files and install dependencies
-COPY package*.json ./
+COPY package.json ./
+COPY package-lock.json* ./
 COPY prisma ./prisma/
-RUN npm ci
+
 # Khắc phục triệt để lỗi Sharp v0.33+ (NPM bug: TypeError endsWith)
-# Xóa hoàn toàn bản cài lỗi từ npm ci và ép tải mới lại để nhận diện đúng OS/CPU
-RUN rm -rf node_modules/sharp && npm install sharp@0.35.3 --no-save
+# Phải xóa hoàn toàn package-lock.json (nếu có) và dùng npm install để npm tự resolve lại đúng binary cho Linux
+RUN rm -f package-lock.json && npm install
 
 # --- Build Stage ---
 FROM node:22-bookworm-slim AS build
