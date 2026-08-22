@@ -15,6 +15,8 @@ COPY prisma ./prisma/
 RUN rm -f package-lock.json && npm install
 # Ép cài đặt các binary của Linux bằng cờ --force để đảm bảo chúng có mặt trên disk
 RUN npm install --no-save --force @img/sharp-linux-x64 @img/sharp-linux-arm64
+# Sửa file sharp.cjs để in ra lỗi gốc (real error) thay vì crash TypeError endsWith
+RUN sed -i 's/if (!err.code.endsWith("MODULE_NOT_FOUND")) {/if (!err || !err.code || !err.code.endsWith("MODULE_NOT_FOUND")) { console.error("SHARP REAL ERROR:", err);/g' node_modules/sharp/dist/sharp.cjs
 
 # --- Build Stage ---
 FROM node:22-bookworm-slim AS build
