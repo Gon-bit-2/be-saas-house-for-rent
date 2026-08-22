@@ -2,8 +2,8 @@
 FROM node:22-bookworm-slim AS deps
 WORKDIR /app
 
-# Install openssl for Prisma
-RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
+# Install openssl for Prisma and libvips-dev for Sharp
+RUN apt-get update && apt-get install -y --no-install-recommends openssl libvips-dev && rm -rf /var/lib/apt/lists/*
 
 # Copy package files and install dependencies
 COPY package.json ./
@@ -11,8 +11,10 @@ COPY package-lock.json* ./
 COPY prisma ./prisma/
 
 # Khắc phục triệt để lỗi Sharp v0.33+ (NPM bug: TypeError endsWith)
-# Phải xóa hoàn toàn package-lock.json (nếu có) và dùng npm install để npm tự resolve lại đúng binary cho Linux
+# Xóa package-lock.json và dùng npm install để npm tự resolve
 RUN rm -f package-lock.json && npm install
+# Ép cài đặt các binary của Linux bằng cờ --force để đảm bảo chúng có mặt trên disk
+RUN npm install --no-save --force @img/sharp-linux-x64 @img/sharp-linux-arm64
 
 # --- Build Stage ---
 FROM node:22-bookworm-slim AS build
@@ -38,6 +40,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     openssl \
     curl \
+    libvips-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user for security hardening
