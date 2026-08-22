@@ -11,6 +11,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  
 }
 
 /// Bảng lưu thông tin tài khoản người dùng đăng nhập toàn hệ thống
