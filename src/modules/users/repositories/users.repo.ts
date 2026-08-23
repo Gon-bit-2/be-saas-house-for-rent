@@ -25,6 +25,30 @@ export const adminUserSelect = {
       slug: true,
       status: true,
       verificationStatus: true,
+      idCardFrontUrl: true,
+      idCardBackUrl: true,
+      portraitUrl: true,
+      subscriptions: {
+        where: { status: 'ACTIVE' },
+        orderBy: { createdAt: 'desc' },
+        take: 1,
+        select: {
+          id: true,
+          status: true,
+          expiredAt: true,
+          plan: {
+            select: {
+              id: true,
+              name: true,
+              maxRooms: true,
+              allowWebhookPayment: true,
+            },
+          },
+        },
+      },
+      _count: {
+        select: { rooms: true },
+      },
     },
   },
   tenantMembers: {
@@ -113,5 +137,18 @@ export class UsersRepository {
 
       return updated
     })
+  }
+
+  async getLandlordStats() {
+    const baseWhere = {
+      deletedAt: null,
+      tenantMembers: { some: { roleId: roleName.LANDLORD } },
+    }
+    const [total, active, locked] = await this.prismaService.$transaction([
+      this.prismaService.user.count({ where: baseWhere }),
+      this.prismaService.user.count({ where: { ...baseWhere, status: 'ACTIVE' } }),
+      this.prismaService.user.count({ where: { ...baseWhere, status: { in: ['INACTIVE', 'BANNED'] } } }),
+    ])
+    return { total, active, locked }
   }
 }

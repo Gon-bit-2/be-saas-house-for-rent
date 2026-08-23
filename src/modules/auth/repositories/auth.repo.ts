@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import { Injectable } from '@nestjs/common'
 import roleName from '@src/common/constants/role.constant'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
@@ -143,7 +144,7 @@ export class AuthRepository {
           },
         })
 
-        await seedTenantDefaults(tx as any, tenant.id)
+        await seedTenantDefaults(tx as Prisma.TransactionClient, tenant.id)
 
         await tx.tenantMember.create({
           data: {
@@ -156,13 +157,11 @@ export class AuthRepository {
         })
       }
 
-      if (data.roleCode === roleName.TENANT) {
-        await tx.renterProfile.create({
-          data: {
-            userId: user.id,
-          },
-        })
-      }
+      await tx.renterProfile.create({
+        data: {
+          userId: user.id,
+        },
+      })
 
       return tx.user.findUniqueOrThrow({
         where: {

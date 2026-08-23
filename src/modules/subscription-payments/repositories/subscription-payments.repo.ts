@@ -53,7 +53,20 @@ const currentSubscriptionSelect = {
   startedAt: true,
   expiredAt: true,
   autoRenew: true,
-  plan: { select: { id: true, code: true, name: true, priceMonthly: true, priceYearly: true } },
+  plan: {
+    select: {
+      id: true,
+      code: true,
+      name: true,
+      priceMonthly: true,
+      priceYearly: true,
+      maxProperties: true,
+      maxRooms: true,
+      maxStaff: true,
+      allowAiOcr: true,
+      allowWebhookPayment: true,
+    },
+  },
 } satisfies Prisma.SubscriptionSelect
 
 type CreateInput = {
@@ -128,14 +141,16 @@ export class SubscriptionPaymentsRepository {
   }
 
   async getUsageLimits(tenantId: number) {
-    const [currentProperties, currentStaff] = await Promise.all([
+    const [currentProperties, currentStaff, currentRooms] = await Promise.all([
       this.prismaService.property.count({ where: { tenantId } }),
       this.prismaService.tenantMember.count({ where: { tenantId, status: 'ACTIVE' } }),
+      this.prismaService.room.count({ where: { tenantId } }),
     ])
     return {
       currentProperties,
       currentStorageGb: 0, // Storage is currently not tracked/mocked
       currentStaff,
+      currentRooms,
     }
   }
 

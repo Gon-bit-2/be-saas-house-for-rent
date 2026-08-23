@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Query } from '@nestjs/common'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
 import { IsAdmin } from '@src/common/decorators/decorators/roles.decorator'
+import { SkipPermission } from '@src/common/decorators/decorators/skip-permission.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
 import { ListLandlordsQueryDTO, UpdateUserStatusBodyDTO } from './dto/users.dto'
 import { UsersService } from './users.service'
@@ -9,9 +10,15 @@ import { UsersService } from './users.service'
  * Super Admin controller for user and landlord account administration.
  */
 @IsAdmin()
+@SkipPermission()
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Get('landlords/stats')
+  getLandlordStats() {
+    return this.usersService.getLandlordStats()
+  }
 
   @Get('landlords')
   listLandlords(@Query() query: ListLandlordsQueryDTO) {

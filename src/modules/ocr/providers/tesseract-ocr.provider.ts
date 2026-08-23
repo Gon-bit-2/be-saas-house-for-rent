@@ -2,7 +2,7 @@ import { Injectable, type OnModuleDestroy } from '@nestjs/common'
 import envConfig from '@src/config/env.config'
 import eng from '@tesseract.js-data/eng'
 import sharp from 'sharp'
-import { createWorker, OEM, PSM, type Block, type Worker, type Word } from 'tesseract.js'
+import { createWorker, OEM, PSM, type Block, type Worker } from 'tesseract.js'
 import type { OcrCandidate, OcrProvider, OcrRecognition } from './ocr.provider'
 
 const DOWNLOAD_TIMEOUT_MS = 10_000
@@ -42,7 +42,8 @@ export class TesseractOcrProvider implements OcrProvider, OnModuleDestroy {
         text: data.text.slice(0, 5_000),
         candidates: this.extractCandidates(data.blocks),
       }
-    } catch {
+    } catch (error) {
+      console.error('Lỗi chi tiết trong TesseractProvider:', error)
       await this.resetWorker()
       throw new Error('OCR_PROVIDER_ERROR')
     }
@@ -117,7 +118,7 @@ export class TesseractOcrProvider implements OcrProvider, OnModuleDestroy {
         cacheMethod: 'none',
       })
       await worker.setParameters({
-        tessedit_pageseg_mode: PSM.SINGLE_BLOCK,
+        tessedit_pageseg_mode: PSM.SINGLE_LINE,
         tessedit_char_whitelist: '0123456789.,',
         preserve_interword_spaces: '1',
       })
@@ -130,34 +131,45 @@ export class TesseractOcrProvider implements OcrProvider, OnModuleDestroy {
 
   private extractCandidates(blocks: Block[] | null) {
     const candidates = new Map<string, OcrCandidate>()
-    for (const word of this.getWords(blocks)) {
-      const value = this.parseValue(word.text)
-      if (!value) continue
 
-      const confidence = this.normalizeConfidence(word.confidence)
+    const evaluate = (text: string, confidence: number) => {
+      if (!text) return
+      const value = this.parseValue(text)
+      if (!value) return
+
+      const normalizedConfidence = this.normalizeConfidence(confidence)
       const current = candidates.get(value)
-      if (!current || confidence > current.confidence) {
-        candidates.set(value, { text: word.text, value, confidence })
+      if (!current || normalizedConfidence > current.confidence) {
+        candidates.set(value, { text, value, confidence: normalizedConfidence })
+      }
+    }
+
+    for (const block of blocks ?? []) {
+      for (const paragraph of block.paragraphs ?? []) {
+        for (const line of paragraph.lines ?? []) {
+          evaluate(line.text, line.confidence)
+          for (const word of line.words ?? []) {
+            evaluate(word.text, word.confidence)
+          }
+        }
       }
     }
 
     return [...candidates.values()].sort((left, right) => right.confidence - left.confidence).slice(0, 20)
   }
 
-  private getWords(blocks: Block[] | null) {
-    const words: Word[] = []
-    for (const block of blocks ?? []) {
-      for (const paragraph of block.paragraphs ?? []) {
-        for (const line of paragraph.lines ?? []) {
-          words.push(...(line.words ?? []))
-        }
-      }
-    }
-    return words
-  }
-
   private parseValue(text: string) {
-    let normalized = text.trim().replace(/\s+/g, '').replace(',', '.').replace(/[Oo]/g, '0')
+    let normalized = text.trim().replace(/\s+/g, '').replace(',', '.')
+
+    normalized = normalized
+      .replace(/[Oo]/g, '0')
+      .replace(/[Ss]/g, '5')
+      .replace(/[Zz]/g, '2')
+      .replace(/[Il]/g, '1')
+      .replace(/[Bb]/g, '8')
+      .replace(/[Gg]/g, '6')
+      .replace(/[Qq]/g, '9')
+
     const match = normalized.match(/\d+(?:\.\d+)?/)
     if (!match) return null
 

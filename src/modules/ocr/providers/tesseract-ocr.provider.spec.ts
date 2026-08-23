@@ -45,12 +45,13 @@ describe('TesseractOcrProvider', () => {
       rotate: jest.fn(),
       grayscale: jest.fn(),
       normalize: jest.fn(),
+      threshold: jest.fn(),
       sharpen: jest.fn(),
       resize: jest.fn(),
       png: jest.fn(),
       toBuffer: jest.fn().mockResolvedValue(preparedImage),
     }
-    for (const method of ['rotate', 'grayscale', 'normalize', 'sharpen', 'resize', 'png']) {
+    for (const method of ['rotate', 'grayscale', 'normalize', 'threshold', 'sharpen', 'resize', 'png']) {
       pipeline[method].mockReturnValue(pipeline)
     }
     sharpMock.mockReturnValue(pipeline)
@@ -85,6 +86,9 @@ describe('TesseractOcrProvider', () => {
       provider: 'TESSERACT_JS',
       text: '00123,4 56 00123,4 -1 12345678901 12.345 ABC',
       candidates: [
+        { text: '-1', value: '1', confidence: 0.99 },
+        { text: '12.345', value: '12.345', confidence: 0.99 },
+        { text: 'ABC', value: '8', confidence: 0.99 },
         { text: '00123,4', value: '00123.4', confidence: 0.9 },
         { text: '56', value: '56', confidence: 0.8 },
       ],
@@ -97,6 +101,7 @@ describe('TesseractOcrProvider', () => {
     expect(pipeline.rotate).toHaveBeenCalledTimes(1)
     expect(pipeline.grayscale).toHaveBeenCalledTimes(1)
     expect(pipeline.normalize).toHaveBeenCalledTimes(1)
+    expect(pipeline.threshold).toHaveBeenCalledTimes(1)
     expect(pipeline.sharpen).toHaveBeenCalledTimes(1)
     expect(pipeline.resize).toHaveBeenCalledWith({
       width: 2_000,
@@ -111,7 +116,7 @@ describe('TesseractOcrProvider', () => {
       cacheMethod: 'none',
     })
     expect(worker.setParameters).toHaveBeenCalledWith({
-      tessedit_pageseg_mode: PSM.SINGLE_BLOCK,
+      tessedit_pageseg_mode: PSM.SINGLE_LINE,
       tessedit_char_whitelist: '0123456789.,',
       preserve_interword_spaces: '1',
     })

@@ -37,6 +37,7 @@ export const marketplaceRoomSelect = {
     select: {
       id: true,
       name: true,
+      type: true,
       addressDetail: true,
       latitude: true,
       longitude: true,

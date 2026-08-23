@@ -19,6 +19,10 @@ export class UsersService {
     return buildPaginatedResult(users, total, page, limit)
   }
 
+  async getLandlordStats() {
+    return this.usersRepository.getLandlordStats()
+  }
+
   async getById(id: number) {
     const user = await this.usersRepository.findById(id)
     if (!user) {
