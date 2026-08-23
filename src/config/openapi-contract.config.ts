@@ -64,12 +64,16 @@ export const FE_PRIORITY_COMPONENTS: Record<string, Schema> = {
     description: nullable(text),
     permissions: arrayOf('PermissionSummary'),
   }),
-  TenantSummary: object(['id', 'name', 'slug', 'status', 'ownerUserId'], {
+  TenantSummary: object(['id', 'name', 'slug', 'status', 'ownerUserId', 'verificationStatus'], {
     id,
     name: text,
     slug: text,
     status: enumOf('ACTIVE', 'SUSPENDED', 'CLOSED'),
     ownerUserId: id,
+    address: nullable(text),
+    idCardFrontUrl: nullable({ type: 'string', format: 'uri' }),
+    idCardBackUrl: nullable({ type: 'string', format: 'uri' }),
+    verificationStatus: enumOf('UNVERIFIED', 'PENDING', 'VERIFIED', 'REJECTED'),
   }),
   TenantMembership: object(['id', 'tenantId', 'roleId', 'status', 'tenant', 'role'], {
     id,
@@ -104,6 +108,9 @@ export const FE_PRIORITY_COMPONENTS: Record<string, Schema> = {
       object(['id', 'verificationStatus'], {
         id,
         verificationStatus: enumOf('UNVERIFIED', 'PENDING', 'VERIFIED', 'REJECTED'),
+        identityFrontUrl: nullable({ type: 'string', format: 'uri' }),
+        identityBackUrl: nullable({ type: 'string', format: 'uri' }),
+        permanentAddress: nullable(text),
       }),
     ),
     ...timestamps,

@@ -43,6 +43,9 @@ const authUserSelect = {
           status: true,
           verificationStatus: true,
           ownerUserId: true,
+          address: true,
+          idCardFrontUrl: true,
+          idCardBackUrl: true,
         },
       },
       role: {
@@ -71,6 +74,9 @@ const authUserSelect = {
     select: {
       id: true,
       verificationStatus: true,
+      identityFrontUrl: true,
+      identityBackUrl: true,
+      permanentAddress: true,
     },
   },
 } satisfies Prisma.UserSelect

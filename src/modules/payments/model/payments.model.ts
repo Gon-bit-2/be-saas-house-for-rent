@@ -72,10 +72,15 @@ export const PayosWebhookBodySchema = z.object({
   signature: z.string(),
 })
 
+export const PayosWebhookRequestSchema = PayosWebhookBodySchema.partial().extend({
+  webhook_url: z.string().optional(),
+})
+
 export type TListPaymentsQuerySchema = z.infer<typeof ListPaymentsQuerySchema>
 export type TCreatePaymentQrBodySchema = z.infer<typeof CreatePaymentQrBodySchema>
 export type TSubmitPaymentConfirmationBodySchema = z.infer<typeof SubmitPaymentConfirmationBodySchema>
 export type TReviewPaymentBodySchema = z.infer<typeof ReviewPaymentBodySchema>
 export type TRecordManualPaymentBodySchema = z.infer<typeof RecordManualPaymentBodySchema>
 export type TPayosWebhookBodySchema = z.infer<typeof PayosWebhookBodySchema>
+export type TPayosWebhookRequestSchema = z.infer<typeof PayosWebhookRequestSchema>
 export type TPayosWebhookDataSchema = z.infer<typeof PayosWebhookDataSchema>

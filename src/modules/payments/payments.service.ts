@@ -8,7 +8,7 @@ import { PayosService } from '../payos/payos.service'
 import { SubscriptionPaymentsService } from '../subscription-payments/subscription-payments.service'
 import type {
   TListPaymentsQuerySchema,
-  TPayosWebhookBodySchema,
+  TPayosWebhookRequestSchema,
   TPayosWebhookDataSchema,
   TReviewPaymentBodySchema,
   TSubmitPaymentConfirmationBodySchema,
@@ -173,20 +173,20 @@ export class PaymentsService {
       body.amount,
       body.method,
       body.paidAt ? new Date(body.paidAt) : new Date(),
-      body.note
+      body.note,
     )
     // You could potentially fire a notification to renter that a payment was successfully recorded
     await this.notificationEventsService.notifyPaymentReviewed(payment)
     return payment
   }
 
-  async handlePayosWebhook(payload: TPayosWebhookBodySchema) {
+  async handlePayosWebhook(payload: TPayosWebhookRequestSchema) {
     try {
-      if (!payload || !payload.data) {
+      if (!payload || !('data' in payload) || !payload.data) {
         return { code: '00', desc: 'success', success: true }
       }
 
-      const verifiedData = await this.payosService.verifyWebhook(payload)
+      const verifiedData = await this.payosService.verifyWebhook(payload as any)
       const data = verifiedData
       const transactionDateTime = this.parsePayosDateTime(data.transactionDateTime)
       const qr = await this.paymentsRepository.findQrByPayosIdentifiers(data.orderCode, data.paymentLinkId)
@@ -397,7 +397,7 @@ export class PaymentsService {
   }
 
   private async logWebhook(
-    payload: TPayosWebhookBodySchema,
+    payload: TPayosWebhookRequestSchema,
     data: TPayosWebhookDataSchema,
     signatureValid: boolean,
     status: 'RECEIVED' | 'PROCESSED' | 'FAILED' | 'IGNORED',

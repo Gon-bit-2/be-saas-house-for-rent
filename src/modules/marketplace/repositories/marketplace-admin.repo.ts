@@ -47,6 +47,18 @@ const adminMarketplaceRoomSelect = {
     orderBy: [{ isThumbnail: 'desc' }, { sortOrder: 'asc' }, { id: 'asc' }],
     select: { id: true, url: true, caption: true, isThumbnail: true, sortOrder: true },
   },
+  amenities: {
+    select: {
+      amenity: {
+        select: {
+          id: true,
+          name: true,
+          icon: true,
+          category: true,
+        },
+      },
+    },
+  },
   marketplaceModerations: {
     take: 1,
     orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],

@@ -29,7 +29,7 @@ export const CreateContractTerminationBodySchema = z
     expectedMoveOutDate: DateOnlySchema,
   })
   .strict()
-export const ReviewContractTerminationBodySchema = z.object({ reviewNote: z.string().trim().min(1).max(5000) }).strict()
+export const ReviewContractTerminationBodySchema = z.object({ reviewNote: z.string().trim().max(5000).optional() }).strict()
 export const EmptyContractTerminationBodySchema = z.object({}).strict()
 export const CompleteContractTerminationBodySchema = z
   .object({

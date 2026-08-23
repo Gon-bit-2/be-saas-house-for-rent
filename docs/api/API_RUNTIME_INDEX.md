@@ -1,8 +1,8 @@
 # Runtime API Index
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-18T16:22:22.785Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-23T19:43:45.308Z. Không chỉnh sửa thủ công.
 
-- Tổng số operation: **240**
+- Tổng số operation: **249**
 - Swagger UI: `GET /docs`
 - OpenAPI JSON: `GET /docs-json`
 - Route protected dùng Bearer JWT; route staff theo tenant có thể yêu cầu `x-tenant-id`.
@@ -70,11 +70,21 @@
 | PATCH | `/contracts/{id}/cancel` | Bearer JWT | `ContractsController_cancel` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/contracts/{id}/expire` | Bearer JWT | `ContractsController_expire` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/contracts/{id}/members` | Bearer JWT | `ContractsController_addMember` | 201, 400, 401, 403, 404, 409, 429, 500 |
-| DELETE | `/contracts/{id}/members/{userId}` | Bearer JWT | `ContractsController_removeMember` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| DELETE | `/contracts/{id}/members/{memberId}` | Bearer JWT | `ContractsController_removeMember` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/contracts/{id}/sign-landlord` | Bearer JWT | `ContractsController_signLandlord` | 201, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/contracts/me` | Bearer JWT | `ContractsController_listMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/contracts/me/{id}` | Bearer JWT | `ContractsController_getMine` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/contracts/me/{id}/sign` | Bearer JWT | `ContractsController_signRenter` | 201, 400, 401, 403, 404, 409, 429, 500 |
+
+## conversations
+
+| Method | Path | Access | Operation ID | Responses |
+|---|---|---|---|---|
+| GET | `/conversations` | Bearer JWT | `ConversationsController_getConversations` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| POST | `/conversations` | Bearer JWT | `ConversationsController_findOrCreateConversation` | 201, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/conversations/{id}/messages` | Bearer JWT | `ConversationsController_getMessages` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| POST | `/conversations/{id}/messages` | Bearer JWT | `ConversationsController_sendMessage` | 201, 400, 401, 403, 404, 409, 429, 500 |
+| POST | `/conversations/{id}/read` | Bearer JWT | `ConversationsController_markAsRead` | 201, 400, 401, 403, 404, 409, 429, 500 |
 
 ## dashboard
 
@@ -157,6 +167,7 @@
 | GET | `/marketplace/rooms` | Công khai | `MarketplaceController_listRooms` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/marketplace/rooms/{id}` | Công khai | `MarketplaceController_getRoomById` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/marketplace/rooms/{id}/rental-requests` | Bearer JWT | `MarketplaceController_createRentalRequest` | 201, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/marketplace/rooms/{id}/similar` | Bearer JWT | `MarketplaceController_getSimilarRooms` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/marketplace/rooms/{id}/viewing-appointments` | Bearer JWT | `MarketplaceController_createViewingAppointment` | 201, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/marketplace/rooms/{roomId}/review-summary` | Công khai | `ReviewsPublicController_getSummary` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/marketplace/rooms/{roomId}/reviews` | Công khai | `ReviewsPublicController_listPublic` | 200, 400, 401, 403, 404, 409, 429, 500 |
@@ -235,6 +246,7 @@
 | POST | `/properties/{propertyId}/floors` | Bearer JWT | `PropertiesController_createFloor` | 201, 400, 401, 403, 404, 409, 429, 500 |
 | DELETE | `/properties/{propertyId}/floors/{floorId}` | Bearer JWT | `PropertiesController_deleteFloor` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/properties/{propertyId}/floors/{floorId}` | Bearer JWT | `PropertiesController_updateFloor` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| POST | `/properties/upload-verification` | Bearer JWT | `PropertiesController_uploadVerificationImages` | 201, 400, 401, 403, 404, 409, 429, 500 |
 
 ## rental-requests
 
@@ -373,6 +385,7 @@
 | PATCH | `/tenants/{id}/plan` | Bearer JWT | `TenantsController_assignPlan` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/tenants/{id}/status` | Bearer JWT | `TenantsController_updateStatus` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/tenants/{id}/verification` | Bearer JWT | `TenantsController_updateVerification` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| PATCH | `/tenants/me/verification` | Bearer JWT | `TenantsController_updateMyVerification` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | POST | `/tenants/register` | Bearer JWT | `TenantsController_register` | 201, 400, 401, 403, 404, 409, 429, 500 |
 
 ## tickets
@@ -407,6 +420,7 @@
 | GET | `/users/{id}` | Bearer JWT | `UsersController_getById` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | PATCH | `/users/{id}/status` | Bearer JWT | `UsersController_updateStatus` | 200, 400, 401, 403, 404, 409, 429, 500 |
 | GET | `/users/landlords` | Bearer JWT | `UsersController_listLandlords` | 200, 400, 401, 403, 404, 409, 429, 500 |
+| GET | `/users/landlords/stats` | Bearer JWT | `UsersController_getLandlordStats` | 200, 400, 401, 403, 404, 409, 429, 500 |
 
 ## utility-meters
 

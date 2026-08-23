@@ -56,6 +56,16 @@ export const UpdateTenantBodySchema = z
 
 export const UpdateTenantStatusBodySchema = z.object({ status: TenantStatusSchema }).strict()
 export const UpdateTenantVerificationBodySchema = z.object({ verificationStatus: VerificationStatusSchema }).strict()
+export const UpdateMyVerificationBodySchema = z
+  .object({
+    idCardFrontUrl: z.string().url().nullable().optional(),
+    idCardBackUrl: z.string().url().nullable().optional(),
+    address: z.string().trim().max(2000).nullable().optional(),
+  })
+  .strict()
+  .refine((data) => Object.keys(data).length > 0, {
+    message: 'Vui lòng cung cấp ít nhất một trường để cập nhật',
+  })
 export const AssignTenantPlanBodySchema = z
   .object({
     planId: z.coerce.number().int().positive(),
@@ -79,5 +89,6 @@ export type TCreateTenantBodySchema = z.infer<typeof CreateTenantBodySchema>
 export type TUpdateTenantBodySchema = z.infer<typeof UpdateTenantBodySchema>
 export type TUpdateTenantStatusBodySchema = z.infer<typeof UpdateTenantStatusBodySchema>
 export type TUpdateTenantVerificationBodySchema = z.infer<typeof UpdateTenantVerificationBodySchema>
+export type TUpdateMyVerificationBodySchema = z.infer<typeof UpdateMyVerificationBodySchema>
 export type TAssignTenantPlanBodySchema = z.infer<typeof AssignTenantPlanBodySchema>
 export type TRegisterTenantBodySchema = z.infer<typeof RegisterTenantBodySchema>

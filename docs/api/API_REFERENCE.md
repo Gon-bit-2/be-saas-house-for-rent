@@ -1,6 +1,6 @@
 # Tài liệu tham chiếu API hiện tại
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-18T16:22:22.790Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-23T19:43:45.315Z. Không chỉnh sửa thủ công.
 
 ## Quy ước chung
 
@@ -11,7 +11,7 @@
 - Request được kiểm tra bằng Zod strict; ngày giờ dùng ISO 8601.
 - Error chuẩn: `{ statusCode, code, message, details?, timestamp, path, requestId }`.
 - Mọi route chịu global rate limit; profile riêng được ghi ở từng operation.
-- Tổng cộng **240 operation** thuộc **37 controller**.
+- Tổng cộng **249 operation** thuộc **38 controller**.
 
 ## Mục lục
 
@@ -20,19 +20,20 @@
 - [Xác thực và hồ sơ (11)](#auth)
 - [Thanh lý hợp đồng (11)](#contract-terminations)
 - [Hợp đồng (13)](#contracts)
+- [conversations (5)](#conversations)
 - [Dashboard (6)](#dashboard)
 - [Thiết bị nhận push (2)](#device-tokens)
 - [Bàn giao phòng (11)](#handovers)
 - [Hóa đơn và công nợ (17)](#invoices)
 - [locations (5)](#locations)
-- [Marketplace và kiểm duyệt (16)](#marketplace)
+- [Marketplace và kiểm duyệt (17)](#marketplace)
 - [Chỉ số điện nước (5)](#meter-readings)
 - [Thông báo (5)](#notifications)
 - [OCR công tơ (5)](#ocr)
 - [Webhook thanh toán (1)](#payment-webhooks)
 - [Thanh toán hóa đơn (6)](#payments)
 - [Gói dịch vụ (5)](#plans)
-- [Nhà trọ và tầng (11)](#properties)
+- [Nhà trọ và tầng (12)](#properties)
 - [Yêu cầu thuê (7)](#rental-requests)
 - [Người thuê và lời mời (11)](#renters)
 - [Báo cáo vi phạm (6)](#reports)
@@ -45,9 +46,9 @@
 - [Danh mục dịch vụ (3)](#service-catalog)
 - [Thanh toán gói SaaS (6)](#subscription-payments)
 - [Subscription hiện hành (1)](#subscriptions)
-- [Đơn vị chủ trọ (8)](#tenants)
+- [Đơn vị chủ trọ (9)](#tenants)
 - [Ticket sự cố (20)](#tickets)
-- [Người dùng và chủ trọ (3)](#users)
+- [Người dùng và chủ trọ (4)](#users)
 - [Đồng hồ điện nước (5)](#utility-meters)
 
 <a id="amenities"></a>
@@ -397,7 +398,7 @@
 ### GET `/contract-terminations/me`
 
 - Operation ID: `ContractTerminationsController_listMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -412,7 +413,7 @@
 ### POST `/contract-terminations/me`
 
 - Operation ID: `ContractTerminationsController_createMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
 
@@ -423,7 +424,7 @@
 ### GET `/contract-terminations/me/{id}`
 
 - Operation ID: `ContractTerminationsController_getMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -434,7 +435,7 @@
 ### PATCH `/contract-terminations/me/{id}/cancel`
 
 - Operation ID: `ContractTerminationsController_cancelMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -565,7 +566,7 @@
 
 - `application/json`: `AddContractMemberBodyDTO`; bắt buộc: có.
 
-### DELETE `/contracts/{id}/members/{userId}`
+### DELETE `/contracts/{id}/members/{memberId}`
 
 - Operation ID: `ContractsController_removeMember`.
 - Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
@@ -575,7 +576,7 @@
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
-| `userId` | path | Có | `number` |
+| `memberId` | path | Có | `number` |
 
 ### POST `/contracts/{id}/sign-landlord`
 
@@ -596,7 +597,7 @@
 ### GET `/contracts/me`
 
 - Operation ID: `ContractsController_listMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -613,7 +614,7 @@
 ### GET `/contracts/me/{id}`
 
 - Operation ID: `ContractsController_getMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -624,7 +625,7 @@
 ### POST `/contracts/me/{id}/sign`
 
 - Operation ID: `ContractsController_signRenter`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
 
@@ -635,6 +636,67 @@
 **Request body**
 
 - `application/json`: `SignContractBodyDTO`; bắt buộc: có.
+
+<a id="conversations"></a>
+
+## conversations
+
+### GET `/conversations`
+
+- Operation ID: `ConversationsController_getConversations`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+### POST `/conversations`
+
+- Operation ID: `ConversationsController_findOrCreateConversation`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+**Request body**
+
+- `application/json`: `CreateConversationBodyDTO`; bắt buộc: có.
+
+### GET `/conversations/{id}/messages`
+
+- Operation ID: `ConversationsController_getMessages`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `skip` | query | Có | `string` |
+| `take` | query | Có | `string` |
+
+### POST `/conversations/{id}/messages`
+
+- Operation ID: `ConversationsController_sendMessage`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+
+**Request body**
+
+- `application/json`: `SendMessageBodyDTO`; bắt buộc: có.
+
+### POST `/conversations/{id}/read`
+
+- Operation ID: `ConversationsController_markAsRead`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
 
 <a id="dashboard"></a>
 
@@ -849,7 +911,7 @@
 ### GET `/handovers/me`
 
 - Operation ID: `HandoversController_listMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -865,7 +927,7 @@
 ### GET `/handovers/me/{id}`
 
 - Operation ID: `HandoversController_getMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -876,7 +938,7 @@
 ### PATCH `/handovers/me/{id}/confirm`
 
 - Operation ID: `HandoversController_confirmMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -891,7 +953,7 @@
 ### PATCH `/handovers/me/{id}/dispute`
 
 - Operation ID: `HandoversController_disputeMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -1067,7 +1129,7 @@
 ### GET `/invoices/debts/me`
 
 - Operation ID: `InvoicesController_listMyDebts`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -1088,7 +1150,7 @@
 ### GET `/invoices/me`
 
 - Operation ID: `InvoicesController_listMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -1109,7 +1171,7 @@
 ### GET `/invoices/me/{id}`
 
 - Operation ID: `InvoicesController_getMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -1120,7 +1182,7 @@
 ### POST `/invoices/me/{id}/payment-confirmations`
 
 - Operation ID: `PaymentsController_submitMyConfirmation`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
 
@@ -1135,7 +1197,7 @@
 ### GET `/invoices/me/{id}/payment-qr`
 
 - Operation ID: `PaymentsController_getMyPaymentQr`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -1146,7 +1208,7 @@
 ### POST `/invoices/me/{id}/payment-qr`
 
 - Operation ID: `PaymentsController_createMyPaymentQr`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
 
@@ -1389,7 +1451,7 @@
 ### POST `/marketplace/rooms/{id}/rental-requests`
 
 - Operation ID: `MarketplaceController_createRentalRequest`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
 
@@ -1401,10 +1463,22 @@
 
 - `application/json`: `CreateMarketplaceRentalRequestBodyDTO`; bắt buộc: có.
 
+### GET `/marketplace/rooms/{id}/similar`
+
+- Operation ID: `MarketplaceController_getSimilarRooms`.
+- Xác thực: Bearer JWT; role: không giới hạn role riêng.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+- Auth metadata: `None`.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+
 ### POST `/marketplace/rooms/{id}/viewing-appointments`
 
 - Operation ID: `MarketplaceController_createViewingAppointment`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
 
@@ -1448,7 +1522,7 @@
 - Xác thực: Bearer JWT; role: không giới hạn role riêng.
 - Rate limit: `global`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
-- Auth metadata: `None`.
+- Auth metadata: `Bearer`, `None`.
 
 | Tham số | Vị trí | Bắt buộc | Schema |
 |---|---|:---:|---|
@@ -1764,7 +1838,7 @@
 ### GET `/payments/me`
 
 - Operation ID: `PaymentsController_listMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -1783,7 +1857,7 @@
 ### GET `/payments/me/{id}`
 
 - Operation ID: `PaymentsController_getMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2023,6 +2097,17 @@
 
 - `application/json`: `UpdateFloorBodyDTO`; bắt buộc: có.
 
+### POST `/properties/upload-verification`
+
+- Operation ID: `PropertiesController_uploadVerificationImages`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `x-tenant-id` | header | Có | `integer` |
+
 <a id="rental-requests"></a>
 
 ## Yêu cầu thuê
@@ -2077,7 +2162,7 @@
 ### GET `/rental-requests/me`
 
 - Operation ID: `RentalRequestsController_listMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2093,7 +2178,7 @@
 ### GET `/rental-requests/me/{id}`
 
 - Operation ID: `RentalRequestsController_getMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2104,7 +2189,7 @@
 ### PATCH `/rental-requests/me/{id}`
 
 - Operation ID: `RentalRequestsController_updateMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2119,7 +2204,7 @@
 ### PATCH `/rental-requests/me/{id}/cancel`
 
 - Operation ID: `RentalRequestsController_cancelMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2240,14 +2325,14 @@
 ### GET `/renters/me`
 
 - Operation ID: `RentersController_getMe`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
 ### PATCH `/renters/me`
 
 - Operation ID: `RentersController_updateMe`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2258,7 +2343,7 @@
 ### GET `/renters/me/history`
 
 - Operation ID: `RentersController_listMyHistory`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2277,7 +2362,7 @@
 ### POST `/reports`
 
 - Operation ID: `ReportsController_create`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `trust-write`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2333,7 +2418,7 @@
 ### GET `/reports/me`
 
 - Operation ID: `ReportsController_listMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2347,7 +2432,7 @@
 ### GET `/reports/me/{id}`
 
 - Operation ID: `ReportsController_getMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2364,7 +2449,7 @@
 ### POST `/reviews`
 
 - Operation ID: `ReviewsController_create`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `trust-write`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2420,7 +2505,7 @@
 ### GET `/reviews/me`
 
 - Operation ID: `ReviewsController_listMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2434,7 +2519,7 @@
 ### GET `/reviews/me/{id}`
 
 - Operation ID: `ReviewsController_getMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2540,7 +2625,7 @@
 ### GET `/room-viewing-appointments/me`
 
 - Operation ID: `ViewingAppointmentsController_listMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2557,7 +2642,7 @@
 ### GET `/room-viewing-appointments/me/{id}`
 
 - Operation ID: `ViewingAppointmentsController_getMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -2568,7 +2653,7 @@
 ### PATCH `/room-viewing-appointments/me/{id}/cancel`
 
 - Operation ID: `ViewingAppointmentsController_cancelMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -3095,6 +3180,17 @@
 
 - `application/json`: `UpdateTenantVerificationBodyDTO`; bắt buộc: có.
 
+### PATCH `/tenants/me/verification`
+
+- Operation ID: `TenantsController_updateMyVerification`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+**Request body**
+
+- `application/json`: `UpdateMyVerificationBodyDTO`; bắt buộc: có.
+
 ### POST `/tenants/register`
 
 - Operation ID: `TenantsController_register`.
@@ -3135,7 +3231,7 @@
 ### POST `/tickets`
 
 - Operation ID: `TicketsController_create`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `ticket-create`.
 - Response: 201, 400, 401, 403, 404, 409, 429, 500.
 
@@ -3293,7 +3389,7 @@
 ### GET `/tickets/me`
 
 - Operation ID: `TicketsController_listMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -3312,7 +3408,7 @@
 ### GET `/tickets/me/{id}`
 
 - Operation ID: `TicketsController_getMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -3323,7 +3419,7 @@
 ### GET `/tickets/me/{id}/attachments`
 
 - Operation ID: `TicketsController_listMyAttachments`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -3336,7 +3432,7 @@
 ### PATCH `/tickets/me/{id}/cancel`
 
 - Operation ID: `TicketsController_cancelMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -3347,7 +3443,7 @@
 ### PATCH `/tickets/me/{id}/close`
 
 - Operation ID: `TicketsController_closeMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -3358,7 +3454,7 @@
 ### GET `/tickets/me/{id}/comments`
 
 - Operation ID: `TicketsController_listMyComments`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -3371,7 +3467,7 @@
 ### GET `/tickets/me/{id}/history`
 
 - Operation ID: `TicketsController_listMyHistory`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -3384,7 +3480,7 @@
 ### PATCH `/tickets/me/{id}/reopen`
 
 - Operation ID: `TicketsController_reopenMine`.
-- Xác thực: Bearer JWT; role: `TENANT`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
@@ -3437,6 +3533,13 @@
 | `limit` | query | Không | `integer` |
 | `search` | query | Không | `string` |
 | `status` | query | Không | `string` |
+
+### GET `/users/landlords/stats`
+
+- Operation ID: `UsersController_getLandlordStats`.
+- Xác thực: Bearer JWT; role: `ADMIN`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
 
 <a id="utility-meters"></a>
 

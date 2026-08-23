@@ -15,6 +15,30 @@ type TicketEventSource = {
   contract: { renterId: number } | null
 }
 
+const statusMap: Record<string, string> = {
+  PUBLISHED: 'Đã duyệt',
+  PENDING_REVIEW: 'Chờ duyệt',
+  REJECTED: 'Từ chối',
+  HIDDEN: 'Bị ẩn',
+  PENDING: 'Chờ xử lý',
+  APPROVED: 'Đã chấp thuận',
+  RESOLVED: 'Đã giải quyết',
+  CONFIRMED: 'Đã xác nhận',
+  CANCELLED: 'Đã hủy',
+  CANCELED: 'Đã hủy',
+  REQUESTED: 'Đã yêu cầu',
+  COMPLETED: 'Đã hoàn thành',
+  CLOSED: 'Đã đóng',
+  OPEN: 'Mở',
+  IN_PROGRESS: 'Đang xử lý',
+  REVIEWING: 'Đang xem xét',
+  NEED_MORE_INFO: 'Cần bổ sung thông tin'
+}
+
+function translateStatus(status: string): string {
+  return statusMap[status] || status
+}
+
 @Injectable()
 export class NotificationEventsService {
   private readonly logger = new Logger(NotificationEventsService.name)
@@ -166,7 +190,7 @@ export class NotificationEventsService {
         userIds: recipients,
         tenantId: room.tenantId,
         title: 'Trạng thái tin đăng đã thay đổi',
-        content: `Tin phòng ${room.roomCode} đã chuyển sang ${room.marketplaceStatus}.`,
+        content: `Tin phòng ${room.roomCode} đã chuyển sang trạng thái ${translateStatus(room.marketplaceStatus)}.`,
         type: 'MARKETPLACE',
         data: this.data('ROOM', room.id, {
           event: 'MARKETPLACE_STATUS_CHANGED',
@@ -217,7 +241,7 @@ export class NotificationEventsService {
         userIds: [request.renterId],
         tenantId: request.tenantId,
         title: 'Yêu cầu thuê đã được cập nhật',
-        content: `Yêu cầu thuê phòng ${request.room.roomCode} đã chuyển sang ${request.status}.`,
+        content: `Yêu cầu thuê phòng ${request.room.roomCode} đã chuyển sang trạng thái ${translateStatus(request.status)}.`,
         type: 'RENTAL_REQUEST',
         data: this.data('RENTAL_REQUEST', request.id, {
           event: 'RENTAL_REQUEST_STATUS_CHANGED',
@@ -274,7 +298,7 @@ export class NotificationEventsService {
         ),
         tenantId: appointment.tenantId,
         title: 'Lịch xem phòng đã được cập nhật',
-        content: `Lịch xem phòng ${appointment.room.roomCode} đã chuyển sang ${appointment.status}.`,
+        content: `Lịch xem phòng ${appointment.room.roomCode} đã chuyển sang trạng thái ${translateStatus(appointment.status)}.`,
         type: 'APPOINTMENT',
         data: this.data('APPOINTMENT', appointment.id, {
           event: 'APPOINTMENT_STATUS_CHANGED',
@@ -302,7 +326,7 @@ export class NotificationEventsService {
       userIds: recipients,
       tenantId: ticket.tenantId,
       title: 'Ticket được cập nhật',
-      content: `Ticket ${ticket.title} đã chuyển sang trạng thái ${ticket.status}.`,
+      content: `Ticket ${ticket.title} đã chuyển sang trạng thái ${translateStatus(ticket.status)}.`,
       type: 'TICKET',
       data: this.data('TICKET', ticket.id, { status: ticket.status }),
     })
@@ -326,7 +350,7 @@ export class NotificationEventsService {
         ticket,
         [ticket.createdById, ticket.contract?.renterId ?? null, ticket.assignedTo],
         'Trạng thái ticket đã thay đổi',
-        `Ticket ${ticket.title} đã chuyển sang ${ticket.status}.`,
+        `Ticket ${ticket.title} đã chuyển sang trạng thái ${translateStatus(ticket.status)}.`,
         'TICKET_STATUS_CHANGED',
       ),
     )
@@ -441,7 +465,7 @@ export class NotificationEventsService {
       userIds: [review.reviewerId],
       tenantId: review.tenantId,
       title: labels[review.status] ?? 'Đánh giá được cập nhật',
-      content: `Đánh giá của bạn đã chuyển sang trạng thái ${review.status}.`,
+      content: `Đánh giá của bạn đã chuyển sang trạng thái ${translateStatus(review.status)}.`,
       type: 'REVIEW',
       data: this.data('REVIEW', review.id, { status: review.status }),
     })

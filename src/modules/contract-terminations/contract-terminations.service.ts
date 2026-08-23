@@ -60,6 +60,7 @@ export class ContractTerminationsService {
     return this.review(userId, id, 'APPROVED', body.reviewNote)
   }
   async reject(userId: number, id: number, body: TReviewContractTerminationBody) {
+    if (!body.reviewNote) throw new BadRequestException('Vui lòng nhập lý do từ chối')
     return this.review(userId, id, 'REJECTED', body.reviewNote)
   }
 
@@ -174,7 +175,7 @@ export class ContractTerminationsService {
     }
   }
 
-  private async review(userId: number, id: number, status: 'APPROVED' | 'REJECTED', reviewNote: string) {
+  private async review(userId: number, id: number, status: 'APPROVED' | 'REJECTED', reviewNote?: string) {
     const tenant = await this.tenantAccess.getActiveTenantContext(userId)
     const request = await this.repository.findById(tenant.tenantId, id)
     if (!request) throw new NotFoundException('Không tìm thấy yêu cầu thanh lý')

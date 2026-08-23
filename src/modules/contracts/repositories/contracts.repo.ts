@@ -61,6 +61,7 @@ export const contractSelect = {
     },
   },
   template: { select: { id: true, name: true } },
+  tenant: { select: { id: true, name: true, phone: true } },
   members: {
     orderBy: [{ role: 'asc' }, { id: 'asc' }],
     select: {

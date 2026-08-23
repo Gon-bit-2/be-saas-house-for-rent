@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
-import { IsAdmin } from '@src/common/decorators/decorators/roles.decorator'
+import { IsAdmin, IsTenant } from '@src/common/decorators/decorators/roles.decorator'
 import { SkipPermission } from '@src/common/decorators/decorators/skip-permission.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
 import {
@@ -10,6 +10,7 @@ import {
   UpdateTenantBodyDTO,
   UpdateTenantStatusBodyDTO,
   UpdateTenantVerificationBodyDTO,
+  UpdateMyVerificationBodyDTO,
   RegisterTenantBodyDTO,
 } from './dto/tenants.dto'
 import { TenantsService } from './tenants.service'
@@ -54,6 +55,12 @@ export class TenantsController {
     @Body() body: UpdateTenantBodyDTO,
   ) {
     return this.tenantsService.update(id, body, user.userId)
+  }
+
+  @IsTenant()
+  @Patch('me/verification')
+  updateMyVerification(@ActiveUser() user: AccessTokenPayload, @Body() body: UpdateMyVerificationBodyDTO) {
+    return this.tenantsService.updateMyVerification(user.userId, body)
   }
 
   @IsAdmin()

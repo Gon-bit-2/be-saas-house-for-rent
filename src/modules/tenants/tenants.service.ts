@@ -9,8 +9,10 @@ import type {
   TUpdateTenantBodySchema,
   TUpdateTenantStatusBodySchema,
   TUpdateTenantVerificationBodySchema,
+  TUpdateMyVerificationBodySchema,
   TRegisterTenantBodySchema,
 } from './model/tenants.model'
+import { TenantAccessService } from '@src/shared/modules/services/tenant-access.service'
 import { SubscriptionPaymentsService } from '../subscription-payments/subscription-payments.service'
 import { TenantsRepository } from './repositories/tenants.repo'
 
@@ -23,6 +25,7 @@ export class TenantsService {
     private readonly tenantsRepository: TenantsRepository,
     private readonly hashingService: HashingService,
     private readonly subscriptionPaymentsService: SubscriptionPaymentsService,
+    private readonly tenantAccessService: TenantAccessService,
   ) {}
 
   async list(query: TListTenantsQuerySchema) {
@@ -121,6 +124,17 @@ export class TenantsService {
     return this.tenantsRepository.update(id, {
       verificationStatus: body.verificationStatus,
       updatedBy: { connect: { id: actorId } },
+    })
+  }
+
+  async updateMyVerification(userId: number, body: TUpdateMyVerificationBodySchema) {
+    const tenantContext = await this.tenantAccessService.getActiveTenantContext(userId)
+    return this.tenantsRepository.update(tenantContext.tenantId, {
+      ...(body.idCardFrontUrl !== undefined && { idCardFrontUrl: body.idCardFrontUrl }),
+      ...(body.idCardBackUrl !== undefined && { idCardBackUrl: body.idCardBackUrl }),
+      ...(body.address !== undefined && { address: body.address }),
+      verificationStatus: 'PENDING',
+      updatedBy: { connect: { id: userId } },
     })
   }
 

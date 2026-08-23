@@ -47,4 +47,5 @@ export const IsMaintenanceStaff = () => Roles(roleName.MAINTENANCE_STAFF)
  * Decorator helper to restrict route access exclusively to Tenants.
  * Decorator bổ trợ để giới hạn quyền truy cập tuyến đường độc quyền cho khách thuê (Tenant).
  */
-export const IsTenant = () => Roles(roleName.TENANT)
+export const IsTenant = () =>
+  Roles(roleName.TENANT, roleName.LANDLORD, roleName.MANAGER, roleName.ACCOUNTANT, roleName.MAINTENANCE_STAFF)

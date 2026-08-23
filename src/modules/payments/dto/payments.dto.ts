@@ -2,7 +2,7 @@ import { createZodDto } from 'nestjs-zod'
 import {
   CreatePaymentQrBodySchema,
   ListPaymentsQuerySchema,
-  PayosWebhookBodySchema,
+  PayosWebhookRequestSchema,
   ReviewPaymentBodySchema,
   SubmitPaymentConfirmationBodySchema,
   RecordManualPaymentBodySchema,
@@ -13,4 +13,4 @@ export class CreatePaymentQrBodyDTO extends createZodDto(CreatePaymentQrBodySche
 export class SubmitPaymentConfirmationBodyDTO extends createZodDto(SubmitPaymentConfirmationBodySchema) {}
 export class ReviewPaymentBodyDTO extends createZodDto(ReviewPaymentBodySchema) {}
 export class RecordManualPaymentBodyDTO extends createZodDto(RecordManualPaymentBodySchema) {}
-export class PayosWebhookBodyDTO extends createZodDto(PayosWebhookBodySchema) {}
+export class PayosWebhookBodyDTO extends createZodDto(PayosWebhookRequestSchema) {}
