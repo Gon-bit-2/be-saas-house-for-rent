@@ -1,0 +1,4209 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict U474UNL8MjdtL3eGoTynqogh8ygNDITeRkhrb8cFRERLxHMYVsKnHVubOJa1raO
+
+-- Dumped from database version 18.3
+-- Dumped by pg_dump version 18.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Data for Name: _prisma_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public._prisma_migrations VALUES ('88ab2eac-4a53-4b39-9aef-a4eed7688805', '8b6050770302690578746eeb64f67f9cc055f6d155d69e9ff112cbf16895b554', '2026-07-02 22:41:01.106569+07', '20260702154100_init_db', NULL, NULL, '2026-07-02 22:41:00.674045+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('9e8b1008-15b3-420e-8f2d-fe6ba609ec1a', '9bd64979f3dcef4e683a1aead674d46d10f9a76a6bb254092f67e5da90485a9c', '2026-07-22 20:28:19.329329+07', '20260722133000_add_ticket_relation_indexes', NULL, NULL, '2026-07-22 20:28:19.31881+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('a8dbf3ad-c620-4928-9c28-71917f728848', '87c54cba55056d5ab0bfe056029385a284d7f46496da85d54fb87cf741f61f5e', '2026-07-06 16:17:56.557009+07', '20260706091756_add_audit_fields', NULL, NULL, '2026-07-06 16:17:56.357343+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('bac5ed68-180a-44db-b321-2137df0e30d6', '1b01aa2b660751fda2feaa3b8149e7395c082f1ced9b6bec95868a5b5da099a6', '2026-07-06 17:00:40.245367+07', '20260706100029_add_otp_secret', NULL, NULL, '2026-07-06 17:00:40.233255+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('e910b008-45c1-4482-a228-7dba0f37bbf0', 'dad8ee3254accf642c6a4f22a3a2f02d7ce0160dee9308ab51c9db570f38ff2f', '2026-08-03 17:21:03.263428+07', '20260803170000_complete_g04_g09_g10', NULL, NULL, '2026-08-03 17:21:03.213396+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('c17b33a9-c060-4858-a828-44aea6d9219e', '0409463bb531f0484e946d4467746d585bf31a707ac4b989f77da09a24d9dbd2', '2026-07-07 01:24:48.206307+07', '20260706182440_add_super_admin_and_change_id_role', NULL, NULL, '2026-07-07 01:24:48.141684+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('1fd49b13-7a2e-457e-969d-d397b27a93b6', '97b3672eccefc8e0ae9708171af469cbe48a9c4a145033f4e4fa520099b205c2', '2026-07-25 22:41:06.82102+07', '20260724220000_add_marketplace_moderation', NULL, NULL, '2026-07-25 22:41:06.569401+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('97329918-6d33-464c-9b82-50ab6f19ee30', 'bbc75af3031f058a8cfb6c7862ecbe0619d4fa0bb92d82e7ba42bb7e37c60524', '2026-07-07 21:33:40.574675+07', '20260707143329_refactor_field_id', NULL, NULL, '2026-07-07 21:33:39.687307+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('4c1adc9f-c807-4492-ad10-6304cd00022d', '41ddeaf1d01b3842f536ae1da2627f8c6bf2f2deec2f2cbedc65fda9458358b6', '2026-07-09 12:15:10.9874+07', '20260709120000_add_room_image_public_id', NULL, NULL, '2026-07-09 12:15:10.961506+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('db24a8d7-29df-43e0-8874-bfeff8a032e6', 'ed4537f0c330df92bb5ca22ece2cdeceb843724b4a79d8cff287bf874d10d1d5', '2026-07-16 20:43:37.745346+07', '20260716000000_add_payos_payment_fields', NULL, NULL, '2026-07-16 20:43:37.687501+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('133a3486-3c26-4ccf-9aa6-5c5e81125107', '6a8beec02044a098fed08d0527b0fd07361e406756401967711188639a9db151', '2026-07-31 05:03:57.87795+07', '20260726150000_add_ocr_workflow', NULL, NULL, '2026-07-31 05:03:57.797949+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('7d5e72d1-4cf3-4249-9405-0c4db8e05d2b', 'b1435202d3d09db719212f7b17426365b14692cf613d385c8a9c8057f400b209', '2026-07-22 20:28:19.282963+07', '20260722090000_add_payment_provider_reference_unique', NULL, NULL, '2026-07-22 20:28:19.174037+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('64dabbea-1345-4710-9b24-2a61ba7fdec7', 'bbee68f9384295d02e3c64192b659f72606713facc7044cdc5deb3461ccdc303', '2026-08-14 20:29:57.235156+07', '20260814193000_add_two_tier_property_location', NULL, NULL, '2026-08-14 20:29:57.143431+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('9e480ce3-4374-40e2-a661-96587d22baec', '56da0627deb28fa1786e4cffa72705f9ae6d931c0b0d5b7971b13e9fe12c0b86', '2026-07-22 20:28:19.317965+07', '20260722130000_secure_payment_webhook_logs', NULL, NULL, '2026-07-22 20:28:19.284057+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('ae8ff1d2-d871-4baa-8ec3-32ece83aa91c', 'b862428bd2a2739d2608b34de1867d2669f23cd635fea75438920cf6ae8f8fea', '2026-07-31 05:03:57.959839+07', '20260729120000_complete_g05_handover_termination', NULL, NULL, '2026-07-31 05:03:57.878648+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('1bf2e6b4-cb01-42c9-ab6a-40a3a443b97e', 'cdcfb9a0d249b1030eb5d94eae90a14de94c9401bb26a69e1c33a1c33d7de207', '2026-08-15 15:59:00.907106+07', '20260707020000_add_auth_tokens', '', NULL, '2026-08-15 15:59:00.907106+07', 0);
+INSERT INTO public._prisma_migrations VALUES ('8c4cb4ce-4ed0-45b8-a4cc-ecfeefe6722c', 'e94ff8b4d0dd478c9e81998c2f1767f290d8cf23f87e6cda0e39d3a5e41bb5df', '2026-07-31 05:03:57.995597+07', '20260730120000_complete_g12_trust_moderation', NULL, NULL, '2026-07-31 05:03:57.960654+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('d7b176ee-14a7-4588-89cd-35da88322b8e', '65678631497c6cd7b64a5e325a0ab7ef5b4f6d5902f8c5c44afba5f3a1ff53f6', '2026-08-15 15:59:08.134958+07', '20260712183000_add_debts_table', '', NULL, '2026-08-15 15:59:08.134958+07', 0);
+INSERT INTO public._prisma_migrations VALUES ('838de924-9eba-405d-a963-136e68f755e2', 'a82990bcc5f76ccf4257aad5ec95aa4f872edd720350eecdc7108e41f92f829b', '2026-07-31 05:50:13.332953+07', '20260731100000_add_renter_invitations', NULL, NULL, '2026-07-31 05:50:13.271081+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('9800fe80-79f8-40d5-b5d7-8610cc444e97', '414ec00601d1b69f5f52d4767f6735b7f07cd8a0ba18c10ef8d6d696c9503ea8', '2026-08-15 15:59:12.920005+07', '20260716183000_add_ticket_notification_fields', '', NULL, '2026-08-15 15:59:12.920005+07', 0);
+INSERT INTO public._prisma_migrations VALUES ('3b8c18a1-a4e5-4eda-8df3-38870dc4e6cc', 'bc3d168127827cd75421bf005c0d312be1d71c31859e5c3d42eabc47a62a44d6', '2026-07-31 06:03:54.347257+07', '20260731110000_add_service_catalog', NULL, NULL, '2026-07-31 06:03:54.290488+07', 1);
+INSERT INTO public._prisma_migrations VALUES ('79d49385-d072-4fa2-8e34-c1c8e057d4e5', 'e39f198d67e79afd3cbbdf8c1489c283c778cacb4f727e18f4e5daf31da3c621', '2026-08-15 15:59:17.658753+07', '20260716203000_add_dashboard_indexes', '', NULL, '2026-08-15 15:59:17.658753+07', 0);
+INSERT INTO public._prisma_migrations VALUES ('f77ed692-a2a9-4e76-ba96-636dcd91c367', '131d46a54b1c99704532fef9800a287581a0b961445c25514d4369fff4321b84', '2026-08-15 15:59:21.285538+07', '20260726090000_add_subscription_payos_billing', '', NULL, '2026-08-15 15:59:21.285538+07', 0);
+INSERT INTO public._prisma_migrations VALUES ('ccc20a40-87fe-4c48-8de6-9b5914c79a34', 'fb0d686725171517fcced15a267370d172c15fb90c47d61b947bdec7ac62cea8', '2026-08-15 16:36:01.182025+07', '20260815093311_add_max_properties', NULL, NULL, '2026-08-15 16:36:01.135073+07', 1);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.users VALUES ('MVP Super Admin', 'admin@mvp.local', NULL, '$2b$10$XC7eZth0GAZXaMj62jd5K.4baw6MHEcA1gfFXzBvaWhgT24xJ3Aoi', NULL, 'ACTIVE', '2026-07-01 00:00:00+07', NULL, NULL, '2026-07-30 23:21:12.766+07', '2026-07-30 23:43:08.47+07', NULL, NULL, 'ADMIN', 2);
+INSERT INTO public.users VALUES ('MVP Landlord', 'landlord@mvp.local', NULL, '$2b$10$g4ufGQMYqU47G75MmIQpU.S5.V9Q4fTXJrfv77GTzOWNCVaRar52y', NULL, 'ACTIVE', '2026-07-01 00:00:00+07', NULL, NULL, '2026-07-30 23:21:12.784+07', '2026-07-30 23:43:08.48+07', NULL, NULL, NULL, 3);
+INSERT INTO public.users VALUES ('MVP Renter', 'renter@mvp.local', NULL, '$2b$10$bIDJHV8dYn.A66APGa4TDO74gkwCDaRNRv7qach3BDtBDk/vpbjg6', NULL, 'ACTIVE', '2026-07-01 00:00:00+07', NULL, NULL, '2026-07-30 23:21:12.786+07', '2026-07-30 23:43:08.484+07', NULL, NULL, NULL, 4);
+INSERT INTO public.users VALUES ('Gon', 'vanthien7029@gmail.com', NULL, '$2b$10$PHE53uUs1UQNcUB/UxCbbeYOdmsPszQCnTdU/qkBAiR5YRMiyEBDy', 'https://lh3.googleusercontent.com/a/ACg8ocLGNTlVT5OVSfWwqUkj2xYPzwEAfJDkk08MiNUL3r4LZopcn7Q=s96-c', 'ACTIVE', '2026-08-22 18:42:31.331+07', NULL, NULL, '2026-08-22 18:42:31.335+07', '2026-08-22 18:42:31.335+07', NULL, NULL, NULL, 19);
+INSERT INTO public.users VALUES ('Văn Khoa Hoàng', 'hoangvankhoa518@gmail.com', '0562328880', '$2b$10$XUnpb6hv2lbo45G/H//a3OMIeJqE9P9k7yBRgZOk9zFDthKPGbf22', 'https://lh3.googleusercontent.com/a/ACg8ocKqQ1OLgD_rWhMwBs_qA2sx9OVOiNFT-VJ0TZp9JHIV4M6opg=s96-c', 'ACTIVE', '2026-08-13 14:54:26.246+07', NULL, '2026-08-23 10:31:51.366+07', '2026-08-13 14:54:26.251+07', '2026-08-23 10:31:51.396+07', NULL, NULL, 'TENANT', 16);
+INSERT INTO public.users VALUES ('Test User (test2)', 'test2@gmail.com', NULL, '$2b$10$3W79YGxnOSnt675oFVAEjOZ7MQZFrNLgMWklqoZfeEoW4PfpqBWuG', NULL, 'ACTIVE', '2026-08-11 12:53:37.321+07', NULL, NULL, '2026-08-09 10:25:07.583+07', '2026-08-11 12:53:37.815+07', NULL, NULL, NULL, 10);
+INSERT INTO public.users VALUES ('Gon JavaScript', 'gonjswork@gmail.com', '0562378890', '$2b$10$PLgbbcIEgCE6ZeTw9xqxeumJurdNMAxDReoJR.k3a1JbfQcEnnqYK', NULL, 'ACTIVE', '2026-07-01 00:00:00+07', NULL, '2026-08-23 04:37:16.025+07', '2026-07-06 18:30:45.054+07', '2026-08-23 04:37:16.039+07', NULL, NULL, 'ADMIN', 1);
+INSERT INTO public.users VALUES ('Khoa Minh', 'lehuykeu2fk@gmail.com', NULL, '$2b$10$xLBu3yb5cOl.n7lsJ0/Gi.b3ql3e5gL7ShtzZBp952WOXfRnD8l2O', 'https://lh3.googleusercontent.com/a/ACg8ocJfZsayr8acIlJFSPXXrf5zg4eO0NqNAjpUkqsZKf7mWJF0PQ=s96-c', 'ACTIVE', '2026-08-23 05:14:17.116+07', NULL, '2026-08-23 06:09:39.812+07', '2026-08-23 05:14:17.122+07', '2026-08-23 06:09:39.823+07', NULL, NULL, NULL, 20);
+INSERT INTO public.users VALUES ('Văn Thiện Nguyễn', '2tbindia001@gmail.com', NULL, '$2b$10$4j9YU6S1Hy4bYzRKRuqrC.V8nL.mvtHHppf1QVDlno7pd1Ii3FPKu', 'https://lh3.googleusercontent.com/a/ACg8ocKrWrROELTlK8RSZIV-p1kWM911v6fI84z9aro8EqUWkhY3=s96-c', 'ACTIVE', '2026-08-07 09:17:43.359+07', NULL, '2026-08-23 06:24:13.211+07', '2026-08-07 09:17:43.379+07', '2026-08-23 06:24:13.217+07', NULL, NULL, 'LANDLORD', 8);
+INSERT INTO public.users VALUES ('Test User (nguoithue1)', 'nguoithue1@gmail.com', NULL, '$2b$10$bSTM8CDK8TfdjZXTVap57eI.t5v/cK8awYbYGZv2/oq4wA5W5NSQe', NULL, 'ACTIVE', '2026-08-11 12:53:37.321+07', NULL, '2026-08-14 06:54:42.48+07', '2026-08-11 12:53:37.82+07', '2026-08-14 06:54:42.503+07', NULL, NULL, 'TENANT', 13);
+INSERT INTO public.users VALUES ('API-E2E-20260811151356-97230 landlord', 'landlord.apie2e2026081115135697230@example.test', '0961237028', '$2b$10$jbGSLfMDW10yR.I/UMjtf.HSrxn2wKIobk9otLjOTLRZklQUj0d3y', NULL, 'ACTIVE', NULL, NULL, NULL, '2026-08-11 15:13:57.154+07', '2026-08-11 15:13:57.154+07', NULL, NULL, NULL, 15);
+INSERT INTO public.users VALUES ('API-E2E-20260811143755-P7DV0 landlord', 'landlord.apie2e20260811143755p7dv0@example.test', '0959076488', '$2b$10$tdNqP4PNF2B7qdd4Z9q0ZOfg1bq62WYCjkBWmVpnyzq08BGxyXo2G', NULL, 'ACTIVE', NULL, NULL, NULL, '2026-08-11 14:37:56.638+07', '2026-08-11 14:37:56.638+07', NULL, NULL, NULL, 14);
+INSERT INTO public.users VALUES ('Test User (test1)', 'test1@gmail.com', NULL, '$2b$10$3W79YGxnOSnt675oFVAEjOZ7MQZFrNLgMWklqoZfeEoW4PfpqBWuG', NULL, 'ACTIVE', '2026-08-11 12:53:37.321+07', NULL, '2026-08-14 06:54:53.57+07', '2026-08-09 10:25:07.464+07', '2026-08-14 06:54:53.572+07', NULL, NULL, 'LANDLORD', 9);
+INSERT INTO public.users VALUES ('Nguyễn Văn Hùng', 'vanthien7028@gmail.com', '0562378880', '$2b$10$oQfzvgSrVVV.ZV1QuyRP6ej5v71rHPu5yutQl4XMl2GjZnRbLg1Jy', NULL, 'ACTIVE', '2026-08-14 07:21:21.872+07', NULL, '2026-08-23 08:35:09.478+07', '2026-08-14 07:21:21.804+07', '2026-08-23 08:35:09.481+07', NULL, NULL, NULL, 18);
+
+
+--
+-- Data for Name: amenities; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.amenities VALUES ('API-E2E-20260811143204-JWL7R amenity', NULL, 'E2E', false, 1, 1, NULL, 1);
+INSERT INTO public.amenities VALUES ('API-E2E-20260811143755-P7DV0 WiFi updated', 'wifi', 'CONNECTIVITY', false, 2, 1, NULL, 1);
+INSERT INTO public.amenities VALUES ('API-E2E-20260811143757-VWYU2 amenity', NULL, 'E2E', false, 3, 1, NULL, 1);
+INSERT INTO public.amenities VALUES ('API-E2E-20260811145335-OBR4D amenity', NULL, 'E2E', false, 4, 1, NULL, 1);
+INSERT INTO public.amenities VALUES ('API-E2E-20260811145614-NE3TM amenity', NULL, 'E2E', false, 5, 1, NULL, 1);
+INSERT INTO public.amenities VALUES ('API-E2E-20260811150747-FQASH amenity', NULL, 'E2E', false, 6, 1, NULL, 1);
+INSERT INTO public.amenities VALUES ('API-E2E-20260811150923-COC5D amenity', NULL, 'E2E', false, 7, 1, NULL, 1);
+INSERT INTO public.amenities VALUES ('API-E2E-20260811151034-7GWTM amenity', NULL, 'E2E', false, 8, 1, NULL, 1);
+INSERT INTO public.amenities VALUES ('API-E2E-20260811151220-TXWCG amenity', NULL, 'E2E', false, 9, 1, NULL, 1);
+INSERT INTO public.amenities VALUES ('API-E2E-20260811151356-97230 WiFi updated', 'wifi', 'CONNECTIVITY', false, 10, 1, NULL, 1);
+INSERT INTO public.amenities VALUES ('API-E2E-20260811151357-VHCL6 amenity', NULL, 'E2E', false, 11, 1, NULL, 1);
+INSERT INTO public.amenities VALUES ('Wifi tốc độ cao', 'wifi', 'GENERAL', true, 12, NULL, NULL, NULL);
+INSERT INTO public.amenities VALUES ('Điều hòa', 'ac_unit', 'GENERAL', true, 13, NULL, NULL, NULL);
+INSERT INTO public.amenities VALUES ('Bếp từ', 'skillet', 'GENERAL', true, 14, NULL, NULL, NULL);
+INSERT INTO public.amenities VALUES ('Máy giặt chung', 'local_laundry_service', 'GENERAL', true, 15, NULL, NULL, NULL);
+INSERT INTO public.amenities VALUES ('An ninh 24/7', 'security', 'GENERAL', true, 16, NULL, NULL, NULL);
+INSERT INTO public.amenities VALUES ('Chỗ để xe', 'local_parking', 'GENERAL', true, 17, NULL, NULL, NULL);
+
+
+--
+-- Data for Name: tenants; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.tenants VALUES ('MVP Demo House', 'mvp-demo-house', NULL, NULL, 'landlord@mvp.local', 'Thu Duc City, Ho Chi Minh City', 'VERIFIED', 'ACTIVE', '2026-07-30 23:21:12.822+07', '2026-07-30 23:43:08.501+07', NULL, 1, 8, 2, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.tenants VALUES ('API Test Tenant 9', 'api-test-landlord-9', NULL, NULL, 'test1@gmail.com', 'Disposable tenant for real API workflow tests', 'VERIFIED', 'ACTIVE', '2026-08-11 14:09:06.215+07', '2026-08-11 14:09:06.215+07', NULL, 15, 9, 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.tenants VALUES ('API-E2E-20260811143755-P7DV0 tenant', 'api-e2e-20260811143755-p7dv0-tenant', NULL, '0959076488', 'tenant.apie2e20260811143755p7dv0@example.test', 'Disposable API E2E tenant', 'VERIFIED', 'CLOSED', '2026-08-11 14:37:56.643+07', '2026-08-11 14:37:57.298+07', NULL, 16, 14, 1, NULL, 1, NULL, NULL, NULL);
+INSERT INTO public.tenants VALUES ('API-E2E-20260811151356-97230 tenant', 'api-e2e-20260811151356-97230-tenant', NULL, '0961237028', 'tenant.apie2e2026081115135697230@example.test', 'Disposable API E2E tenant', 'VERIFIED', 'CLOSED', '2026-08-11 15:13:57.156+07', '2026-08-11 15:13:57.727+07', NULL, 17, 15, 1, NULL, 1, NULL, NULL, NULL);
+INSERT INTO public.tenants VALUES ('Nhà Trọ A Quận 12', 'nha-tro-a-quan-12', NULL, '0562378880', 'vanthien7028@gmail.com', NULL, 'UNVERIFIED', 'ACTIVE', '2026-08-14 08:35:52.572+07', '2026-08-14 08:35:52.572+07', NULL, 18, 18, 18, NULL, NULL, NULL, NULL, NULL);
+
+
+--
+-- Data for Name: asset_categories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.asset_categories VALUES ('API-E2E-20260811143204-JWL7R furniture', 'Disposable category', 1, 9, 9, 9, 15, '2026-08-11 14:32:05.473+07', '2026-08-11 14:32:06.037+07', '2026-08-11 14:32:06.035+07');
+INSERT INTO public.asset_categories VALUES ('API-E2E-20260811145335-OBR4D furniture', 'Disposable category', 2, 9, 9, 9, 15, '2026-08-11 14:53:39.763+07', '2026-08-11 14:53:52.061+07', '2026-08-11 14:53:52.061+07');
+INSERT INTO public.asset_categories VALUES ('API-E2E-20260811145614-NE3TM furniture', 'Disposable category', 3, 9, 9, 9, 15, '2026-08-11 14:56:18.345+07', '2026-08-11 14:56:28.646+07', '2026-08-11 14:56:28.646+07');
+INSERT INTO public.asset_categories VALUES ('API-E2E-20260811150747-FQASH furniture', 'Disposable category', 4, 9, 9, 9, 15, '2026-08-11 15:07:52.385+07', '2026-08-11 15:08:03.174+07', '2026-08-11 15:08:03.173+07');
+INSERT INTO public.asset_categories VALUES ('API-E2E-20260811150923-COC5D furniture', 'Disposable category', 5, 9, 9, 9, 15, '2026-08-11 15:09:26.878+07', '2026-08-11 15:09:37.539+07', '2026-08-11 15:09:37.539+07');
+INSERT INTO public.asset_categories VALUES ('API-E2E-20260811151034-7GWTM furniture', 'Disposable category', 6, 9, 9, 9, 15, '2026-08-11 15:10:38.962+07', '2026-08-11 15:10:53.961+07', '2026-08-11 15:10:53.961+07');
+INSERT INTO public.asset_categories VALUES ('API-E2E-20260811151220-TXWCG furniture', 'Disposable category', 7, 9, 9, 9, 15, '2026-08-11 15:12:24.644+07', '2026-08-11 15:12:38.78+07', '2026-08-11 15:12:38.78+07');
+INSERT INTO public.asset_categories VALUES ('API-E2E-20260811151357-VHCL6 furniture', 'Disposable category', 8, 9, 9, 9, 15, '2026-08-11 15:14:01.512+07', '2026-08-11 15:14:10.16+07', '2026-08-11 15:14:10.16+07');
+INSERT INTO public.asset_categories VALUES ('Tủ Lạnh', 'Tủ Lạnh', 9, 8, NULL, 8, 1, '2026-08-14 15:47:03.053+07', '2026-08-14 15:47:03.053+07', NULL);
+INSERT INTO public.asset_categories VALUES ('Bàn ghế gỗ', '', 10, 8, NULL, 8, 1, '2026-08-14 15:47:12.846+07', '2026-08-14 15:47:12.846+07', NULL);
+INSERT INTO public.asset_categories VALUES ('Tủ quần áo', '', 11, 8, NULL, 8, 1, '2026-08-14 15:47:19.22+07', '2026-08-14 15:47:19.22+07', NULL);
+INSERT INTO public.asset_categories VALUES ('Chăn ga gối đệm', '', 12, 8, NULL, 8, 1, '2026-08-14 15:47:34.712+07', '2026-08-14 15:47:34.712+07', NULL);
+INSERT INTO public.asset_categories VALUES ('Bồn rửa mặt', '', 13, 8, NULL, 8, 1, '2026-08-14 15:48:11.991+07', '2026-08-14 15:48:11.991+07', NULL);
+INSERT INTO public.asset_categories VALUES ('Quạt treo tường', '', 14, 8, NULL, 8, 1, '2026-08-14 15:48:25.811+07', '2026-08-14 15:48:25.811+07', NULL);
+INSERT INTO public.asset_categories VALUES ('Điều Hòa', '', 15, 8, NULL, 8, 1, '2026-08-14 15:51:19.441+07', '2026-08-14 15:51:19.441+07', NULL);
+INSERT INTO public.asset_categories VALUES ('Giường ngủ', '', 16, 8, NULL, 8, 1, '2026-08-15 07:17:58.777+07', '2026-08-15 07:17:58.777+07', NULL);
+
+
+--
+-- Data for Name: audit_logs; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '1', NULL, '{"name": "API-E2E-20260811143204-JWL7R furniture"}', NULL, NULL, '2026-08-11 14:32:05.494+07', 1, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '1', NULL, '{"name": "API-E2E-20260811143204-JWL7R desk", "roomId": 3, "quantity": 1, "condition": "GOOD"}', NULL, NULL, '2026-08-11 14:32:05.585+07', 2, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_ROOM_ASSET', 'ROOM_ASSET', '1', '{"name": "API-E2E-20260811143204-JWL7R desk", "quantity": 1, "condition": "GOOD", "categoryId": 1}', '{"name": "API-E2E-20260811143204-JWL7R desk", "quantity": 1, "condition": "NORMAL", "categoryId": 1}', NULL, NULL, '2026-08-11 14:32:05.663+07', 3, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ROOM_ASSET', 'ROOM_ASSET', '1', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T14:32:05.969Z"}', NULL, NULL, '2026-08-11 14:32:05.969+07', 4, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ASSET_CATEGORY', 'ASSET_CATEGORY', '1', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T14:32:06.039Z"}', NULL, NULL, '2026-08-11 14:32:06.04+07', 5, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '2', NULL, '{"name": "API-E2E-20260811145335-OBR4D furniture"}', NULL, NULL, '2026-08-11 14:53:39.775+07', 6, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '2', NULL, '{"name": "API-E2E-20260811145335-OBR4D desk", "roomId": 7, "quantity": 1, "condition": "GOOD"}', NULL, NULL, '2026-08-11 14:53:39.847+07', 7, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_ROOM_ASSET', 'ROOM_ASSET', '2', '{"name": "API-E2E-20260811145335-OBR4D desk", "quantity": 1, "condition": "GOOD", "categoryId": 2}', '{"name": "API-E2E-20260811145335-OBR4D desk", "quantity": 1, "condition": "NORMAL", "categoryId": 2}', NULL, NULL, '2026-08-11 14:53:39.929+07', 8, 15, 9);
+INSERT INTO public.audit_logs VALUES ('ACTIVATE_CONTRACT', 'CONTRACT', '3', '{"status": "DRAFT_OR_WAITING"}', '{"status": "ACTIVE", "roomStatus": "OCCUPIED"}', NULL, NULL, '2026-08-11 14:53:43.386+07', 9, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_HANDOVER', 'HANDOVER_RECORD', '1', NULL, '{"type": "CHECKIN", "version": 1, "contractId": 3}', NULL, NULL, '2026-08-11 14:53:45.249+07', 10, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DISPUTE_HANDOVER', 'HANDOVER_RECORD', '1', '{"version": 1}', '{"status": "DISPUTED", "version": 1}', NULL, NULL, '2026-08-11 14:53:45.494+07', 11, 15, 13);
+INSERT INTO public.audit_logs VALUES ('RESOLVE_HANDOVER_DISPUTE', 'HANDOVER_RECORD', '1', '{"version": 1}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 14:53:45.657+07', 12, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '1', '{"version": 2}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 14:53:45.814+07', 13, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '1', '{"version": 2}', '{"status": "CONFIRMED", "version": 2}', NULL, NULL, '2026-08-11 14:53:45.978+07', 14, 15, 13);
+INSERT INTO public.audit_logs VALUES ('ASSIGN_TICKET', 'TICKET', '2', '{"status": "OPEN", "assignedTo": null}', '{"status": "IN_PROGRESS", "assignedTo": 9}', NULL, NULL, '2026-08-11 14:53:48.957+07', 15, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ROOM_ASSET', 'ROOM_ASSET', '2', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T14:53:51.999Z"}', NULL, NULL, '2026-08-11 14:53:51.999+07', 16, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ASSET_CATEGORY', 'ASSET_CATEGORY', '2', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T14:53:52.062Z"}', NULL, NULL, '2026-08-11 14:53:52.063+07', 17, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '3', NULL, '{"name": "API-E2E-20260811145614-NE3TM furniture"}', NULL, NULL, '2026-08-11 14:56:18.353+07', 18, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '3', NULL, '{"name": "API-E2E-20260811145614-NE3TM desk", "roomId": 9, "quantity": 1, "condition": "GOOD"}', NULL, NULL, '2026-08-11 14:56:18.417+07', 19, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_ROOM_ASSET', 'ROOM_ASSET', '3', '{"name": "API-E2E-20260811145614-NE3TM desk", "quantity": 1, "condition": "GOOD", "categoryId": 3}', '{"name": "API-E2E-20260811145614-NE3TM desk", "quantity": 1, "condition": "NORMAL", "categoryId": 3}', NULL, NULL, '2026-08-11 14:56:18.484+07', 20, 15, 9);
+INSERT INTO public.audit_logs VALUES ('ACTIVATE_CONTRACT', 'CONTRACT', '4', '{"status": "DRAFT_OR_WAITING"}', '{"status": "ACTIVE", "roomStatus": "OCCUPIED"}', NULL, NULL, '2026-08-11 14:56:21.325+07', 21, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_HANDOVER', 'HANDOVER_RECORD', '2', NULL, '{"type": "CHECKIN", "version": 1, "contractId": 4}', NULL, NULL, '2026-08-11 14:56:22.487+07', 22, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DISPUTE_HANDOVER', 'HANDOVER_RECORD', '2', '{"version": 1}', '{"status": "DISPUTED", "version": 1}', NULL, NULL, '2026-08-11 14:56:22.718+07', 23, 15, 13);
+INSERT INTO public.audit_logs VALUES ('RESOLVE_HANDOVER_DISPUTE', 'HANDOVER_RECORD', '2', '{"version": 1}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 14:56:22.875+07', 24, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '2', '{"version": 2}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 14:56:23.042+07', 25, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '2', '{"version": 2}', '{"status": "CONFIRMED", "version": 2}', NULL, NULL, '2026-08-11 14:56:23.196+07', 26, 15, 13);
+INSERT INTO public.audit_logs VALUES ('ASSIGN_TICKET', 'TICKET', '3', '{"status": "OPEN", "assignedTo": null}', '{"status": "IN_PROGRESS", "assignedTo": 9}', NULL, NULL, '2026-08-11 14:56:25.78+07', 27, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '3', '{"status": "IN_PROGRESS"}', '{"reason": null, "status": "WAITING_RENTER"}', NULL, NULL, '2026-08-11 14:56:26.031+07', 28, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '3', '{"status": "WAITING_RENTER"}', '{"reason": null, "status": "RESOLVED"}', NULL, NULL, '2026-08-11 14:56:26.17+07', 29, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ROOM_ASSET', 'ROOM_ASSET', '3', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T14:56:28.589Z"}', NULL, NULL, '2026-08-11 14:56:28.59+07', 30, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ASSET_CATEGORY', 'ASSET_CATEGORY', '3', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T14:56:28.647Z"}', NULL, NULL, '2026-08-11 14:56:28.648+07', 31, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '4', NULL, '{"name": "API-E2E-20260811150747-FQASH furniture"}', NULL, NULL, '2026-08-11 15:07:52.395+07', 32, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '4', NULL, '{"name": "API-E2E-20260811150747-FQASH desk", "roomId": 11, "quantity": 1, "condition": "GOOD"}', NULL, NULL, '2026-08-11 15:07:52.453+07', 33, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_ROOM_ASSET', 'ROOM_ASSET', '4', '{"name": "API-E2E-20260811150747-FQASH desk", "quantity": 1, "condition": "GOOD", "categoryId": 4}', '{"name": "API-E2E-20260811150747-FQASH desk", "quantity": 1, "condition": "NORMAL", "categoryId": 4}', NULL, NULL, '2026-08-11 15:07:52.511+07', 34, 15, 9);
+INSERT INTO public.audit_logs VALUES ('ACTIVATE_CONTRACT', 'CONTRACT', '5', '{"status": "DRAFT_OR_WAITING"}', '{"status": "ACTIVE", "roomStatus": "OCCUPIED"}', NULL, NULL, '2026-08-11 15:07:55.183+07', 35, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_HANDOVER', 'HANDOVER_RECORD', '3', NULL, '{"type": "CHECKIN", "version": 1, "contractId": 5}', NULL, NULL, '2026-08-11 15:07:56.214+07', 36, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DISPUTE_HANDOVER', 'HANDOVER_RECORD', '3', '{"version": 1}', '{"status": "DISPUTED", "version": 1}', NULL, NULL, '2026-08-11 15:07:56.407+07', 37, 15, 13);
+INSERT INTO public.audit_logs VALUES ('RESOLVE_HANDOVER_DISPUTE', 'HANDOVER_RECORD', '3', '{"version": 1}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 15:07:56.546+07', 38, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '3', '{"version": 2}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 15:07:56.687+07', 39, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '3', '{"version": 2}', '{"status": "CONFIRMED", "version": 2}', NULL, NULL, '2026-08-11 15:07:56.843+07', 40, 15, 13);
+INSERT INTO public.audit_logs VALUES ('ASSIGN_TICKET', 'TICKET', '4', '{"status": "OPEN", "assignedTo": null}', '{"status": "IN_PROGRESS", "assignedTo": 9}', NULL, NULL, '2026-08-11 15:07:59.155+07', 41, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '4', '{"status": "IN_PROGRESS"}', '{"reason": null, "status": "WAITING_RENTER"}', NULL, NULL, '2026-08-11 15:07:59.452+07', 42, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '4', '{"status": "WAITING_RENTER"}', '{"reason": null, "status": "RESOLVED"}', NULL, NULL, '2026-08-11 15:07:59.672+07', 43, 15, 9);
+INSERT INTO public.audit_logs VALUES ('RENTER_REOPEN_TICKET', 'TICKET', '4', '{"status": "RESOLVED"}', '{"reason": null, "status": "IN_PROGRESS"}', NULL, NULL, '2026-08-11 15:07:59.802+07', 44, 15, 13);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '4', '{"status": "IN_PROGRESS"}', '{"reason": null, "status": "RESOLVED"}', NULL, NULL, '2026-08-11 15:07:59.932+07', 45, 15, 9);
+INSERT INTO public.audit_logs VALUES ('RENTER_CLOSE_TICKET', 'TICKET', '4', '{"status": "RESOLVED"}', '{"reason": null, "status": "CLOSED"}', NULL, NULL, '2026-08-11 15:08:00.058+07', 46, 15, 13);
+INSERT INTO public.audit_logs VALUES ('DELETE_ROOM_ASSET', 'ROOM_ASSET', '4', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T15:08:03.115Z"}', NULL, NULL, '2026-08-11 15:08:03.115+07', 50, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ASSET_CATEGORY', 'ASSET_CATEGORY', '4', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T15:08:03.175Z"}', NULL, NULL, '2026-08-11 15:08:03.176+07', 51, 15, 9);
+INSERT INTO public.audit_logs VALUES ('RENTER_CANCEL_TICKET', 'TICKET', '5', '{"status": "OPEN"}', '{"reason": null, "status": "CANCELED"}', NULL, NULL, '2026-08-11 15:08:00.416+07', 47, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CREATE_REVIEW', 'REVIEW', '1', NULL, '{"roomId": 11, "status": "PENDING", "contractId": 5}', NULL, NULL, '2026-08-11 15:08:00.59+07', 48, 15, 13);
+INSERT INTO public.audit_logs VALUES ('APPROVED_REVIEW', 'REVIEW', '1', '{"status": "PENDING"}', '{"reason": null, "status": "APPROVED", "isVisible": true}', NULL, NULL, '2026-08-11 15:08:00.738+07', 49, 15, 1);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '5', NULL, '{"name": "API-E2E-20260811150923-COC5D furniture"}', NULL, NULL, '2026-08-11 15:09:26.891+07', 52, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '5', NULL, '{"name": "API-E2E-20260811150923-COC5D desk", "roomId": 13, "quantity": 1, "condition": "GOOD"}', NULL, NULL, '2026-08-11 15:09:26.943+07', 53, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_ROOM_ASSET', 'ROOM_ASSET', '5', '{"name": "API-E2E-20260811150923-COC5D desk", "quantity": 1, "condition": "GOOD", "categoryId": 5}', '{"name": "API-E2E-20260811150923-COC5D desk", "quantity": 1, "condition": "NORMAL", "categoryId": 5}', NULL, NULL, '2026-08-11 15:09:26.997+07', 54, 15, 9);
+INSERT INTO public.audit_logs VALUES ('ACTIVATE_CONTRACT', 'CONTRACT', '6', '{"status": "DRAFT_OR_WAITING"}', '{"status": "ACTIVE", "roomStatus": "OCCUPIED"}', NULL, NULL, '2026-08-11 15:09:29.734+07', 55, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_HANDOVER', 'HANDOVER_RECORD', '4', NULL, '{"type": "CHECKIN", "version": 1, "contractId": 6}', NULL, NULL, '2026-08-11 15:09:30.673+07', 56, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DISPUTE_HANDOVER', 'HANDOVER_RECORD', '4', '{"version": 1}', '{"status": "DISPUTED", "version": 1}', NULL, NULL, '2026-08-11 15:09:30.866+07', 57, 15, 13);
+INSERT INTO public.audit_logs VALUES ('RESOLVE_HANDOVER_DISPUTE', 'HANDOVER_RECORD', '4', '{"version": 1}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 15:09:31.001+07', 58, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '4', '{"version": 2}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 15:09:31.129+07', 59, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '4', '{"version": 2}', '{"status": "CONFIRMED", "version": 2}', NULL, NULL, '2026-08-11 15:09:31.26+07', 60, 15, 13);
+INSERT INTO public.audit_logs VALUES ('ASSIGN_TICKET', 'TICKET', '6', '{"status": "OPEN", "assignedTo": null}', '{"status": "IN_PROGRESS", "assignedTo": 9}', NULL, NULL, '2026-08-11 15:09:33.557+07', 61, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '6', '{"status": "IN_PROGRESS"}', '{"reason": null, "status": "WAITING_RENTER"}', NULL, NULL, '2026-08-11 15:09:33.78+07', 62, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '6', '{"status": "WAITING_RENTER"}', '{"reason": null, "status": "RESOLVED"}', NULL, NULL, '2026-08-11 15:09:33.909+07', 63, 15, 9);
+INSERT INTO public.audit_logs VALUES ('RENTER_REOPEN_TICKET', 'TICKET', '6', '{"status": "RESOLVED"}', '{"reason": null, "status": "IN_PROGRESS"}', NULL, NULL, '2026-08-11 15:09:34.054+07', 64, 15, 13);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '6', '{"status": "IN_PROGRESS"}', '{"reason": null, "status": "RESOLVED"}', NULL, NULL, '2026-08-11 15:09:34.209+07', 65, 15, 9);
+INSERT INTO public.audit_logs VALUES ('RENTER_CLOSE_TICKET', 'TICKET', '6', '{"status": "RESOLVED"}', '{"reason": null, "status": "CLOSED"}', NULL, NULL, '2026-08-11 15:09:34.341+07', 66, 15, 13);
+INSERT INTO public.audit_logs VALUES ('RENTER_CANCEL_TICKET', 'TICKET', '7', '{"status": "OPEN"}', '{"reason": null, "status": "CANCELED"}', NULL, NULL, '2026-08-11 15:09:34.762+07', 67, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CREATE_REVIEW', 'REVIEW', '2', NULL, '{"roomId": 13, "status": "PENDING", "contractId": 6}', NULL, NULL, '2026-08-11 15:09:34.909+07', 68, 15, 13);
+INSERT INTO public.audit_logs VALUES ('APPROVED_REVIEW', 'REVIEW', '2', '{"status": "PENDING"}', '{"reason": null, "status": "APPROVED", "isVisible": true}', NULL, NULL, '2026-08-11 15:09:35.045+07', 69, 15, 1);
+INSERT INTO public.audit_logs VALUES ('DELETE_ROOM_ASSET', 'ROOM_ASSET', '5', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T15:09:37.476Z"}', NULL, NULL, '2026-08-11 15:09:37.476+07', 70, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ASSET_CATEGORY', 'ASSET_CATEGORY', '5', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T15:09:37.541Z"}', NULL, NULL, '2026-08-11 15:09:37.541+07', 71, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '6', NULL, '{"name": "API-E2E-20260811151034-7GWTM furniture"}', NULL, NULL, '2026-08-11 15:10:38.97+07', 72, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '6', NULL, '{"name": "API-E2E-20260811151034-7GWTM desk", "roomId": 15, "quantity": 1, "condition": "GOOD"}', NULL, NULL, '2026-08-11 15:10:39.038+07', 73, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_ROOM_ASSET', 'ROOM_ASSET', '6', '{"name": "API-E2E-20260811151034-7GWTM desk", "quantity": 1, "condition": "GOOD", "categoryId": 6}', '{"name": "API-E2E-20260811151034-7GWTM desk", "quantity": 1, "condition": "NORMAL", "categoryId": 6}', NULL, NULL, '2026-08-11 15:10:39.102+07', 74, 15, 9);
+INSERT INTO public.audit_logs VALUES ('ACTIVATE_CONTRACT', 'CONTRACT', '7', '{"status": "DRAFT_OR_WAITING"}', '{"status": "ACTIVE", "roomStatus": "OCCUPIED"}', NULL, NULL, '2026-08-11 15:10:41.661+07', 75, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_HANDOVER', 'HANDOVER_RECORD', '5', NULL, '{"type": "CHECKIN", "version": 1, "contractId": 7}', NULL, NULL, '2026-08-11 15:10:42.591+07', 76, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DISPUTE_HANDOVER', 'HANDOVER_RECORD', '5', '{"version": 1}', '{"status": "DISPUTED", "version": 1}', NULL, NULL, '2026-08-11 15:10:42.786+07', 77, 15, 13);
+INSERT INTO public.audit_logs VALUES ('RESOLVE_HANDOVER_DISPUTE', 'HANDOVER_RECORD', '5', '{"version": 1}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 15:10:43.207+07', 78, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '5', '{"version": 2}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 15:10:43.357+07', 79, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '5', '{"version": 2}', '{"status": "CONFIRMED", "version": 2}', NULL, NULL, '2026-08-11 15:10:43.778+07', 80, 15, 13);
+INSERT INTO public.audit_logs VALUES ('ASSIGN_TICKET', 'TICKET', '8', '{"status": "OPEN", "assignedTo": null}', '{"status": "IN_PROGRESS", "assignedTo": 9}', NULL, NULL, '2026-08-11 15:10:46.143+07', 81, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '8', '{"status": "IN_PROGRESS"}', '{"reason": null, "status": "WAITING_RENTER"}', NULL, NULL, '2026-08-11 15:10:46.388+07', 82, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '8', '{"status": "WAITING_RENTER"}', '{"reason": null, "status": "RESOLVED"}', NULL, NULL, '2026-08-11 15:10:46.537+07', 83, 15, 9);
+INSERT INTO public.audit_logs VALUES ('RENTER_REOPEN_TICKET', 'TICKET', '8', '{"status": "RESOLVED"}', '{"reason": null, "status": "IN_PROGRESS"}', NULL, NULL, '2026-08-11 15:10:46.675+07', 84, 15, 13);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '8', '{"status": "IN_PROGRESS"}', '{"reason": null, "status": "RESOLVED"}', NULL, NULL, '2026-08-11 15:10:46.811+07', 85, 15, 9);
+INSERT INTO public.audit_logs VALUES ('RENTER_CLOSE_TICKET', 'TICKET', '8', '{"status": "RESOLVED"}', '{"reason": null, "status": "CLOSED"}', NULL, NULL, '2026-08-11 15:10:46.969+07', 86, 15, 13);
+INSERT INTO public.audit_logs VALUES ('RENTER_CANCEL_TICKET', 'TICKET', '9', '{"status": "OPEN"}', '{"reason": null, "status": "CANCELED"}', NULL, NULL, '2026-08-11 15:10:47.432+07', 87, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CREATE_REVIEW', 'REVIEW', '3', NULL, '{"roomId": 15, "status": "PENDING", "contractId": 7}', NULL, NULL, '2026-08-11 15:10:47.647+07', 88, 15, 13);
+INSERT INTO public.audit_logs VALUES ('APPROVED_REVIEW', 'REVIEW', '3', '{"status": "PENDING"}', '{"reason": null, "status": "APPROVED", "isVisible": true}', NULL, NULL, '2026-08-11 15:10:47.827+07', 89, 15, 1);
+INSERT INTO public.audit_logs VALUES ('CREATE_REPORT', 'REPORT', '1', NULL, '{"status": "PENDING", "targetId": "15", "targetType": "TENANT"}', NULL, NULL, '2026-08-11 15:10:48.075+07', 90, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CLAIM_REPORT', 'REPORT', '1', '{"status": "PENDING"}', '{"status": "REVIEWING", "resolutionNote": null}', NULL, NULL, '2026-08-11 15:10:48.247+07', 91, 15, 1);
+INSERT INTO public.audit_logs VALUES ('RESOLVED_REPORT', 'REPORT', '1', '{"status": "REVIEWING"}', '{"status": "RESOLVED", "resolutionNote": "API-E2E-20260811151034-7GWTM reviewed"}', NULL, NULL, '2026-08-11 15:10:48.299+07', 92, 15, 1);
+INSERT INTO public.audit_logs VALUES ('CREATE_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '1', NULL, '{"status": "PENDING", "contractId": 7, "expectedMoveOutDate": "2026-08-18"}', NULL, NULL, '2026-08-11 15:10:48.702+07', 93, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CANCEL_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '1', NULL, '{"status": "CANCELED", "reviewNote": null}', NULL, NULL, '2026-08-11 15:10:48.876+07', 94, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CREATE_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '2', NULL, '{"status": "PENDING", "contractId": 7, "expectedMoveOutDate": "2026-08-18"}', NULL, NULL, '2026-08-11 15:10:49.021+07', 95, 15, 13);
+INSERT INTO public.audit_logs VALUES ('REJECT_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '2', NULL, '{"status": "REJECTED", "reviewNote": "API-E2E-20260811151034-7GWTM rejection branch"}', NULL, NULL, '2026-08-11 15:10:49.245+07', 96, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '3', NULL, '{"status": "PENDING", "contractId": 7, "expectedMoveOutDate": "2026-08-18"}', NULL, NULL, '2026-08-11 15:10:49.389+07', 97, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '6', '{"version": 1}', '{"status": "DRAFT", "version": 1}', NULL, NULL, '2026-08-11 15:10:50.257+07', 100, 15, 9);
+INSERT INTO public.audit_logs VALUES ('COMPLETE_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '3', '{"status": "APPROVED"}', '{"status": "COMPLETED", "handoverId": 6, "outstandingDebt": "4656250"}', NULL, NULL, '2026-08-11 15:10:50.702+07', 102, 15, 9);
+INSERT INTO public.audit_logs VALUES ('TERMINATE_CONTRACT', 'CONTRACT', '7', '{"status": "ACTIVE"}', '{"status": "TERMINATED"}', NULL, NULL, '2026-08-11 15:10:50.702+07', 103, 15, 9);
+INSERT INTO public.audit_logs VALUES ('RELEASE_ROOM_AFTER_TERMINATION', 'ROOM', '15', NULL, '{"status": "AVAILABLE", "marketplaceStatus": "HIDDEN"}', NULL, NULL, '2026-08-11 15:10:50.702+07', 104, 15, 9);
+INSERT INTO public.audit_logs VALUES ('APPROVE_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '3', NULL, '{"status": "APPROVED", "reviewNote": "API-E2E-20260811151034-7GWTM approved termination"}', NULL, NULL, '2026-08-11 15:10:49.545+07', 98, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_HANDOVER', 'HANDOVER_RECORD', '6', NULL, '{"type": "CHECKOUT", "version": 1, "contractId": 7}', NULL, NULL, '2026-08-11 15:10:49.823+07', 99, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '6', '{"version": 1}', '{"status": "CONFIRMED", "version": 1}', NULL, NULL, '2026-08-11 15:10:50.404+07', 101, 15, 13);
+INSERT INTO public.audit_logs VALUES ('DELETE_ROOM_ASSET', 'ROOM_ASSET', '6', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T15:10:53.621Z"}', NULL, NULL, '2026-08-11 15:10:53.621+07', 105, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ASSET_CATEGORY', 'ASSET_CATEGORY', '6', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T15:10:53.964Z"}', NULL, NULL, '2026-08-11 15:10:53.965+07', 106, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '7', NULL, '{"name": "API-E2E-20260811151220-TXWCG furniture"}', NULL, NULL, '2026-08-11 15:12:24.653+07', 107, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '7', NULL, '{"name": "API-E2E-20260811151220-TXWCG desk", "roomId": 17, "quantity": 1, "condition": "GOOD"}', NULL, NULL, '2026-08-11 15:12:24.708+07', 108, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_ROOM_ASSET', 'ROOM_ASSET', '7', '{"name": "API-E2E-20260811151220-TXWCG desk", "quantity": 1, "condition": "GOOD", "categoryId": 7}', '{"name": "API-E2E-20260811151220-TXWCG desk", "quantity": 1, "condition": "NORMAL", "categoryId": 7}', NULL, NULL, '2026-08-11 15:12:24.774+07', 109, 15, 9);
+INSERT INTO public.audit_logs VALUES ('ACTIVATE_CONTRACT', 'CONTRACT', '8', '{"status": "DRAFT_OR_WAITING"}', '{"status": "ACTIVE", "roomStatus": "OCCUPIED"}', NULL, NULL, '2026-08-11 15:12:27.961+07', 110, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_HANDOVER', 'HANDOVER_RECORD', '7', NULL, '{"type": "CHECKIN", "version": 1, "contractId": 8}', NULL, NULL, '2026-08-11 15:12:28.982+07', 111, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DISPUTE_HANDOVER', 'HANDOVER_RECORD', '7', '{"version": 1}', '{"status": "DISPUTED", "version": 1}', NULL, NULL, '2026-08-11 15:12:29.176+07', 112, 15, 13);
+INSERT INTO public.audit_logs VALUES ('RESOLVE_HANDOVER_DISPUTE', 'HANDOVER_RECORD', '7', '{"version": 1}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 15:12:29.313+07', 113, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '7', '{"version": 2}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 15:12:29.443+07', 114, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '7', '{"version": 2}', '{"status": "CONFIRMED", "version": 2}', NULL, NULL, '2026-08-11 15:12:29.58+07', 115, 15, 13);
+INSERT INTO public.audit_logs VALUES ('ASSIGN_TICKET', 'TICKET', '10', '{"status": "OPEN", "assignedTo": null}', '{"status": "IN_PROGRESS", "assignedTo": 9}', NULL, NULL, '2026-08-11 15:12:32.024+07', 116, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '10', '{"status": "IN_PROGRESS"}', '{"reason": null, "status": "WAITING_RENTER"}', NULL, NULL, '2026-08-11 15:12:32.252+07', 117, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '10', '{"status": "WAITING_RENTER"}', '{"reason": null, "status": "RESOLVED"}', NULL, NULL, '2026-08-11 15:12:32.381+07', 118, 15, 9);
+INSERT INTO public.audit_logs VALUES ('RENTER_REOPEN_TICKET', 'TICKET', '10', '{"status": "RESOLVED"}', '{"reason": null, "status": "IN_PROGRESS"}', NULL, NULL, '2026-08-11 15:12:32.523+07', 119, 15, 13);
+INSERT INTO public.audit_logs VALUES ('UPDATE_TICKET_STATUS', 'TICKET', '10', '{"status": "IN_PROGRESS"}', '{"reason": null, "status": "RESOLVED"}', NULL, NULL, '2026-08-11 15:12:32.656+07', 120, 15, 9);
+INSERT INTO public.audit_logs VALUES ('RENTER_CLOSE_TICKET', 'TICKET', '10', '{"status": "RESOLVED"}', '{"reason": null, "status": "CLOSED"}', NULL, NULL, '2026-08-11 15:12:32.788+07', 121, 15, 13);
+INSERT INTO public.audit_logs VALUES ('RENTER_CANCEL_TICKET', 'TICKET', '11', '{"status": "OPEN"}', '{"reason": null, "status": "CANCELED"}', NULL, NULL, '2026-08-11 15:12:33.171+07', 122, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CREATE_REVIEW', 'REVIEW', '4', NULL, '{"roomId": 17, "status": "PENDING", "contractId": 8}', NULL, NULL, '2026-08-11 15:12:33.357+07', 123, 15, 13);
+INSERT INTO public.audit_logs VALUES ('APPROVED_REVIEW', 'REVIEW', '4', '{"status": "PENDING"}', '{"reason": null, "status": "APPROVED", "isVisible": true}', NULL, NULL, '2026-08-11 15:12:33.547+07', 124, 15, 1);
+INSERT INTO public.audit_logs VALUES ('CREATE_REPORT', 'REPORT', '2', NULL, '{"status": "PENDING", "targetId": "15", "targetType": "TENANT"}', NULL, NULL, '2026-08-11 15:12:33.743+07', 125, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CLAIM_REPORT', 'REPORT', '2', '{"status": "PENDING"}', '{"status": "REVIEWING", "resolutionNote": null}', NULL, NULL, '2026-08-11 15:12:33.894+07', 126, 15, 1);
+INSERT INTO public.audit_logs VALUES ('RESOLVED_REPORT', 'REPORT', '2', '{"status": "REVIEWING"}', '{"status": "RESOLVED", "resolutionNote": "API-E2E-20260811151220-TXWCG reviewed"}', NULL, NULL, '2026-08-11 15:12:33.945+07', 127, 15, 1);
+INSERT INTO public.audit_logs VALUES ('CREATE_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '4', NULL, '{"status": "PENDING", "contractId": 8, "expectedMoveOutDate": "2026-08-18"}', NULL, NULL, '2026-08-11 15:12:34.326+07', 128, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CANCEL_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '4', NULL, '{"status": "CANCELED", "reviewNote": null}', NULL, NULL, '2026-08-11 15:12:34.49+07', 129, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CREATE_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '5', NULL, '{"status": "PENDING", "contractId": 8, "expectedMoveOutDate": "2026-08-18"}', NULL, NULL, '2026-08-11 15:12:34.632+07', 130, 15, 13);
+INSERT INTO public.audit_logs VALUES ('REJECT_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '5', NULL, '{"status": "REJECTED", "reviewNote": "API-E2E-20260811151220-TXWCG rejection branch"}', NULL, NULL, '2026-08-11 15:12:34.763+07', 131, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '6', NULL, '{"status": "PENDING", "contractId": 8, "expectedMoveOutDate": "2026-08-18"}', NULL, NULL, '2026-08-11 15:12:34.902+07', 132, 15, 13);
+INSERT INTO public.audit_logs VALUES ('APPROVE_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '6', NULL, '{"status": "APPROVED", "reviewNote": "API-E2E-20260811151220-TXWCG approved termination"}', NULL, NULL, '2026-08-11 15:12:35.045+07', 133, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_HANDOVER', 'HANDOVER_RECORD', '8', NULL, '{"type": "CHECKOUT", "version": 1, "contractId": 8}', NULL, NULL, '2026-08-11 15:12:35.21+07', 134, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '8', '{"version": 1}', '{"status": "DRAFT", "version": 1}', NULL, NULL, '2026-08-11 15:12:35.371+07', 135, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '8', '{"version": 1}', '{"status": "CONFIRMED", "version": 1}', NULL, NULL, '2026-08-11 15:12:35.527+07', 136, 15, 13);
+INSERT INTO public.audit_logs VALUES ('COMPLETE_CONTRACT_TERMINATION', 'CONTRACT_TERMINATION', '6', '{"status": "APPROVED"}', '{"status": "COMPLETED", "handoverId": 8, "outstandingDebt": "4656250"}', NULL, NULL, '2026-08-11 15:12:35.695+07', 137, 15, 9);
+INSERT INTO public.audit_logs VALUES ('TERMINATE_CONTRACT', 'CONTRACT', '8', '{"status": "ACTIVE"}', '{"status": "TERMINATED"}', NULL, NULL, '2026-08-11 15:12:35.695+07', 138, 15, 9);
+INSERT INTO public.audit_logs VALUES ('RELEASE_ROOM_AFTER_TERMINATION', 'ROOM', '17', NULL, '{"status": "AVAILABLE", "marketplaceStatus": "HIDDEN"}', NULL, NULL, '2026-08-11 15:12:35.695+07', 139, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ROOM_ASSET', 'ROOM_ASSET', '7', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T15:12:38.721Z"}', NULL, NULL, '2026-08-11 15:12:38.722+07', 140, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ASSET_CATEGORY', 'ASSET_CATEGORY', '7', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T15:12:38.782Z"}', NULL, NULL, '2026-08-11 15:12:38.785+07', 141, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '8', NULL, '{"name": "API-E2E-20260811151357-VHCL6 furniture"}', NULL, NULL, '2026-08-11 15:14:01.522+07', 142, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '8', NULL, '{"name": "API-E2E-20260811151357-VHCL6 desk", "roomId": 19, "quantity": 1, "condition": "GOOD"}', NULL, NULL, '2026-08-11 15:14:01.579+07', 143, 15, 9);
+INSERT INTO public.audit_logs VALUES ('UPDATE_ROOM_ASSET', 'ROOM_ASSET', '8', '{"name": "API-E2E-20260811151357-VHCL6 desk", "quantity": 1, "condition": "GOOD", "categoryId": 8}', '{"name": "API-E2E-20260811151357-VHCL6 desk", "quantity": 1, "condition": "NORMAL", "categoryId": 8}', NULL, NULL, '2026-08-11 15:14:01.643+07', 144, 15, 9);
+INSERT INTO public.audit_logs VALUES ('ACTIVATE_CONTRACT', 'CONTRACT', '9', '{"status": "DRAFT_OR_WAITING"}', '{"status": "ACTIVE", "roomStatus": "OCCUPIED"}', NULL, NULL, '2026-08-11 15:14:04.114+07', 145, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CREATE_HANDOVER', 'HANDOVER_RECORD', '9', NULL, '{"type": "CHECKIN", "version": 1, "contractId": 9}', NULL, NULL, '2026-08-11 15:14:05.055+07', 146, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DISPUTE_HANDOVER', 'HANDOVER_RECORD', '9', '{"version": 1}', '{"status": "DISPUTED", "version": 1}', NULL, NULL, '2026-08-11 15:14:05.245+07', 147, 15, 13);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '9', '{"version": 2}', '{"status": "CONFIRMED", "version": 2}', NULL, NULL, '2026-08-11 15:14:05.947+07', 150, 15, 13);
+INSERT INTO public.audit_logs VALUES ('RESOLVE_HANDOVER_DISPUTE', 'HANDOVER_RECORD', '9', '{"version": 1}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 15:14:05.385+07', 148, 15, 9);
+INSERT INTO public.audit_logs VALUES ('CONFIRM_HANDOVER', 'HANDOVER_RECORD', '9', '{"version": 2}', '{"status": "DRAFT", "version": 2}', NULL, NULL, '2026-08-11 15:14:05.525+07', 149, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ROOM_ASSET', 'ROOM_ASSET', '8', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T15:14:10.110Z"}', NULL, NULL, '2026-08-11 15:14:10.11+07', 151, 15, 9);
+INSERT INTO public.audit_logs VALUES ('DELETE_ASSET_CATEGORY', 'ASSET_CATEGORY', '8', '{"deletedAt": null}', '{"deletedAt": "2026-08-11T15:14:10.161Z"}', NULL, NULL, '2026-08-11 15:14:10.161+07', 152, 15, 9);
+INSERT INTO public.audit_logs VALUES ('ACTIVATE_CONTRACT', 'CONTRACT', '10', '{"status": "DRAFT_OR_WAITING"}', '{"status": "ACTIVE", "roomStatus": "OCCUPIED"}', NULL, NULL, '2026-08-14 13:36:19.382+07', 153, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '9', NULL, '{"name": "Tủ Lạnh"}', NULL, NULL, '2026-08-14 15:47:03.058+07', 154, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '10', NULL, '{"name": "Bàn ghế gỗ"}', NULL, NULL, '2026-08-14 15:47:12.848+07', 155, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '11', NULL, '{"name": "Tủ quần áo"}', NULL, NULL, '2026-08-14 15:47:19.222+07', 156, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '12', NULL, '{"name": "Chăn ga gối đệm"}', NULL, NULL, '2026-08-14 15:47:34.715+07', 157, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '13', NULL, '{"name": "Bồn rửa mặt"}', NULL, NULL, '2026-08-14 15:48:11.999+07', 158, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '14', NULL, '{"name": "Quạt treo tường"}', NULL, NULL, '2026-08-14 15:48:25.813+07', 159, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '15', NULL, '{"name": "Điều Hòa"}', NULL, NULL, '2026-08-14 15:51:19.445+07', 160, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '9', NULL, '{"name": "Bàn ghế gỗ", "roomId": 21, "quantity": 1, "condition": "NORMAL"}', NULL, NULL, '2026-08-14 15:58:31.886+07', 161, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '10', NULL, '{"name": "Quạt treo tường", "roomId": 21, "quantity": 1, "condition": "GOOD"}', NULL, NULL, '2026-08-14 15:58:48.169+07', 162, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '11', NULL, '{"name": "Tủ lạnh pana", "roomId": 21, "quantity": 1, "condition": "GOOD"}', NULL, NULL, '2026-08-14 15:59:04.107+07', 163, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '12', NULL, '{"name": "Bàn ghế gỗ", "roomId": 23, "quantity": 1, "condition": "NEW"}', NULL, NULL, '2026-08-15 07:17:07.582+07', 164, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '13', NULL, '{"name": "Tủ Lạnh", "roomId": 23, "quantity": 1, "condition": "NEW"}', NULL, NULL, '2026-08-15 07:17:21.526+07', 165, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '14', NULL, '{"name": "Điều Hòa", "roomId": 23, "quantity": 1, "condition": "NEW"}', NULL, NULL, '2026-08-15 07:17:29.662+07', 166, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ASSET_CATEGORY', 'ASSET_CATEGORY', '16', NULL, '{"name": "Giường ngủ"}', NULL, NULL, '2026-08-15 07:17:58.781+07', 167, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '15', NULL, '{"name": "Giường", "roomId": 24, "quantity": 1, "condition": "NEW"}', NULL, NULL, '2026-08-15 07:26:42.599+07', 168, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '16', NULL, '{"name": "Quạt treo tường", "roomId": 24, "quantity": 1, "condition": "NEW"}', NULL, NULL, '2026-08-15 07:26:58.481+07', 169, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '17', NULL, '{"name": "Bàn ghế gỗ", "roomId": 26, "quantity": 1, "condition": "NEW"}', NULL, NULL, '2026-08-16 17:15:36.823+07', 170, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '18', NULL, '{"name": "Điều Hòa", "roomId": 26, "quantity": 1, "condition": "NEW"}', NULL, NULL, '2026-08-16 17:15:43.133+07', 171, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '19', NULL, '{"name": "Bàn", "roomId": 28, "quantity": 1, "condition": "NORMAL"}', NULL, NULL, '2026-08-19 20:24:55.463+07', 172, 1, 8);
+INSERT INTO public.audit_logs VALUES ('CREATE_ROOM_ASSET', 'ROOM_ASSET', '20', NULL, '{"name": "Điều Hòa", "roomId": 28, "quantity": 1, "condition": "NORMAL"}', NULL, NULL, '2026-08-19 20:25:05.513+07', 173, 1, 8);
+
+
+--
+-- Data for Name: background_jobs; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.background_jobs VALUES ('ocr', 'PROCESS_OCR_JOB', '{"ocrJobId": 1}', 'COMPLETED', 1, NULL, '2026-08-18 06:13:06.813+07', '2026-08-18 06:13:07.451+07', '2026-08-18 06:13:10.313+07', 389, 1, 'ocr-389', '2026-08-18 06:13:10.314+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 1}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:40.334+07', '2026-08-11 14:53:40.463+07', '2026-08-11 14:53:40.482+07', 1, 15, '1', '2026-08-11 14:53:40.483+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 2}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:40.431+07', '2026-08-11 14:53:40.53+07', '2026-08-11 14:53:40.534+07', 2, 15, '2', '2026-08-11 14:53:40.535+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 3}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:40.591+07', '2026-08-11 14:53:40.644+07', '2026-08-11 14:53:40.658+07', 3, 15, '3', '2026-08-11 14:53:40.658+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 4}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:40.919+07', '2026-08-11 14:53:40.994+07', '2026-08-11 14:53:40.997+07', 4, 15, '4', '2026-08-11 14:53:40.998+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 5}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:40.96+07', '2026-08-11 14:53:41.036+07', '2026-08-11 14:53:41.041+07', 5, 15, '5', '2026-08-11 14:53:41.041+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 6}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:41.072+07', '2026-08-11 14:53:41.164+07', '2026-08-11 14:53:41.169+07', 6, 15, '6', '2026-08-11 14:53:41.172+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 7}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:41.475+07', '2026-08-11 14:53:41.551+07', '2026-08-11 14:53:41.564+07', 7, 15, '7', '2026-08-11 14:53:41.565+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 8}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:41.611+07', '2026-08-11 14:53:41.675+07', '2026-08-11 14:53:41.686+07', 8, 15, '8', '2026-08-11 14:53:41.687+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 9}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:41.727+07', '2026-08-11 14:53:41.797+07', '2026-08-11 14:53:41.8+07', 9, 15, '9', '2026-08-11 14:53:41.801+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 10}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:41.975+07', '2026-08-11 14:53:42.049+07', '2026-08-11 14:53:42.053+07', 10, 15, '10', '2026-08-11 14:53:42.057+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 11}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:42.135+07', '2026-08-11 14:53:42.235+07', '2026-08-11 14:53:42.243+07', 11, 15, '11', '2026-08-11 14:53:42.243+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 12}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:42.256+07', '2026-08-11 14:53:42.354+07', '2026-08-11 14:53:42.358+07', 12, 15, '12', '2026-08-11 14:53:42.358+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 13}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:42.371+07', '2026-08-11 14:53:42.464+07', '2026-08-11 14:53:42.468+07', 13, 15, '13', '2026-08-11 14:53:42.469+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 14}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:42.624+07', '2026-08-11 14:53:42.696+07', '2026-08-11 14:53:42.699+07', 14, 15, '14', '2026-08-11 14:53:42.699+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 15}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:42.668+07', '2026-08-11 14:53:42.734+07', '2026-08-11 14:53:42.741+07', 15, 15, '15', '2026-08-11 14:53:42.741+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 16}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:42.77+07', '2026-08-11 14:53:42.85+07', '2026-08-11 14:53:42.853+07', 16, 15, '16', '2026-08-11 14:53:42.854+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 17}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:42.877+07', '2026-08-11 14:53:42.964+07', '2026-08-11 14:53:42.969+07', 17, 15, '17', '2026-08-11 14:53:42.969+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 18}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:45.268+07', '2026-08-11 14:53:45.34+07', '2026-08-11 14:53:45.346+07', 18, 15, '18', '2026-08-11 14:53:45.347+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 19}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:45.314+07', '2026-08-11 14:53:45.39+07', '2026-08-11 14:53:45.394+07', 19, 15, '19', '2026-08-11 14:53:45.394+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 20}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:45.502+07', '2026-08-11 14:53:45.574+07', '2026-08-11 14:53:45.578+07', 20, 15, '20', '2026-08-11 14:53:45.578+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 21}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:45.541+07', '2026-08-11 14:53:45.616+07', '2026-08-11 14:53:45.622+07', 21, 15, '21', '2026-08-11 14:53:45.622+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 22}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:45.666+07', '2026-08-11 14:53:45.727+07', '2026-08-11 14:53:45.743+07', 22, 15, '22', '2026-08-11 14:53:45.743+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 23}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:45.711+07', '2026-08-11 14:53:45.779+07', '2026-08-11 14:53:45.782+07', 23, 15, '23', '2026-08-11 14:53:45.783+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 24}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:45.824+07', '2026-08-11 14:53:45.886+07', '2026-08-11 14:53:45.892+07', 24, 15, '24', '2026-08-11 14:53:45.892+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 25}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:45.864+07', '2026-08-11 14:53:45.932+07', '2026-08-11 14:53:45.936+07', 25, 15, '25', '2026-08-11 14:53:45.936+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 26}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:46.007+07', '2026-08-11 14:53:46.131+07', '2026-08-11 14:53:46.135+07', 26, 15, '26', '2026-08-11 14:53:46.136+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 27}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:46.056+07', '2026-08-11 14:53:46.178+07', '2026-08-11 14:53:46.183+07', 27, 15, '27', '2026-08-11 14:53:46.184+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 28}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:46.555+07', '2026-08-11 14:53:46.628+07', '2026-08-11 14:53:46.631+07', 28, 15, '28', '2026-08-11 14:53:46.631+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 29}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:47.085+07', '2026-08-11 14:53:47.158+07', '2026-08-11 14:53:47.169+07', 29, 15, '29', '2026-08-11 14:53:47.169+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 30}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:47.36+07', '2026-08-11 14:53:47.431+07', '2026-08-11 14:53:47.434+07', 30, 15, '30', '2026-08-11 14:53:47.434+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 31}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:47.69+07', '2026-08-11 14:53:47.807+07', '2026-08-11 14:53:47.924+07', 31, 15, '31', '2026-08-11 14:53:47.924+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 32}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:47.962+07', '2026-08-11 14:53:48.043+07', '2026-08-11 14:53:48.058+07', 32, 15, '32', '2026-08-11 14:53:48.059+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 33}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:48.088+07', '2026-08-11 14:53:48.168+07', '2026-08-11 14:53:48.174+07', 33, 15, '33', '2026-08-11 14:53:48.174+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 34}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:48.201+07', '2026-08-11 14:53:48.28+07', '2026-08-11 14:53:48.284+07', 34, 15, '34', '2026-08-11 14:53:48.285+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 35}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:48.683+07', '2026-08-11 14:53:48.756+07', '2026-08-11 14:53:48.76+07', 35, 15, '35', '2026-08-11 14:53:48.76+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 36}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:48.845+07', '2026-08-11 14:53:48.936+07', '2026-08-11 14:53:48.947+07', 36, 15, '36', '2026-08-11 14:53:48.947+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 37}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:48.978+07', '2026-08-11 14:53:49.052+07', '2026-08-11 14:53:49.058+07', 37, 15, '37', '2026-08-11 14:53:49.058+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 38}', 'COMPLETED', 1, NULL, '2026-08-11 14:53:49.018+07', '2026-08-11 14:53:49.095+07', '2026-08-11 14:53:49.098+07', 38, 15, '38', '2026-08-11 14:53:49.099+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 39}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:18.689+07', '2026-08-11 14:56:18.78+07', '2026-08-11 14:56:18.792+07', 39, 15, '39', '2026-08-11 14:56:18.792+07');
+INSERT INTO public.background_jobs VALUES ('ocr', 'PROCESS_OCR_JOB', '{"ocrJobId": 2}', 'COMPLETED', 1, NULL, '2026-08-18 06:48:17.161+07', '2026-08-18 06:48:17.298+07', '2026-08-18 06:48:20.031+07', 390, 1, 'ocr-390', '2026-08-18 06:48:20.032+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 40}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:18.748+07', '2026-08-11 14:56:18.829+07', '2026-08-11 14:56:18.831+07', 40, 15, '40', '2026-08-11 14:56:18.831+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 41}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:18.866+07', '2026-08-11 14:56:18.936+07', '2026-08-11 14:56:18.944+07', 41, 15, '41', '2026-08-11 14:56:18.945+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 42}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:19.139+07', '2026-08-11 14:56:19.211+07', '2026-08-11 14:56:19.221+07', 42, 15, '42', '2026-08-11 14:56:19.221+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 43}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:19.182+07', '2026-08-11 14:56:19.257+07', '2026-08-11 14:56:19.259+07', 43, 15, '43', '2026-08-11 14:56:19.26+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 44}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:19.289+07', '2026-08-11 14:56:19.364+07', '2026-08-11 14:56:19.367+07', 44, 15, '44', '2026-08-11 14:56:19.367+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 45}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:19.637+07', '2026-08-11 14:56:19.708+07', '2026-08-11 14:56:19.711+07', 45, 15, '45', '2026-08-11 14:56:19.711+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 46}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:19.738+07', '2026-08-11 14:56:19.815+07', '2026-08-11 14:56:19.824+07', 46, 15, '46', '2026-08-11 14:56:19.825+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 47}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:19.845+07', '2026-08-11 14:56:19.929+07', '2026-08-11 14:56:19.931+07', 47, 15, '47', '2026-08-11 14:56:19.932+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 48}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:20.054+07', '2026-08-11 14:56:20.124+07', '2026-08-11 14:56:20.128+07', 48, 15, '48', '2026-08-11 14:56:20.128+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 49}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:20.185+07', '2026-08-11 14:56:20.24+07', '2026-08-11 14:56:20.246+07', 49, 15, '49', '2026-08-11 14:56:20.247+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 50}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:20.31+07', '2026-08-11 14:56:20.363+07', '2026-08-11 14:56:20.368+07', 50, 15, '50', '2026-08-11 14:56:20.368+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 51}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:20.431+07', '2026-08-11 14:56:20.48+07', '2026-08-11 14:56:20.487+07', 51, 15, '51', '2026-08-11 14:56:20.487+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 52}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:20.654+07', '2026-08-11 14:56:20.725+07', '2026-08-11 14:56:20.728+07', 52, 15, '52', '2026-08-11 14:56:20.728+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 53}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:20.697+07', '2026-08-11 14:56:20.763+07', '2026-08-11 14:56:20.767+07', 53, 15, '53', '2026-08-11 14:56:20.768+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 54}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:20.799+07', '2026-08-11 14:56:20.873+07', '2026-08-11 14:56:20.877+07', 54, 15, '54', '2026-08-11 14:56:20.877+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 55}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:20.904+07', '2026-08-11 14:56:20.983+07', '2026-08-11 14:56:20.988+07', 55, 15, '55', '2026-08-11 14:56:20.989+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 56}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:22.507+07', '2026-08-11 14:56:22.583+07', '2026-08-11 14:56:22.593+07', 56, 15, '56', '2026-08-11 14:56:22.594+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 57}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:22.553+07', '2026-08-11 14:56:22.63+07', '2026-08-11 14:56:22.633+07', 57, 15, '57', '2026-08-11 14:56:22.633+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 58}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:22.727+07', '2026-08-11 14:56:22.813+07', '2026-08-11 14:56:22.818+07', 58, 15, '58', '2026-08-11 14:56:22.818+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 59}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:22.766+07', '2026-08-11 14:56:22.855+07', '2026-08-11 14:56:22.858+07', 59, 15, '59', '2026-08-11 14:56:22.859+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 60}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:22.88+07', '2026-08-11 14:56:22.964+07', '2026-08-11 14:56:22.969+07', 60, 15, '60', '2026-08-11 14:56:22.97+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 61}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:22.925+07', '2026-08-11 14:56:23.006+07', '2026-08-11 14:56:23.009+07', 61, 15, '61', '2026-08-11 14:56:23.009+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 62}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:23.053+07', '2026-08-11 14:56:23.117+07', '2026-08-11 14:56:23.123+07', 62, 15, '62', '2026-08-11 14:56:23.124+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 63}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:23.092+07', '2026-08-11 14:56:23.16+07', '2026-08-11 14:56:23.163+07', 63, 15, '63', '2026-08-11 14:56:23.163+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 64}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:23.205+07', '2026-08-11 14:56:23.268+07', '2026-08-11 14:56:23.272+07', 64, 15, '64', '2026-08-11 14:56:23.272+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 65}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:23.245+07', '2026-08-11 14:56:23.308+07', '2026-08-11 14:56:23.312+07', 65, 15, '65', '2026-08-11 14:56:23.312+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 66}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:23.677+07', '2026-08-11 14:56:23.747+07', '2026-08-11 14:56:23.75+07', 66, 15, '66', '2026-08-11 14:56:23.75+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 67}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:24.15+07', '2026-08-11 14:56:24.221+07', '2026-08-11 14:56:24.224+07', 67, 15, '67', '2026-08-11 14:56:24.224+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 68}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:24.392+07', '2026-08-11 14:56:24.465+07', '2026-08-11 14:56:24.47+07', 68, 15, '68', '2026-08-11 14:56:24.47+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 69}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:24.737+07', '2026-08-11 14:56:24.811+07', '2026-08-11 14:56:24.814+07', 69, 15, '69', '2026-08-11 14:56:24.814+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 70}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:24.845+07', '2026-08-11 14:56:24.918+07', '2026-08-11 14:56:24.922+07', 70, 15, '70', '2026-08-11 14:56:24.922+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 71}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:24.949+07', '2026-08-11 14:56:25.027+07', '2026-08-11 14:56:25.03+07', 71, 15, '71', '2026-08-11 14:56:25.031+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 72}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:25.055+07', '2026-08-11 14:56:25.153+07', '2026-08-11 14:56:25.157+07', 72, 15, '72', '2026-08-11 14:56:25.157+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 73}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:25.531+07', '2026-08-11 14:56:25.603+07', '2026-08-11 14:56:25.609+07', 73, 15, '73', '2026-08-11 14:56:25.61+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 75}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:25.789+07', '2026-08-11 14:56:25.829+07', '2026-08-11 14:56:25.832+07', 75, 15, '75', '2026-08-11 14:56:25.832+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 74}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:25.682+07', '2026-08-11 14:56:25.79+07', '2026-08-11 14:56:25.793+07', 74, 15, '74', '2026-08-11 14:56:25.793+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 76}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:25.83+07', '2026-08-11 14:56:25.867+07', '2026-08-11 14:56:25.873+07', 76, 15, '76', '2026-08-11 14:56:25.873+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 81}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:52.686+07', '2026-08-11 15:07:52.8+07', '2026-08-11 15:07:52.816+07', 81, 15, '81', '2026-08-11 15:07:52.817+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 132}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:27.185+07', '2026-08-11 15:09:27.259+07', '2026-08-11 15:09:27.268+07', 132, 15, '132', '2026-08-11 15:09:27.269+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 82}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:52.769+07', '2026-08-11 15:07:52.892+07', '2026-08-11 15:07:52.902+07', 82, 15, '82', '2026-08-11 15:07:52.903+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 133}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:27.228+07', '2026-08-11 15:09:27.306+07', '2026-08-11 15:09:27.31+07', 133, 15, '133', '2026-08-11 15:09:27.31+07');
+INSERT INTO public.background_jobs VALUES ('ocr', 'PROCESS_OCR_JOB', '{"ocrJobId": 3}', 'COMPLETED', 1, NULL, '2026-08-18 06:57:14.116+07', '2026-08-18 06:57:14.203+07', '2026-08-18 06:57:15.379+07', 391, 1, 'ocr-391', '2026-08-18 06:57:15.38+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 86}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:53.274+07', '2026-08-11 15:07:53.357+07', '2026-08-11 15:07:53.361+07', 86, 15, '86', '2026-08-11 15:07:53.361+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 87}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:53.599+07', '2026-08-11 15:07:53.679+07', '2026-08-11 15:07:53.689+07', 87, 15, '87', '2026-08-11 15:07:53.69+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 135}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:27.84+07', '2026-08-11 15:09:27.913+07', '2026-08-11 15:09:27.925+07', 135, 15, '135', '2026-08-11 15:09:27.926+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 88}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:53.72+07', '2026-08-11 15:07:53.81+07', '2026-08-11 15:07:53.815+07', 88, 15, '88', '2026-08-11 15:07:53.816+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 136}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:27.88+07', '2026-08-11 15:09:27.968+07', '2026-08-11 15:09:27.972+07', 136, 15, '136', '2026-08-11 15:09:27.972+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 90}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:54.049+07', '2026-08-11 15:07:54.122+07', '2026-08-11 15:07:54.128+07', 90, 15, '90', '2026-08-11 15:07:54.129+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 138}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:28.294+07', '2026-08-11 15:09:28.367+07', '2026-08-11 15:09:28.378+07', 138, 15, '138', '2026-08-11 15:09:28.379+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 91}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:54.16+07', '2026-08-11 15:07:54.24+07', '2026-08-11 15:07:54.247+07', 91, 15, '91', '2026-08-11 15:07:54.247+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 142}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:28.783+07', '2026-08-11 15:09:28.823+07', '2026-08-11 15:09:28.828+07', 142, 15, '142', '2026-08-11 15:09:28.828+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 92}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:54.262+07', '2026-08-11 15:07:54.36+07', '2026-08-11 15:07:54.368+07', 92, 15, '92', '2026-08-11 15:07:54.368+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 94}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:54.574+07', '2026-08-11 15:07:54.658+07', '2026-08-11 15:07:54.661+07', 94, 15, '94', '2026-08-11 15:07:54.661+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 145}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:29.161+07', '2026-08-11 15:09:29.234+07', '2026-08-11 15:09:29.238+07', 145, 15, '145', '2026-08-11 15:09:29.238+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 95}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:54.615+07', '2026-08-11 15:07:54.697+07', '2026-08-11 15:07:54.701+07', 95, 15, '95', '2026-08-11 15:07:54.701+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 146}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:29.202+07', '2026-08-11 15:09:29.276+07', '2026-08-11 15:09:29.279+07', 146, 15, '146', '2026-08-11 15:09:29.279+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 97}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:54.794+07', '2026-08-11 15:07:54.851+07', '2026-08-11 15:07:54.862+07', 97, 15, '97', '2026-08-11 15:07:54.862+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 147}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:29.294+07', '2026-08-11 15:09:29.386+07', '2026-08-11 15:09:29.39+07', 147, 15, '147', '2026-08-11 15:09:29.39+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 102}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:56.553+07', '2026-08-11 15:07:56.602+07', '2026-08-11 15:07:56.606+07', 102, 15, '102', '2026-08-11 15:07:56.606+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 148}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:29.379+07', '2026-08-11 15:09:29.434+07', '2026-08-11 15:09:29.438+07', 148, 15, '148', '2026-08-11 15:09:29.438+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 103}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:56.59+07', '2026-08-11 15:07:56.642+07', '2026-08-11 15:07:56.647+07', 103, 15, '103', '2026-08-11 15:07:56.647+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 104}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:56.697+07', '2026-08-11 15:07:56.753+07', '2026-08-11 15:07:56.756+07', 104, 15, '104', '2026-08-11 15:07:56.757+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 149}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:30.686+07', '2026-08-11 15:09:30.759+07', '2026-08-11 15:09:30.761+07', 149, 15, '149', '2026-08-11 15:09:30.762+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 105}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:56.735+07', '2026-08-11 15:07:56.792+07', '2026-08-11 15:07:56.796+07', 105, 15, '105', '2026-08-11 15:07:56.796+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 150}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:30.725+07', '2026-08-11 15:09:30.798+07', '2026-08-11 15:09:30.803+07', 150, 15, '150', '2026-08-11 15:09:30.804+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 106}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:56.853+07', '2026-08-11 15:07:56.903+07', '2026-08-11 15:07:56.905+07', 106, 15, '106', '2026-08-11 15:07:56.906+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 107}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:56.89+07', '2026-08-11 15:07:56.945+07', '2026-08-11 15:07:56.948+07', 107, 15, '107', '2026-08-11 15:07:56.949+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 108}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:57.285+07', '2026-08-11 15:07:57.362+07', '2026-08-11 15:07:57.365+07', 108, 15, '108', '2026-08-11 15:07:57.366+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 110}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:57.905+07', '2026-08-11 15:07:57.975+07', '2026-08-11 15:07:57.978+07', 110, 15, '110', '2026-08-11 15:07:57.978+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 112}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:58.295+07', '2026-08-11 15:07:58.377+07', '2026-08-11 15:07:58.379+07', 112, 15, '112', '2026-08-11 15:07:58.379+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 115}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:58.905+07', '2026-08-11 15:07:58.978+07', '2026-08-11 15:07:58.982+07', 115, 15, '115', '2026-08-11 15:07:58.982+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 116}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:59.041+07', '2026-08-11 15:07:59.087+07', '2026-08-11 15:07:59.091+07', 116, 15, '116', '2026-08-11 15:07:59.091+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 117}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:59.171+07', '2026-08-11 15:07:59.283+07', '2026-08-11 15:07:59.288+07', 117, 15, '117', '2026-08-11 15:07:59.288+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 118}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:59.213+07', '2026-08-11 15:07:59.324+07', '2026-08-11 15:07:59.335+07', 118, 15, '118', '2026-08-11 15:07:59.335+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 162}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:32.632+07', '2026-08-11 15:09:32.706+07', '2026-08-11 15:09:32.711+07', 162, 15, '162', '2026-08-11 15:09:32.712+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 77}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:26.04+07', '2026-08-11 14:56:26.109+07', '2026-08-11 14:56:26.112+07', 77, 15, '77', '2026-08-11 14:56:26.112+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 83}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:52.884+07', '2026-08-11 15:07:52.941+07', '2026-08-11 15:07:52.943+07', 83, 15, '83', '2026-08-11 15:07:52.943+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 134}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:27.341+07', '2026-08-11 15:09:27.415+07', '2026-08-11 15:09:27.427+07', 134, 15, '134', '2026-08-11 15:09:27.646+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 78}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:26.078+07', '2026-08-11 14:56:26.152+07', '2026-08-11 14:56:26.156+07', 78, 15, '78', '2026-08-11 14:56:26.156+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 137}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:27.98+07', '2026-08-11 15:09:28.079+07', '2026-08-11 15:09:28.081+07', 137, 15, '137', '2026-08-11 15:09:28.081+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 84}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:53.124+07', '2026-08-11 15:07:53.196+07', '2026-08-11 15:07:53.202+07', 84, 15, '84', '2026-08-11 15:07:53.202+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 79}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:26.178+07', '2026-08-11 14:56:26.26+07', '2026-08-11 14:56:26.265+07', 79, 15, '79', '2026-08-11 14:56:26.265+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 80}', 'COMPLETED', 1, NULL, '2026-08-11 14:56:26.217+07', '2026-08-11 14:56:26.31+07', '2026-08-11 14:56:26.314+07', 80, 15, '80', '2026-08-11 14:56:26.314+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 85}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:53.161+07', '2026-08-11 15:07:53.241+07', '2026-08-11 15:07:53.251+07', 85, 15, '85', '2026-08-11 15:07:53.251+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 139}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:28.39+07', '2026-08-11 15:09:28.485+07', '2026-08-11 15:09:28.49+07', 139, 15, '139', '2026-08-11 15:09:28.49+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 89}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:53.849+07', '2026-08-11 15:07:53.93+07', '2026-08-11 15:07:53.938+07', 89, 15, '89', '2026-08-11 15:07:53.938+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 93}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:54.371+07', '2026-08-11 15:07:54.475+07', '2026-08-11 15:07:54.478+07', 93, 15, '93', '2026-08-11 15:07:54.478+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 140}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:28.492+07', '2026-08-11 15:09:28.597+07', '2026-08-11 15:09:28.605+07', 140, 15, '140', '2026-08-11 15:09:28.606+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 96}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:54.706+07', '2026-08-11 15:07:54.808+07', '2026-08-11 15:07:54.811+07', 96, 15, '96', '2026-08-11 15:07:54.811+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 141}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:28.67+07', '2026-08-11 15:09:28.712+07', '2026-08-11 15:09:28.715+07', 141, 15, '141', '2026-08-11 15:09:28.715+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 98}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:56.229+07', '2026-08-11 15:07:56.3+07', '2026-08-11 15:07:56.304+07', 98, 15, '98', '2026-08-11 15:07:56.305+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 143}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:28.876+07', '2026-08-11 15:09:28.933+07', '2026-08-11 15:09:28.937+07', 143, 15, '143', '2026-08-11 15:09:28.937+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 99}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:56.265+07', '2026-08-11 15:07:56.342+07', '2026-08-11 15:07:56.347+07', 99, 15, '99', '2026-08-11 15:07:56.347+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 144}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:28.974+07', '2026-08-11 15:09:29.043+07', '2026-08-11 15:09:29.046+07', 144, 15, '144', '2026-08-11 15:09:29.046+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 100}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:56.413+07', '2026-08-11 15:07:56.452+07', '2026-08-11 15:07:56.455+07', 100, 15, '100', '2026-08-11 15:07:56.455+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 101}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:56.449+07', '2026-08-11 15:07:56.491+07', '2026-08-11 15:07:56.493+07', 101, 15, '101', '2026-08-11 15:07:56.494+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 109}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:57.705+07', '2026-08-11 15:07:57.776+07', '2026-08-11 15:07:57.779+07', 109, 15, '109', '2026-08-11 15:07:57.779+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 111}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:58.19+07', '2026-08-11 15:07:58.262+07', '2026-08-11 15:07:58.269+07', 111, 15, '111', '2026-08-11 15:07:58.27+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 113}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:58.386+07', '2026-08-11 15:07:58.484+07', '2026-08-11 15:07:58.489+07', 113, 15, '113', '2026-08-11 15:07:58.49+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 114}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:58.471+07', '2026-08-11 15:07:58.532+07', '2026-08-11 15:07:58.537+07', 114, 15, '114', '2026-08-11 15:07:58.538+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 119}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:59.471+07', '2026-08-11 15:07:59.614+07', '2026-08-11 15:07:59.62+07', 119, 15, '119', '2026-08-11 15:07:59.621+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 120}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:59.58+07', '2026-08-11 15:07:59.657+07', '2026-08-11 15:07:59.661+07', 120, 15, '120', '2026-08-11 15:07:59.661+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 121}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:59.682+07', '2026-08-11 15:07:59.767+07', '2026-08-11 15:07:59.77+07', 121, 15, '121', '2026-08-11 15:07:59.77+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 122}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:59.72+07', '2026-08-11 15:07:59.806+07', '2026-08-11 15:07:59.811+07', 122, 15, '122', '2026-08-11 15:07:59.811+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 123}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:59.812+07', '2026-08-11 15:07:59.917+07', '2026-08-11 15:07:59.92+07', 123, 15, '123', '2026-08-11 15:07:59.92+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 124}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:59.848+07', '2026-08-11 15:07:59.956+07', '2026-08-11 15:07:59.959+07', 124, 15, '124', '2026-08-11 15:07:59.959+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 125}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:59.938+07', '2026-08-11 15:07:59.994+07', '2026-08-11 15:07:59.997+07', 125, 15, '125', '2026-08-11 15:07:59.997+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 126}', 'COMPLETED', 1, NULL, '2026-08-11 15:07:59.974+07', '2026-08-11 15:08:00.033+07', '2026-08-11 15:08:00.036+07', 126, 15, '126', '2026-08-11 15:08:00.037+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 127}', 'COMPLETED', 1, NULL, '2026-08-11 15:08:00.065+07', '2026-08-11 15:08:00.144+07', '2026-08-11 15:08:00.147+07', 127, 15, '127', '2026-08-11 15:08:00.147+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 128}', 'COMPLETED', 1, NULL, '2026-08-11 15:08:00.101+07', '2026-08-11 15:08:00.183+07', '2026-08-11 15:08:00.188+07', 128, 15, '128', '2026-08-11 15:08:00.188+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 129}', 'COMPLETED', 1, NULL, '2026-08-11 15:08:00.328+07', '2026-08-11 15:08:00.398+07', '2026-08-11 15:08:00.402+07', 129, 15, '129', '2026-08-11 15:08:00.402+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 130}', 'COMPLETED', 1, NULL, '2026-08-11 15:08:00.432+07', '2026-08-11 15:08:00.507+07', '2026-08-11 15:08:00.51+07', 130, 15, '130', '2026-08-11 15:08:00.51+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "REVIEW", "userId": 13, "notificationId": 131}', 'COMPLETED', 1, NULL, '2026-08-11 15:08:00.741+07', '2026-08-11 15:08:00.817+07', '2026-08-11 15:08:00.823+07', 131, 15, '131', '2026-08-11 15:08:00.823+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 163}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:32.733+07', '2026-08-11 15:09:32.823+07', '2026-08-11 15:09:32.835+07', 163, 15, '163', '2026-08-11 15:09:32.835+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 151}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:30.872+07', '2026-08-11 15:09:30.909+07', '2026-08-11 15:09:30.911+07', 151, 15, '151', '2026-08-11 15:09:30.912+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 152}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:30.909+07', '2026-08-11 15:09:30.947+07', '2026-08-11 15:09:30.952+07', 152, 15, '152', '2026-08-11 15:09:30.952+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 165}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:32.944+07', '2026-08-11 15:09:32.996+07', '2026-08-11 15:09:32.999+07', 165, 15, '165', '2026-08-11 15:09:32.999+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 155}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:31.135+07', '2026-08-11 15:09:31.217+07', '2026-08-11 15:09:31.221+07', 155, 15, '155', '2026-08-11 15:09:31.221+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 166}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:33.334+07', '2026-08-11 15:09:33.407+07', '2026-08-11 15:09:33.411+07', 166, 15, '166', '2026-08-11 15:09:33.411+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 156}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:31.172+07', '2026-08-11 15:09:31.258+07', '2026-08-11 15:09:31.26+07', 156, 15, '156', '2026-08-11 15:09:31.261+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 167}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:33.47+07', '2026-08-11 15:09:33.518+07', '2026-08-11 15:09:33.52+07', 167, 15, '167', '2026-08-11 15:09:33.52+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 157}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:31.265+07', '2026-08-11 15:09:31.367+07', '2026-08-11 15:09:31.37+07', 157, 15, '157', '2026-08-11 15:09:31.371+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 158}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:31.302+07', '2026-08-11 15:09:31.407+07', '2026-08-11 15:09:31.411+07', 158, 15, '158', '2026-08-11 15:09:31.411+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 168}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:33.564+07', '2026-08-11 15:09:33.631+07', '2026-08-11 15:09:33.637+07', 168, 15, '168', '2026-08-11 15:09:33.638+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 159}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:31.657+07', '2026-08-11 15:09:31.727+07', '2026-08-11 15:09:31.73+07', 159, 15, '159', '2026-08-11 15:09:31.73+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 169}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:33.604+07', '2026-08-11 15:09:33.674+07', '2026-08-11 15:09:33.677+07', 169, 15, '169', '2026-08-11 15:09:33.677+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 160}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:32.155+07', '2026-08-11 15:09:32.225+07', '2026-08-11 15:09:32.229+07', 160, 15, '160', '2026-08-11 15:09:32.229+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 170}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:33.787+07', '2026-08-11 15:09:33.858+07', '2026-08-11 15:09:33.862+07', 170, 15, '170', '2026-08-11 15:09:33.862+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 171}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:33.824+07', '2026-08-11 15:09:33.901+07', '2026-08-11 15:09:33.905+07', 171, 15, '171', '2026-08-11 15:09:33.906+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 172}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:33.921+07', '2026-08-11 15:09:34.022+07', '2026-08-11 15:09:34.025+07', 172, 15, '172', '2026-08-11 15:09:34.025+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 173}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:33.963+07', '2026-08-11 15:09:34.062+07', '2026-08-11 15:09:34.068+07', 173, 15, '173', '2026-08-11 15:09:34.069+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 174}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:34.07+07', '2026-08-11 15:09:34.18+07', '2026-08-11 15:09:34.187+07', 174, 15, '174', '2026-08-11 15:09:34.187+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 175}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:34.107+07', '2026-08-11 15:09:34.224+07', '2026-08-11 15:09:34.228+07', 175, 15, '175', '2026-08-11 15:09:34.229+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 176}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:34.219+07', '2026-08-11 15:09:34.269+07', '2026-08-11 15:09:34.271+07', 176, 15, '176', '2026-08-11 15:09:34.271+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 177}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:34.256+07', '2026-08-11 15:09:34.307+07', '2026-08-11 15:09:34.312+07', 177, 15, '177', '2026-08-11 15:09:34.312+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 178}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:34.351+07', '2026-08-11 15:09:34.424+07', '2026-08-11 15:09:34.427+07', 178, 15, '178', '2026-08-11 15:09:34.427+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 179}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:34.391+07', '2026-08-11 15:09:34.464+07', '2026-08-11 15:09:34.472+07', 179, 15, '179', '2026-08-11 15:09:34.473+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 180}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:34.678+07', '2026-08-11 15:09:34.75+07', '2026-08-11 15:09:34.754+07', 180, 15, '180', '2026-08-11 15:09:34.754+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 181}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:34.765+07', '2026-08-11 15:09:34.86+07', '2026-08-11 15:09:34.863+07', 181, 15, '181', '2026-08-11 15:09:34.863+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 183}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:39.267+07', '2026-08-11 15:10:39.34+07', '2026-08-11 15:10:39.349+07', 183, 15, '183', '2026-08-11 15:10:39.349+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 184}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:39.31+07', '2026-08-11 15:10:39.387+07', '2026-08-11 15:10:39.391+07', 184, 15, '184', '2026-08-11 15:10:39.391+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 186}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:39.649+07', '2026-08-11 15:10:39.72+07', '2026-08-11 15:10:39.729+07', 186, 15, '186', '2026-08-11 15:10:39.729+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 187}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:39.687+07', '2026-08-11 15:10:39.765+07', '2026-08-11 15:10:39.779+07', 187, 15, '187', '2026-08-11 15:10:39.779+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 191}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:40.246+07', '2026-08-11 15:10:40.288+07', '2026-08-11 15:10:40.291+07', 191, 15, '191', '2026-08-11 15:10:40.291+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 193}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:40.548+07', '2026-08-11 15:10:40.628+07', '2026-08-11 15:10:40.631+07', 193, 15, '193', '2026-08-11 15:10:40.631+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 196}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:40.947+07', '2026-08-11 15:10:41.031+07', '2026-08-11 15:10:41.034+07', 196, 15, '196', '2026-08-11 15:10:41.034+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 197}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:40.986+07', '2026-08-11 15:10:41.07+07', '2026-08-11 15:10:41.074+07', 197, 15, '197', '2026-08-11 15:10:41.074+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 198}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:41.071+07', '2026-08-11 15:10:41.111+07', '2026-08-11 15:10:41.116+07', 198, 15, '198', '2026-08-11 15:10:41.116+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 199}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:41.161+07', '2026-08-11 15:10:41.222+07', '2026-08-11 15:10:41.225+07', 199, 15, '199', '2026-08-11 15:10:41.226+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 200}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:42.603+07', '2026-08-11 15:10:42.675+07', '2026-08-11 15:10:42.679+07', 200, 15, '200', '2026-08-11 15:10:42.679+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 201}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:42.641+07', '2026-08-11 15:10:42.717+07', '2026-08-11 15:10:42.721+07', 201, 15, '201', '2026-08-11 15:10:42.721+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 255}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:24.998+07', '2026-08-11 15:12:25.072+07', '2026-08-11 15:12:25.085+07', 255, 15, '255', '2026-08-11 15:12:25.086+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 153}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:31.007+07', '2026-08-11 15:09:31.067+07', '2026-08-11 15:09:31.071+07', 153, 15, '153', '2026-08-11 15:09:31.071+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 164}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:32.843+07', '2026-08-11 15:09:32.954+07', '2026-08-11 15:09:32.959+07', 164, 15, '164', '2026-08-11 15:09:32.959+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 154}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:31.044+07', '2026-08-11 15:09:31.108+07', '2026-08-11 15:09:31.111+07', 154, 15, '154', '2026-08-11 15:09:31.111+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "REVIEW", "userId": 13, "notificationId": 182}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:35.049+07', '2026-08-11 15:09:35.12+07', '2026-08-11 15:09:35.125+07', 182, 15, '182', '2026-08-11 15:09:35.125+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 161}', 'COMPLETED', 1, NULL, '2026-08-11 15:09:32.349+07', '2026-08-11 15:09:32.42+07', '2026-08-11 15:09:32.425+07', 161, 15, '161', '2026-08-11 15:09:32.425+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 185}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:39.419+07', '2026-08-11 15:10:39.497+07', '2026-08-11 15:10:39.511+07', 185, 15, '185', '2026-08-11 15:10:39.511+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 188}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:39.779+07', '2026-08-11 15:10:39.885+07', '2026-08-11 15:10:39.888+07', 188, 15, '188', '2026-08-11 15:10:39.889+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 189}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:40.065+07', '2026-08-11 15:10:40.138+07', '2026-08-11 15:10:40.14+07', 189, 15, '189', '2026-08-11 15:10:40.14+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 190}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:40.154+07', '2026-08-11 15:10:40.247+07', '2026-08-11 15:10:40.249+07', 190, 15, '190', '2026-08-11 15:10:40.25+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 192}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:40.442+07', '2026-08-11 15:10:40.513+07', '2026-08-11 15:10:40.522+07', 192, 15, '192', '2026-08-11 15:10:40.522+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 194}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:40.639+07', '2026-08-11 15:10:40.738+07', '2026-08-11 15:10:40.742+07', 194, 15, '194', '2026-08-11 15:10:40.742+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 195}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:40.748+07', '2026-08-11 15:10:40.848+07', '2026-08-11 15:10:40.852+07', 195, 15, '195', '2026-08-11 15:10:40.852+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 202}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:42.795+07', '2026-08-11 15:10:42.913+07', '2026-08-11 15:10:42.923+07', 202, 15, '202', '2026-08-11 15:10:42.924+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 203}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:42.832+07', '2026-08-11 15:10:42.969+07', '2026-08-11 15:10:42.973+07', 203, 15, '203', '2026-08-11 15:10:43.142+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 204}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:43.214+07', '2026-08-11 15:10:43.286+07', '2026-08-11 15:10:43.289+07', 204, 15, '204', '2026-08-11 15:10:43.29+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 205}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:43.253+07', '2026-08-11 15:10:43.329+07', '2026-08-11 15:10:43.337+07', 205, 15, '205', '2026-08-11 15:10:43.337+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 206}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:43.367+07', '2026-08-11 15:10:43.459+07', '2026-08-11 15:10:43.464+07', 206, 15, '206', '2026-08-11 15:10:43.464+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 207}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:43.407+07', '2026-08-11 15:10:43.503+07', '2026-08-11 15:10:43.508+07', 207, 15, '207', '2026-08-11 15:10:43.508+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 208}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:43.783+07', '2026-08-11 15:10:43.854+07', '2026-08-11 15:10:43.857+07', 208, 15, '208', '2026-08-11 15:10:43.857+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 209}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:43.82+07', '2026-08-11 15:10:43.893+07', '2026-08-11 15:10:43.896+07', 209, 15, '209', '2026-08-11 15:10:43.896+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 210}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:44.233+07', '2026-08-11 15:10:44.312+07', '2026-08-11 15:10:44.315+07', 210, 15, '210', '2026-08-11 15:10:44.315+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 211}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:44.64+07', '2026-08-11 15:10:44.709+07', '2026-08-11 15:10:44.712+07', 211, 15, '211', '2026-08-11 15:10:44.712+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 212}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:44.828+07', '2026-08-11 15:10:44.894+07', '2026-08-11 15:10:44.897+07', 212, 15, '212', '2026-08-11 15:10:44.897+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 213}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:45.098+07', '2026-08-11 15:10:45.17+07', '2026-08-11 15:10:45.172+07', 213, 15, '213', '2026-08-11 15:10:45.173+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 214}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:45.206+07', '2026-08-11 15:10:45.273+07', '2026-08-11 15:10:45.281+07', 214, 15, '214', '2026-08-11 15:10:45.281+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 215}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:45.295+07', '2026-08-11 15:10:45.381+07', '2026-08-11 15:10:45.386+07', 215, 15, '215', '2026-08-11 15:10:45.386+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 216}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:45.386+07', '2026-08-11 15:10:45.487+07', '2026-08-11 15:10:45.49+07', 216, 15, '216', '2026-08-11 15:10:45.49+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 217}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:45.887+07', '2026-08-11 15:10:45.96+07', '2026-08-11 15:10:45.972+07', 217, 15, '217', '2026-08-11 15:10:45.972+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 218}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.045+07', '2026-08-11 15:10:46.145+07', '2026-08-11 15:10:46.151+07', 218, 15, '218', '2026-08-11 15:10:46.151+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 219}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.157+07', '2026-08-11 15:10:46.257+07', '2026-08-11 15:10:46.262+07', 219, 15, '219', '2026-08-11 15:10:46.263+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 220}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.204+07', '2026-08-11 15:10:46.298+07', '2026-08-11 15:10:46.302+07', 220, 15, '220', '2026-08-11 15:10:46.302+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 221}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.397+07', '2026-08-11 15:10:46.471+07', '2026-08-11 15:10:46.475+07', 221, 15, '221', '2026-08-11 15:10:46.476+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 222}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.437+07', '2026-08-11 15:10:46.511+07', '2026-08-11 15:10:46.516+07', 222, 15, '222', '2026-08-11 15:10:46.516+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 223}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.552+07', '2026-08-11 15:10:46.627+07', '2026-08-11 15:10:46.63+07', 223, 15, '223', '2026-08-11 15:10:46.63+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 224}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.591+07', '2026-08-11 15:10:46.663+07', '2026-08-11 15:10:46.667+07', 224, 15, '224', '2026-08-11 15:10:46.668+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 225}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.685+07', '2026-08-11 15:10:46.77+07', '2026-08-11 15:10:46.773+07', 225, 15, '225', '2026-08-11 15:10:46.774+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 226}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.722+07', '2026-08-11 15:10:46.807+07', '2026-08-11 15:10:46.812+07', 226, 15, '226', '2026-08-11 15:10:46.812+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 227}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.83+07', '2026-08-11 15:10:46.921+07', '2026-08-11 15:10:46.928+07', 227, 15, '227', '2026-08-11 15:10:46.928+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 297}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.532+07', '2026-08-11 15:12:32.622+07', '2026-08-11 15:12:32.626+07', 297, 15, '297', '2026-08-11 15:12:32.626+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 256}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:25.045+07', '2026-08-11 15:12:25.128+07', '2026-08-11 15:12:25.139+07', 256, 15, '256', '2026-08-11 15:12:25.139+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 228}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.873+07', '2026-08-11 15:10:46.963+07', '2026-08-11 15:10:46.973+07', 228, 15, '228', '2026-08-11 15:10:46.973+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 258}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:25.412+07', '2026-08-11 15:12:25.488+07', '2026-08-11 15:12:25.494+07', 258, 15, '258', '2026-08-11 15:12:25.494+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 229}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:46.981+07', '2026-08-11 15:10:47.076+07', '2026-08-11 15:10:47.08+07', 229, 15, '229', '2026-08-11 15:10:47.08+07');
+INSERT INTO public.background_jobs VALUES ('ocr', 'PROCESS_OCR_JOB', '{"ocrJobId": 4}', 'COMPLETED', 1, NULL, '2026-08-18 07:19:19.402+07', '2026-08-18 07:19:19.537+07', '2026-08-18 07:19:21.183+07', 392, 1, 'ocr-392', '2026-08-18 07:19:21.184+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 230}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:47.022+07', '2026-08-11 15:10:47.114+07', '2026-08-11 15:10:47.123+07', 230, 15, '230', '2026-08-11 15:10:47.123+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 299}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.666+07', '2026-08-11 15:12:32.766+07', '2026-08-11 15:12:32.771+07', 299, 15, '299', '2026-08-11 15:12:32.771+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 259}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:25.459+07', '2026-08-11 15:12:25.529+07', '2026-08-11 15:12:25.534+07', 259, 15, '259', '2026-08-11 15:12:25.766+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "REVIEW", "userId": 13, "notificationId": 233}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:47.834+07', '2026-08-11 15:10:47.91+07', '2026-08-11 15:10:47.914+07', 233, 15, '233', '2026-08-11 15:10:47.914+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 300}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.703+07', '2026-08-11 15:12:32.806+07', '2026-08-11 15:12:32.81+07', 300, 15, '300', '2026-08-11 15:12:32.811+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 261}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:26.173+07', '2026-08-11 15:12:26.267+07', '2026-08-11 15:12:26.281+07', 261, 15, '261', '2026-08-11 15:12:26.284+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 237}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:48.89+07', '2026-08-11 15:10:48.954+07', '2026-08-11 15:10:48.958+07', 237, 15, '237', '2026-08-11 15:10:48.958+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 238}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:48.928+07', '2026-08-11 15:10:48.992+07', '2026-08-11 15:10:48.996+07', 238, 15, '238', '2026-08-11 15:10:48.996+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 264}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:26.647+07', '2026-08-11 15:12:26.718+07', '2026-08-11 15:12:26.721+07', 264, 15, '264', '2026-08-11 15:12:26.721+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 301}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.797+07', '2026-08-11 15:12:32.847+07', '2026-08-11 15:12:32.852+07', 301, 15, '301', '2026-08-11 15:12:32.852+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 239}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:49.03+07', '2026-08-11 15:10:49.12+07', '2026-08-11 15:10:49.125+07', 239, 15, '239', '2026-08-11 15:10:49.125+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 266}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:26.862+07', '2026-08-11 15:12:26.939+07', '2026-08-11 15:12:26.948+07', 266, 15, '266', '2026-08-11 15:12:26.948+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 302}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.836+07', '2026-08-11 15:12:32.889+07', '2026-08-11 15:12:32.892+07', 302, 15, '302', '2026-08-11 15:12:32.892+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 240}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:49.089+07', '2026-08-11 15:10:49.162+07', '2026-08-11 15:10:49.169+07', 240, 15, '240', '2026-08-11 15:10:49.17+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 271}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:27.405+07', '2026-08-11 15:12:27.488+07', '2026-08-11 15:12:27.492+07', 271, 15, '271', '2026-08-11 15:12:27.492+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 241}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:49.254+07', '2026-08-11 15:10:49.31+07', '2026-08-11 15:10:49.314+07', 241, 15, '241', '2026-08-11 15:10:49.315+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 303}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:33.078+07', '2026-08-11 15:12:33.149+07', '2026-08-11 15:12:33.154+07', 303, 15, '303', '2026-08-11 15:12:33.154+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 242}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:49.296+07', '2026-08-11 15:10:49.351+07', '2026-08-11 15:10:49.355+07', 242, 15, '242', '2026-08-11 15:10:49.356+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 274}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:29.181+07', '2026-08-11 15:12:29.279+07', '2026-08-11 15:12:29.282+07', 274, 15, '274', '2026-08-11 15:12:29.282+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 304}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:33.18+07', '2026-08-11 15:12:33.276+07', '2026-08-11 15:12:33.28+07', 304, 15, '304', '2026-08-11 15:12:33.28+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 275}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:29.219+07', '2026-08-11 15:12:29.315+07', '2026-08-11 15:12:29.318+07', 275, 15, '275', '2026-08-11 15:12:29.319+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 243}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:49.397+07', '2026-08-11 15:10:49.472+07', '2026-08-11 15:10:49.477+07', 243, 15, '243', '2026-08-11 15:10:49.478+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 244}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:49.442+07', '2026-08-11 15:10:49.512+07', '2026-08-11 15:10:49.519+07', 244, 15, '244', '2026-08-11 15:10:49.52+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 280}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:29.587+07', '2026-08-11 15:12:29.637+07', '2026-08-11 15:12:29.64+07', 280, 15, '280', '2026-08-11 15:12:29.64+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 313}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:34.771+07', '2026-08-11 15:12:34.852+07', '2026-08-11 15:12:34.856+07', 313, 15, '313', '2026-08-11 15:12:34.857+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 249}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:50.265+07', '2026-08-11 15:10:50.336+07', '2026-08-11 15:10:50.34+07', 249, 15, '249', '2026-08-11 15:10:50.34+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 250}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:50.303+07', '2026-08-11 15:10:50.376+07', '2026-08-11 15:10:50.381+07', 250, 15, '250', '2026-08-11 15:10:50.381+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 281}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:29.624+07', '2026-08-11 15:12:29.672+07', '2026-08-11 15:12:29.676+07', 281, 15, '281', '2026-08-11 15:12:29.676+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 284}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:30.597+07', '2026-08-11 15:12:30.665+07', '2026-08-11 15:12:30.668+07', 284, 15, '284', '2026-08-11 15:12:30.668+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 253}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:50.714+07', '2026-08-11 15:10:50.872+07', '2026-08-11 15:10:50.889+07', 253, 15, '253', '2026-08-11 15:10:50.891+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 254}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:50.764+07', '2026-08-11 15:10:50.928+07', '2026-08-11 15:10:50.934+07', 254, 15, '254', '2026-08-11 15:10:50.935+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 285}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:30.861+07', '2026-08-11 15:12:30.928+07', '2026-08-11 15:12:30.933+07', 285, 15, '285', '2026-08-11 15:12:30.933+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 293}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.261+07', '2026-08-11 15:12:32.33+07', '2026-08-11 15:12:32.335+07', 293, 15, '293', '2026-08-11 15:12:32.335+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 294}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.299+07', '2026-08-11 15:12:32.368+07', '2026-08-11 15:12:32.371+07', 294, 15, '294', '2026-08-11 15:12:32.372+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 330}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:01.821+07', '2026-08-11 15:14:01.892+07', '2026-08-11 15:14:01.909+07', 330, 15, '330', '2026-08-11 15:14:01.916+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 298}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.573+07', '2026-08-11 15:12:32.66+07', '2026-08-11 15:12:32.664+07', 298, 15, '298', '2026-08-11 15:12:32.664+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 231}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:47.319+07', '2026-08-11 15:10:47.397+07', '2026-08-11 15:10:47.408+07', 231, 15, '231', '2026-08-11 15:10:47.409+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 257}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:25.174+07', '2026-08-11 15:12:25.24+07', '2026-08-11 15:12:25.247+07', 257, 15, '257', '2026-08-11 15:12:25.248+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 331}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:01.868+07', '2026-08-11 15:14:01.952+07', '2026-08-11 15:14:01.955+07', 331, 15, '331', '2026-08-11 15:14:01.955+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 314}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:34.808+07', '2026-08-11 15:12:34.892+07', '2026-08-11 15:12:34.896+07', 314, 15, '314', '2026-08-11 15:12:34.896+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 247}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:49.833+07', '2026-08-11 15:10:49.918+07', '2026-08-11 15:10:49.922+07', 247, 15, '247', '2026-08-11 15:10:49.922+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 267}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:26.966+07', '2026-08-11 15:12:27.05+07', '2026-08-11 15:12:27.054+07', 267, 15, '267', '2026-08-11 15:12:27.054+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 248}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:49.875+07', '2026-08-11 15:10:49.957+07', '2026-08-11 15:10:49.961+07', 248, 15, '248', '2026-08-11 15:10:50.176+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 336}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:02.685+07', '2026-08-11 15:14:02.764+07', '2026-08-11 15:14:02.769+07', 336, 15, '336', '2026-08-11 15:14:02.77+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 270}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:27.316+07', '2026-08-11 15:12:27.382+07', '2026-08-11 15:12:27.386+07', 270, 15, '270', '2026-08-11 15:12:27.386+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 315}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:34.909+07', '2026-08-11 15:12:35+07', '2026-08-11 15:12:35.004+07', 315, 15, '315', '2026-08-11 15:12:35.005+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 251}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:50.411+07', '2026-08-11 15:10:50.49+07', '2026-08-11 15:10:50.494+07', 251, 15, '251', '2026-08-11 15:10:50.494+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 252}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:50.451+07', '2026-08-11 15:10:50.545+07', '2026-08-11 15:10:50.611+07', 252, 15, '252', '2026-08-11 15:10:50.611+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 286}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:30.96+07', '2026-08-11 15:12:31.039+07', '2026-08-11 15:12:31.052+07', 286, 15, '286', '2026-08-11 15:12:31.053+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 316}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:34.948+07', '2026-08-11 15:12:35.039+07', '2026-08-11 15:12:35.043+07', 316, 15, '316', '2026-08-11 15:12:35.043+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 340}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:03.188+07', '2026-08-11 15:14:03.295+07', '2026-08-11 15:14:03.298+07', 340, 15, '340', '2026-08-11 15:14:03.298+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 288}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:31.181+07', '2026-08-11 15:12:31.265+07', '2026-08-11 15:12:31.27+07', 288, 15, '288', '2026-08-11 15:12:31.27+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 321}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:35.377+07', '2026-08-11 15:12:35.446+07', '2026-08-11 15:12:35.449+07', 321, 15, '321', '2026-08-11 15:12:35.45+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 342}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:03.376+07', '2026-08-11 15:14:03.475+07', '2026-08-11 15:14:03.48+07', 342, 15, '342', '2026-08-11 15:14:03.481+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 322}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:35.42+07', '2026-08-11 15:12:35.485+07', '2026-08-11 15:12:35.49+07', 322, 15, '322', '2026-08-11 15:12:35.49+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 343}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:03.563+07', '2026-08-11 15:14:03.689+07', '2026-08-11 15:14:03.692+07', 343, 15, '343', '2026-08-11 15:14:03.692+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 344}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:03.605+07', '2026-08-11 15:14:03.737+07', '2026-08-11 15:14:03.74+07', 344, 15, '344', '2026-08-11 15:14:03.741+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 360}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:07.269+07', '2026-08-11 15:14:07.348+07', '2026-08-11 15:14:07.353+07', 360, 15, '360', '2026-08-11 15:14:07.353+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 361}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:07.388+07', '2026-08-11 15:14:07.476+07', '2026-08-11 15:14:07.48+07', 361, 15, '361', '2026-08-11 15:14:07.48+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 364}', 'COMPLETED', 1, NULL, '2026-08-13 14:18:16.947+07', '2026-08-13 14:18:17.08+07', '2026-08-13 14:18:17.093+07', 364, 1, '364', '2026-08-13 14:18:17.094+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 365}', 'COMPLETED', 1, NULL, '2026-08-13 14:18:17.048+07', '2026-08-13 14:18:17.142+07', '2026-08-13 14:18:17.154+07', 365, 1, '365', '2026-08-13 14:18:17.154+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 8, "notificationId": 367}', 'COMPLETED', 1, NULL, '2026-08-13 15:31:18.835+07', '2026-08-13 15:31:19.404+07', '2026-08-13 15:31:19.499+07', 367, 1, '367', '2026-08-13 15:31:19.5+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 368}', 'COMPLETED', 1, NULL, '2026-08-14 08:41:17.186+07', '2026-08-14 08:41:17.328+07', '2026-08-14 08:41:17.352+07', 368, 18, '368', '2026-08-14 08:41:17.353+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 369}', 'COMPLETED', 1, NULL, '2026-08-14 08:41:17.286+07', '2026-08-14 08:41:17.418+07', '2026-08-14 08:41:17.429+07', 369, 18, '369', '2026-08-14 08:41:17.429+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 16, "notificationId": 371}', 'COMPLETED', 1, NULL, '2026-08-14 16:32:02.711+07', '2026-08-14 16:32:02.837+07', '2026-08-14 16:32:02.853+07', 371, 1, '371', '2026-08-14 16:32:02.854+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 18, "notificationId": 372}', 'COMPLETED', 1, NULL, '2026-08-14 19:10:53.706+07', '2026-08-14 19:10:53.834+07', '2026-08-14 19:10:53.852+07', 372, 18, '372', '2026-08-14 19:10:53.852+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 16, "notificationId": 373}', 'COMPLETED', 1, NULL, '2026-08-15 07:12:12.024+07', '2026-08-15 07:12:12.614+07', '2026-08-15 07:12:12.637+07', 373, 1, '373', '2026-08-15 07:12:12.638+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 376}', 'COMPLETED', 1, NULL, '2026-08-15 08:03:02.471+07', '2026-08-15 08:03:02.537+07', '2026-08-15 08:03:02.547+07', 376, 1, '376', '2026-08-15 08:03:02.547+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 377}', 'COMPLETED', 1, NULL, '2026-08-15 08:03:02.506+07', '2026-08-15 08:03:02.584+07', '2026-08-15 08:03:02.587+07', 377, 1, '377', '2026-08-15 08:03:02.588+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 8, "notificationId": 379}', 'COMPLETED', 1, NULL, '2026-08-15 08:21:11.696+07', '2026-08-15 08:21:11.767+07', '2026-08-15 08:21:11.778+07', 379, 1, '379', '2026-08-15 08:21:11.778+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 380}', 'COMPLETED', 1, NULL, '2026-08-16 08:14:24.406+07', '2026-08-16 08:14:25.029+07', '2026-08-16 08:14:25.043+07', 380, 18, '380', '2026-08-16 08:14:25.043+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 381}', 'COMPLETED', 1, NULL, '2026-08-16 08:14:25.011+07', '2026-08-16 08:14:25.093+07', '2026-08-16 08:14:25.097+07', 381, 18, '381', '2026-08-16 08:14:25.097+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 296}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.427+07', '2026-08-11 15:12:32.509+07', '2026-08-11 15:12:32.519+07', 296, 15, '296', '2026-08-11 15:12:32.519+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 232}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:47.448+07', '2026-08-11 15:10:47.518+07', '2026-08-11 15:10:47.525+07', 232, 15, '232', '2026-08-11 15:10:47.525+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 260}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:25.836+07', '2026-08-11 15:12:25.909+07', '2026-08-11 15:12:25.926+07', 260, 15, '260', '2026-08-11 15:12:25.926+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 332}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:01.985+07', '2026-08-11 15:14:02.058+07', '2026-08-11 15:14:02.068+07', 332, 15, '332', '2026-08-11 15:14:02.068+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "REVIEW", "userId": 13, "notificationId": 305}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:33.554+07', '2026-08-11 15:12:33.627+07', '2026-08-11 15:12:33.632+07', 305, 15, '305', '2026-08-11 15:12:33.633+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 262}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:26.339+07', '2026-08-11 15:12:26.397+07', '2026-08-11 15:12:26.402+07', 262, 15, '262', '2026-08-11 15:12:26.402+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 265}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:26.754+07', '2026-08-11 15:12:26.834+07', '2026-08-11 15:12:26.838+07', 265, 15, '265', '2026-08-11 15:12:26.838+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 309}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:34.497+07', '2026-08-11 15:12:34.56+07', '2026-08-11 15:12:34.564+07', 309, 15, '309', '2026-08-11 15:12:34.565+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 333}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:02.235+07', '2026-08-11 15:14:02.302+07', '2026-08-11 15:14:02.305+07', 333, 15, '333', '2026-08-11 15:14:02.305+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 272}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:28.995+07', '2026-08-11 15:12:29.067+07', '2026-08-11 15:12:29.072+07', 272, 15, '272', '2026-08-11 15:12:29.072+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 310}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:34.535+07', '2026-08-11 15:12:34.6+07', '2026-08-11 15:12:34.606+07', 310, 15, '310', '2026-08-11 15:12:34.607+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 273}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:29.036+07', '2026-08-11 15:12:29.106+07', '2026-08-11 15:12:29.111+07', 273, 15, '273', '2026-08-11 15:12:29.111+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 334}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:02.271+07', '2026-08-11 15:14:02.35+07', '2026-08-11 15:14:02.365+07', 334, 15, '334', '2026-08-11 15:14:02.366+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 311}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:34.641+07', '2026-08-11 15:12:34.708+07', '2026-08-11 15:12:34.711+07', 311, 15, '311', '2026-08-11 15:12:34.711+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 278}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:29.45+07', '2026-08-11 15:12:29.494+07', '2026-08-11 15:12:29.498+07', 278, 15, '278', '2026-08-11 15:12:29.498+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 338}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:02.876+07', '2026-08-11 15:14:02.95+07', '2026-08-11 15:14:02.954+07', 338, 15, '338', '2026-08-11 15:14:02.954+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 279}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:29.488+07', '2026-08-11 15:12:29.532+07', '2026-08-11 15:12:29.536+07', 279, 15, '279', '2026-08-11 15:12:29.536+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 312}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:34.678+07', '2026-08-11 15:12:34.743+07', '2026-08-11 15:12:34.746+07', 312, 15, '312', '2026-08-11 15:12:34.747+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 283}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:30.403+07', '2026-08-11 15:12:30.472+07', '2026-08-11 15:12:30.475+07', 283, 15, '283', '2026-08-11 15:12:30.475+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 341}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:03.28+07', '2026-08-11 15:14:03.344+07', '2026-08-11 15:14:03.349+07', 341, 15, '341', '2026-08-11 15:14:03.349+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 323}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:35.535+07', '2026-08-11 15:12:35.594+07', '2026-08-11 15:12:35.6+07', 323, 15, '323', '2026-08-11 15:12:35.601+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 289}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:31.798+07', '2026-08-11 15:12:31.869+07', '2026-08-11 15:12:31.876+07', 289, 15, '289', '2026-08-11 15:12:31.876+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 324}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:35.577+07', '2026-08-11 15:12:35.636+07', '2026-08-11 15:12:35.643+07', 324, 15, '324', '2026-08-11 15:12:35.643+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 290}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:31.938+07', '2026-08-11 15:12:31.977+07', '2026-08-11 15:12:31.98+07', 290, 15, '290', '2026-08-11 15:12:31.98+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 9, "notificationId": 345}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:03.703+07', '2026-08-11 15:14:03.785+07', '2026-08-11 15:14:03.789+07', 345, 15, '345', '2026-08-11 15:14:03.789+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 9, "notificationId": 291}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.031+07', '2026-08-11 15:12:32.079+07', '2026-08-11 15:12:32.082+07', 291, 15, '291', '2026-08-11 15:12:32.082+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 327}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:35.955+07', '2026-08-11 15:12:36.03+07', '2026-08-11 15:12:36.036+07', 327, 15, '327', '2026-08-11 15:12:36.036+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 292}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.069+07', '2026-08-11 15:12:32.115+07', '2026-08-11 15:12:32.121+07', 292, 15, '292', '2026-08-11 15:12:32.121+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 346}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:03.79+07', '2026-08-11 15:14:03.911+07', '2026-08-11 15:14:03.915+07', 346, 15, '346', '2026-08-11 15:14:03.915+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 328}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:36.004+07', '2026-08-11 15:12:36.069+07', '2026-08-11 15:12:36.073+07', 328, 15, '328', '2026-08-11 15:12:36.074+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "TICKET", "userId": 13, "notificationId": 295}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:32.391+07', '2026-08-11 15:12:32.471+07', '2026-08-11 15:12:32.476+07', 295, 15, '295', '2026-08-11 15:12:32.476+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 349}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:05.253+07', '2026-08-11 15:14:05.333+07', '2026-08-11 15:14:05.335+07', 349, 15, '349', '2026-08-11 15:14:05.336+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 350}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:05.289+07', '2026-08-11 15:14:05.38+07', '2026-08-11 15:14:05.386+07', 350, 15, '350', '2026-08-11 15:14:05.386+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 351}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:05.395+07', '2026-08-11 15:14:05.509+07', '2026-08-11 15:14:05.511+07', 351, 15, '351', '2026-08-11 15:14:05.512+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 352}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:05.433+07', '2026-08-11 15:14:05.557+07', '2026-08-11 15:14:05.56+07', 352, 15, '352', '2026-08-11 15:14:05.56+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 355}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:05.958+07', '2026-08-11 15:14:06.04+07', '2026-08-11 15:14:06.046+07', 355, 15, '355', '2026-08-11 15:14:06.048+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 356}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:05.996+07', '2026-08-11 15:14:06.094+07', '2026-08-11 15:14:06.1+07', 356, 15, '356', '2026-08-11 15:14:06.1+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 357}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:06.402+07', '2026-08-11 15:14:06.484+07', '2026-08-11 15:14:06.495+07', 357, 15, '357', '2026-08-11 15:14:06.495+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 335}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:02.371+07', '2026-08-11 15:14:02.488+07', '2026-08-11 15:14:02.492+07', 335, 15, '335', '2026-08-11 15:14:02.492+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "REPORT", "userId": 13, "notificationId": 234}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:48.305+07', '2026-08-11 15:10:48.385+07', '2026-08-11 15:10:48.391+07', 234, 15, '234', '2026-08-11 15:10:48.392+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 9, "notificationId": 263}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:26.446+07', '2026-08-11 15:12:26.509+07', '2026-08-11 15:12:26.513+07', 263, 15, '263', '2026-08-11 15:12:26.513+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "REPORT", "userId": 13, "notificationId": 306}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:33.952+07', '2026-08-11 15:12:34.024+07', '2026-08-11 15:12:34.028+07', 306, 15, '306', '2026-08-11 15:12:34.029+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 235}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:48.713+07', '2026-08-11 15:10:48.785+07', '2026-08-11 15:10:48.794+07', 235, 15, '235', '2026-08-11 15:10:48.794+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 13, "notificationId": 268}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:27.165+07', '2026-08-11 15:12:27.241+07', '2026-08-11 15:12:27.245+07', 268, 15, '268', '2026-08-11 15:12:27.245+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 236}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:48.751+07', '2026-08-11 15:10:48.831+07', '2026-08-11 15:10:48.839+07', 236, 15, '236', '2026-08-11 15:10:48.839+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 337}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:02.775+07', '2026-08-11 15:14:02.893+07', '2026-08-11 15:14:02.905+07', 337, 15, '337', '2026-08-11 15:14:02.905+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 307}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:34.341+07', '2026-08-11 15:12:34.41+07', '2026-08-11 15:12:34.413+07', 307, 15, '307', '2026-08-11 15:12:34.413+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 269}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:27.215+07', '2026-08-11 15:12:27.279+07', '2026-08-11 15:12:27.281+07', 269, 15, '269', '2026-08-11 15:12:27.282+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 245}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:49.554+07', '2026-08-11 15:10:49.624+07', '2026-08-11 15:10:49.632+07', 245, 15, '245', '2026-08-11 15:10:49.638+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 308}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:34.379+07', '2026-08-11 15:12:34.447+07', '2026-08-11 15:12:34.452+07', 308, 15, '308', '2026-08-11 15:12:34.453+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 246}', 'COMPLETED', 1, NULL, '2026-08-11 15:10:49.591+07', '2026-08-11 15:10:49.698+07', '2026-08-11 15:10:49.804+07', 246, 15, '246', '2026-08-11 15:10:49.805+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 13, "notificationId": 339}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:03.074+07', '2026-08-11 15:14:03.169+07', '2026-08-11 15:14:03.172+07', 339, 15, '339', '2026-08-11 15:14:03.172+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 276}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:29.322+07', '2026-08-11 15:12:29.418+07', '2026-08-11 15:12:29.421+07', 276, 15, '276', '2026-08-11 15:12:29.422+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 277}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:29.358+07', '2026-08-11 15:12:29.456+07', '2026-08-11 15:12:29.46+07', 277, 15, '277', '2026-08-11 15:12:29.46+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 317}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:35.054+07', '2026-08-11 15:12:35.151+07', '2026-08-11 15:12:35.155+07', 317, 15, '317', '2026-08-11 15:12:35.155+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 13, "notificationId": 282}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:29.983+07', '2026-08-11 15:12:30.051+07', '2026-08-11 15:12:30.054+07', 282, 15, '282', '2026-08-11 15:12:30.054+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 318}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:35.091+07', '2026-08-11 15:12:35.191+07', '2026-08-11 15:12:35.194+07', 318, 15, '318', '2026-08-11 15:12:35.195+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 287}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:31.076+07', '2026-08-11 15:12:31.154+07', '2026-08-11 15:12:31.159+07', 287, 15, '287', '2026-08-11 15:12:31.159+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 347}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:05.069+07', '2026-08-11 15:14:05.149+07', '2026-08-11 15:14:05.158+07', 347, 15, '347', '2026-08-11 15:14:05.158+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 348}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:05.106+07', '2026-08-11 15:14:05.202+07', '2026-08-11 15:14:05.205+07', 348, 15, '348', '2026-08-11 15:14:05.206+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 319}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:35.224+07', '2026-08-11 15:12:35.298+07', '2026-08-11 15:12:35.305+07', 319, 15, '319', '2026-08-11 15:12:35.305+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 320}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:35.264+07', '2026-08-11 15:12:35.339+07', '2026-08-11 15:12:35.344+07', 320, 15, '320', '2026-08-11 15:12:35.344+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 353}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:05.533+07', '2026-08-11 15:14:05.604+07', '2026-08-11 15:14:05.608+07', 353, 15, '353', '2026-08-11 15:14:05.608+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 9, "notificationId": 325}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:35.706+07', '2026-08-11 15:12:35.744+07', '2026-08-11 15:12:35.747+07', 325, 15, '325', '2026-08-11 15:12:35.748+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 354}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:05.569+07', '2026-08-11 15:14:05.652+07', '2026-08-11 15:14:05.656+07', 354, 15, '354', '2026-08-11 15:14:05.88+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "CONTRACT", "userId": 13, "notificationId": 326}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:35.744+07', '2026-08-11 15:12:35.782+07', '2026-08-11 15:12:35.79+07', 326, 15, '326', '2026-08-11 15:12:35.79+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 358}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:06.825+07', '2026-08-11 15:14:06.904+07', '2026-08-11 15:14:06.907+07', 358, 15, '358', '2026-08-11 15:14:06.907+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 9, "notificationId": 329}', 'COMPLETED', 1, NULL, '2026-08-11 15:12:36.119+07', '2026-08-11 15:12:36.176+07', '2026-08-11 15:12:36.179+07', 329, 15, '329', '2026-08-11 15:12:36.18+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 359}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:07.012+07', '2026-08-11 15:14:07.109+07', '2026-08-11 15:14:07.112+07', 359, 15, '359', '2026-08-11 15:14:07.112+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 9, "notificationId": 362}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:07.486+07', '2026-08-11 15:14:07.608+07', '2026-08-11 15:14:07.611+07', 362, 15, '362', '2026-08-11 15:14:07.612+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "PAYMENT", "userId": 13, "notificationId": 363}', 'COMPLETED', 1, NULL, '2026-08-11 15:14:07.581+07', '2026-08-11 15:14:07.657+07', '2026-08-11 15:14:07.661+07', 363, 15, '363', '2026-08-11 15:14:07.661+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 8, "notificationId": 366}', 'COMPLETED', 1, NULL, '2026-08-13 14:53:26.937+07', '2026-08-13 14:53:27.51+07', '2026-08-13 14:53:27.527+07', 366, 1, '366', '2026-08-13 14:53:27.528+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 18, "notificationId": 370}', 'COMPLETED', 1, NULL, '2026-08-14 09:30:29.158+07', '2026-08-14 09:30:29.292+07', '2026-08-14 09:30:29.313+07', 370, 18, '370', '2026-08-14 09:30:29.314+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 374}', 'COMPLETED', 1, NULL, '2026-08-15 08:02:57.306+07', '2026-08-15 08:02:57.871+07', '2026-08-15 08:02:57.881+07', 374, 1, '374', '2026-08-15 08:02:57.882+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 375}', 'COMPLETED', 1, NULL, '2026-08-15 08:02:57.842+07', '2026-08-15 08:02:57.927+07', '2026-08-15 08:02:57.933+07', 375, 1, '375', '2026-08-15 08:02:57.933+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 8, "notificationId": 378}', 'COMPLETED', 1, NULL, '2026-08-15 08:21:09.273+07', '2026-08-15 08:21:09.345+07', '2026-08-15 08:21:09.371+07', 378, 1, '378', '2026-08-15 08:21:09.372+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 18, "notificationId": 382}', 'COMPLETED', 1, NULL, '2026-08-16 15:11:07.048+07', '2026-08-16 15:11:07.184+07', '2026-08-16 15:11:07.208+07', 382, 18, '382', '2026-08-16 15:11:07.209+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 8, "notificationId": 383}', 'COMPLETED', 1, NULL, '2026-08-16 15:11:21.002+07', '2026-08-16 15:11:21.079+07', '2026-08-16 15:11:21.086+07', 383, 1, '383', '2026-08-16 15:11:21.087+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 384}', 'COMPLETED', 1, NULL, '2026-08-16 17:20:16.423+07', '2026-08-16 17:20:16.56+07', '2026-08-16 17:20:16.577+07', 384, 1, '384', '2026-08-16 17:20:16.578+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 385}', 'COMPLETED', 1, NULL, '2026-08-16 17:20:16.506+07', '2026-08-16 17:20:16.638+07', '2026-08-16 17:20:16.65+07', 385, 1, '385', '2026-08-16 17:20:16.651+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 386}', 'COMPLETED', 1, NULL, '2026-08-16 17:24:37.574+07', '2026-08-16 17:24:37.686+07', '2026-08-16 17:24:37.7+07', 386, 1, '386', '2026-08-16 17:24:37.701+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 387}', 'COMPLETED', 1, NULL, '2026-08-16 17:24:37.656+07', '2026-08-16 17:24:37.75+07', '2026-08-16 17:24:37.768+07', 387, 1, '387', '2026-08-16 17:24:37.769+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "INVOICE", "userId": 16, "notificationId": 388}', 'COMPLETED', 1, NULL, '2026-08-17 15:55:36.405+07', '2026-08-17 15:55:36.547+07', '2026-08-17 15:55:36.567+07', 388, 1, '388', '2026-08-17 15:55:36.568+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 16, "notificationId": 389}', 'COMPLETED', 1, NULL, '2026-08-18 07:45:44.46+07', '2026-08-18 07:45:45.029+07', '2026-08-18 07:45:45.046+07', 393, 18, '389', '2026-08-18 07:45:45.046+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 390}', 'COMPLETED', 1, NULL, '2026-08-19 20:25:06.976+07', '2026-08-19 20:25:07.543+07', '2026-08-19 20:25:07.561+07', 394, 1, '390', '2026-08-19 20:25:07.562+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 391}', 'COMPLETED', 1, NULL, '2026-08-19 20:25:07.512+07', '2026-08-19 20:25:07.609+07', '2026-08-19 20:25:07.621+07', 395, 1, '391', '2026-08-19 20:25:07.622+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 392}', 'COMPLETED', 1, NULL, '2026-08-19 20:29:03.702+07', '2026-08-19 20:29:03.771+07', '2026-08-19 20:29:03.779+07', 396, 1, '392', '2026-08-19 20:29:03.78+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 393}', 'COMPLETED', 1, NULL, '2026-08-19 20:29:03.742+07', '2026-08-19 20:29:03.814+07', '2026-08-19 20:29:03.825+07', 397, 1, '393', '2026-08-19 20:29:03.825+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 394}', 'COMPLETED', 1, NULL, '2026-08-19 20:39:05.196+07', '2026-08-19 20:39:05.309+07', '2026-08-19 20:39:05.324+07', 398, 1, '394', '2026-08-19 20:39:05.325+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 395}', 'COMPLETED', 1, NULL, '2026-08-19 20:39:05.283+07', '2026-08-19 20:39:05.401+07', '2026-08-19 20:39:05.421+07', 399, 1, '395', '2026-08-19 20:39:05.421+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 8, "notificationId": 396}', 'COMPLETED', 1, NULL, '2026-08-19 20:39:44.095+07', '2026-08-19 20:39:44.172+07', '2026-08-19 20:39:44.195+07', 400, 1, '396', '2026-08-19 20:39:44.195+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 8, "notificationId": 397}', 'COMPLETED', 1, NULL, '2026-08-19 20:39:46.485+07', '2026-08-19 20:39:46.557+07', '2026-08-19 20:39:46.57+07', 401, 1, '397', '2026-08-19 20:39:46.571+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 8, "notificationId": 398}', 'COMPLETED', 1, NULL, '2026-08-19 20:39:48.145+07', '2026-08-19 20:39:48.213+07', '2026-08-19 20:39:48.221+07', 402, 1, '398', '2026-08-19 20:39:48.222+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 8, "notificationId": 399}', 'COMPLETED', 1, NULL, '2026-08-19 20:39:49.767+07', '2026-08-19 20:39:49.836+07', '2026-08-19 20:39:49.843+07', 403, 1, '399', '2026-08-19 20:39:49.843+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 8, "notificationId": 400}', 'COMPLETED', 1, NULL, '2026-08-19 20:39:51.936+07', '2026-08-19 20:39:52.012+07', '2026-08-19 20:39:52.019+07', 404, 1, '400', '2026-08-19 20:39:52.019+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 8, "notificationId": 401}', 'COMPLETED', 1, NULL, '2026-08-19 22:10:38.292+07', '2026-08-19 22:10:38.407+07', '2026-08-19 22:10:38.418+07', 405, 1, '401', '2026-08-19 22:10:38.418+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 402}', 'COMPLETED', 1, NULL, '2026-08-23 04:45:44.437+07', '2026-08-23 04:45:44.598+07', '2026-08-23 04:45:44.611+07', 406, 1, '402', '2026-08-23 04:45:44.612+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 403}', 'COMPLETED', 1, NULL, '2026-08-23 04:45:44.563+07', '2026-08-23 04:45:44.658+07', '2026-08-23 04:45:44.666+07', 407, 1, '403', '2026-08-23 04:45:44.666+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 2, "notificationId": 404}', 'COMPLETED', 1, NULL, '2026-08-23 04:53:05.753+07', '2026-08-23 04:53:05.839+07', '2026-08-23 04:53:05.868+07', 408, 1, '404', '2026-08-23 04:53:05.868+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 1, "notificationId": 405}', 'COMPLETED', 1, NULL, '2026-08-23 04:53:05.799+07', '2026-08-23 04:53:05.905+07', '2026-08-23 04:53:05.914+07', 409, 1, '405', '2026-08-23 04:53:05.915+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "APPOINTMENT", "userId": 8, "notificationId": 406}', 'COMPLETED', 1, NULL, '2026-08-23 05:15:55.012+07', '2026-08-23 05:15:55.157+07', '2026-08-23 05:15:55.174+07', 410, 1, '406', '2026-08-23 05:15:55.175+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 18, "notificationId": 407}', 'COMPLETED', 1, NULL, '2026-08-23 06:52:00.593+07', '2026-08-23 06:52:00.725+07', '2026-08-23 06:52:00.736+07', 411, 18, '407', '2026-08-23 06:52:00.736+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "RENTAL_REQUEST", "userId": 16, "notificationId": 408}', 'COMPLETED', 1, NULL, '2026-08-23 07:43:42.205+07', '2026-08-23 07:43:42.353+07', '2026-08-23 07:43:42.364+07', 412, 18, '408', '2026-08-23 07:43:42.365+07');
+INSERT INTO public.background_jobs VALUES ('notifications', 'send-push', '{"type": "MARKETPLACE", "userId": 18, "notificationId": 409}', 'COMPLETED', 1, NULL, '2026-08-23 07:43:42.323+07', '2026-08-23 07:43:42.426+07', '2026-08-23 07:43:42.432+07', 413, 18, '409', '2026-08-23 07:43:42.432+07');
+INSERT INTO public.background_jobs VALUES ('ocr', 'PROCESS_OCR_JOB', '{"ocrJobId": 5}', 'COMPLETED', 1, NULL, '2026-08-23 08:06:44.713+07', '2026-08-23 08:06:44.846+07', '2026-08-23 08:06:46.986+07', 414, 18, 'ocr-414', '2026-08-23 08:06:46.987+07');
+
+
+--
+-- Data for Name: contract_templates; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: properties; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.properties VALUES ('MVP Demo Building', 'MINI_APARTMENT', 'Ho Chi Minh City', 'Thu Duc City', 'Linh Trung', '01 Demo Street', NULL, NULL, NULL, 'ACTIVE', '2026-07-30 23:21:12.884+07', '2026-07-30 23:21:12.884+07', NULL, 1, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('API-E2E-20260811151357-VHCL6 property', 'MINI_APARTMENT', 'Ho Chi Minh City', 'District 1', 'Ben Nghe', 'API-E2E-20260811151357-VHCL6 disposable address', NULL, NULL, 'API-E2E-20260811151357-VHCL6 updated property', 'ACTIVE', '2026-08-11 15:13:57.986+07', '2026-08-11 15:13:58.106+07', NULL, 21, 15, 9, NULL, 9, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('API-E2E-20260811143204-JWL7R property', 'MINI_APARTMENT', 'Ho Chi Minh City', 'District 1', 'Ben Nghe', 'API-E2E-20260811143204-JWL7R disposable address', NULL, NULL, 'API-E2E-20260811143204-JWL7R updated property', 'ACTIVE', '2026-08-11 14:32:04.605+07', '2026-08-11 14:32:06.253+07', '2026-08-11 14:32:06.251+07', 13, 15, 9, 9, 9, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('API-E2E-20260811143757-VWYU2 property', 'MINI_APARTMENT', 'Ho Chi Minh City', 'District 1', 'Ben Nghe', 'API-E2E-20260811143757-VWYU2 disposable address', NULL, NULL, 'API-E2E-20260811143757-VWYU2 updated property', 'ACTIVE', '2026-08-11 14:37:57.579+07', '2026-08-11 14:38:00.164+07', '2026-08-11 14:38:00.163+07', 14, 15, 9, 9, 9, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('API-E2E-20260811145335-OBR4D property', 'MINI_APARTMENT', 'Ho Chi Minh City', 'District 1', 'Ben Nghe', 'API-E2E-20260811145335-OBR4D disposable address', NULL, NULL, 'API-E2E-20260811145335-OBR4D updated property', 'ACTIVE', '2026-08-11 14:53:35.735+07', '2026-08-11 14:53:35.883+07', NULL, 15, 15, 9, NULL, 9, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('API-E2E-20260811145614-NE3TM property', 'MINI_APARTMENT', 'Ho Chi Minh City', 'District 1', 'Ben Nghe', 'API-E2E-20260811145614-NE3TM disposable address', NULL, NULL, 'API-E2E-20260811145614-NE3TM updated property', 'ACTIVE', '2026-08-11 14:56:14.547+07', '2026-08-11 14:56:14.68+07', NULL, 16, 15, 9, NULL, 9, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('API-E2E-20260811150747-FQASH property', 'MINI_APARTMENT', 'Ho Chi Minh City', 'District 1', 'Ben Nghe', 'API-E2E-20260811150747-FQASH disposable address', NULL, NULL, 'API-E2E-20260811150747-FQASH updated property', 'ACTIVE', '2026-08-11 15:07:48.161+07', '2026-08-11 15:07:48.326+07', NULL, 17, 15, 9, NULL, 9, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('API-E2E-20260811150923-COC5D property', 'MINI_APARTMENT', 'Ho Chi Minh City', 'District 1', 'Ben Nghe', 'API-E2E-20260811150923-COC5D disposable address', NULL, NULL, 'API-E2E-20260811150923-COC5D updated property', 'ACTIVE', '2026-08-11 15:09:23.342+07', '2026-08-11 15:09:23.448+07', NULL, 18, 15, 9, NULL, 9, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('API-E2E-20260811151034-7GWTM property', 'MINI_APARTMENT', 'Ho Chi Minh City', 'District 1', 'Ben Nghe', 'API-E2E-20260811151034-7GWTM disposable address', NULL, NULL, 'API-E2E-20260811151034-7GWTM updated property', 'ACTIVE', '2026-08-11 15:10:35.069+07', '2026-08-11 15:10:54.804+07', '2026-08-11 15:10:54.8+07', 19, 15, 9, 9, 9, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('Chung Cư A quận 12', 'MINI_APARTMENT', 'Hồ Chí Minh', '12', 'Thới AN', '28/12 Đường Văn Chung', NULL, NULL, NULL, 'ACTIVE', '2026-08-14 08:36:43.105+07', '2026-08-14 08:36:43.105+07', NULL, 23, 18, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('API-E2E-20260811151220-TXWCG property', 'MINI_APARTMENT', 'Ho Chi Minh City', 'District 1', 'Ben Nghe', 'API-E2E-20260811151220-TXWCG disposable address', NULL, NULL, 'API-E2E-20260811151220-TXWCG updated property', 'ACTIVE', '2026-08-11 15:12:20.882+07', '2026-08-11 15:12:39.094+07', '2026-08-11 15:12:39.093+07', 20, 15, 9, 9, 9, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('Chung Cư A quận 12', 'MINI_APARTMENT', 'Thành phố Hồ Chí Minh', NULL, 'Phường Thới An', '92 Trần Thị Cờ, Thới An, Quận 12, Hồ Chí Minh', 10.87501144, 106.65112728, NULL, 'ACTIVE', '2026-08-13 09:57:31.618+07', '2026-08-15 07:40:52.348+07', NULL, 22, 1, 8, NULL, 8, '79', '26773', NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('Nhà Trọ Sinh Viên', 'MINI_APARTMENT', 'Thành phố Hồ Chí Minh', NULL, 'Phường Phú Thọ Hòa', 'Thoại Ngọc Hầu, Phú Thọ Hoà, Tân Phú, Hồ Chí Minh', 10.78117730, 106.63525850, NULL, 'ACTIVE', '2026-08-16 17:08:14.327+07', '2026-08-16 17:08:14.327+07', NULL, 25, 1, 8, NULL, NULL, '79', '27022', NULL, NULL, NULL);
+INSERT INTO public.properties VALUES ('Nhà Trọ Sinh Viên DN', 'MINI_APARTMENT', 'Thành phố Hà Nội', NULL, 'Phường Ba Đình', 'Phường Đội Cấn, Quận Ba Đình, Thành phố Hà Nội', 21.03532500, 105.83148195, NULL, 'ACTIVE', '2026-08-16 17:10:31.29+07', '2026-08-16 17:10:31.29+07', NULL, 26, 1, 8, NULL, NULL, '01', '00004', NULL, NULL, NULL);
+
+
+--
+-- Data for Name: floors; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.floors VALUES ('Floor 1', 1, '2026-07-30 23:21:12.895+07', 1, 1, 1);
+INSERT INTO public.floors VALUES ('API-E2E-20260811143204-JWL7R floor', 1, '2026-08-11 14:32:04.812+07', 2, 15, 13);
+INSERT INTO public.floors VALUES ('API-E2E-20260811143757-VWYU2 floor', 1, '2026-08-11 14:37:57.76+07', 3, 15, 14);
+INSERT INTO public.floors VALUES ('API-E2E-20260811145335-OBR4D floor', 1, '2026-08-11 14:53:35.951+07', 4, 15, 15);
+INSERT INTO public.floors VALUES ('API-E2E-20260811145614-NE3TM floor', 1, '2026-08-11 14:56:14.742+07', 5, 15, 16);
+INSERT INTO public.floors VALUES ('API-E2E-20260811150747-FQASH floor', 1, '2026-08-11 15:07:48.39+07', 6, 15, 17);
+INSERT INTO public.floors VALUES ('API-E2E-20260811150923-COC5D floor', 1, '2026-08-11 15:09:23.499+07', 7, 15, 18);
+INSERT INTO public.floors VALUES ('API-E2E-20260811151034-7GWTM floor', 1, '2026-08-11 15:10:35.232+07', 8, 15, 19);
+INSERT INTO public.floors VALUES ('API-E2E-20260811151220-TXWCG floor', 1, '2026-08-11 15:12:21.05+07', 9, 15, 20);
+INSERT INTO public.floors VALUES ('API-E2E-20260811151357-VHCL6 floor', 1, '2026-08-11 15:13:58.165+07', 10, 15, 21);
+INSERT INTO public.floors VALUES ('Tầng 1', 1, '2026-08-13 13:55:20.149+07', 11, 1, 22);
+INSERT INTO public.floors VALUES ('Tầng 2', 2, '2026-08-13 13:55:20.149+07', 12, 1, 22);
+INSERT INTO public.floors VALUES ('Tầng 3', 3, '2026-08-13 13:55:20.149+07', 13, 1, 22);
+INSERT INTO public.floors VALUES ('Tầng 4', 4, '2026-08-13 13:55:20.149+07', 14, 1, 22);
+INSERT INTO public.floors VALUES ('Tầng 1', 1, '2026-08-14 08:36:43.13+07', 15, 18, 23);
+INSERT INTO public.floors VALUES ('Tầng 2', 2, '2026-08-14 08:36:43.13+07', 16, 18, 23);
+INSERT INTO public.floors VALUES ('Tầng 3', 3, '2026-08-14 08:36:43.13+07', 17, 18, 23);
+INSERT INTO public.floors VALUES ('Tầng 4', 4, '2026-08-14 08:36:43.13+07', 18, 18, 23);
+INSERT INTO public.floors VALUES ('Tầng 1', 1, '2026-08-16 17:08:14.349+07', 19, 1, 25);
+INSERT INTO public.floors VALUES ('Tầng 1', 1, '2026-08-16 17:10:31.309+07', 20, 1, 26);
+INSERT INTO public.floors VALUES ('Tầng 2', 2, '2026-08-16 17:10:31.309+07', 21, 1, 26);
+INSERT INTO public.floors VALUES ('Tầng 3', 3, '2026-08-16 17:10:31.309+07', 22, 1, 26);
+
+
+--
+-- Data for Name: rooms; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.rooms VALUES ('MVP-A102', 'Occupied MVP integration room', 30.00, 3, 6000000.00, 6000000.00, 3500.00, 20000.00, NULL, 'OCCUPIED', 'HIDDEN', NULL, '2026-07-30 23:21:12.918+07', '2026-07-30 23:43:08.551+07', NULL, 2, 1, 1, 1, 3, NULL, NULL);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811151220-TXWCG-REJECT', 'API-E2E-20260811151220-TXWCG room REJECT', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', '2026-08-11 15:12:25.817+07', '2026-08-11 15:12:21.164+07', '2026-08-11 15:12:38.942+07', '2026-08-11 15:12:38.94+07', 18, 15, 20, 9, 9, 9, 1);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811151220-TXWCG-MAIN', 'API-E2E-20260811151220-TXWCG room updated', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', '2026-08-11 15:12:36.098+07', '2026-08-11 15:12:21.103+07', '2026-08-11 15:12:39.027+07', '2026-08-11 15:12:39.025+07', 17, 15, 20, 9, 9, 9, 1);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811143204-JWL7R-REJECT', 'API-E2E-20260811143204-JWL7R room REJECT', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', NULL, '2026-08-11 14:32:04.987+07', '2026-08-11 14:32:06.102+07', '2026-08-11 14:32:06.1+07', 4, 15, 13, 2, 9, 9, NULL);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811143204-JWL7R-MAIN', 'API-E2E-20260811143204-JWL7R room updated', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', NULL, '2026-08-11 14:32:04.888+07', '2026-08-11 14:32:06.183+07', '2026-08-11 14:32:06.183+07', 3, 15, 13, 2, 9, 9, 9);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811143757-VWYU2-REJECT', 'API-E2E-20260811143757-VWYU2 room REJECT', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', NULL, '2026-08-11 14:37:57.91+07', '2026-08-11 14:37:59.994+07', '2026-08-11 14:37:59.993+07', 6, 15, 14, 3, 9, 9, NULL);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811143757-VWYU2-MAIN', 'API-E2E-20260811143757-VWYU2 room MAIN', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', NULL, '2026-08-11 14:37:57.826+07', '2026-08-11 14:38:00.096+07', '2026-08-11 14:38:00.095+07', 5, 15, 14, 3, 9, 9, NULL);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811151357-VHCL6-MAIN', 'API-E2E-20260811151357-VHCL6 room updated', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'OCCUPIED', 'HIDDEN', '2026-08-11 15:14:01.97+07', '2026-08-11 15:13:58.213+07', '2026-08-11 15:14:04.106+07', NULL, 19, 15, 21, 10, 9, NULL, 9);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811151357-VHCL6-REJECT', 'API-E2E-20260811151357-VHCL6 room REJECT', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', '2026-08-11 15:14:02.355+07', '2026-08-11 15:13:58.28+07', '2026-08-11 15:14:10.207+07', '2026-08-11 15:14:10.206+07', 20, 15, 21, 10, 9, 9, 1);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811145335-OBR4D-MAIN', 'API-E2E-20260811145335-OBR4D room updated', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'OCCUPIED', 'HIDDEN', '2026-08-11 14:53:40.561+07', '2026-08-11 14:53:36.027+07', '2026-08-11 14:53:43.373+07', NULL, 7, 15, 15, 4, 9, NULL, 9);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811145335-OBR4D-REJECT', 'API-E2E-20260811145335-OBR4D room REJECT', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', '2026-08-11 14:53:41.054+07', '2026-08-11 14:53:36.103+07', '2026-08-11 14:53:52.116+07', '2026-08-11 14:53:52.115+07', 8, 15, 15, 4, 9, 9, 1);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811145614-NE3TM-MAIN', 'API-E2E-20260811145614-NE3TM room updated', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'OCCUPIED', 'HIDDEN', '2026-08-11 14:56:18.854+07', '2026-08-11 14:56:14.8+07', '2026-08-11 14:56:21.318+07', NULL, 9, 15, 16, 5, 9, NULL, 9);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811145614-NE3TM-REJECT', 'API-E2E-20260811145614-NE3TM room REJECT', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', '2026-08-11 14:56:19.277+07', '2026-08-11 14:56:14.868+07', '2026-08-11 14:56:28.7+07', '2026-08-11 14:56:28.7+07', 10, 15, 16, 5, 9, 9, 1);
+INSERT INTO public.rooms VALUES ('T101', 'Tầng 1 Phòng 101 đầy đủ nội thất', 25.00, 4, 4500000.00, 4500000.00, 150000.00, 100000.00, '', 'AVAILABLE', 'PUBLISHED', '2026-08-14 09:30:29.108+07', '2026-08-14 08:38:31.761+07', '2026-08-14 09:30:29.11+07', NULL, 22, 18, 23, 15, 18, NULL, 1);
+INSERT INTO public.rooms VALUES ('T101', 'Phòng T101', 25.00, 3, 3000000.00, 3000000.00, 3500.00, 5000.00, '', 'OCCUPIED', 'HIDDEN', '2026-08-13 14:53:26.9+07', '2026-08-13 13:55:52.843+07', '2026-08-14 16:00:56.831+07', NULL, 21, 1, 22, 11, 8, NULL, 8);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811150747-FQASH-MAIN', 'API-E2E-20260811150747-FQASH room updated', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'OCCUPIED', 'HIDDEN', '2026-08-11 15:07:52.864+07', '2026-08-11 15:07:48.509+07', '2026-08-11 15:07:55.175+07', NULL, 11, 15, 17, 6, 9, NULL, 9);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811150747-FQASH-REJECT', 'API-E2E-20260811150747-FQASH room REJECT', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', '2026-08-11 15:07:53.249+07', '2026-08-11 15:07:48.637+07', '2026-08-11 15:08:03.226+07', '2026-08-11 15:08:03.225+07', 12, 15, 17, 6, 9, 9, 1);
+INSERT INTO public.rooms VALUES ('T102', 'Phòng Studio full nội thất tầng 1', 35.00, 5, 6000000.00, 6000000.00, 3500.00, 5000.00, '', 'AVAILABLE', 'PUBLISHED', '2026-08-15 08:21:09.227+07', '2026-08-15 07:16:04.46+07', '2026-08-15 08:21:09.229+07', NULL, 23, 1, 22, 11, 8, NULL, 1);
+INSERT INTO public.rooms VALUES ('T202', 'Phòng trọ giá rẻ Quận 12', 25.00, 3, 3500000.00, 3500000.00, 3500.00, 5000.00, '', 'AVAILABLE', 'PUBLISHED', '2026-08-15 08:21:11.676+07', '2026-08-15 07:25:42.923+07', '2026-08-15 08:21:11.676+07', NULL, 24, 1, 22, 12, 8, NULL, 1);
+INSERT INTO public.rooms VALUES ('P101', 'Phòng Lớn Full NT - Cộng Hoà - Trường Chinh', 35.00, 5, 4500000.00, 4500000.00, 3700.00, 3000.00, '', 'AVAILABLE', 'PUBLISHED', '2026-08-16 15:11:06.998+07', '2026-08-16 07:31:15.93+07', '2026-08-16 15:11:07+07', NULL, 25, 18, 23, 15, 18, NULL, 1);
+INSERT INTO public.rooms VALUES ('MVP-A101', 'Bright studio near university', 25.00, 2, 5500000.00, 5500000.00, 3500.00, 20000.00, NULL, 'AVAILABLE', 'HIDDEN', '2026-07-01 00:00:00+07', '2026-07-30 23:21:12.907+07', '2026-08-16 15:11:20.989+07', NULL, 1, 1, 1, 1, 3, NULL, 1);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811150923-COC5D-MAIN', 'API-E2E-20260811150923-COC5D room updated', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'OCCUPIED', 'HIDDEN', '2026-08-11 15:09:27.317+07', '2026-08-11 15:09:23.562+07', '2026-08-11 15:09:29.726+07', NULL, 13, 15, 18, 7, 9, NULL, 9);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811150923-COC5D-REJECT', 'API-E2E-20260811150923-COC5D room REJECT', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', '2026-08-11 15:09:27.966+07', '2026-08-11 15:09:23.634+07', '2026-08-11 15:09:37.589+07', '2026-08-11 15:09:37.588+07', 14, 15, 18, 7, 9, 9, 1);
+INSERT INTO public.rooms VALUES ('DN101', 'Phòng trọ Kép Kín Triều Khúc - Thanh Xuân', 25.00, 3, 3200000.00, 3200000.00, 3500.00, 3000.00, 'Phòng trọ Khép Kín Ngay cổng trường ĐH giao thông vận tải phố triều khúc thanh xuân cửa khoá vân tay giờ giấc tự do, Không Chung Chủ nội thất điều hoà nóng lạnh tủ quần áo giường gác xép. Chính chủ lh ngay để xem phòng', 'AVAILABLE', 'PUBLISHED', '2026-08-19 20:39:44.05+07', '2026-08-19 20:37:02.042+07', '2026-08-19 20:39:44.052+07', NULL, 30, 1, 26, 20, 8, NULL, 1);
+INSERT INTO public.rooms VALUES ('T305', 'Phòng Trọ Có Gác Cửa Sổ Giá Rẻ Ngay Trung Tâm', 20.00, 2, 1500000.00, 1500000.00, 3700.00, 3000.00, '📐 Diện tích: 20 m2
+
+🌟 Tiện ích & Đặc điểm nổi bật:
+Gác lửng cao ráo, thoáng mát, tối ưu không gian sinh hoạt.
+
+Nội thất đầy đủ (Full option): Chỉ cần xách vali vào ở ngay!
+
+Giờ giấc tự do, không chung chủ, an ninh đảm bảo.
+
+Vị trí đắc địa ngay đường Nguyễn Văn Quỳ, giao thông thuận tiện di chuyển sang Quận 1, Quận 4, Cầu Phú Mỹ qua Quận 2.
+
+Gần các trường đại học lớn (RMIT, TDTU, NTTU...), siêu thị Go! (BigC cũ), Bách Hóa Xanh và chợ truyền thống.', 'AVAILABLE', 'PUBLISHED', '2026-08-19 20:39:46.462+07', '2026-08-19 20:28:14.582+07', '2026-08-19 20:39:46.462+07', NULL, 29, 1, 25, 19, 8, NULL, 1);
+INSERT INTO public.rooms VALUES ('P104', 'CHO THUÊ PHÒNG TRỌ MỚI XÂY GIÁ RẺ - GẦN ĐẠI HỌC VĂN HIẾN & CÔNG THƯƠNG', 25.00, 4, 3500000.00, 3500000.00, 3500.00, 3000.00, '', 'AVAILABLE', 'PUBLISHED', '2026-08-19 20:39:49.75+07', '2026-08-16 17:23:26.141+07', '2026-08-19 20:39:49.75+07', NULL, 27, 1, 25, 19, 8, NULL, 1);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811151034-7GWTM-REJECT', 'API-E2E-20260811151034-7GWTM room REJECT', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', '2026-08-11 15:10:39.767+07', '2026-08-11 15:10:35.35+07', '2026-08-11 15:10:54.391+07', '2026-08-11 15:10:54.391+07', 16, 15, 19, 8, 9, 9, 1);
+INSERT INTO public.rooms VALUES ('API-E2E-20260811151034-7GWTM-MAIN', 'API-E2E-20260811151034-7GWTM room updated', 28.00, 2, 4500000.00, 4500000.00, 3500.00, 20000.00, 'Disposable API E2E room', 'AVAILABLE', 'HIDDEN', '2026-08-11 15:10:39.397+07', '2026-08-11 15:10:35.284+07', '2026-08-11 15:10:54.737+07', '2026-08-11 15:10:54.734+07', 15, 15, 19, 8, 9, 9, 9);
+INSERT INTO public.rooms VALUES ('T105', 'PHÒNG TRỌ MỚI XÂY GẦN ĐẠI HỌC VĂN HIẾN - ĐH HỒNG BÀNG AN NINH SẠCH SẼ', 28.00, 4, 4500000.00, 4500000.00, 3500.00, 3000.00, '', 'AVAILABLE', 'PUBLISHED', '2026-08-19 20:39:51.921+07', '2026-08-16 17:12:19.363+07', '2026-08-19 20:39:51.921+07', NULL, 26, 1, 25, 19, 8, NULL, 1);
+INSERT INTO public.rooms VALUES ('DN303', 'Phòng Trọ Khép Kín 20m2 tại Louis City Hoàng mai', 25.00, 2, 3000000.00, 3000000.00, 3700.00, 3000.00, 'Phòng trọ khép kín tại Louis Cty Hoàng Mai gần Bắc - Kinh - Xây, nhà mới hoàn thiện nội thất đầy đủ , máy giặt, điều hoà , nóng lạnh, cửa khoá vân tay, giờ giấc tự do, chính chủ', 'AVAILABLE', 'PENDING_REVIEW', NULL, '2026-08-23 04:44:26.95+07', '2026-08-23 04:45:44.396+07', NULL, 31, 1, 26, 22, 8, NULL, 8);
+INSERT INTO public.rooms VALUES ('T105', 'CHO THUÊ PHÒNG CC LUXGARDEN', 30.00, 5, 5000000.00, 5000000.00, 3700.00, 3000.00, 'Dự án:
+Thông tin chi tiết: Cho thuê phòng BAN CÔNG ở chung cư Lux Garden q.12
+💥💥 Diện tích: 30m2 - Giá 5tr/ tháng (ƯU TIÊN NAM)
+
+🌈🌈 Tiện ích:
+✳️ Full nội thất như : gường , nệm , ga phủ , máy lạnh , tủ quần áo, bàn, ghế, quạt ...
+✳️ Full tiện ích trong khu như khuôn viên rộng rãi, phòng gym, hồ bơi 2000m2 (hồ bơi dc sử dụng miễn phí), BV 24/24, an ninh tuyệt đối, tầng hầm để xe, các dịch vụ nhà trẻ, quán ăn, spa ...
+✳️ Có dọn dẹp vệ sinh khu sinh hoạt chung 2 lần/ tuần
+✳️ Có kĩ thuật sửa chữa và bảo trì miễn phí các hê thống thiết bị trong căn hộ.
+✳️ Điện nước tính theo đơn giá của nhà nước
+✳️ Phí Dịch Vụ : 100K/ Tháng, Wifi 100K/ Tháng.
+✳️ Nhà bếp đủ đồ dùng, máy giặt, tủ lạnh ...
+🌈🌈 Kề bên các trường Đại Học Tôn Đức Thắng, Đại học Kinh tế tài chính, Đại học RMIT, LotteMart, Vivo, BigC, Highland coffee, Phuc Long Coffee & Tea
+
+👉👉Tất cả đều đã sẵn sàng xách vali vào ở thôi ạ', 'AVAILABLE', 'PUBLISHED', '2026-08-19 20:39:48.13+07', '2026-08-19 20:23:11.73+07', '2026-08-19 20:39:48.13+07', NULL, 28, 1, 22, 11, 8, NULL, 1);
+INSERT INTO public.rooms VALUES ('DN305', 'Phòng trọ Nguyễn Chí Chính, Hoàng Mai, Full đồ', 30.00, 4, 6000000.00, 6000000.00, 3500.00, 3000.00, '113 NGUYỄN CHÍNH ( gần Bách Kinh Xây ) phòng rộng
+Giá thuê : #6tr Full đồ sẵn tủ lạnh , sofa , máy giặt RIÊNG ,...
+✅được nuôi pet', 'AVAILABLE', 'PENDING_REVIEW', NULL, '2026-08-23 04:52:11.56+07', '2026-08-23 04:53:05.739+07', NULL, 32, 1, 26, 22, 8, NULL, 8);
+INSERT INTO public.rooms VALUES ('TEST10K', 'Phòng Test 10k', 20.00, 2, 10000.00, 0.00, 3500.00, 20000.00, NULL, 'RESERVED', 'HIDDEN', NULL, '2026-08-23 12:59:11.253556+07', '2026-08-23 07:43:42.169+07', NULL, 33, 18, 23, NULL, NULL, NULL, 18);
+
+
+--
+-- Data for Name: room_viewing_appointments; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-19 00:00:00+07', 'API-E2E-20260811145335-OBR4D cancel appointment', NULL, 'CANCELED', '2026-08-11 14:53:41.457+07', '2026-08-11 14:53:41.592+07', 1, 15, 7, 13, NULL, 13, NULL, 13);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-21 00:00:00+07', 'API-E2E-20260811145335-OBR4D main appointment', 'API-E2E-20260811145335-OBR4D confirmed', 'CONFIRMED', '2026-08-11 14:53:41.718+07', '2026-08-11 14:53:41.966+07', 2, 15, 7, 13, NULL, 13, NULL, 9);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-19 00:00:00+07', 'API-E2E-20260811145614-NE3TM cancel appointment', NULL, 'CANCELED', '2026-08-11 14:56:19.624+07', '2026-08-11 14:56:19.728+07', 3, 15, 9, 13, NULL, 13, NULL, 13);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-21 00:00:00+07', 'API-E2E-20260811145614-NE3TM main appointment', 'API-E2E-20260811145614-NE3TM confirmed', 'CONFIRMED', '2026-08-11 14:56:19.836+07', '2026-08-11 14:56:20.049+07', 4, 15, 9, 13, NULL, 13, NULL, 9);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-19 00:00:00+07', 'API-E2E-20260811150747-FQASH cancel appointment', NULL, 'CANCELED', '2026-08-11 15:07:53.581+07', '2026-08-11 15:07:53.706+07', 5, 15, 11, 13, NULL, 13, NULL, 13);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-21 00:00:00+07', 'API-E2E-20260811150747-FQASH main appointment', 'API-E2E-20260811150747-FQASH confirmed', 'CONFIRMED', '2026-08-11 15:07:53.827+07', '2026-08-11 15:07:54.042+07', 6, 15, 11, 13, NULL, 13, NULL, 9);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-19 00:00:00+07', 'API-E2E-20260811150923-COC5D cancel appointment', NULL, 'CANCELED', '2026-08-11 15:09:28.28+07', '2026-08-11 15:09:28.38+07', 7, 15, 13, 13, NULL, 13, NULL, 13);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-21 00:00:00+07', 'API-E2E-20260811150923-COC5D main appointment', 'API-E2E-20260811150923-COC5D confirmed', 'CONFIRMED', '2026-08-11 15:09:28.48+07', '2026-08-11 15:09:28.665+07', 8, 15, 13, 13, NULL, 13, NULL, 9);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-19 00:00:00+07', 'API-E2E-20260811151034-7GWTM cancel appointment', NULL, 'CANCELED', '2026-08-11 15:10:40.049+07', '2026-08-11 15:10:40.147+07', 9, 15, 15, 13, NULL, 13, NULL, 13);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-21 00:00:00+07', 'API-E2E-20260811151034-7GWTM main appointment', 'API-E2E-20260811151034-7GWTM confirmed', 'CONFIRMED', '2026-08-11 15:10:40.239+07', '2026-08-11 15:10:40.428+07', 10, 15, 15, 13, NULL, 13, NULL, 9);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-19 00:00:00+07', 'API-E2E-20260811151220-TXWCG cancel appointment', NULL, 'CANCELED', '2026-08-11 15:12:26.162+07', '2026-08-11 15:12:26.32+07', 11, 15, 17, 13, NULL, 13, NULL, 13);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-21 00:00:00+07', 'API-E2E-20260811151220-TXWCG main appointment', 'API-E2E-20260811151220-TXWCG confirmed', 'CONFIRMED', '2026-08-11 15:12:26.439+07', '2026-08-11 15:12:26.636+07', 12, 15, 17, 13, NULL, 13, NULL, 9);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-19 00:00:00+07', 'API-E2E-20260811151357-VHCL6 cancel appointment', NULL, 'CANCELED', '2026-08-11 15:14:02.673+07', '2026-08-11 15:14:02.766+07', 13, 15, 19, 13, NULL, 13, NULL, 13);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-21 00:00:00+07', 'API-E2E-20260811151357-VHCL6 main appointment', 'API-E2E-20260811151357-VHCL6 confirmed', 'CONFIRMED', '2026-08-11 15:14:02.867+07', '2026-08-11 15:14:03.069+07', 14, 15, 19, 13, NULL, 13, NULL, 9);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-20 02:00:00+07', NULL, NULL, 'CANCELED', '2026-08-14 19:10:53.659+07', '2026-08-18 07:45:44.422+07', 15, 18, 22, 16, NULL, 16, NULL, 16);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-22 03:00:00+07', NULL, NULL, 'PENDING', '2026-08-19 22:10:38.26+07', '2026-08-19 22:10:38.26+07', 16, 1, 27, 16, NULL, 16, NULL, NULL);
+INSERT INTO public.room_viewing_appointments VALUES ('2026-08-28 03:00:00+07', 'Người đặt: Khoa Minh, SĐT liên hệ: 0562379980.', NULL, 'PENDING', '2026-08-23 05:15:54.984+07', '2026-08-23 05:15:54.984+07', 17, 1, 29, 20, NULL, 20, NULL, NULL);
+
+
+--
+-- Data for Name: rental_requests; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.rental_requests VALUES ('Seeded rental journey', '2026-01-01', 'CONVERTED_TO_CONTRACT', '2026-07-30 23:21:12.929+07', '2026-07-30 23:43:08.556+07', 1, 1, 2, 4, NULL, 4, NULL, NULL);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811145335-OBR4D cancel request', '2026-08-31', 'CANCELED', '2026-08-11 14:53:42.114+07', '2026-08-11 14:53:42.243+07', 2, 15, 7, 13, 2, 13, NULL, 13);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811145335-OBR4D reject request', '2026-09-05', 'REJECTED', '2026-08-11 14:53:42.765+07', '2026-08-11 14:53:42.866+07', 4, 15, 8, 13, NULL, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811145335-OBR4D main request', '2026-08-31', 'CONVERTED_TO_CONTRACT', '2026-08-11 14:53:42.36+07', '2026-08-11 14:53:43.384+07', 3, 15, 7, 13, 2, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811145614-NE3TM cancel request', '2026-08-31', 'CANCELED', '2026-08-11 14:56:20.175+07', '2026-08-11 14:56:20.294+07', 5, 15, 9, 13, 4, 13, NULL, 13);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811145614-NE3TM reject request', '2026-09-05', 'REJECTED', '2026-08-11 14:56:20.793+07', '2026-08-11 14:56:20.893+07', 7, 15, 10, 13, NULL, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811145614-NE3TM main request', '2026-08-31', 'CONVERTED_TO_CONTRACT', '2026-08-11 14:56:20.423+07', '2026-08-11 14:56:21.323+07', 6, 15, 9, 13, 4, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811150747-FQASH cancel request', '2026-08-31', 'CANCELED', '2026-08-11 15:07:54.149+07', '2026-08-11 15:07:54.25+07', 8, 15, 11, 13, 6, 13, NULL, 13);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811150747-FQASH reject request', '2026-09-05', 'REJECTED', '2026-08-11 15:07:54.698+07', '2026-08-11 15:07:54.788+07', 10, 15, 12, 13, NULL, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811150747-FQASH main request', '2026-08-31', 'CONVERTED_TO_CONTRACT', '2026-08-11 15:07:54.355+07', '2026-08-11 15:07:55.182+07', 9, 15, 11, 13, 6, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811150923-COC5D cancel request', '2026-08-31', 'CANCELED', '2026-08-11 15:09:28.773+07', '2026-08-11 15:09:28.867+07', 11, 15, 13, 13, 8, 13, NULL, 13);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811150923-COC5D reject request', '2026-09-05', 'REJECTED', '2026-08-11 15:09:29.289+07', '2026-08-11 15:09:29.374+07', 13, 15, 14, 13, NULL, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811150923-COC5D main request', '2026-08-31', 'CONVERTED_TO_CONTRACT', '2026-08-11 15:09:28.965+07', '2026-08-11 15:09:29.732+07', 12, 15, 13, 13, 8, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811151034-7GWTM cancel request', '2026-08-31', 'CANCELED', '2026-08-11 15:10:40.542+07', '2026-08-11 15:10:40.629+07', 14, 15, 15, 13, 10, 13, NULL, 13);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811151034-7GWTM reject request', '2026-09-05', 'REJECTED', '2026-08-11 15:10:41.066+07', '2026-08-11 15:10:41.155+07', 16, 15, 16, 13, NULL, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811151034-7GWTM main request', '2026-08-31', 'CONVERTED_TO_CONTRACT', '2026-08-11 15:10:40.742+07', '2026-08-11 15:10:41.66+07', 15, 15, 15, 13, 10, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811151220-TXWCG cancel request', '2026-08-31', 'CANCELED', '2026-08-11 15:12:26.747+07', '2026-08-11 15:12:26.846+07', 17, 15, 17, 13, 12, 13, NULL, 13);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811151220-TXWCG reject request', '2026-09-05', 'REJECTED', '2026-08-11 15:12:27.306+07', '2026-08-11 15:12:27.398+07', 19, 15, 18, 13, NULL, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811151220-TXWCG main request', '2026-08-31', 'CONVERTED_TO_CONTRACT', '2026-08-11 15:12:26.96+07', '2026-08-11 15:12:27.959+07', 18, 15, 17, 13, 12, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811151357-VHCL6 cancel request', '2026-08-31', 'CANCELED', '2026-08-11 15:14:03.18+07', '2026-08-11 15:14:03.27+07', 20, 15, 19, 13, 14, 13, NULL, 13);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811151357-VHCL6 reject request', '2026-09-05', 'REJECTED', '2026-08-11 15:14:03.694+07', '2026-08-11 15:14:03.784+07', 22, 15, 20, 13, NULL, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('API-E2E-20260811151357-VHCL6 main request', '2026-08-31', 'CONVERTED_TO_CONTRACT', '2026-08-11 15:14:03.369+07', '2026-08-11 15:14:04.113+07', 21, 15, 19, 13, 14, 13, NULL, 9);
+INSERT INTO public.rental_requests VALUES ('Số người ở dự kiến: 3 người.
+Lời nhắn: Không có', '2026-09-01', 'REJECTED', '2026-08-13 15:31:18.806+07', '2026-08-15 07:12:11.979+07', 23, 1, 21, 16, NULL, 16, NULL, 8);
+INSERT INTO public.rental_requests VALUES ('Số người ở dự kiến: 3 người.
+Lời nhắn: Không có', '2026-09-01', 'APPROVED', '2026-08-23 06:52:00.564+07', '2026-08-23 07:43:42.172+07', 24, 18, 33, 16, NULL, 16, NULL, 18);
+
+
+--
+-- Data for Name: contracts; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.contracts VALUES ('MVP-CONTRACT-2026-001', '2026-01-01', '2026-12-31', 6000000.00, 6000000.00, 'MONTHLY', 10, 'MVP deterministic contract snapshot', 'ACTIVE', '2026-01-01 00:00:00+07', '2026-01-01 00:00:00+07', '2026-07-30 23:21:12.939+07', '2026-07-30 23:43:08.56+07', NULL, 1, 1, 2, 4, 1, NULL, 3, NULL, NULL, NULL, NULL);
+INSERT INTO public.contracts VALUES ('API-E2E-20260811145335-OBR4D-CONTRACT', '2026-05-11', '2027-08-11', 4500000.00, 4500000.00, 'MONTHLY', 12, 'API-E2E-20260811145335-OBR4D updated contract', 'ACTIVE', NULL, NULL, '2026-08-11 14:53:43.085+07', '2026-08-11 14:53:43.376+07', NULL, 3, 15, 7, 13, 3, NULL, 9, NULL, 9, NULL, NULL);
+INSERT INTO public.contracts VALUES ('API-E2E-20260811145614-NE3TM-CONTRACT', '2026-05-11', '2027-08-11', 4500000.00, 4500000.00, 'MONTHLY', 12, 'API-E2E-20260811145614-NE3TM updated contract', 'ACTIVE', NULL, NULL, '2026-08-11 14:56:21.096+07', '2026-08-11 14:56:21.319+07', NULL, 4, 15, 9, 13, 6, NULL, 9, NULL, 9, NULL, NULL);
+INSERT INTO public.contracts VALUES ('API-E2E-20260811150747-FQASH-CONTRACT', '2026-05-11', '2027-08-11', 4500000.00, 4500000.00, 'MONTHLY', 12, 'API-E2E-20260811150747-FQASH updated contract', 'ACTIVE', NULL, NULL, '2026-08-11 15:07:55.016+07', '2026-08-11 15:07:55.177+07', NULL, 5, 15, 11, 13, 9, NULL, 9, NULL, 9, NULL, NULL);
+INSERT INTO public.contracts VALUES ('API-E2E-20260811150923-COC5D-CONTRACT', '2026-05-11', '2027-08-11', 4500000.00, 4500000.00, 'MONTHLY', 12, 'API-E2E-20260811150923-COC5D updated contract', 'ACTIVE', NULL, NULL, '2026-08-11 15:09:29.542+07', '2026-08-11 15:09:29.728+07', NULL, 6, 15, 13, 13, 12, NULL, 9, NULL, 9, NULL, NULL);
+INSERT INTO public.contracts VALUES ('API-E2E-20260811151034-7GWTM-CONTRACT', '2026-05-11', '2027-08-11', 4500000.00, 4500000.00, 'MONTHLY', 12, 'API-E2E-20260811151034-7GWTM updated contract', 'TERMINATED', NULL, NULL, '2026-08-11 15:10:41.311+07', '2026-08-11 15:10:50.659+07', NULL, 7, 15, 15, 13, 15, NULL, 9, NULL, 9, NULL, NULL);
+INSERT INTO public.contracts VALUES ('API-E2E-20260811151220-TXWCG-CONTRACT', '2026-05-11', '2027-08-11', 4500000.00, 4500000.00, 'MONTHLY', 12, 'API-E2E-20260811151220-TXWCG updated contract', 'TERMINATED', NULL, NULL, '2026-08-11 15:12:27.743+07', '2026-08-11 15:12:35.687+07', NULL, 8, 15, 17, 13, 18, NULL, 9, NULL, 9, NULL, NULL);
+INSERT INTO public.contracts VALUES ('API-E2E-20260811151357-VHCL6-CONTRACT', '2026-05-11', '2027-08-11', 4500000.00, 4500000.00, 'MONTHLY', 12, 'API-E2E-20260811151357-VHCL6 updated contract', 'ACTIVE', NULL, NULL, '2026-08-11 15:14:03.946+07', '2026-08-11 15:14:04.108+07', NULL, 9, 15, 19, 13, 21, NULL, 9, NULL, 9, NULL, NULL);
+INSERT INTO public.contracts VALUES ('HD-1-20260813-PKS2ZM', '2026-08-01', '2026-12-01', 3000000.00, 3000000.00, 'MONTHLY', 5, '-Hoàn cọc sau khi hết hợp đồng', 'ACTIVE', NULL, NULL, '2026-08-13 16:26:47.222+07', '2026-08-14 13:36:19.359+07', NULL, 10, 1, 21, 16, NULL, NULL, 8, NULL, 8, NULL, NULL);
+INSERT INTO public.contracts VALUES ('HD-18-20260823-55G59Q', '2026-09-01', '2027-02-28', 10000.00, 10000.00, 'MONTHLY', 5, 'Điều 1: ĐỐI TƯỢNG CHO THUÊ
+- Bên A đồng ý cho Bên B thuê phòng trọ: Phòng Test 10k
+- Mục đích thuê: Để ở.
+
+Điều 2: THỜI HẠN THUÊ
+- Thời gian thuê: Từ ngày [Ngày bắt đầu] đến ngày [Ngày kết thúc].
+- Nếu một trong hai bên muốn chấm dứt hợp đồng trước hạn, phải báo trước ít nhất 30 ngày.
+
+Điều 3: GIÁ THUÊ VÀ PHƯƠNG THỨC THANH TOÁN
+- Giá thuê phòng: 10.000 VNĐ/tháng.
+- Tiền đặt cọc: 10.000 VNĐ.
+- Tiền cọc sẽ được hoàn trả cho Bên B sau khi thanh lý hợp đồng và trừ đi các khoản chi phí phát sinh (nếu có) hoặc bồi thường hư hỏng tài sản.
+- Ngày thanh toán hàng tháng: Ngày 5 hàng tháng.
+
+Điều 4: TRÁCH NHIỆM CỦA CÁC BÊN
+1. Trách nhiệm Bên A (Chủ trọ):
+- Giao phòng và trang thiết bị đầy đủ cho Bên B đúng thời hạn.
+- Đảm bảo an ninh trật tự, vệ sinh môi trường khu vực chung.
+
+2. Trách nhiệm Bên B (Khách thuê):
+- Đóng tiền phòng và các chi phí sinh hoạt đúng hạn.
+- Giữ gìn an ninh trật tự, tuân thủ nội quy khu trọ.
+- Bồi thường nếu làm hư hỏng tài sản do Bên A cung cấp.
+
+Điều 5: ĐIỀU KHOẢN CHUNG
+- Hai bên cam kết thực hiện đúng các điều khoản trong hợp đồng.
+- Mọi sửa đổi, bổ sung hợp đồng phải được sự đồng ý của cả hai bên bằng văn bản.', 'DRAFT', NULL, NULL, '2026-08-23 07:51:59.969+07', '2026-08-23 07:51:59.969+07', NULL, 11, 18, 33, 16, 24, NULL, 18, NULL, 18, NULL, NULL);
+
+
+--
+-- Data for Name: contract_files; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: contract_members; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.contract_members VALUES ('MAIN_RENTER', '2026-07-30 23:21:12.954+07', 1, 1, 4, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_members VALUES ('MAIN_RENTER', '2026-08-11 14:53:43.094+07', 3, 3, 13, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_members VALUES ('MAIN_RENTER', '2026-08-11 14:56:21.1+07', 4, 4, 13, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_members VALUES ('MAIN_RENTER', '2026-08-11 15:07:55.019+07', 5, 5, 13, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_members VALUES ('MAIN_RENTER', '2026-08-11 15:09:29.544+07', 6, 6, 13, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_members VALUES ('MAIN_RENTER', '2026-08-11 15:10:41.313+07', 7, 7, 13, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_members VALUES ('MAIN_RENTER', '2026-08-11 15:12:27.747+07', 8, 8, 13, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_members VALUES ('MAIN_RENTER', '2026-08-11 15:14:03.949+07', 9, 9, 13, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_members VALUES ('MAIN_RENTER', '2026-08-13 16:26:47.23+07', 10, 10, 16, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_members VALUES ('MAIN_RENTER', '2026-08-23 07:51:59.977+07', 11, 11, 16, NULL, NULL, NULL, NULL, NULL);
+
+
+--
+-- Data for Name: contract_termination_requests; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.contract_termination_requests VALUES ('API-E2E-20260811151034-7GWTM cancel', '2026-08-18', 'CANCELED', '2026-08-11 15:10:48.683+07', '2026-08-11 15:10:48.864+07', 1, 15, 7, 13, NULL, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_termination_requests VALUES ('API-E2E-20260811151034-7GWTM reject', '2026-08-18', 'REJECTED', '2026-08-11 15:10:49.013+07', '2026-08-11 15:10:49.239+07', 2, 15, 7, 13, NULL, 9, 'API-E2E-20260811151034-7GWTM rejection branch', 9, '2026-08-11 15:10:49.237+07', NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_termination_requests VALUES ('API-E2E-20260811151034-7GWTM approve', '2026-08-18', 'COMPLETED', '2026-08-11 15:10:49.385+07', '2026-08-11 15:10:50.663+07', 3, 15, 7, 13, NULL, 9, 'API-E2E-20260811151034-7GWTM approved termination', 9, '2026-08-11 15:10:49.539+07', '2026-08-11', '2026-08-11 15:10:50.661+07', 'API-E2E-20260811151034-7GWTM outstanding rejected-payment invoice acknowledged', 4656250.00);
+INSERT INTO public.contract_termination_requests VALUES ('API-E2E-20260811151220-TXWCG cancel', '2026-08-18', 'CANCELED', '2026-08-11 15:12:34.302+07', '2026-08-11 15:12:34.476+07', 4, 15, 8, 13, NULL, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_termination_requests VALUES ('API-E2E-20260811151220-TXWCG reject', '2026-08-18', 'REJECTED', '2026-08-11 15:12:34.625+07', '2026-08-11 15:12:34.759+07', 5, 15, 8, 13, NULL, 9, 'API-E2E-20260811151220-TXWCG rejection branch', 9, '2026-08-11 15:12:34.759+07', NULL, NULL, NULL, NULL);
+INSERT INTO public.contract_termination_requests VALUES ('API-E2E-20260811151220-TXWCG approve', '2026-08-18', 'COMPLETED', '2026-08-11 15:12:34.896+07', '2026-08-11 15:12:35.688+07', 6, 15, 8, 13, NULL, 9, 'API-E2E-20260811151220-TXWCG approved termination', 9, '2026-08-11 15:12:35.034+07', '2026-08-11', '2026-08-11 15:12:35.688+07', 'API-E2E-20260811151220-TXWCG outstanding rejected-payment invoice acknowledged', 4656250.00);
+
+
+--
+-- Data for Name: tickets; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.tickets VALUES ('MVP seeded water leak', 'Open ticket for the renter dashboard', 'WATER', 'HIGH', 'OPEN', '2026-07-30 23:21:13.089+07', '2026-07-30 23:21:13.089+07', NULL, 1, 1, 2, 1, NULL, 4, NULL, NULL);
+INSERT INTO public.tickets VALUES ('API-E2E-20260811145335-OBR4D support ticket', 'Disposable ticket created through real API', 'WATER', 'HIGH', 'IN_PROGRESS', '2026-08-11 14:53:48.646+07', '2026-08-11 14:53:48.952+07', NULL, 2, 15, 7, 3, 9, 13, NULL, 9);
+INSERT INTO public.tickets VALUES ('API-E2E-20260811145614-NE3TM support ticket', 'Disposable ticket created through real API', 'WATER', 'HIGH', 'RESOLVED', '2026-08-11 14:56:25.511+07', '2026-08-11 14:56:26.169+07', '2026-08-11 14:56:26.168+07', 3, 15, 9, 4, 9, 13, NULL, 9);
+INSERT INTO public.tickets VALUES ('API-E2E-20260811150747-FQASH support ticket', 'Disposable ticket created through real API', 'WATER', 'HIGH', 'CLOSED', '2026-08-11 15:07:58.882+07', '2026-08-11 15:08:00.057+07', '2026-08-11 15:08:00.056+07', 4, 15, 11, 5, 9, 13, NULL, 13);
+INSERT INTO public.tickets VALUES ('API-E2E-20260811150747-FQASH canceled ticket', 'Cancellation branch', 'OTHER', 'LOW', 'CANCELED', '2026-08-11 15:08:00.322+07', '2026-08-11 15:08:00.414+07', NULL, 5, 15, 11, 5, NULL, 13, NULL, 13);
+INSERT INTO public.tickets VALUES ('API-E2E-20260811150923-COC5D support ticket', 'Disposable ticket created through real API', 'WATER', 'HIGH', 'CLOSED', '2026-08-11 15:09:33.314+07', '2026-08-11 15:09:34.34+07', '2026-08-11 15:09:34.34+07', 6, 15, 13, 6, 9, 13, NULL, 13);
+INSERT INTO public.tickets VALUES ('API-E2E-20260811150923-COC5D canceled ticket', 'Cancellation branch', 'OTHER', 'LOW', 'CANCELED', '2026-08-11 15:09:34.664+07', '2026-08-11 15:09:34.761+07', NULL, 7, 15, 13, 6, NULL, 13, NULL, 13);
+INSERT INTO public.tickets VALUES ('API-E2E-20260811151034-7GWTM support ticket', 'Disposable ticket created through real API', 'WATER', 'HIGH', 'CLOSED', '2026-08-11 15:10:45.856+07', '2026-08-11 15:10:46.965+07', '2026-08-11 15:10:46.964+07', 8, 15, 15, 7, 9, 13, NULL, 13);
+INSERT INTO public.tickets VALUES ('API-E2E-20260811151034-7GWTM canceled ticket', 'Cancellation branch', 'OTHER', 'LOW', 'CANCELED', '2026-08-11 15:10:47.305+07', '2026-08-11 15:10:47.43+07', NULL, 9, 15, 15, 7, NULL, 13, NULL, 13);
+INSERT INTO public.tickets VALUES ('API-E2E-20260811151220-TXWCG support ticket', 'Disposable ticket created through real API', 'WATER', 'HIGH', 'CLOSED', '2026-08-11 15:12:31.715+07', '2026-08-11 15:12:32.787+07', '2026-08-11 15:12:32.786+07', 10, 15, 17, 8, 9, 13, NULL, 13);
+INSERT INTO public.tickets VALUES ('API-E2E-20260811151220-TXWCG canceled ticket', 'Cancellation branch', 'OTHER', 'LOW', 'CANCELED', '2026-08-11 15:12:33.066+07', '2026-08-11 15:12:33.17+07', NULL, 11, 15, 17, 8, NULL, 13, NULL, 13);
+
+
+--
+-- Data for Name: conversations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.conversations VALUES ('ROOM_CHAT', '2026-08-23 09:29:38.367+07', 1, 1, 26, NULL, NULL);
+
+
+--
+-- Data for Name: conversation_members; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.conversation_members VALUES ('2026-08-23 09:29:38.39+07', 1, 16);
+
+
+--
+-- Data for Name: invoice_batches; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: invoices; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.invoices VALUES ('MVP-INV-2026-07-A102', '2026-07-01', '2026-07-01', '2026-07-10', 6670000.00, 0.00, 0.00, 6670000.00, 2000000.00, 4670000.00, 'PARTIALLY_PAID', NULL, '2026-07-30 23:21:13.025+07', '2026-07-30 23:43:08.601+07', NULL, 1, 1, NULL, 1, 2, 4, 3, NULL, NULL);
+INSERT INTO public.invoices VALUES ('INV-15-202606-SSM797', '2026-06-01', '2026-06-01', '2026-07-01', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'CANCELED', 'API-E2E-20260811150923-COC5D cancel invoice', '2026-08-11 15:09:33.047+07', '2026-08-11 15:09:33.112+07', NULL, 14, 15, NULL, 6, 13, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202608-LHU9DJ', '2026-08-01', '2026-08-11', '2026-08-21', 4602500.00, 0.00, 0.00, 4602500.00, 4602500.00, 0.00, 'PAID', 'API-E2E-20260811145335-OBR4D invoice updated', '2026-08-11 14:53:46.297+07', '2026-08-11 14:53:47.343+07', NULL, 3, 15, NULL, 3, 7, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202607-D5J58D', '2026-07-01', '2026-07-01', '2026-08-09', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'OVERDUE', 'API-E2E-20260811145335-OBR4D overdue invoice', '2026-08-11 14:53:47.594+07', '2026-08-11 14:53:47.946+07', NULL, 4, 15, NULL, 3, 7, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202606-QVVXNJ', '2026-06-01', '2026-06-01', '2026-07-01', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'CANCELED', 'API-E2E-20260811145335-OBR4D cancel invoice', '2026-08-11 14:53:48.304+07', '2026-08-11 14:53:48.381+07', NULL, 5, 15, NULL, 3, 7, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202608-WPEMCP', '2026-08-01', '2026-08-11', '2026-08-21', 4602500.00, 0.00, 0.00, 4602500.00, 4602500.00, 0.00, 'PAID', 'API-E2E-20260811145614-NE3TM invoice updated', '2026-08-11 14:56:23.441+07', '2026-08-11 14:56:24.379+07', NULL, 6, 15, NULL, 4, 9, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202607-V0SRU1', '2026-07-01', '2026-07-01', '2026-08-09', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'OVERDUE', 'API-E2E-20260811145614-NE3TM overdue invoice', '2026-08-11 14:56:24.649+07', '2026-08-11 14:56:24.834+07', NULL, 7, 15, NULL, 4, 9, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202606-OTQZDR', '2026-06-01', '2026-06-01', '2026-07-01', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'CANCELED', 'API-E2E-20260811145614-NE3TM cancel invoice', '2026-08-11 14:56:25.159+07', '2026-08-11 14:56:25.231+07', NULL, 8, 15, NULL, 4, 9, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202608-0JLZXU', '2026-08-01', '2026-08-11', '2026-08-21', 4602500.00, 0.00, 0.00, 4602500.00, 4602500.00, 0.00, 'PAID', 'API-E2E-20260811150747-FQASH invoice updated', '2026-08-11 15:07:57.076+07', '2026-08-11 15:07:57.894+07', NULL, 9, 15, NULL, 5, 11, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202607-RE2GLJ', '2026-07-01', '2026-07-01', '2026-08-09', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'OVERDUE', 'API-E2E-20260811150747-FQASH overdue invoice', '2026-08-11 15:07:58.089+07', '2026-08-11 15:07:58.278+07', NULL, 10, 15, NULL, 5, 11, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202606-ECVH1Y', '2026-06-01', '2026-06-01', '2026-07-01', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'CANCELED', 'API-E2E-20260811150747-FQASH cancel invoice', '2026-08-11 15:07:58.576+07', '2026-08-11 15:07:58.657+07', NULL, 11, 15, NULL, 5, 11, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202608-062SPS', '2026-08-01', '2026-08-11', '2026-08-21', 4602500.00, 0.00, 0.00, 4602500.00, 4602500.00, 0.00, 'PAID', 'API-E2E-20260811150923-COC5D invoice updated', '2026-08-11 15:09:31.453+07', '2026-08-11 15:09:32.341+07', NULL, 12, 15, NULL, 6, 13, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202607-X9E6WF', '2026-07-01', '2026-07-01', '2026-08-09', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'OVERDUE', 'API-E2E-20260811150923-COC5D overdue invoice', '2026-08-11 15:09:32.554+07', '2026-08-11 15:09:32.723+07', NULL, 13, 15, NULL, 6, 13, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202608-2F8QP3', '2026-08-01', '2026-08-11', '2026-08-21', 4602500.00, 0.00, 0.00, 4602500.00, 4602500.00, 0.00, 'PAID', 'API-E2E-20260811151034-7GWTM invoice updated', '2026-08-11 15:10:44.007+07', '2026-08-11 15:10:44.82+07', NULL, 15, 15, NULL, 7, 15, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202607-KEX172', '2026-07-01', '2026-07-01', '2026-08-09', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'OVERDUE', 'API-E2E-20260811151034-7GWTM overdue invoice', '2026-08-11 15:10:45.023+07', '2026-08-11 15:10:45.189+07', NULL, 16, 15, NULL, 7, 15, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202606-PK6LAX', '2026-06-01', '2026-06-01', '2026-07-01', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'CANCELED', 'API-E2E-20260811151034-7GWTM cancel invoice', '2026-08-11 15:10:45.486+07', '2026-08-11 15:10:45.544+07', NULL, 17, 15, NULL, 7, 15, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202608-Q7UNUS', '2026-08-01', '2026-08-11', '2026-08-21', 4602500.00, 0.00, 0.00, 4602500.00, 4602500.00, 0.00, 'PAID', 'API-E2E-20260811151220-TXWCG invoice updated', '2026-08-11 15:12:29.775+07', '2026-08-11 15:12:30.589+07', NULL, 18, 15, NULL, 8, 17, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202607-8EEMIO', '2026-07-01', '2026-07-01', '2026-08-09', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'OVERDUE', 'API-E2E-20260811151220-TXWCG overdue invoice', '2026-08-11 15:12:30.792+07', '2026-08-11 15:12:30.945+07', NULL, 19, 15, NULL, 8, 17, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202606-X3H820', '2026-06-01', '2026-06-01', '2026-07-01', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'CANCELED', 'API-E2E-20260811151220-TXWCG cancel invoice', '2026-08-11 15:12:31.275+07', '2026-08-11 15:12:31.336+07', NULL, 20, 15, NULL, 8, 17, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202607-YXRNFE', '2026-07-01', '2026-07-01', '2026-08-09', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'OVERDUE', 'API-E2E-20260811151357-VHCL6 overdue invoice', '2026-08-11 15:14:07.191+07', '2026-08-11 15:14:07.36+07', NULL, 22, 15, NULL, 9, 19, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202608-YQ8BPD', '2026-08-01', '2026-08-11', '2026-08-21', 4602500.00, 0.00, 0.00, 4602500.00, 4602500.00, 0.00, 'PAID', 'API-E2E-20260811151357-VHCL6 invoice updated', '2026-08-11 15:14:06.203+07', '2026-08-11 15:14:07.003+07', NULL, 21, 15, NULL, 9, 19, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-15-202606-UXHR7N', '2026-06-01', '2026-06-01', '2026-07-01', 4656250.00, 0.00, 0.00, 4656250.00, 0.00, 4656250.00, 'CANCELED', 'API-E2E-20260811151357-VHCL6 cancel invoice', '2026-08-11 15:14:07.669+07', '2026-08-11 15:14:07.731+07', NULL, 23, 15, NULL, 9, 19, 13, 9, NULL, 9);
+INSERT INTO public.invoices VALUES ('INV-1-202608-3B3KUL', '2026-08-01', '2026-08-14', '2026-08-14', 3258700.00, 0.00, 0.00, 3258700.00, 0.00, 3258700.00, 'CANCELED', NULL, '2026-08-14 16:32:02.659+07', '2026-08-14 17:46:21.307+07', NULL, 24, 1, NULL, 10, 21, 16, 8, NULL, 8);
+INSERT INTO public.invoices VALUES ('INV-1-202608-WFEOHJ', '2026-08-01', '2026-08-17', '2026-08-17', 3393700.00, 0.00, 0.00, 3393700.00, 0.00, 3393700.00, 'UNPAID', NULL, '2026-08-17 15:55:36.345+07', '2026-08-17 15:55:36.345+07', NULL, 25, 1, NULL, 10, 21, 16, 8, NULL, 8);
+
+
+--
+-- Data for Name: debts; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.debts VALUES (1, 1, 1, 1, 2, 4, '2026-07-01', 6670000.00, 2000000.00, 4670000.00, 'PARTIAL', '2026-07-10', NULL, '2026-07-30 23:21:13.056+07', '2026-07-30 23:43:08.622+07');
+INSERT INTO public.debts VALUES (3, 15, 3, 3, 7, 13, '2026-08-01', 4602500.00, 4602500.00, 0.00, 'PAID', '2026-08-21', '2026-08-11 14:53:47.342+07', '2026-08-11 14:53:46.316+07', '2026-08-11 14:53:47.346+07');
+INSERT INTO public.debts VALUES (4, 15, 4, 3, 7, 13, '2026-07-01', 4656250.00, 0.00, 4656250.00, 'OVERDUE', '2026-08-09', NULL, '2026-08-11 14:53:47.599+07', '2026-08-11 14:53:47.949+07');
+INSERT INTO public.debts VALUES (5, 15, 5, 3, 7, 13, '2026-06-01', 4656250.00, 0.00, 4656250.00, 'CANCELED', '2026-07-01', '2026-08-11 14:53:48.382+07', '2026-08-11 14:53:48.309+07', '2026-08-11 14:53:48.383+07');
+INSERT INTO public.debts VALUES (6, 15, 6, 4, 9, 13, '2026-08-01', 4602500.00, 4602500.00, 0.00, 'PAID', '2026-08-21', '2026-08-11 14:56:24.379+07', '2026-08-11 14:56:23.447+07', '2026-08-11 14:56:24.381+07');
+INSERT INTO public.debts VALUES (7, 15, 7, 4, 9, 13, '2026-07-01', 4656250.00, 0.00, 4656250.00, 'OVERDUE', '2026-08-09', NULL, '2026-08-11 14:56:24.653+07', '2026-08-11 14:56:24.838+07');
+INSERT INTO public.debts VALUES (8, 15, 8, 4, 9, 13, '2026-06-01', 4656250.00, 0.00, 4656250.00, 'CANCELED', '2026-07-01', '2026-08-11 14:56:25.232+07', '2026-08-11 14:56:25.162+07', '2026-08-11 14:56:25.232+07');
+INSERT INTO public.debts VALUES (9, 15, 9, 5, 11, 13, '2026-08-01', 4602500.00, 4602500.00, 0.00, 'PAID', '2026-08-21', '2026-08-11 15:07:57.893+07', '2026-08-11 15:07:57.085+07', '2026-08-11 15:07:57.895+07');
+INSERT INTO public.debts VALUES (10, 15, 10, 5, 11, 13, '2026-07-01', 4656250.00, 0.00, 4656250.00, 'OVERDUE', '2026-08-09', NULL, '2026-08-11 15:07:58.092+07', '2026-08-11 15:07:58.281+07');
+INSERT INTO public.debts VALUES (11, 15, 11, 5, 11, 13, '2026-06-01', 4656250.00, 0.00, 4656250.00, 'CANCELED', '2026-07-01', '2026-08-11 15:07:58.659+07', '2026-08-11 15:07:58.584+07', '2026-08-11 15:07:58.66+07');
+INSERT INTO public.debts VALUES (12, 15, 12, 6, 13, 13, '2026-08-01', 4602500.00, 4602500.00, 0.00, 'PAID', '2026-08-21', '2026-08-11 15:09:32.34+07', '2026-08-11 15:09:31.459+07', '2026-08-11 15:09:32.343+07');
+INSERT INTO public.debts VALUES (13, 15, 13, 6, 13, 13, '2026-07-01', 4656250.00, 0.00, 4656250.00, 'OVERDUE', '2026-08-09', NULL, '2026-08-11 15:09:32.56+07', '2026-08-11 15:09:32.725+07');
+INSERT INTO public.debts VALUES (14, 15, 14, 6, 13, 13, '2026-06-01', 4656250.00, 0.00, 4656250.00, 'CANCELED', '2026-07-01', '2026-08-11 15:09:33.113+07', '2026-08-11 15:09:33.051+07', '2026-08-11 15:09:33.113+07');
+INSERT INTO public.debts VALUES (15, 15, 15, 7, 15, 13, '2026-08-01', 4602500.00, 4602500.00, 0.00, 'PAID', '2026-08-21', '2026-08-11 15:10:44.82+07', '2026-08-11 15:10:44.012+07', '2026-08-11 15:10:44.821+07');
+INSERT INTO public.debts VALUES (16, 15, 16, 7, 15, 13, '2026-07-01', 4656250.00, 0.00, 4656250.00, 'OVERDUE', '2026-08-09', NULL, '2026-08-11 15:10:45.028+07', '2026-08-11 15:10:45.19+07');
+INSERT INTO public.debts VALUES (17, 15, 17, 7, 15, 13, '2026-06-01', 4656250.00, 0.00, 4656250.00, 'CANCELED', '2026-07-01', '2026-08-11 15:10:45.545+07', '2026-08-11 15:10:45.49+07', '2026-08-11 15:10:45.545+07');
+INSERT INTO public.debts VALUES (18, 15, 18, 8, 17, 13, '2026-08-01', 4602500.00, 4602500.00, 0.00, 'PAID', '2026-08-21', '2026-08-11 15:12:30.589+07', '2026-08-11 15:12:29.783+07', '2026-08-11 15:12:30.591+07');
+INSERT INTO public.debts VALUES (19, 15, 19, 8, 17, 13, '2026-07-01', 4656250.00, 0.00, 4656250.00, 'OVERDUE', '2026-08-09', NULL, '2026-08-11 15:12:30.796+07', '2026-08-11 15:12:30.947+07');
+INSERT INTO public.debts VALUES (20, 15, 20, 8, 17, 13, '2026-06-01', 4656250.00, 0.00, 4656250.00, 'CANCELED', '2026-07-01', '2026-08-11 15:12:31.337+07', '2026-08-11 15:12:31.278+07', '2026-08-11 15:12:31.337+07');
+INSERT INTO public.debts VALUES (21, 15, 21, 9, 19, 13, '2026-08-01', 4602500.00, 4602500.00, 0.00, 'PAID', '2026-08-21', '2026-08-11 15:14:07.003+07', '2026-08-11 15:14:06.208+07', '2026-08-11 15:14:07.004+07');
+INSERT INTO public.debts VALUES (22, 15, 22, 9, 19, 13, '2026-07-01', 4656250.00, 0.00, 4656250.00, 'OVERDUE', '2026-08-09', NULL, '2026-08-11 15:14:07.195+07', '2026-08-11 15:14:07.367+07');
+INSERT INTO public.debts VALUES (23, 15, 23, 9, 19, 13, '2026-06-01', 4656250.00, 0.00, 4656250.00, 'CANCELED', '2026-07-01', '2026-08-11 15:14:07.732+07', '2026-08-11 15:14:07.671+07', '2026-08-11 15:14:07.733+07');
+INSERT INTO public.debts VALUES (24, 1, 24, 10, 21, 16, '2026-08-01', 3258700.00, 0.00, 3258700.00, 'CANCELED', '2026-08-14', '2026-08-14 17:46:21.313+07', '2026-08-14 16:32:02.673+07', '2026-08-14 17:46:21.314+07');
+INSERT INTO public.debts VALUES (25, 1, 25, 10, 21, 16, '2026-08-01', 3393700.00, 0.00, 3393700.00, 'OPEN', '2026-08-17', NULL, '2026-08-17 15:55:36.36+07', '2026-08-17 15:55:36.36+07');
+
+
+--
+-- Data for Name: device_tokens; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: devices; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: favorite_rooms; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: handover_records; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.handover_records VALUES ('CHECKIN', 'API-E2E-20260811145335-OBR4D checkin', '2026-08-11 14:53:45.81+07', '2026-08-11 14:53:45.963+07', 'CONFIRMED', '2026-08-11 14:53:45.226+07', 1, 15, 3, 7, 9, NULL, 13, 9, 13, 2, 'a107de66f9c08b8cb05ebcad78808caba247c7fe34cee9a83e5045d4da10ea69', '2026-08-11 14:53:45.968+07', 13, 'API-E2E-20260811145335-OBR4D verify dispute path', '2026-08-11 14:53:45.484+07', 9, 'API-E2E-20260811145335-OBR4D resolved', '2026-08-11 14:53:45.65+07', '2026-08-11 14:53:45.97+07');
+INSERT INTO public.handover_records VALUES ('CHECKIN', 'API-E2E-20260811145614-NE3TM checkin', '2026-08-11 14:56:23.031+07', '2026-08-11 14:56:23.184+07', 'CONFIRMED', '2026-08-11 14:56:22.474+07', 2, 15, 4, 9, 9, NULL, 13, 9, 13, 2, '3703b529a2e7800f1847b4af5131de0aab667320032ac44ddbc2ee4831c4d628', '2026-08-11 14:56:23.191+07', 13, 'API-E2E-20260811145614-NE3TM verify dispute path', '2026-08-11 14:56:22.713+07', 9, 'API-E2E-20260811145614-NE3TM resolved', '2026-08-11 14:56:22.869+07', '2026-08-11 14:56:23.192+07');
+INSERT INTO public.handover_records VALUES ('CHECKIN', 'API-E2E-20260811151034-7GWTM checkin', '2026-08-11 15:10:43.345+07', '2026-08-11 15:10:43.77+07', 'CONFIRMED', '2026-08-11 15:10:42.578+07', 5, 15, 7, 15, 9, NULL, 13, 9, 13, 2, '65d1a2f76b6730960f1c0b66347ecc5ddff2b538a6a283d3272b118495297429', '2026-08-11 15:10:43.774+07', 13, 'API-E2E-20260811151034-7GWTM verify dispute path', '2026-08-11 15:10:42.778+07', 9, 'API-E2E-20260811151034-7GWTM resolved', '2026-08-11 15:10:43.2+07', '2026-08-11 15:10:43.774+07');
+INSERT INTO public.handover_records VALUES ('CHECKIN', 'API-E2E-20260811150747-FQASH checkin', '2026-08-11 15:07:56.672+07', '2026-08-11 15:07:56.828+07', 'CONFIRMED', '2026-08-11 15:07:56.205+07', 3, 15, 5, 11, 9, NULL, 13, 9, 13, 2, '64e3eef5a3471485a5193bbedf4cef739ee7b23fe2f92ca1962e23946ffb037d', '2026-08-11 15:07:56.836+07', 13, 'API-E2E-20260811150747-FQASH verify dispute path', '2026-08-11 15:07:56.398+07', 9, 'API-E2E-20260811150747-FQASH resolved', '2026-08-11 15:07:56.54+07', '2026-08-11 15:07:56.838+07');
+INSERT INTO public.handover_records VALUES ('CHECKIN', 'API-E2E-20260811151357-VHCL6 checkin', '2026-08-11 15:14:05.519+07', '2026-08-11 15:14:05.934+07', 'CONFIRMED', '2026-08-11 15:14:05.046+07', 9, 15, 9, 19, 9, NULL, 13, 9, 13, 2, '52b768afa1d5d897e650f0d9cb493aaca1af35e94b9221ef969718d3ca5f5173', '2026-08-11 15:14:05.941+07', 13, 'API-E2E-20260811151357-VHCL6 verify dispute path', '2026-08-11 15:14:05.237+07', 9, 'API-E2E-20260811151357-VHCL6 resolved', '2026-08-11 15:14:05.374+07', '2026-08-11 15:14:05.941+07');
+INSERT INTO public.handover_records VALUES ('CHECKIN', 'API-E2E-20260811150923-COC5D checkin', '2026-08-11 15:09:31.126+07', '2026-08-11 15:09:31.253+07', 'CONFIRMED', '2026-08-11 15:09:30.658+07', 4, 15, 6, 13, 9, NULL, 13, 9, 13, 2, '29091a4b52e561ab0f8272ecf2346d1b05b023da981e7e1a5d40a9d2e8425470', '2026-08-11 15:09:31.257+07', 13, 'API-E2E-20260811150923-COC5D verify dispute path', '2026-08-11 15:09:30.862+07', 9, 'API-E2E-20260811150923-COC5D resolved', '2026-08-11 15:09:30.997+07', '2026-08-11 15:09:31.257+07');
+INSERT INTO public.handover_records VALUES ('CHECKOUT', 'API-E2E-20260811151034-7GWTM checkout', '2026-08-11 15:10:50.231+07', '2026-08-11 15:10:50.392+07', 'CONFIRMED', '2026-08-11 15:10:49.818+07', 6, 15, 7, 15, 9, NULL, 13, 9, 13, 1, '7dfcf73d2579b11852af3ed37587d1c12bdc065e8cc4427bbcdcadc1a8d6235d', '2026-08-11 15:10:50.398+07', NULL, NULL, NULL, NULL, NULL, NULL, '2026-08-11 15:10:50.398+07');
+INSERT INTO public.handover_records VALUES ('CHECKIN', 'API-E2E-20260811151220-TXWCG checkin', '2026-08-11 15:12:29.438+07', '2026-08-11 15:12:29.571+07', 'CONFIRMED', '2026-08-11 15:12:28.973+07', 7, 15, 8, 17, 9, NULL, 13, 9, 13, 2, '549d51e554fb4a87268fdf5d3a98bfe8b1d7303a7a986430e07a39bce63ab5ca', '2026-08-11 15:12:29.575+07', 13, 'API-E2E-20260811151220-TXWCG verify dispute path', '2026-08-11 15:12:29.172+07', 9, 'API-E2E-20260811151220-TXWCG resolved', '2026-08-11 15:12:29.307+07', '2026-08-11 15:12:29.576+07');
+INSERT INTO public.handover_records VALUES ('CHECKOUT', 'API-E2E-20260811151220-TXWCG checkout', '2026-08-11 15:12:35.363+07', '2026-08-11 15:12:35.51+07', 'CONFIRMED', '2026-08-11 15:12:35.198+07', 8, 15, 8, 17, 9, NULL, 13, 9, 13, 1, 'e50ec9cd8c0443b11c66f7a7ad369ac4feb12c9f763ea4f35295c3f48d5c0f8f', '2026-08-11 15:12:35.52+07', NULL, NULL, NULL, NULL, NULL, NULL, '2026-08-11 15:12:35.52+07');
+
+
+--
+-- Data for Name: room_assets; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.room_assets VALUES ('API-E2E-20260811143204-JWL7R desk', 1, 'NORMAL', NULL, NULL, '2026-08-11 14:32:05.578+07', '2026-08-11 14:32:05.953+07', '2026-08-11 14:32:05.952+07', 1, 15, 3, 1, 9, 9, 9);
+INSERT INTO public.room_assets VALUES ('API-E2E-20260811145335-OBR4D desk', 1, 'NORMAL', NULL, NULL, '2026-08-11 14:53:39.84+07', '2026-08-11 14:53:51.997+07', '2026-08-11 14:53:51.996+07', 2, 15, 7, 2, 9, 9, 9);
+INSERT INTO public.room_assets VALUES ('API-E2E-20260811145614-NE3TM desk', 1, 'NORMAL', NULL, NULL, '2026-08-11 14:56:18.414+07', '2026-08-11 14:56:28.584+07', '2026-08-11 14:56:28.584+07', 3, 15, 9, 3, 9, 9, 9);
+INSERT INTO public.room_assets VALUES ('API-E2E-20260811150747-FQASH desk', 1, 'NORMAL', NULL, NULL, '2026-08-11 15:07:52.449+07', '2026-08-11 15:08:03.105+07', '2026-08-11 15:08:03.104+07', 4, 15, 11, 4, 9, 9, 9);
+INSERT INTO public.room_assets VALUES ('API-E2E-20260811150923-COC5D desk', 1, 'NORMAL', NULL, NULL, '2026-08-11 15:09:26.94+07', '2026-08-11 15:09:37.474+07', '2026-08-11 15:09:37.474+07', 5, 15, 13, 5, 9, 9, 9);
+INSERT INTO public.room_assets VALUES ('API-E2E-20260811151034-7GWTM desk', 1, 'NORMAL', NULL, NULL, '2026-08-11 15:10:39.034+07', '2026-08-11 15:10:53.619+07', '2026-08-11 15:10:53.619+07', 6, 15, 15, 6, 9, 9, 9);
+INSERT INTO public.room_assets VALUES ('API-E2E-20260811151220-TXWCG desk', 1, 'NORMAL', NULL, NULL, '2026-08-11 15:12:24.704+07', '2026-08-11 15:12:38.719+07', '2026-08-11 15:12:38.718+07', 7, 15, 17, 7, 9, 9, 9);
+INSERT INTO public.room_assets VALUES ('API-E2E-20260811151357-VHCL6 desk', 1, 'NORMAL', NULL, NULL, '2026-08-11 15:14:01.573+07', '2026-08-11 15:14:10.107+07', '2026-08-11 15:14:10.107+07', 8, 15, 19, 8, 9, 9, 9);
+INSERT INTO public.room_assets VALUES ('Bàn ghế gỗ', 1, 'NORMAL', '1 Bàn 2 ghế', NULL, '2026-08-14 15:58:31.877+07', '2026-08-14 15:58:31.877+07', NULL, 9, 1, 21, 10, 8, NULL, 8);
+INSERT INTO public.room_assets VALUES ('Quạt treo tường', 1, 'GOOD', '1x', NULL, '2026-08-14 15:58:48.166+07', '2026-08-14 15:58:48.166+07', NULL, 10, 1, 21, 14, 8, NULL, 8);
+INSERT INTO public.room_assets VALUES ('Tủ lạnh pana', 1, 'GOOD', '1x', NULL, '2026-08-14 15:59:04.099+07', '2026-08-14 15:59:04.099+07', NULL, 11, 1, 21, 9, 8, NULL, 8);
+INSERT INTO public.room_assets VALUES ('Bàn ghế gỗ', 1, 'NEW', NULL, NULL, '2026-08-15 07:17:07.575+07', '2026-08-15 07:17:07.575+07', NULL, 12, 1, 23, 10, 8, NULL, 8);
+INSERT INTO public.room_assets VALUES ('Tủ Lạnh', 1, 'NEW', '1x', NULL, '2026-08-15 07:17:21.523+07', '2026-08-15 07:17:21.523+07', NULL, 13, 1, 23, 9, 8, NULL, 8);
+INSERT INTO public.room_assets VALUES ('Điều Hòa', 1, 'NEW', '1x', NULL, '2026-08-15 07:17:29.659+07', '2026-08-15 07:17:29.659+07', NULL, 14, 1, 23, 15, 8, NULL, 8);
+INSERT INTO public.room_assets VALUES ('Giường', 1, 'NEW', NULL, NULL, '2026-08-15 07:26:42.594+07', '2026-08-15 07:26:42.594+07', NULL, 15, 1, 24, 16, 8, NULL, 8);
+INSERT INTO public.room_assets VALUES ('Quạt treo tường', 1, 'NEW', NULL, NULL, '2026-08-15 07:26:58.478+07', '2026-08-15 07:26:58.478+07', NULL, 16, 1, 24, 14, 8, NULL, 8);
+INSERT INTO public.room_assets VALUES ('Bàn ghế gỗ', 1, 'NEW', NULL, NULL, '2026-08-16 17:15:36.807+07', '2026-08-16 17:15:36.807+07', NULL, 17, 1, 26, 10, 8, NULL, 8);
+INSERT INTO public.room_assets VALUES ('Điều Hòa', 1, 'NEW', NULL, NULL, '2026-08-16 17:15:43.13+07', '2026-08-16 17:15:43.13+07', NULL, 18, 1, 26, 15, 8, NULL, 8);
+INSERT INTO public.room_assets VALUES ('Bàn', 1, 'NORMAL', NULL, NULL, '2026-08-19 20:24:55.457+07', '2026-08-19 20:24:55.457+07', NULL, 19, 1, 28, 10, 8, NULL, 8);
+INSERT INTO public.room_assets VALUES ('Điều Hòa', 1, 'NORMAL', NULL, NULL, '2026-08-19 20:25:05.511+07', '2026-08-19 20:25:05.511+07', NULL, 20, 1, 28, 15, 8, NULL, 8);
+
+
+--
+-- Data for Name: handover_asset_items; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.handover_asset_items VALUES ('NORMAL', 'Accepted', NULL, 1, 1, 2, 'API-E2E-20260811145335-OBR4D desk', 'API-E2E-20260811145335-OBR4D furniture', 1, 1);
+INSERT INTO public.handover_asset_items VALUES ('NORMAL', 'Accepted', NULL, 2, 2, 3, 'API-E2E-20260811145614-NE3TM desk', 'API-E2E-20260811145614-NE3TM furniture', 1, 1);
+INSERT INTO public.handover_asset_items VALUES ('NORMAL', 'Accepted', NULL, 3, 3, 4, 'API-E2E-20260811150747-FQASH desk', 'API-E2E-20260811150747-FQASH furniture', 1, 1);
+INSERT INTO public.handover_asset_items VALUES ('NORMAL', 'Accepted', NULL, 4, 4, 5, 'API-E2E-20260811150923-COC5D desk', 'API-E2E-20260811150923-COC5D furniture', 1, 1);
+INSERT INTO public.handover_asset_items VALUES ('NORMAL', 'Accepted', NULL, 5, 5, 6, 'API-E2E-20260811151034-7GWTM desk', 'API-E2E-20260811151034-7GWTM furniture', 1, 1);
+INSERT INTO public.handover_asset_items VALUES ('NORMAL', 'Returned', NULL, 6, 6, 6, 'API-E2E-20260811151034-7GWTM desk', 'API-E2E-20260811151034-7GWTM furniture', 1, 1);
+INSERT INTO public.handover_asset_items VALUES ('NORMAL', 'Accepted', NULL, 7, 7, 7, 'API-E2E-20260811151220-TXWCG desk', 'API-E2E-20260811151220-TXWCG furniture', 1, 1);
+INSERT INTO public.handover_asset_items VALUES ('NORMAL', 'Returned', NULL, 8, 8, 7, 'API-E2E-20260811151220-TXWCG desk', 'API-E2E-20260811151220-TXWCG furniture', 1, 1);
+INSERT INTO public.handover_asset_items VALUES ('NORMAL', 'Accepted', NULL, 9, 9, 8, 'API-E2E-20260811151357-VHCL6 desk', 'API-E2E-20260811151357-VHCL6 furniture', 1, 1);
+
+
+--
+-- Data for Name: utility_meters; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.utility_meters VALUES ('ELECTRICITY', 'MVP-E-A102', 'kWh', 'ACTIVE', '2026-07-30 23:21:13+07', 1, 1, 2);
+INSERT INTO public.utility_meters VALUES ('WATER', 'MVP-W-A102', 'm3', 'ACTIVE', '2026-07-30 23:21:13.006+07', 2, 1, 2);
+INSERT INTO public.utility_meters VALUES ('ELECTRICITY', 'API-E2E-20260811145335-OBR4D-ELEC', 'kWh', 'INACTIVE', '2026-08-11 14:53:44.227+07', 5, 15, 7);
+INSERT INTO public.utility_meters VALUES ('ELECTRICITY', 'API-E2E-20260811145614-NE3TM-ELEC', 'kWh', 'INACTIVE', '2026-08-11 14:56:22.125+07', 6, 15, 9);
+INSERT INTO public.utility_meters VALUES ('ELECTRICITY', 'API-E2E-20260811150747-FQASH-ELEC', 'kWh', 'INACTIVE', '2026-08-11 15:07:55.874+07', 7, 15, 11);
+INSERT INTO public.utility_meters VALUES ('ELECTRICITY', 'API-E2E-20260811150923-COC5D-ELEC', 'kWh', 'INACTIVE', '2026-08-11 15:09:30.36+07', 8, 15, 13);
+INSERT INTO public.utility_meters VALUES ('ELECTRICITY', 'API-E2E-20260811151034-7GWTM-ELEC', 'kWh', 'INACTIVE', '2026-08-11 15:10:42.304+07', 9, 15, 15);
+INSERT INTO public.utility_meters VALUES ('ELECTRICITY', 'API-E2E-20260811151220-TXWCG-ELEC', 'kWh', 'INACTIVE', '2026-08-11 15:12:28.637+07', 10, 15, 17);
+INSERT INTO public.utility_meters VALUES ('ELECTRICITY', 'API-E2E-20260811151357-VHCL6-ELEC', 'kWh', 'INACTIVE', '2026-08-11 15:14:04.726+07', 11, 15, 19);
+INSERT INTO public.utility_meters VALUES ('ELECTRICITY', 'CT_D_T101', 'kWh', 'ACTIVE', '2026-08-17 15:38:31.996+07', 12, 1, 21);
+INSERT INTO public.utility_meters VALUES ('WATER', 'CT_N_T101', 'm3', 'ACTIVE', '2026-08-17 15:38:57.653+07', 13, 1, 21);
+INSERT INTO public.utility_meters VALUES ('ELECTRICITY', 'CT_D_P101', 'kWh', 'ACTIVE', '2026-08-23 08:06:09.699+07', 14, 18, 25);
+INSERT INTO public.utility_meters VALUES ('WATER', 'CT_N_P101', 'm3', 'ACTIVE', '2026-08-23 08:06:19.229+07', 15, 18, 25);
+
+
+--
+-- Data for Name: ocr_jobs; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.ocr_jobs VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787033583/ocr/1/13/hg0zztniyhpezbzcfrgb.png', 4.00, 0.8900, '{"text": " .\n                                   5\n94           12\n1\n     9     4                        1\n                       4\n                                      1600\n    6 4\n 4\n                           4\n.                   .                            4\n     1     1    ,\n", "provider": "TESSERACT_JS", "candidates": [{"text": "4", "value": "4", "confidence": 0.89}, {"text": "1", "value": "1", "confidence": 0.25}, {"text": "5", "value": "5", "confidence": 0.19}, {"text": "9", "value": "9", "confidence": 0.12}, {"text": "94", "value": "94", "confidence": 0}, {"text": "12", "value": "12", "confidence": 0}, {"text": "1600", "value": "1600", "confidence": 0}, {"text": "6", "value": "6", "confidence": 0}]}', 'NEED_REVIEW', NULL, '2026-08-18 06:13:06.778+07', '2026-08-18 06:13:10.301+07', 1, 1, 21, 13, 8, 'ocr/1/13/hg0zztniyhpezbzcfrgb', '3d51ab31037f2ee47c63d11daef47e7f07c5cb1bb3368429b3b9293a7fbbdeb3');
+INSERT INTO public.ocr_jobs VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787035693/ocr/1/12/koqql4dcjgij3ukmuiy2.png', 4.00, 0.8900, '{"text": " .\n                                   5\n94           12\n1\n     9     4                        1\n                       4\n                                      1600\n    6 4\n 4\n                           4\n.                   .                            4\n     1     1    ,\n", "provider": "TESSERACT_JS", "candidates": [{"text": "4", "value": "4", "confidence": 0.89}, {"text": "1", "value": "1", "confidence": 0.25}, {"text": "5", "value": "5", "confidence": 0.19}, {"text": "9", "value": "9", "confidence": 0.12}, {"text": "94", "value": "94", "confidence": 0}, {"text": "12", "value": "12", "confidence": 0}, {"text": "1600", "value": "1600", "confidence": 0}, {"text": "6", "value": "6", "confidence": 0}]}', 'NEED_REVIEW', NULL, '2026-08-18 06:48:17.146+07', '2026-08-18 06:48:20.022+07', 2, 1, 21, 12, 8, 'ocr/1/12/koqql4dcjgij3ukmuiy2', '3d51ab31037f2ee47c63d11daef47e7f07c5cb1bb3368429b3b9293a7fbbdeb3');
+INSERT INTO public.ocr_jobs VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787036231/ocr/1/12/zupfse99isrccnl6xjry.png', NULL, NULL, '{"text": " 00058.\n", "provider": "TESSERACT_JS", "candidates": []}', 'NEED_REVIEW', NULL, '2026-08-18 06:57:14.096+07', '2026-08-18 06:57:15.373+07', 3, 1, 21, 12, 8, 'ocr/1/12/zupfse99isrccnl6xjry', 'b62249e43cec2c7e372df4f72629617e538f3ee0e2a9a9d27fcc476f5abf2130');
+INSERT INTO public.ocr_jobs VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787037556/ocr/1/13/sfnnbxhygmlg6j26nbgt.png', 58.00, 0.0000, '{"text": " 00058.\n", "provider": "TESSERACT_JS", "candidates": [{"text": "00058.", "value": "00058", "confidence": 0}]}', 'NEED_REVIEW', NULL, '2026-08-18 07:19:19.388+07', '2026-08-18 07:19:21.176+07', 4, 1, 21, 13, 8, 'ocr/1/13/sfnnbxhygmlg6j26nbgt', 'b62249e43cec2c7e372df4f72629617e538f3ee0e2a9a9d27fcc476f5abf2130');
+INSERT INTO public.ocr_jobs VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787472403/ocr/18/15/dbeqvvqsnquxdllaha15.png', 50.00, 0.0000, '{"text": ".00050\n", "provider": "TESSERACT_JS", "candidates": [{"text": ".00050\n", "value": "00050", "confidence": 0}]}', 'NEED_REVIEW', NULL, '2026-08-23 08:06:44.698+07', '2026-08-23 08:06:46.976+07', 5, 18, 25, 15, 18, 'ocr/18/15/dbeqvvqsnquxdllaha15', 'b62249e43cec2c7e372df4f72629617e538f3ee0e2a9a9d27fcc476f5abf2130');
+
+
+--
+-- Data for Name: meter_readings; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.meter_readings VALUES ('2026-07-01', 1000.00, 1120.00, 120.00, 3500.00, 420000.00, NULL, 'MANUAL', 'CONFIRMED', '2026-07-30 23:21:13.01+07', 1, 1, 2, 1, 1, 3, NULL, NULL, NULL);
+INSERT INTO public.meter_readings VALUES ('2026-07-01', 100.00, 105.00, 5.00, 20000.00, 100000.00, NULL, 'MANUAL', 'CONFIRMED', '2026-07-30 23:21:13.02+07', 2, 1, 2, 2, 1, 3, NULL, NULL, NULL);
+INSERT INTO public.meter_readings VALUES ('2026-08-01', 10.00, 25.00, 15.00, 3500.00, 52500.00, NULL, 'MANUAL', 'CONFIRMED', '2026-08-11 14:53:44.409+07', 5, 15, 7, 5, 3, 9, NULL, 9, NULL);
+INSERT INTO public.meter_readings VALUES ('2026-08-01', 10.00, 25.00, 15.00, 3500.00, 52500.00, NULL, 'MANUAL', 'CONFIRMED', '2026-08-11 14:56:22.269+07', 6, 15, 9, 6, 4, 9, NULL, 9, NULL);
+INSERT INTO public.meter_readings VALUES ('2026-08-01', 10.00, 25.00, 15.00, 3500.00, 52500.00, NULL, 'MANUAL', 'CONFIRMED', '2026-08-11 15:07:56.04+07', 7, 15, 11, 7, 5, 9, NULL, 9, NULL);
+INSERT INTO public.meter_readings VALUES ('2026-08-01', 10.00, 25.00, 15.00, 3500.00, 52500.00, NULL, 'MANUAL', 'CONFIRMED', '2026-08-11 15:09:30.476+07', 8, 15, 13, 8, 6, 9, NULL, 9, NULL);
+INSERT INTO public.meter_readings VALUES ('2026-08-01', 10.00, 25.00, 15.00, 3500.00, 52500.00, NULL, 'MANUAL', 'CONFIRMED', '2026-08-11 15:10:42.418+07', 9, 15, 15, 9, 7, 9, NULL, 9, NULL);
+INSERT INTO public.meter_readings VALUES ('2026-08-01', 10.00, 25.00, 15.00, 3500.00, 52500.00, NULL, 'MANUAL', 'CONFIRMED', '2026-08-11 15:12:28.771+07', 10, 15, 17, 10, 8, 9, NULL, 9, NULL);
+INSERT INTO public.meter_readings VALUES ('2026-08-01', 10.00, 25.00, 15.00, 3500.00, 52500.00, NULL, 'MANUAL', 'CONFIRMED', '2026-08-11 15:14:04.853+07', 11, 15, 19, 11, 9, 9, NULL, 9, NULL);
+INSERT INTO public.meter_readings VALUES ('2026-08-01', 105.00, 130.00, 25.00, 20000.00, 500000.00, NULL, 'MANUAL', 'DRAFT', '2026-08-14 18:32:45.945+07', 12, 1, 2, 2, 1, 8, NULL, 8, NULL);
+INSERT INTO public.meter_readings VALUES ('2026-08-01', 0.00, 10.00, 10.00, 3500.00, 35000.00, NULL, 'MANUAL', 'CONFIRMED', '2026-08-17 15:39:17.093+07', 13, 1, 21, 12, 10, 8, NULL, 8, NULL);
+INSERT INTO public.meter_readings VALUES ('2026-08-01', 0.00, 20.00, 20.00, 5000.00, 100000.00, NULL, 'MANUAL', 'CONFIRMED', '2026-08-17 15:43:12.686+07', 14, 1, 21, 13, 10, 8, NULL, 8, NULL);
+
+
+--
+-- Data for Name: invoice_items; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.invoice_items VALUES ('RENT', 'Monthly rent', 1.00, 6000000.00, 6000000.00, '2026-07-30 23:43:08.616+07', 5, 1, NULL);
+INSERT INTO public.invoice_items VALUES ('ELECTRICITY', 'Electricity', 120.00, 3500.00, 420000.00, '2026-07-30 23:43:08.616+07', 6, 1, 1);
+INSERT INTO public.invoice_items VALUES ('WATER', 'Water', 5.00, 20000.00, 100000.00, '2026-07-30 23:43:08.616+07', 7, 1, 2);
+INSERT INTO public.invoice_items VALUES ('INTERNET', 'Internet', 1.00, 150000.00, 150000.00, '2026-07-30 23:43:08.616+07', 8, 1, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811145335-OBR4D-MAIN tháng 08/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 14:53:46.429+07', 13, 3, NULL);
+INSERT INTO public.invoice_items VALUES ('ELECTRICITY', 'Tiền điện tháng 08/2026 (10 - 25 kWh)', 15.00, 3500.00, 52500.00, '2026-08-11 14:53:46.429+07', 14, 3, 5);
+INSERT INTO public.invoice_items VALUES ('OTHER', 'API-E2E-20260811145335-OBR4D updated extra', 1.00, 50000.00, 50000.00, '2026-08-11 14:53:46.429+07', 15, 3, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811145335-OBR4D-MAIN tháng 07/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 14:53:47.594+07', 16, 4, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811145335-OBR4D internet (tháng) tháng 07/2026', 1.25, 125000.00, 156250.00, '2026-08-11 14:53:47.594+07', 17, 4, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811145335-OBR4D-MAIN tháng 06/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 14:53:48.304+07', 18, 5, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811145335-OBR4D internet (tháng) tháng 06/2026', 1.25, 125000.00, 156250.00, '2026-08-11 14:53:48.304+07', 19, 5, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811145614-NE3TM-MAIN tháng 08/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 14:56:23.55+07', 24, 6, NULL);
+INSERT INTO public.invoice_items VALUES ('ELECTRICITY', 'Tiền điện tháng 08/2026 (10 - 25 kWh)', 15.00, 3500.00, 52500.00, '2026-08-11 14:56:23.55+07', 25, 6, 6);
+INSERT INTO public.invoice_items VALUES ('OTHER', 'API-E2E-20260811145614-NE3TM updated extra', 1.00, 50000.00, 50000.00, '2026-08-11 14:56:23.55+07', 26, 6, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811145614-NE3TM-MAIN tháng 07/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 14:56:24.649+07', 27, 7, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811145614-NE3TM internet (tháng) tháng 07/2026', 1.25, 125000.00, 156250.00, '2026-08-11 14:56:24.649+07', 28, 7, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811145614-NE3TM-MAIN tháng 06/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 14:56:25.159+07', 29, 8, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811145614-NE3TM internet (tháng) tháng 06/2026', 1.25, 125000.00, 156250.00, '2026-08-11 14:56:25.159+07', 30, 8, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811150747-FQASH-MAIN tháng 08/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:07:57.188+07', 35, 9, NULL);
+INSERT INTO public.invoice_items VALUES ('ELECTRICITY', 'Tiền điện tháng 08/2026 (10 - 25 kWh)', 15.00, 3500.00, 52500.00, '2026-08-11 15:07:57.188+07', 36, 9, 7);
+INSERT INTO public.invoice_items VALUES ('OTHER', 'API-E2E-20260811150747-FQASH updated extra', 1.00, 50000.00, 50000.00, '2026-08-11 15:07:57.188+07', 37, 9, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811150747-FQASH-MAIN tháng 07/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:07:58.089+07', 38, 10, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811150747-FQASH internet (tháng) tháng 07/2026', 1.25, 125000.00, 156250.00, '2026-08-11 15:07:58.089+07', 39, 10, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811150747-FQASH-MAIN tháng 06/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:07:58.576+07', 40, 11, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811150747-FQASH internet (tháng) tháng 06/2026', 1.25, 125000.00, 156250.00, '2026-08-11 15:07:58.576+07', 41, 11, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811150923-COC5D-MAIN tháng 08/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:09:31.54+07', 46, 12, NULL);
+INSERT INTO public.invoice_items VALUES ('ELECTRICITY', 'Tiền điện tháng 08/2026 (10 - 25 kWh)', 15.00, 3500.00, 52500.00, '2026-08-11 15:09:31.54+07', 47, 12, 8);
+INSERT INTO public.invoice_items VALUES ('OTHER', 'API-E2E-20260811150923-COC5D updated extra', 1.00, 50000.00, 50000.00, '2026-08-11 15:09:31.54+07', 48, 12, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811150923-COC5D-MAIN tháng 07/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:09:32.554+07', 49, 13, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811150923-COC5D internet (tháng) tháng 07/2026', 1.25, 125000.00, 156250.00, '2026-08-11 15:09:32.554+07', 50, 13, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811150923-COC5D-MAIN tháng 06/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:09:33.047+07', 51, 14, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811150923-COC5D internet (tháng) tháng 06/2026', 1.25, 125000.00, 156250.00, '2026-08-11 15:09:33.047+07', 52, 14, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811151034-7GWTM-MAIN tháng 08/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:10:44.107+07', 57, 15, NULL);
+INSERT INTO public.invoice_items VALUES ('ELECTRICITY', 'Tiền điện tháng 08/2026 (10 - 25 kWh)', 15.00, 3500.00, 52500.00, '2026-08-11 15:10:44.107+07', 58, 15, 9);
+INSERT INTO public.invoice_items VALUES ('OTHER', 'API-E2E-20260811151034-7GWTM updated extra', 1.00, 50000.00, 50000.00, '2026-08-11 15:10:44.107+07', 59, 15, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811151034-7GWTM-MAIN tháng 07/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:10:45.023+07', 60, 16, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811151034-7GWTM internet (tháng) tháng 07/2026', 1.25, 125000.00, 156250.00, '2026-08-11 15:10:45.023+07', 61, 16, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811151034-7GWTM-MAIN tháng 06/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:10:45.486+07', 62, 17, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811151034-7GWTM internet (tháng) tháng 06/2026', 1.25, 125000.00, 156250.00, '2026-08-11 15:10:45.486+07', 63, 17, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811151220-TXWCG-MAIN tháng 08/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:12:29.872+07', 68, 18, NULL);
+INSERT INTO public.invoice_items VALUES ('ELECTRICITY', 'Tiền điện tháng 08/2026 (10 - 25 kWh)', 15.00, 3500.00, 52500.00, '2026-08-11 15:12:29.872+07', 69, 18, 10);
+INSERT INTO public.invoice_items VALUES ('OTHER', 'API-E2E-20260811151220-TXWCG updated extra', 1.00, 50000.00, 50000.00, '2026-08-11 15:12:29.872+07', 70, 18, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811151220-TXWCG-MAIN tháng 07/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:12:30.792+07', 71, 19, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811151220-TXWCG internet (tháng) tháng 07/2026', 1.25, 125000.00, 156250.00, '2026-08-11 15:12:30.792+07', 72, 19, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811151220-TXWCG-MAIN tháng 06/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:12:31.275+07', 73, 20, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811151220-TXWCG internet (tháng) tháng 06/2026', 1.25, 125000.00, 156250.00, '2026-08-11 15:12:31.275+07', 74, 20, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811151357-VHCL6-MAIN tháng 08/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:14:06.289+07', 79, 21, NULL);
+INSERT INTO public.invoice_items VALUES ('ELECTRICITY', 'Tiền điện tháng 08/2026 (10 - 25 kWh)', 15.00, 3500.00, 52500.00, '2026-08-11 15:14:06.289+07', 80, 21, 11);
+INSERT INTO public.invoice_items VALUES ('OTHER', 'API-E2E-20260811151357-VHCL6 updated extra', 1.00, 50000.00, 50000.00, '2026-08-11 15:14:06.289+07', 81, 21, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811151357-VHCL6-MAIN tháng 07/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:14:07.191+07', 82, 22, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811151357-VHCL6 internet (tháng) tháng 07/2026', 1.25, 125000.00, 156250.00, '2026-08-11 15:14:07.191+07', 83, 22, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng API-E2E-20260811151357-VHCL6-MAIN tháng 06/2026', 1.00, 4500000.00, 4500000.00, '2026-08-11 15:14:07.669+07', 84, 23, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'API-E2E-20260811151357-VHCL6 internet (tháng) tháng 06/2026', 1.25, 125000.00, 156250.00, '2026-08-11 15:14:07.669+07', 85, 23, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng T101 tháng 08/2026', 1.00, 3000000.00, 3000000.00, '2026-08-14 16:32:02.659+07', 86, 24, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'Internet (tháng) tháng 08/2026', 1.00, 150000.00, 150000.00, '2026-08-14 16:32:02.659+07', 87, 24, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'Nước sinh hoạt (Khối) tháng 08/2026', 1.00, 5000.00, 5000.00, '2026-08-14 16:32:02.659+07', 88, 24, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'Vệ sinh (tháng) tháng 08/2026', 1.00, 100000.00, 100000.00, '2026-08-14 16:32:02.659+07', 89, 24, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'Điện (kWh) tháng 08/2026', 1.00, 3700.00, 3700.00, '2026-08-14 16:32:02.659+07', 90, 24, NULL);
+INSERT INTO public.invoice_items VALUES ('RENT', 'Tiền thuê phòng T101 tháng 08/2026', 1.00, 3000000.00, 3000000.00, '2026-08-17 15:55:36.345+07', 91, 25, NULL);
+INSERT INTO public.invoice_items VALUES ('ELECTRICITY', 'Tiền điện tháng 08/2026 (0 - 10 kWh)', 10.00, 3500.00, 35000.00, '2026-08-17 15:55:36.345+07', 92, 25, 13);
+INSERT INTO public.invoice_items VALUES ('WATER', 'Tiền nước tháng 08/2026 (0 - 20 m3)', 20.00, 5000.00, 100000.00, '2026-08-17 15:55:36.345+07', 93, 25, 14);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'Internet (tháng) tháng 08/2026', 1.00, 150000.00, 150000.00, '2026-08-17 15:55:36.345+07', 94, 25, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'Nước sinh hoạt (Khối) tháng 08/2026', 1.00, 5000.00, 5000.00, '2026-08-17 15:55:36.345+07', 95, 25, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'Vệ sinh (tháng) tháng 08/2026', 1.00, 100000.00, 100000.00, '2026-08-17 15:55:36.345+07', 96, 25, NULL);
+INSERT INTO public.invoice_items VALUES ('SERVICE', 'Điện (kWh) tháng 08/2026', 1.00, 3700.00, 3700.00, '2026-08-17 15:55:36.345+07', 97, 25, NULL);
+
+
+--
+-- Data for Name: marketplace_moderations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.marketplace_moderations VALUES (1, 4, 15, 9, 'DRAFT', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 14:32:06.107+07');
+INSERT INTO public.marketplace_moderations VALUES (2, 3, 15, 9, 'DRAFT', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 14:32:06.188+07');
+INSERT INTO public.marketplace_moderations VALUES (3, 6, 15, 9, 'DRAFT', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 14:38:00.025+07');
+INSERT INTO public.marketplace_moderations VALUES (4, 5, 15, 9, 'DRAFT', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 14:38:00.099+07');
+INSERT INTO public.marketplace_moderations VALUES (5, 7, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 14:53:40.301+07');
+INSERT INTO public.marketplace_moderations VALUES (6, 7, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 14:53:40.567+07');
+INSERT INTO public.marketplace_moderations VALUES (7, 8, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 14:53:40.908+07');
+INSERT INTO public.marketplace_moderations VALUES (8, 8, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 14:53:41.06+07');
+INSERT INTO public.marketplace_moderations VALUES (9, 7, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_RENTAL_REQUEST_APPROVED', '2026-08-11 14:53:42.615+07');
+INSERT INTO public.marketplace_moderations VALUES (10, 8, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 14:53:52.12+07');
+INSERT INTO public.marketplace_moderations VALUES (11, 9, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 14:56:18.674+07');
+INSERT INTO public.marketplace_moderations VALUES (12, 9, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 14:56:18.857+07');
+INSERT INTO public.marketplace_moderations VALUES (13, 10, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 14:56:19.129+07');
+INSERT INTO public.marketplace_moderations VALUES (14, 10, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 14:56:19.279+07');
+INSERT INTO public.marketplace_moderations VALUES (15, 9, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_RENTAL_REQUEST_APPROVED', '2026-08-11 14:56:20.646+07');
+INSERT INTO public.marketplace_moderations VALUES (16, 10, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 14:56:28.704+07');
+INSERT INTO public.marketplace_moderations VALUES (17, 11, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 15:07:52.667+07');
+INSERT INTO public.marketplace_moderations VALUES (18, 11, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 15:07:52.87+07');
+INSERT INTO public.marketplace_moderations VALUES (19, 12, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 15:07:53.114+07');
+INSERT INTO public.marketplace_moderations VALUES (20, 12, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 15:07:53.262+07');
+INSERT INTO public.marketplace_moderations VALUES (21, 11, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_RENTAL_REQUEST_APPROVED', '2026-08-11 15:07:54.564+07');
+INSERT INTO public.marketplace_moderations VALUES (22, 12, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 15:08:03.23+07');
+INSERT INTO public.marketplace_moderations VALUES (23, 13, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 15:09:27.168+07');
+INSERT INTO public.marketplace_moderations VALUES (24, 13, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 15:09:27.329+07');
+INSERT INTO public.marketplace_moderations VALUES (25, 14, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 15:09:27.827+07');
+INSERT INTO public.marketplace_moderations VALUES (26, 14, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 15:09:27.971+07');
+INSERT INTO public.marketplace_moderations VALUES (27, 13, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_RENTAL_REQUEST_APPROVED', '2026-08-11 15:09:29.157+07');
+INSERT INTO public.marketplace_moderations VALUES (28, 14, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 15:09:37.592+07');
+INSERT INTO public.marketplace_moderations VALUES (29, 15, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 15:10:39.257+07');
+INSERT INTO public.marketplace_moderations VALUES (30, 15, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 15:10:39.409+07');
+INSERT INTO public.marketplace_moderations VALUES (31, 16, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 15:10:39.64+07');
+INSERT INTO public.marketplace_moderations VALUES (32, 16, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 15:10:39.77+07');
+INSERT INTO public.marketplace_moderations VALUES (33, 15, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_RENTAL_REQUEST_APPROVED', '2026-08-11 15:10:40.936+07');
+INSERT INTO public.marketplace_moderations VALUES (34, 16, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 15:10:54.404+07');
+INSERT INTO public.marketplace_moderations VALUES (35, 17, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 15:12:24.975+07');
+INSERT INTO public.marketplace_moderations VALUES (36, 17, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 15:12:25.163+07');
+INSERT INTO public.marketplace_moderations VALUES (37, 18, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 15:12:25.4+07');
+INSERT INTO public.marketplace_moderations VALUES (38, 18, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 15:12:25.822+07');
+INSERT INTO public.marketplace_moderations VALUES (39, 17, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_RENTAL_REQUEST_APPROVED', '2026-08-11 15:12:27.158+07');
+INSERT INTO public.marketplace_moderations VALUES (40, 17, 15, 9, 'HIDDEN', 'PENDING_REVIEW', NULL, '2026-08-11 15:12:35.942+07');
+INSERT INTO public.marketplace_moderations VALUES (41, 17, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 15:12:36.106+07');
+INSERT INTO public.marketplace_moderations VALUES (42, 18, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 15:12:38.964+07');
+INSERT INTO public.marketplace_moderations VALUES (43, 17, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 15:12:39.036+07');
+INSERT INTO public.marketplace_moderations VALUES (44, 19, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 15:14:01.804+07');
+INSERT INTO public.marketplace_moderations VALUES (45, 19, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 15:14:01.973+07');
+INSERT INTO public.marketplace_moderations VALUES (46, 20, 15, 9, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-11 15:14:02.224+07');
+INSERT INTO public.marketplace_moderations VALUES (47, 20, 15, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-11 15:14:02.359+07');
+INSERT INTO public.marketplace_moderations VALUES (48, 19, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_RENTAL_REQUEST_APPROVED', '2026-08-11 15:14:03.556+07');
+INSERT INTO public.marketplace_moderations VALUES (49, 20, 15, 9, 'PUBLISHED', 'HIDDEN', 'AUTO_ROOM_DELETED', '2026-08-11 15:14:10.21+07');
+INSERT INTO public.marketplace_moderations VALUES (50, 21, 1, 8, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-13 14:18:16.908+07');
+INSERT INTO public.marketplace_moderations VALUES (51, 21, 1, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-13 14:53:26.911+07');
+INSERT INTO public.marketplace_moderations VALUES (52, 22, 18, 18, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-14 08:41:17.155+07');
+INSERT INTO public.marketplace_moderations VALUES (53, 22, 18, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-14 09:30:29.126+07');
+INSERT INTO public.marketplace_moderations VALUES (54, 21, 1, 8, 'PUBLISHED', 'HIDDEN', 'AUTO_CONTRACT_ACTIVATED', '2026-08-14 13:36:19.363+07');
+INSERT INTO public.marketplace_moderations VALUES (55, 24, 1, 8, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-15 08:02:57.267+07');
+INSERT INTO public.marketplace_moderations VALUES (56, 23, 1, 8, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-15 08:03:02.458+07');
+INSERT INTO public.marketplace_moderations VALUES (57, 23, 1, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-15 08:21:09.238+07');
+INSERT INTO public.marketplace_moderations VALUES (58, 24, 1, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-15 08:21:11.681+07');
+INSERT INTO public.marketplace_moderations VALUES (59, 25, 18, 18, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-16 08:14:24.373+07');
+INSERT INTO public.marketplace_moderations VALUES (60, 25, 18, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-16 15:11:07.007+07');
+INSERT INTO public.marketplace_moderations VALUES (61, 1, 1, 1, 'PUBLISHED', 'HIDDEN', 'test', '2026-08-16 15:11:20.992+07');
+INSERT INTO public.marketplace_moderations VALUES (62, 26, 1, 8, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-16 17:20:16.391+07');
+INSERT INTO public.marketplace_moderations VALUES (63, 27, 1, 8, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-16 17:24:37.549+07');
+INSERT INTO public.marketplace_moderations VALUES (64, 28, 1, 8, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-19 20:25:06.925+07');
+INSERT INTO public.marketplace_moderations VALUES (65, 29, 1, 8, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-19 20:29:03.69+07');
+INSERT INTO public.marketplace_moderations VALUES (66, 30, 1, 8, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-19 20:39:05.16+07');
+INSERT INTO public.marketplace_moderations VALUES (67, 30, 1, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-19 20:39:44.057+07');
+INSERT INTO public.marketplace_moderations VALUES (68, 29, 1, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-19 20:39:46.467+07');
+INSERT INTO public.marketplace_moderations VALUES (69, 28, 1, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-19 20:39:48.133+07');
+INSERT INTO public.marketplace_moderations VALUES (70, 27, 1, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-19 20:39:49.753+07');
+INSERT INTO public.marketplace_moderations VALUES (71, 26, 1, 1, 'PENDING_REVIEW', 'PUBLISHED', NULL, '2026-08-19 20:39:51.924+07');
+INSERT INTO public.marketplace_moderations VALUES (72, 31, 1, 8, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-23 04:45:44.402+07');
+INSERT INTO public.marketplace_moderations VALUES (73, 32, 1, 8, 'DRAFT', 'PENDING_REVIEW', NULL, '2026-08-23 04:53:05.741+07');
+INSERT INTO public.marketplace_moderations VALUES (74, 33, 18, 18, 'PUBLISHED', 'HIDDEN', 'AUTO_RENTAL_REQUEST_APPROVED', '2026-08-23 07:43:42.174+07');
+
+
+--
+-- Data for Name: messages; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.messages VALUES ('xin chào', 'TEXT', NULL, NULL, '2026-08-23 09:33:06.861+07', NULL, 1, 1, 16);
+
+
+--
+-- Data for Name: notifications; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811145335-OBR4D-MAIN - API-E2E-20260811145335-OBR4D room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 7, "sourceId": 7, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:53:40.317+07', 1, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811145335-OBR4D-MAIN - API-E2E-20260811145335-OBR4D room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 7, "sourceId": 7, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:53:40.326+07', 2, 1, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811145335-OBR4D-MAIN đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 7, "status": "PUBLISHED", "sourceId": 7, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:53:40.585+07', 3, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811145335-OBR4D-REJECT - API-E2E-20260811145335-OBR4D room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 8, "sourceId": 8, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:53:40.916+07', 4, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811145335-OBR4D-REJECT - API-E2E-20260811145335-OBR4D room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 8, "sourceId": 8, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:53:40.917+07', 5, 1, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811145335-OBR4D-REJECT đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 8, "status": "PUBLISHED", "sourceId": 8, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:53:41.069+07', 6, 9, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811145335-OBR4D-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 7, "sourceId": 1, "sourceType": "APPOINTMENT", "appointmentId": 1}', false, NULL, '2026-08-11 14:53:41.47+07', 7, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151220-TXWCG-MAIN - API-E2E-20260811151220-TXWCG room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 17, "sourceId": 17, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:12:24.99+07', 255, 2, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811145335-OBR4D-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 7, "sourceId": 2, "sourceType": "APPOINTMENT", "appointmentId": 2}', false, NULL, '2026-08-11 14:53:41.724+07', 9, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151220-TXWCG-MAIN - API-E2E-20260811151220-TXWCG room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 17, "sourceId": 17, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:12:24.994+07', 256, 1, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811145335-OBR4D-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 7, "sourceId": 2, "requestId": 2, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 14:53:42.13+07', 11, 9, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811151220-TXWCG-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 17, "sourceId": 12, "sourceType": "APPOINTMENT", "appointmentId": 12}', false, NULL, '2026-08-11 15:12:26.445+07', 263, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811145335-OBR4D-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 7, "sourceId": 3, "requestId": 3, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 14:53:42.367+07', 13, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811145335-OBR4D-MAIN đã chuyển sang HIDDEN.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 7, "status": "HIDDEN", "sourceId": 7, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:53:42.666+07', 15, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811145335-OBR4D-REJECT vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 8, "sourceId": 4, "requestId": 4, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 14:53:42.768+07', 16, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811151220-TXWCG-MAIN đã chuyển sang HIDDEN.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 17, "status": "HIDDEN", "sourceId": 17, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:12:27.213+07', 269, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145335-OBR4D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 1, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 14:53:45.264+07', 18, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 7, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:12:29.32+07', 276, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145335-OBR4D-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 1, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 14:53:45.499+07', 20, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145335-OBR4D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 1, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 14:53:45.66+07', 22, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145335-OBR4D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 1, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 14:53:45.817+07', 24, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202607-8EEMIO.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "sourceId": 14, "invoiceId": 19, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:12:31.074+07', 287, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145335-OBR4D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 1, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:45.818+07', 25, 13, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán bị từ chối', 'Thanh toán cho hóa đơn INV-15-202607-D5J58D đã bị từ chối.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "status": "FAILED", "sourceId": 4, "invoiceId": 4, "sourceType": "PAYMENT"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:48.199+07', 34, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811151220-TXWCG-MAIN đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 17, "status": "PUBLISHED", "sourceId": 17, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:12:25.171+07', 257, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811151220-TXWCG-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 17, "sourceId": 18, "requestId": 18, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:12:26.964+07', 267, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811151220-TXWCG-REJECT vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 18, "sourceId": 19, "requestId": 19, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:12:27.314+07', 270, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145335-OBR4D-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 1, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 14:53:45.984+07', 26, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202608-LHU9DJ.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "sourceId": 3, "invoiceId": 3, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 14:53:47.081+07', 29, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202607-D5J58D.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "sourceId": 4, "invoiceId": 4, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 14:53:48.085+07', 33, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145335-OBR4D-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 1, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:46.005+07', 27, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202608-LHU9DJ đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4602500", "dueDate": "2026-08-21T00:00:00.000Z", "sourceId": 3, "sourceType": "INVOICE", "invoiceCode": "INV-15-202608-LHU9DJ"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:46.552+07', 28, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn quá hạn', 'Hóa đơn INV-15-202607-D5J58D đã quá hạn thanh toán.', 'INVOICE', '{"event": "INVOICE_UPDATED", "sourceId": 4, "debtAmount": "4656250", "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-D5J58D"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:47.96+07', 32, 13, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151220-TXWCG-REJECT - API-E2E-20260811151220-TXWCG room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 18, "sourceId": 18, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:12:25.408+07', 258, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151220-TXWCG-REJECT - API-E2E-20260811151220-TXWCG room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 18, "sourceId": 18, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:12:25.41+07', 259, 1, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811151220-TXWCG-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 17, "sourceId": 11, "sourceType": "APPOINTMENT", "appointmentId": 11}', false, NULL, '2026-08-11 15:12:26.171+07', 261, 9, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811151220-TXWCG-MAIN đã chuyển sang CONFIRMED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 17, "status": "CONFIRMED", "sourceId": 12, "sourceType": "APPOINTMENT", "appointmentId": 12}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:26.645+07', 264, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202607-8EEMIO đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4656250", "dueDate": "2026-08-09T00:00:00.000Z", "sourceId": 19, "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-8EEMIO"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:30.86+07', 285, 13, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151220-TXWCG-MAIN - API-E2E-20260811151220-TXWCG room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 17, "sourceId": 17, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:12:35.952+07', 327, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151220-TXWCG-MAIN - API-E2E-20260811151220-TXWCG room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 17, "sourceId": 17, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:12:35.953+07', 328, 1, 15);
+INSERT INTO public.notifications VALUES ('Ticket mới', 'Người thuê vừa gửi sự cố: API-E2E-20260811145335-OBR4D support ticket.', 'TICKET', '{"event": "TICKET_CREATED", "sourceId": 2, "ticketId": 2, "sourceType": "TICKET"}', false, NULL, '2026-08-11 14:53:48.681+07', 35, 9, 15);
+INSERT INTO public.notifications VALUES ('Bình luận ticket mới', 'Ticket API-E2E-20260811145335-OBR4D support ticket vừa có bình luận mới.', 'TICKET', '{"event": "TICKET_COMMENT_ADDED", "status": "OPEN", "sourceId": 2, "ticketId": 2, "sourceType": "TICKET"}', false, NULL, '2026-08-11 14:53:48.844+07', 36, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811145335-OBR4D support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 2, "ticketId": 2, "sourceType": "TICKET"}', false, NULL, '2026-08-11 14:53:48.974+07', 37, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán đã được duyệt', 'Thanh toán cho hóa đơn INV-15-202608-LHU9DJ đã được duyệt.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "status": "SUCCESS", "sourceId": 3, "invoiceId": 3, "sourceType": "PAYMENT"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:47.356+07', 30, 13, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811145335-OBR4D support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 2, "ticketId": 2, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:48.975+07', 38, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811151220-TXWCG-REJECT đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 18, "status": "PUBLISHED", "sourceId": 18, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:12:25.831+07', 260, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811151220-TXWCG-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 17, "sourceId": 17, "requestId": 17, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:12:26.752+07', 265, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 7, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:12:28.993+07', 272, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 7, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:12:29.446+07', 278, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202608-Q7UNUS.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "sourceId": 13, "invoiceId": 18, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:12:30.4+07', 283, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket mới', 'Người thuê vừa gửi sự cố: API-E2E-20260811151220-TXWCG support ticket.', 'TICKET', '{"event": "TICKET_CREATED", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:12:31.794+07', 289, 9, 15);
+INSERT INTO public.notifications VALUES ('Bình luận ticket mới', 'Ticket API-E2E-20260811151220-TXWCG support ticket vừa có bình luận mới.', 'TICKET', '{"event": "TICKET_COMMENT_ADDED", "status": "OPEN", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:12:31.937+07', 290, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:12:32.029+07', 291, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:12:32.389+07', 296, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã chuyển sang IN_PROGRESS.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "IN_PROGRESS", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:12:32.53+07', 298, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:12:32.664+07', 300, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã chuyển sang CLOSED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CLOSED", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:12:32.796+07', 302, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811145614-NE3TM-MAIN - API-E2E-20260811145614-NE3TM room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 9, "sourceId": 9, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:56:18.683+07', 39, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811145614-NE3TM-MAIN - API-E2E-20260811145614-NE3TM room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 9, "sourceId": 9, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:56:18.686+07', 40, 1, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811145614-NE3TM-MAIN đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 9, "status": "PUBLISHED", "sourceId": 9, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:56:18.864+07', 41, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811145614-NE3TM-REJECT - API-E2E-20260811145614-NE3TM room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 10, "sourceId": 10, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:56:19.134+07', 42, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811145614-NE3TM-REJECT - API-E2E-20260811145614-NE3TM room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 10, "sourceId": 10, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:56:19.137+07', 43, 1, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811145614-NE3TM-REJECT đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 10, "status": "PUBLISHED", "sourceId": 10, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:56:19.287+07', 44, 9, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811145614-NE3TM-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 9, "sourceId": 3, "sourceType": "APPOINTMENT", "appointmentId": 3}', false, NULL, '2026-08-11 14:56:19.634+07', 45, 9, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811145614-NE3TM-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 9, "sourceId": 4, "sourceType": "APPOINTMENT", "appointmentId": 4}', false, NULL, '2026-08-11 14:56:19.844+07', 47, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 7, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:12:29.179+07', 274, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811145614-NE3TM-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 9, "sourceId": 5, "requestId": 5, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 14:56:20.183+07', 49, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811145614-NE3TM-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 9, "sourceId": 6, "requestId": 6, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 14:56:20.429+07', 51, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 7, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:12:29.585+07', 280, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811145614-NE3TM-MAIN đã chuyển sang HIDDEN.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 9, "status": "HIDDEN", "sourceId": 9, "sourceType": "ROOM"}', false, NULL, '2026-08-11 14:56:20.696+07', 53, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811145614-NE3TM-REJECT vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 10, "sourceId": 7, "requestId": 7, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 14:56:20.797+07', 54, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145614-NE3TM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 2, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 14:56:22.5+07', 56, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145614-NE3TM-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 2, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 14:56:22.725+07', 58, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145614-NE3TM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 2, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 14:56:22.878+07', 60, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã chuyển sang WAITING_RENTER.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "WAITING_RENTER", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:12:32.259+07', 294, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 7, "sourceType": "HANDOVER"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:29.18+07', 275, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145614-NE3TM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 2, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 14:56:23.05+07', 62, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202608-WPEMCP.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "sourceId": 5, "invoiceId": 6, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 14:56:24.149+07', 67, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202607-V0SRU1.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "sourceId": 6, "invoiceId": 7, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 14:56:24.948+07', 71, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145614-NE3TM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 2, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:23.051+07', 63, 13, 15);
+INSERT INTO public.notifications VALUES ('Báo cáo đã được xử lý', 'Báo cáo của bạn đã được quản trị viên xử lý.', 'REPORT', '{"event": "REPORT_UPDATED", "status": "RESOLVED", "sourceId": 2, "sourceType": "REPORT"}', true, '2026-08-11 15:12:34.17+07', '2026-08-11 15:12:33.949+07', 306, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811151220-TXWCG-MAIN đã chuyển sang APPROVED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 17, "status": "APPROVED", "sourceId": 18, "requestId": 18, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:27.164+07', 268, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 7, "sourceType": "HANDOVER"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:29.321+07', 277, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202608-Q7UNUS đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4602500", "dueDate": "2026-08-21T00:00:00.000Z", "sourceId": 18, "sourceType": "INVOICE", "invoiceCode": "INV-15-202608-Q7UNUS"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:29.981+07', 282, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811151220-TXWCG-MAIN đã chuyển sang CANCELED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 17, "status": "CANCELED", "sourceId": 11, "sourceType": "APPOINTMENT", "appointmentId": 11}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:26.336+07', 262, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 7, "sourceType": "HANDOVER"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:28.993+07', 273, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 7, "sourceType": "HANDOVER"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:29.448+07', 279, 13, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:32.03+07', 292, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:32.388+07', 295, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã chuyển sang IN_PROGRESS.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "IN_PROGRESS", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:32.53+07', 297, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:32.663+07', 299, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã chuyển sang CLOSED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CLOSED", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:32.795+07', 301, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811151220-TXWCG-MAIN đã chuyển sang CANCELED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 17, "status": "CANCELED", "sourceId": 17, "requestId": 17, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:26.859+07', 266, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811151220-TXWCG-REJECT đã chuyển sang REJECTED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 18, "status": "REJECTED", "sourceId": 19, "requestId": 19, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:27.403+07', 271, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 7, "sourceType": "HANDOVER"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:29.585+07', 281, 13, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán đã được duyệt', 'Thanh toán cho hóa đơn INV-15-202608-Q7UNUS đã được duyệt.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "status": "SUCCESS", "sourceId": 13, "invoiceId": 18, "sourceType": "PAYMENT"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:30.596+07', 284, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151220-TXWCG support ticket đã chuyển sang WAITING_RENTER.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "WAITING_RENTER", "sourceId": 10, "ticketId": 10, "sourceType": "TICKET"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:32.258+07', 293, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn quá hạn', 'Hóa đơn INV-15-202607-8EEMIO đã quá hạn thanh toán.', 'INVOICE', '{"event": "INVOICE_UPDATED", "sourceId": 19, "debtAmount": "4656250", "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-8EEMIO"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:30.956+07', 286, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145614-NE3TM-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 2, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 14:56:23.199+07', 64, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145614-NE3TM-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 2, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:23.201+07', 65, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202608-WPEMCP đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4602500", "dueDate": "2026-08-21T00:00:00.000Z", "sourceId": 6, "sourceType": "INVOICE", "invoiceCode": "INV-15-202608-WPEMCP"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:23.675+07', 66, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn quá hạn', 'Hóa đơn INV-15-202607-V0SRU1 đã quá hạn thanh toán.', 'INVOICE', '{"event": "INVOICE_UPDATED", "sourceId": 7, "debtAmount": "4656250", "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-V0SRU1"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:24.843+07', 70, 13, 15);
+INSERT INTO public.notifications VALUES ('Ticket mới', 'Người thuê vừa gửi sự cố: API-E2E-20260811151220-TXWCG canceled ticket.', 'TICKET', '{"event": "TICKET_CREATED", "sourceId": 11, "ticketId": 11, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:12:33.076+07', 303, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151220-TXWCG canceled ticket đã chuyển sang CANCELED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CANCELED", "sourceId": 11, "ticketId": 11, "sourceType": "TICKET"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:33.178+07', 304, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý bị từ chối', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: REJECTED.', 'CONTRACT', '{"event": "REJECTED", "status": "REJECTED", "sourceId": 5, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:34.769+07', 313, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý bị từ chối', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: REJECTED.', 'CONTRACT', '{"event": "REJECTED", "status": "REJECTED", "sourceId": 5, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:34.769+07', 314, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 6, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:34.906+07', 315, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 6, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:34.907+07', 316, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKOUT", "event": "SIGNED", "status": "DRAFT", "sourceId": 8, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:12:35.374+07', 321, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKOUT", "event": "SIGNED", "status": "DRAFT", "sourceId": 8, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:12:35.375+07', 322, 13, 15);
+INSERT INTO public.notifications VALUES ('Ticket mới', 'Người thuê vừa gửi sự cố: API-E2E-20260811145614-NE3TM support ticket.', 'TICKET', '{"event": "TICKET_CREATED", "sourceId": 3, "ticketId": 3, "sourceType": "TICKET"}', false, NULL, '2026-08-11 14:56:25.53+07', 73, 9, 15);
+INSERT INTO public.notifications VALUES ('Bình luận ticket mới', 'Ticket API-E2E-20260811145614-NE3TM support ticket vừa có bình luận mới.', 'TICKET', '{"event": "TICKET_COMMENT_ADDED", "status": "OPEN", "sourceId": 3, "ticketId": 3, "sourceType": "TICKET"}', false, NULL, '2026-08-11 14:56:25.681+07', 74, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811145614-NE3TM support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 3, "ticketId": 3, "sourceType": "TICKET"}', false, NULL, '2026-08-11 14:56:25.785+07', 75, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811145614-NE3TM support ticket đã chuyển sang WAITING_RENTER.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "WAITING_RENTER", "sourceId": 3, "ticketId": 3, "sourceType": "TICKET"}', false, NULL, '2026-08-11 14:56:26.038+07', 78, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811145614-NE3TM support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 3, "ticketId": 3, "sourceType": "TICKET"}', false, NULL, '2026-08-11 14:56:26.176+07', 80, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán đã được duyệt', 'Thanh toán cho hóa đơn INV-15-202608-WPEMCP đã được duyệt.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "status": "SUCCESS", "sourceId": 5, "invoiceId": 6, "sourceType": "PAYMENT"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:24.389+07', 68, 13, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811145614-NE3TM support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 3, "ticketId": 3, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:25.786+07', 76, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811145614-NE3TM support ticket đã chuyển sang WAITING_RENTER.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "WAITING_RENTER", "sourceId": 3, "ticketId": 3, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:26.037+07', 77, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811145614-NE3TM support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 3, "ticketId": 3, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:26.176+07', 79, 13, 15);
+INSERT INTO public.notifications VALUES ('Đánh giá đã được duyệt', 'Đánh giá của bạn đã chuyển sang trạng thái APPROVED.', 'REVIEW', '{"event": "REVIEW_UPDATED", "status": "APPROVED", "sourceId": 4, "sourceType": "REVIEW"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:33.552+07', 305, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý đã hủy', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: CANCELED.', 'CONTRACT', '{"event": "CANCELED", "status": "CANCELED", "sourceId": 4, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:34.494+07', 309, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý đã hủy', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: CANCELED.', 'CONTRACT', '{"event": "CANCELED", "status": "CANCELED", "sourceId": 4, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:34.495+07', 310, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 5, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:34.638+07', 311, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 5, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:34.639+07', 312, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKOUT", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 8, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:12:35.531+07', 323, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKOUT", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 8, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:12:35.532+07', 324, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202607-V0SRU1 đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4656250", "dueDate": "2026-08-09T00:00:00.000Z", "sourceId": 7, "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-V0SRU1"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:24.734+07', 69, 13, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán bị từ chối', 'Thanh toán cho hóa đơn INV-15-202607-8EEMIO đã bị từ chối.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "status": "FAILED", "sourceId": 14, "invoiceId": 19, "sourceType": "PAYMENT"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:12:31.178+07', 288, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 3, "sourceType": "CONTRACT_TERMINATION"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:10:49.394+07', 244, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKOUT", "event": "SIGNED", "status": "DRAFT", "sourceId": 6, "sourceType": "HANDOVER"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:10:50.264+07', 250, 13, 15);
+INSERT INTO public.notifications VALUES ('Hợp đồng đã thanh lý', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: COMPLETED.', 'CONTRACT', '{"event": "COMPLETED", "status": "COMPLETED", "sourceId": 3, "sourceType": "CONTRACT_TERMINATION"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:10:50.713+07', 254, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 4, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:34.336+07', 307, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 4, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:34.339+07', 308, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý đã được duyệt', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: APPROVED.', 'CONTRACT', '{"event": "APPROVED", "status": "APPROVED", "sourceId": 6, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:35.05+07', 317, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý đã được duyệt', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: APPROVED.', 'CONTRACT', '{"event": "APPROVED", "status": "APPROVED", "sourceId": 6, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:35.052+07', 318, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKOUT", "event": "CREATED", "status": "DRAFT", "sourceId": 8, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:12:35.221+07', 319, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKOUT", "event": "CREATED", "status": "DRAFT", "sourceId": 8, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:12:35.222+07', 320, 13, 15);
+INSERT INTO public.notifications VALUES ('Hợp đồng đã thanh lý', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: COMPLETED.', 'CONTRACT', '{"event": "COMPLETED", "status": "COMPLETED", "sourceId": 6, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:35.704+07', 325, 9, 15);
+INSERT INTO public.notifications VALUES ('Hợp đồng đã thanh lý', 'Hợp đồng API-E2E-20260811151220-TXWCG-CONTRACT: COMPLETED.', 'CONTRACT', '{"event": "COMPLETED", "status": "COMPLETED", "sourceId": 6, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:12:35.704+07', 326, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811151220-TXWCG-MAIN đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 17, "status": "PUBLISHED", "sourceId": 17, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:12:36.117+07', 329, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151357-VHCL6-MAIN - API-E2E-20260811151357-VHCL6 room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 19, "sourceId": 19, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:14:01.815+07', 330, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811150747-FQASH-MAIN - API-E2E-20260811150747-FQASH room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 11, "sourceId": 11, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:07:52.679+07', 81, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811150747-FQASH-MAIN - API-E2E-20260811150747-FQASH room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 11, "sourceId": 11, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:07:52.682+07', 82, 1, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811150747-FQASH-MAIN đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 11, "status": "PUBLISHED", "sourceId": 11, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:07:52.881+07', 83, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811150747-FQASH-REJECT - API-E2E-20260811150747-FQASH room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 12, "sourceId": 12, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:07:53.122+07', 84, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811150747-FQASH-REJECT - API-E2E-20260811150747-FQASH room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 12, "sourceId": 12, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:07:53.122+07', 85, 1, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811150747-FQASH-REJECT đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 12, "status": "PUBLISHED", "sourceId": 12, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:07:53.271+07', 86, 9, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811150747-FQASH-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 11, "sourceId": 5, "sourceType": "APPOINTMENT", "appointmentId": 5}', false, NULL, '2026-08-11 15:07:53.596+07', 87, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151357-VHCL6-MAIN - API-E2E-20260811151357-VHCL6 room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 19, "sourceId": 19, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:14:01.819+07', 331, 1, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811150747-FQASH-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 11, "sourceId": 6, "sourceType": "APPOINTMENT", "appointmentId": 6}', false, NULL, '2026-08-11 15:07:53.846+07', 89, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811151357-VHCL6-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 19, "sourceId": 21, "requestId": 21, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:14:03.375+07', 342, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811150747-FQASH-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 11, "sourceId": 8, "requestId": 8, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:07:54.158+07', 91, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811151357-VHCL6-MAIN đã chuyển sang APPROVED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 19, "status": "APPROVED", "sourceId": 21, "requestId": 21, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:14:03.561+07', 343, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811150747-FQASH-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 11, "sourceId": 9, "requestId": 9, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:07:54.369+07', 93, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811151357-VHCL6-MAIN đã chuyển sang HIDDEN.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 19, "status": "HIDDEN", "sourceId": 19, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:14:03.603+07', 344, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811150747-FQASH-MAIN đã chuyển sang HIDDEN.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 11, "status": "HIDDEN", "sourceId": 11, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:07:54.613+07', 95, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811150747-FQASH-REJECT vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 12, "sourceId": 10, "requestId": 10, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:07:54.705+07', 96, 9, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202607-YXRNFE đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4656250", "dueDate": "2026-08-09T00:00:00.000Z", "sourceId": 22, "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-YXRNFE"}', false, NULL, '2026-08-11 15:14:07.268+07', 360, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150747-FQASH-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 3, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:07:56.227+07', 98, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150747-FQASH-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 3, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:07:56.411+07', 100, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150747-FQASH-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 3, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:07:56.55+07', 102, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150747-FQASH-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 3, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:07:56.692+07', 104, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150747-FQASH-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 3, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:07:56.85+07', 106, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150747-FQASH-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 3, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:56.695+07', 105, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150747-FQASH-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 3, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:56.851+07', 107, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202608-0JLZXU đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4602500", "dueDate": "2026-08-21T00:00:00.000Z", "sourceId": 9, "sourceType": "INVOICE", "invoiceCode": "INV-15-202608-0JLZXU"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:57.283+07', 108, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn quá hạn', 'Hóa đơn INV-15-202607-RE2GLJ đã quá hạn thanh toán.', 'INVOICE', '{"event": "INVOICE_UPDATED", "sourceId": 10, "debtAmount": "4656250", "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-RE2GLJ"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:58.292+07', 112, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811151357-VHCL6-MAIN đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 19, "status": "PUBLISHED", "sourceId": 19, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:14:01.981+07', 332, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151357-VHCL6-REJECT - API-E2E-20260811151357-VHCL6 room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 20, "sourceId": 20, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:14:02.231+07', 333, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151357-VHCL6-REJECT - API-E2E-20260811151357-VHCL6 room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 20, "sourceId": 20, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:14:02.232+07', 334, 1, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811151357-VHCL6-MAIN đã chuyển sang CANCELED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 19, "status": "CANCELED", "sourceId": 20, "requestId": 20, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:14:03.278+07', 341, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151357-VHCL6-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 9, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:14:05.25+07', 349, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151357-VHCL6-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 9, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:14:05.251+07', 350, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151357-VHCL6-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 9, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:14:05.954+07', 355, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151357-VHCL6-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 9, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:14:05.955+07', 356, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202608-YQ8BPD đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4602500", "dueDate": "2026-08-21T00:00:00.000Z", "sourceId": 21, "sourceType": "INVOICE", "invoiceCode": "INV-15-202608-YQ8BPD"}', false, NULL, '2026-08-11 15:14:06.4+07', 357, 13, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202608-YQ8BPD.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "sourceId": 15, "invoiceId": 21, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:14:06.824+07', 358, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202608-0JLZXU.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "sourceId": 7, "invoiceId": 9, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:07:57.703+07', 109, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202607-RE2GLJ.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "sourceId": 8, "invoiceId": 10, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:07:58.385+07', 113, 9, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202607-RE2GLJ đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4656250", "dueDate": "2026-08-09T00:00:00.000Z", "sourceId": 10, "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-RE2GLJ"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:58.189+07', 111, 13, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán bị từ chối', 'Thanh toán cho hóa đơn INV-15-202607-RE2GLJ đã bị từ chối.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "status": "FAILED", "sourceId": 8, "invoiceId": 10, "sourceType": "PAYMENT"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:58.47+07', 114, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150747-FQASH canceled ticket đã chuyển sang CANCELED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CANCELED", "sourceId": 5, "ticketId": 5, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:08:00.431+07', 130, 13, 15);
+INSERT INTO public.notifications VALUES ('Đánh giá đã được duyệt', 'Đánh giá của bạn đã chuyển sang trạng thái APPROVED.', 'REVIEW', '{"event": "REVIEW_UPDATED", "status": "APPROVED", "sourceId": 1, "sourceType": "REVIEW"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:08:00.74+07', 131, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811151357-VHCL6-REJECT đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 20, "status": "PUBLISHED", "sourceId": 20, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:14:02.368+07', 335, 9, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811151357-VHCL6-MAIN đã chuyển sang CANCELED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 19, "status": "CANCELED", "sourceId": 13, "sourceType": "APPOINTMENT", "appointmentId": 13}', false, NULL, '2026-08-11 15:14:02.773+07', 337, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811151357-VHCL6-MAIN đã chuyển sang CONFIRMED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 19, "status": "CONFIRMED", "sourceId": 14, "sourceType": "APPOINTMENT", "appointmentId": 14}', false, NULL, '2026-08-11 15:14:03.073+07', 339, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151357-VHCL6-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 9, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:14:05.066+07', 347, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151357-VHCL6-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 9, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:14:05.068+07', 348, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151357-VHCL6-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 9, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:14:05.529+07', 353, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151357-VHCL6-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 9, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:14:05.53+07', 354, 13, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán đã được duyệt', 'Thanh toán cho hóa đơn INV-15-202608-YQ8BPD đã được duyệt.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "status": "SUCCESS", "sourceId": 15, "invoiceId": 21, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:14:07.01+07', 359, 13, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202607-YXRNFE.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "sourceId": 16, "invoiceId": 22, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:14:07.484+07', 362, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán đã được duyệt', 'Thanh toán cho hóa đơn INV-15-202608-0JLZXU đã được duyệt.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "status": "SUCCESS", "sourceId": 7, "invoiceId": 9, "sourceType": "PAYMENT"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:57.903+07', 110, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811151357-VHCL6-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 19, "sourceId": 13, "sourceType": "APPOINTMENT", "appointmentId": 13}', false, NULL, '2026-08-11 15:14:02.681+07', 336, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811151357-VHCL6-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 19, "sourceId": 20, "requestId": 20, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:14:03.186+07', 340, 9, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn quá hạn', 'Hóa đơn INV-15-202607-YXRNFE đã quá hạn thanh toán.', 'INVOICE', '{"event": "INVOICE_UPDATED", "sourceId": 22, "debtAmount": "4656250", "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-YXRNFE"}', false, NULL, '2026-08-11 15:14:07.387+07', 361, 13, 15);
+INSERT INTO public.notifications VALUES ('Ticket mới', 'Người thuê vừa gửi sự cố: API-E2E-20260811150747-FQASH support ticket.', 'TICKET', '{"event": "TICKET_CREATED", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:07:58.903+07', 115, 9, 15);
+INSERT INTO public.notifications VALUES ('Bình luận ticket mới', 'Ticket API-E2E-20260811150747-FQASH support ticket vừa có bình luận mới.', 'TICKET', '{"event": "TICKET_COMMENT_ADDED", "status": "OPEN", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:07:59.039+07', 116, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811150747-FQASH support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:07:59.167+07', 117, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811150747-FQASH support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:59.169+07', 118, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811151357-VHCL6-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 19, "sourceId": 14, "sourceType": "APPOINTMENT", "appointmentId": 14}', false, NULL, '2026-08-11 15:14:02.872+07', 338, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811151357-VHCL6-REJECT vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 20, "sourceId": 22, "requestId": 22, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:14:03.701+07', 345, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811151357-VHCL6-REJECT đã chuyển sang REJECTED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 20, "status": "REJECTED", "sourceId": 22, "requestId": 22, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:14:03.789+07', 346, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151357-VHCL6-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 9, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:14:05.391+07', 351, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151357-VHCL6-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 9, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:14:05.393+07', 352, 13, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán bị từ chối', 'Thanh toán cho hóa đơn INV-15-202607-YXRNFE đã bị từ chối.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "status": "FAILED", "sourceId": 16, "invoiceId": 22, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:14:07.579+07', 363, 13, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T101 - Phòng T101 vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 21, "sourceId": 21, "sourceType": "ROOM"}', false, NULL, '2026-08-13 14:18:16.925+07', 364, 2, 1);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150747-FQASH support ticket đã chuyển sang WAITING_RENTER.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "WAITING_RENTER", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:07:59.462+07', 120, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T101 - Phòng T101 vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 21, "sourceId": 21, "sourceType": "ROOM"}', false, NULL, '2026-08-13 14:18:16.945+07', 365, 1, 1);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150747-FQASH support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:07:59.681+07', 122, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T101, T102. T103 - Tầng 1 vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 22, "sourceId": 22, "sourceType": "ROOM"}', false, NULL, '2026-08-14 08:41:17.174+07', 368, 2, 18);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150747-FQASH support ticket đã chuyển sang IN_PROGRESS.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "IN_PROGRESS", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:07:59.811+07', 124, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T101, T102. T103 - Tầng 1 vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 22, "sourceId": 22, "sourceType": "ROOM"}', false, NULL, '2026-08-14 08:41:17.183+07', 369, 1, 18);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150747-FQASH support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:07:59.937+07', 126, 9, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-1-202608-3B3KUL đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "3258700", "dueDate": "2026-08-14T00:00:00.000Z", "sourceId": 24, "sourceType": "INVOICE", "invoiceCode": "INV-1-202608-3B3KUL"}', false, NULL, '2026-08-14 16:32:02.688+07', 371, 16, 1);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150747-FQASH support ticket đã chuyển sang CLOSED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CLOSED", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:08:00.063+07', 128, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket mới', 'Người thuê vừa gửi sự cố: API-E2E-20260811150747-FQASH canceled ticket.', 'TICKET', '{"event": "TICKET_CREATED", "sourceId": 5, "ticketId": 5, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:08:00.327+07', 129, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811150923-COC5D-MAIN - API-E2E-20260811150923-COC5D room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 13, "sourceId": 13, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:09:27.18+07', 132, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811150923-COC5D-MAIN - API-E2E-20260811150923-COC5D room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 13, "sourceId": 13, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:09:27.182+07', 133, 1, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811150923-COC5D-MAIN đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 13, "status": "PUBLISHED", "sourceId": 13, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:09:27.339+07', 134, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811150923-COC5D-REJECT - API-E2E-20260811150923-COC5D room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 14, "sourceId": 14, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:09:27.835+07', 135, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811150923-COC5D-REJECT - API-E2E-20260811150923-COC5D room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 14, "sourceId": 14, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:09:27.838+07', 136, 1, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811150923-COC5D-REJECT đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 14, "status": "PUBLISHED", "sourceId": 14, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:09:27.977+07', 137, 9, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811150923-COC5D-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 13, "sourceId": 7, "sourceType": "APPOINTMENT", "appointmentId": 7}', false, NULL, '2026-08-11 15:09:28.29+07', 138, 9, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811150923-COC5D-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 13, "sourceId": 8, "sourceType": "APPOINTMENT", "appointmentId": 8}', false, NULL, '2026-08-11 15:09:28.491+07', 140, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng T101 đã chuyển sang REJECTED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 21, "status": "REJECTED", "sourceId": 23, "requestId": 23, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-15 07:12:11.998+07', 373, 16, 1);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811150923-COC5D-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 13, "sourceId": 11, "requestId": 11, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:09:28.781+07', 142, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng P101 - Phòng Lớn Full NT - Cộng Hoà - Trường Chinh vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 25, "sourceId": 25, "sourceType": "ROOM"}', false, NULL, '2026-08-16 08:14:24.396+07', 380, 2, 18);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811150923-COC5D-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 13, "sourceId": 12, "requestId": 12, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:09:28.972+07', 144, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng P101 - Phòng Lớn Full NT - Cộng Hoà - Trường Chinh vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 25, "sourceId": 25, "sourceType": "ROOM"}', false, NULL, '2026-08-16 08:14:24.403+07', 381, 1, 18);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811150923-COC5D-MAIN đã chuyển sang HIDDEN.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 13, "status": "HIDDEN", "sourceId": 13, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:09:29.199+07', 146, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150923-COC5D-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 4, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:09:30.87+07', 151, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150923-COC5D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 4, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:09:31.132+07', 155, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150923-COC5D-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 4, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:09:31.264+07', 157, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202608-062SPS.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "sourceId": 9, "invoiceId": 12, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:09:32.154+07', 160, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811150923-COC5D-MAIN đã chuyển sang APPROVED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 13, "status": "APPROVED", "sourceId": 12, "requestId": 12, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:29.16+07', 145, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150923-COC5D-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 4, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:30.871+07', 152, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150923-COC5D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 4, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:31.133+07', 156, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150923-COC5D-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 4, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:31.264+07', 158, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202608-062SPS đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4602500", "dueDate": "2026-08-21T00:00:00.000Z", "sourceId": 12, "sourceType": "INVOICE", "invoiceCode": "INV-15-202608-062SPS"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:31.655+07', 159, 13, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T202 - Phòng trọ giá rẻ Quận 12 vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 24, "sourceId": 24, "sourceType": "ROOM"}', false, NULL, '2026-08-15 08:02:57.299+07', 374, 2, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T202 - Phòng trọ giá rẻ Quận 12 vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 24, "sourceId": 24, "sourceType": "ROOM"}', false, NULL, '2026-08-15 08:02:57.302+07', 375, 1, 1);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng T101 đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 21, "status": "PUBLISHED", "sourceId": 21, "sourceType": "ROOM"}', true, '2026-08-22 19:39:41.288+07', '2026-08-13 14:53:26.929+07', 366, 8, 1);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng MVP-A101 đã chuyển sang HIDDEN.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 1, "status": "HIDDEN", "sourceId": 1, "sourceType": "ROOM"}', true, '2026-08-22 19:39:41.288+07', '2026-08-16 15:11:21+07', 383, 8, 1);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng T101 đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 22, "status": "PUBLISHED", "sourceId": 22, "sourceType": "ROOM"}', true, '2026-08-22 19:53:33.155+07', '2026-08-14 09:30:29.15+07', 370, 18, 18);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811150923-COC5D-REJECT vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 14, "sourceId": 13, "requestId": 13, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:09:29.293+07', 147, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T102 - Phòng Studio full nội thất tầng 1 vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 23, "sourceId": 23, "sourceType": "ROOM"}', false, NULL, '2026-08-15 08:03:02.466+07', 376, 2, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T102 - Phòng Studio full nội thất tầng 1 vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 23, "sourceId": 23, "sourceType": "ROOM"}', false, NULL, '2026-08-15 08:03:02.469+07', 377, 1, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T105 - PHÒNG TRỌ MỚI XÂY GẦN ĐẠI HỌC VĂN HIẾN - ĐH HỒNG BÀNG AN NINH SẠCH SẼ vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 26, "sourceId": 26, "sourceType": "ROOM"}', false, NULL, '2026-08-16 17:20:16.412+07', 384, 2, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T105 - PHÒNG TRỌ MỚI XÂY GẦN ĐẠI HỌC VĂN HIẾN - ĐH HỒNG BÀNG AN NINH SẠCH SẼ vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 26, "sourceId": 26, "sourceType": "ROOM"}', false, NULL, '2026-08-16 17:20:16.419+07', 385, 1, 1);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-1-202608-WFEOHJ đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "3393700", "dueDate": "2026-08-17T00:00:00.000Z", "sourceId": 25, "sourceType": "INVOICE", "invoiceCode": "INV-1-202608-WFEOHJ"}', false, NULL, '2026-08-17 15:55:36.384+07', 388, 16, 1);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng T101 đã chuyển sang CANCELED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 22, "status": "CANCELED", "sourceId": 15, "sourceType": "APPOINTMENT", "appointmentId": 15}', false, NULL, '2026-08-18 07:45:44.436+07', 389, 16, 18);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T105 - CHO THUÊ PHÒNG CC LUXGARDEN vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 28, "sourceId": 28, "sourceType": "ROOM"}', false, NULL, '2026-08-19 20:25:06.958+07', 390, 2, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T105 - CHO THUÊ PHÒNG CC LUXGARDEN vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 28, "sourceId": 28, "sourceType": "ROOM"}', false, NULL, '2026-08-19 20:25:06.973+07', 391, 1, 1);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng T101 vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 21, "sourceId": 23, "requestId": 23, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-22 19:39:41.288+07', '2026-08-13 15:31:18.826+07', 367, 8, 1);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng T101 vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 22, "sourceId": 15, "sourceType": "APPOINTMENT", "appointmentId": 15}', true, '2026-08-22 19:53:33.155+07', '2026-08-14 19:10:53.687+07', 372, 18, 18);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng P101 đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 25, "status": "PUBLISHED", "sourceId": 25, "sourceType": "ROOM"}', true, '2026-08-22 19:53:33.155+07', '2026-08-16 15:11:07.025+07', 382, 18, 18);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng DN303 - Phòng Trọ Khép Kín 20m2 tại Louis City Hoàng mai vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 31, "sourceId": 31, "sourceType": "ROOM"}', false, NULL, '2026-08-23 04:45:44.419+07', 402, 2, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng DN303 - Phòng Trọ Khép Kín 20m2 tại Louis City Hoàng mai vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 31, "sourceId": 31, "sourceType": "ROOM"}', false, NULL, '2026-08-23 04:45:44.434+07', 403, 1, 1);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811150923-COC5D-REJECT đã chuyển sang REJECTED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 14, "status": "REJECTED", "sourceId": 13, "requestId": 13, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:29.378+07', 148, 13, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng P104 - CHO THUÊ PHÒNG TRỌ MỚI XÂY GIÁ RẺ - GẦN ĐẠI HỌC VĂN HIẾN & CÔNG THƯƠNG vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 27, "sourceId": 27, "sourceType": "ROOM"}', false, NULL, '2026-08-16 17:24:37.566+07', 386, 2, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng P104 - CHO THUÊ PHÒNG TRỌ MỚI XÂY GIÁ RẺ - GẦN ĐẠI HỌC VĂN HIẾN & CÔNG THƯƠNG vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 27, "sourceId": 27, "sourceType": "ROOM"}', false, NULL, '2026-08-16 17:24:37.57+07', 387, 1, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T305 - Phòng Trọ Có Gác Cửa Sổ Giá Rẻ Ngay Trung Tâm vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 29, "sourceId": 29, "sourceType": "ROOM"}', false, NULL, '2026-08-19 20:29:03.697+07', 392, 2, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng T305 - Phòng Trọ Có Gác Cửa Sổ Giá Rẻ Ngay Trung Tâm vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 29, "sourceId": 29, "sourceType": "ROOM"}', false, NULL, '2026-08-19 20:29:03.7+07', 393, 1, 1);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng T102 đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 23, "status": "PUBLISHED", "sourceId": 23, "sourceType": "ROOM"}', true, '2026-08-22 19:39:41.288+07', '2026-08-15 08:21:09.257+07', 378, 8, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng DN305 - Phòng trọ Nguyễn Chí Chính, Hoàng Mai, Full đồ vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 32, "sourceId": 32, "sourceType": "ROOM"}', false, NULL, '2026-08-23 04:53:05.749+07', 404, 2, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng DN305 - Phòng trọ Nguyễn Chí Chính, Hoàng Mai, Full đồ vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 32, "sourceId": 32, "sourceType": "ROOM"}', false, NULL, '2026-08-23 04:53:05.751+07', 405, 1, 1);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150923-COC5D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 4, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:09:30.683+07', 149, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150923-COC5D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 4, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:30.685+07', 150, 13, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng DN101 - Phòng trọ Kép Kín Triều Khúc - Thanh Xuân vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 30, "sourceId": 30, "sourceType": "ROOM"}', false, NULL, '2026-08-19 20:39:05.189+07', 394, 2, 1);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng DN101 - Phòng trọ Kép Kín Triều Khúc - Thanh Xuân vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 30, "sourceId": 30, "sourceType": "ROOM"}', false, NULL, '2026-08-19 20:39:05.192+07', 395, 1, 1);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng T202 đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 24, "status": "PUBLISHED", "sourceId": 24, "sourceType": "ROOM"}', true, '2026-08-22 19:39:41.288+07', '2026-08-15 08:21:11.693+07', 379, 8, 1);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng T305 vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 29, "sourceId": 17, "sourceType": "APPOINTMENT", "appointmentId": 17}', false, NULL, '2026-08-23 05:15:55.005+07', 406, 8, 1);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150923-COC5D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 4, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:09:31.005+07', 153, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng DN101 đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 30, "status": "PUBLISHED", "sourceId": 30, "sourceType": "ROOM"}', true, '2026-08-22 19:39:41.288+07', '2026-08-19 20:39:44.081+07', 396, 8, 1);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng TEST10K vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 33, "sourceId": 24, "requestId": 24, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-23 06:52:00.577+07', 407, 18, 18);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202607-X9E6WF.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "sourceId": 10, "invoiceId": 13, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:09:32.84+07', 164, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket mới', 'Người thuê vừa gửi sự cố: API-E2E-20260811150923-COC5D support ticket.', 'TICKET', '{"event": "TICKET_CREATED", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:09:33.33+07', 166, 9, 15);
+INSERT INTO public.notifications VALUES ('Bình luận ticket mới', 'Ticket API-E2E-20260811150923-COC5D support ticket vừa có bình luận mới.', 'TICKET', '{"event": "TICKET_COMMENT_ADDED", "status": "OPEN", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:09:33.468+07', 167, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811150923-COC5D support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:09:33.562+07', 168, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150923-COC5D support ticket đã chuyển sang WAITING_RENTER.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "WAITING_RENTER", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:09:33.786+07', 171, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150923-COC5D support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:09:33.917+07', 173, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150923-COC5D support ticket đã chuyển sang IN_PROGRESS.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "IN_PROGRESS", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:09:34.067+07', 175, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150923-COC5D support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:09:34.216+07', 177, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150923-COC5D support ticket đã chuyển sang CLOSED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CLOSED", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:09:34.348+07', 179, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket mới', 'Người thuê vừa gửi sự cố: API-E2E-20260811150923-COC5D canceled ticket.', 'TICKET', '{"event": "TICKET_CREATED", "sourceId": 7, "ticketId": 7, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:09:34.676+07', 180, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151034-7GWTM-MAIN - API-E2E-20260811151034-7GWTM room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 15, "sourceId": 15, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:10:39.263+07', 183, 2, 15);
+INSERT INTO public.notifications VALUES ('Đánh giá đã được duyệt', 'Đánh giá của bạn đã chuyển sang trạng thái APPROVED.', 'REVIEW', '{"event": "REVIEW_UPDATED", "status": "APPROVED", "sourceId": 2, "sourceType": "REVIEW"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:35.047+07', 182, 13, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151034-7GWTM-MAIN - API-E2E-20260811151034-7GWTM room updated vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 15, "sourceId": 15, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:10:39.265+07', 184, 1, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811151034-7GWTM-MAIN đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 15, "status": "PUBLISHED", "sourceId": 15, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:10:39.416+07', 185, 9, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151034-7GWTM-REJECT - API-E2E-20260811151034-7GWTM room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 16, "sourceId": 16, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:10:39.645+07', 186, 2, 15);
+INSERT INTO public.notifications VALUES ('Tin đăng chờ kiểm duyệt', 'Phòng API-E2E-20260811151034-7GWTM-REJECT - API-E2E-20260811151034-7GWTM room REJECT vừa được gửi duyệt.', 'MARKETPLACE', '{"event": "MARKETPLACE_SUBMITTED", "roomId": 16, "sourceId": 16, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:10:39.648+07', 187, 1, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811151034-7GWTM-REJECT đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 16, "status": "PUBLISHED", "sourceId": 16, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:10:39.778+07', 188, 9, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811151034-7GWTM-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 15, "sourceId": 9, "sourceType": "APPOINTMENT", "appointmentId": 9}', false, NULL, '2026-08-11 15:10:40.064+07', 189, 9, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng API-E2E-20260811151034-7GWTM-MAIN vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 15, "sourceId": 10, "sourceType": "APPOINTMENT", "appointmentId": 10}', false, NULL, '2026-08-11 15:10:40.244+07', 191, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811151034-7GWTM-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 15, "sourceId": 14, "requestId": 14, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:10:40.547+07', 193, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811151034-7GWTM-MAIN vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 15, "sourceId": 15, "requestId": 15, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:10:40.747+07', 195, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng T305 đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 29, "status": "PUBLISHED", "sourceId": 29, "sourceType": "ROOM"}', true, '2026-08-22 19:39:41.288+07', '2026-08-19 20:39:46.48+07', 397, 8, 1);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng API-E2E-20260811151034-7GWTM-MAIN đã chuyển sang HIDDEN.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 15, "status": "HIDDEN", "sourceId": 15, "sourceType": "ROOM"}', false, NULL, '2026-08-11 15:10:40.985+07', 197, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê mới', 'Phòng API-E2E-20260811151034-7GWTM-REJECT vừa nhận một yêu cầu thuê.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_CREATED", "roomId": 16, "sourceId": 16, "requestId": 16, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-11 15:10:41.07+07', 198, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng T105 đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 28, "status": "PUBLISHED", "sourceId": 28, "sourceType": "ROOM"}', true, '2026-08-22 19:39:41.288+07', '2026-08-19 20:39:48.143+07', 398, 8, 1);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 5, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:10:42.601+07', 200, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng T105 đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 26, "status": "PUBLISHED", "sourceId": 26, "sourceType": "ROOM"}', true, '2026-08-22 19:39:41.288+07', '2026-08-19 20:39:51.935+07', 400, 8, 1);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 5, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:10:42.793+07', 202, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng TEST10K đã chuyển sang APPROVED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 33, "status": "APPROVED", "sourceId": 24, "requestId": 24, "sourceType": "RENTAL_REQUEST"}', false, NULL, '2026-08-23 07:43:42.191+07', 408, 16, 18);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 5, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:10:43.211+07', 204, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng TEST10K đã chuyển sang HIDDEN.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 33, "status": "HIDDEN", "sourceId": 33, "sourceType": "ROOM"}', false, NULL, '2026-08-23 07:43:42.321+07', 409, 18, 18);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 5, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:10:43.362+07', 206, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 5, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:10:43.781+07', 208, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202607-KEX172.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "sourceId": 12, "invoiceId": 16, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:10:45.294+07', 215, 9, 15);
+INSERT INTO public.notifications VALUES ('Báo cáo đã được xử lý', 'Báo cáo của bạn đã được quản trị viên xử lý.', 'REPORT', '{"event": "REPORT_UPDATED", "status": "RESOLVED", "sourceId": 1, "sourceType": "REPORT"}', true, '2026-08-11 15:10:48.511+07', '2026-08-11 15:10:48.303+07', 234, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811145335-OBR4D-MAIN đã chuyển sang CANCELED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 7, "status": "CANCELED", "sourceId": 1, "sourceType": "APPOINTMENT", "appointmentId": 1}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:41.607+07', 8, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811145335-OBR4D-MAIN đã chuyển sang CONFIRMED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 7, "status": "CONFIRMED", "sourceId": 2, "sourceType": "APPOINTMENT", "appointmentId": 2}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:41.972+07', 10, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811145335-OBR4D-MAIN đã chuyển sang CANCELED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 7, "status": "CANCELED", "sourceId": 2, "requestId": 2, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:42.254+07', 12, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811145335-OBR4D-MAIN đã chuyển sang APPROVED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 7, "status": "APPROVED", "sourceId": 3, "requestId": 3, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:42.622+07', 14, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811145335-OBR4D-REJECT đã chuyển sang REJECTED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 8, "status": "REJECTED", "sourceId": 4, "requestId": 4, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:42.874+07', 17, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145335-OBR4D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 1, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:45.265+07', 19, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145335-OBR4D-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 1, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:45.5+07', 21, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145335-OBR4D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 1, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:45.663+07', 23, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202607-D5J58D đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4656250", "dueDate": "2026-08-09T00:00:00.000Z", "sourceId": 4, "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-D5J58D"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:53:47.685+07', 31, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811145614-NE3TM-MAIN đã chuyển sang CANCELED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 9, "status": "CANCELED", "sourceId": 3, "sourceType": "APPOINTMENT", "appointmentId": 3}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:19.734+07', 46, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811145614-NE3TM-MAIN đã chuyển sang CONFIRMED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 9, "status": "CONFIRMED", "sourceId": 4, "sourceType": "APPOINTMENT", "appointmentId": 4}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:20.053+07', 48, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811145614-NE3TM-MAIN đã chuyển sang CANCELED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 9, "status": "CANCELED", "sourceId": 5, "requestId": 5, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:20.308+07', 50, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811145614-NE3TM-MAIN đã chuyển sang APPROVED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 9, "status": "APPROVED", "sourceId": 6, "requestId": 6, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:20.651+07', 52, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811145614-NE3TM-REJECT đã chuyển sang REJECTED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 10, "status": "REJECTED", "sourceId": 7, "requestId": 7, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:20.901+07', 55, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145614-NE3TM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 2, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:22.504+07', 57, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145614-NE3TM-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 2, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:22.726+07', 59, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811145614-NE3TM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 2, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:22.879+07', 61, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKIN", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 5, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:43.781+07', 209, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái tin đăng đã thay đổi', 'Tin phòng P104 đã chuyển sang PUBLISHED.', 'MARKETPLACE', '{"event": "MARKETPLACE_STATUS_CHANGED", "roomId": 27, "status": "PUBLISHED", "sourceId": 27, "sourceType": "ROOM"}', true, '2026-08-22 19:39:41.288+07', '2026-08-19 20:39:49.765+07', 399, 8, 1);
+INSERT INTO public.notifications VALUES ('Thanh toán chờ duyệt', 'Test User (nguoithue1) đã gửi xác nhận thanh toán cho hóa đơn INV-15-202608-2F8QP3.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "sourceId": 11, "invoiceId": 15, "sourceType": "PAYMENT"}', false, NULL, '2026-08-11 15:10:44.639+07', 211, 9, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202607-KEX172 đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4656250", "dueDate": "2026-08-09T00:00:00.000Z", "sourceId": 16, "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-KEX172"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:45.097+07', 213, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151034-7GWTM canceled ticket đã chuyển sang CANCELED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CANCELED", "sourceId": 9, "ticketId": 9, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:47.446+07', 232, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng mới', 'Phòng P104 vừa nhận một lịch hẹn xem phòng.', 'APPOINTMENT', '{"event": "APPOINTMENT_CREATED", "roomId": 27, "sourceId": 16, "sourceType": "APPOINTMENT", "appointmentId": 16}', true, '2026-08-22 19:39:41.288+07', '2026-08-19 22:10:38.287+07', 401, 8, 1);
+INSERT INTO public.notifications VALUES ('Ticket mới', 'Người thuê vừa gửi sự cố: API-E2E-20260811151034-7GWTM support ticket.', 'TICKET', '{"event": "TICKET_CREATED", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:10:45.885+07', 217, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:10:46.548+07', 224, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã chuyển sang IN_PROGRESS.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "IN_PROGRESS", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:10:46.683+07', 226, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:10:46.825+07', 228, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã chuyển sang CLOSED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CLOSED", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:10:46.978+07', 230, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán đã được duyệt', 'Thanh toán cho hóa đơn INV-15-202608-2F8QP3 đã được duyệt.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "status": "SUCCESS", "sourceId": 11, "invoiceId": 15, "sourceType": "PAYMENT"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:44.826+07', 212, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn quá hạn', 'Hóa đơn INV-15-202607-KEX172 đã quá hạn thanh toán.', 'INVOICE', '{"event": "INVOICE_UPDATED", "sourceId": 16, "debtAmount": "4656250", "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-KEX172"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:45.203+07', 214, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:46.547+07', 223, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã chuyển sang IN_PROGRESS.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "IN_PROGRESS", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:46.682+07', 225, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:46.824+07', 227, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã chuyển sang CLOSED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CLOSED", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:46.978+07', 229, 13, 15);
+INSERT INTO public.notifications VALUES ('Đánh giá đã được duyệt', 'Đánh giá của bạn đã chuyển sang trạng thái APPROVED.', 'REVIEW', '{"event": "REVIEW_UPDATED", "status": "APPROVED", "sourceId": 3, "sourceType": "REVIEW"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:47.83+07', 233, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý đã hủy', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: CANCELED.', 'CONTRACT', '{"event": "CANCELED", "status": "CANCELED", "sourceId": 1, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:10:48.882+07', 237, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 2, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:10:49.027+07', 239, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý bị từ chối', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: REJECTED.', 'CONTRACT', '{"event": "REJECTED", "status": "REJECTED", "sourceId": 2, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:10:49.251+07', 241, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 3, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:10:49.394+07', 243, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKOUT", "event": "SIGNED", "status": "DRAFT", "sourceId": 6, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:10:50.263+07', 249, 9, 15);
+INSERT INTO public.notifications VALUES ('Hợp đồng đã thanh lý', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: COMPLETED.', 'CONTRACT', '{"event": "COMPLETED", "status": "COMPLETED", "sourceId": 3, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:10:50.711+07', 253, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý đã hủy', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: CANCELED.', 'CONTRACT', '{"event": "CANCELED", "status": "CANCELED", "sourceId": 1, "sourceType": "CONTRACT_TERMINATION"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:10:48.883+07', 238, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 2, "sourceType": "CONTRACT_TERMINATION"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:10:49.028+07', 240, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý bị từ chối', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: REJECTED.', 'CONTRACT', '{"event": "REJECTED", "status": "REJECTED", "sourceId": 2, "sourceType": "CONTRACT_TERMINATION"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:10:49.252+07', 242, 13, 15);
+INSERT INTO public.notifications VALUES ('Bình luận ticket mới', 'Ticket API-E2E-20260811151034-7GWTM support ticket vừa có bình luận mới.', 'TICKET', '{"event": "TICKET_COMMENT_ADDED", "status": "OPEN", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:10:46.043+07', 218, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:10:46.154+07', 219, 9, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã chuyển sang WAITING_RENTER.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "WAITING_RENTER", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:10:46.395+07', 222, 9, 15);
+INSERT INTO public.notifications VALUES ('Ticket mới', 'Người thuê vừa gửi sự cố: API-E2E-20260811151034-7GWTM canceled ticket.', 'TICKET', '{"event": "TICKET_CREATED", "sourceId": 9, "ticketId": 9, "sourceType": "TICKET"}', false, NULL, '2026-08-11 15:10:47.315+07', 231, 9, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán bị từ chối', 'Thanh toán cho hóa đơn INV-15-202607-KEX172 đã bị từ chối.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "status": "FAILED", "sourceId": 12, "invoiceId": 16, "sourceType": "PAYMENT"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:45.383+07', 216, 13, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:46.155+07', 220, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811151034-7GWTM support ticket đã chuyển sang WAITING_RENTER.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "WAITING_RENTER", "sourceId": 8, "ticketId": 8, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:46.394+07', 221, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKOUT", "event": "CREATED", "status": "DRAFT", "sourceId": 6, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:10:49.83+07', 247, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKOUT", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 6, "sourceType": "HANDOVER"}', false, NULL, '2026-08-11 15:10:50.409+07', 251, 9, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKOUT", "event": "CREATED", "status": "DRAFT", "sourceId": 6, "sourceType": "HANDOVER"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:10:49.831+07', 248, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao trả phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: CONFIRMED.', 'CONTRACT', '{"type": "CHECKOUT", "event": "CONFIRMED", "status": "CONFIRMED", "sourceId": 6, "sourceType": "HANDOVER"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:10:50.41+07', 252, 13, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán bị từ chối', 'Thanh toán cho hóa đơn INV-15-202607-V0SRU1 đã bị từ chối.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "status": "FAILED", "sourceId": 6, "invoiceId": 7, "sourceType": "PAYMENT"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 14:56:25.052+07', 72, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811150747-FQASH-MAIN đã chuyển sang CANCELED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 11, "status": "CANCELED", "sourceId": 5, "sourceType": "APPOINTMENT", "appointmentId": 5}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:53.716+07', 88, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811150747-FQASH-MAIN đã chuyển sang CONFIRMED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 11, "status": "CONFIRMED", "sourceId": 6, "sourceType": "APPOINTMENT", "appointmentId": 6}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:54.046+07', 90, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811150747-FQASH-MAIN đã chuyển sang CANCELED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 11, "status": "CANCELED", "sourceId": 8, "requestId": 8, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:54.26+07', 92, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811150747-FQASH-MAIN đã chuyển sang APPROVED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 11, "status": "APPROVED", "sourceId": 9, "requestId": 9, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:54.572+07', 94, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811150747-FQASH-REJECT đã chuyển sang REJECTED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 12, "status": "REJECTED", "sourceId": 10, "requestId": 10, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:54.793+07', 97, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150747-FQASH-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 3, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:56.227+07', 99, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150747-FQASH-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 3, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:56.412+07', 101, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150747-FQASH-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 3, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:56.551+07', 103, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150747-FQASH support ticket đã chuyển sang WAITING_RENTER.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "WAITING_RENTER", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:59.46+07', 119, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150747-FQASH support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:59.68+07', 121, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150747-FQASH support ticket đã chuyển sang IN_PROGRESS.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "IN_PROGRESS", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:59.809+07', 123, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150747-FQASH support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:07:59.937+07', 125, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150747-FQASH support ticket đã chuyển sang CLOSED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CLOSED", "sourceId": 4, "ticketId": 4, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:08:00.063+07', 127, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811150923-COC5D-MAIN đã chuyển sang CANCELED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 13, "status": "CANCELED", "sourceId": 7, "sourceType": "APPOINTMENT", "appointmentId": 7}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:28.388+07', 139, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811150923-COC5D-MAIN đã chuyển sang CONFIRMED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 13, "status": "CONFIRMED", "sourceId": 8, "sourceType": "APPOINTMENT", "appointmentId": 8}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:28.669+07', 141, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811150923-COC5D-MAIN đã chuyển sang CANCELED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 13, "status": "CANCELED", "sourceId": 11, "requestId": 11, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:28.875+07', 143, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811150923-COC5D-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 4, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:31.006+07', 154, 13, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán đã được duyệt', 'Thanh toán cho hóa đơn INV-15-202608-062SPS đã được duyệt.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "4602500", "status": "SUCCESS", "sourceId": 9, "invoiceId": 12, "sourceType": "PAYMENT"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:32.347+07', 161, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202607-X9E6WF đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4656250", "dueDate": "2026-08-09T00:00:00.000Z", "sourceId": 13, "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-X9E6WF"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:32.63+07', 162, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn quá hạn', 'Hóa đơn INV-15-202607-X9E6WF đã quá hạn thanh toán.', 'INVOICE', '{"event": "INVOICE_UPDATED", "sourceId": 13, "debtAmount": "4656250", "sourceType": "INVOICE", "invoiceCode": "INV-15-202607-X9E6WF"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:32.73+07', 163, 13, 15);
+INSERT INTO public.notifications VALUES ('Thanh toán bị từ chối', 'Thanh toán cho hóa đơn INV-15-202607-X9E6WF đã bị từ chối.', 'PAYMENT', '{"event": "PAYMENT_UPDATED", "amount": "1000", "status": "FAILED", "sourceId": 10, "invoiceId": 13, "sourceType": "PAYMENT"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:32.943+07', 165, 13, 15);
+INSERT INTO public.notifications VALUES ('Ticket đã được phân công', 'Ticket API-E2E-20260811150923-COC5D support ticket đã được phân công xử lý.', 'TICKET', '{"event": "TICKET_ASSIGNED", "status": "IN_PROGRESS", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:33.563+07', 169, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150923-COC5D support ticket đã chuyển sang WAITING_RENTER.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "WAITING_RENTER", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:33.785+07', 170, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150923-COC5D support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:33.915+07', 172, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150923-COC5D support ticket đã chuyển sang IN_PROGRESS.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "IN_PROGRESS", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:34.065+07', 174, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150923-COC5D support ticket đã chuyển sang RESOLVED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "RESOLVED", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:34.215+07', 176, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150923-COC5D support ticket đã chuyển sang CLOSED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CLOSED", "sourceId": 6, "ticketId": 6, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:34.347+07', 178, 13, 15);
+INSERT INTO public.notifications VALUES ('Trạng thái ticket đã thay đổi', 'Ticket API-E2E-20260811150923-COC5D canceled ticket đã chuyển sang CANCELED.', 'TICKET', '{"event": "TICKET_STATUS_CHANGED", "status": "CANCELED", "sourceId": 7, "ticketId": 7, "sourceType": "TICKET"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:09:34.764+07', 181, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811151034-7GWTM-MAIN đã chuyển sang CANCELED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 15, "status": "CANCELED", "sourceId": 9, "sourceType": "APPOINTMENT", "appointmentId": 9}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:40.152+07', 190, 13, 15);
+INSERT INTO public.notifications VALUES ('Lịch xem phòng đã được cập nhật', 'Lịch xem phòng API-E2E-20260811151034-7GWTM-MAIN đã chuyển sang CONFIRMED.', 'APPOINTMENT', '{"event": "APPOINTMENT_STATUS_CHANGED", "roomId": 15, "status": "CONFIRMED", "sourceId": 10, "sourceType": "APPOINTMENT", "appointmentId": 10}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:40.44+07', 192, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811151034-7GWTM-MAIN đã chuyển sang CANCELED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 15, "status": "CANCELED", "sourceId": 14, "requestId": 14, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:40.637+07', 194, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811151034-7GWTM-MAIN đã chuyển sang APPROVED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 15, "status": "APPROVED", "sourceId": 15, "requestId": 15, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:40.945+07', 196, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thuê đã được cập nhật', 'Yêu cầu thuê phòng API-E2E-20260811151034-7GWTM-REJECT đã chuyển sang REJECTED.', 'RENTAL_REQUEST', '{"event": "RENTAL_REQUEST_STATUS_CHANGED", "roomId": 16, "status": "REJECTED", "sourceId": 16, "requestId": 16, "sourceType": "RENTAL_REQUEST"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:41.16+07', 199, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "CREATED", "status": "DRAFT", "sourceId": 5, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:42.602+07', 201, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DISPUTED.', 'CONTRACT', '{"type": "CHECKIN", "event": "DISPUTED", "status": "DISPUTED", "sourceId": 5, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:42.793+07', 203, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "RESOLVED", "status": "DRAFT", "sourceId": 5, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:43.212+07', 205, 13, 15);
+INSERT INTO public.notifications VALUES ('Cập nhật bàn giao nhận phòng', 'Biên bản của hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: DRAFT.', 'CONTRACT', '{"type": "CHECKIN", "event": "SIGNED", "status": "DRAFT", "sourceId": 5, "sourceType": "HANDOVER"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:43.363+07', 207, 13, 15);
+INSERT INTO public.notifications VALUES ('Hóa đơn mới', 'Hóa đơn INV-15-202608-2F8QP3 đã được phát hành.', 'INVOICE', '{"event": "INVOICE_UPDATED", "amount": "4602500", "dueDate": "2026-08-21T00:00:00.000Z", "sourceId": 15, "sourceType": "INVOICE", "invoiceCode": "INV-15-202608-2F8QP3"}', true, '2026-08-11 15:10:48.564+07', '2026-08-11 15:10:44.231+07', 210, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 1, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:10:48.71+07', 235, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý đã được duyệt', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: APPROVED.', 'CONTRACT', '{"event": "APPROVED", "status": "APPROVED", "sourceId": 3, "sourceType": "CONTRACT_TERMINATION"}', false, NULL, '2026-08-11 15:10:49.55+07', 245, 9, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý mới', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: PENDING.', 'CONTRACT', '{"event": "CREATED", "status": "PENDING", "sourceId": 1, "sourceType": "CONTRACT_TERMINATION"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:10:48.711+07', 236, 13, 15);
+INSERT INTO public.notifications VALUES ('Yêu cầu thanh lý đã được duyệt', 'Hợp đồng API-E2E-20260811151034-7GWTM-CONTRACT: APPROVED.', 'CONTRACT', '{"event": "APPROVED", "status": "APPROVED", "sourceId": 3, "sourceType": "CONTRACT_TERMINATION"}', true, '2026-08-11 15:12:34.213+07', '2026-08-11 15:10:49.552+07', 246, 13, 15);
+
+
+--
+-- Data for Name: payment_qr_codes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.payment_qr_codes VALUES ('PayOS', '00020101021238570010A000000727012700069704220113VQRQALHWX76220208QRIBFTTA5303704540733937005802VN62090805INV256304547A', NULL, 3393700.00, '2026-08-18 07:49:13.002+07', 'ACTIVE', '2026-08-18 07:34:13.004+07', 1, 1, 25, 1000000004, '5d04ad99227f46c383b3525a40241644', 'https://pay.payos.vn/web/5d04ad99227f46c383b3525a40241644', 'PENDING', '2026-08-18 07:34:13.68+07');
+INSERT INTO public.payment_qr_codes VALUES ('PayOS', '00020101021238570010A000000727012700069704220113VQRQALHYN16340208QRIBFTTA5303704540733937005802VN62090805INV2563044A6F', NULL, 3393700.00, '2026-08-18 09:34:54.338+07', 'ACTIVE', '2026-08-18 09:19:54.339+07', 2, 1, 25, 1000000005, 'f8d246cd87b74a76bb09301fe9695b60', 'https://pay.payos.vn/web/f8d246cd87b74a76bb09301fe9695b60', 'PENDING', '2026-08-18 09:19:55.212+07');
+INSERT INTO public.payment_qr_codes VALUES ('PayOS', '00020101021238570010A000000727012700069704220113VQRQALIWQ15860208QRIBFTTA5303704540733937005802VN62090805INV256304121E', NULL, 3393700.00, '2026-08-19 23:18:14.976+07', 'ACTIVE', '2026-08-19 23:03:14.978+07', 3, 1, 25, 1000000006, 'f2be67ee1ba44bd98a91cd88fdcd5d79', 'https://pay.payos.vn/web/f2be67ee1ba44bd98a91cd88fdcd5d79', 'PENDING', '2026-08-19 23:03:15.855+07');
+
+
+--
+-- Data for Name: plans; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.plans VALUES ('APIE2E20260811141600TQZPE', 'API-E2E-20260811141600-TQZPE plan', 'API-E2E-20260811141600-TQZPE updated', 99000.00, 990000.00, 30, 5, true, false, false, '2026-08-11 14:16:02.23+07', 3, 1, NULL, 1, 0);
+INSERT INTO public.plans VALUES ('APIE2E20260811143202ABZ2V', 'API-E2E-20260811143202-ABZ2V plan', 'API-E2E-20260811143202-ABZ2V updated', 99000.00, 990000.00, 30, 5, true, false, false, '2026-08-11 14:32:03.213+07', 4, 1, NULL, 1, 0);
+INSERT INTO public.plans VALUES ('APIE2E20260811143755P7DV0', 'API-E2E-20260811143755-P7DV0 plan', 'API-E2E-20260811143755-P7DV0 updated', 99000.00, 990000.00, 30, 5, true, false, false, '2026-08-11 14:37:56.232+07', 5, 1, NULL, 1, 0);
+INSERT INTO public.plans VALUES ('APIE2E2026081115135697230', 'Plus', 'API-E2E-20260811151356-97230 updated', 99000.00, 1188000.00, 30, 5, true, false, true, '2026-08-11 15:13:56.806+07', 6, 1, NULL, 1, 6);
+INSERT INTO public.plans VALUES ('MVP_PRO', 'Pro', 'Deterministic FE integration plan', 199000.00, 2388000.00, 100, 10, true, false, true, '2026-07-30 23:21:12.81+07', 1, 2, NULL, 1, 10);
+INSERT INTO public.plans VALUES ('FREE', 'Free', NULL, 0.00, 0.00, 10, 5, true, false, true, '2026-08-16 15:12:28.053+07', 7, 1, NULL, 1, 1);
+
+
+--
+-- Data for Name: subscriptions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.subscriptions VALUES ('ACTIVE', '2026-08-11 14:09:05.731+07', '2027-08-11 14:09:05.731+07', 'YEARLY', false, '2026-08-11 14:09:06.292+07', '2026-08-11 14:09:06.292+07', 2, 15, 1);
+INSERT INTO public.subscriptions VALUES ('CANCELED', '2026-08-11 14:37:56.633+07', '2026-09-11 14:37:56.633+07', 'MONTHLY', false, '2026-08-11 14:37:56.65+07', '2026-08-11 14:37:56.928+07', 3, 16, 5);
+INSERT INTO public.subscriptions VALUES ('ACTIVE', '2026-08-11 14:37:56.922+07', '2026-09-11 14:37:56.922+07', 'MONTHLY', false, '2026-08-11 14:37:56.929+07', '2026-08-11 14:37:56.929+07', 4, 16, 5);
+INSERT INTO public.subscriptions VALUES ('CANCELED', '2026-08-11 15:13:57.149+07', '2026-09-11 15:13:57.149+07', 'MONTHLY', false, '2026-08-11 15:13:57.162+07', '2026-08-11 15:13:57.385+07', 5, 17, 6);
+INSERT INTO public.subscriptions VALUES ('ACTIVE', '2026-08-11 15:13:57.38+07', '2026-09-11 15:13:57.38+07', 'MONTHLY', false, '2026-08-11 15:13:57.387+07', '2026-08-11 15:13:57.387+07', 6, 17, 6);
+INSERT INTO public.subscriptions VALUES ('ACTIVE', '2026-08-14 08:35:52.561+07', '2026-09-14 08:35:52.561+07', 'MONTHLY', true, '2026-08-14 08:35:52.583+07', '2026-08-14 08:35:52.583+07', 7, 18, 1);
+INSERT INTO public.subscriptions VALUES ('CANCELED', '2026-08-17 07:07:02.933+07', '2026-09-17 07:07:02.933+07', 'MONTHLY', false, '2026-08-17 07:07:02.979+07', '2026-08-17 07:28:19.178+07', 8, 1, 6);
+INSERT INTO public.subscriptions VALUES ('CANCELED', '2026-01-01 00:00:00+07', '2027-01-01 00:00:00+07', 'YEARLY', false, '2026-07-30 23:21:12.868+07', '2026-08-17 07:56:16.441+07', 1, 1, 1);
+INSERT INTO public.subscriptions VALUES ('ACTIVE', '2026-08-17 07:56:12+07', '2026-09-17 07:56:12+07', 'MONTHLY', false, '2026-08-17 07:28:19.198+07', '2026-08-17 07:56:16.444+07', 10, 1, 6);
+
+
+--
+-- Data for Name: subscription_payments; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.subscription_payments VALUES (99000.00, 'QR', NULL, 'EXPIRED', NULL, '2026-08-17 07:07:02.992+07', 1, 8, 1, 'PLAN_CHANGE', 'PayOS', 1000000000, 'bf19bc8185544b31be40ab7e4ac17e55', 'https://pay.payos.vn/web/bf19bc8185544b31be40ab7e4ac17e55', '00020101021238570010A000000727012700069704220113VQRQALHFQ77280208QRIBFTTA53037045405990005802VN62080804SUB16304A2FE', 'EXPIRED', '2026-08-17 07:22:02.933+07', '2026-08-17 07:28:19.177+07', 8, NULL);
+INSERT INTO public.subscription_payments VALUES (99000.00, 'QR', 'FT26229521468920', 'PAID', '2026-08-17 07:56:12+07', '2026-08-17 07:28:19.205+07', 2, 10, 1, 'PLAN_CHANGE', 'PayOS', 1000000001, '0121b8097f234762899985ba1e616044', 'https://pay.payos.vn/web/0121b8097f234762899985ba1e616044', '00020101021238570010A000000727012700069704220113VQRQALHFW46940208QRIBFTTA53037045405990005802VN62080804SUB26304CC72', 'PAID', '2026-08-17 07:43:19.146+07', '2026-08-17 07:56:16.435+07', 8, NULL);
+INSERT INTO public.subscription_payments VALUES (99000.00, 'QR', NULL, 'EXPIRED', NULL, '2026-08-17 08:08:16.752+07', 4, 10, 1, 'RENEWAL', 'PayOS', 1000000003, '5d1509a7fa7c46008e9d5598ae749c56', 'https://pay.payos.vn/web/5d1509a7fa7c46008e9d5598ae749c56', '00020101021238570010A000000727012700069704220113VQRQALHGK50360208QRIBFTTA53037045405990005802VN62080804SUB463048676', 'EXPIRED', '2026-08-17 08:23:16.722+07', '2026-08-17 08:49:53.518+07', 8, NULL);
+INSERT INTO public.subscription_payments VALUES (199000.00, 'QR', NULL, 'PENDING', NULL, '2026-08-23 08:08:17.52+07', 5, 7, 18, 'RENEWAL', 'PayOS', 1000000007, '530dcbc2c8ac4dbdb42390a807a4bf1b', 'https://pay.payos.vn/web/530dcbc2c8ac4dbdb42390a807a4bf1b', '00020101021238570010A000000727012700069704220113VQRQALLBU89120208QRIBFTTA530370454061990005802VN62080804SUB5630472D7', 'PENDING', '2026-08-23 08:23:17.502+07', '2026-08-23 08:08:18.599+07', 18, 18);
+
+
+--
+-- Data for Name: payment_webhook_logs; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.payment_webhook_logs VALUES ('PayOS', 'TF230204212323', '{"code": "00", "data": {"code": "00", "desc": "Thành công", "amount": 3000, "currency": "VND", "orderCode": 123, "reference": "TF230204212323", "paymentLinkId": "124c33293c43417ab7879e14c8d9eb18", "transactionDateTime": "2023-02-04 18:25:00"}, "desc": "success", "success": false}', false, 'IGNORED', NULL, '2026-08-17 07:55:29.051+07', 1, NULL, NULL, 123, '124c33293c43417ab7879e14c8d9eb18', 'TF230204212323', 3000.00, 'VND', '00', 'Thành công', NULL, '2023-02-04 11:25:00+07', 'e46200eb7129c0c22f05b0db05e4e9e1c49c66c5a465fea4332f2c009ea304f1', 1, NULL);
+INSERT INTO public.payment_webhook_logs VALUES ('PayOS', 'FT26229521468920', '{"code": "00", "data": {"code": "00", "desc": "success", "amount": 99000, "currency": "VND", "orderCode": 1000000001, "reference": "FT26229521468920", "paymentLinkId": "0121b8097f234762899985ba1e616044", "transactionDateTime": "2026-08-17 14:56:12"}, "desc": "success", "success": true}', true, 'PROCESSED', NULL, '2026-08-17 07:56:16.458+07', 2, 1, NULL, 1000000001, '0121b8097f234762899985ba1e616044', 'FT26229521468920', 99000.00, 'VND', '00', 'success', true, '2026-08-17 07:56:12+07', '7a0b5d3fc2276bf07f87bbf6672ddbd548692ee294d919724fd25488eae8b922', 1, 2);
+INSERT INTO public.payment_webhook_logs VALUES ('PayOS', 'TF230204212323', '{"code": "00", "data": {"code": "00", "desc": "Thành công", "amount": 3000, "currency": "VND", "orderCode": 123, "reference": "TF230204212323", "paymentLinkId": "124c33293c43417ab7879e14c8d9eb18", "transactionDateTime": "2023-02-04 18:25:00"}, "desc": "success", "success": false}', false, 'IGNORED', NULL, '2026-08-17 08:20:58.678+07', 3, NULL, NULL, 123, '124c33293c43417ab7879e14c8d9eb18', 'TF230204212323', 3000.00, 'VND', '00', 'Thành công', NULL, '2023-02-04 11:25:00+07', 'e46200eb7129c0c22f05b0db05e4e9e1c49c66c5a465fea4332f2c009ea304f1', 1, NULL);
+
+
+--
+-- Data for Name: payments; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.payments VALUES (2000000.00, 'BANK_TRANSFER', 'MVP_SEED', 'MVP-PAYMENT-2026-07-001', 'SUCCESS', '2026-07-01 00:00:00+07', '2026-07-30 23:21:13.068+07', 1, 1, 1, 4, 4, NULL, NULL, NULL, '2026-07-01 00:00:00+07', NULL, NULL, 3, '2026-07-01 00:00:00+07', NULL, NULL, NULL, '2026-07-30 23:43:08.628+07');
+INSERT INTO public.payments VALUES (4602500.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811145335-OBR4D-PAID', 'SUCCESS', '2026-08-11 00:00:00+07', '2026-08-11 14:53:47.046+07', 3, 15, 3, 13, 13, NULL, 9, NULL, '2026-08-11 14:53:47.043+07', NULL, 'API-E2E-20260811145335-OBR4D manual payment', 9, '2026-08-11 14:53:47.333+07', NULL, NULL, 'API-E2E-20260811145335-OBR4D approved', '2026-08-11 14:53:47.334+07');
+INSERT INTO public.payments VALUES (1000.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811145335-OBR4D-REJECT', 'FAILED', NULL, '2026-08-11 14:53:48.078+07', 4, 15, 4, 13, 13, NULL, 9, NULL, '2026-08-11 14:53:48.072+07', NULL, 'Reject branch', NULL, NULL, 9, '2026-08-11 14:53:48.183+07', 'API-E2E-20260811145335-OBR4D evidence invalid', '2026-08-11 14:53:48.184+07');
+INSERT INTO public.payments VALUES (4602500.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811145614-NE3TM-PAID', 'SUCCESS', '2026-08-11 00:00:00+07', '2026-08-11 14:56:24.137+07', 5, 15, 6, 13, 13, NULL, 9, NULL, '2026-08-11 14:56:24.136+07', NULL, 'API-E2E-20260811145614-NE3TM manual payment', 9, '2026-08-11 14:56:24.376+07', NULL, NULL, 'API-E2E-20260811145614-NE3TM approved', '2026-08-11 14:56:24.376+07');
+INSERT INTO public.payments VALUES (1000.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811145614-NE3TM-REJECT', 'FAILED', NULL, '2026-08-11 14:56:24.942+07', 6, 15, 7, 13, 13, NULL, 9, NULL, '2026-08-11 14:56:24.941+07', NULL, 'Reject branch', NULL, NULL, 9, '2026-08-11 14:56:25.042+07', 'API-E2E-20260811145614-NE3TM evidence invalid', '2026-08-11 14:56:25.043+07');
+INSERT INTO public.payments VALUES (4602500.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811150747-FQASH-PAID', 'SUCCESS', '2026-08-11 00:00:00+07', '2026-08-11 15:07:57.689+07', 7, 15, 9, 13, 13, NULL, 9, NULL, '2026-08-11 15:07:57.686+07', NULL, 'API-E2E-20260811150747-FQASH manual payment', 9, '2026-08-11 15:07:57.89+07', NULL, NULL, 'API-E2E-20260811150747-FQASH approved', '2026-08-11 15:07:57.891+07');
+INSERT INTO public.payments VALUES (1000.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811150747-FQASH-REJECT', 'FAILED', NULL, '2026-08-11 15:07:58.377+07', 8, 15, 10, 13, 13, NULL, 9, NULL, '2026-08-11 15:07:58.375+07', NULL, 'Reject branch', NULL, NULL, 9, '2026-08-11 15:07:58.464+07', 'API-E2E-20260811150747-FQASH evidence invalid', '2026-08-11 15:07:58.465+07');
+INSERT INTO public.payments VALUES (4602500.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811150923-COC5D-PAID', 'SUCCESS', '2026-08-11 00:00:00+07', '2026-08-11 15:09:32.143+07', 9, 15, 12, 13, 13, NULL, 9, NULL, '2026-08-11 15:09:32.142+07', NULL, 'API-E2E-20260811150923-COC5D manual payment', 9, '2026-08-11 15:09:32.337+07', NULL, NULL, 'API-E2E-20260811150923-COC5D approved', '2026-08-11 15:09:32.338+07');
+INSERT INTO public.payments VALUES (1000.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811150923-COC5D-REJECT', 'FAILED', NULL, '2026-08-11 15:09:32.831+07', 10, 15, 13, 13, 13, NULL, 9, NULL, '2026-08-11 15:09:32.827+07', NULL, 'Reject branch', NULL, NULL, 9, '2026-08-11 15:09:32.932+07', 'API-E2E-20260811150923-COC5D evidence invalid', '2026-08-11 15:09:32.932+07');
+INSERT INTO public.payments VALUES (4602500.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811151034-7GWTM-PAID', 'SUCCESS', '2026-08-11 00:00:00+07', '2026-08-11 15:10:44.622+07', 11, 15, 15, 13, 13, NULL, 9, NULL, '2026-08-11 15:10:44.62+07', NULL, 'API-E2E-20260811151034-7GWTM manual payment', 9, '2026-08-11 15:10:44.817+07', NULL, NULL, 'API-E2E-20260811151034-7GWTM approved', '2026-08-11 15:10:44.818+07');
+INSERT INTO public.payments VALUES (1000.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811151034-7GWTM-REJECT', 'FAILED', NULL, '2026-08-11 15:10:45.289+07', 12, 15, 16, 13, 13, NULL, 9, NULL, '2026-08-11 15:10:45.289+07', NULL, 'Reject branch', NULL, NULL, 9, '2026-08-11 15:10:45.374+07', 'API-E2E-20260811151034-7GWTM evidence invalid', '2026-08-11 15:10:45.375+07');
+INSERT INTO public.payments VALUES (4602500.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811151220-TXWCG-PAID', 'SUCCESS', '2026-08-11 00:00:00+07', '2026-08-11 15:12:30.388+07', 13, 15, 18, 13, 13, NULL, 9, NULL, '2026-08-11 15:12:30.387+07', NULL, 'API-E2E-20260811151220-TXWCG manual payment', 9, '2026-08-11 15:12:30.586+07', NULL, NULL, 'API-E2E-20260811151220-TXWCG approved', '2026-08-11 15:12:30.586+07');
+INSERT INTO public.payments VALUES (1000.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811151220-TXWCG-REJECT', 'FAILED', NULL, '2026-08-11 15:12:31.064+07', 14, 15, 19, 13, 13, NULL, 9, NULL, '2026-08-11 15:12:31.064+07', NULL, 'Reject branch', NULL, NULL, 9, '2026-08-11 15:12:31.171+07', 'API-E2E-20260811151220-TXWCG evidence invalid', '2026-08-11 15:12:31.172+07');
+INSERT INTO public.payments VALUES (4602500.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811151357-VHCL6-PAID', 'SUCCESS', '2026-08-11 00:00:00+07', '2026-08-11 15:14:06.811+07', 15, 15, 21, 13, 13, NULL, 9, NULL, '2026-08-11 15:14:06.81+07', NULL, 'API-E2E-20260811151357-VHCL6 manual payment', 9, '2026-08-11 15:14:07+07', NULL, NULL, 'API-E2E-20260811151357-VHCL6 approved', '2026-08-11 15:14:07.001+07');
+INSERT INTO public.payments VALUES (1000.00, 'BANK_TRANSFER', 'MANUAL_CONFIRMATION', 'API-E2E-20260811151357-VHCL6-REJECT', 'FAILED', NULL, '2026-08-11 15:14:07.475+07', 16, 15, 22, 13, 13, NULL, 9, NULL, '2026-08-11 15:14:07.474+07', NULL, 'Reject branch', NULL, NULL, 9, '2026-08-11 15:14:07.567+07', 'API-E2E-20260811151357-VHCL6 evidence invalid', '2026-08-11 15:14:07.568+07');
+
+
+--
+-- Data for Name: permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.permissions VALUES ('/auth/refresh-token_POST', 'POST /auth/refresh-token', 'AUTH', 'AUTO_API_PERMISSION: POST /auth/refresh-token', 13, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/auth/send-otp_POST', 'POST /auth/send-otp', 'AUTH', 'AUTO_API_PERMISSION: POST /auth/send-otp', 15, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/rooms_GET', 'GET /marketplace/rooms', 'MARKETPLACE', 'AUTO_API_PERMISSION: GET /marketplace/rooms', 52, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/rooms/:id_GET', 'GET /marketplace/rooms/:id', 'MARKETPLACE', 'AUTO_API_PERMISSION: GET /marketplace/rooms/:id', 53, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/rooms/:id/rental-requests_POST', 'POST /marketplace/rooms/:id/rental-requests', 'MARKETPLACE', 'AUTO_API_PERMISSION: POST /marketplace/rooms/:id/rental-requests', 54, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/rooms/:id/viewing-appointments_POST', 'POST /marketplace/rooms/:id/viewing-appointments', 'MARKETPLACE', 'AUTO_API_PERMISSION: POST /marketplace/rooms/:id/viewing-appointments', 55, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/plans_GET', 'GET /plans', 'PLANS', 'AUTO_API_PERMISSION: GET /plans', 17, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/plans_POST', 'POST /plans', 'PLANS', 'AUTO_API_PERMISSION: POST /plans', 18, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/plans/:id_GET', 'GET /plans/:id', 'PLANS', 'AUTO_API_PERMISSION: GET /plans/:id', 19, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/plans/:id_PATCH', 'PATCH /plans/:id', 'PLANS', 'AUTO_API_PERMISSION: PATCH /plans/:id', 20, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/auth/google/url_GET', 'GET /auth/google/url', 'AUTH', 'AUTO_API_PERMISSION: GET /auth/google/url', 8, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties_GET', 'GET /properties', 'PROPERTIES', 'AUTO_API_PERMISSION: GET /properties', 21, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties_POST', 'POST /properties', 'PROPERTIES', 'AUTO_API_PERMISSION: POST /properties', 22, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties/:propertyId/floors_GET', 'GET /properties/:propertyId/floors', 'PROPERTIES', 'AUTO_API_PERMISSION: GET /properties/:propertyId/floors', 27, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties/:propertyId/floors_POST', 'POST /properties/:propertyId/floors', 'PROPERTIES', 'AUTO_API_PERMISSION: POST /properties/:propertyId/floors', 28, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties/:propertyId/floors/:floorId_PATCH', 'PATCH /properties/:propertyId/floors/:floorId', 'PROPERTIES', 'AUTO_API_PERMISSION: PATCH /properties/:propertyId/floors/:floorId', 30, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms_GET', 'GET /rooms', 'ROOMS', 'AUTO_API_PERMISSION: GET /rooms', 31, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms_POST', 'POST /rooms', 'ROOMS', 'AUTO_API_PERMISSION: POST /rooms', 32, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms/:id_DELETE', 'DELETE /rooms/:id', 'ROOMS', 'AUTO_API_PERMISSION: DELETE /rooms/:id', 33, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms/:id_GET', 'GET /rooms/:id', 'ROOMS', 'AUTO_API_PERMISSION: GET /rooms/:id', 34, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms/:id_PATCH', 'PATCH /rooms/:id', 'ROOMS', 'AUTO_API_PERMISSION: PATCH /rooms/:id', 35, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms/:id/amenities_PATCH', 'PATCH /rooms/:id/amenities', 'ROOMS', 'AUTO_API_PERMISSION: PATCH /rooms/:id/amenities', 36, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms/:id/images_POST', 'POST /rooms/:id/images', 'ROOMS', 'AUTO_API_PERMISSION: POST /rooms/:id/images', 37, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms/:id/images/:imageId_DELETE', 'DELETE /rooms/:id/images/:imageId', 'ROOMS', 'AUTO_API_PERMISSION: DELETE /rooms/:id/images/:imageId', 38, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms/:id/images/:imageId_PATCH', 'PATCH /rooms/:id/images/:imageId', 'ROOMS', 'AUTO_API_PERMISSION: PATCH /rooms/:id/images/:imageId', 39, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms/:id/marketplace_PATCH', 'PATCH /rooms/:id/marketplace', 'ROOMS', 'AUTO_API_PERMISSION: PATCH /rooms/:id/marketplace', 40, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms/:id/status_PATCH', 'PATCH /rooms/:id/status', 'ROOMS', 'AUTO_API_PERMISSION: PATCH /rooms/:id/status', 41, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tenants_GET', 'GET /tenants', 'TENANTS', 'AUTO_API_PERMISSION: GET /tenants', 42, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tenants_POST', 'POST /tenants', 'TENANTS', 'AUTO_API_PERMISSION: POST /tenants', 43, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tenants/:id_GET', 'GET /tenants/:id', 'TENANTS', 'AUTO_API_PERMISSION: GET /tenants/:id', 44, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tenants/:id_PATCH', 'PATCH /tenants/:id', 'TENANTS', 'AUTO_API_PERMISSION: PATCH /tenants/:id', 45, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tenants/:id/plan_PATCH', 'PATCH /tenants/:id/plan', 'TENANTS', 'AUTO_API_PERMISSION: PATCH /tenants/:id/plan', 46, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tenants/:id/status_PATCH', 'PATCH /tenants/:id/status', 'TENANTS', 'AUTO_API_PERMISSION: PATCH /tenants/:id/status', 47, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tenants/:id/verification_PATCH', 'PATCH /tenants/:id/verification', 'TENANTS', 'AUTO_API_PERMISSION: PATCH /tenants/:id/verification', 48, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/users/:id_GET', 'GET /users/:id', 'USERS', 'AUTO_API_PERMISSION: GET /users/:id', 49, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/users/:id/status_PATCH', 'PATCH /users/:id/status', 'USERS', 'AUTO_API_PERMISSION: PATCH /users/:id/status', 50, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/users/landlords_GET', 'GET /users/landlords', 'USERS', 'AUTO_API_PERMISSION: GET /users/landlords', 51, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/_GET', 'GET /', 'ROOT', 'AUTO_API_PERMISSION: GET /', 1, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/amenities_GET', 'GET /amenities', 'AMENITIES', 'AUTO_API_PERMISSION: GET /amenities', 2, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/amenities_POST', 'POST /amenities', 'AMENITIES', 'AUTO_API_PERMISSION: POST /amenities', 3, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/amenities/:id_PATCH', 'PATCH /amenities/:id', 'AMENITIES', 'AUTO_API_PERMISSION: PATCH /amenities/:id', 4, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/auth/forgot-password_POST', 'POST /auth/forgot-password', 'AUTH', 'AUTO_API_PERMISSION: POST /auth/forgot-password', 5, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/auth/google/callback_GET', 'GET /auth/google/callback', 'AUTH', 'AUTO_API_PERMISSION: GET /auth/google/callback', 6, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/auth/google/session_POST', 'POST /auth/google/session', 'AUTH', 'AUTO_API_PERMISSION: POST /auth/google/session', 7, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/auth/login_POST', 'POST /auth/login', 'AUTH', 'AUTO_API_PERMISSION: POST /auth/login', 9, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/auth/logout_POST', 'POST /auth/logout', 'AUTH', 'AUTO_API_PERMISSION: POST /auth/logout', 10, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/auth/profile_GET', 'GET /auth/profile', 'AUTH', 'AUTO_API_PERMISSION: GET /auth/profile', 11, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/auth/profile_PATCH', 'PATCH /auth/profile', 'AUTH', 'AUTO_API_PERMISSION: PATCH /auth/profile', 12, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/auth/register_POST', 'POST /auth/register', 'AUTH', 'AUTO_API_PERMISSION: POST /auth/register', 14, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties/:id_DELETE', 'DELETE /properties/:id', 'PROPERTIES', 'AUTO_API_PERMISSION: DELETE /properties/:id', 23, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties/:id_GET', 'GET /properties/:id', 'PROPERTIES', 'AUTO_API_PERMISSION: GET /properties/:id', 24, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties/:id_PATCH', 'PATCH /properties/:id', 'PROPERTIES', 'AUTO_API_PERMISSION: PATCH /properties/:id', 25, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties/:id/status_PATCH', 'PATCH /properties/:id/status', 'PROPERTIES', 'AUTO_API_PERMISSION: PATCH /properties/:id/status', 26, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/room-viewing-appointments/me_GET', 'GET /room-viewing-appointments/me', 'ROOM_VIEWING_APPOINTMENTS', 'AUTO_API_PERMISSION: GET /room-viewing-appointments/me', 67, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/room-viewing-appointments/me/:id/cancel_PATCH', 'PATCH /room-viewing-appointments/me/:id/cancel', 'ROOM_VIEWING_APPOINTMENTS', 'AUTO_API_PERMISSION: PATCH /room-viewing-appointments/me/:id/cancel', 68, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets_GET', 'GET /tickets', 'TICKETS', 'AUTO_API_PERMISSION: GET /tickets', 107, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets_POST', 'POST /tickets', 'TICKETS', 'AUTO_API_PERMISSION: POST /tickets', 108, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/:id_GET', 'GET /tickets/:id', 'TICKETS', 'AUTO_API_PERMISSION: GET /tickets/:id', 109, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts_GET', 'GET /contracts', 'CONTRACTS', 'AUTO_API_PERMISSION: GET /contracts', 69, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts_POST', 'POST /contracts', 'CONTRACTS', 'AUTO_API_PERMISSION: POST /contracts', 70, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts/:id_GET', 'GET /contracts/:id', 'CONTRACTS', 'AUTO_API_PERMISSION: GET /contracts/:id', 71, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts/:id_PATCH', 'PATCH /contracts/:id', 'CONTRACTS', 'AUTO_API_PERMISSION: PATCH /contracts/:id', 72, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts/:id/activate_PATCH', 'PATCH /contracts/:id/activate', 'CONTRACTS', 'AUTO_API_PERMISSION: PATCH /contracts/:id/activate', 73, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/device-tokens_POST', 'POST /device-tokens', 'DEVICE_TOKENS', 'AUTO_API_PERMISSION: POST /device-tokens', 77, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/device-tokens/:id_DELETE', 'DELETE /device-tokens/:id', 'DEVICE_TOKENS', 'AUTO_API_PERMISSION: DELETE /device-tokens/:id', 78, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices_GET', 'GET /invoices', 'INVOICES', 'AUTO_API_PERMISSION: GET /invoices', 79, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices_POST', 'POST /invoices', 'INVOICES', 'AUTO_API_PERMISSION: POST /invoices', 80, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/:id_GET', 'GET /invoices/:id', 'INVOICES', 'AUTO_API_PERMISSION: GET /invoices/:id', 81, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/:id_PATCH', 'PATCH /invoices/:id', 'INVOICES', 'AUTO_API_PERMISSION: PATCH /invoices/:id', 82, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/:id/cancel_PATCH', 'PATCH /invoices/:id/cancel', 'INVOICES', 'AUTO_API_PERMISSION: PATCH /invoices/:id/cancel', 83, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/:id/issue_PATCH', 'PATCH /invoices/:id/issue', 'INVOICES', 'AUTO_API_PERMISSION: PATCH /invoices/:id/issue', 84, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/:id/overdue_PATCH', 'PATCH /invoices/:id/overdue', 'INVOICES', 'AUTO_API_PERMISSION: PATCH /invoices/:id/overdue', 85, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/debts_GET', 'GET /invoices/debts', 'INVOICES', 'AUTO_API_PERMISSION: GET /invoices/debts', 86, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/me_GET', 'GET /invoices/me', 'INVOICES', 'AUTO_API_PERMISSION: GET /invoices/me', 87, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/me/:id_GET', 'GET /invoices/me/:id', 'INVOICES', 'AUTO_API_PERMISSION: GET /invoices/me/:id', 88, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/me/:id/payment-confirmations_POST', 'POST /invoices/me/:id/payment-confirmations', 'INVOICES', 'AUTO_API_PERMISSION: POST /invoices/me/:id/payment-confirmations', 89, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/me/:id/payment-qr_GET', 'GET /invoices/me/:id/payment-qr', 'INVOICES', 'AUTO_API_PERMISSION: GET /invoices/me/:id/payment-qr', 90, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/me/:id/payment-qr_POST', 'POST /invoices/me/:id/payment-qr', 'INVOICES', 'AUTO_API_PERMISSION: POST /invoices/me/:id/payment-qr', 91, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/meter-readings_GET', 'GET /meter-readings', 'METER_READINGS', 'AUTO_API_PERMISSION: GET /meter-readings', 92, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/meter-readings_POST', 'POST /meter-readings', 'METER_READINGS', 'AUTO_API_PERMISSION: POST /meter-readings', 93, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/meter-readings/:id_GET', 'GET /meter-readings/:id', 'METER_READINGS', 'AUTO_API_PERMISSION: GET /meter-readings/:id', 94, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/meter-readings/:id_PATCH', 'PATCH /meter-readings/:id', 'METER_READINGS', 'AUTO_API_PERMISSION: PATCH /meter-readings/:id', 95, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/meter-readings/:id/status_PATCH', 'PATCH /meter-readings/:id/status', 'METER_READINGS', 'AUTO_API_PERMISSION: PATCH /meter-readings/:id/status', 96, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/notifications_GET', 'GET /notifications', 'NOTIFICATIONS', 'AUTO_API_PERMISSION: GET /notifications', 97, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/notifications/:id/read_PATCH', 'PATCH /notifications/:id/read', 'NOTIFICATIONS', 'AUTO_API_PERMISSION: PATCH /notifications/:id/read', 98, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/notifications/read-all_PATCH', 'PATCH /notifications/read-all', 'NOTIFICATIONS', 'AUTO_API_PERMISSION: PATCH /notifications/read-all', 99, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/notifications/test_POST', 'POST /notifications/test', 'NOTIFICATIONS', 'AUTO_API_PERMISSION: POST /notifications/test', 100, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/notifications/unread-count_GET', 'GET /notifications/unread-count', 'NOTIFICATIONS', 'AUTO_API_PERMISSION: GET /notifications/unread-count', 101, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/payment-webhooks/payos_POST', 'POST /payment-webhooks/payos', 'PAYMENT_WEBHOOKS', 'AUTO_API_PERMISSION: POST /payment-webhooks/payos', 102, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/payments_GET', 'GET /payments', 'PAYMENTS', 'AUTO_API_PERMISSION: GET /payments', 103, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/payments/:id_GET', 'GET /payments/:id', 'PAYMENTS', 'AUTO_API_PERMISSION: GET /payments/:id', 104, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/payments/:id/approve_PATCH', 'PATCH /payments/:id/approve', 'PAYMENTS', 'AUTO_API_PERMISSION: PATCH /payments/:id/approve', 105, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/payments/:id/reject_PATCH', 'PATCH /payments/:id/reject', 'PAYMENTS', 'AUTO_API_PERMISSION: PATCH /payments/:id/reject', 106, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rental-requests/:id_GET', 'GET /rental-requests/:id', 'RENTAL_REQUESTS', 'AUTO_API_PERMISSION: GET /rental-requests/:id', 57, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rental-requests/:id/decision_PATCH', 'PATCH /rental-requests/:id/decision', 'RENTAL_REQUESTS', 'AUTO_API_PERMISSION: PATCH /rental-requests/:id/decision', 58, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rental-requests/me_GET', 'GET /rental-requests/me', 'RENTAL_REQUESTS', 'AUTO_API_PERMISSION: GET /rental-requests/me', 59, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rental-requests/me/:id/cancel_PATCH', 'PATCH /rental-requests/me/:id/cancel', 'RENTAL_REQUESTS', 'AUTO_API_PERMISSION: PATCH /rental-requests/me/:id/cancel', 60, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/renters_GET', 'GET /renters', 'RENTERS', 'AUTO_API_PERMISSION: GET /renters', 61, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/renters/:id_GET', 'GET /renters/:id', 'RENTERS', 'AUTO_API_PERMISSION: GET /renters/:id', 62, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/renters/me_GET', 'GET /renters/me', 'RENTERS', 'AUTO_API_PERMISSION: GET /renters/me', 63, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/renters/me_PATCH', 'PATCH /renters/me', 'RENTERS', 'AUTO_API_PERMISSION: PATCH /renters/me', 64, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/room-viewing-appointments_GET', 'GET /room-viewing-appointments', 'ROOM_VIEWING_APPOINTMENTS', 'AUTO_API_PERMISSION: GET /room-viewing-appointments', 65, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts/:id/cancel_PATCH', 'PATCH /contracts/:id/cancel', 'CONTRACTS', 'AUTO_API_PERMISSION: PATCH /contracts/:id/cancel', 74, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts/me_GET', 'GET /contracts/me', 'CONTRACTS', 'AUTO_API_PERMISSION: GET /contracts/me', 75, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts/me/:id_GET', 'GET /contracts/me/:id', 'CONTRACTS', 'AUTO_API_PERMISSION: GET /contracts/me/:id', 76, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/me_GET', 'GET /tickets/me', 'TICKETS', 'AUTO_API_PERMISSION: GET /tickets/me', 114, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/me/:id_GET', 'GET /tickets/me/:id', 'TICKETS', 'AUTO_API_PERMISSION: GET /tickets/me/:id', 115, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/utility-meters_GET', 'GET /utility-meters', 'UTILITY_METERS', 'AUTO_API_PERMISSION: GET /utility-meters', 116, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/utility-meters_POST', 'POST /utility-meters', 'UTILITY_METERS', 'AUTO_API_PERMISSION: POST /utility-meters', 117, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/utility-meters/:id_GET', 'GET /utility-meters/:id', 'UTILITY_METERS', 'AUTO_API_PERMISSION: GET /utility-meters/:id', 118, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/asset-categories_GET', 'GET /asset-categories', 'ASSET_CATEGORIES', 'AUTO_API_PERMISSION: GET /asset-categories', 121, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contract-terminations_GET', 'GET /contract-terminations', 'CONTRACT_TERMINATIONS', 'AUTO_API_PERMISSION: GET /contract-terminations', 126, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contract-terminations_POST', 'POST /contract-terminations', 'CONTRACT_TERMINATIONS', 'AUTO_API_PERMISSION: POST /contract-terminations', 127, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contract-terminations/:id_GET', 'GET /contract-terminations/:id', 'CONTRACT_TERMINATIONS', 'AUTO_API_PERMISSION: GET /contract-terminations/:id', 128, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contract-terminations/:id/approve_PATCH', 'PATCH /contract-terminations/:id/approve', 'CONTRACT_TERMINATIONS', 'AUTO_API_PERMISSION: PATCH /contract-terminations/:id/approve', 129, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/dashboard/summary_GET', 'GET /dashboard/summary', 'DASHBOARD', 'AUTO_API_PERMISSION: GET /dashboard/summary', 141, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties/:propertyId/floors/:floorId_DELETE', 'DELETE /properties/:propertyId/floors/:floorId', 'PROPERTIES', 'AUTO_API_PERMISSION: DELETE /properties/:propertyId/floors/:floorId', 29, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rental-requests_GET', 'GET /rental-requests', 'RENTAL_REQUESTS', 'AUTO_API_PERMISSION: GET /rental-requests', 56, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/room-viewing-appointments/:id/status_PATCH', 'PATCH /room-viewing-appointments/:id/status', 'ROOM_VIEWING_APPOINTMENTS', 'AUTO_API_PERMISSION: PATCH /room-viewing-appointments/:id/status', 66, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/utility-meters/:id_PATCH', 'PATCH /utility-meters/:id', 'UTILITY_METERS', 'AUTO_API_PERMISSION: PATCH /utility-meters/:id', 119, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/asset-categories_POST', 'POST /asset-categories', 'ASSET_CATEGORIES', 'AUTO_API_PERMISSION: POST /asset-categories', 122, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contract-terminations/:id/cancel_PATCH', 'PATCH /contract-terminations/:id/cancel', 'CONTRACT_TERMINATIONS', 'AUTO_API_PERMISSION: PATCH /contract-terminations/:id/cancel', 130, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contract-terminations/:id/complete_PATCH', 'PATCH /contract-terminations/:id/complete', 'CONTRACT_TERMINATIONS', 'AUTO_API_PERMISSION: PATCH /contract-terminations/:id/complete', 131, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contract-terminations/me_GET', 'GET /contract-terminations/me', 'CONTRACT_TERMINATIONS', 'AUTO_API_PERMISSION: GET /contract-terminations/me', 133, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contract-terminations/me_POST', 'POST /contract-terminations/me', 'CONTRACT_TERMINATIONS', 'AUTO_API_PERMISSION: POST /contract-terminations/me', 134, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contract-terminations/me/:id_GET', 'GET /contract-terminations/me/:id', 'CONTRACT_TERMINATIONS', 'AUTO_API_PERMISSION: GET /contract-terminations/me/:id', 135, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contract-terminations/me/:id/cancel_PATCH', 'PATCH /contract-terminations/me/:id/cancel', 'CONTRACT_TERMINATIONS', 'AUTO_API_PERMISSION: PATCH /contract-terminations/me/:id/cancel', 136, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/dashboard/platform/summary_GET', 'GET /dashboard/platform/summary', 'DASHBOARD', 'AUTO_API_PERMISSION: GET /dashboard/platform/summary', 137, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/dashboard/platform/trends_GET', 'GET /dashboard/platform/trends', 'DASHBOARD', 'AUTO_API_PERMISSION: GET /dashboard/platform/trends', 138, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/dashboard/recent-activity_GET', 'GET /dashboard/recent-activity', 'DASHBOARD', 'AUTO_API_PERMISSION: GET /dashboard/recent-activity', 139, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/:id/assign_PATCH', 'PATCH /tickets/:id/assign', 'TICKETS', 'AUTO_API_PERMISSION: PATCH /tickets/:id/assign', 110, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/:id/attachments_POST', 'POST /tickets/:id/attachments', 'TICKETS', 'AUTO_API_PERMISSION: POST /tickets/:id/attachments', 111, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/:id/comments_POST', 'POST /tickets/:id/comments', 'TICKETS', 'AUTO_API_PERMISSION: POST /tickets/:id/comments', 112, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/utility-meters/:id/status_PATCH', 'PATCH /utility-meters/:id/status', 'UTILITY_METERS', 'AUTO_API_PERMISSION: PATCH /utility-meters/:id/status', 120, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/asset-categories/:id_DELETE', 'DELETE /asset-categories/:id', 'ASSET_CATEGORIES', 'AUTO_API_PERMISSION: DELETE /asset-categories/:id', 123, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/asset-categories/:id_GET', 'GET /asset-categories/:id', 'ASSET_CATEGORIES', 'AUTO_API_PERMISSION: GET /asset-categories/:id', 124, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/asset-categories/:id_PATCH', 'PATCH /asset-categories/:id', 'ASSET_CATEGORIES', 'AUTO_API_PERMISSION: PATCH /asset-categories/:id', 125, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contract-terminations/:id/reject_PATCH', 'PATCH /contract-terminations/:id/reject', 'CONTRACT_TERMINATIONS', 'AUTO_API_PERMISSION: PATCH /contract-terminations/:id/reject', 132, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/dashboard/revenue-trend_GET', 'GET /dashboard/revenue-trend', 'DASHBOARD', 'AUTO_API_PERMISSION: GET /dashboard/revenue-trend', 140, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/:id/status_PATCH', 'PATCH /tickets/:id/status', 'TICKETS', 'AUTO_API_PERMISSION: PATCH /tickets/:id/status', 113, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/handovers/me/:id_GET', 'GET /handovers/me/:id', 'HANDOVERS', 'AUTO_API_PERMISSION: GET /handovers/me/:id', 150, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/handovers/me/:id/confirm_PATCH', 'PATCH /handovers/me/:id/confirm', 'HANDOVERS', 'AUTO_API_PERMISSION: PATCH /handovers/me/:id/confirm', 151, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/handovers/me/:id/dispute_PATCH', 'PATCH /handovers/me/:id/dispute', 'HANDOVERS', 'AUTO_API_PERMISSION: PATCH /handovers/me/:id/dispute', 152, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/debts/me_GET', 'GET /invoices/debts/me', 'INVOICES', 'AUTO_API_PERMISSION: GET /invoices/debts/me', 153, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/admin/rooms_GET', 'GET /marketplace/admin/rooms', 'MARKETPLACE', 'AUTO_API_PERMISSION: GET /marketplace/admin/rooms', 154, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/admin/rooms/:id_GET', 'GET /marketplace/admin/rooms/:id', 'MARKETPLACE', 'AUTO_API_PERMISSION: GET /marketplace/admin/rooms/:id', 155, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/admin/rooms/:id/status_PATCH', 'PATCH /marketplace/admin/rooms/:id/status', 'MARKETPLACE', 'AUTO_API_PERMISSION: PATCH /marketplace/admin/rooms/:id/status', 157, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/rooms/:roomId/review-summary_GET', 'GET /marketplace/rooms/:roomId/review-summary', 'MARKETPLACE', 'AUTO_API_PERMISSION: GET /marketplace/rooms/:roomId/review-summary', 158, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/rooms/:roomId/reviews_GET', 'GET /marketplace/rooms/:roomId/reviews', 'MARKETPLACE', 'AUTO_API_PERMISSION: GET /marketplace/rooms/:roomId/reviews', 159, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/ocr/jobs_GET', 'GET /ocr/jobs', 'OCR', 'AUTO_API_PERMISSION: GET /ocr/jobs', 160, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/ocr/jobs_POST', 'POST /ocr/jobs', 'OCR', 'AUTO_API_PERMISSION: POST /ocr/jobs', 161, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/ocr/jobs/:id_GET', 'GET /ocr/jobs/:id', 'OCR', 'AUTO_API_PERMISSION: GET /ocr/jobs/:id', 162, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/ocr/jobs/:id/accept_POST', 'POST /ocr/jobs/:id/accept', 'OCR', 'AUTO_API_PERMISSION: POST /ocr/jobs/:id/accept', 163, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/ocr/jobs/:id/retry_POST', 'POST /ocr/jobs/:id/retry', 'OCR', 'AUTO_API_PERMISSION: POST /ocr/jobs/:id/retry', 164, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/payments/me_GET', 'GET /payments/me', 'PAYMENTS', 'AUTO_API_PERMISSION: GET /payments/me', 165, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/payments/me/:id_GET', 'GET /payments/me/:id', 'PAYMENTS', 'AUTO_API_PERMISSION: GET /payments/me/:id', 166, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/plans/available_GET', 'GET /plans/available', 'PLANS', 'AUTO_API_PERMISSION: GET /plans/available', 167, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/renters/:id_PATCH', 'PATCH /renters/:id', 'RENTERS', 'AUTO_API_PERMISSION: PATCH /renters/:id', 168, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/renters/:id/history_GET', 'GET /renters/:id/history', 'RENTERS', 'AUTO_API_PERMISSION: GET /renters/:id/history', 169, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/renters/invitations_POST', 'POST /renters/invitations', 'RENTERS', 'AUTO_API_PERMISSION: POST /renters/invitations', 170, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/renters/invitations/accept_POST', 'POST /renters/invitations/accept', 'RENTERS', 'AUTO_API_PERMISSION: POST /renters/invitations/accept', 171, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/renters/me/history_GET', 'GET /renters/me/history', 'RENTERS', 'AUTO_API_PERMISSION: GET /renters/me/history', 172, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reports_POST', 'POST /reports', 'REPORTS', 'AUTO_API_PERMISSION: POST /reports', 173, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reports/admin_GET', 'GET /reports/admin', 'REPORTS', 'AUTO_API_PERMISSION: GET /reports/admin', 174, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reports/admin/:id_GET', 'GET /reports/admin/:id', 'REPORTS', 'AUTO_API_PERMISSION: GET /reports/admin/:id', 175, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reports/admin/:id/status_PATCH', 'PATCH /reports/admin/:id/status', 'REPORTS', 'AUTO_API_PERMISSION: PATCH /reports/admin/:id/status', 176, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reports/me_GET', 'GET /reports/me', 'REPORTS', 'AUTO_API_PERMISSION: GET /reports/me', 177, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reports/me/:id_GET', 'GET /reports/me/:id', 'REPORTS', 'AUTO_API_PERMISSION: GET /reports/me/:id', 178, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reviews_POST', 'POST /reviews', 'REVIEWS', 'AUTO_API_PERMISSION: POST /reviews', 179, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reviews/admin_GET', 'GET /reviews/admin', 'REVIEWS', 'AUTO_API_PERMISSION: GET /reviews/admin', 180, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reviews/admin/:id_GET', 'GET /reviews/admin/:id', 'REVIEWS', 'AUTO_API_PERMISSION: GET /reviews/admin/:id', 181, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reviews/admin/:id/status_PATCH', 'PATCH /reviews/admin/:id/status', 'REVIEWS', 'AUTO_API_PERMISSION: PATCH /reviews/admin/:id/status', 182, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reviews/me_GET', 'GET /reviews/me', 'REVIEWS', 'AUTO_API_PERMISSION: GET /reviews/me', 183, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/reviews/me/:id_GET', 'GET /reviews/me/:id', 'REVIEWS', 'AUTO_API_PERMISSION: GET /reviews/me/:id', 184, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/room-assets/:id_DELETE', 'DELETE /room-assets/:id', 'ROOM_ASSETS', 'AUTO_API_PERMISSION: DELETE /room-assets/:id', 185, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/room-assets/:id_GET', 'GET /room-assets/:id', 'ROOM_ASSETS', 'AUTO_API_PERMISSION: GET /room-assets/:id', 186, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/room-assets/:id_PATCH', 'PATCH /room-assets/:id', 'ROOM_ASSETS', 'AUTO_API_PERMISSION: PATCH /room-assets/:id', 187, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms/:roomId/assets_GET', 'GET /rooms/:roomId/assets', 'ROOMS', 'AUTO_API_PERMISSION: GET /rooms/:roomId/assets', 188, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rooms/:roomId/assets_POST', 'POST /rooms/:roomId/assets', 'ROOMS', 'AUTO_API_PERMISSION: POST /rooms/:roomId/assets', 189, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/service-assignments_GET', 'GET /service-assignments', 'SERVICE_ASSIGNMENTS', 'AUTO_API_PERMISSION: GET /service-assignments', 190, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/service-assignments_POST', 'POST /service-assignments', 'SERVICE_ASSIGNMENTS', 'AUTO_API_PERMISSION: POST /service-assignments', 191, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/service-assignments/:id_PATCH', 'PATCH /service-assignments/:id', 'SERVICE_ASSIGNMENTS', 'AUTO_API_PERMISSION: PATCH /service-assignments/:id', 192, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/service-catalog_GET', 'GET /service-catalog', 'SERVICE_CATALOG', 'AUTO_API_PERMISSION: GET /service-catalog', 193, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/service-catalog_POST', 'POST /service-catalog', 'SERVICE_CATALOG', 'AUTO_API_PERMISSION: POST /service-catalog', 194, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/service-catalog/:id_PATCH', 'PATCH /service-catalog/:id', 'SERVICE_CATALOG', 'AUTO_API_PERMISSION: PATCH /service-catalog/:id', 195, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/subscription-payments_GET', 'GET /subscription-payments', 'SUBSCRIPTION_PAYMENTS', 'AUTO_API_PERMISSION: GET /subscription-payments', 196, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/handovers/:id_GET', 'GET /handovers/:id', 'HANDOVERS', 'AUTO_API_PERMISSION: GET /handovers/:id', 144, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/handovers/:id_PATCH', 'PATCH /handovers/:id', 'HANDOVERS', 'AUTO_API_PERMISSION: PATCH /handovers/:id', 145, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/handovers/:id/confirm_PATCH', 'PATCH /handovers/:id/confirm', 'HANDOVERS', 'AUTO_API_PERMISSION: PATCH /handovers/:id/confirm', 146, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/handovers/:id/dispute_PATCH', 'PATCH /handovers/:id/dispute', 'HANDOVERS', 'AUTO_API_PERMISSION: PATCH /handovers/:id/dispute', 147, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/handovers/:id/resolve_PATCH', 'PATCH /handovers/:id/resolve', 'HANDOVERS', 'AUTO_API_PERMISSION: PATCH /handovers/:id/resolve', 148, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/handovers/me_GET', 'GET /handovers/me', 'HANDOVERS', 'AUTO_API_PERMISSION: GET /handovers/me', 149, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts/me/:id/sign_POST', 'POST /contracts/me/:id/sign', 'CONTRACTS', 'AUTO_API_PERMISSION: POST /contracts/me/:id/sign', 224, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/locations/reverse-geocode_GET', 'GET /locations/reverse-geocode', 'LOCATIONS', 'AUTO_API_PERMISSION: GET /locations/reverse-geocode', 228, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/locations/wards_GET', 'GET /locations/wards', 'LOCATIONS', 'AUTO_API_PERMISSION: GET /locations/wards', 229, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/admin/rooms/:id/history_GET', 'GET /marketplace/admin/rooms/:id/history', 'MARKETPLACE', 'AUTO_API_PERMISSION: GET /marketplace/admin/rooms/:id/history', 156, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rental-requests/me/:id_PATCH', 'PATCH /rental-requests/me/:id', 'RENTAL_REQUESTS', 'AUTO_API_PERMISSION: PATCH /rental-requests/me/:id', 213, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/subscription-payments/me/:id_GET', 'GET /subscription-payments/me/:id', 'SUBSCRIPTION_PAYMENTS', 'AUTO_API_PERMISSION: GET /subscription-payments/me/:id', 199, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/subscription-payments/me/:id/cancel_POST', 'POST /subscription-payments/me/:id/cancel', 'SUBSCRIPTION_PAYMENTS', 'AUTO_API_PERMISSION: POST /subscription-payments/me/:id/cancel', 200, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/subscription-payments/me/payos_POST', 'POST /subscription-payments/me/payos', 'SUBSCRIPTION_PAYMENTS', 'AUTO_API_PERMISSION: POST /subscription-payments/me/payos', 201, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/:id/attachments/upload_POST', 'POST /tickets/:id/attachments/upload', 'TICKETS', 'AUTO_API_PERMISSION: POST /tickets/:id/attachments/upload', 218, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/me/:id/comments_GET', 'GET /tickets/me/:id/comments', 'TICKETS', 'AUTO_API_PERMISSION: GET /tickets/me/:id/comments', 206, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/me/:id/history_GET', 'GET /tickets/me/:id/history', 'TICKETS', 'AUTO_API_PERMISSION: GET /tickets/me/:id/history', 211, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/me/:id/reopen_PATCH', 'PATCH /tickets/me/:id/reopen', 'TICKETS', 'AUTO_API_PERMISSION: PATCH /tickets/me/:id/reopen', 209, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/dashboard/action-center_GET', 'GET /dashboard/action-center', 'DASHBOARD', 'AUTO_API_PERMISSION: GET /dashboard/action-center', 212, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/handovers_GET', 'GET /handovers', 'HANDOVERS', 'AUTO_API_PERMISSION: GET /handovers', 142, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/favorites_GET', 'GET /marketplace/favorites', 'MARKETPLACE', 'AUTO_API_PERMISSION: GET /marketplace/favorites', 230, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/favorites/:roomId_DELETE', 'DELETE /marketplace/favorites/:roomId', 'MARKETPLACE', 'AUTO_API_PERMISSION: DELETE /marketplace/favorites/:roomId', 231, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/renters/:id/images_POST', 'POST /renters/:id/images', 'RENTERS', 'AUTO_API_PERMISSION: POST /renters/:id/images', 214, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/renters/invitations/:id_GET', 'GET /renters/invitations/:id', 'RENTERS', 'AUTO_API_PERMISSION: GET /renters/invitations/:id', 215, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/room-viewing-appointments/:id_GET', 'GET /room-viewing-appointments/:id', 'ROOM_VIEWING_APPOINTMENTS', 'AUTO_API_PERMISSION: GET /room-viewing-appointments/:id', 216, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/subscriptions/me_GET', 'GET /subscriptions/me', 'SUBSCRIPTIONS', 'AUTO_API_PERMISSION: GET /subscriptions/me', 202, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tenants/register_POST', 'POST /tenants/register', 'TENANTS', 'AUTO_API_PERMISSION: POST /tenants/register', 217, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts/:id/expire_PATCH', 'PATCH /contracts/:id/expire', 'CONTRACTS', 'AUTO_API_PERMISSION: PATCH /contracts/:id/expire', 207, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts/:id/members_POST', 'POST /contracts/:id/members', 'CONTRACTS', 'AUTO_API_PERMISSION: POST /contracts/:id/members', 221, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/handovers_POST', 'POST /handovers', 'HANDOVERS', 'AUTO_API_PERMISSION: POST /handovers', 143, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/locations/autocomplete_GET', 'GET /locations/autocomplete', 'LOCATIONS', 'AUTO_API_PERMISSION: GET /locations/autocomplete', 225, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/locations/place-detail_GET', 'GET /locations/place-detail', 'LOCATIONS', 'AUTO_API_PERMISSION: GET /locations/place-detail', 226, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/favorites/:roomId_POST', 'POST /marketplace/favorites/:roomId', 'MARKETPLACE', 'AUTO_API_PERMISSION: POST /marketplace/favorites/:roomId', 232, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/subscription-payments/:id_GET', 'GET /subscription-payments/:id', 'SUBSCRIPTION_PAYMENTS', 'AUTO_API_PERMISSION: GET /subscription-payments/:id', 197, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/subscription-payments/me_GET', 'GET /subscription-payments/me', 'SUBSCRIPTION_PAYMENTS', 'AUTO_API_PERMISSION: GET /subscription-payments/me', 198, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/:id/attachments_GET', 'GET /tickets/:id/attachments', 'TICKETS', 'AUTO_API_PERMISSION: GET /tickets/:id/attachments', 203, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/:id/close_PATCH', 'PATCH /tickets/:id/close', 'TICKETS', 'AUTO_API_PERMISSION: PATCH /tickets/:id/close', 219, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/:id/comments_GET', 'GET /tickets/:id/comments', 'TICKETS', 'AUTO_API_PERMISSION: GET /tickets/:id/comments', 204, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/:id/history_GET', 'GET /tickets/:id/history', 'TICKETS', 'AUTO_API_PERMISSION: GET /tickets/:id/history', 220, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/me/:id/attachments_GET', 'GET /tickets/me/:id/attachments', 'TICKETS', 'AUTO_API_PERMISSION: GET /tickets/me/:id/attachments', 205, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/me/:id/cancel_PATCH', 'PATCH /tickets/me/:id/cancel', 'TICKETS', 'AUTO_API_PERMISSION: PATCH /tickets/me/:id/cancel', 210, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/tickets/me/:id/close_PATCH', 'PATCH /tickets/me/:id/close', 'TICKETS', 'AUTO_API_PERMISSION: PATCH /tickets/me/:id/close', 208, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts/:id/sign-landlord_POST', 'POST /contracts/:id/sign-landlord', 'CONTRACTS', 'AUTO_API_PERMISSION: POST /contracts/:id/sign-landlord', 223, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/locations/provinces_GET', 'GET /locations/provinces', 'LOCATIONS', 'AUTO_API_PERMISSION: GET /locations/provinces', 227, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/contracts/:id/members/:memberId_DELETE', 'DELETE /contracts/:id/members/:memberId', 'CONTRACTS', 'AUTO_API_PERMISSION: DELETE /contracts/:id/members/:memberId', 241, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/conversations_GET', 'GET /conversations', 'CONVERSATIONS', 'AUTO_API_PERMISSION: GET /conversations', 242, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/conversations_POST', 'POST /conversations', 'CONVERSATIONS', 'AUTO_API_PERMISSION: POST /conversations', 243, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/conversations/:id/messages_GET', 'GET /conversations/:id/messages', 'CONVERSATIONS', 'AUTO_API_PERMISSION: GET /conversations/:id/messages', 244, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/conversations/:id/messages_POST', 'POST /conversations/:id/messages', 'CONVERSATIONS', 'AUTO_API_PERMISSION: POST /conversations/:id/messages', 245, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/conversations/:id/read_POST', 'POST /conversations/:id/read', 'CONVERSATIONS', 'AUTO_API_PERMISSION: POST /conversations/:id/read', 246, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/amenities_GET', 'GET /marketplace/amenities', 'MARKETPLACE', 'AUTO_API_PERMISSION: GET /marketplace/amenities', 247, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/rooms/:id/similar_GET', 'GET /marketplace/rooms/:id/similar', 'MARKETPLACE', 'AUTO_API_PERMISSION: GET /marketplace/rooms/:id/similar', 248, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties/upload-verification_POST', 'POST /properties/upload-verification', 'PROPERTIES', 'AUTO_API_PERMISSION: POST /properties/upload-verification', 249, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/users/landlords/stats_GET', 'GET /users/landlords/stats', 'USERS', 'AUTO_API_PERMISSION: GET /users/landlords/stats', 250, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/:id/manual-payments_POST', 'POST /invoices/:id/manual-payments', 'INVOICES', 'AUTO_API_PERMISSION: POST /invoices/:id/manual-payments', 238, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/:id/payment-qr_POST', 'POST /invoices/:id/payment-qr', 'INVOICES', 'AUTO_API_PERMISSION: POST /invoices/:id/payment-qr', 239, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/invoices/preview_POST', 'POST /invoices/preview', 'INVOICES', 'AUTO_API_PERMISSION: POST /invoices/preview', 240, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/rooms/:roomId/views_POST', 'POST /marketplace/rooms/:roomId/views', 'MARKETPLACE', 'AUTO_API_PERMISSION: POST /marketplace/rooms/:roomId/views', 233, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/marketplace/view-history_GET', 'GET /marketplace/view-history', 'MARKETPLACE', 'AUTO_API_PERMISSION: GET /marketplace/view-history', 234, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/properties/:id/cover-image_POST', 'POST /properties/:id/cover-image', 'PROPERTIES', 'AUTO_API_PERMISSION: POST /properties/:id/cover-image', 236, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/rental-requests/me/:id_GET', 'GET /rental-requests/me/:id', 'RENTAL_REQUESTS', 'AUTO_API_PERMISSION: GET /rental-requests/me/:id', 237, NULL, NULL, NULL);
+INSERT INTO public.permissions VALUES ('/room-viewing-appointments/me/:id_GET', 'GET /room-viewing-appointments/me/:id', 'ROOM_VIEWING_APPOINTMENTS', 'AUTO_API_PERMISSION: GET /room-viewing-appointments/me/:id', 235, NULL, NULL, NULL);
+
+
+--
+-- Data for Name: refresh_tokens; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.refresh_tokens VALUES ('153e16e056fdc1851ef3cb8e0e306d5cfea2cb84b4f4e2b05b673cd0eba28d1a', 'okhttp/4.12.0', '192.168.1.16', '2026-08-29 20:20:34.742+07', NULL, NULL, '2026-08-22 20:20:34.744+07', '2026-08-22 20:20:34.744+07', NULL, 437, 18);
+INSERT INTO public.refresh_tokens VALUES ('21c7a1e4a7026ba60cb078bb28ad4331d393a1bfce492946292b728d29848217', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-14 15:22:27.557+07', '2026-08-07 15:22:38.339+07', 'Token rotation', '2026-08-07 15:22:27.563+07', '2026-08-07 15:22:38.362+07', NULL, 1, 8);
+INSERT INTO public.refresh_tokens VALUES ('ba2916d1ca1136efd8853141eaf5a60e9bf9454226beab9165840169496da00a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-14 15:22:38.338+07', NULL, NULL, '2026-08-07 15:22:38.365+07', '2026-08-07 15:22:38.365+07', NULL, 2, 8);
+INSERT INTO public.refresh_tokens VALUES ('bf4077321d66027533c2162a35bac6e01279615e09e98d1b54963f894f8ecc2b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-14 15:22:56.737+07', '2026-08-07 15:23:16.232+07', 'Token rotation', '2026-08-07 15:22:56.738+07', '2026-08-07 15:23:16.235+07', NULL, 3, 8);
+INSERT INTO public.refresh_tokens VALUES ('b982d2a65c7276d8272e7cb47e3d0c7f327f0b96f64018d6d60cb77be58dc78b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-14 15:23:16.232+07', NULL, NULL, '2026-08-07 15:23:16.239+07', '2026-08-07 15:23:16.239+07', NULL, 4, 8);
+INSERT INTO public.refresh_tokens VALUES ('cb1c00f4194de16866869ef900008962039882060d1ea73d58b5c1796aca15eb', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 08:32:28.874+07', '2026-08-13 08:58:20.086+07', 'Token rotation', '2026-08-13 08:32:28.874+07', '2026-08-13 08:58:20.099+07', NULL, 149, 1);
+INSERT INTO public.refresh_tokens VALUES ('669f5b90af29c955fd17774af7b67c8b0978f05e57b25a33204d0f795d2fec25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-15 10:12:16.73+07', '2026-08-08 10:13:35.927+07', 'Token rotation', '2026-08-08 10:12:16.736+07', '2026-08-08 10:13:35.944+07', NULL, 5, 8);
+INSERT INTO public.refresh_tokens VALUES ('99fff26a0b3317a364109ec07c8ebd46f38d243d571dea106d238dcede6e7c6c', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-15 10:13:35.927+07', '2026-08-08 10:13:37.499+07', 'Token rotation', '2026-08-08 10:13:35.946+07', '2026-08-08 10:13:37.513+07', NULL, 6, 8);
+INSERT INTO public.refresh_tokens VALUES ('8a8471eb38b4197707993f20a659615f9d80bca8f091d810149c209b0780f0bd', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-15 10:13:37.499+07', '2026-08-08 10:13:40.422+07', 'Token rotation', '2026-08-08 10:13:37.515+07', '2026-08-08 10:13:40.424+07', NULL, 7, 8);
+INSERT INTO public.refresh_tokens VALUES ('bd4a19d9e62c45951cc900ad71024cd353e75da4f48a02acbf411555b6f770f8', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-15 10:13:40.422+07', '2026-08-08 10:13:41.32+07', 'Token rotation', '2026-08-08 10:13:40.425+07', '2026-08-08 10:13:41.322+07', NULL, 8, 8);
+INSERT INTO public.refresh_tokens VALUES ('9369ac9a1de3744db982ed97a5757f3a4fcb526c240e3d15188a6f9fe6ea418e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-15 10:13:41.32+07', '2026-08-08 10:13:48.687+07', 'Token rotation', '2026-08-08 10:13:41.323+07', '2026-08-08 10:13:48.69+07', NULL, 9, 8);
+INSERT INTO public.refresh_tokens VALUES ('ca0ad6e5dabddebb2e2c40864adb7180526576eeb1568104d6745b70ae649556', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-15 10:13:48.687+07', '2026-08-08 10:13:55.217+07', 'User logout', '2026-08-08 10:13:48.691+07', '2026-08-08 10:13:55.218+07', NULL, 10, 8);
+INSERT INTO public.refresh_tokens VALUES ('6c4b68148ce9ca93213542531c1db2515ef9ae14ffbae8f8f7971d0ba51c9e14', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-15 10:14:00.464+07', '2026-08-08 10:14:06.036+07', 'Token rotation', '2026-08-08 10:14:00.464+07', '2026-08-08 10:14:06.038+07', NULL, 11, 8);
+INSERT INTO public.refresh_tokens VALUES ('0e18106471cd8e96170659ff855c718d74e6f41e5c1195b4e14b74d6386f66c0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-15 10:14:06.036+07', '2026-08-08 10:29:18.168+07', 'Token rotation', '2026-08-08 10:14:06.039+07', '2026-08-08 10:29:18.2+07', NULL, 12, 8);
+INSERT INTO public.refresh_tokens VALUES ('bf429573350cff7c01bf72a44dce032bff9525956cb0bd922e1b7278ff24eb99', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-15 10:29:18.168+07', '2026-08-08 10:32:21.709+07', 'Token rotation', '2026-08-08 10:29:18.207+07', '2026-08-08 10:32:21.72+07', NULL, 13, 8);
+INSERT INTO public.refresh_tokens VALUES ('b624c53ea54d36e2488e5adf7bac041f306c157030bd60e55bebabfe46a04d99', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-15 10:32:21.709+07', NULL, NULL, '2026-08-08 10:32:21.722+07', '2026-08-08 10:32:21.722+07', NULL, 14, 8);
+INSERT INTO public.refresh_tokens VALUES ('4ff035f74f5d61f2ffe670d56ef9b625de81621d902d15bb9190ecc72b1bfcc3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-15 14:34:03.502+07', NULL, NULL, '2026-08-08 14:34:03.509+07', '2026-08-08 14:34:03.509+07', NULL, 15, 8);
+INSERT INTO public.refresh_tokens VALUES ('6241e663c10d316d85175a24a46fc5ed95d175900df0adf970404eac962b2b14', 'yaak', '::1', '2026-08-16 10:00:35.068+07', NULL, NULL, '2026-08-09 10:00:35.073+07', '2026-08-09 10:00:35.073+07', NULL, 16, 1);
+INSERT INTO public.refresh_tokens VALUES ('3c9357ff0ce608d8e635cdcefe0093549cee5af2a99e3a8f4592a01532590fc0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 10:56:03.818+07', '2026-08-11 10:56:07.883+07', 'Token rotation', '2026-08-11 10:56:03.824+07', '2026-08-11 10:56:07.898+07', NULL, 17, 8);
+INSERT INTO public.refresh_tokens VALUES ('29d91e943257ef5b5193f7386a9d57500e22c078c6df560e253fd53d0b683af0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 10:56:07.883+07', '2026-08-11 10:56:09.051+07', 'Token rotation', '2026-08-11 10:56:07.901+07', '2026-08-11 10:56:09.054+07', NULL, 18, 8);
+INSERT INTO public.refresh_tokens VALUES ('72003994319746e292e6c9d6c1bf560abd4d901e5b2fc9e0eecb3bfc99d1b724', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 10:56:09.051+07', '2026-08-11 10:56:32.018+07', 'Token rotation', '2026-08-11 10:56:09.055+07', '2026-08-11 10:56:32.022+07', NULL, 19, 8);
+INSERT INTO public.refresh_tokens VALUES ('4a17be9fede90b08b22dbd96e5e71637da003d73611427a6306f32ce09484aeb', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 10:56:32.018+07', '2026-08-11 10:59:29.222+07', 'Token rotation', '2026-08-11 10:56:32.024+07', '2026-08-11 10:59:29.234+07', NULL, 20, 8);
+INSERT INTO public.refresh_tokens VALUES ('336e77ae0f3e82f1643f7e59ded24ac69f94e8b6181bbbc00cd9cdb521e505e0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 10:59:29.222+07', '2026-08-11 10:59:41.922+07', 'Token rotation', '2026-08-11 10:59:29.236+07', '2026-08-11 10:59:41.923+07', NULL, 21, 8);
+INSERT INTO public.refresh_tokens VALUES ('ae6959bf4982f249fb40b18c4d77e0cb8d0197c6a7ea78279d4495cb3bb7e5df', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 10:59:41.922+07', '2026-08-11 10:59:49.846+07', 'Token rotation', '2026-08-11 10:59:41.924+07', '2026-08-11 10:59:49.854+07', NULL, 22, 8);
+INSERT INTO public.refresh_tokens VALUES ('f9010d366dbd84911afce13a1b05d705ce98f630c9a01a43b5f6399596ceb310', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 10:59:49.846+07', '2026-08-11 11:04:39.123+07', 'Token rotation', '2026-08-11 10:59:49.856+07', '2026-08-11 11:04:39.146+07', NULL, 23, 8);
+INSERT INTO public.refresh_tokens VALUES ('d4f915f91e67f364658cb2ea1ca4ae5185d9b94fe01b4a40189044d07f26a24e', 'Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36', '::1', '2026-08-18 11:04:39.123+07', '2026-08-11 11:06:42.603+07', 'Token rotation', '2026-08-11 11:04:39.149+07', '2026-08-11 11:06:42.616+07', NULL, 24, 8);
+INSERT INTO public.refresh_tokens VALUES ('b93b1624a52b0dbafc26433367f24534235e3980e11927cd9d17ae08dc17914e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 11:06:42.603+07', '2026-08-11 11:23:51.106+07', 'Token rotation', '2026-08-11 11:06:42.618+07', '2026-08-11 11:23:51.126+07', NULL, 25, 8);
+INSERT INTO public.refresh_tokens VALUES ('d8fef011fae9a26c6f0cf5ba1a1e9eea9474da6df4134671781d13bc8b968245', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 11:23:51.106+07', '2026-08-11 11:28:48.671+07', 'Token rotation', '2026-08-11 11:23:51.135+07', '2026-08-11 11:28:48.701+07', NULL, 26, 8);
+INSERT INTO public.refresh_tokens VALUES ('dfc5449066e90f16734392fb7d66b05f89682436654eac690f3af8017a5fcc54', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 11:28:48.671+07', '2026-08-11 11:35:12.282+07', 'Token rotation', '2026-08-11 11:28:48.709+07', '2026-08-11 11:35:12.3+07', NULL, 27, 8);
+INSERT INTO public.refresh_tokens VALUES ('47d3567df08c623067190367ccd083cf030b2965bb6b67cd0ca724109e990ad9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 11:35:12.281+07', '2026-08-11 11:35:23.15+07', 'Token rotation', '2026-08-11 11:35:12.302+07', '2026-08-11 11:35:23.16+07', NULL, 28, 8);
+INSERT INTO public.refresh_tokens VALUES ('76500f757c71ac62b1a2cab8026739ba257ec842c3a159309edc619177350c20', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 11:35:23.15+07', '2026-08-11 11:35:25.409+07', 'Token rotation', '2026-08-11 11:35:23.161+07', '2026-08-11 11:35:25.417+07', NULL, 29, 8);
+INSERT INTO public.refresh_tokens VALUES ('7ef90479198f72485237aa20ab31aab5c33d555e9596c30cd4639bcc5947a807', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 11:35:25.409+07', '2026-08-11 11:37:40.75+07', 'Token rotation', '2026-08-11 11:35:25.418+07', '2026-08-11 11:37:40.765+07', NULL, 30, 8);
+INSERT INTO public.refresh_tokens VALUES ('e9af5f78a07d42cd5ea46b4e23f6f4539bb6dafdd7547b002439dc2b526f9741', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 11:37:40.75+07', '2026-08-11 11:38:05.273+07', 'Token rotation', '2026-08-11 11:37:40.766+07', '2026-08-11 11:38:05.279+07', NULL, 31, 8);
+INSERT INTO public.refresh_tokens VALUES ('5a5a6c357e4a9d0c2d86ca4d3ed265dcd1c02ad53b005aa5e10d96a8a8b42d4d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 11:38:05.273+07', '2026-08-11 11:38:47.8+07', 'Token rotation', '2026-08-11 11:38:05.281+07', '2026-08-11 11:38:47.812+07', NULL, 32, 8);
+INSERT INTO public.refresh_tokens VALUES ('2d533f4d406c9dcc340c934e7004c23ca65260f47adf82152fb804b06c251315', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 11:38:47.8+07', '2026-08-11 11:39:15.991+07', 'Token rotation', '2026-08-11 11:38:47.813+07', '2026-08-11 11:39:16.001+07', NULL, 33, 8);
+INSERT INTO public.refresh_tokens VALUES ('5c629b8aece7c9281324e250323092a6a2a28e886e895e48dd5472752da1baf3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 11:39:15.991+07', '2026-08-11 12:05:02.778+07', 'Token rotation', '2026-08-11 11:39:16.003+07', '2026-08-11 12:05:02.802+07', NULL, 34, 8);
+INSERT INTO public.refresh_tokens VALUES ('7efd28777f50e8afcf328fd60d7894ada83ed0f983d81f77f3c2835c8f56d27e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 12:05:02.778+07', '2026-08-11 12:09:13.848+07', 'Token rotation', '2026-08-11 12:05:02.809+07', '2026-08-11 12:09:13.863+07', NULL, 35, 8);
+INSERT INTO public.refresh_tokens VALUES ('7ccf4a805b863e59a2d4cb31662c6f7f3d48df37f7bf3e8f0b4f490eb3a5f322', 'yaak', '::1', '2026-08-18 12:24:04.667+07', NULL, NULL, '2026-08-11 12:24:04.668+07', '2026-08-11 12:24:04.668+07', NULL, 37, 1);
+INSERT INTO public.refresh_tokens VALUES ('7c412984779e4c924d865ff155a794fba177f5fd563bcf8ad5c33c7c39ba532b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 12:38:55.285+07', '2026-08-11 12:38:59.527+07', 'Token rotation', '2026-08-11 12:38:55.285+07', '2026-08-11 12:38:59.542+07', NULL, 38, 1);
+INSERT INTO public.refresh_tokens VALUES ('949eff21c1fccf7a4bb9accee6125a12809c86d757aacfe104f884e2b2fc7fc1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 12:38:59.527+07', '2026-08-11 12:39:24.97+07', 'Token rotation', '2026-08-11 12:38:59.544+07', '2026-08-11 12:39:24.972+07', NULL, 39, 1);
+INSERT INTO public.refresh_tokens VALUES ('77559eeb7f104c371384da42ccbd6e42693e067a3b9cc0a7299b01d94e4f2305', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 12:09:13.848+07', '2026-08-11 12:41:26.187+07', 'Token rotation', '2026-08-11 12:09:13.865+07', '2026-08-11 12:41:26.203+07', NULL, 36, 8);
+INSERT INTO public.refresh_tokens VALUES ('0470de6b600c0df51d07c65995b84f95b32d36c01f8958a532c758055977cccc', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 12:41:26.187+07', NULL, NULL, '2026-08-11 12:41:26.205+07', '2026-08-11 12:41:26.205+07', NULL, 41, 8);
+INSERT INTO public.refresh_tokens VALUES ('c2a43e5aee87acf7692b7377ef79c466cce45a0d92761fdfc668ec61bae4c217', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 12:39:24.97+07', '2026-08-11 12:41:35.476+07', 'Token rotation', '2026-08-11 12:39:24.973+07', '2026-08-11 12:41:35.489+07', NULL, 40, 1);
+INSERT INTO public.refresh_tokens VALUES ('4d9297f618f1f3052f43e4be853e77df7cfa916c7ba4e1131c88dfa3ef27a16e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 12:41:35.476+07', '2026-08-11 12:41:46.178+07', 'Token rotation', '2026-08-11 12:41:35.491+07', '2026-08-11 12:41:46.181+07', NULL, 42, 1);
+INSERT INTO public.refresh_tokens VALUES ('d7dd7176c9a53bdec7e8c646485074646b1969a509baf4063f9e3511e7e9fc95', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 12:41:46.178+07', '2026-08-11 12:41:55.388+07', 'Token rotation', '2026-08-11 12:41:46.183+07', '2026-08-11 12:41:55.391+07', NULL, 43, 1);
+INSERT INTO public.refresh_tokens VALUES ('0e0e67db509d47b15e520eacfe727e69fe688e71bd22cf733b97131de445ccc7', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 12:41:55.388+07', '2026-08-11 12:42:15.518+07', 'Token rotation', '2026-08-11 12:41:55.392+07', '2026-08-11 12:42:15.52+07', NULL, 44, 1);
+INSERT INTO public.refresh_tokens VALUES ('a2a8368dd3b2fc34550f7d4128bc983260f590da639b58139a85c6e905963ec2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 12:42:15.518+07', '2026-08-11 12:42:55.55+07', 'Token rotation', '2026-08-11 12:42:15.521+07', '2026-08-11 12:42:55.562+07', NULL, 45, 1);
+INSERT INTO public.refresh_tokens VALUES ('021b04d5df68a5ae0b14f5fa5289b91101b784db9a276a18568cab540ca74af5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-18 12:42:55.55+07', NULL, NULL, '2026-08-11 12:42:55.564+07', '2026-08-11 12:42:55.564+07', NULL, 46, 1);
+INSERT INTO public.refresh_tokens VALUES ('e31461ea066db920378a4da042e647b676cdcbf97ec84f6e71225f4dd2b9c9b6', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:45:14.667+07', NULL, NULL, '2026-08-11 13:45:14.675+07', '2026-08-11 13:45:14.675+07', NULL, 47, 1);
+INSERT INTO public.refresh_tokens VALUES ('8e15a58638d08dab626a3e7f4586abe8b882bba00fcaacf84f475c747d510241', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:45:14.676+07', NULL, NULL, '2026-08-11 13:45:14.677+07', '2026-08-11 13:45:14.677+07', NULL, 48, 13);
+INSERT INTO public.refresh_tokens VALUES ('6d737335e6ee080b9a88df14cf5a817d63a17856602b7894e421e216acb90d44', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:45:14.753+07', NULL, NULL, '2026-08-11 13:45:14.753+07', '2026-08-11 13:45:14.753+07', NULL, 49, 9);
+INSERT INTO public.refresh_tokens VALUES ('4c5d6db073cf02e862d18c2973ecd1f48b902d4a3aeba1e949a7c7aa90b6e1c2', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:45:15.677+07', '2026-08-11 13:45:15.901+07', 'Token rotation', '2026-08-11 13:45:15.677+07', '2026-08-11 13:45:15.915+07', NULL, 50, 13);
+INSERT INTO public.refresh_tokens VALUES ('b52e0641b3cbf6c00dbd9e57d0513328413026accb41ced82bf18ba9f3a6807c', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:45:15.901+07', '2026-08-11 13:45:16.197+07', 'User logout', '2026-08-11 13:45:15.917+07', '2026-08-11 13:45:16.198+07', NULL, 51, 13);
+INSERT INTO public.refresh_tokens VALUES ('7a6a83e1dfd4287ab6413cfec945dfe871713a58d9dd52f20ae165048b728908', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:45:17.124+07', NULL, NULL, '2026-08-11 13:45:17.124+07', '2026-08-11 13:45:17.124+07', NULL, 52, 9);
+INSERT INTO public.refresh_tokens VALUES ('bd36abd416c28e81d5ed6ef1ddb4aa09ed3feea624ffd364e78b4d01e9876c64', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:45:17.125+07', NULL, NULL, '2026-08-11 13:45:17.125+07', '2026-08-11 13:45:17.125+07', NULL, 53, 13);
+INSERT INTO public.refresh_tokens VALUES ('9c023d2f81f987f5fdfa876c5b19f237da09cd25fb990e172dd2887cd2d1fe45', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:48:03.489+07', NULL, NULL, '2026-08-11 13:48:03.498+07', '2026-08-11 13:48:03.498+07', NULL, 54, 1);
+INSERT INTO public.refresh_tokens VALUES ('bd1491bbda03a06d5ec5e116af00d2029e600dfc165fa0b6a17af6798f08770a', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:48:03.5+07', NULL, NULL, '2026-08-11 13:48:03.501+07', '2026-08-11 13:48:03.501+07', NULL, 55, 9);
+INSERT INTO public.refresh_tokens VALUES ('52ccc09c898d775dce69b10cf774d7887290b27639229ca52caa6c63b411db95', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:48:03.631+07', NULL, NULL, '2026-08-11 13:48:03.632+07', '2026-08-11 13:48:03.632+07', NULL, 56, 13);
+INSERT INTO public.refresh_tokens VALUES ('05dd1831221d5e41a06bc8b54b85aba46639ee946e226169f4f74887b2a85b7f', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:48:04.844+07', '2026-08-11 13:48:05.062+07', 'Token rotation', '2026-08-11 13:48:04.844+07', '2026-08-11 13:48:05.077+07', NULL, 57, 13);
+INSERT INTO public.refresh_tokens VALUES ('203fc16156cddae850d1105305ac0461f167a93b2ed004ba699b120a1bd80339', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 13:48:05.062+07', '2026-08-11 13:48:05.329+07', 'User logout', '2026-08-11 13:48:05.08+07', '2026-08-11 13:48:05.332+07', NULL, 58, 13);
+INSERT INTO public.refresh_tokens VALUES ('569b37651822ef742260eb72980e043468e78fa34c9c7b3bdd183701a4ca5a73', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:10:36.02+07', NULL, NULL, '2026-08-11 14:10:36.028+07', '2026-08-11 14:10:36.028+07', NULL, 59, 1);
+INSERT INTO public.refresh_tokens VALUES ('67f53c3a29a0aefd1040b317790f879f537d0bfac96035ade50182e7bae6c56a', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:10:36.032+07', NULL, NULL, '2026-08-11 14:10:36.033+07', '2026-08-11 14:10:36.033+07', NULL, 60, 13);
+INSERT INTO public.refresh_tokens VALUES ('8b905f987ece0a6df7ae1b136b86e2d0a7bbbad2d508bed4940619a92b05c6f9', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:10:36.035+07', NULL, NULL, '2026-08-11 14:10:36.035+07', '2026-08-11 14:10:36.035+07', NULL, 61, 9);
+INSERT INTO public.refresh_tokens VALUES ('b37e987d789b2fdd2f0d617b759b90c20c02aebe645c6a685889510f462a3640', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 17:24:45.111+07', '2026-08-12 18:31:43.326+07', 'Token rotation', '2026-08-12 17:24:45.143+07', '2026-08-12 18:31:43.399+07', NULL, 145, 8);
+INSERT INTO public.refresh_tokens VALUES ('27e1f3ed6d4db55148bb61ea0f3cfbc7018acb7d1d6dfee08ca34e1a0b2f49be', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:15:43.177+07', NULL, NULL, '2026-08-11 14:15:43.177+07', '2026-08-11 14:15:43.177+07', NULL, 63, 9);
+INSERT INTO public.refresh_tokens VALUES ('0f57728bb17cd43b9652cc8bdf28fd9b66f3e4ce2f32a154ca9da931d96eeace', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:15:43.186+07', NULL, NULL, '2026-08-11 14:15:43.187+07', '2026-08-11 14:15:43.187+07', NULL, 64, 1);
+INSERT INTO public.refresh_tokens VALUES ('25d26ab437046c291a5a8b2311b3038e41fd1629a3b1a91e8a80227508093638', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:15:43.133+07', '2026-08-11 14:15:43.574+07', 'Token rotation', '2026-08-11 14:15:43.133+07', '2026-08-11 14:15:43.592+07', NULL, 62, 13);
+INSERT INTO public.refresh_tokens VALUES ('e9e9fc9cc85e6b8ee1dae9ce5a00b6a7cfdf361ed6fe82098574f5fb8246f6b3', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:15:43.574+07', '2026-08-11 14:15:43.94+07', 'User logout', '2026-08-11 14:15:43.596+07', '2026-08-11 14:15:43.945+07', NULL, 65, 13);
+INSERT INTO public.refresh_tokens VALUES ('df159bc5d35466570970296fd00f31c75223f9d499eb64a40ccbc79b258ce22c', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:16:01.454+07', NULL, NULL, '2026-08-11 14:16:01.456+07', '2026-08-11 14:16:01.456+07', NULL, 66, 9);
+INSERT INTO public.refresh_tokens VALUES ('9871983e974008877f1544fa52652f5c39a5b71f5b97825c2de573512f331e48', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:16:01.464+07', NULL, NULL, '2026-08-11 14:16:01.464+07', '2026-08-11 14:16:01.464+07', NULL, 67, 1);
+INSERT INTO public.refresh_tokens VALUES ('846855fa0dbacf71babd345c50a0f27cba7c61632116a876933c998092181539', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:16:03.832+07', NULL, NULL, '2026-08-11 14:16:03.833+07', '2026-08-11 14:16:03.833+07', NULL, 68, 1);
+INSERT INTO public.refresh_tokens VALUES ('1a85654b53e57e7b1d81609ab7ed7afd7e8419cc6d8fc7e21b9acdef02b3a66d', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:16:03.836+07', NULL, NULL, '2026-08-11 14:16:03.837+07', '2026-08-11 14:16:03.837+07', NULL, 69, 9);
+INSERT INTO public.refresh_tokens VALUES ('b2b8bd9ba55b77e2d2b2e0f78bea666aecd0a2caee13d2085eac7eca9887020a', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:31:59.257+07', NULL, NULL, '2026-08-11 14:31:59.259+07', '2026-08-11 14:31:59.259+07', NULL, 71, 1);
+INSERT INTO public.refresh_tokens VALUES ('28f06f23b3f29b388a7eb20233d70d55b33d6b8302413d4b0beb1ffa9d0c972f', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:31:59.279+07', NULL, NULL, '2026-08-11 14:31:59.28+07', '2026-08-11 14:31:59.28+07', NULL, 72, 9);
+INSERT INTO public.refresh_tokens VALUES ('25b49238c2647b529e7aab72043228ed080f0403ae93d785920dbcd4b51cbe71', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:31:59.223+07', '2026-08-11 14:32:00.887+07', 'Token rotation', '2026-08-11 14:31:59.223+07', '2026-08-11 14:32:00.896+07', NULL, 70, 13);
+INSERT INTO public.refresh_tokens VALUES ('faf64291ad6602aa554b0525850c7bedea859d8ae581b12acf45face24b260ce', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:32:00.887+07', '2026-08-11 14:32:01.214+07', 'User logout', '2026-08-11 14:32:00.897+07', '2026-08-11 14:32:01.215+07', NULL, 73, 13);
+INSERT INTO public.refresh_tokens VALUES ('04ca90d7689927549444028a538c781cd86cc3b5477614db268ba5981a848611', 'api-e2e-playwright/1.0', '::1', '2026-08-18 14:37:52.103+07', NULL, NULL, '2026-08-11 14:37:52.103+07', '2026-08-11 14:37:52.103+07', NULL, 74, 1);
+INSERT INTO public.refresh_tokens VALUES ('ebb9794248b3d32268818494795ab2766ba9f783f4dbe449cdfcc8c1a13ab545', 'api-e2e-playwright/1.0', '::1', '2026-08-18 14:37:52.109+07', NULL, NULL, '2026-08-11 14:37:52.11+07', '2026-08-11 14:37:52.11+07', NULL, 75, 9);
+INSERT INTO public.refresh_tokens VALUES ('c7fc94507db517bf434bac34bc1811b490ee43a275c7088967d762616914ad86', 'api-e2e-playwright/1.0', '::1', '2026-08-18 14:37:52.121+07', '2026-08-11 14:37:53.936+07', 'Token rotation', '2026-08-11 14:37:52.122+07', '2026-08-11 14:37:53.948+07', NULL, 76, 13);
+INSERT INTO public.refresh_tokens VALUES ('ebd95a0b04837a813c70eddf380841afcee020fdb412f8ea229e0d30ad453f04', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 14:37:53.936+07', '2026-08-11 14:37:54.266+07', 'User logout', '2026-08-11 14:37:53.95+07', '2026-08-11 14:37:54.266+07', NULL, 77, 13);
+INSERT INTO public.refresh_tokens VALUES ('1705c03dc796be4428ae5bf280fd962e014220c8d51845d91333224e93eb6bdf', 'api-e2e-playwright/1.0', '::1', '2026-08-18 14:53:33.857+07', NULL, NULL, '2026-08-11 14:53:33.858+07', '2026-08-11 14:53:33.858+07', NULL, 78, 9);
+INSERT INTO public.refresh_tokens VALUES ('f6026f45c47d0fa2839f3fa799b14de47a198449a06506bdf4023723afbdac22', 'api-e2e-playwright/1.0', '::1', '2026-08-18 14:53:33.86+07', NULL, NULL, '2026-08-11 14:53:33.86+07', '2026-08-11 14:53:33.86+07', NULL, 79, 13);
+INSERT INTO public.refresh_tokens VALUES ('ce0006f27d4d66955d85ba385a61a56ccd0dee8c10b4a554114b958acc00a211', 'api-e2e-playwright/1.0', '::1', '2026-08-18 14:53:33.864+07', NULL, NULL, '2026-08-11 14:53:33.865+07', '2026-08-11 14:53:33.865+07', NULL, 80, 1);
+INSERT INTO public.refresh_tokens VALUES ('d8fea9bfdf3622baa61ba80f033ff3bd9ac7510c39570077f497aee32a3e5c76', 'api-e2e-playwright/tenant', '::1', '2026-08-18 14:56:12.934+07', NULL, NULL, '2026-08-11 14:56:12.934+07', '2026-08-11 14:56:12.934+07', NULL, 81, 13);
+INSERT INTO public.refresh_tokens VALUES ('9912b7fd0c6127474b85419b228a477f6bbbca847a45870db88889c86945c41a', 'api-e2e-playwright/admin', '::1', '2026-08-18 14:56:12.939+07', NULL, NULL, '2026-08-11 14:56:12.939+07', '2026-08-11 14:56:12.939+07', NULL, 82, 1);
+INSERT INTO public.refresh_tokens VALUES ('6b945f7f33872ff3133a6e09639cab8623ef06083f962ae02c6d86fb92ab897c', 'api-e2e-playwright/landlord', '::1', '2026-08-18 14:56:12.94+07', NULL, NULL, '2026-08-11 14:56:12.94+07', '2026-08-11 14:56:12.94+07', NULL, 83, 9);
+INSERT INTO public.refresh_tokens VALUES ('48412e32c07e55e1460d58a9b6e585b1907e944e6ed102ca82a315e89f4f002b', 'api-e2e-playwright/landlord', '::1', '2026-08-18 15:07:47.111+07', NULL, NULL, '2026-08-11 15:07:47.118+07', '2026-08-11 15:07:47.118+07', NULL, 84, 9);
+INSERT INTO public.refresh_tokens VALUES ('a2f1d0822be5f2d1312cf4d775440cbf5882a5a99e01ac356f4d47e9cd071fc5', 'api-e2e-playwright/tenant', '::1', '2026-08-18 15:07:47.12+07', NULL, NULL, '2026-08-11 15:07:47.121+07', '2026-08-11 15:07:47.121+07', NULL, 85, 13);
+INSERT INTO public.refresh_tokens VALUES ('dc454f0c9c41aef8b4392c3c57ec3e8c6f22332f3b5cbe76d77a96797a1cff7d', 'api-e2e-playwright/admin', '::1', '2026-08-18 15:07:47.122+07', NULL, NULL, '2026-08-11 15:07:47.122+07', '2026-08-11 15:07:47.122+07', NULL, 86, 1);
+INSERT INTO public.refresh_tokens VALUES ('a268cd422b20dfb348402131174b2ba4bde10c7e43edc44f89250af3989b881b', 'api-e2e-playwright/tenant', '::1', '2026-08-18 15:09:22.211+07', NULL, NULL, '2026-08-11 15:09:22.212+07', '2026-08-11 15:09:22.212+07', NULL, 87, 13);
+INSERT INTO public.refresh_tokens VALUES ('7a94f67e83cc46210860406a20ef8f0e07067df8f9c1d37f041c6aca06efbedb', 'api-e2e-playwright/admin', '::1', '2026-08-18 15:09:22.237+07', NULL, NULL, '2026-08-11 15:09:22.238+07', '2026-08-11 15:09:22.238+07', NULL, 88, 1);
+INSERT INTO public.refresh_tokens VALUES ('b0273589679d0d4db1b2a86557018e303629e506206f1507c5a31005200a233d', 'api-e2e-playwright/landlord', '::1', '2026-08-18 15:09:22.258+07', NULL, NULL, '2026-08-11 15:09:22.259+07', '2026-08-11 15:09:22.259+07', NULL, 89, 9);
+INSERT INTO public.refresh_tokens VALUES ('c254ddf666c8c72fc32984f1eb53a57e4a22a31ad2528c0d53ed09c5ccb460fc', 'api-e2e-playwright/landlord', '::1', '2026-08-18 15:10:33.784+07', NULL, NULL, '2026-08-11 15:10:33.784+07', '2026-08-11 15:10:33.784+07', NULL, 90, 9);
+INSERT INTO public.refresh_tokens VALUES ('1774e18e969fad11e4b83941ba96f3a711ac4c1a5f68ecbc339fbb5430a30e6a', 'api-e2e-playwright/admin', '::1', '2026-08-18 15:10:33.813+07', NULL, NULL, '2026-08-11 15:10:33.813+07', '2026-08-11 15:10:33.813+07', NULL, 91, 1);
+INSERT INTO public.refresh_tokens VALUES ('d7eecfdc3e7e2e2428f42e2eb8e3126c0e85edc53720d534d07e085fb104273b', 'api-e2e-playwright/tenant', '::1', '2026-08-18 15:10:33.863+07', NULL, NULL, '2026-08-11 15:10:33.863+07', '2026-08-11 15:10:33.863+07', NULL, 92, 13);
+INSERT INTO public.refresh_tokens VALUES ('6f3787d7a1acd7a9de419076aac7ef1cff4d5806611e56acc191d81804db679c', 'api-e2e-playwright/admin', '::1', '2026-08-18 15:12:19.247+07', NULL, NULL, '2026-08-11 15:12:19.248+07', '2026-08-11 15:12:19.248+07', NULL, 93, 1);
+INSERT INTO public.refresh_tokens VALUES ('1b8a187884578c885585cbcc07144bd34dea9968a6d30013c4cdb1d08d6a1ba4', 'api-e2e-playwright/landlord', '::1', '2026-08-18 15:12:19.286+07', NULL, NULL, '2026-08-11 15:12:19.287+07', '2026-08-11 15:12:19.287+07', NULL, 94, 9);
+INSERT INTO public.refresh_tokens VALUES ('cf96334dbf93661c6a69f1b9151a068c04824816d5dc630c50e487cf48da29e0', 'api-e2e-playwright/tenant', '::1', '2026-08-18 15:12:19.294+07', NULL, NULL, '2026-08-11 15:12:19.295+07', '2026-08-11 15:12:19.295+07', NULL, 95, 13);
+INSERT INTO public.refresh_tokens VALUES ('d060fc0b627f66ff6cbe3ed3e68c7260701061a122fc20ecb0b83f3540349a7a', 'api-e2e-playwright/admin', '::1', '2026-08-18 15:13:53.201+07', NULL, NULL, '2026-08-11 15:13:53.202+07', '2026-08-11 15:13:53.202+07', NULL, 96, 1);
+INSERT INTO public.refresh_tokens VALUES ('b120c2880ed464db20357f03e0d84df59c333f5013d563431c18f2aa825f7c13', 'api-e2e-playwright/landlord', '::1', '2026-08-18 15:13:53.21+07', NULL, NULL, '2026-08-11 15:13:53.211+07', '2026-08-11 15:13:53.211+07', NULL, 97, 9);
+INSERT INTO public.refresh_tokens VALUES ('66bfabac42396ef1d5b9a6fcea71d00f6c8d8ca0da085f35a3ef94eacbbc3d12', 'api-e2e-playwright/tenant', '::1', '2026-08-18 15:13:53.284+07', '2026-08-11 15:13:54.674+07', 'Token rotation', '2026-08-11 15:13:53.284+07', '2026-08-11 15:13:54.692+07', NULL, 98, 13);
+INSERT INTO public.refresh_tokens VALUES ('a2e5341a72aeeaece8a0158fdc970c19e42709171d1bf7ead2498ea660f82804', 'Playwright/1.62.1 (x64; windows 10.0) node/24.14', '::1', '2026-08-18 15:13:54.674+07', '2026-08-11 15:13:55.015+07', 'User logout', '2026-08-11 15:13:54.694+07', '2026-08-11 15:13:55.017+07', NULL, 99, 13);
+INSERT INTO public.refresh_tokens VALUES ('721bd39e05fecd7462d4772a7c5eb45a5d7e1d737ef236063bedcb96f9caaca5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36', '::1', '2026-08-18 16:46:34.869+07', '2026-08-11 16:46:35.617+07', 'Token rotation', '2026-08-11 16:46:34.878+07', '2026-08-11 16:46:35.655+07', NULL, 100, 9);
+INSERT INTO public.refresh_tokens VALUES ('5b0a058a2cacd0d92b9e6e7e346fa4cd2e36fcafbc2ed03be23e54ebf375c561', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36', '::1', '2026-08-18 16:46:35.617+07', NULL, NULL, '2026-08-11 16:46:35.659+07', '2026-08-11 16:46:35.659+07', NULL, 101, 9);
+INSERT INTO public.refresh_tokens VALUES ('f388d273561907249e0d3be47a94cf101df610428e2ba295ce0eaa7f9211ff74', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15', '::1', '2026-08-18 16:46:36.801+07', '2026-08-11 16:46:37.89+07', 'Token rotation', '2026-08-11 16:46:36.802+07', '2026-08-11 16:46:37.894+07', NULL, 102, 9);
+INSERT INTO public.refresh_tokens VALUES ('3fe995850ce521154cca71e52985d471b9ff1eb60b42b248fab6214d7014fcab', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36', '::1', '2026-08-18 16:46:37.196+07', NULL, NULL, '2026-08-11 16:46:37.197+07', '2026-08-11 16:46:37.197+07', NULL, 103, 13);
+INSERT INTO public.refresh_tokens VALUES ('ae0af7023418f2f81c9805451c092a29ad01991d31cf5b53cf8821dd6c3b8f15', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0', '::ffff:127.0.0.1', '2026-08-18 16:46:40.372+07', '2026-08-11 16:46:41.147+07', 'Token rotation', '2026-08-11 16:46:40.373+07', '2026-08-11 16:46:41.157+07', NULL, 107, 9);
+INSERT INTO public.refresh_tokens VALUES ('cef5df58644dd68eaed15f7f9108524ba78d43b0fc7ff187c8b4f6cdc42d574b', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15', '::1', '2026-08-18 16:46:42.542+07', NULL, NULL, '2026-08-11 16:46:42.542+07', '2026-08-11 16:46:42.542+07', NULL, 109, 13);
+INSERT INTO public.refresh_tokens VALUES ('219e2092f7007dbac2e9aed9f453e771d019c59ae7d4cc1a9dd73f332536f309', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0', '::ffff:127.0.0.1', '2026-08-18 16:46:45.484+07', NULL, NULL, '2026-08-11 16:46:45.484+07', '2026-08-11 16:46:45.484+07', NULL, 110, 13);
+INSERT INTO public.refresh_tokens VALUES ('fd2572eb91dbe5716bdbf7ce24f5555473a54dc3358c08331386de69f438cfd0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 18:31:43.326+07', '2026-08-12 18:42:23.946+07', 'Token rotation', '2026-08-12 18:31:43.415+07', '2026-08-12 18:42:23.958+07', NULL, 146, 8);
+INSERT INTO public.refresh_tokens VALUES ('cb6770ee22622625eee4eb36001bcc5f88331a94beec938e059837575718bd8e', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15', '::1', '2026-08-18 16:46:46.389+07', '2026-08-11 16:46:47.386+07', 'Token rotation', '2026-08-11 16:46:46.389+07', '2026-08-11 16:46:47.388+07', NULL, 111, 9);
+INSERT INTO public.refresh_tokens VALUES ('3ebaac99af645901d0371576602fa8327aa32a4288b624bd4681d602fcf47604', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 08:40:09.983+07', '2026-08-13 08:41:37.833+07', 'Token rotation', '2026-08-13 08:40:10.02+07', '2026-08-13 08:41:37.849+07', NULL, 151, 1);
+INSERT INTO public.refresh_tokens VALUES ('5c529aa469dcacf0b6abe6f2d6cf8b63fdaba23e9f1d835e552082f3f0f5313b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 08:41:37.833+07', '2026-08-13 08:42:04.126+07', 'Token rotation', '2026-08-13 08:41:37.851+07', '2026-08-13 08:42:04.141+07', NULL, 152, 1);
+INSERT INTO public.refresh_tokens VALUES ('8c5d9b2cabad1322284c34292e0c9cc6cdd3abf04ae67016386c2052ffd6c2d9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 08:58:20.086+07', '2026-08-13 09:13:58.066+07', 'Token rotation', '2026-08-13 08:58:20.1+07', '2026-08-13 09:13:58.101+07', NULL, 155, 1);
+INSERT INTO public.refresh_tokens VALUES ('06bfd1c70aa3e74776902b6df8b90c83c8406874f949f4d994d4a143d01e0d03', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:14:13.391+07', '2026-08-13 09:49:25.93+07', 'Token rotation', '2026-08-13 09:14:13.399+07', '2026-08-13 09:49:25.956+07', NULL, 159, 1);
+INSERT INTO public.refresh_tokens VALUES ('31c7fbf07d72d1206d8deaeedec2d57664d241803f0f22c414635a5e488e82c8', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:49:25.93+07', '2026-08-13 09:49:54.742+07', 'Token rotation', '2026-08-13 09:49:25.965+07', '2026-08-13 09:49:54.743+07', NULL, 164, 1);
+INSERT INTO public.refresh_tokens VALUES ('43a7b34422eb428f71c05fd0daba0d21a34b1befa33c115cdba774656a2ee5ae', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:49:54.742+07', '2026-08-13 09:50:16.369+07', 'Token rotation', '2026-08-13 09:49:54.744+07', '2026-08-13 09:50:16.371+07', NULL, 165, 1);
+INSERT INTO public.refresh_tokens VALUES ('371ac0d15799e1654faad01b72d4fa595d461d0a189109cce9858cc9e3cb8342', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:50:16.369+07', '2026-08-13 09:50:35.769+07', 'Token rotation', '2026-08-13 09:50:16.371+07', '2026-08-13 09:50:35.776+07', NULL, 166, 1);
+INSERT INTO public.refresh_tokens VALUES ('092ddac6cd51ca165cbf01989fbccd1e23ae064aa130b12dab097de48b138b8a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:50:46.256+07', '2026-08-13 09:51:11.516+07', 'User logout', '2026-08-13 09:50:46.259+07', '2026-08-13 09:51:11.518+07', NULL, 168, 8);
+INSERT INTO public.refresh_tokens VALUES ('8a7c4c5580b6b4b0ca50d51e92907574791268a8f34dc8905305b3435ce297b9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:57:10.848+07', '2026-08-13 09:59:42.481+07', 'Token rotation', '2026-08-13 09:57:10.893+07', '2026-08-13 09:59:42.487+07', NULL, 170, 8);
+INSERT INTO public.refresh_tokens VALUES ('7b65312939e80f2399f7b27d7bd6445f1ce9534a8cfdc83ea59556166db78284', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 10:02:16.672+07', NULL, NULL, '2026-08-13 10:02:16.683+07', '2026-08-13 10:02:16.683+07', NULL, 174, 8);
+INSERT INTO public.refresh_tokens VALUES ('fa9552b5dc8808beda04f20ac291c3ef23ad4b6f06468df5d482d7ac645a78ba', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 14:12:10.751+07', '2026-08-13 14:16:03.875+07', 'Token rotation', '2026-08-13 14:12:10.825+07', '2026-08-13 14:16:03.891+07', NULL, 180, 8);
+INSERT INTO public.refresh_tokens VALUES ('3351117b0c1b73871ce96c33c2d369f54b749a1edf20a409bc49a650b7ce8dfc', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 13:35:09.301+07', '2026-08-13 14:18:24.198+07', 'Token rotation', '2026-08-13 13:35:09.318+07', '2026-08-13 14:18:24.204+07', NULL, 177, 1);
+INSERT INTO public.refresh_tokens VALUES ('5ea9e12a07e52d506cb691590fccd96f0a5d8bda25c13cf6351f607bd4b7bccd', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 14:24:01.08+07', '2026-08-13 14:47:24.794+07', 'Token rotation', '2026-08-13 14:24:01.093+07', '2026-08-13 14:47:24.821+07', NULL, 183, 1);
+INSERT INTO public.refresh_tokens VALUES ('0a85dd056832a3eca3f77a71a56e99c7afc8fdf2bb50db885bae2e16aced8dff', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 14:54:27.069+07', '2026-08-13 15:05:40.529+07', 'Token rotation', '2026-08-13 14:54:27.07+07', '2026-08-13 15:05:40.557+07', NULL, 186, 16);
+INSERT INTO public.refresh_tokens VALUES ('2e3c658fb96a587b0758cb9e26326f6b7b9d8ee17f7af7f29106c8340a5b8085', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 15:13:56.095+07', '2026-08-13 15:14:09.41+07', 'Token rotation', '2026-08-13 15:13:56.115+07', '2026-08-13 15:14:09.421+07', NULL, 189, 16);
+INSERT INTO public.refresh_tokens VALUES ('f70c7393aa394277bff202c343181616525bb4902447cd8ff1c31d9c17c2e0ed', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 15:41:55.531+07', '2026-08-13 15:54:07.931+07', 'User logout', '2026-08-13 15:41:55.541+07', '2026-08-13 15:54:07.932+07', NULL, 192, 16);
+INSERT INTO public.refresh_tokens VALUES ('350ac9e8cdacf5abab80c31ba322d2e0a7af16736a04d4ea7c5813520d245f21', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 16:32:06.445+07', '2026-08-13 16:32:09.179+07', 'Token rotation', '2026-08-13 16:32:06.459+07', '2026-08-13 16:32:09.19+07', NULL, 195, 8);
+INSERT INTO public.refresh_tokens VALUES ('949e346785d7722d5809636f94a397dd2287670587829f7568d007641cacde28', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 17:20:36.867+07', '2026-08-13 17:20:57.146+07', 'Token rotation', '2026-08-13 17:20:36.919+07', '2026-08-13 17:20:57.149+07', NULL, 198, 8);
+INSERT INTO public.refresh_tokens VALUES ('73457cd6de3a4033be1dbf0554e232eca0bcf95edfd496e03c54adcbc3cb7d0e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 17:20:57.145+07', '2026-08-13 17:53:54.925+07', 'Token rotation', '2026-08-13 17:20:57.149+07', '2026-08-13 17:53:54.933+07', NULL, 199, 8);
+INSERT INTO public.refresh_tokens VALUES ('2b8235c35ee31c115d718dfa3154f4d3a20c4399c75aa48ee9af2393a934f7ba', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15', '::1', '2026-08-21 06:44:50.181+07', NULL, NULL, '2026-08-14 06:44:50.181+07', '2026-08-14 06:44:50.181+07', NULL, 208, 9);
+INSERT INTO public.refresh_tokens VALUES ('920f8441e097b7a8070d068f951ad9111a37142412ea098b07253202e1bcf18e', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15', '::1', '2026-08-21 06:44:58.898+07', NULL, NULL, '2026-08-14 06:44:58.905+07', '2026-08-14 06:44:58.905+07', NULL, 210, 13);
+INSERT INTO public.refresh_tokens VALUES ('3d2c19d0f80fd769da29add8ff68b34efa789b47c4404aa76ca65bfbcd9b06dc', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15', '::1', '2026-08-18 16:46:37.89+07', NULL, NULL, '2026-08-11 16:46:37.897+07', '2026-08-11 16:46:37.897+07', NULL, 104, 9);
+INSERT INTO public.refresh_tokens VALUES ('de50ef74be50538f67b433350766da0f2f88d0e173998ddb709a501bccd443b6', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36', '::1', '2026-08-18 16:46:39.589+07', NULL, NULL, '2026-08-11 16:46:39.595+07', '2026-08-11 16:46:39.595+07', NULL, 106, 9);
+INSERT INTO public.refresh_tokens VALUES ('39c444f8fe4e437bac1bdec3f4236c16bd67b04b47ea53914b0a9fe180ca07e0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 18:42:23.946+07', NULL, NULL, '2026-08-12 18:42:23.96+07', '2026-08-12 18:42:23.96+07', NULL, 147, 8);
+INSERT INTO public.refresh_tokens VALUES ('672e07f99372b6ce004e87cc2cca57304b3ac6421abd41251a10c542d5911edf', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 08:30:38.102+07', NULL, NULL, '2026-08-13 08:30:38.111+07', '2026-08-13 08:30:38.111+07', NULL, 148, 8);
+INSERT INTO public.refresh_tokens VALUES ('70c025cc1747f6fcee698e16c73bf6f5af7b727c794585a2c83fc6e76ca8526b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:13:58.066+07', '2026-08-13 09:13:59.984+07', 'Token rotation', '2026-08-13 09:13:58.11+07', '2026-08-13 09:13:59.985+07', NULL, 156, 1);
+INSERT INTO public.refresh_tokens VALUES ('e5c1ee88cc3cecf2bab8c4051dcf39f7ef28a1183a4bd8f134d2883c9bcba524', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:13:59.984+07', '2026-08-13 09:14:08.974+07', 'Token rotation', '2026-08-13 09:13:59.986+07', '2026-08-13 09:14:08.982+07', NULL, 157, 1);
+INSERT INTO public.refresh_tokens VALUES ('34fd74e8035669afb81810052d9d0b0e50f8e69f7a2b71d1f8784e0cc2abb12f', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 08:42:04.126+07', '2026-08-13 09:14:22.085+07', 'Token rotation', '2026-08-13 08:42:04.142+07', '2026-08-13 09:14:22.087+07', NULL, 153, 1);
+INSERT INTO public.refresh_tokens VALUES ('8db2e16e0ad2207578ee91a351d1fde6823d0c931fd33a79f93511e78dc5817e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:14:22.085+07', '2026-08-13 09:14:24.411+07', 'User logout', '2026-08-13 09:14:22.088+07', '2026-08-13 09:14:24.413+07', NULL, 160, 1);
+INSERT INTO public.refresh_tokens VALUES ('d6e462a8c23b313a4fabf5e4b2cec943d0ed8f717d064cb06ca0adbe8957998a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:16:42.065+07', '2026-08-13 09:32:24.374+07', 'Token rotation', '2026-08-13 09:16:42.087+07', '2026-08-13 09:32:24.411+07', NULL, 162, 8);
+INSERT INTO public.refresh_tokens VALUES ('84adfbeaf117259a66797f8156ff9be473e53ebbac64061f44c0837c1954afe7', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36', '::1', '2026-08-20 09:59:41.289+07', NULL, NULL, '2026-08-13 09:59:41.311+07', '2026-08-13 09:59:41.311+07', NULL, 171, 1);
+INSERT INTO public.refresh_tokens VALUES ('ffc40f08b15c8586a5d76330ed914af9f29fe09cde019301d49983081f3c33ea', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:50:35.769+07', '2026-08-13 09:59:42.914+07', 'Token rotation', '2026-08-13 09:50:35.777+07', '2026-08-13 09:59:42.926+07', NULL, 167, 1);
+INSERT INTO public.refresh_tokens VALUES ('bd563a11892a1f91ea48482fc8ec63101a4f0d0958ed3311ca4fcdf47e188af8', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:59:42.481+07', '2026-08-13 10:02:16.672+07', 'Token rotation', '2026-08-13 09:59:42.488+07', '2026-08-13 10:02:16.682+07', NULL, 172, 8);
+INSERT INTO public.refresh_tokens VALUES ('07b4610c3d9677d7a37f0ea0a0e8db5175fc5be71636b107f52735ff73aa153c', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 13:32:27.318+07', '2026-08-13 13:51:27.086+07', 'Token rotation', '2026-08-13 13:32:27.325+07', '2026-08-13 13:51:27.139+07', NULL, 175, 8);
+INSERT INTO public.refresh_tokens VALUES ('034ffcdb84f1eddefb60fca698a9015e3a15ddd20f45ac77e81f8c9530962bca', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 13:51:27.086+07', '2026-08-13 14:01:11.812+07', 'Token rotation', '2026-08-13 13:51:27.149+07', '2026-08-13 14:01:11.858+07', NULL, 178, 8);
+INSERT INTO public.refresh_tokens VALUES ('50dbb4038b50de49a6de3658994a4503028ef1f53b9c921604e9cab288fd4118', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 14:16:03.875+07', '2026-08-13 14:45:22.416+07', 'Token rotation', '2026-08-13 14:16:03.893+07', '2026-08-13 14:45:22.449+07', NULL, 181, 8);
+INSERT INTO public.refresh_tokens VALUES ('d5146d15aacb2fe24f0fe3655829180ae5fd4cbb9e75a8426bb74df3992e14f4', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 14:45:22.416+07', NULL, NULL, '2026-08-13 14:45:22.457+07', '2026-08-13 14:45:22.457+07', NULL, 184, 8);
+INSERT INTO public.refresh_tokens VALUES ('81feb160d30fa6584b22ac55b47544205ec487bd24d4a7e94146ed2e70048bbd', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 15:05:40.529+07', '2026-08-13 15:05:56.346+07', 'Token rotation', '2026-08-13 15:05:40.564+07', '2026-08-13 15:05:56.355+07', NULL, 187, 16);
+INSERT INTO public.refresh_tokens VALUES ('bd968b901b414b5eefe59f1e07f9d7c9ae1ec4e4aa729fd8f1aae281e8c21483', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 15:14:09.41+07', '2026-08-13 15:41:55.531+07', 'Token rotation', '2026-08-13 15:14:09.423+07', '2026-08-13 15:41:55.539+07', NULL, 190, 16);
+INSERT INTO public.refresh_tokens VALUES ('cad7f4b93f470e58c9a59c78de8197aeea06d88ea1b509b793ecdbb4207fa662', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 15:54:16.733+07', '2026-08-13 16:18:53.357+07', 'Token rotation', '2026-08-13 15:54:16.735+07', '2026-08-13 16:18:53.363+07', NULL, 193, 8);
+INSERT INTO public.refresh_tokens VALUES ('e2ee83b06dd6c306c61a7a661cd44e1ed8545b325263cca57947a07ca31e5cc9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 16:32:09.179+07', '2026-08-13 16:46:34.085+07', 'Token rotation', '2026-08-13 16:32:09.192+07', '2026-08-13 16:46:34.097+07', NULL, 196, 8);
+INSERT INTO public.refresh_tokens VALUES ('e6e728cbecf16959d7dd3c31cc614adee6d13feff2a6431a508025c458860c3b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 17:53:54.925+07', '2026-08-13 18:29:57.433+07', 'Token rotation', '2026-08-13 17:53:54.935+07', '2026-08-13 18:29:57.468+07', NULL, 200, 8);
+INSERT INTO public.refresh_tokens VALUES ('b22b17c6c5b4dcb446ce441928a9ea3e8283f6bbf567566033e4c4a72759260c', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36', '::1', '2026-08-21 06:43:56.144+07', NULL, NULL, '2026-08-14 06:43:56.153+07', '2026-08-14 06:43:56.153+07', NULL, 203, 9);
+INSERT INTO public.refresh_tokens VALUES ('5abfe21a61fa09acaa19bd87839d2c0168a7583f16bfe2ab69a8db22beadf583', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36', '::1', '2026-08-21 06:43:52.629+07', '2026-08-14 06:44:01.765+07', 'Token rotation', '2026-08-14 06:43:52.632+07', '2026-08-14 06:44:01.801+07', NULL, 202, 13);
+INSERT INTO public.refresh_tokens VALUES ('686f9ef60691e8242e485e3c9413580c37073ab95a160d8aaf0e3ad96dbca235', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0', '::ffff:127.0.0.1', '2026-08-21 06:44:22.741+07', NULL, NULL, '2026-08-14 06:44:22.741+07', '2026-08-14 06:44:22.741+07', NULL, 205, 13);
+INSERT INTO public.refresh_tokens VALUES ('9cffbf8ea78da74ec7a25a5e38e39854eb6fd4f4398bf1deaeadf4d0c856f140', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15', '::1', '2026-08-21 06:44:51.579+07', NULL, NULL, '2026-08-14 06:44:51.579+07', '2026-08-14 06:44:51.579+07', NULL, 209, 1);
+INSERT INTO public.refresh_tokens VALUES ('2ae956a691fcef88de36720ca64cbaffc0716992f2f979dfc1700b194fb45eaa', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15', '::1', '2026-08-21 06:44:48.633+07', '2026-08-14 06:44:58.898+07', 'Token rotation', '2026-08-14 06:44:48.634+07', '2026-08-14 06:44:58.904+07', NULL, 207, 13);
+INSERT INTO public.refresh_tokens VALUES ('61f7962443777a9c37b1c9fe415a790ee234f9d260f396f68d81347a886fd8dc', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36', '::1', '2026-08-21 06:54:42.423+07', NULL, NULL, '2026-08-14 06:54:42.424+07', '2026-08-14 06:54:42.424+07', NULL, 213, 9);
+INSERT INTO public.refresh_tokens VALUES ('69e163c1ee7dc97c23a0c544e2dda1a9de71477be7b13da8a04d9bc4998e3142', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 06:47:25.719+07', '2026-08-14 06:55:45.375+07', 'User logout', '2026-08-14 06:47:25.719+07', '2026-08-14 06:55:45.376+07', NULL, 211, 13);
+INSERT INTO public.refresh_tokens VALUES ('f7ed272a58a1937edcd862d0d616ea2b6dc0252722e36d2e7c74683987ce3e4c', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-22 07:11:41.622+07', '2026-08-15 07:50:31.327+07', 'Token rotation', '2026-08-15 07:11:41.636+07', '2026-08-15 07:50:31.361+07', NULL, 271, 8);
+INSERT INTO public.refresh_tokens VALUES ('6f707559b7e514ee6a18a756a3aa00af6b93110e173a067eb141d917683a32f6', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36', '::1', '2026-08-18 16:46:38.584+07', '2026-08-11 16:46:39.589+07', 'Token rotation', '2026-08-11 16:46:38.585+07', '2026-08-11 16:46:39.593+07', NULL, 105, 9);
+INSERT INTO public.refresh_tokens VALUES ('9af05c4594b3fffd973163c562736c26502d91f236bfd9b0d7e343fa5526684d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0', '::ffff:127.0.0.1', '2026-08-18 16:46:41.147+07', NULL, NULL, '2026-08-11 16:46:41.158+07', '2026-08-11 16:46:41.158+07', NULL, 108, 9);
+INSERT INTO public.refresh_tokens VALUES ('04778a4386c819a29894f35032e8856bed6b7423f484af4e9ef3450023616684', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15', '::1', '2026-08-18 16:46:47.386+07', NULL, NULL, '2026-08-11 16:46:47.389+07', '2026-08-11 16:46:47.389+07', NULL, 112, 9);
+INSERT INTO public.refresh_tokens VALUES ('3d90d21935e9eb56c3190ec08cb39b5e3d6f56c77e355b13d7846f967482d78e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 09:13:26.963+07', '2026-08-12 09:45:25.424+07', 'Token rotation', '2026-08-12 09:13:26.969+07', '2026-08-12 09:45:25.448+07', NULL, 113, 8);
+INSERT INTO public.refresh_tokens VALUES ('5edc7cea2c55b58d98a4affff8d1e58a5cc9b7b17012dac45b97a81df47cf7e3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 09:45:25.424+07', '2026-08-12 09:49:08.3+07', 'Token rotation', '2026-08-12 09:45:25.451+07', '2026-08-12 09:49:08.319+07', NULL, 114, 8);
+INSERT INTO public.refresh_tokens VALUES ('a88dcf1c8c4e749985bff0d7389acdb8aa893c1a9c514c3b9e565ea0c0dacaee', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 09:49:08.3+07', '2026-08-12 09:49:14.188+07', 'Token rotation', '2026-08-12 09:49:08.322+07', '2026-08-12 09:49:14.19+07', NULL, 115, 8);
+INSERT INTO public.refresh_tokens VALUES ('336ea6387e0da9acc9b36b377acc0076848c43192bfc15d293366e291f7883c6', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 09:49:14.188+07', '2026-08-12 09:49:36.878+07', 'Token rotation', '2026-08-12 09:49:14.192+07', '2026-08-12 09:49:36.88+07', NULL, 116, 8);
+INSERT INTO public.refresh_tokens VALUES ('39a5f6db23ca61f8b0ce2a90ab2094ad5c03918e7c1303772d95c3127b3b972b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 09:49:36.878+07', '2026-08-12 09:49:38.242+07', 'Token rotation', '2026-08-12 09:49:36.881+07', '2026-08-12 09:49:38.244+07', NULL, 117, 8);
+INSERT INTO public.refresh_tokens VALUES ('4218883b97645617116fa9e3d938a48a04f98207ba29931aac8d7b50c5373b78', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 09:49:38.242+07', '2026-08-12 09:49:38.903+07', 'Token rotation', '2026-08-12 09:49:38.245+07', '2026-08-12 09:49:38.913+07', NULL, 118, 8);
+INSERT INTO public.refresh_tokens VALUES ('4e80a97931593a2321c8ad53fbf6701c4dadfebeb813dc3f841031419f4766ad', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 09:49:38.903+07', NULL, NULL, '2026-08-12 09:49:38.914+07', '2026-08-12 09:49:38.914+07', NULL, 119, 8);
+INSERT INTO public.refresh_tokens VALUES ('2ef77ba24a1415df9f597b1f80b6b44e039a4512ce60b14edc5624af6936e0c7', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 09:49:45.839+07', '2026-08-12 09:57:17.145+07', 'Token rotation', '2026-08-12 09:49:45.839+07', '2026-08-12 09:57:17.163+07', NULL, 120, 8);
+INSERT INTO public.refresh_tokens VALUES ('feedc48c8fc114443baf70f935b2e56c5a266926958dfc0605fa6eacb5620998', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 09:57:17.145+07', '2026-08-12 10:07:23.168+07', 'Token rotation', '2026-08-12 09:57:17.164+07', '2026-08-12 10:07:23.199+07', NULL, 121, 8);
+INSERT INTO public.refresh_tokens VALUES ('17ec7f24d0bfa169f19e60a4adbd7dd50242f7a97d8f6a3dac1d3b85c284b874', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:07:23.168+07', '2026-08-12 10:07:28.353+07', 'Token rotation', '2026-08-12 10:07:23.204+07', '2026-08-12 10:07:28.365+07', NULL, 122, 8);
+INSERT INTO public.refresh_tokens VALUES ('d38e63efc43e929967cc72c6db7bea3899f079cbc28dde0a39f635d342c29baf', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:07:28.353+07', '2026-08-12 10:15:47.135+07', 'Token rotation', '2026-08-12 10:07:28.366+07', '2026-08-12 10:15:47.159+07', NULL, 123, 8);
+INSERT INTO public.refresh_tokens VALUES ('63b2afed5d846b70227810ca4270bd0acb725647b256944878c9ad430798cf50', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:15:47.135+07', '2026-08-12 10:16:27.054+07', 'User logout', '2026-08-12 10:15:47.165+07', '2026-08-12 10:16:27.055+07', NULL, 124, 8);
+INSERT INTO public.refresh_tokens VALUES ('0bd2a875058a53898903871c2f7c2c8d987d4df9b36eefaad38ba7934dce0859', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:16:34.089+07', '2026-08-12 10:16:39.634+07', 'Token rotation', '2026-08-12 10:16:34.089+07', '2026-08-12 10:16:39.642+07', NULL, 125, 8);
+INSERT INTO public.refresh_tokens VALUES ('d7d8a5833394add447822a74510771fc84c53be5fe0570fedf46cfba52d18b36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:16:39.634+07', '2026-08-12 10:22:31.942+07', 'User logout', '2026-08-12 10:16:39.644+07', '2026-08-12 10:22:31.943+07', NULL, 126, 8);
+INSERT INTO public.refresh_tokens VALUES ('2c36d9e0cb2316b27f600a24e5066ee2adbe758852ebb892accc913078c76bb9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:22:39.632+07', '2026-08-12 10:23:02.401+07', 'Token rotation', '2026-08-12 10:22:39.632+07', '2026-08-12 10:23:02.412+07', NULL, 127, 8);
+INSERT INTO public.refresh_tokens VALUES ('0d3d4e50e3b84c6250c4758f57f7b894118d6b58298068524eb149f7bad6eb92', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:23:02.401+07', '2026-08-12 10:23:09.178+07', 'User logout', '2026-08-12 10:23:02.414+07', '2026-08-12 10:23:09.179+07', NULL, 128, 8);
+INSERT INTO public.refresh_tokens VALUES ('ba2ad843e0b10ce6a0d8390d13ef168310d9aeda6e3246293fe3236bcdd31509', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:27:54.329+07', '2026-08-12 10:27:57.944+07', 'Token rotation', '2026-08-12 10:27:54.329+07', '2026-08-12 10:27:57.951+07', NULL, 130, 8);
+INSERT INTO public.refresh_tokens VALUES ('57201a9d7843221ae72d4a4202c9503c35448d4886aa74b3e70d09f03396231d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:27:57.944+07', '2026-08-12 10:28:27.354+07', 'Token rotation', '2026-08-12 10:27:57.953+07', '2026-08-12 10:28:27.362+07', NULL, 131, 8);
+INSERT INTO public.refresh_tokens VALUES ('a21b4ae9a83105d9789f0e3cb12d7763ff58452b2a1aac1bff17fe60d97efd80', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:28:27.354+07', NULL, NULL, '2026-08-12 10:28:27.365+07', '2026-08-12 10:28:27.365+07', NULL, 132, 8);
+INSERT INTO public.refresh_tokens VALUES ('3d108b4b5a626b8b718be14b096cd0bdc1a81b9921240f7183410126544cff1a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:23:29.554+07', '2026-08-12 10:31:54.367+07', 'Token rotation', '2026-08-12 10:23:29.555+07', '2026-08-12 10:31:54.385+07', NULL, 129, 8);
+INSERT INTO public.refresh_tokens VALUES ('368da38fd306823a0e18c65edcfa631755ff3c2cec58fa1de93f5335e7bce1c1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:31:54.366+07', '2026-08-12 10:35:13.842+07', 'Token rotation', '2026-08-12 10:31:54.388+07', '2026-08-12 10:35:13.858+07', NULL, 133, 8);
+INSERT INTO public.refresh_tokens VALUES ('08b5346de04748aa52863a1a1ff063742d1a3654e2311899d6630aca41d409b2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:35:13.842+07', '2026-08-12 10:35:44.631+07', 'Token rotation', '2026-08-12 10:35:13.86+07', '2026-08-12 10:35:44.656+07', NULL, 134, 8);
+INSERT INTO public.refresh_tokens VALUES ('4dd3ab8b29caa46a073c18ff8d20188dce47e477df9b39323be92660cb8dda21', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:35:44.631+07', '2026-08-12 10:38:00.649+07', 'Token rotation', '2026-08-12 10:35:44.659+07', '2026-08-12 10:38:00.669+07', NULL, 135, 8);
+INSERT INTO public.refresh_tokens VALUES ('2f31ce76b4cd6a5d032e6658f32fe54a1f07a1386619c1494783c900a19735cd', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 10:38:00.649+07', NULL, NULL, '2026-08-12 10:38:00.671+07', '2026-08-12 10:38:00.671+07', NULL, 136, 8);
+INSERT INTO public.refresh_tokens VALUES ('81bba699908226e0e181022b1c4246e3a306274b297612943ed0cafc01c11c98', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 17:16:42.273+07', '2026-08-12 17:24:45.111+07', 'Token rotation', '2026-08-12 17:16:42.294+07', '2026-08-12 17:24:45.134+07', NULL, 144, 8);
+INSERT INTO public.refresh_tokens VALUES ('ea1f1ec6523e13923ecf08d505fb297367291dea84cb044afce32810123bd778', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 16:44:38.239+07', '2026-08-12 16:54:05.924+07', 'Token rotation', '2026-08-12 16:44:38.25+07', '2026-08-12 16:54:05.951+07', NULL, 137, 8);
+INSERT INTO public.refresh_tokens VALUES ('fa802679f39cf5547f68ed6cb714f59e106a718ffaf437119f99e3a3b756424d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 08:34:04.18+07', '2026-08-23 08:35:09.456+07', 'Token rotation', '2026-08-23 08:34:04.193+07', '2026-08-23 08:35:09.473+07', NULL, 469, 18);
+INSERT INTO public.refresh_tokens VALUES ('bc23bdf2f748436470e998f8c73a75f8cedf065c83e6eb8983ddfe5c8f2cea92', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 16:54:05.924+07', '2026-08-12 17:08:22.528+07', 'Token rotation', '2026-08-12 16:54:05.954+07', '2026-08-12 17:08:22.551+07', NULL, 138, 8);
+INSERT INTO public.refresh_tokens VALUES ('b08f12d240877647f1a140299cbc0af0645a217b20094fac3770b6cd505ec73b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 08:40:03.263+07', '2026-08-13 08:40:09.983+07', 'Token rotation', '2026-08-13 08:40:03.268+07', '2026-08-13 08:40:10.017+07', NULL, 150, 1);
+INSERT INTO public.refresh_tokens VALUES ('35c6b7ded3e3b0e4aed7dc34227f8d5a13186bbadd745c734a4280c186f4b16b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 17:08:22.527+07', '2026-08-12 17:08:43.98+07', 'Token rotation', '2026-08-12 17:08:22.556+07', '2026-08-12 17:08:43.983+07', NULL, 139, 8);
+INSERT INTO public.refresh_tokens VALUES ('78f2e68db928adcc4352626f0d4d3d34ec17d999c6ddae9e5845ad58b6d9a0b8', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-22 07:50:31.326+07', '2026-08-15 08:47:58.112+07', 'Token rotation', '2026-08-15 07:50:31.37+07', '2026-08-15 08:47:58.144+07', NULL, 272, 8);
+INSERT INTO public.refresh_tokens VALUES ('2635de8c9a6a29b62e5ef635e1ba975b584725729e48d493d0b8eb19d91de772', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 17:08:43.98+07', '2026-08-12 17:10:09.69+07', 'Token rotation', '2026-08-12 17:08:43.984+07', '2026-08-12 17:10:09.701+07', NULL, 140, 8);
+INSERT INTO public.refresh_tokens VALUES ('26021462a381111c695e847fe342914b0c5d216bd1aac36b8d5aa31e06fb6278', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 17:10:09.69+07', '2026-08-12 17:14:01.556+07', 'Token rotation', '2026-08-12 17:10:09.703+07', '2026-08-12 17:14:01.589+07', NULL, 141, 8);
+INSERT INTO public.refresh_tokens VALUES ('7f7f15290f5aca81032140266e4e8ca0ce29cb0e1f15190a89c4108e1c0c91ce', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:14:08.974+07', '2026-08-13 09:14:13.391+07', 'Token rotation', '2026-08-13 09:14:08.984+07', '2026-08-13 09:14:13.398+07', NULL, 158, 1);
+INSERT INTO public.refresh_tokens VALUES ('92eb3ec6774e523f916def3aa595281f7620ec6f1fe204b9a462e96f91c2465c', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 17:14:01.556+07', '2026-08-12 17:16:30.833+07', 'Token rotation', '2026-08-12 17:14:01.593+07', '2026-08-12 17:16:30.862+07', NULL, 142, 8);
+INSERT INTO public.refresh_tokens VALUES ('700a259b156422037c69c813918dba5672b9b963f6d0eb67fc7bb23df63a51dd', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-19 17:16:30.833+07', '2026-08-12 17:16:42.273+07', 'Token rotation', '2026-08-12 17:16:30.864+07', '2026-08-12 17:16:42.29+07', NULL, 143, 8);
+INSERT INTO public.refresh_tokens VALUES ('505eb3646dc4dceeeac505c384553b1533c100378c7b19fa4ddcf32abbc1258a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:14:33.495+07', '2026-08-13 09:16:42.065+07', 'Token rotation', '2026-08-13 09:14:33.496+07', '2026-08-13 09:16:42.085+07', NULL, 161, 8);
+INSERT INTO public.refresh_tokens VALUES ('b026dcf904b6341d60f7ec0eba400f6c5521a1e253fc5c3d7921115a7df77e08', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:32:24.374+07', '2026-08-13 09:50:46.256+07', 'Token rotation', '2026-08-13 09:32:24.419+07', '2026-08-13 09:50:46.258+07', NULL, 163, 8);
+INSERT INTO public.refresh_tokens VALUES ('c990cfb205f5708554ebf93374f5eab5e8a565109fa2bcd92a19a24e2b1931b7', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:51:18.481+07', '2026-08-13 09:57:10.849+07', 'Token rotation', '2026-08-13 09:51:18.482+07', '2026-08-13 09:57:10.882+07', NULL, 169, 8);
+INSERT INTO public.refresh_tokens VALUES ('81e12010f433dff1b7e8d02e9b74cc046ab2629219708795fb32a399dcd06e64', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36', '::1', '2026-08-20 08:55:53.86+07', '2026-08-13 09:59:41.289+07', 'Token rotation', '2026-08-13 08:55:53.86+07', '2026-08-13 09:59:41.309+07', NULL, 154, 1);
+INSERT INTO public.refresh_tokens VALUES ('17349881b74b8d5c73c352e61107e87a3640cc1fb4b4935512fc72c971e6792a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 09:59:42.914+07', NULL, NULL, '2026-08-13 09:59:42.929+07', '2026-08-13 09:59:42.929+07', NULL, 173, 1);
+INSERT INTO public.refresh_tokens VALUES ('ef9c26a339c72f7e94254428cb50b579628550d45cee92ebac5643f8dcd82a93', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 13:34:55.012+07', '2026-08-13 13:35:09.301+07', 'Token rotation', '2026-08-13 13:34:55.013+07', '2026-08-13 13:35:09.316+07', NULL, 176, 1);
+INSERT INTO public.refresh_tokens VALUES ('649155b3024929cb09d20b2f3cbf3ef9ca3b4e91eef38eebd33df5d2153e939a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 14:01:11.812+07', '2026-08-13 14:12:10.751+07', 'Token rotation', '2026-08-13 14:01:11.869+07', '2026-08-13 14:12:10.805+07', NULL, 179, 8);
+INSERT INTO public.refresh_tokens VALUES ('04c7f3a164f2b290f820fdbdbb58835b2b50c631d7b630b9a98c8f8e97cee086', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 14:18:24.198+07', '2026-08-13 14:24:01.08+07', 'Token rotation', '2026-08-13 14:18:24.206+07', '2026-08-13 14:24:01.091+07', NULL, 182, 1);
+INSERT INTO public.refresh_tokens VALUES ('5c075151fba3b1c150fbe1ff3ad5e567a12c41af40a0cd817444215b73adb1e9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 15:05:56.346+07', '2026-08-13 15:13:56.095+07', 'Token rotation', '2026-08-13 15:05:56.357+07', '2026-08-13 15:13:56.111+07', NULL, 188, 16);
+INSERT INTO public.refresh_tokens VALUES ('7fee671c6e432c0b1f26cf63eeef03c5223ca871f7c18152afcfae54e1d41e3b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 14:47:24.794+07', '2026-08-13 15:41:25.952+07', 'Token rotation', '2026-08-13 14:47:24.828+07', '2026-08-13 15:41:25.964+07', NULL, 185, 1);
+INSERT INTO public.refresh_tokens VALUES ('7c68d554db92b6342850b53e55c8880a864429f556f836e99b48c2a92b7dbede', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 15:41:25.952+07', '2026-08-13 15:41:27.398+07', 'User logout', '2026-08-13 15:41:25.976+07', '2026-08-13 15:41:27.4+07', NULL, 191, 1);
+INSERT INTO public.refresh_tokens VALUES ('41f351c23ba72a2943a4973a00179d2bc0d47c1b5030eb8d6aced5fb7acb4c91', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 16:18:53.357+07', '2026-08-13 16:32:06.445+07', 'Token rotation', '2026-08-13 16:18:53.365+07', '2026-08-13 16:32:06.457+07', NULL, 194, 8);
+INSERT INTO public.refresh_tokens VALUES ('7540741ec74836a4c784232a0463155c78b79d096f5c167b7b9ca0e0cf2fdb8e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 16:46:34.085+07', '2026-08-13 17:20:36.867+07', 'Token rotation', '2026-08-13 16:46:34.099+07', '2026-08-13 17:20:36.908+07', NULL, 197, 8);
+INSERT INTO public.refresh_tokens VALUES ('85a63d00b8b5db9ff74a9c29d41c5e153ac6d1cfdda8772da892d7c2866b486d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-20 18:29:57.433+07', NULL, NULL, '2026-08-13 18:29:57.479+07', '2026-08-13 18:29:57.479+07', NULL, 201, 8);
+INSERT INTO public.refresh_tokens VALUES ('2d2b1ac1d7f6b7f325930836dd27f3fcb6250d1a4f8ce92ac0843ae41ecff61a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36', '::1', '2026-08-21 06:44:01.765+07', NULL, NULL, '2026-08-14 06:44:01.805+07', '2026-08-14 06:44:01.805+07', NULL, 204, 13);
+INSERT INTO public.refresh_tokens VALUES ('a932d69003f82eef593d37deafacc7e64fab720f53283c6efebe7a9b1248bb4b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0', '::ffff:127.0.0.1', '2026-08-21 06:44:35.744+07', NULL, NULL, '2026-08-14 06:44:35.744+07', '2026-08-14 06:44:35.744+07', NULL, 206, 9);
+INSERT INTO public.refresh_tokens VALUES ('816f7f0e8c5034e095229038564f172a1eeb33cba880cfd7cef3129d5c50cf3e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36', '::1', '2026-08-21 06:54:42.414+07', NULL, NULL, '2026-08-14 06:54:42.417+07', '2026-08-14 06:54:42.417+07', NULL, 212, 13);
+INSERT INTO public.refresh_tokens VALUES ('a060b8f533d08c4a04ffe8449767bf3f3758d10eb8f830395179458607f270d2', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Safari/605.1.15', '::1', '2026-08-21 06:55:10.696+07', NULL, NULL, '2026-08-14 06:55:10.697+07', '2026-08-14 06:55:10.697+07', NULL, 216, 1);
+INSERT INTO public.refresh_tokens VALUES ('da0a3061610cc1d87cd70418b71daca5ef560ffc3cdb30b5d74ebfeaf87655af', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 08:35:09.456+07', NULL, NULL, '2026-08-23 08:35:09.475+07', '2026-08-23 08:35:09.475+07', NULL, 470, 18);
+INSERT INTO public.refresh_tokens VALUES ('25de6cb2b356850261a10a7efbdd4c83242e6a5ebd76d3445e464f4cad5a10cf', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-22 08:18:03.758+07', '2026-08-15 08:18:15.442+07', 'Token rotation', '2026-08-15 08:18:03.759+07', '2026-08-15 08:18:15.449+07', NULL, 273, 1);
+INSERT INTO public.refresh_tokens VALUES ('4d1ac96b2bad773dc2186bfe8079e79fe2fb466e3314ca91188b7f353b0c3cd3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-22 08:18:15.442+07', '2026-08-15 08:19:54.802+07', 'Token rotation', '2026-08-15 08:18:15.45+07', '2026-08-15 08:19:54.811+07', NULL, 274, 1);
+INSERT INTO public.refresh_tokens VALUES ('e18e9a1151eee1ae9be39fd73a821f8c5fbbfb3d56448617a8d65193e1e2d77b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-22 08:47:58.111+07', '2026-08-15 09:39:11.47+07', 'Token rotation', '2026-08-15 08:47:58.153+07', '2026-08-15 09:39:11.496+07', NULL, 277, 8);
+INSERT INTO public.refresh_tokens VALUES ('2204263d8ac5a133944eb83bb01f51489d4fa83641bd073f7464afd172547dfc', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 07:26:40.688+07', '2026-08-16 07:33:02.577+07', 'Token rotation', '2026-08-16 07:26:40.689+07', '2026-08-16 07:33:02.607+07', NULL, 279, 18);
+INSERT INTO public.refresh_tokens VALUES ('6e8834edabd71686da7a5d9684fa28da8f0a5f6410b9b91b5283d2d7e140108d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 08:14:17.422+07', '2026-08-16 08:14:28.712+07', 'Token rotation', '2026-08-16 08:14:17.457+07', '2026-08-16 08:14:28.714+07', NULL, 281, 18);
+INSERT INTO public.refresh_tokens VALUES ('0451ca5254aa8f6b2dc5bb5817c25c855d828ed3ab331682c250e427980bb49d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 08:14:28.712+07', '2026-08-16 08:33:01.606+07', 'Token rotation', '2026-08-16 08:14:28.715+07', '2026-08-16 08:33:01.642+07', NULL, 282, 18);
+INSERT INTO public.refresh_tokens VALUES ('f2496a7d5ad80b331777db57bfa9eeb866e22897a518bf807a173adcb6cee4e9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 14:48:39.539+07', '2026-08-16 14:48:44.346+07', 'Token rotation', '2026-08-16 14:48:39.544+07', '2026-08-16 14:48:44.386+07', NULL, 284, 1);
+INSERT INTO public.refresh_tokens VALUES ('2495ce76bbcfd79d650cd059c1aa70a49f9e8c4e70aa030dc841f30cbc1cbd41', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 14:54:33.247+07', '2026-08-16 14:54:52.203+07', 'Token rotation', '2026-08-16 14:54:33.277+07', '2026-08-16 14:54:52.22+07', NULL, 286, 1);
+INSERT INTO public.refresh_tokens VALUES ('6ea09045ecf94db32ef137a8c3121e37e76577b078d90d305ec5807c22050d93', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 14:59:58.822+07', '2026-08-16 15:00:05.97+07', 'Token rotation', '2026-08-16 14:59:58.828+07', '2026-08-16 15:00:05.993+07', NULL, 288, 1);
+INSERT INTO public.refresh_tokens VALUES ('6c25d5cdc9b534877140edbab077d245f723c08775fb31f68ab96d0afad46be1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 15:08:47.623+07', '2026-08-16 15:12:42.218+07', 'Token rotation', '2026-08-16 15:08:47.654+07', '2026-08-16 15:12:42.234+07', NULL, 290, 1);
+INSERT INTO public.refresh_tokens VALUES ('1c5229f2151690ef6abad90e88b3a5ec553d044a84910d23900b650cc847f400', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 15:13:10.457+07', NULL, NULL, '2026-08-16 15:13:10.457+07', '2026-08-16 15:13:10.457+07', NULL, 292, 16);
+INSERT INTO public.refresh_tokens VALUES ('1ffa93034b9602e2e4fd6885a765e6f8dc6c49809a6e440db6961ea326ed6771', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 16:09:13.526+07', '2026-08-16 16:21:57.914+07', 'Token rotation', '2026-08-16 16:09:13.567+07', '2026-08-16 16:21:57.944+07', NULL, 294, 16);
+INSERT INTO public.refresh_tokens VALUES ('c3549e776e78ea7433a9c81b96ec124f2253aebfd66ffcf0b90e64c1835a290a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 16:55:03.265+07', '2026-08-16 17:00:45.437+07', 'Token rotation', '2026-08-16 16:55:03.35+07', '2026-08-16 17:00:45.449+07', NULL, 296, 16);
+INSERT INTO public.refresh_tokens VALUES ('258d033d284f14286c58fdaaf5efac7a9f653c6696271b890f2ec1c4a15423ab', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 17:04:08.518+07', '2026-08-16 17:04:24.958+07', 'User logout', '2026-08-16 17:04:08.534+07', '2026-08-16 17:04:24.959+07', NULL, 298, 16);
+INSERT INTO public.refresh_tokens VALUES ('29b484a2eddf3c9e4041cb8ee83dbef7e20920df1d4a588a9d33a13e103b2959', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 18:13:58.438+07', '2026-08-16 18:51:50.179+07', 'Token rotation', '2026-08-16 18:13:58.468+07', '2026-08-16 18:51:50.244+07', NULL, 300, 8);
+INSERT INTO public.refresh_tokens VALUES ('2bbb914b52b6442f906d31850940e209d2894ee801648a7a1048884144f14e8a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 18:54:01.808+07', '2026-08-16 18:55:45.585+07', 'Token rotation', '2026-08-16 18:54:01.842+07', '2026-08-16 18:55:45.628+07', NULL, 302, 8);
+INSERT INTO public.refresh_tokens VALUES ('fd10b13ef162eaeb2a74e24cea6e8d96a6137d0a50e7cbb8329bcf21ff949503', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 19:11:11.729+07', NULL, NULL, '2026-08-16 19:11:11.738+07', '2026-08-16 19:11:11.738+07', NULL, 304, 8);
+INSERT INTO public.refresh_tokens VALUES ('2141ad196f74be7a3e6c1b6a23919e84fb782f22a5cf38501afd417bc924f458', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 06:55:15.784+07', '2026-08-17 06:58:33.744+07', 'Token rotation', '2026-08-17 06:55:15.789+07', '2026-08-17 06:58:33.765+07', NULL, 337, 8);
+INSERT INTO public.refresh_tokens VALUES ('e369c54056bb5bc66a0e95581a7972c899fa92509038de53baf36909063150f6', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 07:07:02.587+07', '2026-08-17 07:28:18.406+07', 'Token rotation', '2026-08-17 07:07:02.636+07', '2026-08-17 07:28:18.428+07', NULL, 339, 8);
+INSERT INTO public.refresh_tokens VALUES ('f1e49748fe06f8c0b85b4120b394dea3208ee35bcd67787b6ba508ce50787fbe', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 08:08:16.453+07', '2026-08-17 08:14:18.077+07', 'Token rotation', '2026-08-17 08:08:16.481+07', '2026-08-17 08:14:18.123+07', NULL, 341, 8);
+INSERT INTO public.refresh_tokens VALUES ('a13ba38aaffd74b8a15b1a4753f51f1e0e4b36158692f2c1f25e72a4626b58bf', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 08:21:33.864+07', '2026-08-17 08:21:38.817+07', 'Token rotation', '2026-08-17 08:21:33.899+07', '2026-08-17 08:21:38.824+07', NULL, 343, 8);
+INSERT INTO public.refresh_tokens VALUES ('7603277df70eb58b2e566ee15e8877ad760298794c9131ca71f3e540aacb2bf5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 08:37:48.567+07', '2026-08-17 08:38:01.275+07', 'Token rotation', '2026-08-17 08:37:48.614+07', '2026-08-17 08:38:01.287+07', NULL, 345, 8);
+INSERT INTO public.refresh_tokens VALUES ('dc0bd5476828f8db5148ab0f738dbb2ff9e2b9e765ed8406440d2d84aae90fe2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 08:49:48.586+07', '2026-08-17 08:56:39.664+07', 'Token rotation', '2026-08-17 08:49:48.632+07', '2026-08-17 08:56:39.685+07', NULL, 347, 8);
+INSERT INTO public.refresh_tokens VALUES ('90979ba427f358f573ff974e99330111ab435337a4386b8750f8b4c69f76e518', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 08:57:14.161+07', NULL, NULL, '2026-08-17 08:57:14.185+07', '2026-08-17 08:57:14.185+07', NULL, 349, 8);
+INSERT INTO public.refresh_tokens VALUES ('aae29927edd5d1c1540d74a9e8ad86bd8b1623a116b7289bcbb56112f90ec817', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 15:22:33.483+07', '2026-08-17 15:37:34.107+07', 'Token rotation', '2026-08-17 15:22:33.49+07', '2026-08-17 15:37:34.123+07', NULL, 350, 8);
+INSERT INTO public.refresh_tokens VALUES ('3211ddb7d18943334fb3ca7d8da692feb05d782dc37233e62982d0cbc22a2811', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0', '::ffff:127.0.0.1', '2026-08-21 06:54:53.566+07', NULL, NULL, '2026-08-14 06:54:53.567+07', '2026-08-14 06:54:53.567+07', NULL, 214, 9);
+INSERT INTO public.refresh_tokens VALUES ('8e0f24bcc23e75d33b87eb5c17612c6428b6d9fc8e77a8649107c887574c44ec', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:153.0) Gecko/20100101 Firefox/153.0', '::ffff:127.0.0.1', '2026-08-21 06:55:02.541+07', NULL, NULL, '2026-08-14 06:55:02.542+07', '2026-08-14 06:55:02.542+07', NULL, 215, 1);
+INSERT INTO public.refresh_tokens VALUES ('e875abd90284790406ab6e9c5f237c1b7c0f167aef904498d5e472e303553184', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 07:24:14.021+07', '2026-08-14 07:42:32.56+07', 'Token rotation', '2026-08-14 07:24:14.022+07', '2026-08-14 07:42:32.591+07', NULL, 217, 18);
+INSERT INTO public.refresh_tokens VALUES ('395574ee08868b6cae86ddf2c3b4c56cf1a1d078fe2150f9fe7e511ed7c67139', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 07:42:32.559+07', '2026-08-14 07:42:49.466+07', 'Token rotation', '2026-08-14 07:42:32.601+07', '2026-08-14 07:42:49.48+07', NULL, 218, 18);
+INSERT INTO public.refresh_tokens VALUES ('3e59e335a2d7bc45f0941019c440e0a34aeb419ada5b91e31de117ce73491954', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 07:42:49.466+07', '2026-08-14 07:44:28.681+07', 'Token rotation', '2026-08-14 07:42:49.482+07', '2026-08-14 07:44:28.704+07', NULL, 219, 18);
+INSERT INTO public.refresh_tokens VALUES ('b269679e509faed2034a9840d65b57c88e63a79262e14da220be9e6f70503649', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 07:44:28.681+07', '2026-08-14 08:23:11.054+07', 'Token rotation', '2026-08-14 07:44:28.707+07', '2026-08-14 08:23:11.082+07', NULL, 220, 18);
+INSERT INTO public.refresh_tokens VALUES ('2108b6c47934934c8bcaadad1a94daf8da2b00b2b0683c7c0ee03f30d4045292', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 08:23:11.053+07', '2026-08-14 08:24:31.075+07', 'User logout', '2026-08-14 08:23:11.09+07', '2026-08-14 08:24:31.076+07', NULL, 221, 18);
+INSERT INTO public.refresh_tokens VALUES ('92fb4b424efe1a4e083b952b7ffb9525001062d990561a835bf862dd7154ffc2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 08:25:15.863+07', '2026-08-14 08:35:49.157+07', 'Token rotation', '2026-08-14 08:25:15.864+07', '2026-08-14 08:35:49.189+07', NULL, 222, 18);
+INSERT INTO public.refresh_tokens VALUES ('23f5eb380a33f1c792905667e81ede6e6609b157c1881ebacffa76d5e516cfbc', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 08:35:49.157+07', '2026-08-14 08:35:53.335+07', 'Token rotation', '2026-08-14 08:35:49.197+07', '2026-08-14 08:35:53.35+07', NULL, 223, 18);
+INSERT INTO public.refresh_tokens VALUES ('c04f23a84474d36f9aa23b97e642dc2b7913d142f53d069d7e5f29684764b14e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 08:35:53.335+07', '2026-08-14 08:43:40.532+07', 'Token rotation', '2026-08-14 08:35:53.352+07', '2026-08-14 08:43:40.551+07', NULL, 224, 18);
+INSERT INTO public.refresh_tokens VALUES ('882244d173c9d3ab14256817584b9be8510804dc0b5ee86d0fea6e3d42c2a626', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 08:43:40.532+07', '2026-08-14 08:58:08.685+07', 'Token rotation', '2026-08-14 08:43:40.553+07', '2026-08-14 08:58:08.717+07', NULL, 225, 18);
+INSERT INTO public.refresh_tokens VALUES ('fedc2cdee51f453406f35ebb6a66f011166a7f5925dc4b2ba4f4333ace93fcc0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 08:58:08.685+07', '2026-08-14 09:08:54.126+07', 'Token rotation', '2026-08-14 08:58:08.73+07', '2026-08-14 09:08:54.157+07', NULL, 226, 18);
+INSERT INTO public.refresh_tokens VALUES ('728c946764e7e084e55355c6a57d40bd3325ed28e9409d531671e5e490e9f783', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 09:08:54.126+07', '2026-08-14 09:29:17.175+07', 'Token rotation', '2026-08-14 09:08:54.169+07', '2026-08-14 09:29:17.205+07', NULL, 227, 18);
+INSERT INTO public.refresh_tokens VALUES ('4b1e4d4172e36dc171b50a7b5ef5506174f232ce33e20b3526c47b90df9df62e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 09:29:17.174+07', '2026-08-14 09:29:23.635+07', 'User logout', '2026-08-14 09:29:17.215+07', '2026-08-14 09:29:23.637+07', NULL, 228, 18);
+INSERT INTO public.refresh_tokens VALUES ('29bbcf92851318e700156dc6f807de918882c35e576141f5fd74c5b1ca52441e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 09:29:32.787+07', '2026-08-14 09:29:37.337+07', 'Token rotation', '2026-08-14 09:29:32.788+07', '2026-08-14 09:29:37.356+07', NULL, 229, 1);
+INSERT INTO public.refresh_tokens VALUES ('6ca05b3294d6856a811a8d6619a355e155bb2243ea6145dd0d5420ac208b951e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 09:29:37.337+07', '2026-08-14 09:34:09.65+07', 'Token rotation', '2026-08-14 09:29:37.358+07', '2026-08-14 09:34:09.68+07', NULL, 230, 1);
+INSERT INTO public.refresh_tokens VALUES ('23e9aeaeee8425c947ab9fadd6745ad829aee8a2c64de6be140c22dcfeb7ba49', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 09:34:09.65+07', '2026-08-14 09:37:14.757+07', 'Token rotation', '2026-08-14 09:34:09.687+07', '2026-08-14 09:37:14.77+07', NULL, 231, 1);
+INSERT INTO public.refresh_tokens VALUES ('866acb40112607fe769aef4eccd49351b17de7b62982d5084ec968d4d58a2aa0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 09:37:14.757+07', '2026-08-14 09:39:41.623+07', 'User logout', '2026-08-14 09:37:14.771+07', '2026-08-14 09:39:41.625+07', NULL, 232, 1);
+INSERT INTO public.refresh_tokens VALUES ('e3f3c48fbb083f222df1fbae99e0d80af73106bc69d00089ec26f8a8ac532b97', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 09:39:51.307+07', '2026-08-14 09:39:58.586+07', 'Token rotation', '2026-08-14 09:39:51.308+07', '2026-08-14 09:39:58.604+07', NULL, 233, 8);
+INSERT INTO public.refresh_tokens VALUES ('4bb653394d48f260b2be0c2a1672148a87ed8d48b050e5a8734b5ba736b8ba3a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 09:39:58.586+07', '2026-08-14 10:01:19.009+07', 'Token rotation', '2026-08-14 09:39:58.607+07', '2026-08-14 10:01:19.039+07', NULL, 234, 8);
+INSERT INTO public.refresh_tokens VALUES ('6ec9804585d78f282c3d469f6c81c94e799e5377712c85dbf4ca7fe026573089', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 10:01:19.009+07', '2026-08-14 10:06:09.786+07', 'Token rotation', '2026-08-14 10:01:19.048+07', '2026-08-14 10:06:09.806+07', NULL, 235, 8);
+INSERT INTO public.refresh_tokens VALUES ('2bb93c6d076f1ec2853de86ae8fec23ffb7ab62568a610b74786231cf5ddd351', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 10:06:09.786+07', NULL, NULL, '2026-08-14 10:06:09.808+07', '2026-08-14 10:06:09.808+07', NULL, 236, 8);
+INSERT INTO public.refresh_tokens VALUES ('1b603951b5e4b26dde196847e97749cbd3a7e0cfceb3ef71d036930ae54f84de', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 11:57:46.458+07', '2026-08-14 12:24:00.578+07', 'Token rotation', '2026-08-14 11:57:46.466+07', '2026-08-14 12:24:00.655+07', NULL, 237, 8);
+INSERT INTO public.refresh_tokens VALUES ('542f0a3dacde11edaa1e67213f3cc4a8246e7182e1bdf93917c2905d6edfc9e0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 12:24:00.578+07', '2026-08-14 12:29:12.315+07', 'Token rotation', '2026-08-14 12:24:00.664+07', '2026-08-14 12:29:12.335+07', NULL, 238, 8);
+INSERT INTO public.refresh_tokens VALUES ('bdc04a9d942f9e42af75b4f98548c6af3f9f063f9807ff0fe5a846baa0f12bd8', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 12:29:12.315+07', '2026-08-14 12:38:11.614+07', 'Token rotation', '2026-08-14 12:29:12.337+07', '2026-08-14 12:38:11.627+07', NULL, 239, 8);
+INSERT INTO public.refresh_tokens VALUES ('e33014122a2abf36615098f2eec1c268816c6fd2dd1b52d0dc353205c77ed9c3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 12:38:11.614+07', '2026-08-14 13:01:41.588+07', 'Token rotation', '2026-08-14 12:38:11.629+07', '2026-08-14 13:01:41.609+07', NULL, 240, 8);
+INSERT INTO public.refresh_tokens VALUES ('b324f8bcbdaabb03c1da71e1a334e3b336f035d15d176ff1f2bc7e84c7149f9f', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 13:01:41.588+07', '2026-08-14 13:04:45.673+07', 'Token rotation', '2026-08-14 13:01:41.613+07', '2026-08-14 13:04:45.708+07', NULL, 241, 8);
+INSERT INTO public.refresh_tokens VALUES ('0eff70a75408d9c0cfb473639db736400e27a0fa3deff67484e5b1549c519aee', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-22 08:19:54.802+07', '2026-08-15 08:20:17.027+07', 'Token rotation', '2026-08-15 08:19:54.813+07', '2026-08-15 08:20:17.037+07', NULL, 275, 1);
+INSERT INTO public.refresh_tokens VALUES ('3690e702175fc1309cf27d579e958a9906fc7340b0f73f92d612eae5ee2cd130', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 13:04:45.673+07', '2026-08-14 13:06:47.373+07', 'Token rotation', '2026-08-14 13:04:45.711+07', '2026-08-14 13:06:47.392+07', NULL, 242, 8);
+INSERT INTO public.refresh_tokens VALUES ('16d79356d39407f34964197b842e0392fcaeb81a898ed28077cf4fda6852dfad', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 13:06:47.373+07', NULL, NULL, '2026-08-14 13:06:47.394+07', '2026-08-14 13:06:47.394+07', NULL, 243, 8);
+INSERT INTO public.refresh_tokens VALUES ('9c30a637afbc8df771857c26e367769e4aa9861c44669680dbbfced4b2f9c96d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 13:30:23.789+07', '2026-08-14 13:41:57.375+07', 'Token rotation', '2026-08-14 13:30:23.797+07', '2026-08-14 13:41:57.391+07', NULL, 244, 8);
+INSERT INTO public.refresh_tokens VALUES ('8a89aaa3debea07004e54679ff67c45dda09727596c028aa51201ccd0bc1984d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 13:41:57.374+07', '2026-08-14 14:19:59.472+07', 'Token rotation', '2026-08-14 13:41:57.393+07', '2026-08-14 14:19:59.49+07', NULL, 245, 8);
+INSERT INTO public.refresh_tokens VALUES ('b9011c5afd91be5aa5ea094bc093259a4ae3b7fc0a2be7febf898ded9752f24f', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 14:19:59.472+07', NULL, NULL, '2026-08-14 14:19:59.503+07', '2026-08-14 14:19:59.503+07', NULL, 246, 8);
+INSERT INTO public.refresh_tokens VALUES ('d5d57f9c3f0401c6c1f9dee9dffb88b36f3fbe6742808bb362d5b7a31c377f88', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 14:43:48.113+07', '2026-08-14 14:57:39.871+07', 'Token rotation', '2026-08-14 14:43:48.119+07', '2026-08-14 14:57:39.884+07', NULL, 247, 8);
+INSERT INTO public.refresh_tokens VALUES ('2b1060ca36f4af3fbdee523025ca5afe4541ebfe5387bd104bd1300c38012e8e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 14:57:39.871+07', '2026-08-14 15:38:07.498+07', 'Token rotation', '2026-08-14 14:57:39.886+07', '2026-08-14 15:38:07.528+07', NULL, 248, 8);
+INSERT INTO public.refresh_tokens VALUES ('563f4a0590f3d582fe2c4acc1f5b452fe890f6951e084d0f7c9321c02c73f510', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 15:38:07.498+07', '2026-08-14 15:45:55.702+07', 'Token rotation', '2026-08-14 15:38:07.538+07', '2026-08-14 15:45:55.735+07', NULL, 249, 8);
+INSERT INTO public.refresh_tokens VALUES ('740ad4eb0424b4be3ed23b8f9c5ecd61253a19a6da6ef60364444b035af2b400', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 15:45:55.702+07', '2026-08-14 15:46:03.161+07', 'Token rotation', '2026-08-14 15:45:55.749+07', '2026-08-14 15:46:03.174+07', NULL, 250, 8);
+INSERT INTO public.refresh_tokens VALUES ('dc39bc607c9704b5d3a29936fe90ad1e45b7ebb411338cf9820829d7315aa359', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 15:46:03.161+07', '2026-08-14 16:00:17.083+07', 'Token rotation', '2026-08-14 15:46:03.176+07', '2026-08-14 16:00:17.097+07', NULL, 251, 8);
+INSERT INTO public.refresh_tokens VALUES ('d4fa457bb219a54e7f4bc6fb1d44b73b1914fdda575effaacd74abd634abf5c7', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 16:00:17.083+07', '2026-08-14 16:22:31.618+07', 'Token rotation', '2026-08-14 16:00:17.099+07', '2026-08-14 16:22:31.645+07', NULL, 252, 8);
+INSERT INTO public.refresh_tokens VALUES ('7a0f71bd29da31bed8c3dd3d4b33faa8a28fb6c37506b661b1cc252f79286ce3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 16:22:31.618+07', '2026-08-14 17:45:56.68+07', 'Token rotation', '2026-08-14 16:22:31.657+07', '2026-08-14 17:45:56.703+07', NULL, 253, 8);
+INSERT INTO public.refresh_tokens VALUES ('b2446f63ed809562b4c1af668ed1be3250015905276930dda07ac52690104ebb', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 17:45:56.68+07', '2026-08-14 18:17:58.991+07', 'Token rotation', '2026-08-14 17:45:56.713+07', '2026-08-14 18:17:59.015+07', NULL, 254, 8);
+INSERT INTO public.refresh_tokens VALUES ('8d5eaa6081e8a44b5130f46af7e7e1a268ec27b77b1e28ce0b7ffdf65436f0da', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 18:17:58.991+07', '2026-08-14 18:26:07.351+07', 'Token rotation', '2026-08-14 18:17:59.024+07', '2026-08-14 18:26:07.359+07', NULL, 255, 8);
+INSERT INTO public.refresh_tokens VALUES ('4e32c3e86d4aced288c40b3e58a5f2a2ecdc32015a75b6b64b968bae0ee49da5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 18:26:07.351+07', '2026-08-14 18:31:25.943+07', 'Token rotation', '2026-08-14 18:26:07.366+07', '2026-08-14 18:31:25.956+07', NULL, 256, 8);
+INSERT INTO public.refresh_tokens VALUES ('3175018fa2e5febe021b52b782dd2c82c9e70ceb6b9077cc83c704a60cfbbd5e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 18:31:25.943+07', '2026-08-14 18:32:49.346+07', 'Token rotation', '2026-08-14 18:31:25.958+07', '2026-08-14 18:32:49.359+07', NULL, 257, 8);
+INSERT INTO public.refresh_tokens VALUES ('b85ba27c968b40005d693ba973bfc07c594ca7bcfaf0e4028cc9a9c694ddf782', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 18:32:49.346+07', NULL, NULL, '2026-08-14 18:32:49.361+07', '2026-08-14 18:32:49.361+07', NULL, 258, 8);
+INSERT INTO public.refresh_tokens VALUES ('ab7929f4a4e4a22b6fb9d0cbeb442111448cd0478d9ef800bc8988aac0e5b4bc', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 18:53:54.116+07', '2026-08-14 18:55:34.002+07', 'Token rotation', '2026-08-14 18:53:54.123+07', '2026-08-14 18:55:34.026+07', NULL, 259, 16);
+INSERT INTO public.refresh_tokens VALUES ('89239cbcc7de1445f8e8a92c3bca7116424b0fb78541e3a08fffc93d65b502c9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 18:55:34.001+07', '2026-08-14 18:55:36.453+07', 'Token rotation', '2026-08-14 18:55:34.029+07', '2026-08-14 18:55:36.476+07', NULL, 260, 16);
+INSERT INTO public.refresh_tokens VALUES ('74fc9fb1debdd8a768dc75ce97d77acc7e4442affbe13244bcb859e76cb49a1c', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 18:55:36.452+07', '2026-08-14 18:55:37.73+07', 'Token rotation', '2026-08-14 18:55:36.479+07', '2026-08-14 18:55:37.745+07', NULL, 261, 16);
+INSERT INTO public.refresh_tokens VALUES ('347590835b8442a4a338326254cb1f864443d98c2e1d437ed987e157a001baba', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 18:55:37.73+07', '2026-08-14 18:55:38.981+07', 'Token rotation', '2026-08-14 18:55:37.75+07', '2026-08-14 18:55:39.017+07', NULL, 262, 16);
+INSERT INTO public.refresh_tokens VALUES ('f6674b829bd9f0111e884e6cea00e116230172afa24b0ac1ee1e2132c70c23fa', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 18:55:38.981+07', '2026-08-14 18:59:45.866+07', 'Token rotation', '2026-08-14 18:55:39.02+07', '2026-08-14 18:59:45.911+07', NULL, 263, 16);
+INSERT INTO public.refresh_tokens VALUES ('0e4dc9ddcf3d138b26ed6d61d1ab67cd30f7ac8140da2f0018eb4564fe0cb8f1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::ffff:127.0.0.1', '2026-08-21 18:59:45.865+07', NULL, NULL, '2026-08-14 18:59:45.931+07', '2026-08-14 18:59:45.931+07', NULL, 264, 16);
+INSERT INTO public.refresh_tokens VALUES ('fa060d90ca787356df599d0798b6d141d2c04f8ef08458fc3c18974a13feb4fc', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 19:10:15.776+07', '2026-08-14 19:10:27.481+07', 'Token rotation', '2026-08-14 19:10:15.783+07', '2026-08-14 19:10:27.511+07', NULL, 265, 16);
+INSERT INTO public.refresh_tokens VALUES ('dec1cfa56a8b09679981d53bbbf5d654b7788be54b4f10857679aaa0a894b5a0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 19:10:27.481+07', '2026-08-14 19:23:10.746+07', 'Token rotation', '2026-08-14 19:10:27.514+07', '2026-08-14 19:23:10.798+07', NULL, 266, 16);
+INSERT INTO public.refresh_tokens VALUES ('10a275a9de91f862e4c900c3dd28d02793d961a084355de9d7e6c64e1dd938de', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-21 19:23:10.746+07', NULL, NULL, '2026-08-14 19:23:10.819+07', '2026-08-14 19:23:10.819+07', NULL, 267, 16);
+INSERT INTO public.refresh_tokens VALUES ('4ab234cbea6cb3dfabac3d3faac0b66df072b554669a854f41f920c4260823a0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-22 06:39:00.453+07', '2026-08-15 07:05:51.379+07', 'Token rotation', '2026-08-15 06:39:00.461+07', '2026-08-15 07:05:51.398+07', NULL, 268, 8);
+INSERT INTO public.refresh_tokens VALUES ('d98667cf7a055cb4b20c5f969e73af5559b0b64d60d20bedb3bdad095527f9ce', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-22 07:06:00.758+07', '2026-08-15 07:11:41.622+07', 'Token rotation', '2026-08-15 07:06:00.769+07', '2026-08-15 07:11:41.634+07', NULL, 270, 8);
+INSERT INTO public.refresh_tokens VALUES ('ab6ac6243378bf403a616ddcb648e1da526e3b164d42e89682486ad6b6caee34', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-22 07:05:51.379+07', '2026-08-15 07:06:00.758+07', 'Token rotation', '2026-08-15 07:05:51.401+07', '2026-08-15 07:06:00.767+07', NULL, 269, 8);
+INSERT INTO public.refresh_tokens VALUES ('47c7216cca13b2863d190576c3a5c45f566a4480b813004da5a68992d9e6acbc', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-22 08:20:17.027+07', NULL, NULL, '2026-08-15 08:20:17.038+07', '2026-08-15 08:20:17.038+07', NULL, 276, 1);
+INSERT INTO public.refresh_tokens VALUES ('83bebcaba324dcb7e0c485cae49d23aa3506dd503a30b931f5b8a9375a51e4d9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-22 09:39:11.47+07', NULL, NULL, '2026-08-15 09:39:11.5+07', '2026-08-15 09:39:11.5+07', NULL, 278, 8);
+INSERT INTO public.refresh_tokens VALUES ('9e8621e4725def6da856ff848be72b528ada85f9f4624dadac50fa48c8d39cc6', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 07:33:02.577+07', '2026-08-16 08:14:17.423+07', 'Token rotation', '2026-08-16 07:33:02.61+07', '2026-08-16 08:14:17.45+07', NULL, 280, 18);
+INSERT INTO public.refresh_tokens VALUES ('24e5f09ebc371921dbdd16540467414c1181b25a567feba42d6b5e527d6e7eb1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 14:48:44.345+07', '2026-08-16 14:54:33.247+07', 'Token rotation', '2026-08-16 14:48:44.389+07', '2026-08-16 14:54:33.271+07', NULL, 285, 1);
+INSERT INTO public.refresh_tokens VALUES ('c997fb648508d8d7da2cf97146874cd14afcf869369c94cf8fd2e51068b53416', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 14:54:52.203+07', NULL, NULL, '2026-08-16 14:54:52.222+07', '2026-08-16 14:54:52.222+07', NULL, 287, 1);
+INSERT INTO public.refresh_tokens VALUES ('636951cc707129f47373ae1b93556b467b17efc9335a10b7087250abbd804dbb', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 15:00:05.969+07', '2026-08-16 15:08:47.623+07', 'Token rotation', '2026-08-16 15:00:05.995+07', '2026-08-16 15:08:47.651+07', NULL, 289, 1);
+INSERT INTO public.refresh_tokens VALUES ('fcd8ab62a41d194a3f3df8e125df0b1ab13d5c6f32231affa5f4c3309625fc45', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 15:12:42.218+07', '2026-08-16 15:12:57.899+07', 'User logout', '2026-08-16 15:12:42.236+07', '2026-08-16 15:12:57.9+07', NULL, 291, 1);
+INSERT INTO public.refresh_tokens VALUES ('564f3223745de4bf4f85c48ee571379a2bc1eb3adcf8720b7eeca7e4acfa6447', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 16:05:36.483+07', '2026-08-16 16:09:13.526+07', 'Token rotation', '2026-08-16 16:05:36.493+07', '2026-08-16 16:09:13.559+07', NULL, 293, 16);
+INSERT INTO public.refresh_tokens VALUES ('bd6f282a7c77d3267d09e1d568ba032a897ca45831b418549918941716f30714', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 16:21:57.913+07', '2026-08-16 16:55:03.265+07', 'Token rotation', '2026-08-16 16:21:57.95+07', '2026-08-16 16:55:03.333+07', NULL, 295, 16);
+INSERT INTO public.refresh_tokens VALUES ('a10c8d863c385f8587d445fd835b18175eeb3ceeb93fd40376e5f55ddd3fbef1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 17:00:45.437+07', '2026-08-16 17:04:08.518+07', 'Token rotation', '2026-08-16 17:00:45.451+07', '2026-08-16 17:04:08.529+07', NULL, 297, 16);
+INSERT INTO public.refresh_tokens VALUES ('96fb084c4a8f5f51db13bff413b4cfe0457d0403e2711818ffc076c5745647d8', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 17:04:32.619+07', '2026-08-16 18:13:58.438+07', 'Token rotation', '2026-08-16 17:04:32.621+07', '2026-08-16 18:13:58.462+07', NULL, 299, 8);
+INSERT INTO public.refresh_tokens VALUES ('c6e68bb92a29305f5de3752be48be0f7957be616fbbcedbbfd36a9b55dce1c5d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 18:51:50.179+07', '2026-08-16 18:54:01.809+07', 'Token rotation', '2026-08-16 18:51:50.258+07', '2026-08-16 18:54:01.84+07', NULL, 301, 8);
+INSERT INTO public.refresh_tokens VALUES ('fdef922831930070acfe0098c491f74fd44c3b32139f6d7a17712e35c95af984', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 18:55:45.585+07', NULL, NULL, '2026-08-16 18:55:45.637+07', '2026-08-16 18:55:45.637+07', NULL, 303, 8);
+INSERT INTO public.refresh_tokens VALUES ('64e80ffcda01a9a2d95276121c584b9cd8a613b4eb741c27e2aafe14c897d3c5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 06:58:33.744+07', '2026-08-17 07:07:02.588+07', 'Token rotation', '2026-08-17 06:58:33.768+07', '2026-08-17 07:07:02.625+07', NULL, 338, 8);
+INSERT INTO public.refresh_tokens VALUES ('834ad3bfcbdb43ef61dad6d60920ad54a42624e98da99cd401a668de0e81d095', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 07:28:18.406+07', '2026-08-17 08:08:16.453+07', 'Token rotation', '2026-08-17 07:28:18.443+07', '2026-08-17 08:08:16.476+07', NULL, 340, 8);
+INSERT INTO public.refresh_tokens VALUES ('426b34ed8524587afc4dad5997098f2433a5afb05c60bccc52d68cc1115348e3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 08:14:18.077+07', '2026-08-17 08:21:33.864+07', 'Token rotation', '2026-08-17 08:14:18.134+07', '2026-08-17 08:21:33.891+07', NULL, 342, 8);
+INSERT INTO public.refresh_tokens VALUES ('f3e339f7ea0dadeb913cedae07e30d67448a7591acdf73b2aad37f026f929b5b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 08:21:38.817+07', '2026-08-17 08:37:48.567+07', 'Token rotation', '2026-08-17 08:21:38.827+07', '2026-08-17 08:37:48.604+07', NULL, 344, 8);
+INSERT INTO public.refresh_tokens VALUES ('320cd09c1455b3ce6b8b91d5ca198ff47f8542dcf5c87bec392648677165626b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 08:38:01.275+07', '2026-08-17 08:49:48.586+07', 'Token rotation', '2026-08-17 08:38:01.288+07', '2026-08-17 08:49:48.619+07', NULL, 346, 8);
+INSERT INTO public.refresh_tokens VALUES ('f138879c0c6fcfbb06c4703526b45800cfcd7c52c67f9ad9a1f9d78f41e244b8', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 08:56:39.664+07', '2026-08-17 08:57:14.161+07', 'Token rotation', '2026-08-17 08:56:39.691+07', '2026-08-17 08:57:14.182+07', NULL, 348, 8);
+INSERT INTO public.refresh_tokens VALUES ('7e855e4c05061de13cdcb77645d9a69343c3329a763f105852fd2ab191997f9f', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 15:37:34.107+07', '2026-08-17 15:38:34.93+07', 'Token rotation', '2026-08-17 15:37:34.125+07', '2026-08-17 15:38:34.942+07', NULL, 351, 8);
+INSERT INTO public.refresh_tokens VALUES ('a2ed7471d2c15f0edeea24388f89e1957c733f62a20287a8af049af188d08fc4', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 15:38:34.93+07', '2026-08-17 15:39:01.009+07', 'Token rotation', '2026-08-17 15:38:34.944+07', '2026-08-17 15:39:01.019+07', NULL, 352, 8);
+INSERT INTO public.refresh_tokens VALUES ('3653cc906549dcd3fc5094aa4f7b0110bea8d63fdd3d720589852a57e1d97593', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 15:39:01.009+07', '2026-08-17 15:39:20.282+07', 'Token rotation', '2026-08-17 15:39:01.02+07', '2026-08-17 15:39:20.291+07', NULL, 353, 8);
+INSERT INTO public.refresh_tokens VALUES ('738bbb9f589b8b75dd6a2b26f5f6fd543002c106831ee4ad70d18f1601b5c38d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 15:39:20.282+07', '2026-08-17 15:43:18.126+07', 'Token rotation', '2026-08-17 15:39:20.293+07', '2026-08-17 15:43:18.138+07', NULL, 354, 8);
+INSERT INTO public.refresh_tokens VALUES ('724c4d193c7badaa3298fc1866f425cfdff806cf512dcb1c19784cf9e22cd0f8', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 15:43:18.126+07', '2026-08-17 15:43:38.015+07', 'Token rotation', '2026-08-17 15:43:18.139+07', '2026-08-17 15:43:38.017+07', NULL, 355, 8);
+INSERT INTO public.refresh_tokens VALUES ('9ca5de8b2a197f0976bee29a251f9448daa9f95aa2a0a95ad89e95c845bf5c55', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-23 08:33:01.606+07', '2026-08-22 19:42:35.343+07', 'Password reset', '2026-08-16 08:33:01.655+07', '2026-08-22 19:42:35.344+07', NULL, 283, 18);
+INSERT INTO public.refresh_tokens VALUES ('6e6d127e4e74e42ef622899c96bfd88141eb62467e93719d6cf987bca89e86d2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 15:43:38.015+07', '2026-08-17 15:52:03.425+07', 'Token rotation', '2026-08-17 15:43:38.017+07', '2026-08-17 15:52:03.437+07', NULL, 356, 8);
+INSERT INTO public.refresh_tokens VALUES ('465c011c8acecc54920d919c9dc5db00375f24741cfe34f19942b647d855b202', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 15:52:03.425+07', '2026-08-17 16:57:53.2+07', 'Token rotation', '2026-08-17 15:52:03.438+07', '2026-08-17 16:57:53.258+07', NULL, 357, 8);
+INSERT INTO public.refresh_tokens VALUES ('41a8244f08f0a58e7efe74b710cbd3786e3ad1829b4863b46d7bbb0ecacd659e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 16:57:53.199+07', '2026-08-17 17:16:32.971+07', 'Token rotation', '2026-08-17 16:57:53.271+07', '2026-08-17 17:16:33.006+07', NULL, 358, 8);
+INSERT INTO public.refresh_tokens VALUES ('f7dbeeceb670c4f759287f162f07ebff7b49d8744ac820257f125d3257832926', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::ffff:127.0.0.1', '2026-08-24 17:16:32.97+07', '2026-08-17 17:25:47.459+07', 'Token rotation', '2026-08-17 17:16:33.014+07', '2026-08-17 17:25:47.492+07', NULL, 359, 8);
+INSERT INTO public.refresh_tokens VALUES ('7fd9ee078c92f5d1b235ade621126166996b38f1c0836380615cbbd0454fb439', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 17:25:47.458+07', '2026-08-17 17:25:58.631+07', 'Token rotation', '2026-08-17 17:25:47.498+07', '2026-08-17 17:25:58.65+07', NULL, 360, 8);
+INSERT INTO public.refresh_tokens VALUES ('bc241e30ff54bb04050b2f077ae8bf9d48c77f3ce17709a9774615c0e0e445f1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 17:25:58.631+07', '2026-08-17 17:26:05.829+07', 'Token rotation', '2026-08-17 17:25:58.652+07', '2026-08-17 17:26:05.84+07', NULL, 361, 8);
+INSERT INTO public.refresh_tokens VALUES ('18656fe33ae8451c988a298b080437ae540258c3a1a9028dadc76d6516e0fc61', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 17:26:05.829+07', '2026-08-17 17:26:13.279+07', 'Token rotation', '2026-08-17 17:26:05.843+07', '2026-08-17 17:26:13.283+07', NULL, 362, 8);
+INSERT INTO public.refresh_tokens VALUES ('ea84eced99c6ada9e7cded975bd4b69a575e5a98fd7faf0ae5a0f832786d7949', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 17:26:13.279+07', '2026-08-17 17:28:21.447+07', 'Token rotation', '2026-08-17 17:26:13.284+07', '2026-08-17 17:28:21.46+07', NULL, 363, 8);
+INSERT INTO public.refresh_tokens VALUES ('a37a97316d3980e3c9b3b259976a2629de5ab988fdac1cfe4f434c10d8a8a98f', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 17:28:21.447+07', '2026-08-17 17:28:40.225+07', 'Token rotation', '2026-08-17 17:28:21.461+07', '2026-08-17 17:28:40.239+07', NULL, 364, 8);
+INSERT INTO public.refresh_tokens VALUES ('ab2b194d52070204f843f4065d120d4b4a489ef4e600ba31c44a0ac7c47c888c', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 17:28:40.225+07', '2026-08-17 17:29:02.922+07', 'Token rotation', '2026-08-17 17:28:40.242+07', '2026-08-17 17:29:02.929+07', NULL, 365, 8);
+INSERT INTO public.refresh_tokens VALUES ('69b050c3f84c4b28a21ee7c6c9f060a56bb3132e3be0d10147826fb049456182', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 17:29:02.922+07', NULL, NULL, '2026-08-17 17:29:02.932+07', '2026-08-17 17:29:02.932+07', NULL, 366, 8);
+INSERT INTO public.refresh_tokens VALUES ('08b92dbf84431d9c52c090fbca15257bb1850d5b06ef17c2088eb8fad0c8baf0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 17:47:17.909+07', '2026-08-17 17:52:49.323+07', 'Token rotation', '2026-08-17 17:47:17.919+07', '2026-08-17 17:52:49.356+07', NULL, 367, 8);
+INSERT INTO public.refresh_tokens VALUES ('0142a6cf05a37eb9ddf9a152f2fc905184363fd3966c049be2d4a2c5f1c88d65', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 17:52:49.323+07', '2026-08-17 18:23:20.458+07', 'Token rotation', '2026-08-17 17:52:49.363+07', '2026-08-17 18:23:20.489+07', NULL, 368, 8);
+INSERT INTO public.refresh_tokens VALUES ('f74ba0eb2ad8a139f1f132adfabae5654f0d94cb5ac240d8095f7ed55c7c282c', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-24 18:23:20.458+07', NULL, NULL, '2026-08-17 18:23:20.496+07', '2026-08-17 18:23:20.496+07', NULL, 369, 8);
+INSERT INTO public.refresh_tokens VALUES ('965b98850b92b832782f6e71e52fa9d175e6d674d0e50dbf2b9e3d1145dffc56', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 04:26:08.37+07', NULL, NULL, '2026-08-18 04:26:08.375+07', '2026-08-18 04:26:08.375+07', NULL, 370, 8);
+INSERT INTO public.refresh_tokens VALUES ('6b12b6effa62807f431aecc0c706887ba1b6ab5a055dd39ff5783b7bf6e2a610', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 04:54:59.941+07', NULL, NULL, '2026-08-18 04:54:59.949+07', '2026-08-18 04:54:59.949+07', NULL, 371, 8);
+INSERT INTO public.refresh_tokens VALUES ('00fe5c0ce6c057a6521bc1aee74a58c8b8f48366fe95a76c54905ec2dff07e82', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 04:57:38.764+07', '2026-08-18 04:58:41.495+07', 'Token rotation', '2026-08-18 04:57:38.769+07', '2026-08-18 04:58:41.54+07', NULL, 372, 8);
+INSERT INTO public.refresh_tokens VALUES ('84570be819430e9f32ce6f812c436cb393be30f8599aa37c6ca9a9e6c1470918', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 04:58:41.493+07', '2026-08-18 05:01:12.194+07', 'Token rotation', '2026-08-18 04:58:41.548+07', '2026-08-18 05:01:12.206+07', NULL, 373, 8);
+INSERT INTO public.refresh_tokens VALUES ('2f625e851075172246a5efefabad74da1d737ef1549355ecc78d7779e0c0020c', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 05:01:12.194+07', '2026-08-18 05:02:50.75+07', 'Token rotation', '2026-08-18 05:01:12.208+07', '2026-08-18 05:02:50.761+07', NULL, 374, 8);
+INSERT INTO public.refresh_tokens VALUES ('bb81b410c252bf9d4ddda5573d282a76b4039ea10bd1ef83804d6f7032f772b9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 05:02:50.75+07', '2026-08-18 05:08:52.919+07', 'Token rotation', '2026-08-18 05:02:50.762+07', '2026-08-18 05:08:52.93+07', NULL, 375, 8);
+INSERT INTO public.refresh_tokens VALUES ('b6c65d0c0674ed9cc11c09c1b8b4d7a146469c69148472e5a4fe3e4de9a5a14e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 05:08:52.919+07', NULL, NULL, '2026-08-18 05:08:52.931+07', '2026-08-18 05:08:52.931+07', NULL, 376, 8);
+INSERT INTO public.refresh_tokens VALUES ('e060a729ea3cd2857165970802b23501dc66ce868fe8b8794229de37cd332811', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 05:46:47.4+07', '2026-08-18 06:21:44.213+07', 'Token rotation', '2026-08-18 05:46:47.408+07', '2026-08-18 06:21:44.238+07', NULL, 377, 8);
+INSERT INTO public.refresh_tokens VALUES ('0f2f74a7497c3830e4e217596318ce96174a93a57bad3296fa373038f5aa75f3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 06:21:44.213+07', '2026-08-18 06:47:59.146+07', 'Token rotation', '2026-08-18 06:21:44.245+07', '2026-08-18 06:47:59.175+07', NULL, 378, 8);
+INSERT INTO public.refresh_tokens VALUES ('deff532f98d4354ffbe27e3dc83c5259c41076cf38552cb704fe6f3d3851996c', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 06:47:59.146+07', '2026-08-18 06:55:46.703+07', 'Token rotation', '2026-08-18 06:47:59.182+07', '2026-08-18 06:55:46.718+07', NULL, 379, 8);
+INSERT INTO public.refresh_tokens VALUES ('4acb4a060ad0323ee948ae911e1b7e2a07e7159c0f9d103e4b292781d6007cb5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 06:55:46.703+07', '2026-08-18 07:09:04.994+07', 'Token rotation', '2026-08-18 06:55:46.72+07', '2026-08-18 07:09:05.018+07', NULL, 380, 8);
+INSERT INTO public.refresh_tokens VALUES ('e4e0811e0da9479d51d58af1ff6108da39b916cedd6fd29469a2f6d7084ba7d4', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 07:09:04.994+07', '2026-08-18 07:19:08.432+07', 'Token rotation', '2026-08-18 07:09:05.034+07', '2026-08-18 07:19:08.452+07', NULL, 381, 8);
+INSERT INTO public.refresh_tokens VALUES ('4c5188ee54cfdeec168d95330319836343eb6b6018c88fad919f773f0a71b561', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 07:19:08.431+07', '2026-08-18 07:34:10.814+07', 'Token rotation', '2026-08-18 07:19:08.457+07', '2026-08-18 07:34:10.845+07', NULL, 382, 8);
+INSERT INTO public.refresh_tokens VALUES ('41f3b3ef735d5200b762f197c5411658ba3b52316add6aa58495ea2601c7f012', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 09:07:35.029+07', '2026-08-23 09:20:28.379+07', 'Token rotation', '2026-08-23 09:07:35.111+07', '2026-08-23 09:20:28.406+07', NULL, 471, 16);
+INSERT INTO public.refresh_tokens VALUES ('677287a14dace879cdcb1da5f6f407102d126631b0673d967b2801d432f71f7e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 07:34:10.814+07', '2026-08-18 07:35:06.459+07', 'User logout', '2026-08-18 07:34:10.851+07', '2026-08-18 07:35:06.461+07', NULL, 383, 8);
+INSERT INTO public.refresh_tokens VALUES ('846a387761e9304532bdc362b8e2ca3830303a96f151f21e19c7059662b3d238', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 07:37:53.469+07', '2026-08-18 08:31:55.071+07', 'Token rotation', '2026-08-18 07:37:53.47+07', '2026-08-18 08:31:55.096+07', NULL, 384, 16);
+INSERT INTO public.refresh_tokens VALUES ('74a97e6b616eb947ad9b9f589de222d72e5d96fa651ff30ec5196185fcfc7733', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 08:31:55.071+07', '2026-08-18 09:07:50.307+07', 'Token rotation', '2026-08-18 08:31:55.106+07', '2026-08-18 09:07:50.328+07', NULL, 385, 16);
+INSERT INTO public.refresh_tokens VALUES ('447dc2e0fbbfc99fff2aab2444e4d1f58b3e8e8b908afb76fbbffb84dffef669', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-25 09:07:50.307+07', NULL, NULL, '2026-08-18 09:07:50.337+07', '2026-08-18 09:07:50.337+07', NULL, 386, 16);
+INSERT INTO public.refresh_tokens VALUES ('93d19e17a9549d028b5778596a093aa7949878193f71cdf4fa1f340b18b9fd28', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 18:42:33.727+07', '2026-08-19 18:53:01.655+07', 'Token rotation', '2026-08-19 18:42:33.734+07', '2026-08-19 18:53:01.669+07', NULL, 387, 8);
+INSERT INTO public.refresh_tokens VALUES ('0134044f63ad39b6e40ca63ec0b76e1dca136602c8795b12e6d9ee484dc16931', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 18:53:01.655+07', '2026-08-19 18:53:25.139+07', 'Token rotation', '2026-08-19 18:53:01.675+07', '2026-08-19 18:53:25.158+07', NULL, 388, 8);
+INSERT INTO public.refresh_tokens VALUES ('456ef5296125459d2121a59a51b03b098a251163d40cfdf5a6da6f4ff36b8daa', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 18:53:25.139+07', '2026-08-19 18:58:39.167+07', 'Token rotation', '2026-08-19 18:53:25.16+07', '2026-08-19 18:58:39.226+07', NULL, 389, 8);
+INSERT INTO public.refresh_tokens VALUES ('5450aa1306b83fc85e2f6d010ac090ca63a2ca55354e489c2561104ed961ea7e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 18:58:39.167+07', '2026-08-19 19:02:27.44+07', 'Token rotation', '2026-08-19 18:58:39.23+07', '2026-08-19 19:02:27.456+07', NULL, 390, 8);
+INSERT INTO public.refresh_tokens VALUES ('97e0528dc55dc607e0adca4afd576d05e063b160dc492ea53d182b271c26a1e3', 'Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36', '::1', '2026-08-26 19:02:27.44+07', '2026-08-19 19:20:24.657+07', 'Token rotation', '2026-08-19 19:02:27.458+07', '2026-08-19 19:20:24.69+07', NULL, 391, 8);
+INSERT INTO public.refresh_tokens VALUES ('885e7b667329e5cf8cee5c57f96c73577332cb24bb5f20baad6160a9dff451ca', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 19:20:24.657+07', '2026-08-19 20:20:41.956+07', 'Token rotation', '2026-08-19 19:20:24.694+07', '2026-08-19 20:20:42+07', NULL, 392, 8);
+INSERT INTO public.refresh_tokens VALUES ('c4e7e4e2f75baa1531fb1c815453469c965f9717cab87e66b425ff488f12396b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 20:20:41.956+07', '2026-08-19 20:20:42.348+07', 'Token rotation', '2026-08-19 20:20:42.008+07', '2026-08-19 20:20:42.363+07', NULL, 393, 8);
+INSERT INTO public.refresh_tokens VALUES ('b6b665ad86576b2ae8a20f0f92daed89a2e1469d35d2c90df132e92eb751bfa3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 20:20:42.348+07', '2026-08-19 20:39:17.056+07', 'User logout', '2026-08-19 20:20:42.365+07', '2026-08-19 20:39:17.057+07', NULL, 394, 8);
+INSERT INTO public.refresh_tokens VALUES ('412261be9ccd1ccbca12e8dc3b43c0ea3337a2e2a650da1763753e9cc89b6f90', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 20:39:23.981+07', '2026-08-19 20:39:31.605+07', 'Token rotation', '2026-08-19 20:39:23.982+07', '2026-08-19 20:39:31.615+07', NULL, 395, 1);
+INSERT INTO public.refresh_tokens VALUES ('d348a8003e38e9e6eefb27b8505532e6aa0eecbc4f84a15d56a984642e728cf9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 20:39:31.605+07', '2026-08-19 20:49:41.725+07', 'User logout', '2026-08-19 20:39:31.617+07', '2026-08-19 20:49:41.732+07', NULL, 396, 1);
+INSERT INTO public.refresh_tokens VALUES ('b1260ce25f66f6235bc2fa615b08a5637ee0441e8bb6513a407b501b0d48eb13', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 20:49:49.628+07', '2026-08-19 21:23:47.372+07', 'Token rotation', '2026-08-19 20:49:49.633+07', '2026-08-19 21:23:47.415+07', NULL, 397, 16);
+INSERT INTO public.refresh_tokens VALUES ('e35d7e5fe690c09da29140d96859558126ebd41b80e7e198df067ba2c8812645', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 21:23:47.371+07', '2026-08-19 21:26:39.901+07', 'Token rotation', '2026-08-19 21:23:47.423+07', '2026-08-19 21:26:39.922+07', NULL, 398, 16);
+INSERT INTO public.refresh_tokens VALUES ('d5b5142f764d90ec6df415a01642b77333c97f019424d82a17196bc6b72c9e7a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 21:26:39.901+07', '2026-08-19 21:48:07.457+07', 'Token rotation', '2026-08-19 21:26:39.924+07', '2026-08-19 21:48:07.47+07', NULL, 399, 16);
+INSERT INTO public.refresh_tokens VALUES ('11c692defb68d6604c7bee8a0a5af17897f8f3134d92ba5e28bc91aea9fa3f3d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 21:48:07.457+07', '2026-08-19 21:51:46.083+07', 'Token rotation', '2026-08-19 21:48:07.471+07', '2026-08-19 21:51:46.096+07', NULL, 400, 16);
+INSERT INTO public.refresh_tokens VALUES ('c10b2257ac7245368637495a1b3ba670bb3b8f2f4c18cde5e2426d50f332c7d1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 21:51:46.083+07', '2026-08-19 21:51:50.888+07', 'Token rotation', '2026-08-19 21:51:46.098+07', '2026-08-19 21:51:50.907+07', NULL, 401, 16);
+INSERT INTO public.refresh_tokens VALUES ('f552f323020715ff8b891eb30a7cffd858fde85033461609fdfea95bb5fbb402', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 21:51:50.888+07', '2026-08-19 21:53:59.763+07', 'User logout', '2026-08-19 21:51:50.909+07', '2026-08-19 21:53:59.765+07', NULL, 402, 16);
+INSERT INTO public.refresh_tokens VALUES ('c33752c0dff3c3f5dcd66802b99325952a693709d9780105ace9667e518ee4e6', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 21:54:06.067+07', '2026-08-19 21:55:01.216+07', 'Token rotation', '2026-08-19 21:54:06.068+07', '2026-08-19 21:55:01.231+07', NULL, 403, 8);
+INSERT INTO public.refresh_tokens VALUES ('d92419d8892d8710d4c0219facabf1cea08b9b740bcb898f4c5f3dcd9644293e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 21:55:01.216+07', '2026-08-19 21:58:42.968+07', 'User logout', '2026-08-19 21:55:01.233+07', '2026-08-19 21:58:42.969+07', NULL, 404, 8);
+INSERT INTO public.refresh_tokens VALUES ('49aa526c5e7a212f8785c772956ff2aeb1ff7bad17ced29d4bbcc0930dfb4de7', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 21:58:49.522+07', '2026-08-19 22:10:54.774+07', 'Token rotation', '2026-08-19 21:58:49.522+07', '2026-08-19 22:10:54.785+07', NULL, 405, 16);
+INSERT INTO public.refresh_tokens VALUES ('87d070ea79ba1babc88097882444c2f2089f08429f795f49385ecac9d713c998', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 22:10:54.774+07', '2026-08-19 22:12:34.04+07', 'Token rotation', '2026-08-19 22:10:54.786+07', '2026-08-19 22:12:34.048+07', NULL, 406, 16);
+INSERT INTO public.refresh_tokens VALUES ('fe6b7397dd480fadbbf55eb7bdf58f2f0c7e87e26332548547178eb8429e029f', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 22:12:34.04+07', '2026-08-19 22:13:15.328+07', 'Token rotation', '2026-08-19 22:12:34.05+07', '2026-08-19 22:13:15.34+07', NULL, 407, 16);
+INSERT INTO public.refresh_tokens VALUES ('f668292f73ad21cd77bbe78d43e34eb730407b88b2072b28fb55eb1123c9c821', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 22:13:15.328+07', '2026-08-19 22:14:04.664+07', 'Token rotation', '2026-08-19 22:13:15.341+07', '2026-08-19 22:14:04.675+07', NULL, 408, 16);
+INSERT INTO public.refresh_tokens VALUES ('5041cfc8dca21d9d2d6297dca40dd74bb8cb3aebf2e2dc41a4ebdab28838216a', 'okhttp/4.12.0', '192.168.1.16', '2026-08-29 18:33:45.854+07', '2026-08-22 18:42:06.985+07', 'User logout', '2026-08-22 18:33:45.859+07', '2026-08-22 18:42:06.986+07', NULL, 425, 1);
+INSERT INTO public.refresh_tokens VALUES ('91252c798fb55e880ba6cbd83d7d52ccf8203aa3a9ab0bcab8eb7b7032d3bf34', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 22:14:04.664+07', '2026-08-19 22:16:19.789+07', 'User logout', '2026-08-19 22:14:04.677+07', '2026-08-19 22:16:19.79+07', NULL, 409, 16);
+INSERT INTO public.refresh_tokens VALUES ('a861a20fb8ed63fe321f40e6662436c6e4f8b2a17e9e5034ead1ba61793d2fdb', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 22:16:51.543+07', '2026-08-19 22:28:54.59+07', 'User logout', '2026-08-19 22:16:51.543+07', '2026-08-19 22:28:54.59+07', NULL, 410, 8);
+INSERT INTO public.refresh_tokens VALUES ('c1e7c87c03a796c94624c74bba95f0da281f45192d464870eeee03e2c6933786', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 22:29:05.057+07', '2026-08-19 22:29:11.105+07', 'Token rotation', '2026-08-19 22:29:05.058+07', '2026-08-19 22:29:11.116+07', NULL, 411, 1);
+INSERT INTO public.refresh_tokens VALUES ('8c43715b9d5f5aea86b361f2232a2ce15c102cf7a3b1b2919522cf50d0dc1b15', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 22:29:11.105+07', '2026-08-19 23:02:10.603+07', 'Token rotation', '2026-08-19 22:29:11.117+07', '2026-08-19 23:02:10.621+07', NULL, 412, 1);
+INSERT INTO public.refresh_tokens VALUES ('3421cca9c161f283decbc254c31483107ecb5fbe829c54a5dc83a71835ad876a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 23:02:10.603+07', '2026-08-19 23:02:12.672+07', 'User logout', '2026-08-19 23:02:10.624+07', '2026-08-19 23:02:12.673+07', NULL, 413, 1);
+INSERT INTO public.refresh_tokens VALUES ('1dad1aa3d6f9700c64e4e46b1da3a9d8c192e8e4299d48b71e63de184f7b2d31', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '::1', '2026-08-26 23:02:23.861+07', NULL, NULL, '2026-08-19 23:02:23.861+07', '2026-08-19 23:02:23.861+07', NULL, 414, 8);
+INSERT INTO public.refresh_tokens VALUES ('c4172c9ae8f0c1bc10786e6990b8a5bc603a36ff8fe8b43c462f07963fa4b706', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '127.0.0.1', '2026-08-28 11:28:16.202+07', '2026-08-21 11:45:17.055+07', 'Token rotation', '2026-08-21 11:28:16.208+07', '2026-08-21 11:45:17.085+07', NULL, 415, 8);
+INSERT INTO public.refresh_tokens VALUES ('024e2cd0e83d172a4fb642f104ff09e33402cd117cdbc473902fc3dac4b00f43', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '127.0.0.1', '2026-08-28 11:45:17.054+07', '2026-08-21 11:51:55.8+07', 'Token rotation', '2026-08-21 11:45:17.088+07', '2026-08-21 11:51:55.822+07', NULL, 416, 8);
+INSERT INTO public.refresh_tokens VALUES ('fe5f89b84c42041ab0ffd2d8fbd0f5abcafb8f1b8b6caf057d6d67a681fa40b1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '127.0.0.1', '2026-08-28 11:51:55.8+07', '2026-08-21 11:56:38.541+07', 'Token rotation', '2026-08-21 11:51:55.827+07', '2026-08-21 11:56:38.573+07', NULL, 417, 8);
+INSERT INTO public.refresh_tokens VALUES ('76073e3198e4493aeb3d19c59aafbcd419f5dea958e9bc03dafddd3c4eb40df9', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '127.0.0.1', '2026-08-28 11:56:38.541+07', '2026-08-21 12:13:09.768+07', 'Token rotation', '2026-08-21 11:56:38.58+07', '2026-08-21 12:13:09.791+07', NULL, 418, 8);
+INSERT INTO public.refresh_tokens VALUES ('ec0c720e114bb4eaf8cc68f7f40929315eabd2850dd992cc11a17494fcde78ac', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '127.0.0.1', '2026-08-28 12:13:09.767+07', NULL, NULL, '2026-08-21 12:13:09.796+07', '2026-08-21 12:13:09.796+07', NULL, 419, 8);
+INSERT INTO public.refresh_tokens VALUES ('cd7703efdfe379ce409ad4fccc3c5d0f5375dc7f09915ebd354fe8da429e7838', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '127.0.0.1', '2026-08-28 15:19:08.564+07', '2026-08-21 15:21:41.973+07', 'Token rotation', '2026-08-21 15:19:08.572+07', '2026-08-21 15:21:42.016+07', NULL, 420, 8);
+INSERT INTO public.refresh_tokens VALUES ('c7f360d90877661796f56254fcd7bf1c019dca97bc6d027fe499ec54b9af0d8a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '127.0.0.1', '2026-08-28 15:21:41.973+07', NULL, NULL, '2026-08-21 15:21:42.028+07', '2026-08-21 15:21:42.028+07', NULL, 421, 8);
+INSERT INTO public.refresh_tokens VALUES ('56cf3b6619a06c0e2f3945fdf79287aab5e25486be41d0c12a9acdf16aa0fc05', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '127.0.0.1', '2026-08-28 15:33:13.988+07', '2026-08-21 16:02:27.602+07', 'Token rotation', '2026-08-21 15:33:14.001+07', '2026-08-21 16:02:27.641+07', NULL, 422, 8);
+INSERT INTO public.refresh_tokens VALUES ('d64ad7a7e4ba9a1f8b67fb518539a5cd6d3c2458c4f41fd033d7829d7a096ff6', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '127.0.0.1', '2026-08-28 16:02:27.602+07', NULL, NULL, '2026-08-21 16:02:27.655+07', '2026-08-21 16:02:27.655+07', NULL, 423, 8);
+INSERT INTO public.refresh_tokens VALUES ('f7ad978060e2446691fe0a56321c588e211bb109ec25aa507aa9318e42ebffbe', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 18:10:24.405+07', '2026-08-22 18:37:24.803+07', 'Token rotation', '2026-08-22 18:10:24.413+07', '2026-08-22 18:37:24.827+07', NULL, 424, 8);
+INSERT INTO public.refresh_tokens VALUES ('b3026fcf1b3c4c6bcecb72220d5b613d16f7c7ec96dede919323af293edad865', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 18:37:24.803+07', '2026-08-22 19:02:18.914+07', 'Token rotation', '2026-08-22 18:37:24.838+07', '2026-08-22 19:02:18.944+07', NULL, 426, 8);
+INSERT INTO public.refresh_tokens VALUES ('4728187fbba50e5f2a2fac5d165fffa4f64661309b1388941d1a6f5eec15ab7b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 19:02:18.914+07', '2026-08-22 19:39:37.24+07', 'Token rotation', '2026-08-22 19:02:18.952+07', '2026-08-22 19:39:37.276+07', NULL, 427, 8);
+INSERT INTO public.refresh_tokens VALUES ('bdf04bc70e4bb86f4559d985cd6013ef84920f0606cc0731c1996da048b560a4', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 19:39:37.24+07', '2026-08-22 19:39:46.69+07', 'User logout', '2026-08-22 19:39:37.286+07', '2026-08-22 19:39:46.691+07', NULL, 428, 8);
+INSERT INTO public.refresh_tokens VALUES ('7ec31d0d2a34528060ff19ed60e23f052ff977ef2472e5aa8d7dee1c6776856b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 19:42:58.436+07', '2026-08-22 19:45:27.459+07', 'Token rotation', '2026-08-22 19:42:58.437+07', '2026-08-22 19:45:27.47+07', NULL, 429, 18);
+INSERT INTO public.refresh_tokens VALUES ('b7c24bce85db642c89b4171b105d58909c73524df5abdb196a93338b9205e1da', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 19:45:27.459+07', '2026-08-22 19:45:29.023+07', 'Token rotation', '2026-08-22 19:45:27.472+07', '2026-08-22 19:45:29.035+07', NULL, 430, 18);
+INSERT INTO public.refresh_tokens VALUES ('c0f8c422b8179cfa81e27386c885e4fe18021ea9e0c2acc417780d578d1dce21', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 19:45:29.023+07', '2026-08-22 19:50:44.179+07', 'Token rotation', '2026-08-22 19:45:29.037+07', '2026-08-22 19:50:44.231+07', NULL, 431, 18);
+INSERT INTO public.refresh_tokens VALUES ('2f370905acdc5c923e08aa10494f0181ab1c1de3e5ae3c8ba3f9934278e91ffb', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 19:50:44.179+07', '2026-08-22 19:53:30.631+07', 'Token rotation', '2026-08-22 19:50:44.242+07', '2026-08-22 19:53:30.643+07', NULL, 432, 18);
+INSERT INTO public.refresh_tokens VALUES ('54318d7bb8d6dbd04ac25db76ceb9bff1cff16510059a886ef3bcf63e29127cf', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 19:53:30.631+07', '2026-08-22 19:53:38.198+07', 'Token rotation', '2026-08-22 19:53:30.644+07', '2026-08-22 19:53:38.217+07', NULL, 433, 18);
+INSERT INTO public.refresh_tokens VALUES ('c0089317b8674db757920ee42a43e2479c02a12ca4a14c138f2b7f55e28c37c4', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 19:53:38.198+07', '2026-08-22 19:57:23.183+07', 'Token rotation', '2026-08-22 19:53:38.219+07', '2026-08-22 19:57:23.227+07', NULL, 434, 18);
+INSERT INTO public.refresh_tokens VALUES ('e90d7b9e11c16bd18225f846a62064cdb5da4290fe3e7fcef577b6557bcbf8f2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 19:57:23.183+07', '2026-08-22 20:06:08.683+07', 'Token rotation', '2026-08-22 19:57:23.236+07', '2026-08-22 20:06:08.715+07', NULL, 435, 18);
+INSERT INTO public.refresh_tokens VALUES ('6ecc24205bd208a760db431a8b0401c2269c4bf3efda5bb34a2e6fef295bf84e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 20:06:08.683+07', NULL, NULL, '2026-08-22 20:06:08.724+07', '2026-08-22 20:06:08.724+07', NULL, 436, 18);
+INSERT INTO public.refresh_tokens VALUES ('21277096ee9e8c707adb910a120f077892c799e4f1f693cc60908227ad6aca21', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 07:43:26.393+07', '2026-08-23 09:07:35.03+07', 'Token rotation', '2026-08-23 07:43:26.428+07', '2026-08-23 09:07:35.079+07', NULL, 459, 16);
+INSERT INTO public.refresh_tokens VALUES ('fdb33c9e45dbe14fea46775393551d7e52a8ff5dbf8f2741e0b48a51cdb9340a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 20:34:08.072+07', '2026-08-22 20:36:22.481+07', 'Token rotation', '2026-08-22 20:34:08.084+07', '2026-08-22 20:36:22.52+07', NULL, 438, 16);
+INSERT INTO public.refresh_tokens VALUES ('a8fa8745ba04e07de190b977ecef718d76a099aacf33c3639d5bb68fb7f85489', 'Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36', '192.168.1.14', '2026-08-29 20:36:22.481+07', '2026-08-22 21:09:36.03+07', 'Token rotation', '2026-08-22 20:36:22.528+07', '2026-08-22 21:09:36.08+07', NULL, 439, 16);
+INSERT INTO public.refresh_tokens VALUES ('e79868fc80ccd46d74494c684fbbf15d6718ab8cb56cfd6122b9c472ebd849dc', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 21:09:36.03+07', '2026-08-22 21:10:37.415+07', 'User logout', '2026-08-22 21:09:36.094+07', '2026-08-22 21:10:37.416+07', NULL, 440, 16);
+INSERT INTO public.refresh_tokens VALUES ('78e89bd0b96d8ef785680568ee92e65358657e5d725562508d158407e0b1472e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 21:10:44.957+07', NULL, NULL, '2026-08-22 21:10:44.959+07', '2026-08-22 21:10:44.959+07', NULL, 441, 8);
+INSERT INTO public.refresh_tokens VALUES ('b6f336e06ef948447bed500e84e27afb74e71728f2d07c23e9c7bc189d7640a4', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.14', '2026-08-29 21:20:36.96+07', NULL, NULL, '2026-08-22 21:20:36.973+07', '2026-08-22 21:20:36.973+07', NULL, 442, 8);
+INSERT INTO public.refresh_tokens VALUES ('e0351e1383bc1616e13dbac620efd8bc81b5637f4d723fb240908635105d7f1d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 03:13:43.082+07', '2026-08-23 03:20:33.346+07', 'User logout', '2026-08-23 03:13:43.087+07', '2026-08-23 03:20:33.349+07', NULL, 443, 8);
+INSERT INTO public.refresh_tokens VALUES ('81391002fdc9882e24a562a4a44523db2d1c3ec6509018ed7462f18532504344', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 03:20:42.028+07', '2026-08-23 03:20:56.027+07', 'Token rotation', '2026-08-23 03:20:42.029+07', '2026-08-23 03:20:56.032+07', NULL, 444, 1);
+INSERT INTO public.refresh_tokens VALUES ('bb3f8defa3a7720b04ea9d658dfd73ff3263b7f902eb9a1f78fd64bf7fc40e33', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 03:20:56.026+07', '2026-08-23 04:06:21.761+07', 'Token rotation', '2026-08-23 03:20:56.034+07', '2026-08-23 04:06:21.787+07', NULL, 445, 1);
+INSERT INTO public.refresh_tokens VALUES ('314575a9ed7ea4ab2a8faa09ff7bbb4143a722f36a1a30e48cc4ff9cb09396a3', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 04:06:21.76+07', '2026-08-23 04:21:41.308+07', 'Token rotation', '2026-08-23 04:06:21.798+07', '2026-08-23 04:21:41.348+07', NULL, 446, 1);
+INSERT INTO public.refresh_tokens VALUES ('fc10f1ff558946c9cc0785f2748534173760bb3fc1403acbe6907f2994ffc03a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 04:21:41.307+07', '2026-08-23 04:37:15.945+07', 'Token rotation', '2026-08-23 04:21:41.361+07', '2026-08-23 04:37:15.985+07', NULL, 447, 1);
+INSERT INTO public.refresh_tokens VALUES ('2df286037f2e2fd7fcaf1830604db95b55a1fd5915d6f4a25261bbbdb99d9a14', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 04:37:15.944+07', '2026-08-23 04:37:39.51+07', 'User logout', '2026-08-23 04:37:15.999+07', '2026-08-23 04:37:39.511+07', NULL, 448, 1);
+INSERT INTO public.refresh_tokens VALUES ('ed141272bf18941067b39c5dc55da2ac5301c79793c2380aa44b40fbc8e8abb5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 04:37:57.854+07', '2026-08-23 05:14:05.677+07', 'User logout', '2026-08-23 04:37:57.856+07', '2026-08-23 05:14:05.681+07', NULL, 449, 8);
+INSERT INTO public.refresh_tokens VALUES ('1be9222c20f113283839c2802026ad61198a444da8b8ff81a07359ec25a7ef15', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 05:14:17.967+07', '2026-08-23 06:09:39.71+07', 'Token rotation', '2026-08-23 05:14:17.969+07', '2026-08-23 06:09:39.755+07', NULL, 450, 20);
+INSERT INTO public.refresh_tokens VALUES ('b713dd826c1f32b008b18470eaaa8f481d29d89b57c53021c7a9cfbfe6936b3b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 06:09:39.709+07', '2026-08-23 06:24:04.723+07', 'User logout', '2026-08-23 06:09:39.769+07', '2026-08-23 06:24:04.727+07', NULL, 451, 20);
+INSERT INTO public.refresh_tokens VALUES ('597c7fbaf558972356a64c0a4ffad1abd86048647430add88ee5512f2184abfc', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 06:24:13.197+07', '2026-08-23 06:37:32.403+07', 'User logout', '2026-08-23 06:24:13.2+07', '2026-08-23 06:37:32.417+07', NULL, 452, 8);
+INSERT INTO public.refresh_tokens VALUES ('6c844333783e0330dea908b2570f508765b2a35187d1080738f076d7fdbec500', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 06:37:38.731+07', '2026-08-23 06:37:54.55+07', 'User logout', '2026-08-23 06:37:38.734+07', '2026-08-23 06:37:54.55+07', NULL, 453, 16);
+INSERT INTO public.refresh_tokens VALUES ('9255ac44f1e6f32ca18901071927ab002aeec57c9f3589e42ba9a14f9849a0aa', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 06:38:45.773+07', '2026-08-23 06:50:36.062+07', 'Token rotation', '2026-08-23 06:38:45.773+07', '2026-08-23 06:50:36.094+07', NULL, 454, 18);
+INSERT INTO public.refresh_tokens VALUES ('146679b491b9210d9f6259b995adc5687950f30f838268a29c2aa5b3fbd30d46', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 06:50:36.062+07', '2026-08-23 06:51:35.033+07', 'User logout', '2026-08-23 06:50:36.103+07', '2026-08-23 06:51:35.034+07', NULL, 455, 18);
+INSERT INTO public.refresh_tokens VALUES ('11553267a84d8c0ade6d251becdcf53af63f0639912191a9b6d672bb56637750', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 06:52:43.706+07', '2026-08-23 06:52:50.431+07', 'User logout', '2026-08-23 06:52:43.706+07', '2026-08-23 06:52:50.432+07', NULL, 457, 18);
+INSERT INTO public.refresh_tokens VALUES ('9449d70d45dd407eabcabea8ceabe950fe60fd49281cf8b4e6a9228e17287836', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 06:51:45.119+07', '2026-08-23 07:43:26.393+07', 'Token rotation', '2026-08-23 06:51:45.12+07', '2026-08-23 07:43:26.419+07', NULL, 456, 16);
+INSERT INTO public.refresh_tokens VALUES ('f8e44df2063b7e0099a490f088be71a507d1f740b1c0d545fef7dd800d7d7078', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 06:53:11.817+07', '2026-08-23 07:43:32.161+07', 'Token rotation', '2026-08-23 06:53:11.817+07', '2026-08-23 07:43:32.173+07', NULL, 458, 18);
+INSERT INTO public.refresh_tokens VALUES ('41abf0d4b116032ef32e7c2b72ddb9e5a1d1317455b5da4f6c3edd492c255a5e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 07:43:32.161+07', '2026-08-23 08:05:52.483+07', 'Token rotation', '2026-08-23 07:43:32.176+07', '2026-08-23 08:05:52.501+07', NULL, 460, 18);
+INSERT INTO public.refresh_tokens VALUES ('a8278220bb1e51dd899207bc9235635d7911cd2e499240d3e54643eeb61761ce', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 08:05:52.483+07', '2026-08-23 08:06:21.074+07', 'Token rotation', '2026-08-23 08:05:52.511+07', '2026-08-23 08:06:21.081+07', NULL, 461, 18);
+INSERT INTO public.refresh_tokens VALUES ('3b468283cfad0b8da35f259526293e6929b68c1827233258162dda3af9a624d8', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 08:06:21.074+07', '2026-08-23 08:12:58.781+07', 'Token rotation', '2026-08-23 08:06:21.082+07', '2026-08-23 08:12:58.807+07', NULL, 462, 18);
+INSERT INTO public.refresh_tokens VALUES ('0518bb49d7b566f84d6555641f92274ba9b49d0b26c59203839f27db9598901a', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 08:29:47.03+07', '2026-08-23 08:34:04.18+07', 'Token rotation', '2026-08-23 08:29:47.041+07', '2026-08-23 08:34:04.192+07', NULL, 468, 18);
+INSERT INTO public.refresh_tokens VALUES ('b4625d53d1b31ee2af1c709b1c71301c45c98fa3a309a07e1803551a69bb6485', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 08:12:58.781+07', '2026-08-23 08:18:52.727+07', 'Token rotation', '2026-08-23 08:12:58.812+07', '2026-08-23 08:18:52.74+07', NULL, 463, 18);
+INSERT INTO public.refresh_tokens VALUES ('08fc65e3445ae4878ac5d841fe2a9c4bcc71aa186e23a7007c40f35c0ca6c0a1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 09:20:28.379+07', '2026-08-23 09:30:14.912+07', 'Token rotation', '2026-08-23 09:20:28.411+07', '2026-08-23 09:30:14.939+07', NULL, 472, 16);
+INSERT INTO public.refresh_tokens VALUES ('8d26269b2e6d27897744f71b3ba87af1d03cc53e0d00654cacaaa975c12d5060', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 08:18:52.727+07', '2026-08-23 08:19:04.558+07', 'Token rotation', '2026-08-23 08:18:52.742+07', '2026-08-23 08:19:04.568+07', NULL, 464, 18);
+INSERT INTO public.refresh_tokens VALUES ('dc3a22ee78e4520276c4b6c44de8a46c6c0061d78bc8867b88b5702d1f36435f', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 08:19:04.558+07', '2026-08-23 08:27:04.018+07', 'Token rotation', '2026-08-23 08:19:04.57+07', '2026-08-23 08:27:04.028+07', NULL, 465, 18);
+INSERT INTO public.refresh_tokens VALUES ('95b7fdda52168d44bc429a8208d75cef4aa60f65e68174ad8a9653c8d3daa2ba', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 09:30:14.912+07', '2026-08-23 09:40:13.141+07', 'Token rotation', '2026-08-23 09:30:14.947+07', '2026-08-23 09:40:13.165+07', NULL, 473, 16);
+INSERT INTO public.refresh_tokens VALUES ('5d0e5530eb72d98a3179105397dba043a02a84102807ad5ddcd282a3abdd222b', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 08:27:04.018+07', '2026-08-23 08:27:21.835+07', 'Token rotation', '2026-08-23 08:27:04.029+07', '2026-08-23 08:27:21.846+07', NULL, 466, 18);
+INSERT INTO public.refresh_tokens VALUES ('7c21ba1e322831fa2e76a739fab1b537006e72d7b74536541fea9e79d7e55319', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 09:40:13.141+07', '2026-08-23 09:50:01.586+07', 'Token rotation', '2026-08-23 09:40:13.169+07', '2026-08-23 09:50:01.6+07', NULL, 474, 16);
+INSERT INTO public.refresh_tokens VALUES ('65611479760da21fe35e9eae6a7ee78e875d3332d41666881da1ab0bc1dc5cfd', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 08:27:21.835+07', '2026-08-23 08:29:47.03+07', 'Token rotation', '2026-08-23 08:27:21.848+07', '2026-08-23 08:29:47.04+07', NULL, 467, 18);
+INSERT INTO public.refresh_tokens VALUES ('e77c906411e04f68da112ba0c7a28d14f77dd592200bd85fe82dc6faf552657d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 09:50:01.586+07', '2026-08-23 09:50:17.523+07', 'Token rotation', '2026-08-23 09:50:01.607+07', '2026-08-23 09:50:17.526+07', NULL, 475, 16);
+INSERT INTO public.refresh_tokens VALUES ('2f797e52b65996e28513a2d9607ff4edb8daf741d3970fca30a6f2b5e48cca19', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 09:50:17.523+07', '2026-08-23 09:59:19.039+07', 'Token rotation', '2026-08-23 09:50:17.527+07', '2026-08-23 09:59:19.083+07', NULL, 476, 16);
+INSERT INTO public.refresh_tokens VALUES ('7b9c2de4797b9ac8c30f35f09bd9bd3a70fb5b8c94e37ddd3c44bba8af4c6f9d', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 09:59:19.039+07', '2026-08-23 10:02:30.583+07', 'Token rotation', '2026-08-23 09:59:19.096+07', '2026-08-23 10:02:30.601+07', NULL, 477, 16);
+INSERT INTO public.refresh_tokens VALUES ('ad7ce69eba04d4fe41735c66744fd92ba68f97788629b9d17160ec8c091f7584', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 10:02:30.583+07', '2026-08-23 10:03:58.577+07', 'Token rotation', '2026-08-23 10:02:30.604+07', '2026-08-23 10:03:58.587+07', NULL, 478, 16);
+INSERT INTO public.refresh_tokens VALUES ('f3e8fcd36024c9642cb328ace61dd2c0107e66805ccef39a6f4660f018ea9879', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 10:03:58.577+07', '2026-08-23 10:04:06.738+07', 'Token rotation', '2026-08-23 10:03:58.589+07', '2026-08-23 10:04:06.749+07', NULL, 479, 16);
+INSERT INTO public.refresh_tokens VALUES ('81b333fc7b68a3d9c963fc2305670690eca8623f66141e232665be7a3455a627', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 10:04:06.738+07', '2026-08-23 10:09:19.915+07', 'Token rotation', '2026-08-23 10:04:06.751+07', '2026-08-23 10:09:19.94+07', NULL, 480, 16);
+INSERT INTO public.refresh_tokens VALUES ('30d27b7716314db9a2909153b2c798df78472a5534cadab20ee6222b87166fdd', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 10:09:19.915+07', '2026-08-23 10:31:51.296+07', 'Token rotation', '2026-08-23 10:09:19.945+07', '2026-08-23 10:31:51.33+07', NULL, 481, 16);
+INSERT INTO public.refresh_tokens VALUES ('6dcbfa0aa2a8af0681a37f53518d92111166c8d67e0b29ae1e4bef287e045ade', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '192.168.1.5', '2026-08-30 10:31:51.296+07', NULL, NULL, '2026-08-23 10:31:51.338+07', '2026-08-23 10:31:51.338+07', NULL, 482, 16);
+
+
+--
+-- Data for Name: rental_histories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.rental_histories VALUES ('2026-01-01', NULL, 'ACTIVE', '2026-07-30 23:21:12.988+07', 1, 4, 1, 2, 1);
+INSERT INTO public.rental_histories VALUES ('2026-05-11', NULL, 'ACTIVE', '2026-08-11 14:53:43.379+07', 3, 13, 15, 7, 3);
+INSERT INTO public.rental_histories VALUES ('2026-05-11', NULL, 'ACTIVE', '2026-08-11 14:56:21.321+07', 4, 13, 15, 9, 4);
+INSERT INTO public.rental_histories VALUES ('2026-05-11', NULL, 'ACTIVE', '2026-08-11 15:07:55.179+07', 5, 13, 15, 11, 5);
+INSERT INTO public.rental_histories VALUES ('2026-05-11', NULL, 'ACTIVE', '2026-08-11 15:09:29.73+07', 6, 13, 15, 13, 6);
+INSERT INTO public.rental_histories VALUES ('2026-05-11', '2026-08-11', 'TERMINATED', '2026-08-11 15:10:41.658+07', 7, 13, 15, 15, 7);
+INSERT INTO public.rental_histories VALUES ('2026-05-11', '2026-08-11', 'TERMINATED', '2026-08-11 15:12:27.956+07', 8, 13, 15, 17, 8);
+INSERT INTO public.rental_histories VALUES ('2026-05-11', NULL, 'ACTIVE', '2026-08-11 15:14:04.11+07', 9, 13, 15, 19, 9);
+INSERT INTO public.rental_histories VALUES ('2026-08-01', NULL, 'ACTIVE', '2026-08-14 13:36:19.375+07', 10, 16, 1, 21, 10);
+
+
+--
+-- Data for Name: renter_invitations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: renter_profiles; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, 'Ho Chi Minh City', 'Software engineer', NULL, NULL, 'VERIFIED', '2026-07-30 23:21:12.793+07', '2026-07-30 23:43:08.489+07', 1, 4);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UNVERIFIED', '2026-08-07 09:17:43.413+07', '2026-08-07 09:17:43.413+07', 3, 8);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'VERIFIED', '2026-08-11 14:09:06.141+07', '2026-08-11 15:06:46.594+07', 4, 13);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UNVERIFIED', '2026-08-14 07:21:21.833+07', '2026-08-14 07:21:21.833+07', 7, 18);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UNVERIFIED', '2026-08-22 18:42:31.344+07', '2026-08-22 18:42:31.344+07', 8, 19);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UNVERIFIED', '2026-08-23 05:14:17.145+07', '2026-08-23 05:14:17.145+07', 9, 20);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UNVERIFIED', '2026-08-23 13:44:25.670236+07', '2026-08-23 13:44:25.670236+07', 11, 2);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UNVERIFIED', '2026-08-23 13:44:25.670236+07', '2026-08-23 13:44:25.670236+07', 12, 3);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UNVERIFIED', '2026-08-23 13:44:25.670236+07', '2026-08-23 13:44:25.670236+07', 13, 10);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UNVERIFIED', '2026-08-23 13:44:25.670236+07', '2026-08-23 13:44:25.670236+07', 14, 1);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UNVERIFIED', '2026-08-23 13:44:25.670236+07', '2026-08-23 13:44:25.670236+07', 15, 15);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UNVERIFIED', '2026-08-23 13:44:25.670236+07', '2026-08-23 13:44:25.670236+07', 16, 14);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UNVERIFIED', '2026-08-23 13:44:25.670236+07', '2026-08-23 13:44:25.670236+07', 17, 9);
+INSERT INTO public.renter_profiles VALUES (NULL, 'OTHER', '066205007847', 'https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787471519/renters/ujuxmt7zlx1t1b4rbctu.png', 'https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787471519/renters/kshapx9mtxp18uufgydj.png', '', NULL, NULL, NULL, 'UNVERIFIED', '2026-08-13 14:54:26.268+07', '2026-08-23 07:51:59.988+07', 6, 16);
+
+
+--
+-- Data for Name: reports; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.reports VALUES ('TENANT', '15', 'API-E2E-20260811151034-7GWTM report reason', 'Disposable moderation report', 'RESOLVED', '2026-08-11 15:10:48.043+07', '2026-08-11 15:10:48.295+07', 1, 13, 1, 15, '{"id": 15, "name": "API Test Tenant 9", "status": "ACTIVE", "verificationStatus": "VERIFIED"}', '1d7d5e34c5c9a42a6f91f10e12becc8d00315f302d3daa024059d50339ade42b', '2026-08-11 15:10:48.241+07', 'API-E2E-20260811151034-7GWTM reviewed', '2026-08-11 15:10:48.296+07');
+INSERT INTO public.reports VALUES ('TENANT', '15', 'API-E2E-20260811151220-TXWCG report reason', 'Disposable moderation report', 'RESOLVED', '2026-08-11 15:12:33.732+07', '2026-08-11 15:12:33.94+07', 2, 13, 1, 15, '{"id": 15, "name": "API Test Tenant 9", "status": "ACTIVE", "verificationStatus": "VERIFIED"}', '1d7d5e34c5c9a42a6f91f10e12becc8d00315f302d3daa024059d50339ade42b', '2026-08-11 15:12:33.889+07', 'API-E2E-20260811151220-TXWCG reviewed', '2026-08-11 15:12:33.942+07');
+
+
+--
+-- Data for Name: reputation_scores; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.reviews VALUES (5, 'API-E2E-20260811150747-FQASH verified rental review', 5, 4, 4, 5, true, 'APPROVED', '2026-08-11 15:08:00.573+07', 1, 15, 11, 5, 13, 1, NULL, '2026-08-11 15:08:00.732+07', '2026-08-11 15:08:00.733+07');
+INSERT INTO public.reviews VALUES (5, 'API-E2E-20260811150923-COC5D verified rental review', 5, 4, 4, 5, true, 'APPROVED', '2026-08-11 15:09:34.901+07', 2, 15, 13, 6, 13, 1, NULL, '2026-08-11 15:09:35.041+07', '2026-08-11 15:09:35.042+07');
+INSERT INTO public.reviews VALUES (5, 'API-E2E-20260811151034-7GWTM verified rental review', 5, 4, 4, 5, true, 'APPROVED', '2026-08-11 15:10:47.634+07', 3, 15, 15, 7, 13, 1, NULL, '2026-08-11 15:10:47.815+07', '2026-08-11 15:10:47.82+07');
+INSERT INTO public.reviews VALUES (5, 'API-E2E-20260811151220-TXWCG verified rental review', 5, 4, 4, 5, true, 'APPROVED', '2026-08-11 15:12:33.344+07', 4, 15, 17, 8, 13, 1, NULL, '2026-08-11 15:12:33.518+07', '2026-08-11 15:12:33.518+07');
+
+
+--
+-- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.roles VALUES ('ADMIN', 'ADMIN', 'Quản trị viên hệ thống, có toàn quyền truy cập tất cả API.', NULL, NULL, NULL);
+INSERT INTO public.roles VALUES ('LANDLORD', 'LANDLORD', 'Chủ trọ hoặc chủ tổ chức quản lý phòng trọ.', NULL, NULL, NULL);
+INSERT INTO public.roles VALUES ('MANAGER', 'MANAGER', 'Nhân viên quản lý vận hành trong tenant.', NULL, NULL, NULL);
+INSERT INTO public.roles VALUES ('ACCOUNTANT', 'ACCOUNTANT', 'Nhân viên kế toán, phụ trách hóa đơn và thanh toán.', NULL, NULL, NULL);
+INSERT INTO public.roles VALUES ('MAINTENANCE_STAFF', 'MAINTENANCE_STAFF', 'Nhân viên bảo trì, phụ trách sự cố và tài sản.', NULL, NULL, NULL);
+INSERT INTO public.roles VALUES ('TENANT', 'TENANT', 'Khách thuê sử dụng marketplace và các chức năng cá nhân.', NULL, NULL, NULL);
+
+
+--
+-- Data for Name: role_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.role_permissions VALUES ('ADMIN', 13);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 15);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 52);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 53);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 54);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 55);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 17);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 18);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 19);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 20);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 8);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 21);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 22);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 27);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 28);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 30);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 31);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 32);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 33);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 34);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 35);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 36);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 37);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 38);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 39);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 40);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 41);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 42);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 43);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 44);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 45);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 46);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 47);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 48);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 49);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 50);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 51);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 1);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 2);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 3);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 4);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 5);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 6);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 7);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 9);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 10);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 11);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 12);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 14);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 23);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 24);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 25);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 26);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 67);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 68);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 107);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 108);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 109);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 69);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 70);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 71);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 72);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 73);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 77);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 78);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 79);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 80);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 81);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 82);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 83);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 84);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 85);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 86);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 87);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 88);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 89);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 90);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 91);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 92);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 93);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 94);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 95);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 96);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 97);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 98);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 99);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 100);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 101);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 102);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 103);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 104);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 105);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 106);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 57);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 58);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 59);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 60);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 61);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 62);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 63);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 64);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 65);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 74);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 75);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 76);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 114);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 115);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 116);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 117);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 118);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 121);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 126);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 127);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 128);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 129);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 141);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 29);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 56);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 66);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 119);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 122);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 130);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 131);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 133);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 134);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 135);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 136);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 137);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 138);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 139);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 110);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 111);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 112);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 120);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 123);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 124);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 125);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 132);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 140);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 113);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 150);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 151);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 152);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 153);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 154);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 155);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 157);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 158);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 159);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 160);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 161);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 162);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 163);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 164);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 165);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 166);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 167);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 168);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 169);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 170);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 171);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 172);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 173);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 174);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 175);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 176);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 177);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 178);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 179);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 180);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 181);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 182);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 183);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 184);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 185);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 186);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 187);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 188);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 189);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 190);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 191);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 192);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 193);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 194);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 195);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 196);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 144);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 145);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 146);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 147);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 148);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 149);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 224);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 228);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 229);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 156);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 213);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 199);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 200);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 201);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 218);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 206);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 211);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 209);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 212);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 142);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 230);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 231);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 214);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 215);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 216);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 202);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 217);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 207);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 221);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 143);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 225);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 226);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 232);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 197);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 198);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 203);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 219);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 204);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 220);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 205);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 210);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 208);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 223);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 227);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 241);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 242);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 243);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 244);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 245);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 246);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 247);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 248);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 249);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 250);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 238);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 239);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 240);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 233);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 234);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 236);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 237);
+INSERT INTO public.role_permissions VALUES ('ADMIN', 235);
+INSERT INTO public.role_permissions VALUES ('TENANT', 52);
+INSERT INTO public.role_permissions VALUES ('TENANT', 53);
+INSERT INTO public.role_permissions VALUES ('TENANT', 54);
+INSERT INTO public.role_permissions VALUES ('TENANT', 55);
+INSERT INTO public.role_permissions VALUES ('TENANT', 1);
+INSERT INTO public.role_permissions VALUES ('TENANT', 10);
+INSERT INTO public.role_permissions VALUES ('TENANT', 11);
+INSERT INTO public.role_permissions VALUES ('TENANT', 12);
+INSERT INTO public.role_permissions VALUES ('TENANT', 67);
+INSERT INTO public.role_permissions VALUES ('TENANT', 68);
+INSERT INTO public.role_permissions VALUES ('TENANT', 107);
+INSERT INTO public.role_permissions VALUES ('TENANT', 108);
+INSERT INTO public.role_permissions VALUES ('TENANT', 109);
+INSERT INTO public.role_permissions VALUES ('TENANT', 69);
+INSERT INTO public.role_permissions VALUES ('TENANT', 70);
+INSERT INTO public.role_permissions VALUES ('TENANT', 71);
+INSERT INTO public.role_permissions VALUES ('TENANT', 72);
+INSERT INTO public.role_permissions VALUES ('TENANT', 73);
+INSERT INTO public.role_permissions VALUES ('TENANT', 79);
+INSERT INTO public.role_permissions VALUES ('TENANT', 80);
+INSERT INTO public.role_permissions VALUES ('TENANT', 81);
+INSERT INTO public.role_permissions VALUES ('TENANT', 82);
+INSERT INTO public.role_permissions VALUES ('TENANT', 83);
+INSERT INTO public.role_permissions VALUES ('TENANT', 84);
+INSERT INTO public.role_permissions VALUES ('TENANT', 85);
+INSERT INTO public.role_permissions VALUES ('TENANT', 86);
+INSERT INTO public.role_permissions VALUES ('TENANT', 87);
+INSERT INTO public.role_permissions VALUES ('TENANT', 88);
+INSERT INTO public.role_permissions VALUES ('TENANT', 89);
+INSERT INTO public.role_permissions VALUES ('TENANT', 90);
+INSERT INTO public.role_permissions VALUES ('TENANT', 91);
+INSERT INTO public.role_permissions VALUES ('TENANT', 97);
+INSERT INTO public.role_permissions VALUES ('TENANT', 98);
+INSERT INTO public.role_permissions VALUES ('TENANT', 99);
+INSERT INTO public.role_permissions VALUES ('TENANT', 100);
+INSERT INTO public.role_permissions VALUES ('TENANT', 101);
+INSERT INTO public.role_permissions VALUES ('TENANT', 103);
+INSERT INTO public.role_permissions VALUES ('TENANT', 104);
+INSERT INTO public.role_permissions VALUES ('TENANT', 105);
+INSERT INTO public.role_permissions VALUES ('TENANT', 106);
+INSERT INTO public.role_permissions VALUES ('TENANT', 57);
+INSERT INTO public.role_permissions VALUES ('TENANT', 58);
+INSERT INTO public.role_permissions VALUES ('TENANT', 59);
+INSERT INTO public.role_permissions VALUES ('TENANT', 60);
+INSERT INTO public.role_permissions VALUES ('TENANT', 61);
+INSERT INTO public.role_permissions VALUES ('TENANT', 62);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 21);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 22);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 27);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 28);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 30);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 31);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 32);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 33);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 34);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 35);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 36);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 37);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 38);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 39);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 40);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 41);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 42);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 43);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 44);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 45);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 46);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 47);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 48);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 1);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 2);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 3);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 4);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 10);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 11);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 12);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 23);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 24);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 25);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 26);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 67);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 68);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 107);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 108);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 109);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 69);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 70);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 71);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 72);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 73);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 79);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 80);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 81);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 82);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 83);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 84);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 85);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 86);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 87);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 88);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 89);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 90);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 91);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 92);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 93);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 94);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 95);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 96);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 97);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 98);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 99);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 100);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 101);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 103);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 104);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 105);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 106);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 57);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 58);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 59);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 60);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 61);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 62);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 63);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 64);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 65);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 74);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 75);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 76);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 114);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 115);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 116);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 117);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 118);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 121);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 126);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 127);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 128);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 129);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 141);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 29);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 56);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 66);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 119);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 122);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 130);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 131);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 133);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 134);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 135);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 136);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 137);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 138);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 139);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 110);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 111);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 112);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 120);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 123);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 124);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 125);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 132);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 140);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 113);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 150);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 151);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 152);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 153);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 160);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 161);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 162);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 163);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 164);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 165);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 166);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 168);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 169);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 170);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 171);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 172);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 185);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 186);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 187);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 188);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 189);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 190);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 191);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 192);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 193);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 194);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 195);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 196);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 144);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 145);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 146);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 147);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 148);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 149);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 224);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 213);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 199);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 200);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 201);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 218);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 206);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 211);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 209);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 212);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 142);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 214);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 215);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 216);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 202);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 217);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 207);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 221);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 143);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 197);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 198);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 203);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 219);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 204);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 220);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 205);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 210);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 208);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 223);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 241);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 242);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 243);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 244);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 245);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 246);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 249);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 238);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 239);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 240);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 236);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 237);
+INSERT INTO public.role_permissions VALUES ('LANDLORD', 235);
+INSERT INTO public.role_permissions VALUES ('TENANT', 63);
+INSERT INTO public.role_permissions VALUES ('TENANT', 64);
+INSERT INTO public.role_permissions VALUES ('TENANT', 65);
+INSERT INTO public.role_permissions VALUES ('TENANT', 74);
+INSERT INTO public.role_permissions VALUES ('TENANT', 75);
+INSERT INTO public.role_permissions VALUES ('TENANT', 76);
+INSERT INTO public.role_permissions VALUES ('TENANT', 114);
+INSERT INTO public.role_permissions VALUES ('TENANT', 115);
+INSERT INTO public.role_permissions VALUES ('TENANT', 126);
+INSERT INTO public.role_permissions VALUES ('TENANT', 127);
+INSERT INTO public.role_permissions VALUES ('TENANT', 128);
+INSERT INTO public.role_permissions VALUES ('TENANT', 129);
+INSERT INTO public.role_permissions VALUES ('TENANT', 56);
+INSERT INTO public.role_permissions VALUES ('TENANT', 66);
+INSERT INTO public.role_permissions VALUES ('TENANT', 130);
+INSERT INTO public.role_permissions VALUES ('TENANT', 131);
+INSERT INTO public.role_permissions VALUES ('TENANT', 133);
+INSERT INTO public.role_permissions VALUES ('TENANT', 134);
+INSERT INTO public.role_permissions VALUES ('TENANT', 135);
+INSERT INTO public.role_permissions VALUES ('TENANT', 136);
+INSERT INTO public.role_permissions VALUES ('TENANT', 110);
+INSERT INTO public.role_permissions VALUES ('TENANT', 111);
+INSERT INTO public.role_permissions VALUES ('TENANT', 112);
+INSERT INTO public.role_permissions VALUES ('TENANT', 132);
+INSERT INTO public.role_permissions VALUES ('TENANT', 113);
+INSERT INTO public.role_permissions VALUES ('TENANT', 150);
+INSERT INTO public.role_permissions VALUES ('TENANT', 151);
+INSERT INTO public.role_permissions VALUES ('TENANT', 152);
+INSERT INTO public.role_permissions VALUES ('TENANT', 153);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 21);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 22);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 27);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 28);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 30);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 31);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 32);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 33);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 34);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 35);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 36);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 37);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 38);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 39);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 40);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 41);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 1);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 2);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 3);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 4);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 10);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 11);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 12);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 23);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 24);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 25);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 26);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 67);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 68);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 107);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 108);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 109);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 69);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 70);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 71);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 72);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 73);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 92);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 93);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 94);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 95);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 96);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 97);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 98);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 99);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 100);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 101);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 57);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 58);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 59);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 60);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 61);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 62);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 63);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 64);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 65);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 74);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 75);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 76);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 114);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 115);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 116);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 117);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 118);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 121);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 126);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 127);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 128);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 129);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 141);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 29);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 56);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 66);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 119);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 122);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 130);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 131);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 133);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 134);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 135);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 136);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 137);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 138);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 139);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 110);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 111);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 112);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 120);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 123);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 124);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 125);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 132);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 140);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 113);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 150);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 151);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 152);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 168);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 169);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 170);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 171);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 172);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 185);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 186);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 187);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 188);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 189);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 190);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 191);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 192);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 193);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 194);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 195);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 144);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 145);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 146);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 147);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 148);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 149);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 224);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 213);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 218);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 206);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 211);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 209);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 212);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 142);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 214);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 215);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 216);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 207);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 221);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 143);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 203);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 219);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 204);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 220);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 205);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 210);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 208);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 223);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 241);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 242);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 243);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 244);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 245);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 246);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 249);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 236);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 237);
+INSERT INTO public.role_permissions VALUES ('MANAGER', 235);
+INSERT INTO public.role_permissions VALUES ('TENANT', 154);
+INSERT INTO public.role_permissions VALUES ('TENANT', 155);
+INSERT INTO public.role_permissions VALUES ('TENANT', 157);
+INSERT INTO public.role_permissions VALUES ('TENANT', 158);
+INSERT INTO public.role_permissions VALUES ('TENANT', 159);
+INSERT INTO public.role_permissions VALUES ('TENANT', 165);
+INSERT INTO public.role_permissions VALUES ('TENANT', 166);
+INSERT INTO public.role_permissions VALUES ('TENANT', 168);
+INSERT INTO public.role_permissions VALUES ('TENANT', 169);
+INSERT INTO public.role_permissions VALUES ('TENANT', 170);
+INSERT INTO public.role_permissions VALUES ('TENANT', 171);
+INSERT INTO public.role_permissions VALUES ('TENANT', 172);
+INSERT INTO public.role_permissions VALUES ('TENANT', 173);
+INSERT INTO public.role_permissions VALUES ('TENANT', 174);
+INSERT INTO public.role_permissions VALUES ('TENANT', 175);
+INSERT INTO public.role_permissions VALUES ('TENANT', 176);
+INSERT INTO public.role_permissions VALUES ('TENANT', 177);
+INSERT INTO public.role_permissions VALUES ('TENANT', 178);
+INSERT INTO public.role_permissions VALUES ('TENANT', 179);
+INSERT INTO public.role_permissions VALUES ('TENANT', 180);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 1);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 10);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 11);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 12);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 69);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 70);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 71);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 72);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 73);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 79);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 80);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 81);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 82);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 83);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 84);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 85);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 86);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 87);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 88);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 89);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 90);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 91);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 92);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 93);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 94);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 95);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 96);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 103);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 104);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 105);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 106);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 74);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 75);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 76);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 141);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 137);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 138);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 139);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 140);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 153);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 165);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 166);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 190);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 191);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 192);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 193);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 194);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 195);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 196);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 224);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 199);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 200);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 201);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 212);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 202);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 207);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 221);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 197);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 198);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 223);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 241);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 238);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 239);
+INSERT INTO public.role_permissions VALUES ('ACCOUNTANT', 240);
+INSERT INTO public.role_permissions VALUES ('TENANT', 181);
+INSERT INTO public.role_permissions VALUES ('TENANT', 182);
+INSERT INTO public.role_permissions VALUES ('TENANT', 183);
+INSERT INTO public.role_permissions VALUES ('TENANT', 184);
+INSERT INTO public.role_permissions VALUES ('TENANT', 144);
+INSERT INTO public.role_permissions VALUES ('TENANT', 145);
+INSERT INTO public.role_permissions VALUES ('TENANT', 146);
+INSERT INTO public.role_permissions VALUES ('TENANT', 147);
+INSERT INTO public.role_permissions VALUES ('TENANT', 148);
+INSERT INTO public.role_permissions VALUES ('TENANT', 149);
+INSERT INTO public.role_permissions VALUES ('TENANT', 224);
+INSERT INTO public.role_permissions VALUES ('TENANT', 156);
+INSERT INTO public.role_permissions VALUES ('TENANT', 213);
+INSERT INTO public.role_permissions VALUES ('TENANT', 218);
+INSERT INTO public.role_permissions VALUES ('TENANT', 206);
+INSERT INTO public.role_permissions VALUES ('TENANT', 211);
+INSERT INTO public.role_permissions VALUES ('TENANT', 209);
+INSERT INTO public.role_permissions VALUES ('TENANT', 142);
+INSERT INTO public.role_permissions VALUES ('TENANT', 230);
+INSERT INTO public.role_permissions VALUES ('TENANT', 231);
+INSERT INTO public.role_permissions VALUES ('TENANT', 214);
+INSERT INTO public.role_permissions VALUES ('TENANT', 215);
+INSERT INTO public.role_permissions VALUES ('TENANT', 216);
+INSERT INTO public.role_permissions VALUES ('TENANT', 207);
+INSERT INTO public.role_permissions VALUES ('TENANT', 221);
+INSERT INTO public.role_permissions VALUES ('TENANT', 143);
+INSERT INTO public.role_permissions VALUES ('TENANT', 232);
+INSERT INTO public.role_permissions VALUES ('TENANT', 203);
+INSERT INTO public.role_permissions VALUES ('TENANT', 219);
+INSERT INTO public.role_permissions VALUES ('TENANT', 204);
+INSERT INTO public.role_permissions VALUES ('TENANT', 220);
+INSERT INTO public.role_permissions VALUES ('TENANT', 205);
+INSERT INTO public.role_permissions VALUES ('TENANT', 210);
+INSERT INTO public.role_permissions VALUES ('TENANT', 208);
+INSERT INTO public.role_permissions VALUES ('TENANT', 223);
+INSERT INTO public.role_permissions VALUES ('TENANT', 241);
+INSERT INTO public.role_permissions VALUES ('TENANT', 242);
+INSERT INTO public.role_permissions VALUES ('TENANT', 243);
+INSERT INTO public.role_permissions VALUES ('TENANT', 244);
+INSERT INTO public.role_permissions VALUES ('TENANT', 245);
+INSERT INTO public.role_permissions VALUES ('TENANT', 246);
+INSERT INTO public.role_permissions VALUES ('TENANT', 247);
+INSERT INTO public.role_permissions VALUES ('TENANT', 248);
+INSERT INTO public.role_permissions VALUES ('TENANT', 238);
+INSERT INTO public.role_permissions VALUES ('TENANT', 239);
+INSERT INTO public.role_permissions VALUES ('TENANT', 240);
+INSERT INTO public.role_permissions VALUES ('TENANT', 233);
+INSERT INTO public.role_permissions VALUES ('TENANT', 234);
+INSERT INTO public.role_permissions VALUES ('TENANT', 237);
+INSERT INTO public.role_permissions VALUES ('TENANT', 235);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 21);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 22);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 27);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 28);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 30);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 31);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 32);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 33);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 34);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 35);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 36);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 37);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 38);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 39);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 40);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 41);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 1);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 10);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 11);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 12);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 23);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 24);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 25);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 26);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 107);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 108);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 109);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 92);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 93);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 94);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 95);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 96);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 114);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 115);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 116);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 117);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 118);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 29);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 119);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 110);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 111);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 112);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 120);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 113);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 185);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 186);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 187);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 188);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 189);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 218);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 206);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 211);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 209);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 203);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 219);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 204);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 220);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 205);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 210);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 208);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 249);
+INSERT INTO public.role_permissions VALUES ('MAINTENANCE_STAFF', 236);
+
+
+--
+-- Data for Name: room_amenities; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.room_amenities VALUES (4, 1);
+INSERT INTO public.room_amenities VALUES (3, 1);
+INSERT INTO public.room_amenities VALUES (5, 3);
+INSERT INTO public.room_amenities VALUES (6, 3);
+INSERT INTO public.room_amenities VALUES (8, 4);
+INSERT INTO public.room_amenities VALUES (7, 4);
+INSERT INTO public.room_amenities VALUES (10, 5);
+INSERT INTO public.room_amenities VALUES (9, 5);
+INSERT INTO public.room_amenities VALUES (12, 6);
+INSERT INTO public.room_amenities VALUES (11, 6);
+INSERT INTO public.room_amenities VALUES (14, 7);
+INSERT INTO public.room_amenities VALUES (13, 7);
+INSERT INTO public.room_amenities VALUES (16, 8);
+INSERT INTO public.room_amenities VALUES (15, 8);
+INSERT INTO public.room_amenities VALUES (18, 9);
+INSERT INTO public.room_amenities VALUES (17, 9);
+INSERT INTO public.room_amenities VALUES (20, 11);
+INSERT INTO public.room_amenities VALUES (19, 11);
+INSERT INTO public.room_amenities VALUES (21, 16);
+INSERT INTO public.room_amenities VALUES (21, 14);
+INSERT INTO public.room_amenities VALUES (21, 13);
+INSERT INTO public.room_amenities VALUES (21, 17);
+INSERT INTO public.room_amenities VALUES (21, 15);
+INSERT INTO public.room_amenities VALUES (21, 12);
+INSERT INTO public.room_amenities VALUES (23, 16);
+INSERT INTO public.room_amenities VALUES (23, 14);
+INSERT INTO public.room_amenities VALUES (23, 13);
+INSERT INTO public.room_amenities VALUES (23, 12);
+INSERT INTO public.room_amenities VALUES (23, 15);
+INSERT INTO public.room_amenities VALUES (23, 17);
+INSERT INTO public.room_amenities VALUES (24, 16);
+INSERT INTO public.room_amenities VALUES (24, 17);
+INSERT INTO public.room_amenities VALUES (24, 15);
+INSERT INTO public.room_amenities VALUES (24, 12);
+INSERT INTO public.room_amenities VALUES (24, 13);
+INSERT INTO public.room_amenities VALUES (24, 14);
+INSERT INTO public.room_amenities VALUES (25, 16);
+INSERT INTO public.room_amenities VALUES (25, 17);
+INSERT INTO public.room_amenities VALUES (25, 15);
+INSERT INTO public.room_amenities VALUES (25, 12);
+INSERT INTO public.room_amenities VALUES (25, 13);
+INSERT INTO public.room_amenities VALUES (25, 14);
+INSERT INTO public.room_amenities VALUES (26, 16);
+INSERT INTO public.room_amenities VALUES (26, 17);
+INSERT INTO public.room_amenities VALUES (26, 15);
+INSERT INTO public.room_amenities VALUES (26, 12);
+INSERT INTO public.room_amenities VALUES (27, 17);
+INSERT INTO public.room_amenities VALUES (27, 15);
+INSERT INTO public.room_amenities VALUES (27, 12);
+INSERT INTO public.room_amenities VALUES (28, 16);
+INSERT INTO public.room_amenities VALUES (28, 17);
+INSERT INTO public.room_amenities VALUES (28, 15);
+INSERT INTO public.room_amenities VALUES (28, 12);
+INSERT INTO public.room_amenities VALUES (28, 13);
+INSERT INTO public.room_amenities VALUES (28, 14);
+INSERT INTO public.room_amenities VALUES (29, 16);
+INSERT INTO public.room_amenities VALUES (29, 17);
+INSERT INTO public.room_amenities VALUES (29, 15);
+INSERT INTO public.room_amenities VALUES (29, 12);
+INSERT INTO public.room_amenities VALUES (29, 13);
+INSERT INTO public.room_amenities VALUES (29, 14);
+INSERT INTO public.room_amenities VALUES (30, 16);
+INSERT INTO public.room_amenities VALUES (30, 17);
+INSERT INTO public.room_amenities VALUES (30, 15);
+INSERT INTO public.room_amenities VALUES (30, 12);
+INSERT INTO public.room_amenities VALUES (30, 13);
+INSERT INTO public.room_amenities VALUES (30, 14);
+INSERT INTO public.room_amenities VALUES (31, 16);
+INSERT INTO public.room_amenities VALUES (31, 17);
+INSERT INTO public.room_amenities VALUES (31, 15);
+INSERT INTO public.room_amenities VALUES (31, 12);
+INSERT INTO public.room_amenities VALUES (31, 13);
+INSERT INTO public.room_amenities VALUES (31, 14);
+INSERT INTO public.room_amenities VALUES (32, 16);
+INSERT INTO public.room_amenities VALUES (32, 17);
+INSERT INTO public.room_amenities VALUES (32, 15);
+INSERT INTO public.room_amenities VALUES (32, 12);
+INSERT INTO public.room_amenities VALUES (32, 13);
+
+
+--
+-- Data for Name: room_images; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786459079/rooms/15/5/kuexbliycqt3rjmk5caf.png', NULL, 0, true, '2026-08-11 14:37:59.888+07', 1, 5, 'rooms/15/5/kuexbliycqt3rjmk5caf');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786630648/rooms/1/21/p9iwsn9wzzgopvc7hane.jpg', NULL, 0, true, '2026-08-13 14:17:34.146+07', 16, 21, 'rooms/1/21/p9iwsn9wzzgopvc7hane');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786630650/rooms/1/21/vnggxkhwvisduhjudrn0.jpg', NULL, 1, false, '2026-08-13 14:17:34.146+07', 17, 21, 'rooms/1/21/vnggxkhwvisduhjudrn0');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786630651/rooms/1/21/eapvx1kvb97dgbocfjo5.jpg', NULL, 2, false, '2026-08-13 14:17:34.146+07', 18, 21, 'rooms/1/21/eapvx1kvb97dgbocfjo5');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786630652/rooms/1/21/kca2vhw7brw3h2ykewgt.jpg', NULL, 3, false, '2026-08-13 14:17:34.146+07', 19, 21, 'rooms/1/21/kca2vhw7brw3h2ykewgt');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786696845/rooms/18/22/slkmelahtdsrlzngltjc.jpg', NULL, 0, true, '2026-08-14 08:40:50.308+07', 20, 22, 'rooms/18/22/slkmelahtdsrlzngltjc');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786696846/rooms/18/22/vcbf3pz9hxocuqiw8c5x.jpg', NULL, 1, false, '2026-08-14 08:40:50.308+07', 21, 22, 'rooms/18/22/vcbf3pz9hxocuqiw8c5x');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786696847/rooms/18/22/jel6jq2skbtjv7nvqywe.jpg', NULL, 2, false, '2026-08-14 08:40:50.308+07', 22, 22, 'rooms/18/22/jel6jq2skbtjv7nvqywe');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786696849/rooms/18/22/kdphmdfcakhmup4ysefk.jpg', NULL, 3, false, '2026-08-14 08:40:50.308+07', 23, 22, 'rooms/18/22/kdphmdfcakhmup4ysefk');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786778196/rooms/1/23/qwnsnzmfg7r8p6lfz54r.jpg', NULL, 0, true, '2026-08-15 07:16:44.915+07', 24, 23, 'rooms/1/23/qwnsnzmfg7r8p6lfz54r');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786778198/rooms/1/23/rwreotwzal9rpvlm9cpy.jpg', NULL, 1, false, '2026-08-15 07:16:44.915+07', 25, 23, 'rooms/1/23/rwreotwzal9rpvlm9cpy');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786778200/rooms/1/23/spdibzz05maqkxxcvqnb.jpg', NULL, 2, false, '2026-08-15 07:16:44.915+07', 26, 23, 'rooms/1/23/spdibzz05maqkxxcvqnb');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786778202/rooms/1/23/m7p51vod5b0hwzfvgqkp.jpg', NULL, 3, false, '2026-08-15 07:16:44.915+07', 27, 23, 'rooms/1/23/m7p51vod5b0hwzfvgqkp');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786778769/rooms/1/24/qoh6zmbftrj7rwm3qcuu.jpg', NULL, 0, true, '2026-08-15 07:26:13.912+07', 28, 24, 'rooms/1/24/qoh6zmbftrj7rwm3qcuu');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786778771/rooms/1/24/evtdvwgokfnfgtdmh60x.jpg', NULL, 1, false, '2026-08-15 07:26:13.912+07', 29, 24, 'rooms/1/24/evtdvwgokfnfgtdmh60x');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786778772/rooms/1/24/vx8twkmkbelfkv9snb5a.jpg', NULL, 2, false, '2026-08-15 07:26:13.912+07', 30, 24, 'rooms/1/24/vx8twkmkbelfkv9snb5a');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786865496/rooms/18/25/ezncx0tj4uxbndvftaim.jpg', NULL, 0, true, '2026-08-16 07:31:42.876+07', 31, 25, 'rooms/18/25/ezncx0tj4uxbndvftaim');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786865498/rooms/18/25/gzhwkkitsdqwbtcbpqti.jpg', NULL, 1, false, '2026-08-16 07:31:42.876+07', 32, 25, 'rooms/18/25/gzhwkkitsdqwbtcbpqti');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786865499/rooms/18/25/tmwdx3cubrvpayrvkqar.jpg', NULL, 2, false, '2026-08-16 07:31:42.876+07', 33, 25, 'rooms/18/25/tmwdx3cubrvpayrvkqar');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786900460/rooms/1/26/eap2zmown4grrdl5ukrf.jpg', NULL, 0, true, '2026-08-16 17:14:26.915+07', 34, 26, 'rooms/1/26/eap2zmown4grrdl5ukrf');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786900461/rooms/1/26/saqouz5spibzyze6rnok.jpg', NULL, 1, false, '2026-08-16 17:14:26.915+07', 35, 26, 'rooms/1/26/saqouz5spibzyze6rnok');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786900463/rooms/1/26/dgsikuuqv4swz3jalwxn.jpg', NULL, 2, false, '2026-08-16 17:14:26.915+07', 36, 26, 'rooms/1/26/dgsikuuqv4swz3jalwxn');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786900464/rooms/1/26/foyep3laujnb7phpla1i.jpg', NULL, 3, false, '2026-08-16 17:14:26.915+07', 37, 26, 'rooms/1/26/foyep3laujnb7phpla1i');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786901049/rooms/1/27/awabpbncskd95t99vi7v.jpg', NULL, 0, true, '2026-08-16 17:24:15.344+07', 38, 27, 'rooms/1/27/awabpbncskd95t99vi7v');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786901050/rooms/1/27/dthe1zrdx3yxrdyum3n1.jpg', NULL, 1, false, '2026-08-16 17:24:15.344+07', 39, 27, 'rooms/1/27/dthe1zrdx3yxrdyum3n1');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786901051/rooms/1/27/p1c44ul4eeoyjn6grvi0.jpg', NULL, 2, false, '2026-08-16 17:24:15.344+07', 40, 27, 'rooms/1/27/p1c44ul4eeoyjn6grvi0');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1786901052/rooms/1/27/giyoyd2b8wwm3dnqofr8.jpg', NULL, 3, false, '2026-08-16 17:24:15.344+07', 41, 27, 'rooms/1/27/giyoyd2b8wwm3dnqofr8');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171050/rooms/1/28/ltv7wqwz3vcrk8slnepk.jpg', NULL, 0, true, '2026-08-19 20:24:18.599+07', 42, 28, 'rooms/1/28/ltv7wqwz3vcrk8slnepk');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171052/rooms/1/28/fx5oqunkpduewqmll9ab.jpg', NULL, 1, false, '2026-08-19 20:24:18.599+07', 43, 28, 'rooms/1/28/fx5oqunkpduewqmll9ab');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171053/rooms/1/28/aevttl7ifss5cqxcfak7.jpg', NULL, 2, false, '2026-08-19 20:24:18.599+07', 44, 28, 'rooms/1/28/aevttl7ifss5cqxcfak7');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171055/rooms/1/28/ryxeh0jislgntqhvp3qh.jpg', NULL, 3, false, '2026-08-19 20:24:18.599+07', 45, 28, 'rooms/1/28/ryxeh0jislgntqhvp3qh');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171329/rooms/1/29/ylufumh0ttavxlhr4ixb.jpg', NULL, 0, true, '2026-08-19 20:28:56.973+07', 46, 29, 'rooms/1/29/ylufumh0ttavxlhr4ixb');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171330/rooms/1/29/dkasnk5uswpkcsrvtqee.jpg', NULL, 1, false, '2026-08-19 20:28:56.973+07', 47, 29, 'rooms/1/29/dkasnk5uswpkcsrvtqee');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171331/rooms/1/29/h6jhg5lecg0pgneyi0br.jpg', NULL, 2, false, '2026-08-19 20:28:56.973+07', 48, 29, 'rooms/1/29/h6jhg5lecg0pgneyi0br');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171333/rooms/1/29/muvoaxkwayawyxh9odmb.jpg', NULL, 3, false, '2026-08-19 20:28:56.973+07', 49, 29, 'rooms/1/29/muvoaxkwayawyxh9odmb');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171843/rooms/1/30/j8gulnuszyt8ndlp6921.jpg', NULL, 0, true, '2026-08-19 20:37:32.541+07', 50, 30, 'rooms/1/30/j8gulnuszyt8ndlp6921');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171844/rooms/1/30/os2mat4falcuzwyjq5tx.jpg', NULL, 1, false, '2026-08-19 20:37:32.541+07', 51, 30, 'rooms/1/30/os2mat4falcuzwyjq5tx');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171846/rooms/1/30/wml9mkwubaus42wbdsir.jpg', NULL, 2, false, '2026-08-19 20:37:32.541+07', 52, 30, 'rooms/1/30/wml9mkwubaus42wbdsir');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787171847/rooms/1/30/winddylmrhthvolco2e7.jpg', NULL, 3, false, '2026-08-19 20:37:32.541+07', 53, 30, 'rooms/1/30/winddylmrhthvolco2e7');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787460321/rooms/1/31/s7vf0sdybzqycuem7k2j.jpg', NULL, 0, true, '2026-08-23 04:45:27.129+07', 54, 31, 'rooms/1/31/s7vf0sdybzqycuem7k2j');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787460323/rooms/1/31/jr1xifhdreursuxsuzbf.jpg', NULL, 1, false, '2026-08-23 04:45:27.129+07', 55, 31, 'rooms/1/31/jr1xifhdreursuxsuzbf');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787460325/rooms/1/31/wzhd14bh4msqx7j0mnxa.jpg', NULL, 2, false, '2026-08-23 04:45:27.129+07', 56, 31, 'rooms/1/31/wzhd14bh4msqx7j0mnxa');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787460326/rooms/1/31/omndv5tnlwf9i8b1cif0.jpg', NULL, 3, false, '2026-08-23 04:45:27.129+07', 57, 31, 'rooms/1/31/omndv5tnlwf9i8b1cif0');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787460764/rooms/1/32/gh1ppb32hmpqzxu2vmwf.jpg', NULL, 0, true, '2026-08-23 04:52:47.149+07', 58, 32, 'rooms/1/32/gh1ppb32hmpqzxu2vmwf');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787460765/rooms/1/32/wmhepshcbuwbxkymd2fg.jpg', NULL, 1, false, '2026-08-23 04:52:47.149+07', 59, 32, 'rooms/1/32/wmhepshcbuwbxkymd2fg');
+INSERT INTO public.room_images VALUES ('https://res.cloudinary.com/dp5b7jl8y/image/upload/v1787460766/rooms/1/32/zpckfqgjowswc2hmalux.jpg', NULL, 2, false, '2026-08-23 04:52:47.149+07', 60, 32, 'rooms/1/32/zpckfqgjowswc2hmalux');
+
+
+--
+-- Data for Name: room_view_logs; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-16 07:22:06.827+07', 1, NULL, 24);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 18:42:41.254+07', 2, NULL, 24);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 18:53:04.064+07', 3, NULL, 24);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 18:53:27.239+07', 4, NULL, 24);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36', '2026-08-19 19:02:30.124+07', 5, NULL, 24);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 19:20:28.36+07', 6, NULL, 24);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 20:20:43.599+07', 7, NULL, 24);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 20:53:44.295+07', 8, NULL, 27);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 21:50:34.151+07', 9, NULL, 26);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 21:51:58.924+07', 10, NULL, 22);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 21:52:06.216+07', 11, NULL, 23);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 21:52:10.384+07', 12, NULL, 29);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 21:52:21.195+07', 13, NULL, 22);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 21:58:56.2+07', 14, NULL, 27);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 22:01:15.298+07', 15, NULL, 26);
+INSERT INTO public.room_view_logs VALUES ('::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-19 22:10:33.21+07', 16, NULL, 27);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.14', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-22 19:43:08.291+07', 17, NULL, 27);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.14', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-22 20:34:18.832+07', 18, NULL, 27);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.14', 'Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36', '2026-08-22 20:36:25.36+07', 19, NULL, 27);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 05:15:37.037+07', 20, NULL, 29);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 06:09:42.373+07', 21, NULL, 29);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 06:40:17.017+07', 22, NULL, 33);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 06:51:25.816+07', 23, NULL, 33);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 06:51:49.7+07', 24, NULL, 33);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 07:43:28.657+07', 25, NULL, 33);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 08:35:20.925+07', 26, NULL, 24);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 09:12:18.101+07', 27, NULL, 26);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 09:20:30.775+07', 28, NULL, 26);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 09:20:38.545+07', 29, NULL, 26);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 09:30:17.403+07', 30, NULL, 26);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 09:34:53.356+07', 31, NULL, 26);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 09:40:16.362+07', 32, NULL, 26);
+INSERT INTO public.room_view_logs VALUES ('192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0', '2026-08-23 10:09:24.581+07', 33, 16, 26);
+
+
+--
+-- Data for Name: service_catalog_items; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.service_catalog_items VALUES (3, 15, 'API-E2E-20260811145335-OBR4D', 'API-E2E-20260811145335-OBR4D internet', 'Disposable service', 'SERVICE', 125000.00, 'tháng', false, '2026-08-11 14:53:43.8+07', '2026-08-11 14:53:49.4+07');
+INSERT INTO public.service_catalog_items VALUES (4, 15, 'API-E2E-20260811145614-NE3TM', 'API-E2E-20260811145614-NE3TM internet', 'Disposable service', 'SERVICE', 125000.00, 'tháng', false, '2026-08-11 14:56:21.739+07', '2026-08-11 14:56:26.464+07');
+INSERT INTO public.service_catalog_items VALUES (5, 15, 'API-E2E-20260811150747-FQASH', 'API-E2E-20260811150747-FQASH internet', 'Disposable service', 'SERVICE', 125000.00, 'tháng', false, '2026-08-11 15:07:55.513+07', '2026-08-11 15:08:00.939+07');
+INSERT INTO public.service_catalog_items VALUES (6, 15, 'API-E2E-20260811150923-COC5D', 'API-E2E-20260811150923-COC5D internet', 'Disposable service', 'SERVICE', 125000.00, 'tháng', false, '2026-08-11 15:09:30.055+07', '2026-08-11 15:09:35.322+07');
+INSERT INTO public.service_catalog_items VALUES (7, 15, 'API-E2E-20260811151034-7GWTM', 'API-E2E-20260811151034-7GWTM internet', 'Disposable service', 'SERVICE', 125000.00, 'tháng', false, '2026-08-11 15:10:41.987+07', '2026-08-11 15:10:51.456+07');
+INSERT INTO public.service_catalog_items VALUES (8, 15, 'API-E2E-20260811151220-TXWCG', 'API-E2E-20260811151220-TXWCG internet', 'Disposable service', 'SERVICE', 125000.00, 'tháng', false, '2026-08-11 15:12:28.32+07', '2026-08-11 15:12:36.472+07');
+INSERT INTO public.service_catalog_items VALUES (9, 15, 'API-E2E-20260811151357-VHCL6', 'API-E2E-20260811151357-VHCL6 internet', 'Disposable service', 'SERVICE', 125000.00, 'tháng', false, '2026-08-11 15:14:04.414+07', '2026-08-11 15:14:08.066+07');
+INSERT INTO public.service_catalog_items VALUES (1, 1, 'INTERNET', 'Internet', NULL, 'SERVICE', 150000.00, 'tháng', true, '2026-07-30 23:21:12.964+07', '2026-08-13 17:21:17.006+07');
+INSERT INTO public.service_catalog_items VALUES (11, 18, 'INTERNET', 'Wifi', NULL, 'SERVICE', 150000.00, 'tháng', true, '2026-08-14 08:43:20.424+07', '2026-08-14 08:43:20.424+07');
+INSERT INTO public.service_catalog_items VALUES (13, 1, 'VESINH', 'Vệ sinh', NULL, 'SERVICE', 100000.00, 'tháng', true, '2026-08-14 14:57:35.995+07', '2026-08-14 14:57:35.995+07');
+INSERT INTO public.service_catalog_items VALUES (10, 1, 'NUOC', 'Nước sinh hoạt', NULL, 'SERVICE', 5000.00, 'Khối', true, '2026-08-13 17:25:57.978+07', '2026-08-14 15:59:43.946+07');
+INSERT INTO public.service_catalog_items VALUES (14, 1, 'DIEN', 'Điện', NULL, 'SERVICE', 3700.00, 'kWh', true, '2026-08-14 16:00:00.006+07', '2026-08-14 16:00:00.006+07');
+INSERT INTO public.service_catalog_items VALUES (15, 18, 'VESINH', 'Vệ sinh', NULL, 'SERVICE', 150000.00, 'tháng', true, '2026-08-16 07:32:37.682+07', '2026-08-16 07:32:37.682+07');
+INSERT INTO public.service_catalog_items VALUES (12, 18, 'NUOC', 'Nước sinh hoạt', NULL, 'SERVICE', 3000.00, 'khối', true, '2026-08-14 08:43:35.346+07', '2026-08-16 07:32:55.188+07');
+INSERT INTO public.service_catalog_items VALUES (16, 1, 'XE', 'Bãi gửi xe', NULL, 'SERVICE', 100000.00, 'xe', true, '2026-08-19 22:23:27.027+07', '2026-08-19 22:23:27.027+07');
+
+
+--
+-- Data for Name: service_assignments; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.service_assignments VALUES (1, 1, 1, NULL, 1, 1.00, NULL, '2026-01-01', '2026-12-31', true, '2026-07-30 23:21:12.983+07', '2026-07-30 23:43:08.575+07');
+INSERT INTO public.service_assignments VALUES (2, 15, 3, NULL, 3, 1.25, 125000.00, '2026-06-01', NULL, false, '2026-08-11 14:53:43.952+07', '2026-08-11 14:53:49.342+07');
+INSERT INTO public.service_assignments VALUES (3, 15, 4, NULL, 4, 1.25, 125000.00, '2026-06-01', NULL, false, '2026-08-11 14:56:21.866+07', '2026-08-11 14:56:26.405+07');
+INSERT INTO public.service_assignments VALUES (4, 15, 5, NULL, 5, 1.25, 125000.00, '2026-06-01', NULL, false, '2026-08-11 15:07:55.623+07', '2026-08-11 15:08:00.89+07');
+INSERT INTO public.service_assignments VALUES (5, 15, 6, NULL, 6, 1.25, 125000.00, '2026-06-01', NULL, false, '2026-08-11 15:09:30.159+07', '2026-08-11 15:09:35.275+07');
+INSERT INTO public.service_assignments VALUES (6, 15, 7, NULL, 7, 1.25, 125000.00, '2026-06-01', NULL, false, '2026-08-11 15:10:42.092+07', '2026-08-11 15:10:51.405+07');
+INSERT INTO public.service_assignments VALUES (7, 15, 8, NULL, 8, 1.25, 125000.00, '2026-06-01', NULL, false, '2026-08-11 15:12:28.441+07', '2026-08-11 15:12:36.409+07');
+INSERT INTO public.service_assignments VALUES (8, 15, 9, NULL, 9, 1.25, 125000.00, '2026-06-01', NULL, false, '2026-08-11 15:14:04.522+07', '2026-08-11 15:14:08.011+07');
+INSERT INTO public.service_assignments VALUES (9, 1, 1, 21, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-14 15:46:31.801+07', '2026-08-14 15:46:31.801+07');
+INSERT INTO public.service_assignments VALUES (10, 1, 10, 21, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-14 15:46:35.894+07', '2026-08-14 15:46:35.894+07');
+INSERT INTO public.service_assignments VALUES (11, 1, 13, 21, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-14 15:46:39.418+07', '2026-08-14 15:46:39.418+07');
+INSERT INTO public.service_assignments VALUES (12, 1, 14, 21, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-14 16:00:27.236+07', '2026-08-14 16:00:27.236+07');
+INSERT INTO public.service_assignments VALUES (13, 1, 14, 23, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-15 07:16:46.903+07', '2026-08-15 07:16:46.903+07');
+INSERT INTO public.service_assignments VALUES (14, 1, 1, 23, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-15 07:16:50.222+07', '2026-08-15 07:16:50.222+07');
+INSERT INTO public.service_assignments VALUES (15, 1, 10, 23, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-15 07:16:53.091+07', '2026-08-15 07:16:53.091+07');
+INSERT INTO public.service_assignments VALUES (16, 1, 13, 23, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-15 07:16:56.003+07', '2026-08-15 07:16:56.003+07');
+INSERT INTO public.service_assignments VALUES (17, 1, 1, 24, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-15 07:26:21.964+07', '2026-08-15 07:26:21.964+07');
+INSERT INTO public.service_assignments VALUES (18, 1, 10, 24, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-15 07:26:24.676+07', '2026-08-15 07:26:24.676+07');
+INSERT INTO public.service_assignments VALUES (19, 1, 13, 24, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-15 07:26:27.612+07', '2026-08-15 07:26:27.612+07');
+INSERT INTO public.service_assignments VALUES (20, 18, 12, 25, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-16 07:31:44.966+07', '2026-08-16 07:31:44.966+07');
+INSERT INTO public.service_assignments VALUES (21, 18, 11, 25, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-16 07:31:48.99+07', '2026-08-16 07:31:48.99+07');
+INSERT INTO public.service_assignments VALUES (22, 1, 1, 26, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-16 17:15:08.151+07', '2026-08-16 17:15:08.151+07');
+INSERT INTO public.service_assignments VALUES (23, 1, 13, 26, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-16 17:15:11.486+07', '2026-08-16 17:15:11.486+07');
+INSERT INTO public.service_assignments VALUES (24, 1, 1, 27, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-16 17:24:27.903+07', '2026-08-16 17:24:27.903+07');
+INSERT INTO public.service_assignments VALUES (25, 1, 13, 27, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-16 17:24:31.135+07', '2026-08-16 17:24:31.135+07');
+INSERT INTO public.service_assignments VALUES (26, 1, 1, 28, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-19 20:24:34.07+07', '2026-08-19 20:24:34.07+07');
+INSERT INTO public.service_assignments VALUES (27, 1, 13, 28, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-19 20:24:37.479+07', '2026-08-19 20:24:37.479+07');
+INSERT INTO public.service_assignments VALUES (28, 1, 1, 29, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-19 20:28:59.261+07', '2026-08-19 20:28:59.261+07');
+INSERT INTO public.service_assignments VALUES (29, 1, 13, 29, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-19 20:29:02.18+07', '2026-08-19 20:29:02.18+07');
+INSERT INTO public.service_assignments VALUES (30, 1, 1, 30, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-19 20:37:34.638+07', '2026-08-19 20:37:34.638+07');
+INSERT INTO public.service_assignments VALUES (31, 1, 13, 30, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-19 20:37:40.323+07', '2026-08-19 20:37:40.323+07');
+INSERT INTO public.service_assignments VALUES (32, 1, 1, 31, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-23 04:45:30.564+07', '2026-08-23 04:45:30.564+07');
+INSERT INTO public.service_assignments VALUES (33, 1, 13, 31, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-23 04:45:33.658+07', '2026-08-23 04:45:33.658+07');
+INSERT INTO public.service_assignments VALUES (34, 1, 16, 31, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-23 04:45:38.442+07', '2026-08-23 04:45:38.442+07');
+INSERT INTO public.service_assignments VALUES (35, 1, 1, 32, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-23 04:52:58.087+07', '2026-08-23 04:52:58.087+07');
+INSERT INTO public.service_assignments VALUES (36, 1, 13, 32, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-23 04:53:01.55+07', '2026-08-23 04:53:01.55+07');
+INSERT INTO public.service_assignments VALUES (37, 1, 16, 32, NULL, 1.00, NULL, NULL, NULL, true, '2026-08-23 04:53:04.347+07', '2026-08-23 04:53:04.347+07');
+
+
+--
+-- Data for Name: system_settings; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: tenant_members; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.tenant_members VALUES ('LANDLORD', 'ACTIVE', '2026-07-01 00:00:00+07', '2026-07-30 23:21:12.834+07', 1, 1, 8);
+INSERT INTO public.tenant_members VALUES ('LANDLORD', 'ACTIVE', '2026-08-11 14:09:05.731+07', '2026-08-11 14:09:06.232+07', 4, 15, 9);
+INSERT INTO public.tenant_members VALUES ('LANDLORD', 'ACTIVE', '2026-08-11 14:37:56.633+07', '2026-08-11 14:37:56.647+07', 5, 16, 14);
+INSERT INTO public.tenant_members VALUES ('LANDLORD', 'ACTIVE', '2026-08-11 15:13:57.149+07', '2026-08-11 15:13:57.159+07', 6, 17, 15);
+INSERT INTO public.tenant_members VALUES ('LANDLORD', 'ACTIVE', '2026-08-14 08:35:52.561+07', '2026-08-14 08:35:52.577+07', 7, 18, 18);
+
+
+--
+-- Data for Name: ticket_attachments; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: ticket_comments; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811145335-OBR4D renter comment', false, '2026-08-11 14:53:48.836+07', 1, 2, 13);
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811145335-OBR4D landlord internal comment', true, '2026-08-11 14:53:49.163+07', 2, 2, 9);
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811145614-NE3TM renter comment', false, '2026-08-11 14:56:25.673+07', 3, 3, 13);
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811145614-NE3TM landlord internal comment', true, '2026-08-11 14:56:25.975+07', 4, 3, 9);
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811150747-FQASH renter comment', false, '2026-08-11 15:07:59.032+07', 5, 4, 13);
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811150747-FQASH landlord internal comment', true, '2026-08-11 15:07:59.39+07', 6, 4, 9);
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811150923-COC5D renter comment', false, '2026-08-11 15:09:33.461+07', 7, 6, 13);
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811150923-COC5D landlord internal comment', true, '2026-08-11 15:09:33.732+07', 8, 6, 9);
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811151034-7GWTM renter comment', false, '2026-08-11 15:10:46.038+07', 9, 8, 13);
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811151034-7GWTM landlord internal comment', true, '2026-08-11 15:10:46.331+07', 10, 8, 9);
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811151220-TXWCG renter comment', false, '2026-08-11 15:12:31.931+07', 11, 10, 13);
+INSERT INTO public.ticket_comments VALUES ('API-E2E-20260811151220-TXWCG landlord internal comment', true, '2026-08-11 15:12:32.197+07', 12, 10, 9);
+
+
+--
+-- Data for Name: verification_codes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.verification_codes VALUES ('gonjswork@gmail.com', '$2b$10$6wdUK1NASdBOmKuHJG9X3eBaEtcucHAZA3n1ZUazAZHBlnMJ6Gd06', 'LOGIN', 0, '2026-08-07 15:56:46.746+07', NULL, NULL, '2026-08-07 15:51:46.774+07', 1);
+INSERT INTO public.verification_codes VALUES ('test1@gmail.com', '$2b$10$KeIWdCcAUfPz8eRXwnjh8uwXq.9x9GMuGyx/OfZSfr8ySwZtE/lKu', 'FORGOT_PASSWORD', 0, '2026-08-14 06:48:52.581+07', NULL, NULL, '2026-08-14 06:43:52.621+07', 2);
+INSERT INTO public.verification_codes VALUES ('user_1786690474885@example.com', '$2b$10$Xo.M0STUN82IiKTaq7h5Ze2toRCMAd3eJnwcNnVFhD/FOeGOlp/fe', 'REGISTER', 0, '2026-08-14 06:59:38.458+07', NULL, NULL, '2026-08-14 06:54:38.607+07', 3);
+INSERT INTO public.verification_codes VALUES ('test1@gmail.com', '$2b$10$qjB/7bhBfZLjprX7OVFD6enT06Kw8bXBaOaKLw.Q8ZFUz0oPRXwke', 'FORGOT_PASSWORD', 0, '2026-08-14 06:59:42.112+07', NULL, NULL, '2026-08-14 06:54:42.158+07', 4);
+INSERT INTO public.verification_codes VALUES ('user_1786690486720@example.com', '$2b$10$XkT2SYT6Oqo5kAH8B0VOb.Lhv6wTwP6P1hhNK/QYLNJwzCo.9.1vC', 'REGISTER', 0, '2026-08-14 07:00:03.092+07', NULL, NULL, '2026-08-14 06:55:03.107+07', 5);
+INSERT INTO public.verification_codes VALUES ('user_1786690502903@example.com', '$2b$10$lAI4sqy.TDnmgy4pBEKQBuooKIoA0nu/JEFKG2fDCW8ndvU7/G5rG', 'REGISTER', 0, '2026-08-14 07:00:10.508+07', NULL, NULL, '2026-08-14 06:55:10.512+07', 6);
+INSERT INTO public.verification_codes VALUES ('vanthien7028@gmail.com', '$2b$10$sdFnRXkrz71lkRX40ivCge8b3.//xOkoPfecnSoWHXhDGDPEEXW92', 'REGISTER', 0, '2026-08-14 07:07:34.615+07', '2026-08-14 07:03:18.921+07', NULL, '2026-08-14 07:02:34.665+07', 7);
+INSERT INTO public.verification_codes VALUES ('vanthien7028@gmail.com', '$2b$10$hyLNMG/0ouF4P4AF6/mmqeIat3SwB0i5XF8vlanp80OFZrTDV33Ya', 'REGISTER', 0, '2026-08-14 07:26:06.615+07', '2026-08-14 07:21:21.677+07', NULL, '2026-08-14 07:21:06.635+07', 8);
+INSERT INTO public.verification_codes VALUES ('vanthien7028@gmail.com', '$2b$10$DCLJHZvogR2dFHCKYaj3XOaH5A6q0/TkcxlMQj4AhYbAvtgqtvd7O', 'LOGIN', 0, '2026-08-14 07:29:02.517+07', '2026-08-14 07:24:14.013+07', NULL, '2026-08-14 07:24:02.525+07', 9);
+INSERT INTO public.verification_codes VALUES ('vanthien7028@gmail.com', '$2b$10$3f3/kSwio6ADUshKgbw1M..t5AOKjzNVfb2sDG8v/63eE3zaDVc1.', 'LOGIN', 0, '2026-08-14 08:29:42.096+07', '2026-08-14 08:25:15.858+07', NULL, '2026-08-14 08:24:42.105+07', 10);
+INSERT INTO public.verification_codes VALUES ('vanthien7028@gmail.com', '$2b$10$ZEAk6uWume58zzPU2MRp5eECtWjlJ5DZ3eQaTzEcHxzI6OzfIkUGW', 'FORGOT_PASSWORD', 0, '2026-08-22 19:45:02.424+07', '2026-08-22 19:42:35.191+07', NULL, '2026-08-22 19:40:02.442+07', 11);
+INSERT INTO public.verification_codes VALUES ('vanthien7028@gmail.com', '$2b$10$B7Mp0R6BXZnOxMMKbLy3deXHgekB62NAxKfGKKkJA2RfewmpqtJlG', 'LOGIN', 0, '2026-08-22 19:47:46.915+07', '2026-08-22 19:42:58.432+07', NULL, '2026-08-22 19:42:46.922+07', 12);
+INSERT INTO public.verification_codes VALUES ('vanthien7028@gmail.com', '$2b$10$zlynR56piBIZP12B4aDCQuXlZT8S53m75VcWJxapaqwBhmWrmEFY.', 'LOGIN', 0, '2026-08-22 20:25:02.704+07', '2026-08-22 20:20:34.728+07', NULL, '2026-08-22 20:20:02.731+07', 13);
+INSERT INTO public.verification_codes VALUES ('vanthien7028@gmail.com', '$2b$10$6Cn9Cm86hY6jaxm70PonfuvAdYCVNponz2.X42dxPmNy6ZluW5EoW', 'LOGIN', 0, '2026-08-23 06:43:02.284+07', '2026-08-23 06:38:45.765+07', NULL, '2026-08-23 06:38:02.299+07', 14);
+INSERT INTO public.verification_codes VALUES ('vanthien7028@gmail.com', '$2b$10$HoYx8m14Zglvg5sdm2FjNe9ODfmiOi.CEXpXnQ6YrNUESy91JSuWS', 'LOGIN', 0, '2026-08-23 06:57:32.139+07', '2026-08-23 06:52:43.7+07', NULL, '2026-08-23 06:52:32.146+07', 15);
+INSERT INTO public.verification_codes VALUES ('vanthien7028@gmail.com', '$2b$10$hycU2EKqqCO4jeD.JuBnzOM2IS4nFY.5vH05WXn.7GIhvETDv8FL6', 'LOGIN', 0, '2026-08-23 06:58:00.568+07', '2026-08-23 06:53:11.813+07', NULL, '2026-08-23 06:53:00.57+07', 16);
+
+
+--
+-- Name: amenities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.amenities_id_seq', 17, true);
+
+
+--
+-- Name: asset_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.asset_categories_id_seq', 16, true);
+
+
+--
+-- Name: audit_logs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.audit_logs_id_seq', 173, true);
+
+
+--
+-- Name: background_jobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.background_jobs_id_seq', 414, true);
+
+
+--
+-- Name: contract_files_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.contract_files_id_seq', 1, false);
+
+
+--
+-- Name: contract_members_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.contract_members_id_seq', 11, true);
+
+
+--
+-- Name: contract_templates_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.contract_templates_id_seq', 1, false);
+
+
+--
+-- Name: contract_termination_requests_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.contract_termination_requests_id_seq', 6, true);
+
+
+--
+-- Name: contracts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.contracts_id_seq', 11, true);
+
+
+--
+-- Name: conversations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.conversations_id_seq', 1, true);
+
+
+--
+-- Name: debts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.debts_id_seq', 25, true);
+
+
+--
+-- Name: device_tokens_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.device_tokens_id_seq', 1, false);
+
+
+--
+-- Name: devices_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.devices_id_seq', 1, false);
+
+
+--
+-- Name: floors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.floors_id_seq', 22, true);
+
+
+--
+-- Name: handover_asset_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.handover_asset_items_id_seq', 9, true);
+
+
+--
+-- Name: handover_records_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.handover_records_id_seq', 9, true);
+
+
+--
+-- Name: invoice_batches_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.invoice_batches_id_seq', 1, false);
+
+
+--
+-- Name: invoice_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.invoice_items_id_seq', 97, true);
+
+
+--
+-- Name: invoices_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.invoices_id_seq', 25, true);
+
+
+--
+-- Name: marketplace_moderations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.marketplace_moderations_id_seq', 74, true);
+
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.messages_id_seq', 1, true);
+
+
+--
+-- Name: meter_readings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.meter_readings_id_seq', 14, true);
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.notifications_id_seq', 409, true);
+
+
+--
+-- Name: ocr_jobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.ocr_jobs_id_seq', 5, true);
+
+
+--
+-- Name: payment_qr_codes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.payment_qr_codes_id_seq', 3, true);
+
+
+--
+-- Name: payment_webhook_logs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.payment_webhook_logs_id_seq', 3, true);
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.payments_id_seq', 16, true);
+
+
+--
+-- Name: payos_order_code_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.payos_order_code_seq', 1000000008, true);
+
+
+--
+-- Name: permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.permissions_id_seq', 250, true);
+
+
+--
+-- Name: plans_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.plans_id_seq', 7, true);
+
+
+--
+-- Name: properties_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.properties_id_seq', 26, true);
+
+
+--
+-- Name: refresh_tokens_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.refresh_tokens_id_seq', 482, true);
+
+
+--
+-- Name: rental_histories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.rental_histories_id_seq', 10, true);
+
+
+--
+-- Name: rental_requests_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.rental_requests_id_seq', 24, true);
+
+
+--
+-- Name: renter_invitations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.renter_invitations_id_seq', 1, false);
+
+
+--
+-- Name: renter_profiles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.renter_profiles_id_seq', 18, true);
+
+
+--
+-- Name: reports_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.reports_id_seq', 2, true);
+
+
+--
+-- Name: reputation_scores_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.reputation_scores_id_seq', 1, false);
+
+
+--
+-- Name: reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.reviews_id_seq', 4, true);
+
+
+--
+-- Name: room_assets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.room_assets_id_seq', 20, true);
+
+
+--
+-- Name: room_images_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.room_images_id_seq', 60, true);
+
+
+--
+-- Name: room_view_logs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.room_view_logs_id_seq', 33, true);
+
+
+--
+-- Name: room_viewing_appointments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.room_viewing_appointments_id_seq', 17, true);
+
+
+--
+-- Name: rooms_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.rooms_id_seq', 33, true);
+
+
+--
+-- Name: service_assignments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.service_assignments_id_seq', 37, true);
+
+
+--
+-- Name: service_catalog_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.service_catalog_items_id_seq', 16, true);
+
+
+--
+-- Name: subscription_payments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.subscription_payments_id_seq', 6, true);
+
+
+--
+-- Name: subscriptions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.subscriptions_id_seq', 11, true);
+
+
+--
+-- Name: system_settings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.system_settings_id_seq', 1, false);
+
+
+--
+-- Name: tenant_members_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.tenant_members_id_seq', 7, true);
+
+
+--
+-- Name: tenants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.tenants_id_seq', 19, true);
+
+
+--
+-- Name: ticket_attachments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.ticket_attachments_id_seq', 1, false);
+
+
+--
+-- Name: ticket_comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.ticket_comments_id_seq', 12, true);
+
+
+--
+-- Name: tickets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.tickets_id_seq', 11, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 20, true);
+
+
+--
+-- Name: utility_meters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.utility_meters_id_seq', 15, true);
+
+
+--
+-- Name: verification_codes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.verification_codes_id_seq', 16, true);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict U474UNL8MjdtL3eGoTynqogh8ygNDITeRkhrb8cFRERLxHMYVsKnHVubOJa1raO
+
