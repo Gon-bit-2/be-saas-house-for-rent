@@ -174,8 +174,7 @@ export class MarketplaceService {
   }
 
   private toPublicRoom(room: MarketplaceRoomRecord, includeExactLocation: boolean) {
-    const { tenantId, property, ...publicRoom } = room
-    void tenantId
+    const { property, ...publicRoom } = room
     if (includeExactLocation) return { ...publicRoom, property }
     const { addressDetail, latitude, longitude, ...publicProperty } = property
     void addressDetail

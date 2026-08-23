@@ -1,6 +1,7 @@
 import { Controller, Get, Param, ParseIntPipe, Post, Req } from '@nestjs/common'
 import { ActiveUser } from '@src/common/decorators/decorators/active-user.decorator'
-import { isPublic } from '@src/common/decorators/decorators/auth.decorator'
+import { Auth } from '@src/common/decorators/decorators/auth.decorator'
+import { AuthType, ConditionGuard } from '@src/common/constants/auth.constant'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
 import type { Request } from 'express'
 import { ViewLogService } from './view-log.service'
@@ -14,7 +15,7 @@ export class ViewLogController {
     return this.viewLogService.getViewHistory(user.userId)
   }
 
-  @isPublic()
+  @Auth([AuthType.Bearer, AuthType.None], { condition: ConditionGuard.Or })
   @Post('rooms/:roomId/views')
   recordView(
     @ActiveUser() user: AccessTokenPayload | undefined,
