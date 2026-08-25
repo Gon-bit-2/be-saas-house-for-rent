@@ -38,6 +38,8 @@ import { TenantsModule } from './modules/tenants/tenants.module'
 import { TicketsModule } from './modules/tickets/tickets.module'
 import { UtilityMetersModule } from './modules/utility-meters/utility-meters.module'
 import { UsersModule } from './modules/users/users.module'
+import { RolesModule } from './modules/roles/roles.module'
+import { TenantMembersModule } from './modules/tenant-members/tenant-members.module'
 import { ConversationsModule } from './modules/conversations/conversations.module'
 import { DatabaseModule } from './shared/modules/database/prisma.module'
 import { SharedServiceModule } from './shared/modules/services/shared-service.module'
@@ -91,6 +93,8 @@ function buildRedisConnection() {
     AuthModule,
     PlansModule,
     TenantsModule,
+    RolesModule,
+    TenantMembersModule,
     UsersModule,
     PropertiesModule,
     RoomsModule,

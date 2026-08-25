@@ -10,6 +10,15 @@ export const ListLandlordsQuerySchema = z
   })
   .strict()
 
+export const ListRentersQuerySchema = z
+  .object({
+    page: z.coerce.number().int().positive().default(1),
+    limit: z.coerce.number().int().positive().max(100).default(20),
+    search: z.string().trim().optional(),
+    status: z.enum(UserStatus).optional(),
+  })
+  .strict()
+
 export const UpdateUserStatusBodySchema = z
   .object({
     status: z.enum(UserStatus),
@@ -18,4 +27,5 @@ export const UpdateUserStatusBodySchema = z
   .strict()
 
 export type TListLandlordsQuerySchema = z.infer<typeof ListLandlordsQuerySchema>
+export type TListRentersQuerySchema = z.infer<typeof ListRentersQuerySchema>
 export type TUpdateUserStatusBodySchema = z.infer<typeof UpdateUserStatusBodySchema>

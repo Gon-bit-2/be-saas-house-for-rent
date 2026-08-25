@@ -4,6 +4,7 @@ import { ActiveUser } from '@src/common/decorators/decorators/active-user.decora
 import { IsTenant, Roles } from '@src/common/decorators/decorators/roles.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
 import {
+  AssignAppointmentBodyDTO,
   CancelMyViewingAppointmentBodyDTO,
   ListViewingAppointmentsQueryDTO,
   UpdateViewingAppointmentStatusBodyDTO,
@@ -59,5 +60,15 @@ export class ViewingAppointmentsController {
     @Body() body: UpdateViewingAppointmentStatusBodyDTO,
   ) {
     return this.viewingAppointmentsService.updateStatus(user.userId, id, body)
+  }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Patch(':id/assign')
+  assignStaff(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: AssignAppointmentBodyDTO,
+  ) {
+    return this.viewingAppointmentsService.assignStaff(user.userId, id, body)
   }
 }

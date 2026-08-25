@@ -64,6 +64,12 @@ export const UpdateViewingAppointmentStatusBodySchema = z
 
 export const CancelMyViewingAppointmentBodySchema = z.object({}).strict()
 
+export const AssignAppointmentBodySchema = z
+  .object({
+    staffId: z.coerce.number().int().positive(),
+  })
+  .strict()
+
 export type TListRentalRequestsQuerySchema = z.infer<typeof ListRentalRequestsQuerySchema>
 export type TDecideRentalRequestBodySchema = z.infer<typeof DecideRentalRequestBodySchema>
 export type TCancelMyRentalRequestBodySchema = z.infer<typeof CancelMyRentalRequestBodySchema>
@@ -71,3 +77,4 @@ export type TUpdateMyRentalRequestBodySchema = z.infer<typeof UpdateMyRentalRequ
 export type TListViewingAppointmentsQuerySchema = z.infer<typeof ListViewingAppointmentsQuerySchema>
 export type TUpdateViewingAppointmentStatusBodySchema = z.infer<typeof UpdateViewingAppointmentStatusBodySchema>
 export type TCancelMyViewingAppointmentBodySchema = z.infer<typeof CancelMyViewingAppointmentBodySchema>
+export type TAssignAppointmentBodySchema = z.infer<typeof AssignAppointmentBodySchema>

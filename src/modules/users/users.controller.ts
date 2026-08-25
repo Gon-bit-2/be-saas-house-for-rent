@@ -3,7 +3,7 @@ import { ActiveUser } from '@src/common/decorators/decorators/active-user.decora
 import { IsAdmin } from '@src/common/decorators/decorators/roles.decorator'
 import { SkipPermission } from '@src/common/decorators/decorators/skip-permission.decorator'
 import type { AccessTokenPayload } from '@src/common/types/jwt.type'
-import { ListLandlordsQueryDTO, UpdateUserStatusBodyDTO } from './dto/users.dto'
+import { ListLandlordsQueryDTO, ListRentersQueryDTO, UpdateUserStatusBodyDTO } from './dto/users.dto'
 import { UsersService } from './users.service'
 
 /**
@@ -37,5 +37,22 @@ export class UsersController {
     @Body() body: UpdateUserStatusBodyDTO,
   ) {
     return this.usersService.updateStatus(user.userId, id, body)
+  }
+}
+
+@IsAdmin()
+@SkipPermission()
+@Controller('admin/renters')
+export class AdminRentersController {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Get()
+  listRenters(@Query() query: ListRentersQueryDTO) {
+    return this.usersService.listRenters(query)
+  }
+
+  @Get(':id')
+  getRenterById(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.getRenterById(id)
   }
 }

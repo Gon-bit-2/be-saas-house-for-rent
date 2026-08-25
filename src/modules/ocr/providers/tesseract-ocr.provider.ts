@@ -6,7 +6,7 @@ import { createWorker, OEM, PSM, type Block, type Worker } from 'tesseract.js'
 import type { OcrCandidate, OcrProvider, OcrRecognition } from './ocr.provider'
 
 const DOWNLOAD_TIMEOUT_MS = 10_000
-const OUTPUT_SIZE = 2_000
+const OUTPUT_SIZE = 3_000
 
 @Injectable()
 export class TesseractOcrProvider implements OcrProvider, OnModuleDestroy {
@@ -93,6 +93,7 @@ export class TesseractOcrProvider implements OcrProvider, OnModuleDestroy {
       .rotate()
       .grayscale()
       .normalize()
+      .threshold(140) // Nhị phân hóa ảnh để tách số khỏi nền phức tạp trên mặt công tơ
       .sharpen()
       .resize({
         width: OUTPUT_SIZE,
@@ -118,8 +119,7 @@ export class TesseractOcrProvider implements OcrProvider, OnModuleDestroy {
         cacheMethod: 'none',
       })
       await worker.setParameters({
-        tessedit_pageseg_mode: PSM.SINGLE_LINE,
-        tessedit_char_whitelist: '0123456789.,',
+        tessedit_pageseg_mode: PSM.SPARSE_TEXT, // Mode 11: phù hợp cho ảnh công tơ có text rải rác
         preserve_interword_spaces: '1',
       })
       return worker

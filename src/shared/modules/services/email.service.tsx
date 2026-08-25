@@ -1,6 +1,7 @@
 import React from 'react'
 import { BadGatewayException, Injectable } from '@nestjs/common'
 import { OTPVerificationEmail } from '@src/shared/mail/otp'
+import { NewAccountEmail } from '@src/shared/mail/new-account'
 import { Resend } from 'resend'
 import envConfig from '@src/config/env.config'
 
@@ -9,6 +10,14 @@ type SendOtpEmailPayload = {
   code: string
   title?: string
 }
+
+export type SendNewAccountEmailPayload = {
+  email: string
+  fullName: string
+  plainPassword: string
+  loginUrl: string
+}
+
 
 /**
  * Service that handles sending emails using the Resend API provider.
@@ -44,4 +53,30 @@ export class EmailService {
       throw new BadGatewayException('Không thể gửi email OTP')
     }
   }
+
+  /**
+   * Sends an email with account information for newly created users.
+   * Gửi email thông tin tài khoản cho người dùng mới được tạo.
+   */
+  async sendNewAccountEmail(payload: SendNewAccountEmailPayload): Promise<void> {
+    const subject = 'Thông tin tài khoản nhân viên mới'
+    const result = await this.resend.emails.send({
+      from: 'thiendev <no-reply@gonshoe.online>',
+      to: [payload.email],
+      subject,
+      react: (
+        <NewAccountEmail
+          fullName={payload.fullName}
+          email={payload.email}
+          plainPassword={payload.plainPassword}
+          loginUrl={payload.loginUrl}
+        />
+      ),
+    })
+
+    if (result.error) {
+      throw new BadGatewayException('Không thể gửi email thông tin tài khoản')
+    }
+  }
 }
+

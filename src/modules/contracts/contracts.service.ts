@@ -131,6 +131,18 @@ export class ContractsService {
     if (!EDITABLE_STATUSES.includes(contract.status as (typeof EDITABLE_STATUSES)[number])) {
       throw new BadRequestException('Chỉ có thể kích hoạt hợp đồng nháp hoặc đang chờ ký')
     }
+
+    // Không cho kích hoạt nếu ngày bắt đầu hợp đồng chưa đến
+    const today = new Date()
+    today.setUTCHours(0, 0, 0, 0)
+    const startDate = new Date(contract.startDate)
+    startDate.setUTCHours(0, 0, 0, 0)
+    if (startDate.getTime() > today.getTime()) {
+      throw new BadRequestException(
+        `Chưa thể kích hoạt hợp đồng. Ngày bắt đầu là ${startDate.toLocaleDateString('vi-VN')}, vui lòng đợi đến ngày bắt đầu hợp đồng.`,
+      )
+    }
+
     if (!['AVAILABLE', 'RESERVED'].includes(contract.room.status)) {
       throw new BadRequestException('Phòng không còn trống hoặc giữ chỗ để kích hoạt hợp đồng')
     }
@@ -276,6 +288,19 @@ export class ContractsService {
   private assertDateRange(startDate: Date, endDate: Date) {
     if (endDate.getTime() <= startDate.getTime()) {
       throw new BadRequestException('Ngày kết thúc hợp đồng phải sau ngày bắt đầu')
+    }
+
+    const today = new Date()
+    today.setUTCHours(0, 0, 0, 0)
+    const start = new Date(startDate)
+    start.setUTCHours(0, 0, 0, 0)
+    
+    const MAX_DAYS = 10
+    const diffTime = start.getTime() - today.getTime()
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+    
+    if (diffDays > MAX_DAYS) {
+      throw new BadRequestException(`Không thể tạo hợp đồng có ngày bắt đầu vượt quá ${MAX_DAYS} ngày so với hiện tại`)
     }
   }
 

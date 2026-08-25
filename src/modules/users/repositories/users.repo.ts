@@ -72,6 +72,41 @@ export const adminUserSelect = {
   },
 } satisfies Prisma.UserSelect
 
+export const adminRenterSelect = {
+  id: true,
+  fullName: true,
+  email: true,
+  phone: true,
+  systemRole: true,
+  avatarUrl: true,
+  status: true,
+  emailVerifiedAt: true,
+  phoneVerifiedAt: true,
+  lastLoginAt: true,
+  createdAt: true,
+  updatedAt: true,
+  deletedAt: true,
+  tenantMembers: {
+    where: { roleId: roleName.TENANT },
+    select: {
+      id: true,
+      tenantId: true,
+      roleId: true,
+      status: true,
+      joinedAt: true,
+      tenant: {
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          status: true,
+          verificationStatus: true,
+        },
+      },
+    },
+  },
+} satisfies Prisma.UserSelect
+
 /**
  * Repository for Super Admin user management queries.
  */
@@ -100,6 +135,30 @@ export class UsersRepository {
         tenantMembers: { some: { roleId: roleName.LANDLORD } },
       },
       select: adminUserSelect,
+    })
+  }
+
+  async findManyRenters(where: Prisma.UserWhereInput, skip: number, take: number) {
+    return this.prismaService.$transaction([
+      this.prismaService.user.findMany({
+        where,
+        skip,
+        take,
+        orderBy: [{ createdAt: 'desc' }],
+        select: adminRenterSelect,
+      }),
+      this.prismaService.user.count({ where }),
+    ])
+  }
+
+  async findRenterById(id: number) {
+    return this.prismaService.user.findFirst({
+      where: {
+        id,
+        deletedAt: null,
+        tenantMembers: { some: { roleId: roleName.TENANT } },
+      },
+      select: adminRenterSelect,
     })
   }
 

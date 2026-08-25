@@ -12,6 +12,14 @@ describe('HTTP security configuration', () => {
     expect(callback).toHaveBeenNthCalledWith(2, null, true)
   })
 
+  it('allows any origin when wildcard * is configured', () => {
+    const options = buildCorsOptions('*')
+    const callback = jest.fn()
+
+    options.origin('https://any-domain.com', callback)
+    expect(callback).toHaveBeenCalledWith(null, true)
+  })
+
   it('fails closed for origins outside the allowlist', () => {
     const options = buildCorsOptions('https://app.example.com')
     const callback = jest.fn()

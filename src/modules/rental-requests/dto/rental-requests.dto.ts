@@ -7,6 +7,7 @@ import {
   ListViewingAppointmentsQuerySchema,
   UpdateViewingAppointmentStatusBodySchema,
   UpdateMyRentalRequestBodySchema,
+  AssignAppointmentBodySchema,
 } from '../model/rental-requests.model'
 
 export class ListRentalRequestsQueryDTO extends createZodDto(ListRentalRequestsQuerySchema) {}
@@ -16,3 +17,4 @@ export class UpdateMyRentalRequestBodyDTO extends createZodDto(UpdateMyRentalReq
 export class ListViewingAppointmentsQueryDTO extends createZodDto(ListViewingAppointmentsQuerySchema) {}
 export class UpdateViewingAppointmentStatusBodyDTO extends createZodDto(UpdateViewingAppointmentStatusBodySchema) {}
 export class CancelMyViewingAppointmentBodyDTO extends createZodDto(CancelMyViewingAppointmentBodySchema) {}
+export class AssignAppointmentBodyDTO extends createZodDto(AssignAppointmentBodySchema) {}

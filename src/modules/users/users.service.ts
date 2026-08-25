@@ -2,7 +2,11 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import roleName from '@src/common/constants/role.constant'
 import { buildPaginatedResult, normalizePagination } from '@src/common/utils/pagination.util'
 import type { Prisma } from 'generated/prisma/client'
-import type { TListLandlordsQuerySchema, TUpdateUserStatusBodySchema } from './model/users.model'
+import type {
+  TListLandlordsQuerySchema,
+  TListRentersQuerySchema,
+  TUpdateUserStatusBodySchema,
+} from './model/users.model'
 import { UsersRepository } from './repositories/users.repo'
 
 /**
@@ -31,6 +35,21 @@ export class UsersService {
     return user
   }
 
+  async listRenters(query: TListRentersQuerySchema) {
+    const { page, limit, skip } = normalizePagination(query)
+    const where = this.buildRenterWhere(query)
+    const [users, total] = await this.usersRepository.findManyRenters(where, skip, limit)
+    return buildPaginatedResult(users, total, page, limit)
+  }
+
+  async getRenterById(id: number) {
+    const user = await this.usersRepository.findRenterById(id)
+    if (!user) {
+      throw new NotFoundException('Không tìm thấy người thuê')
+    }
+    return user
+  }
+
   async updateStatus(actorId: number, id: number, body: TUpdateUserStatusBodySchema) {
     const landlord = await this.getById(id)
     if (landlord.status === body.status) {
@@ -55,6 +74,27 @@ export class UsersService {
               { email: { contains: query.search, mode: 'insensitive' } },
               { phone: { contains: query.search, mode: 'insensitive' } },
               { ownedTenants: { some: { name: { contains: query.search, mode: 'insensitive' } } } },
+            ],
+          }
+        : {}),
+    }
+  }
+
+  private buildRenterWhere(query: TListRentersQuerySchema): Prisma.UserWhereInput {
+    return {
+      deletedAt: null,
+      tenantMembers: {
+        some: {
+          roleId: roleName.TENANT,
+        },
+      },
+      ...(query.status ? { status: query.status } : {}),
+      ...(query.search
+        ? {
+            OR: [
+              { fullName: { contains: query.search, mode: 'insensitive' } },
+              { email: { contains: query.search, mode: 'insensitive' } },
+              { phone: { contains: query.search, mode: 'insensitive' } },
             ],
           }
         : {}),

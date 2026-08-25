@@ -34,6 +34,15 @@ async function main() {
     `, [tenantId, propertyId, 'TEST10K', 'Phòng Test 10k', 10000, 0, 3500, 20000, 20, 2, 'AVAILABLE']);
     
     console.log('CREATED_ROOM_ID=' + roomInsert.rows[0].id);
+
+    // Tạo thêm phòng test thứ 2
+    const roomInsert2 = await client.query(`
+      INSERT INTO rooms (tenant_id, property_id, room_code, title, base_price, deposit_amount, electricity_price, water_price, area, max_occupants, status, created_at, updated_at) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW(), NOW()) 
+      RETURNING id
+    `, [tenantId, propertyId, 'TEST20K', 'Phòng Test 20k', 20000, 0, 3500, 20000, 25, 3, 'AVAILABLE']);
+    
+    console.log('CREATED_ROOM_2_ID=' + roomInsert2.rows[0].id);
   } catch (err) {
     console.error(err);
   } finally {

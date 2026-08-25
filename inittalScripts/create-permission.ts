@@ -76,6 +76,7 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
     'CONVERSATIONS',
     'NOTIFICATIONS',
     'DASHBOARD',
+    'ROLES',
   ],
   [roleName.MANAGER]: [
     'PROPERTIES',
@@ -100,6 +101,7 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
     'CONVERSATIONS',
     'NOTIFICATIONS',
     'DASHBOARD',
+    'ROLES',
   ],
   [roleName.ACCOUNTANT]: [
     'INVOICES',

@@ -8,6 +8,7 @@ import type {
   TListViewingAppointmentsQuerySchema,
   TUpdateViewingAppointmentStatusBodySchema,
 } from './model/rental-requests.model'
+import { AssignAppointmentBodyDTO } from './dto/rental-requests.dto'
 import { RentalRequestsRepository } from './repositories/rental-requests.repo'
 
 /**
@@ -85,6 +86,48 @@ export class ViewingAppointmentsService {
           scheduledAt: body.scheduledAt,
           assignedStaffId: body.assignedStaffId === undefined ? undefined : (body.assignedStaffId ?? null),
           landlordNote: body.landlordNote === undefined ? undefined : (body.landlordNote ?? null),
+          updatedById: userId,
+        },
+        60,
+      )
+      await this.notificationEventsService.notifyViewingAppointmentChanged(updated)
+      return updated
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        ['APPOINTMENT_CONFLICT', 'APPOINTMENT_TRANSITION_CONFLICT'].includes(error.message)
+      ) {
+        throw new ConflictException('Lịch xem phòng hoặc nhân viên đã bị trùng với lịch khác')
+      }
+      throw error
+    }
+  }
+
+  async assignStaff(userId: number, id: number, body: AssignAppointmentBodyDTO) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const appointment = await this.rentalRequestsRepository.findTenantAppointment(tenant.tenantId, id)
+    if (!appointment) {
+      throw new NotFoundException('Không tìm thấy lịch hẹn xem phòng')
+    }
+
+    const member = await this.rentalRequestsRepository.findActiveTenantMember(tenant.tenantId, body.staffId, [
+      'LANDLORD',
+      'MANAGER',
+      'STAFF',
+      'MAINTENANCE_STAFF',
+    ])
+    if (!member) {
+      throw new BadRequestException('Nhân viên được phân công không thuộc tenant hiện tại hoặc không có quyền phù hợp')
+    }
+
+    try {
+      const updated = await this.rentalRequestsRepository.updateAppointmentWithConflictCheck(
+        tenant.tenantId,
+        id,
+        appointment.status,
+        {
+          status: appointment.status,
+          assignedStaffId: body.staffId,
           updatedById: userId,
         },
         60,
