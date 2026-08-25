@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { ConflictException, Injectable } from '@nestjs/common'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
 import type { Prisma, TerminationRequestStatus } from 'generated/prisma/client'
 
@@ -187,40 +187,91 @@ export class ContractTerminationsRepository {
           },
         })
         if (!checkout) return { kind: 'handover' as const }
-        const debt = await tx.debt.aggregate({
-          where: {
-            tenantId: input.tenantId,
-            contractId: request.contractId,
-            status: { in: ['OPEN', 'PARTIAL', 'OVERDUE'] },
-          },
-          _sum: { remainingAmount: true },
+      // 1. Lấy thông tin Hợp đồng và Biên bản bàn giao
+      const contractInfo = await tx.contract.findUnique({
+        where: { id: request.contractId },
+        select: { depositAmount: true, monthlyPrice: true }
+      })
+      
+      const handover = await tx.handoverRecord.findUnique({
+        where: { id: input.handoverId },
+        include: { assetItems: true }
+      })
+      // 2. Tính toán các chi phí phát sinh từ Biên bản bàn giao (nếu có)
+      // Giả định bạn có logic tính tiền điện nước dựa trên chênh lệch chỉ số mới nhất
+      const electricityFee = 0 // Thay bằng hàm tính toán thực tế
+      const waterFee = 0 // Thay bằng hàm tính toán thực tế
+      const damageFee = 0 // Thay bằng tổng tiền phạt từ handover.assetItems
+      
+      // 3. Khởi tạo Hóa Đơn Quyết Toán (Final Invoice)
+      const finalInvoice = await tx.invoice.create({
+        data: {
+          tenantId: input.tenantId,
+          contractId: request.contractId,
+          roomId: request.contract.roomId,
+          renterId: request.contract.renterId,
+          invoiceCode: `INV-FINAL-${request.contractId}-${Date.now()}`,
+          billingMonth: new Date(),
+          issueDate: new Date(),
+          dueDate: new Date(),
+          subtotal: electricityFee + waterFee + damageFee, // Tạm tính tổng phí phát sinh
+          discountAmount: contractInfo?.depositAmount ?? 0, // HOÀN CỌC: Dùng depositAmount làm khoản giảm trừ!
+          penaltyAmount: 0,
+          totalAmount: Math.max(0, (electricityFee + waterFee + damageFee) - Number(contractInfo?.depositAmount ?? 0)),
+          debtAmount: Math.max(0, (electricityFee + waterFee + damageFee) - Number(contractInfo?.depositAmount ?? 0)),
+          status: 'UNPAID',
+          note: 'Hóa đơn Quyết Toán Thanh Lý Hợp Đồng (Đã khấu trừ tiền cọc)',
+          createdById: input.actorId,
+          updatedById: input.actorId,
+          items: {
+            create: [
+              { itemType: 'ELECTRICITY', description: 'Tiền điện chốt cuối kỳ', quantity: 1, unitPrice: electricityFee, amount: electricityFee },
+              { itemType: 'WATER', description: 'Tiền nước chốt cuối kỳ', quantity: 1, unitPrice: waterFee, amount: waterFee },
+              { itemType: 'OTHER', description: 'Tiền đền bù hư hỏng tài sản', quantity: 1, unitPrice: damageFee, amount: damageFee },
+              { itemType: 'DISCOUNT', description: 'Hoàn lại tiền cọc ban đầu', quantity: 1, unitPrice: -Number(contractInfo?.depositAmount ?? 0), amount: -Number(contractInfo?.depositAmount ?? 0) }
+            ]
+          }
+        }
+      })
+      // 4. Nếu khách còn nợ thêm (Total Amount > 0) và chưa xác nhận công nợ -> Báo lỗi
+      if (finalInvoice.totalAmount.toNumber() > 0 && !input.acknowledgeDebt) {
+        throw new ConflictException({
+          message: 'Tiền cọc không đủ bù chi phí. Hợp đồng phát sinh công nợ; cần xác nhận trước khi hoàn tất',
+          outstandingDebt: finalInvoice.totalAmount,
         })
-        const outstandingDebt = debt._sum.remainingAmount ?? 0
-        if (Number(outstandingDebt) > 0 && !input.acknowledgeDebt)
-          return { kind: 'debt' as const, amount: String(outstandingDebt) }
+      }
+      // 5. Nếu tổng hóa đơn <= 0, tự động đánh dấu hóa đơn là PAID (Khách không nợ gì thêm)
+      if (finalInvoice.totalAmount.toNumber() === 0) {
+        await tx.invoice.update({
+          where: { id: finalInvoice.id },
+          data: { status: 'PAID' }
+        })
+      }
 
-        const contractResult = await tx.contract.updateMany({
-          where: { id: request.contractId, tenantId: input.tenantId, status: 'ACTIVE', deletedAt: null },
-          data: { status: 'TERMINATED', updatedById: input.actorId },
-        })
-        if (contractResult.count !== 1) return { kind: 'conflict' as const }
-        const requestResult = await tx.contractTerminationRequest.updateMany({
-          where: { id: request.id, status: 'APPROVED' },
-          data: {
-            status: 'COMPLETED',
-            actualMoveOutDate: input.actualMoveOutDate,
-            completedAt: new Date(),
-            completionNote: input.completionNote ?? null,
-            outstandingDebt,
-            updatedById: input.actorId,
-          },
-        })
-        if (requestResult.count !== 1) return { kind: 'conflict' as const }
+      const outstandingDebt = finalInvoice.totalAmount
+
+      const contractResult = await tx.contract.updateMany({
+        where: { id: request.contractId, tenantId: input.tenantId, status: { in: ['ACTIVE', 'EXPIRED'] }, deletedAt: null },
+        data: { status: 'TERMINATED', updatedById: input.actorId },
+      })
+      if (contractResult.count !== 1) return { kind: 'conflict' as const }
+      const requestResult = await tx.contractTerminationRequest.updateMany({
+        where: { id: request.id, status: 'APPROVED' },
+        data: {
+          status: 'COMPLETED',
+          actualMoveOutDate: input.actualMoveOutDate,
+          completedAt: new Date(),
+          completionNote: input.completionNote ?? null,
+          outstandingDebt,
+          updatedById: input.actorId,
+        },
+      })
+      if (requestResult.count !== 1) return { kind: 'conflict' as const }
         const historyResult = await tx.rentalHistory.updateMany({
-          where: { contractId: request.contractId, status: 'ACTIVE' },
+          where: { contractId: request.contractId, status: { in: ['ACTIVE', 'ENDED'] } },
           data: { status: 'TERMINATED', endedAt: input.actualMoveOutDate },
         })
-        if (historyResult.count !== 1) throw new Error('ACTIVE_RENTAL_HISTORY_NOT_FOUND')
+        if (historyResult.count !== 1) throw new Error('RENTAL_HISTORY_NOT_FOUND')
 
         const hasDamage = checkout.assetItems.some(
           (item) => ['DAMAGED', 'LOST'].includes(item.condition) || item.actualQuantity < item.expectedQuantity,

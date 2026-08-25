@@ -1011,6 +1011,8 @@ export const TicketScalarFieldEnum = {
   roomId: 'roomId',
   contractId: 'contractId',
   assignedTo: 'assignedTo',
+  scheduledAt: 'scheduledAt',
+  scheduledNote: 'scheduledNote',
   title: 'title',
   description: 'description',
   category: 'category',

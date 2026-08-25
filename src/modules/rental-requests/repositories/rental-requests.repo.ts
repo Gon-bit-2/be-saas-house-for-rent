@@ -178,6 +178,18 @@ export class RentalRequestsRepository {
           data: { status: 'APPROVED', updatedById: actorId },
         })
         if (approved.count !== 1) throw new Error('RENTAL_REQUEST_DECISION_CONFLICT')
+
+        const otherPendingRequests = await tx.rentalRequest.findMany({
+          where: { roomId: request.roomId, tenantId, id: { not: id }, status: { in: ['PENDING', 'NEED_MORE_INFO'] } },
+          select: rentalRequestSelect,
+        })
+        if (otherPendingRequests.length > 0) {
+          await tx.rentalRequest.updateMany({
+            where: { roomId: request.roomId, tenantId, id: { not: id }, status: { in: ['PENDING', 'NEED_MORE_INFO'] } },
+            data: { status: 'REJECTED', updatedById: actorId },
+          })
+        }
+
         if (room.marketplaceStatus !== 'HIDDEN') {
           await tx.marketplaceModeration.create({
             data: {
@@ -190,8 +202,8 @@ export class RentalRequestsRepository {
             },
           })
         }
-
-        return tx.rentalRequest.findUniqueOrThrow({ where: { id }, select: rentalRequestSelect })
+        const updated = await tx.rentalRequest.findUniqueOrThrow({ where: { id }, select: rentalRequestSelect })
+        return { updated, rejectedOthers: otherPendingRequests }
       },
       { isolationLevel: 'Serializable' },
     )

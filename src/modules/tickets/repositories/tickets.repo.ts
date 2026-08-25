@@ -53,10 +53,11 @@ const staffTicketBaseSelect = {
   priority: true,
   status: true,
   createdAt: true,
-  updatedAt: true,
   resolvedAt: true,
   createdById: true,
   updatedById: true,
+  scheduledAt: true,
+  scheduledNote: true,
   room: { select: { id: true, roomCode: true, title: true, property: { select: { id: true, name: true } } } },
   contract: { select: { id: true, contractCode: true, status: true, renterId: true } },
   assignedToUser: { select: { id: true, fullName: true, email: true, phone: true } },
@@ -74,10 +75,11 @@ const renterTicketBaseSelect = {
   priority: true,
   status: true,
   createdAt: true,
-  updatedAt: true,
   resolvedAt: true,
   createdById: true,
   updatedById: true,
+  scheduledAt: true,
+  scheduledNote: true,
   room: { select: { id: true, roomCode: true, title: true, property: { select: { id: true, name: true } } } },
   contract: { select: { id: true, contractCode: true, status: true, renterId: true } },
   assignedToUser: { select: { id: true, fullName: true } },
@@ -232,6 +234,9 @@ export class TicketsRepository {
         },
       })
       if (result.count !== 1) return null
+
+      // Đoạn đồng bộ trạng thái Room đã bị loại bỏ theo thiết kế mới
+
       await tx.auditLog.create({
         data: {
           tenantId: input.tenantId,
@@ -253,6 +258,8 @@ export class TicketsRepository {
     expectedStatus: TicketStatus
     expectedAssignee: number | null
     assignedTo: number | null
+    scheduledAt?: Date | null
+    scheduledNote?: string | null
     actorId: number
   }) {
     const status: TicketStatus =
@@ -265,9 +272,18 @@ export class TicketsRepository {
           status: input.expectedStatus,
           assignedTo: input.expectedAssignee,
         },
-        data: { assignedTo: input.assignedTo, status, updatedById: input.actorId },
+        data: { 
+          assignedTo: input.assignedTo, 
+          status, 
+          scheduledAt: input.scheduledAt,
+          scheduledNote: input.scheduledNote,
+          updatedById: input.actorId 
+        },
       })
       if (result.count !== 1) return null
+
+      // Đoạn đồng bộ trạng thái Room đã bị loại bỏ theo thiết kế mới
+
       await tx.auditLog.create({
         data: {
           tenantId: input.tenantId,

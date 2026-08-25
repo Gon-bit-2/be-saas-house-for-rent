@@ -13,6 +13,7 @@ type TicketEventSource = {
   assignedTo: number | null
   status: string
   contract: { renterId: number } | null
+  scheduledAt?: Date | null
 }
 
 const statusMap: Record<string, string> = {
@@ -333,12 +334,20 @@ export class NotificationEventsService {
   }
 
   async notifyTicketAssigned(ticket: TicketEventSource) {
+    let content = `Ticket ${ticket.title} đã được phân công xử lý.`
+    if (ticket.scheduledAt) {
+      const timeStr = ticket.scheduledAt.toLocaleString('vi-VN', { 
+        timeZone: 'Asia/Ho_Chi_Minh',
+        hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric'
+      })
+      content = `Ticket ${ticket.title} đã được phân công xử lý. Thời gian dự kiến: ${timeStr}.`
+    }
     return this.bestEffort('TICKET_ASSIGNED', () =>
       this.dispatchTicketNotification(
         ticket,
         [ticket.assignedTo, ticket.createdById, ticket.contract?.renterId ?? null],
         'Ticket đã được phân công',
-        `Ticket ${ticket.title} đã được phân công xử lý.`,
+        content,
         'TICKET_ASSIGNED',
       ),
     )

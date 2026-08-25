@@ -51,8 +51,16 @@ export class RentalRequestsService {
         throw new BadRequestException('Phòng không còn trống để duyệt yêu cầu thuê')
       }
       try {
-        const updated = await this.rentalRequestsRepository.approveRequestAndReserveRoom(tenant.tenantId, id, userId)
+        const { updated, rejectedOthers } = await this.rentalRequestsRepository.approveRequestAndReserveRoom(
+          tenant.tenantId,
+          id,
+          userId,
+        )
         await this.notificationEventsService.notifyRentalRequestChanged(updated)
+        for (const rejected of rejectedOthers) {
+          await this.notificationEventsService.notifyRentalRequestChanged({ ...rejected, status: 'REJECTED' })
+        }
+
         await this.notificationEventsService.notifyMarketplaceModerated({
           id: updated.roomId,
           tenantId: updated.tenantId,

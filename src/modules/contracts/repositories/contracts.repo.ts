@@ -386,10 +386,25 @@ export class ContractsRepository {
           data: { status: 'ENDED', endedAt: contract.endDate },
         })
         if (history.count !== 1) throw new Error('CONTRACT_EXPIRY_CONFLICT')
-        await tx.room.updateMany({
-          where: { id: contract.roomId, tenantId, status: 'OCCUPIED', deletedAt: null },
-          data: { status: 'AVAILABLE', marketplaceStatus: 'HIDDEN', updatedById: actorId },
+
+        const existingTermination = await tx.contractTerminationRequest.findFirst({
+          where: { contractId: id, tenantId },
         })
+        if (!existingTermination) {
+          await tx.contractTerminationRequest.create({
+            data: {
+              tenantId,
+              contractId: id,
+              reason: 'Hợp đồng hết hạn (Tự động tạo)',
+              expectedMoveOutDate: contract.endDate,
+              status: 'APPROVED',
+              reviewedAt: new Date(),
+              reviewedById: actorId,
+              reviewNote: 'Duyệt tự động do hết hạn hợp đồng',
+            },
+          })
+        }
+
         await tx.auditLog.createMany({
           data: [
             {
@@ -400,14 +415,6 @@ export class ContractsRepository {
               entityId: String(id),
               oldValues: { status: 'ACTIVE' },
               newValues: { status: 'EXPIRED' },
-            },
-            {
-              tenantId,
-              actorId,
-              action: 'RELEASE_ROOM_AFTER_EXPIRY',
-              entityType: 'ROOM',
-              entityId: String(contract.roomId),
-              newValues: { status: 'AVAILABLE', marketplaceStatus: 'HIDDEN' },
             },
           ],
         })

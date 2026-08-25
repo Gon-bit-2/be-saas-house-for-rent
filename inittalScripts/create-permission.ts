@@ -46,6 +46,7 @@ const roleModuleMap: Record<RoleNameType, string[]> = {
   [roleName.ADMIN]: [],
   [roleName.LANDLORD]: [
     'TENANTS',
+    'TENANT_MEMBERS',
     'PROPERTIES',
     'FLOORS',
     'ROOMS',

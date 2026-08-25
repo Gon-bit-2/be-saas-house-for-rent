@@ -54,6 +54,8 @@ export const UpdateTicketStatusBodySchema = z
 export const AssignTicketBodySchema = z
   .object({
     assignedTo: z.coerce.number().int().positive().nullable(),
+    scheduledAt: z.string().datetime().transform(val => new Date(val)).optional(),
+    scheduledNote: z.string().trim().max(500).optional(),
   })
   .strict()
 

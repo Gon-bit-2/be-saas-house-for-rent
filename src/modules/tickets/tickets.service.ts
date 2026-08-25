@@ -187,6 +187,8 @@ export class TicketsService {
       expectedStatus: ticket.status,
       expectedAssignee: ticket.assignedTo,
       assignedTo: body.assignedTo,
+      scheduledAt: body.scheduledAt,
+      scheduledNote: body.scheduledNote,
       actorId: userId,
     })
     if (!updated) throw new ConflictException('Ticket đã được cập nhật bởi thao tác khác')

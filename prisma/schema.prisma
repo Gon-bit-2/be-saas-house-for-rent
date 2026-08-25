@@ -2250,7 +2250,11 @@ model Ticket {
   contractId  Int?           @map("contract_id")
   // (removed old createdBy)
   /// ID nhân viên được phân công xử lý sự cố (nullable nếu chưa phân công)
-  assignedTo  Int?           @map("assigned_to")
+  assignedTo    Int?           @map("assigned_to")
+  /// Thời gian dự kiến nhân viên bảo trì đến xử lý
+  scheduledAt   DateTime?      @map("scheduled_at") @db.Timestamptz
+  /// Ghi chú lịch hẹn bảo trì (VD: "Thợ sẽ đến lúc 9h sáng")
+  scheduledNote String?        @map("scheduled_note") @db.VarChar(500)
   /// Tiêu đề báo cáo ngắn gọn (ví dụ: Hỏng vòi nước nhà vệ sinh)
   title       String         @db.VarChar(255)
   /// Mô tả chi tiết về hiện trạng sự cố xảy ra

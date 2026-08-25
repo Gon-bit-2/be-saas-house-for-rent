@@ -133,11 +133,7 @@ export class ContractTerminationsService {
     }
     if (result.kind === 'handover')
       throw new BadRequestException('Biên bản trả phòng chưa được xác nhận hoặc không thuộc hợp đồng')
-    if (result.kind === 'debt')
-      throw new ConflictException({
-        message: 'Hợp đồng còn công nợ; cần xác nhận trước khi hoàn tất',
-        outstandingDebt: result.amount,
-      })
+
     if (result.kind === 'conflict') throw new ConflictException('Trạng thái hợp đồng hoặc yêu cầu đã thay đổi')
     await this.notify(() => this.notifications.notifyTerminationChanged(result.data, 'COMPLETED'))
     return { ...result.data, roomStatus: result.roomStatus }

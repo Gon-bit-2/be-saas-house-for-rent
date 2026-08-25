@@ -54,6 +54,8 @@ export type TicketMinAggregateOutputType = {
   roomId: number | null
   contractId: number | null
   assignedTo: number | null
+  scheduledAt: Date | null
+  scheduledNote: string | null
   title: string | null
   description: string | null
   category: $Enums.TicketCategory | null
@@ -73,6 +75,8 @@ export type TicketMaxAggregateOutputType = {
   roomId: number | null
   contractId: number | null
   assignedTo: number | null
+  scheduledAt: Date | null
+  scheduledNote: string | null
   title: string | null
   description: string | null
   category: $Enums.TicketCategory | null
@@ -92,6 +96,8 @@ export type TicketCountAggregateOutputType = {
   roomId: number
   contractId: number
   assignedTo: number
+  scheduledAt: number
+  scheduledNote: number
   title: number
   description: number
   category: number
@@ -135,6 +141,8 @@ export type TicketMinAggregateInputType = {
   roomId?: true
   contractId?: true
   assignedTo?: true
+  scheduledAt?: true
+  scheduledNote?: true
   title?: true
   description?: true
   category?: true
@@ -154,6 +162,8 @@ export type TicketMaxAggregateInputType = {
   roomId?: true
   contractId?: true
   assignedTo?: true
+  scheduledAt?: true
+  scheduledNote?: true
   title?: true
   description?: true
   category?: true
@@ -173,6 +183,8 @@ export type TicketCountAggregateInputType = {
   roomId?: true
   contractId?: true
   assignedTo?: true
+  scheduledAt?: true
+  scheduledNote?: true
   title?: true
   description?: true
   category?: true
@@ -279,6 +291,8 @@ export type TicketGroupByOutputType = {
   roomId: number
   contractId: number | null
   assignedTo: number | null
+  scheduledAt: Date | null
+  scheduledNote: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -321,6 +335,8 @@ export type TicketWhereInput = {
   roomId?: Prisma.IntFilter<"Ticket"> | number
   contractId?: Prisma.IntNullableFilter<"Ticket"> | number | null
   assignedTo?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  scheduledAt?: Prisma.DateTimeNullableFilter<"Ticket"> | Date | string | null
+  scheduledNote?: Prisma.StringNullableFilter<"Ticket"> | string | null
   title?: Prisma.StringFilter<"Ticket"> | string
   description?: Prisma.StringFilter<"Ticket"> | string
   category?: Prisma.EnumTicketCategoryFilter<"Ticket"> | $Enums.TicketCategory
@@ -350,6 +366,8 @@ export type TicketOrderByWithRelationInput = {
   roomId?: Prisma.SortOrder
   contractId?: Prisma.SortOrderInput | Prisma.SortOrder
   assignedTo?: Prisma.SortOrderInput | Prisma.SortOrder
+  scheduledAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  scheduledNote?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   category?: Prisma.SortOrder
@@ -382,6 +400,8 @@ export type TicketWhereUniqueInput = Prisma.AtLeast<{
   roomId?: Prisma.IntFilter<"Ticket"> | number
   contractId?: Prisma.IntNullableFilter<"Ticket"> | number | null
   assignedTo?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  scheduledAt?: Prisma.DateTimeNullableFilter<"Ticket"> | Date | string | null
+  scheduledNote?: Prisma.StringNullableFilter<"Ticket"> | string | null
   title?: Prisma.StringFilter<"Ticket"> | string
   description?: Prisma.StringFilter<"Ticket"> | string
   category?: Prisma.EnumTicketCategoryFilter<"Ticket"> | $Enums.TicketCategory
@@ -411,6 +431,8 @@ export type TicketOrderByWithAggregationInput = {
   roomId?: Prisma.SortOrder
   contractId?: Prisma.SortOrderInput | Prisma.SortOrder
   assignedTo?: Prisma.SortOrderInput | Prisma.SortOrder
+  scheduledAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  scheduledNote?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   category?: Prisma.SortOrder
@@ -438,6 +460,8 @@ export type TicketScalarWhereWithAggregatesInput = {
   roomId?: Prisma.IntWithAggregatesFilter<"Ticket"> | number
   contractId?: Prisma.IntNullableWithAggregatesFilter<"Ticket"> | number | null
   assignedTo?: Prisma.IntNullableWithAggregatesFilter<"Ticket"> | number | null
+  scheduledAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Ticket"> | Date | string | null
+  scheduledNote?: Prisma.StringNullableWithAggregatesFilter<"Ticket"> | string | null
   title?: Prisma.StringWithAggregatesFilter<"Ticket"> | string
   description?: Prisma.StringWithAggregatesFilter<"Ticket"> | string
   category?: Prisma.EnumTicketCategoryWithAggregatesFilter<"Ticket"> | $Enums.TicketCategory
@@ -452,6 +476,8 @@ export type TicketScalarWhereWithAggregatesInput = {
 }
 
 export type TicketCreateInput = {
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -478,6 +504,8 @@ export type TicketUncheckedCreateInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -495,6 +523,8 @@ export type TicketUncheckedCreateInput = {
 }
 
 export type TicketUpdateInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -521,6 +551,8 @@ export type TicketUncheckedUpdateInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -543,6 +575,8 @@ export type TicketCreateManyInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -557,6 +591,8 @@ export type TicketCreateManyInput = {
 }
 
 export type TicketUpdateManyMutationInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -573,6 +609,8 @@ export type TicketUncheckedUpdateManyInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -602,6 +640,8 @@ export type TicketCountOrderByAggregateInput = {
   roomId?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
   assignedTo?: Prisma.SortOrder
+  scheduledAt?: Prisma.SortOrder
+  scheduledNote?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   category?: Prisma.SortOrder
@@ -632,6 +672,8 @@ export type TicketMaxOrderByAggregateInput = {
   roomId?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
   assignedTo?: Prisma.SortOrder
+  scheduledAt?: Prisma.SortOrder
+  scheduledNote?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   category?: Prisma.SortOrder
@@ -651,6 +693,8 @@ export type TicketMinOrderByAggregateInput = {
   roomId?: Prisma.SortOrder
   contractId?: Prisma.SortOrder
   assignedTo?: Prisma.SortOrder
+  scheduledAt?: Prisma.SortOrder
+  scheduledNote?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   category?: Prisma.SortOrder
@@ -1036,6 +1080,8 @@ export type TicketUpdateOneWithoutConversationsNestedInput = {
 }
 
 export type TicketCreateWithoutAssignedToUserInput = {
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1060,6 +1106,8 @@ export type TicketUncheckedCreateWithoutAssignedToUserInput = {
   tenantId: number
   roomId: number
   contractId?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1087,6 +1135,8 @@ export type TicketCreateManyAssignedToUserInputEnvelope = {
 }
 
 export type TicketCreateWithoutCreatedByInput = {
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1112,6 +1162,8 @@ export type TicketUncheckedCreateWithoutCreatedByInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1138,6 +1190,8 @@ export type TicketCreateManyCreatedByInputEnvelope = {
 }
 
 export type TicketCreateWithoutUpdatedByInput = {
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1163,6 +1217,8 @@ export type TicketUncheckedCreateWithoutUpdatedByInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1189,6 +1245,8 @@ export type TicketCreateManyUpdatedByInputEnvelope = {
 }
 
 export type TicketCreateWithoutDeletedByInput = {
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1214,6 +1272,8 @@ export type TicketUncheckedCreateWithoutDeletedByInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1264,6 +1324,8 @@ export type TicketScalarWhereInput = {
   roomId?: Prisma.IntFilter<"Ticket"> | number
   contractId?: Prisma.IntNullableFilter<"Ticket"> | number | null
   assignedTo?: Prisma.IntNullableFilter<"Ticket"> | number | null
+  scheduledAt?: Prisma.DateTimeNullableFilter<"Ticket"> | Date | string | null
+  scheduledNote?: Prisma.StringNullableFilter<"Ticket"> | string | null
   title?: Prisma.StringFilter<"Ticket"> | string
   description?: Prisma.StringFilter<"Ticket"> | string
   category?: Prisma.EnumTicketCategoryFilter<"Ticket"> | $Enums.TicketCategory
@@ -1326,6 +1388,8 @@ export type TicketUpdateManyWithWhereWithoutDeletedByInput = {
 }
 
 export type TicketCreateWithoutTenantInput = {
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1350,6 +1414,8 @@ export type TicketUncheckedCreateWithoutTenantInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1393,6 +1459,8 @@ export type TicketUpdateManyWithWhereWithoutTenantInput = {
 }
 
 export type TicketCreateWithoutRoomInput = {
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1417,6 +1485,8 @@ export type TicketUncheckedCreateWithoutRoomInput = {
   tenantId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1460,6 +1530,8 @@ export type TicketUpdateManyWithWhereWithoutRoomInput = {
 }
 
 export type TicketCreateWithoutContractInput = {
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1484,6 +1556,8 @@ export type TicketUncheckedCreateWithoutContractInput = {
   tenantId: number
   roomId: number
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1527,6 +1601,8 @@ export type TicketUpdateManyWithWhereWithoutContractInput = {
 }
 
 export type TicketCreateWithoutAttachmentsInput = {
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1552,6 +1628,8 @@ export type TicketUncheckedCreateWithoutAttachmentsInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1584,6 +1662,8 @@ export type TicketUpdateToOneWithWhereWithoutAttachmentsInput = {
 }
 
 export type TicketUpdateWithoutAttachmentsInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1609,6 +1689,8 @@ export type TicketUncheckedUpdateWithoutAttachmentsInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1625,6 +1707,8 @@ export type TicketUncheckedUpdateWithoutAttachmentsInput = {
 }
 
 export type TicketCreateWithoutCommentsInput = {
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1650,6 +1734,8 @@ export type TicketUncheckedCreateWithoutCommentsInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1682,6 +1768,8 @@ export type TicketUpdateToOneWithWhereWithoutCommentsInput = {
 }
 
 export type TicketUpdateWithoutCommentsInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1707,6 +1795,8 @@ export type TicketUncheckedUpdateWithoutCommentsInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1723,6 +1813,8 @@ export type TicketUncheckedUpdateWithoutCommentsInput = {
 }
 
 export type TicketCreateWithoutConversationsInput = {
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1748,6 +1840,8 @@ export type TicketUncheckedCreateWithoutConversationsInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1780,6 +1874,8 @@ export type TicketUpdateToOneWithWhereWithoutConversationsInput = {
 }
 
 export type TicketUpdateWithoutConversationsInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1805,6 +1901,8 @@ export type TicketUncheckedUpdateWithoutConversationsInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1825,6 +1923,8 @@ export type TicketCreateManyAssignedToUserInput = {
   tenantId: number
   roomId: number
   contractId?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1844,6 +1944,8 @@ export type TicketCreateManyCreatedByInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1862,6 +1964,8 @@ export type TicketCreateManyUpdatedByInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1880,6 +1984,8 @@ export type TicketCreateManyDeletedByInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -1893,6 +1999,8 @@ export type TicketCreateManyDeletedByInput = {
 }
 
 export type TicketUpdateWithoutAssignedToUserInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1917,6 +2025,8 @@ export type TicketUncheckedUpdateWithoutAssignedToUserInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1938,6 +2048,8 @@ export type TicketUncheckedUpdateManyWithoutAssignedToUserInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1952,6 +2064,8 @@ export type TicketUncheckedUpdateManyWithoutAssignedToUserInput = {
 }
 
 export type TicketUpdateWithoutCreatedByInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1977,6 +2091,8 @@ export type TicketUncheckedUpdateWithoutCreatedByInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -1998,6 +2114,8 @@ export type TicketUncheckedUpdateManyWithoutCreatedByInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2011,6 +2129,8 @@ export type TicketUncheckedUpdateManyWithoutCreatedByInput = {
 }
 
 export type TicketUpdateWithoutUpdatedByInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2036,6 +2156,8 @@ export type TicketUncheckedUpdateWithoutUpdatedByInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2057,6 +2179,8 @@ export type TicketUncheckedUpdateManyWithoutUpdatedByInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2070,6 +2194,8 @@ export type TicketUncheckedUpdateManyWithoutUpdatedByInput = {
 }
 
 export type TicketUpdateWithoutDeletedByInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2095,6 +2221,8 @@ export type TicketUncheckedUpdateWithoutDeletedByInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2116,6 +2244,8 @@ export type TicketUncheckedUpdateManyWithoutDeletedByInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2133,6 +2263,8 @@ export type TicketCreateManyTenantInput = {
   roomId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -2147,6 +2279,8 @@ export type TicketCreateManyTenantInput = {
 }
 
 export type TicketUpdateWithoutTenantInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2171,6 +2305,8 @@ export type TicketUncheckedUpdateWithoutTenantInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2192,6 +2328,8 @@ export type TicketUncheckedUpdateManyWithoutTenantInput = {
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2210,6 +2348,8 @@ export type TicketCreateManyRoomInput = {
   tenantId: number
   contractId?: number | null
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -2224,6 +2364,8 @@ export type TicketCreateManyRoomInput = {
 }
 
 export type TicketUpdateWithoutRoomInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2248,6 +2390,8 @@ export type TicketUncheckedUpdateWithoutRoomInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2269,6 +2413,8 @@ export type TicketUncheckedUpdateManyWithoutRoomInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   contractId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2287,6 +2433,8 @@ export type TicketCreateManyContractInput = {
   tenantId: number
   roomId: number
   assignedTo?: number | null
+  scheduledAt?: Date | string | null
+  scheduledNote?: string | null
   title: string
   description: string
   category: $Enums.TicketCategory
@@ -2301,6 +2449,8 @@ export type TicketCreateManyContractInput = {
 }
 
 export type TicketUpdateWithoutContractInput = {
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2325,6 +2475,8 @@ export type TicketUncheckedUpdateWithoutContractInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2346,6 +2498,8 @@ export type TicketUncheckedUpdateManyWithoutContractInput = {
   tenantId?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   assignedTo?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  scheduledAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  scheduledNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.EnumTicketCategoryFieldUpdateOperationsInput | $Enums.TicketCategory
@@ -2414,6 +2568,8 @@ export type TicketSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   roomId?: boolean
   contractId?: boolean
   assignedTo?: boolean
+  scheduledAt?: boolean
+  scheduledNote?: boolean
   title?: boolean
   description?: boolean
   category?: boolean
@@ -2444,6 +2600,8 @@ export type TicketSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   roomId?: boolean
   contractId?: boolean
   assignedTo?: boolean
+  scheduledAt?: boolean
+  scheduledNote?: boolean
   title?: boolean
   description?: boolean
   category?: boolean
@@ -2470,6 +2628,8 @@ export type TicketSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   roomId?: boolean
   contractId?: boolean
   assignedTo?: boolean
+  scheduledAt?: boolean
+  scheduledNote?: boolean
   title?: boolean
   description?: boolean
   category?: boolean
@@ -2496,6 +2656,8 @@ export type TicketSelectScalar = {
   roomId?: boolean
   contractId?: boolean
   assignedTo?: boolean
+  scheduledAt?: boolean
+  scheduledNote?: boolean
   title?: boolean
   description?: boolean
   category?: boolean
@@ -2509,7 +2671,7 @@ export type TicketSelectScalar = {
   deletedById?: boolean
 }
 
-export type TicketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "contractId" | "assignedTo" | "title" | "description" | "category" | "priority" | "status" | "createdAt" | "updatedAt" | "resolvedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["ticket"]>
+export type TicketOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "contractId" | "assignedTo" | "scheduledAt" | "scheduledNote" | "title" | "description" | "category" | "priority" | "status" | "createdAt" | "updatedAt" | "resolvedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["ticket"]>
 export type TicketInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
@@ -2598,6 +2760,14 @@ export type $TicketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
      * ID nhân viên được phân công xử lý sự cố (nullable nếu chưa phân công)
      */
     assignedTo: number | null
+    /**
+     * Thời gian dự kiến nhân viên bảo trì đến xử lý
+     */
+    scheduledAt: Date | null
+    /**
+     * Ghi chú lịch hẹn bảo trì (VD: "Thợ sẽ đến lúc 9h sáng")
+     */
+    scheduledNote: string | null
     /**
      * Tiêu đề báo cáo ngắn gọn (ví dụ: Hỏng vòi nước nhà vệ sinh)
      */
@@ -3080,6 +3250,8 @@ export interface TicketFieldRefs {
   readonly roomId: Prisma.FieldRef<"Ticket", 'Int'>
   readonly contractId: Prisma.FieldRef<"Ticket", 'Int'>
   readonly assignedTo: Prisma.FieldRef<"Ticket", 'Int'>
+  readonly scheduledAt: Prisma.FieldRef<"Ticket", 'DateTime'>
+  readonly scheduledNote: Prisma.FieldRef<"Ticket", 'String'>
   readonly title: Prisma.FieldRef<"Ticket", 'String'>
   readonly description: Prisma.FieldRef<"Ticket", 'String'>
   readonly category: Prisma.FieldRef<"Ticket", 'TicketCategory'>
