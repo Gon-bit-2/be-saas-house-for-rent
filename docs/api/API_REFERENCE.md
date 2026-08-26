@@ -1,6 +1,6 @@
 # Tài liệu tham chiếu API hiện tại
 
-> Sinh tự động từ NestJS runtime ngày 2026-08-23T19:43:45.315Z. Không chỉnh sửa thủ công.
+> Sinh tự động từ NestJS runtime ngày 2026-08-26T16:50:29.707Z. Không chỉnh sửa thủ công.
 
 ## Quy ước chung
 
@@ -11,10 +11,11 @@
 - Request được kiểm tra bằng Zod strict; ngày giờ dùng ISO 8601.
 - Error chuẩn: `{ statusCode, code, message, details?, timestamp, path, requestId }`.
 - Mọi route chịu global rate limit; profile riêng được ghi ở từng operation.
-- Tổng cộng **249 operation** thuộc **38 controller**.
+- Tổng cộng **257 operation** thuộc **41 controller**.
 
 ## Mục lục
 
+- [admin (2)](#admin)
 - [Danh mục tiện ích (3)](#amenities)
 - [Danh mục tài sản (5)](#asset-categories)
 - [Xác thực và hồ sơ (11)](#auth)
@@ -38,18 +39,49 @@
 - [Người thuê và lời mời (11)](#renters)
 - [Báo cáo vi phạm (6)](#reports)
 - [Đánh giá và uy tín (6)](#reviews)
+- [roles (1)](#roles)
 - [Tài sản trong phòng (3)](#room-assets)
-- [Lịch xem phòng (6)](#room-viewing-appointments)
+- [Lịch xem phòng (7)](#room-viewing-appointments)
 - [Phòng, tiện ích và ảnh (13)](#rooms)
 - [Trạng thái dịch vụ (1)](#root)
 - [Gán dịch vụ (3)](#service-assignments)
 - [Danh mục dịch vụ (3)](#service-catalog)
 - [Thanh toán gói SaaS (6)](#subscription-payments)
 - [Subscription hiện hành (1)](#subscriptions)
+- [tenant-members (4)](#tenant-members)
 - [Đơn vị chủ trọ (9)](#tenants)
 - [Ticket sự cố (20)](#tickets)
 - [Người dùng và chủ trọ (4)](#users)
 - [Đồng hồ điện nước (5)](#utility-meters)
+
+<a id="admin"></a>
+
+## admin
+
+### GET `/admin/renters`
+
+- Operation ID: `AdminRentersController_listRenters`.
+- Xác thực: Bearer JWT; role: `ADMIN`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `page` | query | Không | `integer` |
+| `limit` | query | Không | `integer` |
+| `search` | query | Không | `string` |
+| `status` | query | Không | `string` |
+
+### GET `/admin/renters/{id}`
+
+- Operation ID: `AdminRentersController_getRenterById`.
+- Xác thực: Bearer JWT; role: `ADMIN`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
 
 <a id="amenities"></a>
 
@@ -2527,6 +2559,17 @@
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
 
+<a id="roles"></a>
+
+## roles
+
+### GET `/roles/tenant-assignable`
+
+- Operation ID: `RolesController_getTenantAssignableRoles`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
 <a id="room-assets"></a>
 
 ## Tài sản trong phòng
@@ -2605,6 +2648,22 @@
 |---|---|:---:|---|
 | `id` | path | Có | `number` |
 | `x-tenant-id` | header | Có | `integer` |
+
+### PATCH `/room-viewing-appointments/{id}/assign`
+
+- Operation ID: `ViewingAppointmentsController_assignStaff`.
+- Xác thực: Bearer JWT; role: `LANDLORD`, `MANAGER`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+| `x-tenant-id` | header | Có | `integer` |
+
+**Request body**
+
+- `application/json`: `AssignAppointmentBodyDTO`; bắt buộc: có.
 
 ### PATCH `/room-viewing-appointments/{id}/status`
 
@@ -3075,6 +3134,54 @@
 - Xác thực: Bearer JWT; role: `LANDLORD`.
 - Rate limit: `global`.
 - Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+<a id="tenant-members"></a>
+
+## tenant-members
+
+### GET `/tenant-members`
+
+- Operation ID: `TenantMembersController_list`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+### POST `/tenant-members`
+
+- Operation ID: `TenantMembersController_addMember`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
+- Rate limit: `global`.
+- Response: 201, 400, 401, 403, 404, 409, 429, 500.
+
+**Request body**
+
+- `application/json`: `AddTenantMemberBodyDTO`; bắt buộc: có.
+
+### DELETE `/tenant-members/{id}`
+
+- Operation ID: `TenantMembersController_removeMember`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+
+### PATCH `/tenant-members/{id}/role`
+
+- Operation ID: `TenantMembersController_updateRole`.
+- Xác thực: Bearer JWT; role: `TENANT`, `LANDLORD`, `MANAGER`, `ACCOUNTANT`, `MAINTENANCE_STAFF`.
+- Rate limit: `global`.
+- Response: 200, 400, 401, 403, 404, 409, 429, 500.
+
+| Tham số | Vị trí | Bắt buộc | Schema |
+|---|---|:---:|---|
+| `id` | path | Có | `number` |
+
+**Request body**
+
+- `application/json`: `UpdateTenantMemberRoleBodyDTO`; bắt buộc: có.
 
 <a id="tenants"></a>
 

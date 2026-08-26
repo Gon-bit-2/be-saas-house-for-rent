@@ -133,13 +133,12 @@ export class ContractsService {
     }
 
     // Không cho kích hoạt nếu ngày bắt đầu hợp đồng chưa đến
-    const today = new Date()
-    today.setUTCHours(0, 0, 0, 0)
-    const startDate = new Date(contract.startDate)
-    startDate.setUTCHours(0, 0, 0, 0)
-    if (startDate.getTime() > today.getTime()) {
+    const todayStr = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' })
+    const startStr = new Date(contract.startDate).toLocaleDateString('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' })
+    if (startStr > todayStr) {
+      const displayDate = new Date(contract.startDate).toLocaleDateString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })
       throw new BadRequestException(
-        `Chưa thể kích hoạt hợp đồng. Ngày bắt đầu là ${startDate.toLocaleDateString('vi-VN')}, vui lòng đợi đến ngày bắt đầu hợp đồng.`,
+        `Chưa thể kích hoạt hợp đồng. Ngày bắt đầu là ${displayDate}, vui lòng đợi đến ngày bắt đầu hợp đồng.`,
       )
     }
 
@@ -169,9 +168,9 @@ export class ContractsService {
     if (contract.status !== 'ACTIVE') {
       throw new BadRequestException('Chỉ có thể hết hạn hợp đồng đang hiệu lực')
     }
-    const today = new Date()
-    today.setUTCHours(0, 0, 0, 0)
-    if (new Date(contract.endDate).getTime() > today.getTime()) {
+    const todayStr = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' })
+    const endStr = new Date(contract.endDate).toLocaleDateString('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' })
+    if (endStr > todayStr) {
       throw new BadRequestException('Hợp đồng chưa đến ngày hết hạn')
     }
 

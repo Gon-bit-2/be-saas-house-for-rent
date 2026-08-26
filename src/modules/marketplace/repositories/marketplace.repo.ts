@@ -161,7 +161,21 @@ export class MarketplaceRepository {
       where: {
         renterId,
         roomId,
-        status: { in: ['PENDING', 'NEED_MORE_INFO', 'APPROVED'] },
+        OR: [
+          // Nếu yêu cầu đang chờ duyệt hoặc chờ bổ sung -> Không cho tạo mới
+          { status: { in: ['PENDING', 'NEED_MORE_INFO'] } },
+          {
+            // Nếu yêu cầu đã duyệt:
+            status: 'APPROVED',
+            OR: [
+              // 1. Chưa tạo hợp đồng nào -> Không cho tạo mới
+              { contracts: { none: {} } },
+              // 2. Đã tạo hợp đồng và hợp đồng đang ở trạng thái Nháp/Hoạt động -> Không cho tạo mới
+              { contracts: { some: { status: { in: ['DRAFT', 'ACTIVE'] }, deletedAt: null } } },
+            ],
+            // Nghĩa là: Nếu đã tạo hợp đồng nhưng toàn bộ hợp đồng đều đã TERMINATED/EXPIRED -> Sẽ cho phép tạo mới.
+          },
+        ],
       },
       select: { id: true, status: true },
     })

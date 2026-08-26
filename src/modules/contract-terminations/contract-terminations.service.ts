@@ -125,9 +125,13 @@ export class ContractTerminationsService {
         acknowledgeDebt: body.acknowledgeOutstandingDebt,
         completionNote: body.completionNote,
         actorId: userId,
+        electricityFee: body.electricityFee,
+        waterFee: body.waterFee,
+        damageFee: body.damageFee,
+        penaltyFee: body.penaltyFee,
       })
     } catch (error) {
-      if ((error instanceof Error && error.message === 'ACTIVE_RENTAL_HISTORY_NOT_FOUND') || this.isConflict(error))
+      if ((error instanceof Error && error.message === 'RENTAL_HISTORY_NOT_FOUND') || this.isConflict(error))
         throw new ConflictException('Không thể hoàn tất do dữ liệu vòng đời hợp đồng đã thay đổi')
       throw error
     }

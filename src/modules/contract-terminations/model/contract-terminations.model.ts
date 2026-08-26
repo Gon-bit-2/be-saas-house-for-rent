@@ -29,7 +29,9 @@ export const CreateContractTerminationBodySchema = z
     expectedMoveOutDate: DateOnlySchema,
   })
   .strict()
-export const ReviewContractTerminationBodySchema = z.object({ reviewNote: z.string().trim().max(5000).optional() }).strict()
+export const ReviewContractTerminationBodySchema = z
+  .object({ reviewNote: z.string().trim().max(5000).optional() })
+  .strict()
 export const EmptyContractTerminationBodySchema = z.object({}).strict()
 export const CompleteContractTerminationBodySchema = z
   .object({
@@ -37,6 +39,10 @@ export const CompleteContractTerminationBodySchema = z
     actualMoveOutDate: DateOnlySchema,
     acknowledgeOutstandingDebt: z.boolean().default(false),
     completionNote: z.string().trim().max(5000).nullable().optional(),
+    electricityFee: z.coerce.number().int().min(0).default(0).optional(),
+    waterFee: z.coerce.number().int().min(0).default(0).optional(),
+    damageFee: z.coerce.number().int().min(0).default(0).optional(),
+    penaltyFee: z.coerce.number().int().min(0).default(0).optional(),
   })
   .strict()
 
