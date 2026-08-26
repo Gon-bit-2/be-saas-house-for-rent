@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, BadRequestException } from '@nestjs/common'
 import { PrismaService } from '@src/shared/modules/database/prisma.service'
 import type { Prisma } from 'generated/prisma/client'
 import type { TRenterInfo, TAddContractMemberBodySchema } from '../model/contracts.model'
@@ -206,10 +206,17 @@ export class ContractsRepository {
 
       if (renterInfo) {
         if (renterInfo.phone !== undefined) {
-          await tx.user.update({
-            where: { id: contract.renterId },
-            data: { phone: renterInfo.phone },
-          })
+          try {
+            await tx.user.update({
+              where: { id: contract.renterId },
+              data: { phone: renterInfo.phone },
+            })
+          } catch (error: any) {
+            if (error?.code === 'P2002') {
+              throw new BadRequestException('Số điện thoại đã được sử dụng bởi một tài khoản khác.')
+            }
+            throw error
+          }
         }
         if (
           renterInfo.identityNumber !== undefined ||
@@ -262,10 +269,17 @@ export class ContractsRepository {
 
       if (renterInfo) {
         if (renterInfo.phone !== undefined) {
-          await tx.user.update({
-            where: { id: renterId },
-            data: { phone: renterInfo.phone },
-          })
+          try {
+            await tx.user.update({
+              where: { id: renterId },
+              data: { phone: renterInfo.phone },
+            })
+          } catch (error: any) {
+            if (error?.code === 'P2002') {
+              throw new BadRequestException('Số điện thoại đã được sử dụng bởi một tài khoản khác.')
+            }
+            throw error
+          }
         }
         if (
           renterInfo.identityNumber !== undefined ||

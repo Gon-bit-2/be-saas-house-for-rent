@@ -2,12 +2,14 @@ import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/commo
 import { ConversationsRepo } from './repositories/conversations.repo'
 import { MessagesRepo } from './repositories/messages.repo'
 import { CreateConversationBodyDTO, SendMessageBodyDTO } from './dto/conversations.dto'
+import { PrismaService } from '@src/shared/modules/database/prisma.service'
 
 @Injectable()
 export class ConversationsService {
   constructor(
     private readonly conversationsRepo: ConversationsRepo,
     private readonly messagesRepo: MessagesRepo,
+    private readonly prismaService: PrismaService,
   ) {}
 
   async getUserConversations(userId: number) {
@@ -51,8 +53,16 @@ export class ConversationsService {
     // Add current user as member
     await this.conversationsRepo.addMember(conversation.id, userId)
 
-    // Note: We might need to automatically add the Tenant Owner or Host as a member here depending on business logic
-    // For now, we assume other members can be added later or we fetch the tenant owner and add them.
+    // Automatically add the Tenant Owner as a member so they can receive messages
+    if (dto.tenantId) {
+      const tenant = await this.prismaService.tenant.findUnique({
+        where: { id: dto.tenantId },
+        select: { ownerUserId: true },
+      })
+      if (tenant && tenant.ownerUserId !== userId) {
+        await this.conversationsRepo.addMember(conversation.id, tenant.ownerUserId)
+      }
+    }
 
     return this.conversationsRepo.findById(conversation.id)
   }
