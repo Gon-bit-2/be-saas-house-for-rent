@@ -99,4 +99,8 @@ export class ConversationsService {
 
     return conversation
   }
+
+  async getConversationById(conversationId: number) {
+    return this.conversationsRepo.findById(conversationId)
+  }
 }

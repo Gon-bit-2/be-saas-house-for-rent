@@ -45,6 +45,7 @@ export class ConversationsGateway implements OnGatewayConnection {
     try {
       const user = await this.tokenService.verifyAccessToken(token)
       client.data.userId = user.userId
+      client.join(`user:${user.userId}`) // Tham gia phòng riêng theo ID người dùng
       // We don't join all rooms here. The client will emit 'joinConversation' for specific rooms.
     } catch (error) {
       this.logger.warn(error instanceof Error ? error.message : 'Invalid websocket token')
@@ -103,6 +104,14 @@ export class ConversationsGateway implements OnGatewayConnection {
       const roomName = this.getConversationRoom(payload.conversationId)
       // Broadcast the message to all clients in the room (including sender, or we can broadcast to others)
       this.server.to(roomName).emit('newMessage', message)
+
+      // Phát tin nhắn thêm tới các phòng cá nhân của từng thành viên trong cuộc hội thoại để cập nhật màn hình danh sách chat
+      const conversationDetails = await this.conversationsService.getConversationById(payload.conversationId)
+      if (conversationDetails && conversationDetails.members) {
+        conversationDetails.members.forEach((member) => {
+          this.server.to(`user:${member.userId}`).emit('newMessage', message)
+        })
+      }
       return { success: true, data: message }
     } catch (error) {
       this.logger.error(`Error sending message: ${error}`)
