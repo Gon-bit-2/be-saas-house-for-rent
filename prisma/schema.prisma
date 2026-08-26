@@ -1259,6 +1259,10 @@ model Contract {
   monthlyPrice       Decimal              @map("monthly_price") @db.Decimal(12, 2)
   /// Tiền đặt cọc thực tế khách đã đóng
   depositAmount      Decimal              @map("deposit_amount") @db.Decimal(12, 2)
+  /// Trạng thái đã thanh toán tiền cọc hay chưa
+  isDepositPaid      Boolean              @default(false) @map("is_deposit_paid")
+  /// Liên kết tới hóa đơn cọc (nếu có)
+  depositInvoiceId   Int?                 @unique @map("deposit_invoice_id")
   /// Chu kỳ đóng tiền trọ (Hàng tháng hoặc Hàng quý)
   billingCycle       ContractBillingCycle @map("billing_cycle")
   /// Ngày hạn chót đóng tiền trọ hằng tháng (ví dụ: ngày 5 hằng tháng)
@@ -1285,6 +1289,8 @@ model Contract {
   // Các quan hệ (Relations)
   /// Tenant quản lý
   tenant              Tenant                       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  /// Hóa đơn cọc tương ứng
+  depositInvoice      Invoice?                     @relation("DepositInvoice", fields: [depositInvoiceId], references: [id], onDelete: SetNull)
   /// Phòng thuê (chặn xóa phòng nếu đang có hợp đồng)
   room                Room                         @relation(fields: [roomId], references: [id], onDelete: Restrict)
   /// Khách thuê chính
@@ -1947,6 +1953,8 @@ model Invoice {
   webhookLogs PaymentWebhookLog[]
   /// Bản ghi công nợ tương ứng với hóa đơn này
   debt        Debt?
+  /// Hợp đồng mà hóa đơn này là hóa đơn cọc
+  depositForContract Contract? @relation("DepositInvoice")
 
   /// ID người dùng tạo bản ghi
   createdById Int? @map("created_by_id")
@@ -3040,6 +3048,8 @@ enum InvoiceItemType {
   INTERNET
   /// Phí phạt (nộp muộn, vi phạm quy định hợp đồng...)
   PENALTY
+  /// Tiền đặt cọc
+  DEPOSIT
   /// Khoản chiết khấu, giảm giá phòng
   DISCOUNT
   /// Khoản thu khác

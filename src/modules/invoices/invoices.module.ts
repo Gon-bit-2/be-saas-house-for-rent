@@ -13,5 +13,6 @@ import { InvoicesRepository } from './repositories/invoices.repo'
   imports: [SharedServiceModule, NotificationsModule],
   controllers: [InvoicesController],
   providers: [InvoicesService, InvoicesRepository, InvoicesScheduler],
+  exports: [InvoicesService],
 })
 export class InvoicesModule {}

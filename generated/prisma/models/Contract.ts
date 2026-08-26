@@ -35,6 +35,7 @@ export type ContractAvgAggregateOutputType = {
   templateId: number | null
   monthlyPrice: runtime.Decimal | null
   depositAmount: runtime.Decimal | null
+  depositInvoiceId: number | null
   paymentDueDay: number | null
   createdById: number | null
   updatedById: number | null
@@ -50,6 +51,7 @@ export type ContractSumAggregateOutputType = {
   templateId: number | null
   monthlyPrice: runtime.Decimal | null
   depositAmount: runtime.Decimal | null
+  depositInvoiceId: number | null
   paymentDueDay: number | null
   createdById: number | null
   updatedById: number | null
@@ -68,6 +70,8 @@ export type ContractMinAggregateOutputType = {
   endDate: Date | null
   monthlyPrice: runtime.Decimal | null
   depositAmount: runtime.Decimal | null
+  isDepositPaid: boolean | null
+  depositInvoiceId: number | null
   billingCycle: $Enums.ContractBillingCycle | null
   paymentDueDay: number | null
   contentSnapshot: string | null
@@ -96,6 +100,8 @@ export type ContractMaxAggregateOutputType = {
   endDate: Date | null
   monthlyPrice: runtime.Decimal | null
   depositAmount: runtime.Decimal | null
+  isDepositPaid: boolean | null
+  depositInvoiceId: number | null
   billingCycle: $Enums.ContractBillingCycle | null
   paymentDueDay: number | null
   contentSnapshot: string | null
@@ -124,6 +130,8 @@ export type ContractCountAggregateOutputType = {
   endDate: number
   monthlyPrice: number
   depositAmount: number
+  isDepositPaid: number
+  depositInvoiceId: number
   billingCycle: number
   paymentDueDay: number
   contentSnapshot: number
@@ -151,6 +159,7 @@ export type ContractAvgAggregateInputType = {
   templateId?: true
   monthlyPrice?: true
   depositAmount?: true
+  depositInvoiceId?: true
   paymentDueDay?: true
   createdById?: true
   updatedById?: true
@@ -166,6 +175,7 @@ export type ContractSumAggregateInputType = {
   templateId?: true
   monthlyPrice?: true
   depositAmount?: true
+  depositInvoiceId?: true
   paymentDueDay?: true
   createdById?: true
   updatedById?: true
@@ -184,6 +194,8 @@ export type ContractMinAggregateInputType = {
   endDate?: true
   monthlyPrice?: true
   depositAmount?: true
+  isDepositPaid?: true
+  depositInvoiceId?: true
   billingCycle?: true
   paymentDueDay?: true
   contentSnapshot?: true
@@ -212,6 +224,8 @@ export type ContractMaxAggregateInputType = {
   endDate?: true
   monthlyPrice?: true
   depositAmount?: true
+  isDepositPaid?: true
+  depositInvoiceId?: true
   billingCycle?: true
   paymentDueDay?: true
   contentSnapshot?: true
@@ -240,6 +254,8 @@ export type ContractCountAggregateInputType = {
   endDate?: true
   monthlyPrice?: true
   depositAmount?: true
+  isDepositPaid?: true
+  depositInvoiceId?: true
   billingCycle?: true
   paymentDueDay?: true
   contentSnapshot?: true
@@ -355,6 +371,8 @@ export type ContractGroupByOutputType = {
   endDate: Date
   monthlyPrice: runtime.Decimal
   depositAmount: runtime.Decimal
+  isDepositPaid: boolean
+  depositInvoiceId: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -406,6 +424,8 @@ export type ContractWhereInput = {
   endDate?: Prisma.DateTimeFilter<"Contract"> | Date | string
   monthlyPrice?: Prisma.DecimalFilter<"Contract"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFilter<"Contract"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFilter<"Contract"> | boolean
+  depositInvoiceId?: Prisma.IntNullableFilter<"Contract"> | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFilter<"Contract"> | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFilter<"Contract"> | number
   contentSnapshot?: Prisma.StringFilter<"Contract"> | string
@@ -421,6 +441,7 @@ export type ContractWhereInput = {
   updatedById?: Prisma.IntNullableFilter<"Contract"> | number | null
   deletedById?: Prisma.IntNullableFilter<"Contract"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  depositInvoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   renter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   rentalRequest?: Prisma.XOR<Prisma.RentalRequestNullableScalarRelationFilter, Prisma.RentalRequestWhereInput> | null
@@ -454,6 +475,8 @@ export type ContractOrderByWithRelationInput = {
   endDate?: Prisma.SortOrder
   monthlyPrice?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
+  isDepositPaid?: Prisma.SortOrder
+  depositInvoiceId?: Prisma.SortOrderInput | Prisma.SortOrder
   billingCycle?: Prisma.SortOrder
   paymentDueDay?: Prisma.SortOrder
   contentSnapshot?: Prisma.SortOrder
@@ -469,6 +492,7 @@ export type ContractOrderByWithRelationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
   tenant?: Prisma.TenantOrderByWithRelationInput
+  depositInvoice?: Prisma.InvoiceOrderByWithRelationInput
   room?: Prisma.RoomOrderByWithRelationInput
   renter?: Prisma.UserOrderByWithRelationInput
   rentalRequest?: Prisma.RentalRequestOrderByWithRelationInput
@@ -493,6 +517,7 @@ export type ContractOrderByWithRelationInput = {
 export type ContractWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   contractCode?: string
+  depositInvoiceId?: number
   AND?: Prisma.ContractWhereInput | Prisma.ContractWhereInput[]
   OR?: Prisma.ContractWhereInput[]
   NOT?: Prisma.ContractWhereInput | Prisma.ContractWhereInput[]
@@ -505,6 +530,7 @@ export type ContractWhereUniqueInput = Prisma.AtLeast<{
   endDate?: Prisma.DateTimeFilter<"Contract"> | Date | string
   monthlyPrice?: Prisma.DecimalFilter<"Contract"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFilter<"Contract"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFilter<"Contract"> | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFilter<"Contract"> | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFilter<"Contract"> | number
   contentSnapshot?: Prisma.StringFilter<"Contract"> | string
@@ -520,6 +546,7 @@ export type ContractWhereUniqueInput = Prisma.AtLeast<{
   updatedById?: Prisma.IntNullableFilter<"Contract"> | number | null
   deletedById?: Prisma.IntNullableFilter<"Contract"> | number | null
   tenant?: Prisma.XOR<Prisma.TenantScalarRelationFilter, Prisma.TenantWhereInput>
+  depositInvoice?: Prisma.XOR<Prisma.InvoiceNullableScalarRelationFilter, Prisma.InvoiceWhereInput> | null
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
   renter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   rentalRequest?: Prisma.XOR<Prisma.RentalRequestNullableScalarRelationFilter, Prisma.RentalRequestWhereInput> | null
@@ -539,7 +566,7 @@ export type ContractWhereUniqueInput = Prisma.AtLeast<{
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-}, "id" | "contractCode">
+}, "id" | "contractCode" | "depositInvoiceId">
 
 export type ContractOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -553,6 +580,8 @@ export type ContractOrderByWithAggregationInput = {
   endDate?: Prisma.SortOrder
   monthlyPrice?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
+  isDepositPaid?: Prisma.SortOrder
+  depositInvoiceId?: Prisma.SortOrderInput | Prisma.SortOrder
   billingCycle?: Prisma.SortOrder
   paymentDueDay?: Prisma.SortOrder
   contentSnapshot?: Prisma.SortOrder
@@ -589,6 +618,8 @@ export type ContractScalarWhereWithAggregatesInput = {
   endDate?: Prisma.DateTimeWithAggregatesFilter<"Contract"> | Date | string
   monthlyPrice?: Prisma.DecimalWithAggregatesFilter<"Contract"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalWithAggregatesFilter<"Contract"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolWithAggregatesFilter<"Contract"> | boolean
+  depositInvoiceId?: Prisma.IntNullableWithAggregatesFilter<"Contract"> | number | null
   billingCycle?: Prisma.EnumContractBillingCycleWithAggregatesFilter<"Contract"> | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntWithAggregatesFilter<"Contract"> | number
   contentSnapshot?: Prisma.StringWithAggregatesFilter<"Contract"> | string
@@ -611,6 +642,7 @@ export type ContractCreateInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -623,6 +655,7 @@ export type ContractCreateInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -656,6 +689,8 @@ export type ContractUncheckedCreateInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -690,6 +725,7 @@ export type ContractUpdateInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -702,6 +738,7 @@ export type ContractUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -735,6 +772,8 @@ export type ContractUncheckedUpdateInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -775,6 +814,8 @@ export type ContractCreateManyInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -797,6 +838,7 @@ export type ContractUpdateManyMutationInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -822,6 +864,8 @@ export type ContractUncheckedUpdateManyInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -865,6 +909,8 @@ export type ContractCountOrderByAggregateInput = {
   endDate?: Prisma.SortOrder
   monthlyPrice?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
+  isDepositPaid?: Prisma.SortOrder
+  depositInvoiceId?: Prisma.SortOrder
   billingCycle?: Prisma.SortOrder
   paymentDueDay?: Prisma.SortOrder
   contentSnapshot?: Prisma.SortOrder
@@ -890,6 +936,7 @@ export type ContractAvgOrderByAggregateInput = {
   templateId?: Prisma.SortOrder
   monthlyPrice?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
+  depositInvoiceId?: Prisma.SortOrder
   paymentDueDay?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
@@ -908,6 +955,8 @@ export type ContractMaxOrderByAggregateInput = {
   endDate?: Prisma.SortOrder
   monthlyPrice?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
+  isDepositPaid?: Prisma.SortOrder
+  depositInvoiceId?: Prisma.SortOrder
   billingCycle?: Prisma.SortOrder
   paymentDueDay?: Prisma.SortOrder
   contentSnapshot?: Prisma.SortOrder
@@ -936,6 +985,8 @@ export type ContractMinOrderByAggregateInput = {
   endDate?: Prisma.SortOrder
   monthlyPrice?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
+  isDepositPaid?: Prisma.SortOrder
+  depositInvoiceId?: Prisma.SortOrder
   billingCycle?: Prisma.SortOrder
   paymentDueDay?: Prisma.SortOrder
   contentSnapshot?: Prisma.SortOrder
@@ -961,6 +1012,7 @@ export type ContractSumOrderByAggregateInput = {
   templateId?: Prisma.SortOrder
   monthlyPrice?: Prisma.SortOrder
   depositAmount?: Prisma.SortOrder
+  depositInvoiceId?: Prisma.SortOrder
   paymentDueDay?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
@@ -1424,12 +1476,44 @@ export type ContractCreateNestedOneWithoutInvoicesInput = {
   connect?: Prisma.ContractWhereUniqueInput
 }
 
+export type ContractCreateNestedOneWithoutDepositInvoiceInput = {
+  create?: Prisma.XOR<Prisma.ContractCreateWithoutDepositInvoiceInput, Prisma.ContractUncheckedCreateWithoutDepositInvoiceInput>
+  connectOrCreate?: Prisma.ContractCreateOrConnectWithoutDepositInvoiceInput
+  connect?: Prisma.ContractWhereUniqueInput
+}
+
+export type ContractUncheckedCreateNestedOneWithoutDepositInvoiceInput = {
+  create?: Prisma.XOR<Prisma.ContractCreateWithoutDepositInvoiceInput, Prisma.ContractUncheckedCreateWithoutDepositInvoiceInput>
+  connectOrCreate?: Prisma.ContractCreateOrConnectWithoutDepositInvoiceInput
+  connect?: Prisma.ContractWhereUniqueInput
+}
+
 export type ContractUpdateOneRequiredWithoutInvoicesNestedInput = {
   create?: Prisma.XOR<Prisma.ContractCreateWithoutInvoicesInput, Prisma.ContractUncheckedCreateWithoutInvoicesInput>
   connectOrCreate?: Prisma.ContractCreateOrConnectWithoutInvoicesInput
   upsert?: Prisma.ContractUpsertWithoutInvoicesInput
   connect?: Prisma.ContractWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContractUpdateToOneWithWhereWithoutInvoicesInput, Prisma.ContractUpdateWithoutInvoicesInput>, Prisma.ContractUncheckedUpdateWithoutInvoicesInput>
+}
+
+export type ContractUpdateOneWithoutDepositInvoiceNestedInput = {
+  create?: Prisma.XOR<Prisma.ContractCreateWithoutDepositInvoiceInput, Prisma.ContractUncheckedCreateWithoutDepositInvoiceInput>
+  connectOrCreate?: Prisma.ContractCreateOrConnectWithoutDepositInvoiceInput
+  upsert?: Prisma.ContractUpsertWithoutDepositInvoiceInput
+  disconnect?: Prisma.ContractWhereInput | boolean
+  delete?: Prisma.ContractWhereInput | boolean
+  connect?: Prisma.ContractWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContractUpdateToOneWithWhereWithoutDepositInvoiceInput, Prisma.ContractUpdateWithoutDepositInvoiceInput>, Prisma.ContractUncheckedUpdateWithoutDepositInvoiceInput>
+}
+
+export type ContractUncheckedUpdateOneWithoutDepositInvoiceNestedInput = {
+  create?: Prisma.XOR<Prisma.ContractCreateWithoutDepositInvoiceInput, Prisma.ContractUncheckedCreateWithoutDepositInvoiceInput>
+  connectOrCreate?: Prisma.ContractCreateOrConnectWithoutDepositInvoiceInput
+  upsert?: Prisma.ContractUpsertWithoutDepositInvoiceInput
+  disconnect?: Prisma.ContractWhereInput | boolean
+  delete?: Prisma.ContractWhereInput | boolean
+  connect?: Prisma.ContractWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContractUpdateToOneWithWhereWithoutDepositInvoiceInput, Prisma.ContractUpdateWithoutDepositInvoiceInput>, Prisma.ContractUncheckedUpdateWithoutDepositInvoiceInput>
 }
 
 export type ContractCreateNestedOneWithoutDebtsInput = {
@@ -1498,6 +1582,7 @@ export type ContractCreateWithoutRenterInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -1510,6 +1595,7 @@ export type ContractCreateWithoutRenterInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
@@ -1541,6 +1627,8 @@ export type ContractUncheckedCreateWithoutRenterInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -1585,6 +1673,7 @@ export type ContractCreateWithoutCreatedByInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -1597,6 +1686,7 @@ export type ContractCreateWithoutCreatedByInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -1629,6 +1719,8 @@ export type ContractUncheckedCreateWithoutCreatedByInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -1672,6 +1764,7 @@ export type ContractCreateWithoutUpdatedByInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -1684,6 +1777,7 @@ export type ContractCreateWithoutUpdatedByInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -1716,6 +1810,8 @@ export type ContractUncheckedCreateWithoutUpdatedByInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -1759,6 +1855,7 @@ export type ContractCreateWithoutDeletedByInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -1771,6 +1868,7 @@ export type ContractCreateWithoutDeletedByInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -1803,6 +1901,8 @@ export type ContractUncheckedCreateWithoutDeletedByInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -1871,6 +1971,8 @@ export type ContractScalarWhereInput = {
   endDate?: Prisma.DateTimeFilter<"Contract"> | Date | string
   monthlyPrice?: Prisma.DecimalFilter<"Contract"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFilter<"Contract"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFilter<"Contract"> | boolean
+  depositInvoiceId?: Prisma.IntNullableFilter<"Contract"> | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFilter<"Contract"> | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFilter<"Contract"> | number
   contentSnapshot?: Prisma.StringFilter<"Contract"> | string
@@ -1941,6 +2043,7 @@ export type ContractCreateWithoutTenantInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -1952,6 +2055,7 @@ export type ContractCreateWithoutTenantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -1984,6 +2088,8 @@ export type ContractUncheckedCreateWithoutTenantInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2044,6 +2150,7 @@ export type ContractCreateWithoutRoomInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2056,6 +2163,7 @@ export type ContractCreateWithoutRoomInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
@@ -2087,6 +2195,8 @@ export type ContractUncheckedCreateWithoutRoomInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2147,6 +2257,7 @@ export type ContractCreateWithoutRentalHistoriesInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2159,6 +2270,7 @@ export type ContractCreateWithoutRentalHistoriesInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -2191,6 +2303,8 @@ export type ContractUncheckedCreateWithoutRentalHistoriesInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2240,6 +2354,7 @@ export type ContractUpdateWithoutRentalHistoriesInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2252,6 +2367,7 @@ export type ContractUpdateWithoutRentalHistoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -2284,6 +2400,8 @@ export type ContractUncheckedUpdateWithoutRentalHistoriesInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2317,6 +2435,7 @@ export type ContractCreateWithoutRentalRequestInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2329,6 +2448,7 @@ export type ContractCreateWithoutRentalRequestInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
@@ -2360,6 +2480,8 @@ export type ContractUncheckedCreateWithoutRentalRequestInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2420,6 +2542,7 @@ export type ContractCreateWithoutTemplateInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2432,6 +2555,7 @@ export type ContractCreateWithoutTemplateInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -2463,6 +2587,8 @@ export type ContractUncheckedCreateWithoutTemplateInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2523,6 +2649,7 @@ export type ContractCreateWithoutMembersInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2535,6 +2662,7 @@ export type ContractCreateWithoutMembersInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -2567,6 +2695,8 @@ export type ContractUncheckedCreateWithoutMembersInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2616,6 +2746,7 @@ export type ContractUpdateWithoutMembersInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2628,6 +2759,7 @@ export type ContractUpdateWithoutMembersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -2660,6 +2792,8 @@ export type ContractUncheckedUpdateWithoutMembersInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2693,6 +2827,7 @@ export type ContractCreateWithoutFilesInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2705,6 +2840,7 @@ export type ContractCreateWithoutFilesInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -2737,6 +2873,8 @@ export type ContractUncheckedCreateWithoutFilesInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2786,6 +2924,7 @@ export type ContractUpdateWithoutFilesInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2798,6 +2937,7 @@ export type ContractUpdateWithoutFilesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -2830,6 +2970,8 @@ export type ContractUncheckedUpdateWithoutFilesInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2863,6 +3005,7 @@ export type ContractCreateWithoutTerminationRequestsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2875,6 +3018,7 @@ export type ContractCreateWithoutTerminationRequestsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -2907,6 +3051,8 @@ export type ContractUncheckedCreateWithoutTerminationRequestsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -2956,6 +3102,7 @@ export type ContractUpdateWithoutTerminationRequestsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2968,6 +3115,7 @@ export type ContractUpdateWithoutTerminationRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -3000,6 +3148,8 @@ export type ContractUncheckedUpdateWithoutTerminationRequestsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3033,6 +3183,7 @@ export type ContractCreateWithoutHandoverRecordsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3045,6 +3196,7 @@ export type ContractCreateWithoutHandoverRecordsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -3077,6 +3229,8 @@ export type ContractUncheckedCreateWithoutHandoverRecordsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3126,6 +3280,7 @@ export type ContractUpdateWithoutHandoverRecordsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3138,6 +3293,7 @@ export type ContractUpdateWithoutHandoverRecordsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -3170,6 +3326,8 @@ export type ContractUncheckedUpdateWithoutHandoverRecordsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3203,6 +3361,7 @@ export type ContractCreateWithoutMeterReadingsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3215,6 +3374,7 @@ export type ContractCreateWithoutMeterReadingsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -3247,6 +3407,8 @@ export type ContractUncheckedCreateWithoutMeterReadingsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3296,6 +3458,7 @@ export type ContractUpdateWithoutMeterReadingsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3308,6 +3471,7 @@ export type ContractUpdateWithoutMeterReadingsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -3340,6 +3504,8 @@ export type ContractUncheckedUpdateWithoutMeterReadingsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3373,6 +3539,7 @@ export type ContractCreateWithoutServiceAssignmentsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3385,6 +3552,7 @@ export type ContractCreateWithoutServiceAssignmentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -3417,6 +3585,8 @@ export type ContractUncheckedCreateWithoutServiceAssignmentsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3466,6 +3636,7 @@ export type ContractUpdateWithoutServiceAssignmentsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3478,6 +3649,7 @@ export type ContractUpdateWithoutServiceAssignmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -3510,6 +3682,8 @@ export type ContractUncheckedUpdateWithoutServiceAssignmentsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3543,6 +3717,7 @@ export type ContractCreateWithoutInvoicesInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3555,6 +3730,7 @@ export type ContractCreateWithoutInvoicesInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -3587,6 +3763,8 @@ export type ContractUncheckedCreateWithoutInvoicesInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3619,6 +3797,92 @@ export type ContractCreateOrConnectWithoutInvoicesInput = {
   create: Prisma.XOR<Prisma.ContractCreateWithoutInvoicesInput, Prisma.ContractUncheckedCreateWithoutInvoicesInput>
 }
 
+export type ContractCreateWithoutDepositInvoiceInput = {
+  contractCode: string
+  startDate: Date | string
+  endDate: Date | string
+  monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  billingCycle: $Enums.ContractBillingCycle
+  paymentDueDay: number
+  contentSnapshot: string
+  status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  room: Prisma.RoomCreateNestedOneWithoutContractsInput
+  renter: Prisma.UserCreateNestedOneWithoutContractsInput
+  rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
+  template?: Prisma.ContractTemplateCreateNestedOneWithoutContractsInput
+  members?: Prisma.ContractMemberCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentCreateNestedManyWithoutContractInput
+  files?: Prisma.ContractFileCreateNestedManyWithoutContractInput
+  terminationRequests?: Prisma.ContractTerminationRequestCreateNestedManyWithoutContractInput
+  rentalHistories?: Prisma.RentalHistoryCreateNestedManyWithoutContractInput
+  handoverRecords?: Prisma.HandoverRecordCreateNestedManyWithoutContractInput
+  meterReadings?: Prisma.MeterReadingCreateNestedManyWithoutContractInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtCreateNestedManyWithoutContractInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutContractInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutContractInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutContractInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedContractsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedContractsInput
+  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedContractsInput
+}
+
+export type ContractUncheckedCreateWithoutDepositInvoiceInput = {
+  id?: number
+  tenantId: number
+  roomId: number
+  renterId: number
+  rentalRequestId?: number | null
+  templateId?: number | null
+  contractCode: string
+  startDate: Date | string
+  endDate: Date | string
+  monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  billingCycle: $Enums.ContractBillingCycle
+  paymentDueDay: number
+  contentSnapshot: string
+  status?: $Enums.ContractStatus
+  landlordSignature?: string | null
+  renterSignature?: string | null
+  signedByLandlordAt?: Date | string | null
+  signedByRenterAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  createdById?: number | null
+  updatedById?: number | null
+  deletedById?: number | null
+  members?: Prisma.ContractMemberUncheckedCreateNestedManyWithoutContractInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedCreateNestedManyWithoutContractInput
+  files?: Prisma.ContractFileUncheckedCreateNestedManyWithoutContractInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedCreateNestedManyWithoutContractInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedCreateNestedManyWithoutContractInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedCreateNestedManyWithoutContractInput
+  meterReadings?: Prisma.MeterReadingUncheckedCreateNestedManyWithoutContractInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutContractInput
+  debts?: Prisma.DebtUncheckedCreateNestedManyWithoutContractInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutContractInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutContractInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutContractInput
+}
+
+export type ContractCreateOrConnectWithoutDepositInvoiceInput = {
+  where: Prisma.ContractWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContractCreateWithoutDepositInvoiceInput, Prisma.ContractUncheckedCreateWithoutDepositInvoiceInput>
+}
+
 export type ContractUpsertWithoutInvoicesInput = {
   update: Prisma.XOR<Prisma.ContractUpdateWithoutInvoicesInput, Prisma.ContractUncheckedUpdateWithoutInvoicesInput>
   create: Prisma.XOR<Prisma.ContractCreateWithoutInvoicesInput, Prisma.ContractUncheckedCreateWithoutInvoicesInput>
@@ -3636,6 +3900,7 @@ export type ContractUpdateWithoutInvoicesInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3648,6 +3913,7 @@ export type ContractUpdateWithoutInvoicesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -3680,6 +3946,8 @@ export type ContractUncheckedUpdateWithoutInvoicesInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3707,12 +3975,105 @@ export type ContractUncheckedUpdateWithoutInvoicesInput = {
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
 }
 
+export type ContractUpsertWithoutDepositInvoiceInput = {
+  update: Prisma.XOR<Prisma.ContractUpdateWithoutDepositInvoiceInput, Prisma.ContractUncheckedUpdateWithoutDepositInvoiceInput>
+  create: Prisma.XOR<Prisma.ContractCreateWithoutDepositInvoiceInput, Prisma.ContractUncheckedCreateWithoutDepositInvoiceInput>
+  where?: Prisma.ContractWhereInput
+}
+
+export type ContractUpdateToOneWithWhereWithoutDepositInvoiceInput = {
+  where?: Prisma.ContractWhereInput
+  data: Prisma.XOR<Prisma.ContractUpdateWithoutDepositInvoiceInput, Prisma.ContractUncheckedUpdateWithoutDepositInvoiceInput>
+}
+
+export type ContractUpdateWithoutDepositInvoiceInput = {
+  contractCode?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
+  paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
+  contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
+  renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
+  rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
+  template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
+  members?: Prisma.ContractMemberUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUpdateManyWithoutContractNestedInput
+  files?: Prisma.ContractFileUpdateManyWithoutContractNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUpdateManyWithoutContractNestedInput
+  rentalHistories?: Prisma.RentalHistoryUpdateManyWithoutContractNestedInput
+  handoverRecords?: Prisma.HandoverRecordUpdateManyWithoutContractNestedInput
+  meterReadings?: Prisma.MeterReadingUpdateManyWithoutContractNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUpdateManyWithoutContractNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutContractNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutContractNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutContractNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedContractsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedContractsNestedInput
+  deletedBy?: Prisma.UserUpdateOneWithoutDeletedContractsNestedInput
+}
+
+export type ContractUncheckedUpdateWithoutDepositInvoiceInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  tenantId?: Prisma.IntFieldUpdateOperationsInput | number
+  roomId?: Prisma.IntFieldUpdateOperationsInput | number
+  renterId?: Prisma.IntFieldUpdateOperationsInput | number
+  rentalRequestId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  templateId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  contractCode?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
+  paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
+  contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumContractStatusFieldUpdateOperationsInput | $Enums.ContractStatus
+  landlordSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  renterSignature?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signedByLandlordAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  signedByRenterAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deletedById?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  members?: Prisma.ContractMemberUncheckedUpdateManyWithoutContractNestedInput
+  serviceAssignments?: Prisma.ServiceAssignmentUncheckedUpdateManyWithoutContractNestedInput
+  files?: Prisma.ContractFileUncheckedUpdateManyWithoutContractNestedInput
+  terminationRequests?: Prisma.ContractTerminationRequestUncheckedUpdateManyWithoutContractNestedInput
+  rentalHistories?: Prisma.RentalHistoryUncheckedUpdateManyWithoutContractNestedInput
+  handoverRecords?: Prisma.HandoverRecordUncheckedUpdateManyWithoutContractNestedInput
+  meterReadings?: Prisma.MeterReadingUncheckedUpdateManyWithoutContractNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutContractNestedInput
+  debts?: Prisma.DebtUncheckedUpdateManyWithoutContractNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutContractNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutContractNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutContractNestedInput
+}
+
 export type ContractCreateWithoutDebtsInput = {
   contractCode: string
   startDate: Date | string
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3725,6 +4086,7 @@ export type ContractCreateWithoutDebtsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -3757,6 +4119,8 @@ export type ContractUncheckedCreateWithoutDebtsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3806,6 +4170,7 @@ export type ContractUpdateWithoutDebtsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3818,6 +4183,7 @@ export type ContractUpdateWithoutDebtsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -3850,6 +4216,8 @@ export type ContractUncheckedUpdateWithoutDebtsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3883,6 +4251,7 @@ export type ContractCreateWithoutTicketsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3895,6 +4264,7 @@ export type ContractCreateWithoutTicketsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -3927,6 +4297,8 @@ export type ContractUncheckedCreateWithoutTicketsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -3976,6 +4348,7 @@ export type ContractUpdateWithoutTicketsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3988,6 +4361,7 @@ export type ContractUpdateWithoutTicketsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -4020,6 +4394,8 @@ export type ContractUncheckedUpdateWithoutTicketsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4053,6 +4429,7 @@ export type ContractCreateWithoutConversationsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -4065,6 +4442,7 @@ export type ContractCreateWithoutConversationsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -4097,6 +4475,8 @@ export type ContractUncheckedCreateWithoutConversationsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -4146,6 +4526,7 @@ export type ContractUpdateWithoutConversationsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4158,6 +4539,7 @@ export type ContractUpdateWithoutConversationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -4190,6 +4572,8 @@ export type ContractUncheckedUpdateWithoutConversationsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4223,6 +4607,7 @@ export type ContractCreateWithoutReviewsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -4235,6 +4620,7 @@ export type ContractCreateWithoutReviewsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   tenant: Prisma.TenantCreateNestedOneWithoutContractsInput
+  depositInvoice?: Prisma.InvoiceCreateNestedOneWithoutDepositForContractInput
   room: Prisma.RoomCreateNestedOneWithoutContractsInput
   renter: Prisma.UserCreateNestedOneWithoutContractsInput
   rentalRequest?: Prisma.RentalRequestCreateNestedOneWithoutContractsInput
@@ -4267,6 +4653,8 @@ export type ContractUncheckedCreateWithoutReviewsInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -4316,6 +4704,7 @@ export type ContractUpdateWithoutReviewsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4328,6 +4717,7 @@ export type ContractUpdateWithoutReviewsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -4360,6 +4750,8 @@ export type ContractUncheckedUpdateWithoutReviewsInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4398,6 +4790,8 @@ export type ContractCreateManyRenterInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -4426,6 +4820,8 @@ export type ContractCreateManyCreatedByInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -4453,6 +4849,8 @@ export type ContractCreateManyUpdatedByInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -4480,6 +4878,8 @@ export type ContractCreateManyDeletedByInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -4501,6 +4901,7 @@ export type ContractUpdateWithoutRenterInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4513,6 +4914,7 @@ export type ContractUpdateWithoutRenterInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
@@ -4544,6 +4946,8 @@ export type ContractUncheckedUpdateWithoutRenterInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4583,6 +4987,8 @@ export type ContractUncheckedUpdateManyWithoutRenterInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4605,6 +5011,7 @@ export type ContractUpdateWithoutCreatedByInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4617,6 +5024,7 @@ export type ContractUpdateWithoutCreatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -4649,6 +5057,8 @@ export type ContractUncheckedUpdateWithoutCreatedByInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4688,6 +5098,8 @@ export type ContractUncheckedUpdateManyWithoutCreatedByInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4709,6 +5121,7 @@ export type ContractUpdateWithoutUpdatedByInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4721,6 +5134,7 @@ export type ContractUpdateWithoutUpdatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -4753,6 +5167,8 @@ export type ContractUncheckedUpdateWithoutUpdatedByInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4792,6 +5208,8 @@ export type ContractUncheckedUpdateManyWithoutUpdatedByInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4813,6 +5231,7 @@ export type ContractUpdateWithoutDeletedByInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4825,6 +5244,7 @@ export type ContractUpdateWithoutDeletedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -4857,6 +5277,8 @@ export type ContractUncheckedUpdateWithoutDeletedByInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4896,6 +5318,8 @@ export type ContractUncheckedUpdateManyWithoutDeletedByInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4922,6 +5346,8 @@ export type ContractCreateManyTenantInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -4944,6 +5370,7 @@ export type ContractUpdateWithoutTenantInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4955,6 +5382,7 @@ export type ContractUpdateWithoutTenantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -4987,6 +5415,8 @@ export type ContractUncheckedUpdateWithoutTenantInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5026,6 +5456,8 @@ export type ContractUncheckedUpdateManyWithoutTenantInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5053,6 +5485,8 @@ export type ContractCreateManyRoomInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -5075,6 +5509,7 @@ export type ContractUpdateWithoutRoomInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5087,6 +5522,7 @@ export type ContractUpdateWithoutRoomInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
@@ -5118,6 +5554,8 @@ export type ContractUncheckedUpdateWithoutRoomInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5157,6 +5595,8 @@ export type ContractUncheckedUpdateManyWithoutRoomInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5184,6 +5624,8 @@ export type ContractCreateManyRentalRequestInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -5206,6 +5648,7 @@ export type ContractUpdateWithoutRentalRequestInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5218,6 +5661,7 @@ export type ContractUpdateWithoutRentalRequestInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   template?: Prisma.ContractTemplateUpdateOneWithoutContractsNestedInput
@@ -5249,6 +5693,8 @@ export type ContractUncheckedUpdateWithoutRentalRequestInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5288,6 +5734,8 @@ export type ContractUncheckedUpdateManyWithoutRentalRequestInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5315,6 +5763,8 @@ export type ContractCreateManyTemplateInput = {
   endDate: Date | string
   monthlyPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: boolean
+  depositInvoiceId?: number | null
   billingCycle: $Enums.ContractBillingCycle
   paymentDueDay: number
   contentSnapshot: string
@@ -5337,6 +5787,7 @@ export type ContractUpdateWithoutTemplateInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5349,6 +5800,7 @@ export type ContractUpdateWithoutTemplateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tenant?: Prisma.TenantUpdateOneRequiredWithoutContractsNestedInput
+  depositInvoice?: Prisma.InvoiceUpdateOneWithoutDepositForContractNestedInput
   room?: Prisma.RoomUpdateOneRequiredWithoutContractsNestedInput
   renter?: Prisma.UserUpdateOneRequiredWithoutContractsNestedInput
   rentalRequest?: Prisma.RentalRequestUpdateOneWithoutContractsNestedInput
@@ -5380,6 +5832,8 @@ export type ContractUncheckedUpdateWithoutTemplateInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5419,6 +5873,8 @@ export type ContractUncheckedUpdateManyWithoutTemplateInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   monthlyPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   depositAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isDepositPaid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  depositInvoiceId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   billingCycle?: Prisma.EnumContractBillingCycleFieldUpdateOperationsInput | $Enums.ContractBillingCycle
   paymentDueDay?: Prisma.IntFieldUpdateOperationsInput | number
   contentSnapshot?: Prisma.StringFieldUpdateOperationsInput | string
@@ -5577,6 +6033,8 @@ export type ContractSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   endDate?: boolean
   monthlyPrice?: boolean
   depositAmount?: boolean
+  isDepositPaid?: boolean
+  depositInvoiceId?: boolean
   billingCycle?: boolean
   paymentDueDay?: boolean
   contentSnapshot?: boolean
@@ -5592,6 +6050,7 @@ export type ContractSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   updatedById?: boolean
   deletedById?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  depositInvoice?: boolean | Prisma.Contract$depositInvoiceArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   renter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   rentalRequest?: boolean | Prisma.Contract$rentalRequestArgs<ExtArgs>
@@ -5626,6 +6085,8 @@ export type ContractSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   endDate?: boolean
   monthlyPrice?: boolean
   depositAmount?: boolean
+  isDepositPaid?: boolean
+  depositInvoiceId?: boolean
   billingCycle?: boolean
   paymentDueDay?: boolean
   contentSnapshot?: boolean
@@ -5641,6 +6102,7 @@ export type ContractSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   updatedById?: boolean
   deletedById?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  depositInvoice?: boolean | Prisma.Contract$depositInvoiceArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   renter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   rentalRequest?: boolean | Prisma.Contract$rentalRequestArgs<ExtArgs>
@@ -5662,6 +6124,8 @@ export type ContractSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   endDate?: boolean
   monthlyPrice?: boolean
   depositAmount?: boolean
+  isDepositPaid?: boolean
+  depositInvoiceId?: boolean
   billingCycle?: boolean
   paymentDueDay?: boolean
   contentSnapshot?: boolean
@@ -5677,6 +6141,7 @@ export type ContractSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   updatedById?: boolean
   deletedById?: boolean
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  depositInvoice?: boolean | Prisma.Contract$depositInvoiceArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   renter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   rentalRequest?: boolean | Prisma.Contract$rentalRequestArgs<ExtArgs>
@@ -5698,6 +6163,8 @@ export type ContractSelectScalar = {
   endDate?: boolean
   monthlyPrice?: boolean
   depositAmount?: boolean
+  isDepositPaid?: boolean
+  depositInvoiceId?: boolean
   billingCycle?: boolean
   paymentDueDay?: boolean
   contentSnapshot?: boolean
@@ -5714,9 +6181,10 @@ export type ContractSelectScalar = {
   deletedById?: boolean
 }
 
-export type ContractOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "renterId" | "rentalRequestId" | "templateId" | "contractCode" | "startDate" | "endDate" | "monthlyPrice" | "depositAmount" | "billingCycle" | "paymentDueDay" | "contentSnapshot" | "status" | "landlordSignature" | "renterSignature" | "signedByLandlordAt" | "signedByRenterAt" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["contract"]>
+export type ContractOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tenantId" | "roomId" | "renterId" | "rentalRequestId" | "templateId" | "contractCode" | "startDate" | "endDate" | "monthlyPrice" | "depositAmount" | "isDepositPaid" | "depositInvoiceId" | "billingCycle" | "paymentDueDay" | "contentSnapshot" | "status" | "landlordSignature" | "renterSignature" | "signedByLandlordAt" | "signedByRenterAt" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["contract"]>
 export type ContractInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  depositInvoice?: boolean | Prisma.Contract$depositInvoiceArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   renter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   rentalRequest?: boolean | Prisma.Contract$rentalRequestArgs<ExtArgs>
@@ -5740,6 +6208,7 @@ export type ContractInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
 }
 export type ContractIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  depositInvoice?: boolean | Prisma.Contract$depositInvoiceArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   renter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   rentalRequest?: boolean | Prisma.Contract$rentalRequestArgs<ExtArgs>
@@ -5750,6 +6219,7 @@ export type ContractIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
 }
 export type ContractIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tenant?: boolean | Prisma.TenantDefaultArgs<ExtArgs>
+  depositInvoice?: boolean | Prisma.Contract$depositInvoiceArgs<ExtArgs>
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
   renter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   rentalRequest?: boolean | Prisma.Contract$rentalRequestArgs<ExtArgs>
@@ -5766,6 +6236,10 @@ export type $ContractPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
      * Tenant quản lý
      */
     tenant: Prisma.$TenantPayload<ExtArgs>
+    /**
+     * Hóa đơn cọc tương ứng
+     */
+    depositInvoice: Prisma.$InvoicePayload<ExtArgs> | null
     /**
      * Phòng thuê (chặn xóa phòng nếu đang có hợp đồng)
      */
@@ -5876,6 +6350,14 @@ export type $ContractPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
      * Tiền đặt cọc thực tế khách đã đóng
      */
     depositAmount: runtime.Decimal
+    /**
+     * Trạng thái đã thanh toán tiền cọc hay chưa
+     */
+    isDepositPaid: boolean
+    /**
+     * Liên kết tới hóa đơn cọc (nếu có)
+     */
+    depositInvoiceId: number | null
     /**
      * Chu kỳ đóng tiền trọ (Hàng tháng hoặc Hàng quý)
      */
@@ -6327,6 +6809,7 @@ readonly fields: ContractFieldRefs;
 export interface Prisma__ContractClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tenant<T extends Prisma.TenantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TenantDefaultArgs<ExtArgs>>): Prisma.Prisma__TenantClient<runtime.Types.Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  depositInvoice<T extends Prisma.Contract$depositInvoiceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$depositInvoiceArgs<ExtArgs>>): Prisma.Prisma__InvoiceClient<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   room<T extends Prisma.RoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomDefaultArgs<ExtArgs>>): Prisma.Prisma__RoomClient<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   renter<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   rentalRequest<T extends Prisma.Contract$rentalRequestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contract$rentalRequestArgs<ExtArgs>>): Prisma.Prisma__RentalRequestClient<runtime.Types.Result.GetResult<Prisma.$RentalRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -6386,6 +6869,8 @@ export interface ContractFieldRefs {
   readonly endDate: Prisma.FieldRef<"Contract", 'DateTime'>
   readonly monthlyPrice: Prisma.FieldRef<"Contract", 'Decimal'>
   readonly depositAmount: Prisma.FieldRef<"Contract", 'Decimal'>
+  readonly isDepositPaid: Prisma.FieldRef<"Contract", 'Boolean'>
+  readonly depositInvoiceId: Prisma.FieldRef<"Contract", 'Int'>
   readonly billingCycle: Prisma.FieldRef<"Contract", 'ContractBillingCycle'>
   readonly paymentDueDay: Prisma.FieldRef<"Contract", 'Int'>
   readonly contentSnapshot: Prisma.FieldRef<"Contract", 'String'>
@@ -6798,6 +7283,25 @@ export type ContractDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Contracts to delete.
    */
   limit?: number
+}
+
+/**
+ * Contract.depositInvoice
+ */
+export type Contract$depositInvoiceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Invoice
+   */
+  select?: Prisma.InvoiceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Invoice
+   */
+  omit?: Prisma.InvoiceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvoiceInclude<ExtArgs> | null
+  where?: Prisma.InvoiceWhereInput
 }
 
 /**

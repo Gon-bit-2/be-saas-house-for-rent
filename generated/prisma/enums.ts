@@ -252,6 +252,7 @@ export const InvoiceItemType = {
   PARKING: 'PARKING',
   INTERNET: 'INTERNET',
   PENALTY: 'PENALTY',
+  DEPOSIT: 'DEPOSIT',
   DISCOUNT: 'DISCOUNT',
   OTHER: 'OTHER'
 } as const

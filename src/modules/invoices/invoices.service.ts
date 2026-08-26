@@ -178,6 +178,65 @@ export class InvoicesService {
     return invoice
   }
 
+  async createDepositInvoice(
+    contract: {
+      id: number
+      tenantId: number
+      roomId: number
+      renterId: number
+      depositAmount: number | any
+      contractCode: string
+    },
+    userId: number,
+  ) {
+    const billingMonth = this.normalizeBillingMonth(new Date())
+    const issueDate = this.todayDateOnly()
+    const dueDate = new Date(issueDate)
+    dueDate.setDate(dueDate.getDate() + 3) // Tiền cọc thường phải đóng sớm
+
+    const invoiceCode = await this.generateInvoiceCode(contract.tenantId, billingMonth)
+    const depositAmount = this.toNumber(contract.depositAmount)
+
+    const items: InvoiceItemDraft[] = [
+      {
+        itemType: 'DEPOSIT',
+        description: `Tiền cọc hợp đồng ${contract.contractCode}`,
+        quantity: 1,
+        unitPrice: depositAmount,
+        amount: depositAmount,
+        meterReadingId: null,
+      },
+    ]
+
+    const invoice = await this.invoicesRepository.createInvoiceWithItemsAndDebt(
+      {
+        tenantId: contract.tenantId,
+        contractId: contract.id,
+        roomId: contract.roomId,
+        renterId: contract.renterId,
+        invoiceCode,
+        billingMonth,
+        issueDate,
+        dueDate,
+        subtotal: depositAmount,
+        discountAmount: 0,
+        penaltyAmount: 0,
+        totalAmount: depositAmount,
+        paidAmount: 0,
+        debtAmount: depositAmount,
+        status: 'UNPAID',
+        note: 'Hóa đơn tiền cọc tự động sinh khi ký hợp đồng',
+        createdById: userId,
+        updatedById: userId,
+      },
+      items,
+      'OPEN',
+    )
+
+    await this.notificationEventsService.notifyInvoiceIssued(invoice)
+    return invoice
+  }
+
   async generateMonthlyInvoices() {
     const today = new Date()
     // Define the billing month as the current month

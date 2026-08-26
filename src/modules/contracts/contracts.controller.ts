@@ -116,4 +116,13 @@ export class ContractsController {
   ) {
     return this.contractsService.removeMember(user.userId, id, memberId)
   }
+
+  @Roles(roleName.LANDLORD, roleName.MANAGER)
+  @Post(':id/deposit-invoice')
+  generateDepositInvoice(
+    @ActiveUser() user: AccessTokenPayload,
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.contractsService.generateDepositInvoice(user.userId, id)
+  }
 }

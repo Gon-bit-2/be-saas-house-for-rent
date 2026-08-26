@@ -15,6 +15,8 @@ export const contractSelect = {
   endDate: true,
   monthlyPrice: true,
   depositAmount: true,
+  isDepositPaid: true,
+  depositInvoiceId: true,
   billingCycle: true,
   paymentDueDay: true,
   contentSnapshot: true,
@@ -540,6 +542,19 @@ export class ContractsRepository {
         },
       })
       return updated
+    })
+  }
+  async updateDepositInvoiceId(id: number, depositInvoiceId: number) {
+    return this.prismaService.contract.update({
+      where: { id },
+      data: { depositInvoiceId }
+    })
+  }
+
+  async markDepositPaid(id: number) {
+    return this.prismaService.contract.update({
+      where: { id },
+      data: { isDepositPaid: true }
     })
   }
 }

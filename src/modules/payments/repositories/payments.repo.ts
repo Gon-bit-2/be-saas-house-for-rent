@@ -432,6 +432,13 @@ export class PaymentsRepository {
           resolvedAt,
         },
       })
+      if (remainingAmount.isZero()) {
+        await tx.contract.updateMany({
+          where: { depositInvoiceId: payment.invoiceId },
+          data: { isDepositPaid: true },
+        })
+      }
+
       if (payment.qrCodeId) {
         await tx.paymentQrCode.update({
           where: { id: payment.qrCodeId },
@@ -554,6 +561,10 @@ export class PaymentsRepository {
         await tx.paymentQrCode.updateMany({
           where: { invoiceId, status: 'ACTIVE' },
           data: { status: 'PAID' },
+        })
+        await tx.contract.updateMany({
+          where: { depositInvoiceId: invoiceId },
+          data: { isDepositPaid: true },
         })
       }
 

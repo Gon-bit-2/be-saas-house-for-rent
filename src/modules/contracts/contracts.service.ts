@@ -9,6 +9,7 @@ import type {
   TUpdateContractBodySchema,
 } from './model/contracts.model'
 import { ContractsRepository } from './repositories/contracts.repo'
+import { InvoicesService } from '@src/modules/invoices/invoices.service'
 
 const EDITABLE_STATUSES = ['DRAFT', 'WAITING_LANDLORD_SIGN', 'WAITING_RENTER_SIGN'] as const
 
@@ -20,6 +21,7 @@ export class ContractsService {
   constructor(
     private readonly contractsRepository: ContractsRepository,
     private readonly tenantAccessService: TenantAccessService,
+    private readonly invoicesService: InvoicesService,
   ) {}
 
   async listForLandlord(userId: number, query: TListContractsQuerySchema) {
@@ -259,6 +261,36 @@ export class ContractsService {
     return contract
   }
 
+
+  async generateDepositInvoice(userId: number, id: number) {
+    const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
+    const contract = await this.getTenantContractOrThrow(tenant.tenantId, id)
+    
+    if (contract.depositInvoiceId) {
+      throw new BadRequestException('Hợp đồng này đã có hóa đơn cọc')
+    }
+    if (contract.isDepositPaid) {
+      throw new BadRequestException('Hợp đồng đã thu tiền cọc')
+    }
+    if (Number(contract.depositAmount) <= 0) {
+      throw new BadRequestException('Hợp đồng không yêu cầu tiền cọc')
+    }
+    if (contract.status === 'DRAFT' || contract.status === 'WAITING_LANDLORD_SIGN' || contract.status === 'WAITING_RENTER_SIGN') {
+      throw new BadRequestException('Hợp đồng phải ở trạng thái hiệu lực (Khách đã ký) mới có thể tạo hóa đơn cọc')
+    }
+
+    const depositInvoice = await this.invoicesService.createDepositInvoice({
+      id: contract.id,
+      tenantId: contract.tenantId,
+      roomId: contract.roomId,
+      renterId: contract.renterId,
+      depositAmount: contract.depositAmount,
+      contractCode: contract.contractCode
+    }, userId)
+    
+    await this.contractsRepository.updateDepositInvoiceId(contract.id, depositInvoice.id)
+    return { success: true, invoiceId: depositInvoice.id }
+  }
   async signLandlord(userId: number, id: number, signature: string) {
     const tenant = await this.tenantAccessService.getActiveTenantContext(userId)
     const contract = await this.getTenantContractOrThrow(tenant.tenantId, id)
@@ -273,7 +305,25 @@ export class ContractsService {
     if (contract.status !== 'WAITING_RENTER_SIGN') {
       throw new BadRequestException('Chỉ có thể ký khi hợp đồng đang chờ khách thuê ký')
     }
-    return this.contractsRepository.signRenter(id, userId, signature)
+    const signedContract = await this.contractsRepository.signRenter(id, userId, signature)
+    
+    if (Number(signedContract.depositAmount) > 0) {
+      try {
+        const depositInvoice = await this.invoicesService.createDepositInvoice({
+          id: signedContract.id,
+          tenantId: signedContract.tenantId,
+          roomId: signedContract.roomId,
+          renterId: signedContract.renterId,
+          depositAmount: signedContract.depositAmount,
+          contractCode: signedContract.contractCode
+        }, userId)
+        
+        await this.contractsRepository.updateDepositInvoiceId(signedContract.id, depositInvoice.id)
+      } catch (e) {
+        console.error('Lỗi khi tạo hóa đơn tiền cọc', e)
+      }
+    }
+    return signedContract
   }
 
   private async getTenantContractOrThrow(tenantId: number, id: number) {

@@ -5482,6 +5482,8 @@ export const ContractScalarFieldEnum = {
   endDate: 'endDate',
   monthlyPrice: 'monthlyPrice',
   depositAmount: 'depositAmount',
+  isDepositPaid: 'isDepositPaid',
+  depositInvoiceId: 'depositInvoiceId',
   billingCycle: 'billingCycle',
   paymentDueDay: 'paymentDueDay',
   contentSnapshot: 'contentSnapshot',

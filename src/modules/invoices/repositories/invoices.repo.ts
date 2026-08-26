@@ -92,7 +92,7 @@ export const debtSelect = {
 } satisfies Prisma.DebtSelect
 
 export type InvoiceItemDraft = {
-  itemType: 'RENT' | 'ELECTRICITY' | 'WATER' | 'SERVICE' | 'PARKING' | 'INTERNET' | 'PENALTY' | 'DISCOUNT' | 'OTHER'
+  itemType: 'RENT' | 'ELECTRICITY' | 'WATER' | 'SERVICE' | 'PARKING' | 'INTERNET' | 'PENALTY' | 'DISCOUNT' | 'OTHER' | 'DEPOSIT'
   description: string
   quantity: number
   unitPrice: number

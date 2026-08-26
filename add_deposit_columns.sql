@@ -1,0 +1,1 @@
+ALTER TABLE contracts ADD COLUMN is_deposit_paid BOOLEAN NOT NULL DEFAULT false; ALTER TABLE contracts ADD COLUMN deposit_invoice_id INTEGER UNIQUE;
