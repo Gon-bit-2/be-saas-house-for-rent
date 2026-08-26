@@ -423,7 +423,7 @@ export class PaymentsRepository {
           updatedById: actorId,
         },
       })
-      await tx.debt.update({
+      await tx.debt.updateMany({
         where: { invoiceId: payment.invoiceId },
         data: {
           paidAmount: newPaidAmount,
@@ -520,7 +520,7 @@ export class PaymentsRepository {
       })
       const newPaidAmount = successfulPayments._sum.amount ?? new Prisma.Decimal(0)
       const totalAmount = new Prisma.Decimal(invoice.totalAmount)
-      
+
       // Should not happen, but safe check
       if (newPaidAmount.greaterThan(totalAmount)) {
         throw new ConflictException('Tổng thanh toán vượt quá giá trị hóa đơn')

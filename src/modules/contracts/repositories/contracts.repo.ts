@@ -523,6 +523,12 @@ export class ContractsRepository {
         },
         select: contractSelect,
       })
+      
+      // BỔ SUNG ĐOẠN NÀY: Cập nhật phòng sang trạng thái đang cho thuê
+      await tx.room.update({
+        where: { id: updated.roomId },
+        data: { status: 'OCCUPIED' }
+      })
       await tx.auditLog.create({
         data: {
           tenantId: updated.tenantId,
